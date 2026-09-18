@@ -11,23 +11,57 @@ file adds what is specific to working as ChatGPT.
 
 ## Before anything else
 
-Ask the operator to run these and paste the output, or run them yourself if you
-have shell access:
+**Get the state yourself. Do not ask the operator to fetch it for you.**
+
+Start every session by reading `AGENTS.md` in the repository root and this file,
+then access the Book Factory repository directly and read the canonical state.
+
+### Route 1 - shell access (preferred)
+
+If you can run commands, run these two:
 
 ```bash
 bookfactory status <book-id> --json
 bookfactory next <book-id> --json
 ```
 
-Then read, in this order:
+That is the whole briefing. `next` returns the single task to do, with the
+locked references to match, the constraints, the exact path your output belongs
+at, and the command that registers it.
+
+### Route 2 - GitHub or file access, no shell
+
+If you can read the repository but cannot run the CLI, read the canonical files
+directly. They hold exactly the same information - the CLI only formats them:
+
+| Read | For |
+| --- | --- |
+| `books/<book-id>/book.json` | Stage, locks, manuscript and style versions, and `next_action` - the cached next task. |
+| `books/<book-id>/tasks/open/*.json` | The current task in full. There is at most one. |
+| `books/<book-id>/pages/manifest.json` | Every page, its status, and which assets it needs. |
+| `books/<book-id>/pages/specs/<page-id>.json` | The exact copy and illustration brief for a page. |
+| `books/<book-id>/assets/registry.json` | Every asset, its status, and its approved file and checksum. |
+
+`book.json` -> `next_action` names the task id; the matching file in
+`tasks/open/` is the same task the CLI would have printed.
+
+### Route 3 - no repository access at all
+
+Only if neither route above is available, ask the operator to run the two
+commands and paste the output. This is the last resort, not the opening move.
+
+### Then, whichever route you used
+
+Read, in this order:
 
 1. `books/<book-id>/style/visual-bible.md` - the whole art direction.
 2. `books/<book-id>/style/reference-set.json` - which references are locked.
 3. The reference images the task lists, from `assets/approved/`.
 
-**Do not start from what you remember about this book.** You may have generated
-artwork for it in a previous conversation. That conversation is not the project.
-The repository is.
+**Never reconstruct state from conversation history.** You may have generated
+artwork for this book in a previous conversation, and you may remember what was
+agreed. That conversation is not the project. The repository is, and it may have
+moved on since.
 
 If the operator describes the style in chat and the visual bible says something
 different, the visual bible wins - say so, and ask whether they want to change

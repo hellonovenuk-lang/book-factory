@@ -107,10 +107,53 @@ def test_derivation_is_pure(produced_book):
     assert first == second
 
 
-def test_a_finished_book_has_no_next_task(workspace):
-    from bookfactory.core.paths import books_dir
+def test_an_open_asset_revision_is_surfaced_as_an_illustration_task(produced_book, workspace):
+    """Without this the approved artwork masks the revision and `next` says nothing
+    is outstanding, which is how work quietly goes missing."""
+    api.revise("test-book", "fig-scope", kind="asset", reason="Composition is too tight",
+               root=workspace)
+    task = api.next_task("test-book", root=workspace)
+    assert task["type"] == "illustration"
+    assert task["asset_id"] == "fig-scope"
+    assert "replacement" in task["summary"]
+    assert "stays canonical" in task["instructions"]
+    assert task["output"]["destination"] == "assets/drafts/fig-scope/"
+    assert task["references"], "a replacement must still name the references it matches"
+
+
+def test_a_resubmitted_replacement_becomes_an_approval_task(produced_book, workspace):
+    from tests.conftest import make_image
+
+    api.revise("test-book", "fig-scope", kind="asset", root=workspace)
+    art = make_image(workspace / "staging" / "fig-scope-v2.png", (1800, 1350), seed=21)
+    api.submit_asset("test-book", "fig-scope", art, kind="asset", root=workspace)
+    task = api.next_task("test-book", root=workspace)
+    assert task["type"] == "approval"
+    assert task["asset_id"] == "fig-scope"
+
+
+def test_the_demo_book_carries_the_cross_agent_smoke_test_task():
+    """The shipped fixture is left with exactly one open illustration task so a
+    fresh session can be handed the repository and asked to produce artwork."""
     import pytest
+
+    from bookfactory.core.paths import books_dir
 
     if not (books_dir() / "demo-book" / "book.json").is_file():
         pytest.skip("demo book fixture not present")
-    assert next_task(Book.load("demo-book")) is None
+
+    book = Book.load("demo-book")
+    task = next_task(book)
+    assert task is not None, "the demo book must leave one task open for the smoke test"
+    assert task.type == "illustration"
+    assert task.asset_id
+    assert task.references, "the task must name the locked references to match"
+    assert task.constraints["embedded_text"] is False
+    assert task.output["destination"].startswith("assets/drafts/")
+    assert "bookfactory submit demo-book" in task.output["submit_command"]
+    assert task.approval_required is True
+
+    #: and the book is still finished and assemblable while that task is open
+    assert book.state.stage == "release_ready"
+    assert all(page.is_approved for page in book.manifest)
+    assert book.verify_approved() == []

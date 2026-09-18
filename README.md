@@ -66,8 +66,12 @@ bookfactory next golf-addict
 That is the whole operating loop.
 
 There is a complete worked example in `books/demo-book/` - a small synthetic
-book, taken all the way from idea to assembled interior PDF. Rebuild it from
-nothing at any time with:
+book, taken all the way from idea to assembled interior PDF. It is deliberately
+left with one open illustration task, so you can hand the repository to a fresh
+ChatGPT session and watch a real piece of artwork come back through the proper
+route. The book stays assembled and valid while that task is open.
+
+Rebuild it from nothing at any time with:
 
 ```bash
 python scripts/build_demo_book.py

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-p007-window-illustration",
+  "book_id": "demo-book",
+  "type": "illustration",
+  "stage": "release_ready",
+  "summary": "Create replacement illustration 'p007-window' for page p007",
+  "instructions": "The subject from behind at a kitchen window, mug in hand, garden visible through the glass.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.\n\nThis replaces artwork already approved as revision v1. That file stays canonical until the replacement is approved, so do not touch it - submit a new draft.",
+  "page_id": "p007",
+  "asset_id": "p007-window",
+  "scene": "The subject from behind at a kitchen window, mug in hand, garden visible through the glass.",
+  "characters": [
+    "subject"
+  ],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-page-editorial-normal-internal-editorial-page-example.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p007.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": true,
+    "min_pixels": 1800
+  },
+  "output": {
+    "destination": "assets/drafts/p007-window/",
+    "submit_command": "bookfactory submit demo-book p007-window --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "open",
+  "created_at": "2026-09-18T12:47:58Z",
+  "closed_at": null
+}

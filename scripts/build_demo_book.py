@@ -35,6 +35,12 @@ BOOK_ID = "demo-book"
 TITLE = "The Reluctant Gardener"
 OPERATOR = "demo-operator"
 
+#: The finished book is left with exactly one open illustration task, so a fresh
+#: ChatGPT session can be handed the repository and asked to produce real
+#: artwork against the locked references. The approved artwork stays canonical
+#: throughout, so the book remains assemblable while the smoke test runs.
+SMOKE_TEST_ASSET = "p007-window"
+
 #: Pixel sizes chosen so every image clears 300 DPI at its printed size.
 ART_SIZES = {
     "full_page": (1800, 1500),
@@ -205,6 +211,16 @@ def build(*, clean: bool = True) -> Book:
     step(16, "Mark release ready")
     if preflight["status"] != "fail":
         api.advance(BOOK_ID, "release_ready", by=OPERATOR, root=REPO_ROOT)
+
+    step(17, "Leave one illustration task open for the cross-agent smoke test")
+    api.revise(BOOK_ID, SMOKE_TEST_ASSET, kind=ASSET, root=REPO_ROOT, by=OPERATOR,
+               reason=("Cross-agent visual smoke test: the subject's posture reads as "
+                       "relaxed rather than resigned."))
+    task = api.next_task(BOOK_ID, root=REPO_ROOT)
+    log(f"`bookfactory next {BOOK_ID}` now returns: {task['task_id']}")
+    log(f"  {task['summary']}")
+    log(f"  output -> {task['output']['destination']}")
+    log(f"  the approved artwork stays canonical until a replacement is approved")
 
     book = Book.load(BOOK_ID, REPO_ROOT)
     print()
