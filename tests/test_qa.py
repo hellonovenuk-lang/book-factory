@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import os
 
+import pytest
+
 from bookfactory.core import api
 from bookfactory.core.book import Book
 from bookfactory.qa import content, technical, visual
@@ -87,23 +89,32 @@ def test_content_qa_always_asks_a_human_to_read_the_book(produced_book):
     assert any(finding.needs_human for finding in findings)
 
 
-def test_visual_qa_catches_artwork_below_print_resolution(planned_book, workspace):
-    small = make_image(workspace / "staging" / "small.png", (400, 300), seed=2)
-    api.register_asset("test-book", "fig-small", root=workspace, kind="illustration",
-                       page_id="p002")
-    api.submit_asset("test-book", "fig-small", small, kind="asset", root=workspace)
-    api.approve("test-book", "fig-small", kind="asset", root=workspace)
-
+def test_visual_qa_catches_artwork_below_print_resolution(produced_book, workspace):
+    """Undersized artwork cannot be approved any more - the submit-time
+    constraint stops it. Visual QA still has to catch artwork that became
+    undersized afterwards, which is what changing the trim does: the same
+    pixels now have to cover a wider page.
+    """
     book = Book.load("test-book", workspace)
-    spec = book.read_page_spec("p002")
-    spec["illustration"]["asset_id"] = "fig-small"
-    book.write_page_spec("p002", spec)
-    page = book.manifest.get("p002")
-    page.required_assets = ["fig-small"]
+    assert book.registry.get("fig-scope").approved.width == 1800
+    book.state.format.trim = "8.5x11"
     book.save()
 
     codes = _codes(visual.check(Book.load("test-book", workspace)))
     assert "visual.low_resolution" in codes
+
+
+def test_undersized_artwork_cannot_reach_approval_in_the_first_place(
+        planned_book, workspace):
+    from bookfactory.core.errors import HardConstraintViolation
+
+    small = make_image(workspace / "staging" / "small.png", (400, 300), seed=2)
+    api.register_asset("test-book", "fig-small", root=workspace, kind="illustration",
+                       page_id="p002")
+    draft = api.submit_asset("test-book", "fig-small", small, kind="asset", root=workspace)
+    assert draft["constraint_failures"][0]["constraint"] == "min_pixels"
+    with pytest.raises(HardConstraintViolation):
+        api.approve("test-book", "fig-small", kind="asset", root=workspace)
 
 
 def test_visual_qa_catches_a_page_pointing_at_unapproved_artwork(planned_book, workspace):

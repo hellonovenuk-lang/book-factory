@@ -233,3 +233,99 @@ def test_first_approval_of_artwork_does_not_reopen_anything(planned_book, worksp
     api.approve("test-book", "p002", kind=PAGE, root=workspace)
     book = Book.load("test-book", workspace)
     assert book.manifest.get("p002").revision_open is False
+
+
+# ----------------------------------------------------------------------
+# Aggregate status is derived from the record, never assigned by hand
+# ----------------------------------------------------------------------
+
+
+def test_rejecting_a_replacement_reports_the_canonical_approved_state(
+        produced_book, workspace):
+    """The smoke-test bug: after v2 was rejected the asset still said
+    'draft_submitted', while v1 sat there approved and canonical."""
+    api.revise("test-book", "fig-scope", kind=ASSET, reason="Composition", root=workspace)
+    art = make_image(workspace / "staging" / "reject-me.png", (1800, 1350), seed=51)
+    api.submit_asset("test-book", "fig-scope", art, kind=ASSET, root=workspace)
+
+    book = Book.load("test-book", workspace)
+    assert book.registry.get("fig-scope").status == "draft_submitted"
+
+    api.reject("test-book", "fig-scope", kind=ASSET, revision="v2",
+               reason="Posture is wrong", root=workspace)
+
+    book = Book.load("test-book", workspace)
+    asset = book.registry.get("fig-scope")
+    assert asset.status == "approved", "status must reflect what is actually canonical"
+    assert asset.revision_open is True, "a replacement is still expected"
+    assert asset.approved.revision == "v1"
+    assert [(d.revision, d.status) for d in asset.drafts] == [("v1", "approved"),
+                                                              ("v2", "rejected")]
+    assert book.paths.resolve(asset.draft("v2").path).is_file(), "rejected work is preserved"
+
+
+def test_the_still_open_revision_keeps_next_asking_for_a_replacement(
+        produced_book, workspace):
+    api.revise("test-book", "fig-scope", kind=ASSET, root=workspace)
+    art = make_image(workspace / "staging" / "reject-me-2.png", (1800, 1350), seed=52)
+    api.submit_asset("test-book", "fig-scope", art, kind=ASSET, root=workspace)
+    api.reject("test-book", "fig-scope", kind=ASSET, revision="v2", root=workspace)
+
+    task = api.next_task("test-book", root=workspace)
+    assert task["type"] == "illustration"
+    assert task["asset_id"] == "fig-scope"
+
+
+def test_opening_a_revision_does_not_claim_a_draft_was_submitted(produced_book, workspace):
+    api.revise("test-book", "fig-scope", kind=ASSET, root=workspace)
+    asset = Book.load("test-book", workspace).registry.get("fig-scope")
+    assert asset.status == "approved", "nothing has been submitted yet"
+    assert asset.revision_open is True
+
+
+def test_a_page_under_revision_reports_that_work_is_under_way(produced_book, workspace):
+    api.revise("test-book", "p001", kind=PAGE, root=workspace)
+    page = Book.load("test-book", workspace).manifest.get("p001")
+    assert page.status == "in_production"
+    assert page.revision_open is True
+    assert page.is_approved
+
+
+def test_rejecting_the_only_draft_of_unapproved_work_reports_rejected(
+        locked_book, workspace):
+    api.register_asset("test-book", "fig-extra", root=workspace, kind="illustration")
+    _submit(workspace, seed=53)
+    api.reject("test-book", "fig-extra", kind=ASSET, revision="v1", root=workspace)
+    assert Book.load("test-book", workspace).registry.get("fig-extra").status == "rejected"
+
+
+def test_resubmitting_after_a_rejection_reports_draft_submitted(locked_book, workspace):
+    api.register_asset("test-book", "fig-extra", root=workspace, kind="illustration")
+    _submit(workspace, seed=54)
+    api.reject("test-book", "fig-extra", kind=ASSET, revision="v1", root=workspace)
+    _submit(workspace, seed=55)
+    assert Book.load("test-book", workspace).registry.get("fig-extra").status == "draft_submitted"
+
+
+def test_derive_status_covers_the_four_states():
+    from bookfactory.core.models import ApprovalRecord, AssetRecord, DraftRecord, derive_status
+
+    def draft(revision, status):
+        return DraftRecord(revision=revision, path=f"x/{revision}.png", sha256="a",
+                           submitted_at="2026-01-01T00:00:00Z", status=status)
+
+    approval = ApprovalRecord(revision="v1", path="assets/approved/a.png", sha256="a",
+                              approved_at="2026-01-01T00:00:00Z")
+
+    assert derive_status(AssetRecord(asset_id="a", kind="illustration")) == "planned"
+    assert derive_status(AssetRecord(asset_id="a", kind="illustration",
+                                     drafts=[draft("v1", "draft")])) == "draft_submitted"
+    assert derive_status(AssetRecord(asset_id="a", kind="illustration",
+                                     drafts=[draft("v1", "rejected")])) == "rejected"
+    assert derive_status(AssetRecord(asset_id="a", kind="illustration",
+                                     drafts=[draft("v1", "approved")],
+                                     approved=approval)) == "approved"
+    #: an open revision with nothing submitted is still, factually, approved
+    assert derive_status(AssetRecord(asset_id="a", kind="illustration", revision_open=True,
+                                     drafts=[draft("v1", "approved")],
+                                     approved=approval)) == "approved"

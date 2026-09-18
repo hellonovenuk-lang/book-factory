@@ -15,30 +15,30 @@
   },
   "concept": {
     "locked": true,
-    "locked_at": "2026-09-18T12:47:42Z",
+    "locked_at": "2026-09-18T16:28:35Z",
     "sha256": "f360ab0dada25836d159b77a7cf1d79f22b2aea17050ecece675c5c310ddc0bf"
   },
   "manuscript": {
     "version": "v1",
     "locked": true,
-    "locked_at": "2026-09-18T12:47:42Z",
+    "locked_at": "2026-09-18T16:28:35Z",
     "sha256": "24b95e8416fc640e31c066232189e0607905b0a055fc57328b6cc9fed6bdcc2c",
     "path": "manuscript/versions/manuscript-v1.md"
   },
   "style": {
     "visual_version": "v1",
     "visual_locked": true,
-    "visual_locked_at": "2026-09-18T12:47:44Z",
+    "visual_locked_at": "2026-09-18T16:28:38Z",
     "visual_sha256": "8eb876a43eda6d5eafa9c4e2c7770be5aaca41251f68f389bc58d9ead6e2f774",
     "voice_version": "v1",
     "voice_locked": true,
-    "voice_locked_at": "2026-09-18T12:47:42Z",
+    "voice_locked_at": "2026-09-18T16:28:35Z",
     "voice_sha256": "995825feeeb0a01e28690d6967708868945fef1824d88e89e6b1152f3b0172ab"
   },
   "page_plan": {
     "planned": true,
     "page_count": 24,
-    "planned_at": "2026-09-18T12:47:44Z"
+    "planned_at": "2026-09-18T16:28:38Z"
   },
   "blocked": null,
   "next_action": {
@@ -52,10 +52,10 @@
   "last_transition": {
     "from": "kdp_preflight",
     "to": "release_ready",
-    "at": "2026-09-18T12:47:58Z",
+    "at": "2026-09-18T16:28:52Z",
     "by": "demo-operator",
     "note": null
   },
-  "created_at": "2026-09-18T12:47:42Z",
-  "updated_at": "2026-09-18T12:52:32Z"
+  "created_at": "2026-09-18T16:28:35Z",
+  "updated_at": "2026-09-18T16:32:17Z"
 }

@@ -17,10 +17,11 @@
   ],
   "constraints": {
     "embedded_text": false,
-    "maintain_style": true,
     "maintain_character_identity": true,
+    "maintain_style": true,
     "colour": true,
-    "min_pixels": 1800
+    "readable_image": true,
+    "min_pixels": 1530
   },
   "output": {
     "destination": "assets/drafts/ref-layout-chapter-opener/",
@@ -29,6 +30,6 @@
   },
   "approval_required": true,
   "status": "done",
-  "created_at": "2026-09-18T12:47:43Z",
-  "closed_at": "2026-09-18T12:47:43Z"
+  "created_at": "2026-09-18T16:28:36Z",
+  "closed_at": "2026-09-18T16:28:36Z"
 }

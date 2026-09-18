@@ -74,8 +74,8 @@ def check(label: str, ok: bool, detail: str = "") -> None:
     print(f"  [{'ok ' if ok else 'FAIL'}] {label}{(' - ' + detail) if detail else ''}")
 
 
-def step(number: int, title: str) -> None:
-    print(f"\n{number:02d}. {title}")
+def step(number: float, title: str) -> None:
+    print(f"\n{number:04.1f}. {title}")
 
 
 def main() -> int:
@@ -110,7 +110,7 @@ def _run(workspace: Path, book: Path) -> int:  # noqa: C901 - a checklist, read 
         run(workspace, "asset", "add", BOOK, reference,
             "--kind", "character_reference", "--title", reference)
         art = workspace / f"art-{reference}.png"
-        demo_art.generate(art, width=1400, height=1400, seed=reference)
+        demo_art.generate(art, width=1800, height=1800, seed=reference)
         run(workspace, "submit", BOOK, reference, "--kind", "asset", "--file", str(art))
         run(workspace, "approve", BOOK, reference, "--kind", "asset", "--by", "operator")
     check("visual lock", run(workspace, "lock", "visual", BOOK) == 0)
@@ -152,6 +152,34 @@ def _run(workspace: Path, book: Path) -> int:  # noqa: C901 - a checklist, read 
               "--file", str(art), expect=7) == 7)
     check("approving again without a revision is refused",
           run(workspace, "approve", BOOK, "p002", "--kind", "page", expect=7) == 7)
+
+    step(8.5, "Submit artwork that fails a hard constraint")
+    undersized = workspace / "undersized.png"
+    demo_art.generate(undersized, width=600, height=600, seed="undersized")
+    run(workspace, "revise", BOOK, "fig-scope", "--kind", "asset", "--reason", "smoke test")
+    run(workspace, "submit", BOOK, "fig-scope", "--kind", "asset", "--file", str(undersized))
+    registry = json.loads((book / "assets" / "registry.json").read_text())
+    asset = next(a for a in registry["assets"] if a["asset_id"] == "fig-scope")
+    failing = next(d for d in asset["drafts"] if d["revision"] == "v2")
+    check("the failing draft is kept", (book / failing["path"]).is_file())
+    check("the failure is recorded", bool(failing["constraint_failures"]),
+          failing["constraint_failures"][0]["constraint"] if failing["constraint_failures"] else "")
+    check("approval is refused",
+          run(workspace, "approve", BOOK, "fig-scope", "--kind", "asset", expect=12) == 12)
+    run(workspace, "reject", BOOK, "fig-scope", "--kind", "asset", "--draft", "v2",
+        "--reason", "too small")
+    registry = json.loads((book / "assets" / "registry.json").read_text())
+    asset = next(a for a in registry["assets"] if a["asset_id"] == "fig-scope")
+    check("status after rejection reports the canonical approved state",
+          asset["status"] == "approved" and asset["revision_open"] is True,
+          f"status={asset['status']} revision_open={asset['revision_open']}")
+    art_good = workspace / "fig-scope-v3.png"
+    demo_art.generate(art_good, width=1800, height=1350, seed="fig-scope-v3")
+    run(workspace, "submit", BOOK, "fig-scope", "--kind", "asset", "--file", str(art_good))
+    run(workspace, "approve", BOOK, "fig-scope", "--kind", "asset", "--by", "operator")
+    run(workspace, "render", BOOK, "--page", "p003", "--submit")
+    run(workspace, "approve", BOOK, "p003", "--kind", "page", "--by", "operator")
+    check("a corrected resubmission goes through", run(workspace, "validate", BOOK) == 0)
 
     original = approved.read_bytes()
     os.chmod(approved, 0o644)

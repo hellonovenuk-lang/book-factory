@@ -10,17 +10,10 @@ from __future__ import annotations
 from bookfactory.core import checksums
 from bookfactory.qa.findings import Finding, INFO, LayerResult
 
-#: Placement to the fraction of the page width the artwork will occupy.
-PLACEMENT_COVERAGE = {
-    "full_bleed": 1.0,
-    "full_page": 0.85,
-    "top": 0.85,
-    "bottom": 0.85,
-    "left": 0.5,
-    "right": 0.5,
-    "inline": 0.6,
-    "spot": 0.35,
-}
+#: Placement to the fraction of the page width the artwork will occupy. Shared
+#: with the submit-time constraint check, so a draft cannot clear one and fail
+#: the other.
+from bookfactory.core.constraints import PLACEMENT_COVERAGE  # noqa: E402  (re-export)
 
 
 def check(book) -> LayerResult:

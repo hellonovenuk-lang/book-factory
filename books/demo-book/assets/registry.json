@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "demo-book",
-  "updated_at": "2026-09-18T12:52:32Z",
+  "updated_at": "2026-09-18T16:32:17Z",
   "assets": [
     {
       "asset_id": "p006-scope",
@@ -24,10 +24,11 @@
           "revision": "v1",
           "path": "assets/drafts/p006-scope/p006-scope-v1.png",
           "sha256": "72ba128119e6a8460396c13e98fe6d6ecc4d8c912af308f1adaadeb2f1e65ce4",
-          "submitted_at": "2026-09-18T12:47:44Z",
+          "submitted_at": "2026-09-18T16:28:38Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -36,7 +37,7 @@
         "revision": "v1",
         "path": "assets/approved/p006-scope-scope-of-the-manual.png",
         "sha256": "72ba128119e6a8460396c13e98fe6d6ecc4d8c912af308f1adaadeb2f1e65ce4",
-        "approved_at": "2026-09-18T12:47:44Z",
+        "approved_at": "2026-09-18T16:28:38Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p006-scope/p006-scope-v1.png",
         "note": null,
@@ -61,7 +62,7 @@
         "ref-character-main",
         "ref-page-editorial"
       ],
-      "status": "draft_submitted",
+      "status": "approved",
       "revision_open": true,
       "locked": false,
       "drafts": [
@@ -69,10 +70,11 @@
           "revision": "v1",
           "path": "assets/drafts/p007-window/p007-window-v1.png",
           "sha256": "f75fd3bfe5769afd92aef2f48be5887df8651ca9145834b00f031c63bc6d953e",
-          "submitted_at": "2026-09-18T12:47:45Z",
+          "submitted_at": "2026-09-18T16:28:39Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -81,7 +83,7 @@
         "revision": "v1",
         "path": "assets/approved/p007-window-the-window-observation.png",
         "sha256": "f75fd3bfe5769afd92aef2f48be5887df8651ca9145834b00f031c63bc6d953e",
-        "approved_at": "2026-09-18T12:47:45Z",
+        "approved_at": "2026-09-18T16:28:39Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p007-window/p007-window-v1.png",
         "note": null,
@@ -114,10 +116,11 @@
           "revision": "v1",
           "path": "assets/drafts/p009-equipment/p009-equipment-v1.png",
           "sha256": "32525221b1dd0fe0cdc7bab23496b3f258a01bdff5e28fc7499029f92f2b9724",
-          "submitted_at": "2026-09-18T12:47:45Z",
+          "submitted_at": "2026-09-18T16:28:39Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -126,7 +129,7 @@
         "revision": "v1",
         "path": "assets/approved/p009-equipment-the-equipment-phase.png",
         "sha256": "32525221b1dd0fe0cdc7bab23496b3f258a01bdff5e28fc7499029f92f2b9724",
-        "approved_at": "2026-09-18T12:47:45Z",
+        "approved_at": "2026-09-18T16:28:39Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p009-equipment/p009-equipment-v1.png",
         "note": null,
@@ -159,10 +162,11 @@
           "revision": "v1",
           "path": "assets/drafts/p010-anatomy/p010-anatomy-v1.png",
           "sha256": "5a0c798e7244fc1654fc75f512ad81c56995a73cccada4fae2668b50f0cb2614",
-          "submitted_at": "2026-09-18T12:47:46Z",
+          "submitted_at": "2026-09-18T16:28:39Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -171,7 +175,7 @@
         "revision": "v1",
         "path": "assets/approved/p010-anatomy-anatomy-of-the-acquisition.png",
         "sha256": "5a0c798e7244fc1654fc75f512ad81c56995a73cccada4fae2668b50f0cb2614",
-        "approved_at": "2026-09-18T12:47:46Z",
+        "approved_at": "2026-09-18T16:28:39Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p010-anatomy/p010-anatomy-v1.png",
         "note": null,
@@ -204,10 +208,11 @@
           "revision": "v1",
           "path": "assets/drafts/p012-summary/p012-summary-v1.png",
           "sha256": "72d37d01955e76b0f1e1f4f0fcbf41eb3bcc9187ad06ca18f9d30eb0f60c5e5b",
-          "submitted_at": "2026-09-18T12:47:46Z",
+          "submitted_at": "2026-09-18T16:28:40Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 900,
           "height": 900
         }
@@ -216,7 +221,7 @@
         "revision": "v1",
         "path": "assets/approved/p012-summary-summary-of-chapter-one.png",
         "sha256": "72d37d01955e76b0f1e1f4f0fcbf41eb3bcc9187ad06ca18f9d30eb0f60c5e5b",
-        "approved_at": "2026-09-18T12:47:46Z",
+        "approved_at": "2026-09-18T16:28:40Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p012-summary/p012-summary-v1.png",
         "note": null,
@@ -249,10 +254,11 @@
           "revision": "v1",
           "path": "assets/drafts/p014-principles/p014-principles-v1.png",
           "sha256": "05ad9aba75f546b2294ab9dc00591ff50f494c49ebd680afbf23fffe4356c00b",
-          "submitted_at": "2026-09-18T12:47:46Z",
+          "submitted_at": "2026-09-18T16:28:40Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -261,7 +267,7 @@
         "revision": "v1",
         "path": "assets/approved/p014-principles-principles-of-response.png",
         "sha256": "05ad9aba75f546b2294ab9dc00591ff50f494c49ebd680afbf23fffe4356c00b",
-        "approved_at": "2026-09-18T12:47:46Z",
+        "approved_at": "2026-09-18T16:28:40Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p014-principles/p014-principles-v1.png",
         "note": null,
@@ -294,10 +300,11 @@
           "revision": "v1",
           "path": "assets/drafts/p016-frequency/p016-frequency-v1.png",
           "sha256": "234dd2a49fe23c8a00d447e7e160c26a63f10e8a6e04009e9123d59f9a5e2b18",
-          "submitted_at": "2026-09-18T12:47:47Z",
+          "submitted_at": "2026-09-18T16:28:40Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -306,7 +313,7 @@
         "revision": "v1",
         "path": "assets/approved/p016-frequency-guidance-on-frequency.png",
         "sha256": "234dd2a49fe23c8a00d447e7e160c26a63f10e8a6e04009e9123d59f9a5e2b18",
-        "approved_at": "2026-09-18T12:47:47Z",
+        "approved_at": "2026-09-18T16:28:40Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p016-frequency/p016-frequency-v1.png",
         "note": null,
@@ -339,10 +346,11 @@
           "revision": "v1",
           "path": "assets/drafts/p019-recording/p019-recording-v1.png",
           "sha256": "b7faebb330ee913682aec82cf507c27a6d6433ebaab6b56be3dda0a900d440fd",
-          "submitted_at": "2026-09-18T12:47:47Z",
+          "submitted_at": "2026-09-18T16:28:41Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -351,7 +359,7 @@
         "revision": "v1",
         "path": "assets/approved/p019-recording-recording-progress.png",
         "sha256": "b7faebb330ee913682aec82cf507c27a6d6433ebaab6b56be3dda0a900d440fd",
-        "approved_at": "2026-09-18T12:47:47Z",
+        "approved_at": "2026-09-18T16:28:41Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p019-recording/p019-recording-v1.png",
         "note": null,
@@ -384,10 +392,11 @@
           "revision": "v1",
           "path": "assets/drafts/p020-inventory/p020-inventory-v1.png",
           "sha256": "b0a7ff4e80fa49bdca6b63e91d367eff4c1f829465e93f2d1f32030143f3fb1c",
-          "submitted_at": "2026-09-18T12:47:47Z",
+          "submitted_at": "2026-09-18T16:28:41Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -396,7 +405,7 @@
         "revision": "v1",
         "path": "assets/approved/p020-inventory-the-tool-inventory.png",
         "sha256": "b0a7ff4e80fa49bdca6b63e91d367eff4c1f829465e93f2d1f32030143f3fb1c",
-        "approved_at": "2026-09-18T12:47:47Z",
+        "approved_at": "2026-09-18T16:28:41Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p020-inventory/p020-inventory-v1.png",
         "note": null,
@@ -429,10 +438,11 @@
           "revision": "v1",
           "path": "assets/drafts/p022-closing/p022-closing-v1.png",
           "sha256": "a1f9792a2b9c3fa91fdf3cdfb768766288b2ef214960faf80a79545796f5fa4c",
-          "submitted_at": "2026-09-18T12:47:48Z",
+          "submitted_at": "2026-09-18T16:28:42Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -441,7 +451,7 @@
         "revision": "v1",
         "path": "assets/approved/p022-closing-closing-statement.png",
         "sha256": "a1f9792a2b9c3fa91fdf3cdfb768766288b2ef214960faf80a79545796f5fa4c",
-        "approved_at": "2026-09-18T12:47:48Z",
+        "approved_at": "2026-09-18T16:28:42Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/p022-closing/p022-closing-v1.png",
         "note": null,
@@ -468,27 +478,28 @@
         {
           "revision": "v1",
           "path": "assets/drafts/ref-character-main/ref-character-main-v1.png",
-          "sha256": "4dd43952d99824b18d250eb1e4f86404d2304442ca204c6654efe674b354911d",
-          "submitted_at": "2026-09-18T12:47:42Z",
+          "sha256": "b94ae2b7f80bc909b34998283d5d30bb2ba6cf99de5ea8ff52028209013bb292",
+          "submitted_at": "2026-09-18T16:28:36Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
-          "width": 1400,
-          "height": 1400
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1800
         }
       ],
       "approved": {
         "revision": "v1",
         "path": "assets/approved/ref-character-main-main-character-reference.png",
-        "sha256": "4dd43952d99824b18d250eb1e4f86404d2304442ca204c6654efe674b354911d",
-        "approved_at": "2026-09-18T12:47:42Z",
+        "sha256": "b94ae2b7f80bc909b34998283d5d30bb2ba6cf99de5ea8ff52028209013bb292",
+        "approved_at": "2026-09-18T16:28:36Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/ref-character-main/ref-character-main-v1.png",
         "note": "Reference approved for the locked set.",
         "superseded_at": null,
         "superseded_reason": null,
-        "width": 1400,
-        "height": 1400
+        "width": 1800,
+        "height": 1800
       },
       "approval_history": [],
       "notes": null
@@ -508,27 +519,28 @@
         {
           "revision": "v1",
           "path": "assets/drafts/ref-character-support/ref-character-support-v1.png",
-          "sha256": "531ef211a628ab7bf32063d31ca66895736a26d58b048ba0f9874fcabc075543",
-          "submitted_at": "2026-09-18T12:47:43Z",
+          "sha256": "fc4adae459781985ad2c1bbb1256151bdededb245591dced100f9b95a11ebde2",
+          "submitted_at": "2026-09-18T16:28:36Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
-          "width": 1400,
-          "height": 1400
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1800
         }
       ],
       "approved": {
         "revision": "v1",
         "path": "assets/approved/ref-character-support-supporting-character-reference.png",
-        "sha256": "531ef211a628ab7bf32063d31ca66895736a26d58b048ba0f9874fcabc075543",
-        "approved_at": "2026-09-18T12:47:43Z",
+        "sha256": "fc4adae459781985ad2c1bbb1256151bdededb245591dced100f9b95a11ebde2",
+        "approved_at": "2026-09-18T16:28:36Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/ref-character-support/ref-character-support-v1.png",
         "note": "Reference approved for the locked set.",
         "superseded_at": null,
         "superseded_reason": null,
-        "width": 1400,
-        "height": 1400
+        "width": 1800,
+        "height": 1800
       },
       "approval_history": [],
       "notes": null
@@ -548,27 +560,28 @@
         {
           "revision": "v1",
           "path": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
-          "sha256": "8d9f18fc9f16a456e5796c9aafa14b70f48a16a0bacba5212c529433f5fa364e",
-          "submitted_at": "2026-09-18T12:47:43Z",
+          "sha256": "c1a2885077b78b96a265f47c3ebfbb36f2f626f6b6f5860a9bbcdd21df52490b",
+          "submitted_at": "2026-09-18T16:28:36Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
-          "width": 1400,
-          "height": 1400
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1800
         }
       ],
       "approved": {
         "revision": "v1",
         "path": "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
-        "sha256": "8d9f18fc9f16a456e5796c9aafa14b70f48a16a0bacba5212c529433f5fa364e",
-        "approved_at": "2026-09-18T12:47:43Z",
+        "sha256": "c1a2885077b78b96a265f47c3ebfbb36f2f626f6b6f5860a9bbcdd21df52490b",
+        "approved_at": "2026-09-18T16:28:36Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
         "note": "Reference approved for the locked set.",
         "superseded_at": null,
         "superseded_reason": null,
-        "width": 1400,
-        "height": 1400
+        "width": 1800,
+        "height": 1800
       },
       "approval_history": [],
       "notes": null
@@ -588,27 +601,28 @@
         {
           "revision": "v1",
           "path": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
-          "sha256": "0ff50c5b49ea39f369b69372d1de401733e08d8de396ec5ed7d11b45585041f0",
-          "submitted_at": "2026-09-18T12:47:44Z",
+          "sha256": "3ebf302e3c2b3e60e2d87466c13953b8350b900f66a14af7191df70e87ca47a2",
+          "submitted_at": "2026-09-18T16:28:37Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
-          "width": 1400,
-          "height": 1400
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1800
         }
       ],
       "approved": {
         "revision": "v1",
         "path": "assets/approved/ref-page-diagnostic-diagram-checklist-test-page-example.png",
-        "sha256": "0ff50c5b49ea39f369b69372d1de401733e08d8de396ec5ed7d11b45585041f0",
-        "approved_at": "2026-09-18T12:47:44Z",
+        "sha256": "3ebf302e3c2b3e60e2d87466c13953b8350b900f66a14af7191df70e87ca47a2",
+        "approved_at": "2026-09-18T16:28:37Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
         "note": "Reference approved for the locked set.",
         "superseded_at": null,
         "superseded_reason": null,
-        "width": 1400,
-        "height": 1400
+        "width": 1800,
+        "height": 1800
       },
       "approval_history": [],
       "notes": null
@@ -628,27 +642,28 @@
         {
           "revision": "v1",
           "path": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
-          "sha256": "e8d6c370e86c6a79638af4926c7f8cd441e9d99ecb821939bd9760786c303f36",
-          "submitted_at": "2026-09-18T12:47:43Z",
+          "sha256": "dfa46d85d79458422e8f72fc4c876243d4036388d6fa00a49340bd06eaf58cd8",
+          "submitted_at": "2026-09-18T16:28:37Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
-          "width": 1400,
-          "height": 1400
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1800
         }
       ],
       "approved": {
         "revision": "v1",
         "path": "assets/approved/ref-page-editorial-normal-internal-editorial-page-example.png",
-        "sha256": "e8d6c370e86c6a79638af4926c7f8cd441e9d99ecb821939bd9760786c303f36",
-        "approved_at": "2026-09-18T12:47:43Z",
+        "sha256": "dfa46d85d79458422e8f72fc4c876243d4036388d6fa00a49340bd06eaf58cd8",
+        "approved_at": "2026-09-18T16:28:37Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
         "note": "Reference approved for the locked set.",
         "superseded_at": null,
         "superseded_reason": null,
-        "width": 1400,
-        "height": 1400
+        "width": 1800,
+        "height": 1800
       },
       "approval_history": [],
       "notes": null
@@ -668,27 +683,28 @@
         {
           "revision": "v1",
           "path": "assets/drafts/ref-palette/ref-palette-v1.png",
-          "sha256": "5c6e77c92cbc762a9e475a3ecff65a3f7a21b9513bab8b04e4da29231bd4902a",
-          "submitted_at": "2026-09-18T12:47:44Z",
+          "sha256": "a9268ef5882b05db4c5e4da3244542f7516eb91d98da6cb8e1ae10b0753312b2",
+          "submitted_at": "2026-09-18T16:28:38Z",
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
-          "width": 1400,
-          "height": 1400
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1800
         }
       ],
       "approved": {
         "revision": "v1",
         "path": "assets/approved/ref-palette-palette-type-and-layout-rules.png",
-        "sha256": "5c6e77c92cbc762a9e475a3ecff65a3f7a21b9513bab8b04e4da29231bd4902a",
-        "approved_at": "2026-09-18T12:47:44Z",
+        "sha256": "a9268ef5882b05db4c5e4da3244542f7516eb91d98da6cb8e1ae10b0753312b2",
+        "approved_at": "2026-09-18T16:28:38Z",
         "approved_by": "demo-operator",
         "source_draft": "assets/drafts/ref-palette/ref-palette-v1.png",
         "note": "Reference approved for the locked set.",
         "superseded_at": null,
         "superseded_reason": null,
-        "width": 1400,
-        "height": 1400
+        "width": 1800,
+        "height": 1800
       },
       "approval_history": [],
       "notes": null
