@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "demo-book",
-  "updated_at": "2026-09-18T14:07:30Z",
+  "updated_at": "2026-09-18T16:34:54Z",
   "front_matter_pages": 2,
   "pages": [
     {
@@ -23,7 +23,8 @@
           "submitted_at": "2026-09-18T12:47:48Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -65,7 +66,8 @@
           "submitted_at": "2026-09-18T12:47:49Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -107,7 +109,8 @@
           "submitted_at": "2026-09-18T12:47:49Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -149,7 +152,8 @@
           "submitted_at": "2026-09-18T12:47:49Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -191,7 +195,8 @@
           "submitted_at": "2026-09-18T12:47:50Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -235,7 +240,8 @@
           "submitted_at": "2026-09-18T12:47:50Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -279,7 +285,8 @@
           "submitted_at": "2026-09-18T12:47:50Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -321,7 +328,8 @@
           "submitted_at": "2026-09-18T12:47:51Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -365,7 +373,8 @@
           "submitted_at": "2026-09-18T12:47:51Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -409,7 +418,8 @@
           "submitted_at": "2026-09-18T12:47:51Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -451,7 +461,8 @@
           "submitted_at": "2026-09-18T12:47:51Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -495,7 +506,8 @@
           "submitted_at": "2026-09-18T12:47:52Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -537,7 +549,8 @@
           "submitted_at": "2026-09-18T12:47:52Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -581,7 +594,8 @@
           "submitted_at": "2026-09-18T12:47:52Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -623,7 +637,8 @@
           "submitted_at": "2026-09-18T12:47:53Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -667,7 +682,8 @@
           "submitted_at": "2026-09-18T12:47:53Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         },
         {
           "revision": "v2",
@@ -676,7 +692,8 @@
           "submitted_at": "2026-09-18T12:47:56Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -730,7 +747,8 @@
           "submitted_at": "2026-09-18T12:47:53Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -772,7 +790,8 @@
           "submitted_at": "2026-09-18T12:47:53Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -816,7 +835,8 @@
           "submitted_at": "2026-09-18T12:47:54Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -860,7 +880,8 @@
           "submitted_at": "2026-09-18T12:47:54Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -902,7 +923,8 @@
           "submitted_at": "2026-09-18T12:47:54Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -946,7 +968,8 @@
           "submitted_at": "2026-09-18T12:47:55Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -988,7 +1011,8 @@
           "submitted_at": "2026-09-18T12:47:55Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
@@ -1030,7 +1054,8 @@
           "submitted_at": "2026-09-18T12:47:55Z",
           "source": "renderer:default",
           "status": "approved",
-          "note": null
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "demo-book",
-  "updated_at": "2026-09-18T14:07:30Z",
+  "updated_at": "2026-09-18T16:34:54Z",
   "assets": [
     {
       "asset_id": "p006-scope",
@@ -28,6 +28,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -61,7 +62,7 @@
         "ref-character-main",
         "ref-page-editorial"
       ],
-      "status": "draft_submitted",
+      "status": "approved",
       "revision_open": true,
       "locked": false,
       "drafts": [
@@ -73,6 +74,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         },
@@ -84,6 +86,15 @@
           "source": "chatgpt-image",
           "status": "rejected",
           "note": "Rejected by explicit operator instruction: draft v2 is 1254x1254 pixels and fails the task hard minimum resolution requirement of 1800 pixels.",
+          "constraint_failures": [
+            {
+              "constraint": "min_pixels",
+              "expected": 1530,
+              "actual": 1254,
+              "message": "Artwork is 1254x1254px. At its printed size (bottom) it needs to be at least 1530px wide to reach 300 DPI.",
+              "remedy": "Generate the same picture at 1530px wide or more and submit it as a new draft. Do not upscale the existing file - it adds pixels, not detail."
+            }
+          ],
           "width": 1254,
           "height": 1254
         }
@@ -129,6 +140,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -174,6 +186,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -219,6 +232,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 900,
           "height": 900
         }
@@ -264,6 +278,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -309,6 +324,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -354,6 +370,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -399,6 +416,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -444,6 +462,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": null,
+          "constraint_failures": [],
           "width": 1800,
           "height": 1350
         }
@@ -484,6 +503,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
+          "constraint_failures": [],
           "width": 1400,
           "height": 1400
         }
@@ -524,6 +544,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
+          "constraint_failures": [],
           "width": 1400,
           "height": 1400
         }
@@ -564,6 +585,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
+          "constraint_failures": [],
           "width": 1400,
           "height": 1400
         }
@@ -604,6 +626,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
+          "constraint_failures": [],
           "width": 1400,
           "height": 1400
         }
@@ -644,6 +667,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
+          "constraint_failures": [],
           "width": 1400,
           "height": 1400
         }
@@ -684,6 +708,7 @@
           "source": "demo-fixture",
           "status": "approved",
           "note": "Synthetic placeholder reference.",
+          "constraint_failures": [],
           "width": 1400,
           "height": 1400
         }
