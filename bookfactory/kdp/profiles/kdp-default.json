@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "kdp-default",
+  "name": "Amazon KDP paperback - general",
+  "source": "Amazon KDP print options and manuscript formatting guidelines",
+  "captured_on": "2026-09-18",
+  "note": "Amazon changes these. Verify against kdp.amazon.com before a release, then bump captured_on. Nothing in the codebase hard-codes these numbers.",
+
+  "trim_sizes": {
+    "5x8":      { "width_in": 5.0,  "height_in": 8.0 },
+    "5.25x8":   { "width_in": 5.25, "height_in": 8.0 },
+    "5.5x8.5":  { "width_in": 5.5,  "height_in": 8.5 },
+    "6x9":      { "width_in": 6.0,  "height_in": 9.0 },
+    "7x10":     { "width_in": 7.0,  "height_in": 10.0 },
+    "8x10":     { "width_in": 8.0,  "height_in": 10.0 },
+    "8.5x11":   { "width_in": 8.5,  "height_in": 11.0 }
+  },
+
+  "bleed": {
+    "edge_in": 0.125,
+    "note": "Bleed is added to the top, bottom and outer edges only; the gutter edge is unchanged."
+  },
+
+  "margins": {
+    "outside_min_in": 0.25,
+    "outside_min_with_bleed_in": 0.375,
+    "gutter_by_page_count_in": [
+      { "max_pages": 150, "gutter_in": 0.375 },
+      { "max_pages": 300, "gutter_in": 0.5 },
+      { "max_pages": 500, "gutter_in": 0.625 },
+      { "max_pages": 700, "gutter_in": 0.75 },
+      { "max_pages": 828, "gutter_in": 0.875 }
+    ]
+  },
+
+  "page_count": {
+    "min": 24,
+    "max_by_interior": {
+      "black_and_white_white_paper": 828,
+      "black_and_white_cream_paper": 776,
+      "premium_colour": 828,
+      "standard_colour": 828
+    },
+    "note": "Interiors must have an even page count for print."
+  },
+
+  "images": {
+    "min_dpi": 300,
+    "recommended_dpi": 300,
+    "colour_space": "RGB or CMYK; KDP converts. Keep one consistently.",
+    "note": "Below 300 DPI at final printed size KDP warns and print quality suffers."
+  },
+
+  "interior": {
+    "allowed_formats": ["pdf"],
+    "embedded_fonts_required": true,
+    "max_file_size_mb": 650
+  },
+
+  "warnings": {
+    "page_count_odd": "Interiors print on both sides of a sheet; an odd page count means a blank is added for you, at a position you did not choose.",
+    "page_count_low": "Very short books look thin on a shelf and cannot carry text on the spine.",
+    "spine_text_min_pages": 79
+  }
+}
