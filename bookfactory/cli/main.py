@@ -45,14 +45,25 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--json", action="store_true",
                         help="Machine-readable output. Use this when an agent is driving.")
     parser.add_argument("--root", help="Repository root (defaults to the one containing books/).")
+
+    # The same flags on every subcommand, so both `bookfactory --json next <book>`
+    # and `bookfactory next <book> --json` work. Agents reach for the second form
+    # and it is the one the documentation shows. SUPPRESS keeps an absent flag
+    # from overwriting a value given before the subcommand.
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("--json", action="store_true", default=argparse.SUPPRESS,
+                        help="Machine-readable output. Use this when an agent is driving.")
+    common.add_argument("--root", default=argparse.SUPPRESS,
+                        help="Repository root (defaults to the one containing books/).")
+
     sub = parser.add_subparsers(dest="command", metavar="<command>")
 
     # -- discovery ------------------------------------------------------
-    sub.add_parser("list", help="List every book in this repository.")
-    sub.add_parser("stages", help="Show the production stages in order.")
-    sub.add_parser("doctor", help="Check that this machine can render and assemble.")
+    sub.add_parser("list", parents=[common], help="List every book in this repository.")
+    sub.add_parser("stages", parents=[common], help="Show the production stages in order.")
+    sub.add_parser("doctor", parents=[common], help="Check that this machine can render and assemble.")
 
-    create = sub.add_parser("create", help="Start a new book project.")
+    create = sub.add_parser("create", parents=[common], help="Start a new book project.")
     create.add_argument("title")
     create.add_argument("--id", dest="book_id", help="Book id (default: slug of the title).")
     create.add_argument("--idea", help="One sentence describing the book.")
@@ -72,14 +83,14 @@ def build_parser() -> argparse.ArgumentParser:
         ("validate", "Structural check: schemas, manifest, checksums."),
         ("relock", "Re-apply read-only permissions to approved artefacts."),
     ):
-        command = sub.add_parser(name, help=help_text)
+        command = sub.add_parser(name, parents=[common], help=help_text)
         command.add_argument("book")
 
-    task = sub.add_parser("task", help="Show a task in full (defaults to the next one).")
+    task = sub.add_parser("task", parents=[common], help="Show a task in full (defaults to the next one).")
     task.add_argument("book")
     task.add_argument("task_id", nargs="?")
 
-    plan = sub.add_parser("plan", help="Create or extend the page plan.")
+    plan = sub.add_parser("plan", parents=[common], help="Create or extend the page plan.")
     plan.add_argument("book")
     plan.add_argument("--from-file", dest="from_file",
                       help="JSON file: a list of pages, or {\"pages\": [...]}.")
@@ -93,14 +104,14 @@ def build_parser() -> argparse.ArgumentParser:
     plan.add_argument("--renumber", action="store_true",
                       help="Recompute printed page numbers.")
 
-    spec = sub.add_parser("spec", help="Write a page specification.")
+    spec = sub.add_parser("spec", parents=[common], help="Write a page specification.")
     spec.add_argument("book")
     spec.add_argument("page")
     spec.add_argument("--from-file", dest="from_file", required=True)
 
-    asset = sub.add_parser("asset", help="Manage illustration assets and visual references.")
+    asset = sub.add_parser("asset", parents=[common], help="Manage illustration assets and visual references.")
     asset_sub = asset.add_subparsers(dest="asset_command", metavar="<subcommand>")
-    asset_add = asset_sub.add_parser("add", help="Register an asset.")
+    asset_add = asset_sub.add_parser("add", parents=[common], help="Register an asset.")
     asset_add.add_argument("book")
     asset_add.add_argument("asset_id")
     asset_add.add_argument("--kind", default="illustration")
@@ -109,10 +120,10 @@ def build_parser() -> argparse.ArgumentParser:
     asset_add.add_argument("--page", dest="page_id")
     asset_add.add_argument("--characters", nargs="*", default=None)
     asset_add.add_argument("--references", nargs="*", default=None)
-    asset_list = asset_sub.add_parser("list", help="List registered assets.")
+    asset_list = asset_sub.add_parser("list", parents=[common], help="List registered assets.")
     asset_list.add_argument("book")
 
-    submit = sub.add_parser("submit", help="Register a draft (artwork or rendered page).")
+    submit = sub.add_parser("submit", parents=[common], help="Register a draft (artwork or rendered page).")
     submit.add_argument("book")
     submit.add_argument("id")
     submit.add_argument("--file", required=True)
@@ -121,7 +132,7 @@ def build_parser() -> argparse.ArgumentParser:
     submit.add_argument("--note")
     submit.add_argument("--source", help="What produced it, e.g. 'chatgpt-image'.")
 
-    approve = sub.add_parser("approve", help="Approve a draft. The only way work becomes canonical.")
+    approve = sub.add_parser("approve", parents=[common], help="Approve a draft. The only way work becomes canonical.")
     approve.add_argument("book")
     approve.add_argument("id")
     approve.add_argument("--kind", choices=[PAGE, ASSET], default=PAGE)
@@ -129,7 +140,7 @@ def build_parser() -> argparse.ArgumentParser:
     approve.add_argument("--by", help="Who approved it.")
     approve.add_argument("--note")
 
-    reject = sub.add_parser("reject", help="Reject a draft. The file is kept.")
+    reject = sub.add_parser("reject", parents=[common], help="Reject a draft. The file is kept.")
     reject.add_argument("book")
     reject.add_argument("id")
     reject.add_argument("--kind", choices=[PAGE, ASSET], default=PAGE)
@@ -137,21 +148,21 @@ def build_parser() -> argparse.ArgumentParser:
     reject.add_argument("--reason")
     reject.add_argument("--by")
 
-    revise = sub.add_parser("revise", help="Open a revision on approved work.")
+    revise = sub.add_parser("revise", parents=[common], help="Open a revision on approved work.")
     revise.add_argument("book")
     revise.add_argument("id")
     revise.add_argument("--kind", choices=[PAGE, ASSET], default=PAGE)
     revise.add_argument("--reason")
     revise.add_argument("--by")
 
-    lock = sub.add_parser("lock", help="Lock a stage of the book.")
+    lock = sub.add_parser("lock", parents=[common], help="Lock a stage of the book.")
     lock.add_argument("what", choices=sorted(api.LOCKS))
     lock.add_argument("book")
     lock.add_argument("--version")
     lock.add_argument("--by")
     lock.add_argument("--note")
 
-    advance = sub.add_parser("advance", help="Move the book to the next stage.")
+    advance = sub.add_parser("advance", parents=[common], help="Move the book to the next stage.")
     advance.add_argument("book")
     advance.add_argument("--to", choices=stages.ORDER)
     advance.add_argument("--by")
@@ -159,39 +170,39 @@ def build_parser() -> argparse.ArgumentParser:
     advance.add_argument("--force", action="store_true",
                          help="Skip gate checks. Recorded in the audit log.")
 
-    block = sub.add_parser("block", help="Mark the book blocked on an operator decision.")
+    block = sub.add_parser("block", parents=[common], help="Mark the book blocked on an operator decision.")
     block.add_argument("book")
     block.add_argument("reason")
     block.add_argument("--needs")
-    unblock = sub.add_parser("unblock", help="Clear the blocked flag.")
+    unblock = sub.add_parser("unblock", parents=[common], help="Clear the blocked flag.")
     unblock.add_argument("book")
 
-    render = sub.add_parser("render", help="Render pages deterministically from their specs.")
+    render = sub.add_parser("render", parents=[common], help="Render pages deterministically from their specs.")
     render.add_argument("book")
     render.add_argument("--page", dest="page_id")
     render.add_argument("--backend", help="weasyprint or chromium.")
     render.add_argument("--submit", action="store_true",
                         help="Also register the render as a draft.")
 
-    qa = sub.add_parser("qa", help="Run quality assurance.")
+    qa = sub.add_parser("qa", parents=[common], help="Run quality assurance.")
     qa.add_argument("book")
     qa.add_argument("--layer", action="append", dest="layers",
                     choices=["content", "visual", "technical", "assembly"])
 
-    assemble = sub.add_parser("assemble", help="Build the interior PDF from approved pages.")
+    assemble = sub.add_parser("assemble", parents=[common], help="Build the interior PDF from approved pages.")
     assemble.add_argument("book")
     assemble.add_argument("--out", dest="destination")
 
-    review = sub.add_parser("review", help="Build contact sheets and review PDFs.")
+    review = sub.add_parser("review", parents=[common], help="Build contact sheets and review PDFs.")
     review.add_argument("book")
     review.add_argument("--no-chapters", action="store_true")
     review.add_argument("--no-contact-sheet", action="store_true")
     review.add_argument("--no-full", action="store_true")
 
-    preflight = sub.add_parser("preflight", help="Check the interior against the KDP profile.")
+    preflight = sub.add_parser("preflight", parents=[common], help="Check the interior against the KDP profile.")
     preflight.add_argument("book")
 
-    history = sub.add_parser("history", help="Show the audit log.")
+    history = sub.add_parser("history", parents=[common], help="Show the audit log.")
     history.add_argument("book")
     history.add_argument("--limit", type=int, default=20)
     history.add_argument("--event")

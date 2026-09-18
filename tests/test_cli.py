@@ -150,3 +150,26 @@ def test_task_command_returns_the_full_task(capsys, planned_book, workspace):
     code, data = run_json(capsys, "--root", str(workspace), "task", "test-book")
     assert code == 0
     assert data["task_id"].startswith("test-book-")
+
+
+def test_json_flag_works_after_the_subcommand(capsys, produced_book, workspace):
+    """`bookfactory next <book> --json` is the form every document shows and the
+    form an agent reaches for. It has to work."""
+    code = main(["next", "test-book", "--root", str(workspace), "--json"])
+    assert code == 0
+    data = json.loads(capsys.readouterr().out)
+    assert data["book_id"] == "test-book"
+
+
+def test_json_flag_works_before_the_subcommand(capsys, produced_book, workspace):
+    code = main(["--json", "--root", str(workspace), "next", "test-book"])
+    assert code == 0
+    data = json.loads(capsys.readouterr().out)
+    assert data["book_id"] == "test-book"
+
+
+def test_a_flag_given_before_the_subcommand_is_not_lost(capsys, produced_book, workspace):
+    """argparse subparsers overwrite parent defaults unless suppressed."""
+    code = main(["--json", "status", "test-book", "--root", str(workspace)])
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["book_id"] == "test-book"
