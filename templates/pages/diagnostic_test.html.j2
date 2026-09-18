@@ -1,0 +1,30 @@
+{% extends "_base.html.j2" %}
+
+{% block content %}
+  {% if copy.eyebrow %}<p class="eyebrow">{{ copy.eyebrow }}</p>{% endif %}
+  <h2 class="heading">{{ copy.heading or page.title }}</h2>
+  {% if copy.subheading %}<p class="subheading">{{ copy.subheading }}</p>{% endif %}
+
+  {% if body_paragraphs %}
+  <div class="prose prose--tight" style="margin-bottom:1.2em">
+    {% for para in body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="grow">
+    {% for item in copy['items'] %}
+    <div class="question">
+      <p class="question__text">{{ loop.index }}. {{ item.label if item is mapping else item }}</p>
+      {% if item is mapping and item.options %}
+      <ul class="question__options">
+        {% for option in item.options %}<li>{{ option }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if copy.footnote %}
+  <div class="scoring">{{ copy.footnote }}</div>
+  {% endif %}
+{% endblock %}

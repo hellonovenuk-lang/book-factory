@@ -1,0 +1,19 @@
+{% extends "_base.html.j2" %}
+
+{% block content %}
+  <div class="certificate">
+    <div class="certificate__inner">
+      {% if copy.eyebrow %}<p class="eyebrow" style="text-align:center">{{ copy.eyebrow }}</p>{% endif %}
+      <h2 class="certificate__title">{{ copy.heading or page.title }}</h2>
+      {% if body_paragraphs %}
+      <div class="prose prose--tight" style="text-align:center">
+        {% for para in body_paragraphs %}<p style="text-align:center;text-indent:0">{{ para }}</p>{% endfor %}
+      </div>
+      {% endif %}
+      {% for item in copy['items'] %}
+      <div class="certificate__line"></div>
+      <div class="certificate__line-label">{{ item if item is not mapping else item.label }}</div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

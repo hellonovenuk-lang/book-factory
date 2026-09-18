@@ -1,0 +1,10 @@
+{% macro illustration(illo, extra_class='') %}
+{%- if illo and illo.src %}
+<figure class="illustration illustration--{{ illo.placement | default('full-page') | replace('_','-') }} {{ extra_class }}" style="margin:0">
+  <img src="{{ illo.src }}" alt="">
+</figure>
+{%- if illo.caption %}
+<figcaption class="caption">{{ illo.caption }}</figcaption>
+{%- endif %}
+{%- endif %}
+{% endmacro %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ book.language | default('en-GB') }}">
+<head>
+<meta charset="utf-8">
+<title>{{ book.title }} - {{ page.page_id }}</title>
+<style>
+@page {
+  size: {{ geometry.page_width_in }}in {{ geometry.page_height_in }}in;
+  margin: 0;
+}
+:root {
+  --font-display: {{ tokens.fonts.display | safe }};
+  --font-body: {{ tokens.fonts.body | safe }};
+  --font-accent: {{ tokens.fonts.accent | safe }};
+  --font-mono: {{ tokens.fonts.mono | safe }};
+
+  --size-chapter-number: {{ tokens.type_scale_pt.chapter_number }}pt;
+  --size-chapter-title: {{ tokens.type_scale_pt.chapter_title }}pt;
+  --size-heading: {{ tokens.type_scale_pt.heading }}pt;
+  --size-subheading: {{ tokens.type_scale_pt.subheading }}pt;
+  --size-body: {{ tokens.type_scale_pt.body }}pt;
+  --size-caption: {{ tokens.type_scale_pt.caption }}pt;
+  --size-folio: {{ tokens.type_scale_pt.folio }}pt;
+  --size-running-head: {{ tokens.type_scale_pt.running_head }}pt;
+
+  --leading-body: {{ tokens.leading.body }};
+  --leading-heading: {{ tokens.leading.heading }};
+  --leading-caption: {{ tokens.leading.caption }};
+
+  --ink: {{ tokens.palette.ink }};
+  --ink-soft: {{ tokens.palette.ink_soft }};
+  --paper: {{ tokens.palette.paper }};
+  --accent: {{ tokens.palette.accent }};
+  --accent-soft: {{ tokens.palette.accent_soft }};
+  --rule: {{ tokens.palette.rule }};
+
+  --margin-top: {{ geometry.margin_top_in }}in;
+  --margin-bottom: {{ geometry.margin_bottom_in }}in;
+  --margin-left: {{ geometry.margin_left_in }}in;
+  --margin-right: {{ geometry.margin_right_in }}in;
+}
+{{ css | safe }}
+{% block extra_css %}{% endblock %}
+</style>
+</head>
+<body class="page-{{ page.type }} side-{{ page.side }}">
+<div class="page{% if illustration and illustration.placement == 'full_bleed' %} page--full-bleed{% endif %} {% block page_classes %}{% endblock %}">
+  {% if show_running_head and running_head %}
+  <div class="running-head running-head--{{ page.side }}">{{ running_head }}</div>
+  {% endif %}
+
+  <div class="page__body">
+{% block content %}{% endblock %}
+  </div>
+
+  {% if show_folio and page.printed_number %}
+  <div class="folio folio--{{ page.side }}">{{ page.printed_number }}</div>
+  {% endif %}
+</div>
+</body>
+</html>

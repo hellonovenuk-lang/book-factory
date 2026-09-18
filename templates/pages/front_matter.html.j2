@@ -1,0 +1,15 @@
+{% extends "_base.html.j2" %}
+
+{% block content %}
+  <div class="front-matter">
+    {% if copy.eyebrow %}<p class="eyebrow" style="text-align:center">{{ copy.eyebrow }}</p>{% endif %}
+    <h1 class="front-matter__title">{{ copy.heading or book.title }}</h1>
+    {% if copy.subheading %}<p class="front-matter__subtitle">{{ copy.subheading }}</p>{% endif %}
+    {% if body_paragraphs %}
+    <div class="prose prose--tight" style="margin-top:1.6em">
+      {% for para in body_paragraphs %}<p style="text-align:center;text-indent:0">{{ para }}</p>{% endfor %}
+    </div>
+    {% endif %}
+    {% if copy.footnote %}<p class="front-matter__meta">{{ copy.footnote }}</p>{% endif %}
+  </div>
+{% endblock %}

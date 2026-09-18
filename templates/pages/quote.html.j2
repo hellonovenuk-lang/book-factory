@@ -1,0 +1,10 @@
+{% extends "_base.html.j2" %}
+
+{% block content %}
+  <div class="quote">
+    <blockquote class="quote__text">{{ copy.quote or copy.heading }}</blockquote>
+    {% if copy.attribution %}
+    <p class="quote__attribution">{{ copy.attribution }}</p>
+    {% endif %}
+  </div>
+{% endblock %}

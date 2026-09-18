@@ -1,0 +1,30 @@
+{% extends "_base.html.j2" %}
+{% import "_illustration.html.j2" as art %}
+
+{% block content %}
+  {% if copy.eyebrow %}<p class="eyebrow">{{ copy.eyebrow }}</p>{% endif %}
+  <h2 class="heading">{{ copy.heading or page.title }}</h2>
+  {% if copy.subheading %}<p class="subheading">{{ copy.subheading }}</p>{% endif %}
+
+  {# Artwork carries no labelling: every word on this page is set as real type. #}
+  {{ art.illustration(illustration, 'illustration--top') }}
+
+  {% if copy['items'] %}
+  <ol class="numbered">
+    {% for item in copy['items'] %}
+    <li>
+      {% if item is mapping %}
+      <span class="checklist__label">{{ item.label }}</span>
+      {% if item.note %}<span class="checklist__note">{{ item.note }}</span>{% endif %}
+      {% else %}{{ item }}{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  {% if body_paragraphs %}
+  <div class="prose prose--tight" style="margin-top:1.1em">
+    {% for para in body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}
