@@ -98,6 +98,11 @@
           "type": "boolean",
           "description": "True for approved reference-set members after visual lock."
         },
+        "reference_role": {
+          "description": "What this reference is for. 'deterministic_layout' fixtures test renderer geometry and must never be passed to an image-generation task as a style example. Null means the kind-based default, which is always generative.",
+          "type": ["string", "null"],
+          "enum": [null, "generative_style", "generative_character", "deterministic_layout", "palette", "typography"]
+        },
         "drafts": {
           "type": "array",
           "items": {
@@ -287,6 +292,13 @@
           ]
         },
         "superseded_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authorization": {
+          "description": "Set only when this approval was granted under the book's recorded autonomous-production authorization rather than an explicit operator decision.",
           "type": [
             "string",
             "null"

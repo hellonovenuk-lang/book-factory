@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from bookfactory.core import clock, gates, schema, stages
+from bookfactory.core import clock, gates, production, schema, stages
 from bookfactory.core.jsonio import read_json, write_json
 from bookfactory.core.models import Task
 
@@ -46,8 +46,10 @@ def _cmd(book, *parts: str) -> str:
 
 def next_task(book) -> Task | None:
     """The one thing to do next, or None when the book is finished."""
+    task = None
     for derive in (
         _blocked_task,
+        _intake_task,
         _brief_task,
         _voice_task,
         _manuscript_task,
@@ -61,8 +63,34 @@ def next_task(book) -> Task | None:
     ):
         task = derive(book)
         if task is not None:
-            return task
-    return None
+            break
+    task_mode = production.compute_mode(book, task)
+    if task is not None:
+        task.mode = task_mode
+    return task
+
+
+def _intake_task(book) -> Task | None:
+    if not book.state.intake.required or book.state.intake.completed:
+        return None
+    from bookfactory.core import intake
+
+    return _task(
+        book, "intake",
+        type="intake",
+        summary="Complete the Book Factory intake questionnaire",
+        instructions=(
+            intake.questionnaire_text()
+            + "\n\nAsk the user these questions once, in one compact exchange - not a "
+            "forty-question creative brief. Then persist the answers:\n\n"
+            f"  {_cmd(book, 'intake', '<book>', '--from-file <answers.json>')}\n\n"
+            "This never needs asking again. A fresh session reads brief/intake.json "
+            "and book.json's `intake` block instead of asking twice."
+        ),
+        output={"destination": "brief/intake.json", "expected_format": "json"},
+        approval_required=True,
+        gate="intake",
+    )
 
 
 def _blocked_task(book) -> Task | None:
@@ -115,6 +143,7 @@ def _brief_task(book) -> Task | None:
         ),
         required_inputs=["brief/brief.md", "brief/concept.md"],
         approval_required=True,
+        gate="concept_lock",
     )
 
 
@@ -163,6 +192,7 @@ def _voice_task(book) -> Task | None:
         ),
         required_inputs=["manuscript/writing-sample.md", "style/voice-bible.md"],
         approval_required=True,
+        gate="voice_lock",
     )
 
 
@@ -197,6 +227,7 @@ def _manuscript_task(book) -> Task | None:
         ),
         required_inputs=["manuscript/manuscript.md"],
         approval_required=True,
+        gate="manuscript_lock",
     )
 
 
@@ -263,7 +294,7 @@ def _visual_reference_task(book) -> Task | None:
             ).strip(),
             asset_id=asset_id,
             characters=asset.characters,
-            references=book.reference_paths(asset.references),
+            references=book.reference_paths(asset.references, generative_only=True),
             required_inputs=["style/visual-bible.md", "style/design-tokens.json"],
             constraints=book.asset_constraints(asset),
             output={"destination": f"assets/drafts/{asset_id}/",
@@ -286,6 +317,7 @@ def _visual_reference_task(book) -> Task | None:
         ),
         required_inputs=["style/visual-bible.md", "style/reference-set.json"],
         approval_required=True,
+        gate="visual_lock",
     )
 
 
@@ -427,6 +459,7 @@ def _illustration_task(book, page, asset) -> Task:
     illustration = spec.get("illustration") or {}
     reference_ids = illustration.get("references") or asset.references or book.required_reference_ids()
     failing = asset.failing_draft()
+    retry_count = len([d for d in asset.drafts if d.constraint_failures])
     remediation = ""
     if failing is not None:
         from bookfactory.core import constraints as constraint_rules
@@ -468,7 +501,7 @@ def _illustration_task(book, page, asset) -> Task:
         asset_id=asset.asset_id,
         scene=illustration.get("scene") or asset.description,
         characters=illustration.get("characters") or asset.characters,
-        references=book.reference_paths(reference_ids),
+        references=book.reference_paths(reference_ids, generative_only=True),
         required_inputs=[page.spec, "style/visual-bible.md"],
         constraints={
             **book.asset_constraints(asset),
@@ -479,6 +512,8 @@ def _illustration_task(book, page, asset) -> Task:
                                        "--kind asset --file <path>"),
                 "expected_format": "png"},
         approval_required=True,
+        remediation=failing is not None,
+        retry_count=retry_count,
     )
 
 
@@ -571,6 +606,7 @@ def _release_task(book) -> Task | None:
             f"Run: {_cmd(book, 'advance', '<book>', '--to release_ready')}"
         ),
         approval_required=True,
+        gate="release_ready",
     )
 
 

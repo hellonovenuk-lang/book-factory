@@ -6,6 +6,32 @@ what the next one is.
 
 ---
 
+## The fast path: one idea, ChatGPT does the rest
+
+For a normal new book, you do not need to work through the steps below by
+hand. Open a fresh ChatGPT Work session with access to this repository and say
+something like:
+
+> Create a new Book Factory project. Idea: a fake rehabilitation manual for
+> men who are addicted to golf. Ask me the setup questionnaire, then continue
+> autonomously through the whole book unless you genuinely need my judgement.
+
+ChatGPT will create the project, ask you a short, one-time questionnaire
+(twelve questions, covering the idea, the buyer, the humour level, the visual
+feel, and how hands-off you want it to be), and then drive the entire
+pipeline - brief, manuscript, visual development, illustrations, rendering,
+QA, assembly and KDP preflight - stopping only where the repository or your
+own answers say it must. If the session ends partway through, open a new one
+and say "Continue Book Factory project \<book-id\>" - it resumes from exactly
+where the repository left off.
+
+Claude Code is not part of this loop. It is the tool used to build and
+maintain Book Factory itself; you do not need it to make a book.
+
+The rest of this document is the manual, step-by-step version - useful if you
+want the checkpointed workflow, want to understand what is happening under the
+hood, or are doing something the fast path does not cover.
+
 ## The whole thing in one paragraph
 
 You create a project. You fill in a brief and lock it. You write a sample, agree
@@ -309,7 +335,10 @@ never have to explain the history again.
 ## The one-line reference
 
 ```
-bookfactory create "Title"                     start a project
+bookfactory create "Title"                     start a project (manual, every detail up front)
+bookfactory create-from-idea "One-line idea"   start a project (autonomous flow, questionnaire required)
+bookfactory questionnaire                      show the intake questionnaire
+bookfactory intake <book> --from-file a.json   persist the questionnaire answers, once
 bookfactory status <book>                      where it stands
 bookfactory next <book>                        what to do next
 bookfactory task <book>                        the current task in full

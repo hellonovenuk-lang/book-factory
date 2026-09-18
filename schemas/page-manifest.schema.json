@@ -323,6 +323,13 @@
             "string",
             "null"
           ]
+        },
+        "authorization": {
+          "description": "Set only when this approval was granted under the book's recorded autonomous-production authorization rather than an explicit operator decision.",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }

@@ -40,6 +40,23 @@
     "page_count": 24,
     "planned_at": "2026-09-18T12:47:44Z"
   },
+  "intake": {
+    "required": false,
+    "completed": true,
+    "completed_at": null,
+    "answers": {}
+  },
+  "production_policy": {
+    "mode": "checkpointed",
+    "operator_authorized": false,
+    "visual_checkpoint": true,
+    "major_gate_checkpoints": true,
+    "stop_on_soft_qa_failure": true,
+    "stop_on_hard_failure": true,
+    "authorized_at": null,
+    "source": null
+  },
+  "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
     "task_id": "demo-book-p007-window-illustration",

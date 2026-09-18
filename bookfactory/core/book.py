@@ -11,7 +11,7 @@ import shutil
 from pathlib import Path
 
 from bookfactory import SCHEMA_VERSION
-from bookfactory.core import audit, checksums, clock, gates, ids, schema, stages
+from bookfactory.core import audit, checksums, clock, gates, ids, production, schema, stages
 from bookfactory.core.errors import (
     BookAlreadyExists,
     BookNotFound,
@@ -29,6 +29,7 @@ from bookfactory.core.models import (
     BookState,
     DraftRecord,
     PageRecord,
+    effective_reference_role,
 )
 from bookfactory.core.paths import BookPaths, books_dir
 from bookfactory.core.registry import AssetRegistry
@@ -149,8 +150,10 @@ class Book:
 
                 task = next_task(self)
                 self.state.next_action = task.summary_dict() if task else None
+                self.state.production_mode = task.mode if task else production.COMPLETE
             except Exception:  # noqa: BLE001 - a broken derivation must never block a save
                 self.state.next_action = None
+                self.state.production_mode = production.COMPLETE
         self.state.touch()
         data = self.state.to_dict()
         schema.validate("book", data, context=str(self.paths.state_file))
@@ -435,7 +438,15 @@ class Book:
                        title: str | None = None, description: str | None = None,
                        page_id: str | None = None, characters: list[str] | None = None,
                        references: list[str] | None = None,
+                       reference_role: str | None = None,
                        notes: str | None = None) -> AssetRecord:
+        from bookfactory.core.models import REFERENCE_ROLES
+
+        if reference_role is not None and reference_role not in REFERENCE_ROLES:
+            raise ValidationError(
+                f"Unknown reference_role {reference_role!r}",
+                remedy="Valid roles: " + ", ".join(REFERENCE_ROLES),
+            )
         record = AssetRecord(
             asset_id=ids.validate_asset_id(asset_id),
             kind=kind,
@@ -444,6 +455,7 @@ class Book:
             page_id=page_id,
             characters=list(characters or []),
             references=list(references or []),
+            reference_role=reference_role,
             notes=notes,
         )
         return self.registry.add(record)
@@ -562,8 +574,23 @@ class Book:
         return draft
 
     def approve(self, kind: str, identifier: str, *, revision: str | None = None,
-                by: str | None = None, note: str | None = None) -> ApprovalRecord:
-        """Promote a draft to the approved tree. The only way anything becomes canonical."""
+                by: str | None = None, note: str | None = None,
+                autonomous: bool = False) -> ApprovalRecord:
+        """Promote a draft to the approved tree. The only way anything becomes canonical.
+
+        `autonomous=True` records that this approval was granted under the
+        book's recorded autonomous-production authorization rather than an
+        explicit, in-the-moment operator decision. It only works if the
+        operator actually recorded that authorization at intake - it is never
+        inferred from silence, and never available in checkpointed mode.
+        """
+        if autonomous and not gates.autonomous_approval_authorized(self).ok:
+            raise ValidationError(
+                "This book's production_policy does not authorize autonomous approval",
+                remedy=("Answer the intake questionnaire's production policy question with "
+                        "FULL AUTONOMOUS or VISUAL CHECKPOINT, or approve explicitly without "
+                        "--autonomous."),
+            )
         record = self._target(kind, identifier)
         if not record.drafts:
             raise ValidationError(
@@ -626,6 +653,8 @@ class Book:
         destination = self._approved_dir(kind) / approved_name
         digest = checksums.copy_into_approved(draft_path, destination, allow_replace=replacing)
 
+        authorization = (f"autonomous_production_policy:{self.state.production_policy.mode}"
+                        if autonomous else None)
         approval = ApprovalRecord(
             revision=revision,
             path=self.paths.relative(destination),
@@ -636,13 +665,15 @@ class Book:
             note=note,
             width=draft.width,
             height=draft.height,
+            authorization=authorization,
         )
         record.approved = approval
         record.revision_open = False
         draft.status = "approved"
         record.refresh_status()
         self.log("approved", kind=kind, id=identifier, revision=revision,
-                 path=approval.path, sha256=digest, by=by, note=note)
+                 path=approval.path, sha256=digest, by=by, note=note,
+                 authorization=authorization)
 
         if kind == ASSET and replacing:
             self._reopen_pages_using(identifier, revision)
@@ -803,16 +834,26 @@ class Book:
     # ------------------------------------------------------------------
     # Reporting
     # ------------------------------------------------------------------
-    def reference_paths(self, asset_ids: list[str]) -> list[str]:
-        """Book-relative paths to approved reference artwork, for visual tasks."""
+    def reference_paths(self, asset_ids: list[str], *, generative_only: bool = False) -> list[str]:
+        """Book-relative paths to approved reference artwork, for visual tasks.
+
+        `generative_only` excludes anything tagged (or defaulted to)
+        `deterministic_layout` - a fixture built to test renderer geometry must
+        never reach an image-generation task as a style example. Every visual
+        task that hands references to an agent for actual generation sets this.
+        """
         paths = []
         for asset_id in asset_ids:
             asset = self.registry.find(asset_id)
             if asset and asset.approved:
+                if generative_only and effective_reference_role(asset) == "deterministic_layout":
+                    continue
                 paths.append(asset.approved.path)
         return paths
 
     def summary(self) -> dict:
+        from dataclasses import asdict as _asdict
+
         page_counts = self.manifest.counts()
         return {
             "book_id": self.state.book_id,
@@ -820,6 +861,10 @@ class Book:
             "stage": self.state.stage,
             "stage_label": self.state.stage_label,
             "stage_number": self.state.stage_number,
+            "mode": self.state.production_mode,
+            "intake": {"required": self.state.intake.required,
+                       "completed": self.state.intake.completed},
+            "production_policy": _asdict(self.state.production_policy),
             "format": {
                 "trim": self.state.format.trim,
                 "colour": self.state.format.colour,
