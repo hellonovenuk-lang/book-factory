@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bookfactory"
+version = "1.0.0"
+description = "Book Factory - an agent-agnostic production system for illustrated humour and gift books."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "Book Factory" }]
+
+dependencies = [
+    "Jinja2>=3.1,<4",
+    "pypdf>=4.0",
+    "Pillow>=10.0",
+    "jsonschema>=4.0",
+    "weasyprint>=60",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+bookfactory = "bookfactory.cli.main:main"
+
+[tool.setuptools.packages.find]
+include = ["bookfactory*"]
+
+[tool.setuptools.package-data]
+"bookfactory" = [
+    "render/assets/*.css",
+    "render/templates/**/*",
+    "kdp/profiles/*.json",
+    "schemas/*.json",
+    "templates/**/*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+# WeasyPrint logs every CSS property it does not implement. Those properties
+# are there for the Chromium backend and are harmless; the noise is not.
+log_cli = false
+filterwarnings = ["ignore::DeprecationWarning:weasyprint.*"]

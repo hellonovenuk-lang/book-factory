@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://book-factory/schemas/book.schema.json",
+  "title": "Book state",
+  "description": "The canonical dashboard for one book. Small on purpose: detail lives in the page manifest, specs and bibles. Any agent may read this file first and know where the project stands.",
+  "type": "object",
+  "required": ["schema_version", "book_id", "title", "stage", "format", "manuscript", "style", "created_at", "updated_at"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "book_id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "subtitle": { "type": ["string", "null"] },
+    "series": { "type": ["string", "null"] },
+    "stage": {
+      "type": "string",
+      "enum": ["idea", "book_brief", "concept_lock", "outline", "writing_sample", "voice_lock",
+               "manuscript", "manuscript_lock", "visual_development", "visual_lock",
+               "page_planning", "page_production", "page_approval", "content_qa", "visual_qa",
+               "technical_qa", "assembly", "kdp_preflight", "release_ready"]
+    },
+    "format": {
+      "type": "object",
+      "required": ["trim", "colour", "dpi"],
+      "additionalProperties": false,
+      "properties": {
+        "trim": { "type": "string", "description": "Trim size key from the KDP profile, e.g. '6x9'." },
+        "colour": { "type": "boolean" },
+        "bleed": { "type": "boolean", "default": false },
+        "dpi": { "type": "integer", "minimum": 72 },
+        "kdp_profile": { "type": "string" },
+        "target_page_count": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "locked": { "type": "boolean" },
+        "locked_at": { "type": ["string", "null"] },
+        "sha256": { "type": ["string", "null"] }
+      }
+    },
+    "manuscript": {
+      "type": "object",
+      "required": ["version", "locked"],
+      "additionalProperties": false,
+      "properties": {
+        "version": { "type": "string", "pattern": "^v\\d+$" },
+        "locked": { "type": "boolean" },
+        "locked_at": { "type": ["string", "null"] },
+        "sha256": { "type": ["string", "null"] },
+        "path": { "type": ["string", "null"] }
+      }
+    },
+    "style": {
+      "type": "object",
+      "required": ["visual_version", "visual_locked", "voice_version", "voice_locked"],
+      "additionalProperties": false,
+      "properties": {
+        "visual_version": { "type": "string", "pattern": "^v\\d+$" },
+        "visual_locked": { "type": "boolean" },
+        "visual_locked_at": { "type": ["string", "null"] },
+        "visual_sha256": { "type": ["string", "null"] },
+        "voice_version": { "type": "string", "pattern": "^v\\d+$" },
+        "voice_locked": { "type": "boolean" },
+        "voice_locked_at": { "type": ["string", "null"] },
+        "voice_sha256": { "type": ["string", "null"] }
+      }
+    },
+    "page_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "planned": { "type": "boolean" },
+        "page_count": { "type": "integer", "minimum": 0 },
+        "planned_at": { "type": ["string", "null"] }
+      }
+    },
+    "blocked": {
+      "description": "Set when a human decision is required before anything else can proceed.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["reason", "since"],
+          "additionalProperties": false,
+          "properties": {
+            "reason": { "type": "string" },
+            "since": { "type": "string" },
+            "needs": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "next_action": {
+      "description": "Cached copy of `bookfactory next`. Derived state - recomputed on every write. Never hand-edit.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["task_id", "type", "summary"],
+          "properties": {
+            "task_id": { "type": "string" },
+            "type": { "type": "string" },
+            "summary": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "last_transition": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["from", "to", "at"],
+          "additionalProperties": false,
+          "properties": {
+            "from": { "type": ["string", "null"] },
+            "to": { "type": "string" },
+            "at": { "type": "string" },
+            "by": { "type": ["string", "null"] },
+            "note": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

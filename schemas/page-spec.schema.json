@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://book-factory/schemas/page-spec.schema.json",
+  "title": "Page specification",
+  "description": "Everything needed to produce one page, written before production starts. A fresh agent with no conversation history must be able to make this page from this file plus the locked bibles.",
+  "type": "object",
+  "required": ["schema_version", "page_id", "type", "title", "copy"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "page_id": { "type": "string", "pattern": "^p\\d{3,4}$" },
+    "book_id": { "type": "string" },
+    "type": { "type": "string" },
+    "chapter": { "type": ["integer", "null"] },
+    "title": { "type": "string" },
+    "copy": {
+      "type": "object",
+      "description": "Exact approved wording. The deterministic renderer sets all of this as real type. Image generation never renders any of it.",
+      "additionalProperties": true,
+      "properties": {
+        "eyebrow": { "type": ["string", "null"] },
+        "heading": { "type": ["string", "null"] },
+        "subheading": { "type": ["string", "null"] },
+        "body": { "type": ["array", "string", "null"], "items": { "type": "string" } },
+        "caption": { "type": ["string", "null"] },
+        "items": { "type": "array", "items": { "type": ["string", "object"] } },
+        "columns": { "type": "array", "items": { "type": "object" } },
+        "quote": { "type": ["string", "null"] },
+        "attribution": { "type": ["string", "null"] },
+        "footnote": { "type": ["string", "null"] }
+      }
+    },
+    "illustration": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["asset_id"],
+          "additionalProperties": false,
+          "properties": {
+            "asset_id": { "type": "string" },
+            "concept": { "type": "string", "description": "What the picture shows, in plain English." },
+            "scene": { "type": "string" },
+            "characters": { "type": "array", "items": { "type": "string" } },
+            "references": { "type": "array", "items": { "type": "string" },
+              "description": "Locked visual reference ids that this illustration must match." },
+            "placement": { "type": "string", "enum": ["full_bleed", "full_page", "top", "bottom", "left", "right", "inline", "spot"] },
+            "aspect": { "type": ["string", "null"] },
+            "embedded_text": { "type": "boolean", "default": false,
+              "description": "Must be false for anything whose wording matters. Generated type cannot be trusted." }
+          }
+        }
+      ]
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template": { "type": ["string", "null"] },
+        "typography_variant": { "type": ["string", "null"] },
+        "show_page_number": { "type": "boolean", "default": true },
+        "show_running_head": { "type": "boolean", "default": true },
+        "background": { "type": ["string", "null"] }
+      }
+    },
+    "special_elements": { "type": "array", "items": { "type": "string" } },
+    "prohibited_elements": { "type": "array", "items": { "type": "string" } },
+    "continuity_notes": { "type": ["string", "null"] },
+    "source": {
+      "type": "object",
+      "description": "Where the copy came from, so drift back to an old manuscript version is detectable.",
+      "additionalProperties": false,
+      "properties": {
+        "manuscript_version": { "type": ["string", "null"] },
+        "visual_style_version": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

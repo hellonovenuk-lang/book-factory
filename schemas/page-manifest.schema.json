@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://book-factory/schemas/page-manifest.schema.json",
+  "title": "Page manifest",
+  "description": "The canonical record of every planned page. Assembly reads this and nothing else. If a page is not here, it is not in the book.",
+  "type": "object",
+  "required": ["schema_version", "book_id", "pages"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "book_id": { "type": "string" },
+    "updated_at": { "type": "string" },
+    "front_matter_pages": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many leading pages are unnumbered front matter."
+    },
+    "pages": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/page" }
+    }
+  },
+  "definitions": {
+    "page": {
+      "type": "object",
+      "required": ["page_id", "sequence", "chapter", "title", "type", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "page_id": { "type": "string", "pattern": "^p\\d{3,4}$" },
+        "sequence": { "type": "integer", "minimum": 1 },
+        "printed_number": { "type": ["integer", "null"] },
+        "chapter": { "type": ["integer", "null"] },
+        "title": { "type": "string" },
+        "type": {
+          "type": "string",
+          "description": "Template family. Must exist in the renderer's template registry.",
+          "enum": ["chapter_opener", "editorial_illustration", "text_illustration", "checklist",
+                   "diagnostic_test", "comparison", "diagram", "quote", "certificate",
+                   "closing", "front_matter", "contents"]
+        },
+        "spec": { "type": ["string", "null"], "description": "Book-relative path to the page spec." },
+        "required_assets": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Asset ids this page cannot render without."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["planned", "spec_ready", "in_production", "draft_submitted", "approved", "rejected"]
+        },
+        "revision_open": {
+          "type": "boolean",
+          "description": "True while an approved page is being revised. The previously approved file stays canonical until the replacement is approved."
+        },
+        "drafts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["revision", "path", "sha256", "submitted_at"],
+            "additionalProperties": false,
+            "properties": {
+              "revision": { "type": "string", "pattern": "^v\\d+$" },
+              "path": { "type": "string" },
+              "sha256": { "type": "string" },
+              "submitted_at": { "type": "string" },
+              "source": { "type": ["string", "null"] },
+              "status": { "type": "string", "enum": ["draft", "approved", "rejected", "superseded"] },
+              "note": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "approved": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/definitions/approval" }
+          ]
+        },
+        "approval_history": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/approval" }
+        },
+        "qa": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "content": { "type": "string", "enum": ["pending", "pass", "fail", "warn"] },
+            "visual": { "type": "string", "enum": ["pending", "pass", "fail", "warn"] },
+            "technical": { "type": "string", "enum": ["pending", "pass", "fail", "warn"] }
+          }
+        },
+        "depends_on": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["revision", "path", "sha256", "approved_at"],
+      "additionalProperties": false,
+      "properties": {
+        "revision": { "type": "string", "pattern": "^v\\d+$" },
+        "path": { "type": "string" },
+        "sha256": { "type": "string" },
+        "approved_at": { "type": "string" },
+        "approved_by": { "type": ["string", "null"] },
+        "source_draft": { "type": ["string", "null"] },
+        "note": { "type": ["string", "null"] },
+        "superseded_at": { "type": ["string", "null"] },
+        "superseded_reason": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

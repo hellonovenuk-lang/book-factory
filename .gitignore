@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Build artefacts inside book projects are regenerable and are NOT canonical state.
+books/*/output/
+books/*/pages/renders/
+books/*/.tmp/
