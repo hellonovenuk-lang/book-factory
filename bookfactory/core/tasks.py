@@ -244,7 +244,7 @@ def _visual_reference_task(book) -> Task | None:
                 ),
                 asset_id=asset_id,
             )
-        if asset.is_approved:
+        if asset.is_approved and not asset.revision_open:
             continue
         latest = asset.latest_draft()
         if latest and latest.status == "draft":
@@ -382,7 +382,7 @@ def _page_production_task(book) -> Task | None:
                     ),
                     page_id=page.page_id, asset_id=asset_id,
                 )
-            if asset.is_approved:
+            if asset.is_approved and not asset.revision_open:
                 continue
             latest = asset.latest_draft()
             if latest and latest.status == "draft":
@@ -430,16 +430,26 @@ def _illustration_task(book, page, asset) -> Task:
         spec = {}
     illustration = spec.get("illustration") or {}
     reference_ids = illustration.get("references") or asset.references or book.required_reference_ids()
+    revising = ""
+    if asset.revision_open and asset.approved:
+        revising = (
+            f"\n\nThis replaces artwork already approved as revision "
+            f"{asset.approved.revision}. That file stays canonical until the replacement is "
+            "approved, so do not touch it - submit a new draft."
+        )
     return _task(
         book, f"{asset.asset_id}-illustration",
         type="illustration",
-        summary=f"Create illustration '{asset.asset_id}' for page {page.page_id}",
+        summary=(f"Create replacement illustration '{asset.asset_id}' for page {page.page_id}"
+                 if asset.revision_open else
+                 f"Create illustration '{asset.asset_id}' for page {page.page_id}"),
         instructions=(
             f"{illustration.get('concept') or asset.description or ''}\n\n"
             "Match the locked references exactly - same character, same line style, same "
             "palette, same edge treatment. If you cannot match them, stop and say so rather "
             "than producing something near enough.\n"
             "No text, numbers, labels or signatures inside the artwork."
+            f"{revising}"
         ).strip(),
         page_id=page.page_id,
         asset_id=asset.asset_id,

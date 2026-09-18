@@ -200,3 +200,36 @@ def test_approving_an_unknown_revision_lists_what_exists(locked_book, workspace)
     with pytest.raises(ValidationError) as excinfo:
         api.approve("test-book", "fig-extra", kind=ASSET, revision="v9", root=workspace)
     assert "v1" in excinfo.value.remedy
+
+
+def test_approving_replacement_artwork_reopens_the_pages_that_use_it(produced_book, workspace):
+    """New artwork means the page showing it is out of date.
+
+    Leaving the page approved would show the old picture while the registry
+    claimed the new one was canonical - drift, written into the book.
+    """
+    api.revise("test-book", "fig-scope", kind=ASSET, reason="Composition", root=workspace)
+    art = make_image(workspace / "staging" / "fig-scope-v2.png", (1800, 1350), seed=31)
+    api.submit_asset("test-book", "fig-scope", art, kind=ASSET, root=workspace)
+    api.approve("test-book", "fig-scope", kind=ASSET, by="operator", root=workspace)
+
+    book = Book.load("test-book", workspace)
+    page = book.manifest.get("p002")
+    assert "fig-scope" in page.required_assets
+    assert page.revision_open is True, "the page using the replaced artwork must be reopened"
+    assert page.approved is not None, "its approved render stays canonical until re-approved"
+
+    untouched = book.manifest.get("p001")
+    assert untouched.revision_open is False, "pages that do not use the asset are left alone"
+
+    task = api.next_task("test-book", root=workspace)
+    assert task["type"] == "page_render"
+    assert task["page_id"] == "p002"
+
+
+def test_first_approval_of_artwork_does_not_reopen_anything(planned_book, workspace):
+    """Only a *replacement* reopens pages. A first approval has nothing to invalidate."""
+    api.render("test-book", page_id="p002", submit=True, root=workspace)
+    api.approve("test-book", "p002", kind=PAGE, root=workspace)
+    book = Book.load("test-book", workspace)
+    assert book.manifest.get("p002").revision_open is False

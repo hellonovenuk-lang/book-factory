@@ -582,8 +582,37 @@ class Book:
         draft.status = "approved"
         self.log("approved", kind=kind, id=identifier, revision=revision,
                  path=approval.path, sha256=digest, by=by, note=note)
+
+        if kind == ASSET and replacing:
+            self._reopen_pages_using(identifier, revision)
+
         self.save()
         return approval
+
+    def _reopen_pages_using(self, asset_id: str, revision: str) -> list[str]:
+        """New artwork means the pages that use it are out of date.
+
+        An approved page is a render of particular artwork. Replacing the
+        artwork without re-rendering would leave the book showing the old
+        picture while the registry claims the new one is canonical, which is
+        exactly the kind of quiet drift this system exists to prevent. So the
+        affected pages go back into revision and must be re-rendered and
+        re-approved.
+        """
+        reopened = []
+        for page in self.manifest:
+            if asset_id not in page.required_assets:
+                continue
+            if not page.is_approved or page.revision_open:
+                continue
+            page.revision_open = True
+            page.status = "in_production"
+            reopened.append(page.page_id)
+            self.log("revision_opened", kind=PAGE, id=page.page_id,
+                     reason=f"artwork {asset_id} replaced by {revision}",
+                     current_revision=page.approved.revision,
+                     next_revision=ids.next_revision([d.revision for d in page.drafts]))
+        return reopened
 
     def _archive_approved(self, kind: str, record, *, reason: str) -> None:
         """Move the currently approved artefact into _history. Never deletes."""
