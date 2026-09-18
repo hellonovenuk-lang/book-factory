@@ -1,0 +1,36 @@
+{
+  "copy": {
+    "eyebrow": "1.2",
+    "heading": "The window observation",
+    "body": [
+      "The subject will be observed at the kitchen window between seven and nine in the morning, holding a mug, looking at the garden. This is not planning. No plan results from it.",
+      "The behaviour is understood to be a form of negotiation with an opponent who does not know the negotiation is happening.",
+      "Inspectors should note that the garden is winning, and has been winning since March."
+    ],
+    "caption": "Fig. 1.2 - The subject, at the window, holding the mug."
+  },
+  "illustration": {
+    "asset_id": "p007-window",
+    "concept": "The subject from behind at a kitchen window, mug in hand, garden visible through the glass.",
+    "scene": "The subject from behind at a kitchen window, mug in hand, garden visible through the glass.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "bottom",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p007",
+  "type": "text_illustration",
+  "title": "The window observation",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

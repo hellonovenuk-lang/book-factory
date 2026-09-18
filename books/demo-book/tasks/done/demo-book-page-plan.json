@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-page-plan",
+  "book_id": "demo-book",
+  "type": "authoring",
+  "stage": "visual_lock",
+  "summary": "Create the page plan",
+  "instructions": "Turn the locked manuscript into a page manifest: every page that will exist, in order, with a type and a title.\n\nRun: bookfactory plan demo-book --from-file <plan.json>\nor add pages one at a time with `bookfactory plan <book> --add`.\n\nPage types: chapter_opener, editorial_illustration, text_illustration, checklist, diagnostic_test, comparison, diagram, quote, certificate, closing, front_matter, contents.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/manuscript.md",
+    "manuscript/outline.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/manifest.json"
+  },
+  "approval_required": false,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:44Z",
+  "closed_at": "2026-09-18T12:47:44Z"
+}

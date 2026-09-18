@@ -1,0 +1,36 @@
+{
+  "copy": {
+    "eyebrow": "2.2.1",
+    "heading": "Guidance on frequency",
+    "body": [
+      "Ninety minutes, once a fortnight, between April and September. The subject will argue that this is insufficient. The subject has not done ninety minutes once a fortnight, so the argument is theoretical.",
+      "A lawn mown once looks mown for nine days. A lawn mown twice looks mown for eighteen days and has cost the subject one film. This is the only arithmetic in the manual and the subject is advised to do it honestly.",
+      "One film is ninety minutes. The subject is invited to draw the obvious conclusion without assistance from this manual."
+    ],
+    "caption": "Fig. 2.2 - Ninety minutes, as spent."
+  },
+  "illustration": {
+    "asset_id": "p016-frequency",
+    "concept": "The subject from behind, standing in long grass, not working, mug in hand.",
+    "scene": "The subject from behind, standing in long grass, not working, mug in hand.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "bottom",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p016",
+  "type": "text_illustration",
+  "title": "Guidance on frequency",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

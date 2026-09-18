@@ -1,0 +1,17 @@
+{% extends "_base.html.j2" %}
+
+{% block content %}
+  {% if copy.eyebrow %}<p class="eyebrow">{{ copy.eyebrow }}</p>{% endif %}
+  <h2 class="heading">{{ copy.heading or 'Contents' }}</h2>
+  <hr class="rule rule--short">
+
+  <div class="grow" style="margin-top:1.2em">
+    {% for item in copy['items'] %}
+    <div class="contents__entry">
+      <span class="contents__title">{{ item.label if item is mapping else item }}</span>
+      <span class="contents__leader"></span>
+      <span class="contents__page">{{ item.page if item is mapping else '' }}</span>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

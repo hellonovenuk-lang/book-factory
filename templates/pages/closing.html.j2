@@ -1,0 +1,18 @@
+{% extends "_base.html.j2" %}
+{% import "_illustration.html.j2" as art %}
+
+{% block content %}
+  <div class="stack stack--center grow" style="text-align:center">
+    {% if copy.eyebrow %}<p class="eyebrow" style="text-align:center">{{ copy.eyebrow }}</p>{% endif %}
+    {% if copy.heading %}<h2 class="chapter-title" style="text-align:center">{{ copy.heading }}</h2>{% endif %}
+    <hr class="rule rule--short" style="margin-left:auto;margin-right:auto">
+
+    {{ art.illustration(illustration) }}
+
+    {% if body_paragraphs %}
+    <div class="prose prose--tight" style="margin-top:1.2em">
+      {% for para in body_paragraphs %}<p style="text-align:center;text-indent:0">{{ para }}</p>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-p002-approve",
+  "book_id": "demo-book",
+  "type": "approval",
+  "stage": "page_production",
+  "summary": "Approve page p002 - Notice of issue",
+  "instructions": "Draft v1 of p002 is waiting for an explicit decision.\nFile: pages/drafts/p002/p002-v1.pdf\n\nNothing is approved by silence. Approve or reject explicitly:\n  bookfactory approve demo-book p002 --kind page --draft v1\n  bookfactory reject demo-book p002 --kind page --draft v1 --reason \"...\"",
+  "page_id": "p002",
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:49Z",
+  "closed_at": "2026-09-18T12:47:49Z"
+}

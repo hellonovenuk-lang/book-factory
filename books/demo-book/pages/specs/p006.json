@@ -1,0 +1,35 @@
+{
+  "copy": {
+    "eyebrow": "1.1",
+    "heading": "Scope",
+    "body": [
+      "This manual applies to any person who has acquired a garden through purchase of a property, inheritance, or the decision of another member of the household. It does not apply to persons who wanted one.",
+      "Where a garden has been acquired deliberately, the subject is outside the scope of this document and beyond the sympathy of its authors."
+    ],
+    "caption": "Fig. 1.1 - The garden, as inherited."
+  },
+  "illustration": {
+    "asset_id": "p006-scope",
+    "concept": "A neglected suburban back garden seen from the kitchen door, flat colour, ink line, nobody in frame.",
+    "scene": "A neglected suburban back garden seen from the kitchen door, flat colour, ink line, nobody in frame.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "top",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p006",
+  "type": "editorial_illustration",
+  "title": "Scope of the manual",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

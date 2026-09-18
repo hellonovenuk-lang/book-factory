@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-ref-character-support-generate",
+  "book_id": "demo-book",
+  "type": "character_reference",
+  "stage": "visual_development",
+  "summary": "Create visual reference: Supporting character reference",
+  "instructions": "The recurring partner/friend/pet. Delete this entry if the book has none.\n\nRead style/visual-bible.md first and follow it exactly.\nNo text of any kind inside the artwork - typography is set by the deterministic renderer, never generated.\nSave the result as a draft, then submit it.",
+  "page_id": null,
+  "asset_id": "ref-character-support",
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "style/visual-bible.md",
+    "style/design-tokens.json"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_style": true,
+    "maintain_character_identity": true,
+    "colour": true,
+    "min_pixels": 1800
+  },
+  "output": {
+    "destination": "assets/drafts/ref-character-support/",
+    "submit_command": "bookfactory submit demo-book ref-character-support --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:42Z",
+  "closed_at": "2026-09-18T12:47:43Z"
+}

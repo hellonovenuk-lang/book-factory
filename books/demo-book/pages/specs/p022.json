@@ -1,0 +1,34 @@
+{
+  "copy": {
+    "eyebrow": "End of guidance",
+    "heading": "The manual closes here",
+    "body": [
+      "The inspector's work is complete. The subject remains at the window.",
+      "This is considered an acceptable outcome."
+    ]
+  },
+  "illustration": {
+    "asset_id": "p022-closing",
+    "concept": "A wide view of the garden at dusk, the subject small and far off, seen from behind.",
+    "scene": "A wide view of the garden at dusk, the subject small and far off, seen from behind.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "top",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p022",
+  "type": "closing",
+  "title": "Closing statement",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

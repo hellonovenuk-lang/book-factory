@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-ref-page-diagnostic-register",
+  "book_id": "demo-book",
+  "type": "authoring",
+  "stage": "visual_development",
+  "summary": "Register required visual reference 'ref-page-diagnostic'",
+  "instructions": "The reference set requires 'ref-page-diagnostic' (Diagram / checklist / test page example) but it is not in the asset registry.\n\nRun: bookfactory asset add demo-book ref-page-diagnostic --kind page_reference --title 'Diagram / checklist / test page example'",
+  "page_id": null,
+  "asset_id": "ref-page-diagnostic",
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {},
+  "approval_required": false,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:43Z",
+  "closed_at": "2026-09-18T12:47:43Z"
+}

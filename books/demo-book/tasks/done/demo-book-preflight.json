@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-preflight",
+  "book_id": "demo-book",
+  "type": "preflight",
+  "stage": "assembly",
+  "summary": "Run KDP preflight",
+  "instructions": "Check the assembled interior against the KDP profile in bookfactory/kdp/profiles/kdp-default.json.\n\nRun: bookfactory preflight demo-book",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {},
+  "approval_required": false,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:56Z",
+  "closed_at": "2026-09-18T12:47:58Z"
+}

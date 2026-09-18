@@ -1,0 +1,561 @@
+/* Book Factory page design system.
+ *
+ * Deliberately editorial, not "developer". Everything that governs the look of
+ * the book is a custom property fed from the book's style/design-tokens.json,
+ * so a book's identity is data and this file is only the typographic machinery.
+ *
+ * Geometry is set per page by the renderer (page size, mirrored margins).
+ */
+
+/* ---------------------------------------------------------------- reset */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  hyphens: none;
+  orphans: 2;
+  widows: 2;
+}
+
+/* ------------------------------------------------------------ page frame */
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding-top: var(--margin-top);
+  padding-bottom: var(--margin-bottom);
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
+  background: var(--paper);
+  /* Deliberately NOT overflow:hidden. Copy that does not fit must spill onto a
+   * second PDF page so the renderer's single-page check catches it. Clipping
+   * would silently delete the end of a sentence, which is far worse. */
+}
+
+.page--full-bleed {
+  padding: 0;
+}
+
+/* Plain block flow. Column flexbox is not used for the page body: print
+ * engines disagree about how a flex-basis-constrained child affects its
+ * siblings, and the disagreement shows up as body copy that silently
+ * disappears. Illustrations are sized in inches instead. */
+.page__body {
+  display: block;
+  height: 100%;
+}
+
+/* --------------------------------------------------------- running heads */
+.running-head {
+  position: absolute;
+  top: calc(var(--margin-top) * 0.42);
+  left: var(--margin-left);
+  right: var(--margin-right);
+  font-family: var(--font-accent);
+  font-size: var(--size-running-head);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.75;
+}
+
+.running-head--verso { text-align: left; }
+.running-head--recto { text-align: right; }
+
+.folio {
+  position: absolute;
+  bottom: calc(var(--margin-bottom) * 0.40);
+  left: var(--margin-left);
+  right: var(--margin-right);
+  font-family: var(--font-accent);
+  font-size: var(--size-folio);
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.folio--verso { text-align: left; }
+.folio--recto { text-align: right; }
+
+/* --------------------------------------------------------------- headings */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  line-height: var(--leading-heading);
+}
+
+.eyebrow {
+  font-family: var(--font-accent);
+  font-size: var(--size-subheading);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.9em 0;
+}
+
+/* Chapter openers sink: printed books start a chapter part-way down the page
+ * rather than at the top margin. */
+.chapter-sink { padding-top: 1.15in; }
+
+.chapter-number {
+  font-family: var(--font-display);
+  font-size: var(--size-chapter-number);
+  line-height: 0.82;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.chapter-title {
+  font-size: var(--size-chapter-title);
+  line-height: 1.08;
+  margin: 0.34em 0 0 0;
+  text-wrap: balance;
+}
+
+.chapter-standfirst {
+  font-family: var(--font-body);
+  font-size: calc(var(--size-body) * 1.12);
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 1.1em 0 0 0;
+  max-width: 26em;
+}
+
+.heading {
+  font-size: var(--size-heading);
+  margin: 0 0 0.55em 0;
+  text-wrap: balance;
+}
+
+.subheading {
+  font-family: var(--font-accent);
+  font-size: var(--size-subheading);
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 1.2em 0;
+}
+
+/* ------------------------------------------------------------------ rules */
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 1.3em 0;
+}
+
+.rule--short {
+  width: 3.2em;
+  border-top-width: 2px;
+  border-color: var(--accent);
+  margin: 1.1em 0;
+}
+
+/* ------------------------------------------------------------------- body */
+.prose p {
+  hyphens: auto;
+  margin: 0 0 0.85em 0;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.prose p:last-child { margin-bottom: 0; }
+
+.prose p + p {
+  text-indent: 1.15em;
+  margin-top: -0.2em;
+}
+
+/* Drop cap. Emitted as a real span by the renderer rather than via
+ * ::first-letter, because a floated ::first-letter is not universally
+ * supported and a page that renders differently per backend is not
+ * deterministic. */
+.dropcap {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.05em;
+  line-height: 0.76;
+  padding: 0.04em 0.09em 0 0;
+  color: var(--accent);
+}
+
+.prose--opening p:first-child { text-indent: 0; }
+
+.prose--tight p { text-align: left; }
+.prose--tight p + p { text-indent: 0; margin-top: 0; }
+
+/* ------------------------------------------------------------ illustration */
+/* Illustration heights are stated in inches rather than as a share of a flex
+ * container, so the same page comes out the same size in every backend. */
+.illustration {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+}
+
+.illustration img {
+  display: inline-block;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.illustration--full-bleed {
+  position: absolute;
+  inset: 0;
+}
+
+.illustration--full-bleed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+  max-height: none;
+}
+
+.illustration--top { margin: 0 0 1.3em 0; }
+.illustration--top img { max-height: 3.5in; }
+.illustration--bottom { margin: 1.3em 0 0 0; }
+.illustration--bottom img { max-height: 3.3in; }
+.illustration--full-page img { max-height: 5.8in; }
+.illustration--left img, .illustration--right img, .illustration--inline img { max-height: 3.2in; }
+.illustration--spot { margin: 0 0 1.1em 0; }
+.illustration--spot img { max-height: 2.1in; }
+
+.caption {
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+  line-height: var(--leading-caption);
+  color: var(--ink-soft);
+  margin: 0.7em 0 0 0;
+  text-align: center;
+  max-width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.caption--left { text-align: left; margin-left: 0; }
+
+/* ------------------------------------------------------------------ lists */
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checklist li {
+  position: relative;
+  padding-left: 1.85em;
+  margin: 0 0 0.78em 0;
+  break-inside: avoid;
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.14em;
+  width: 0.92em;
+  height: 0.92em;
+  border: 1.2px solid var(--ink-soft);
+  border-radius: 1px;
+}
+
+.checklist__label { font-weight: 600; }
+.checklist__note {
+  display: block;
+  font-size: calc(var(--size-body) * 0.9);
+  color: var(--ink-soft);
+  margin-top: 0.12em;
+}
+
+.numbered {
+  list-style: none;
+  counter-reset: bfitem;
+  margin: 0;
+  padding: 0;
+}
+
+.numbered li {
+  counter-increment: bfitem;
+  position: relative;
+  padding-left: 2.1em;
+  margin: 0 0 0.8em 0;
+  break-inside: avoid;
+}
+
+.numbered li::before {
+  content: counter(bfitem);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-display);
+  font-size: 1.15em;
+  color: var(--accent);
+}
+
+/* ----------------------------------------------------------------- tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(var(--size-body) * 0.95);
+}
+
+.table th {
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--ink-soft);
+  padding: 0 0.7em 0.5em 0;
+  border-bottom: 1.5px solid var(--rule);
+}
+
+.table td {
+  padding: 0.62em 0.7em 0.62em 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.table tr:last-child td { border-bottom: 0; }
+
+/* ------------------------------------------------------------- comparison */
+.comparison {
+  display: flex;
+  gap: 1.6em;
+}
+
+.comparison__column {
+  flex: 1 1 0;
+  display: block;
+}
+
+.comparison__column + .comparison__column {
+  border-left: 1px solid var(--rule);
+  padding-left: 1.6em;
+}
+
+.comparison .checklist li { padding-left: 1em; }
+
+.comparison .checklist li::before {
+  content: "";
+  top: 0.52em;
+  width: 0.42em;
+  height: 0;
+  border: 0;
+  border-top: 1.2px solid var(--accent);
+  border-radius: 0;
+}
+
+.comparison .checklist__label { font-weight: 400; }
+
+.comparison__title {
+  font-family: var(--font-accent);
+  font-size: var(--size-subheading);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.9em 0;
+}
+
+/* -------------------------------------------------------------- questions */
+.question {
+  margin: 0 0 1.05em 0;
+  break-inside: avoid;
+}
+
+.question__text {
+  font-weight: 600;
+  margin: 0 0 0.35em 0;
+}
+
+.question__options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: calc(var(--size-body) * 0.94);
+  color: var(--ink-soft);
+}
+
+.question__options li {
+  position: relative;
+  padding-left: 1.5em;
+  margin: 0 0 0.16em 0;
+}
+
+.question__options li::before {
+  content: "";
+  position: absolute;
+  left: 0.05em;
+  top: 0.3em;
+  width: 0.72em;
+  height: 0.72em;
+  border: 1.1px solid var(--rule);
+  border-radius: 50%;
+}
+
+.scoring {
+  position: absolute;
+  left: var(--margin-left);
+  right: var(--margin-right);
+  bottom: var(--margin-bottom);
+  padding-top: 0.8em;
+  border-top: 1px solid var(--rule);
+  font-size: var(--size-caption);
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------ quote */
+.quote {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.quote__text {
+  font-family: var(--font-display);
+  font-size: calc(var(--size-chapter-title) * 0.72);
+  line-height: 1.24;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.quote__attribution {
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 1.6em 0 0 0;
+}
+
+/* ------------------------------------------------------------ certificate */
+.certificate {
+  height: 100%;
+  border: 2px solid var(--accent);
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.certificate__inner {
+  height: 100%;
+  border: 1px solid var(--rule);
+  padding: 1.6em 1.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.certificate__title {
+  font-family: var(--font-display);
+  font-size: calc(var(--size-chapter-title) * 0.72);
+  line-height: 1.1;
+  margin: 0 0 0.5em 0;
+}
+
+.certificate__line {
+  border-bottom: 1px solid var(--ink-soft);
+  min-height: 1.8em;
+  margin: 1.3em 2em 0.35em 2em;
+}
+
+.certificate__line-label {
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ----------------------------------------------------------- front matter */
+.front-matter {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.front-matter__title {
+  font-family: var(--font-display);
+  font-size: calc(var(--size-chapter-title) * 1.2);
+  line-height: 1.06;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.front-matter__subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: calc(var(--size-body) * 1.2);
+  color: var(--ink-soft);
+  margin: 0.9em 0 0 0;
+}
+
+.front-matter__meta {
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 2.4em;
+}
+
+/* ---------------------------------------------------------------- contents */
+/* A classic dotted-leader contents row, built with floats rather than flex so
+ * the leader cannot drift away from its entry. */
+.contents__entry {
+  display: block;
+  margin: 0 0 0.62em 0;
+  padding-bottom: 0.22em;
+  border-bottom: 1px dotted var(--rule);
+  overflow: hidden;
+}
+
+.contents__title { float: left; }
+.contents__leader { display: none; }
+.contents__page {
+  float: right;
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------------ notes */
+.footnote {
+  position: absolute;
+  left: var(--margin-left);
+  right: var(--margin-right);
+  bottom: var(--margin-bottom);
+  font-size: var(--size-caption);
+  line-height: var(--leading-caption);
+  color: var(--ink-soft);
+}
+
+.stack { display: block; }
+.stack--center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.grow { min-height: 0; }

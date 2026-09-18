@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-p012-render",
+  "book_id": "demo-book",
+  "type": "page_render",
+  "stage": "page_production",
+  "summary": "Render page p012 - Summary of chapter one",
+  "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render demo-book --page p012 --submit",
+  "page_id": "p012",
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "pages/specs/p012.json",
+    "assets/approved/p012-summary-summary-of-chapter-one.png"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/drafts/p012/",
+    "submit_command": "bookfactory submit demo-book p012 --kind page --file <path>",
+    "expected_format": "pdf"
+  },
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:51Z",
+  "closed_at": "2026-09-18T12:47:52Z"
+}

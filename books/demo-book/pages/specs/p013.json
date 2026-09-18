@@ -1,0 +1,20 @@
+{
+  "copy": {
+    "eyebrow": "Chapter two",
+    "heading": "The Minimum Viable Response",
+    "subheading": "In which the manual declines to recommend enthusiasm.",
+    "body": [
+      "Enthusiasm in month one produces a raised bed in month two and a covered raised bed in month nine. The minimum viable response is the smallest action that prevents the situation from becoming visible to neighbours."
+    ]
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p013",
+  "type": "chapter_opener",
+  "title": "The Minimum Viable Response",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

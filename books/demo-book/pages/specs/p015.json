@@ -1,0 +1,52 @@
+{
+  "copy": {
+    "eyebrow": "2.2",
+    "heading": "The ninety minute protocol",
+    "subheading": "To be completed by the subject, honestly, in pen",
+    "items": [
+      {
+        "label": "How many fortnights since the last ninety minutes?",
+        "options": [
+          "One",
+          "Three",
+          "I do not measure time that way"
+        ]
+      },
+      {
+        "label": "What prevented the most recent attempt?",
+        "options": [
+          "Rain",
+          "Forecast rain",
+          "Rain the previous Tuesday"
+        ]
+      },
+      {
+        "label": "Which task was performed instead?",
+        "options": [
+          "Tidying the shed",
+          "Researching a mower",
+          "Standing at the window"
+        ]
+      },
+      {
+        "label": "Was the mug present throughout?",
+        "options": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      }
+    ],
+    "footnote": "Scoring: any answer in the third column indicates the subject has replaced gardening with the contemplation of gardening. This is common and is not, by itself, a cause for concern."
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p015",
+  "type": "diagnostic_test",
+  "title": "The ninety minute protocol",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "copy": {
+    "eyebrow": "2.5.1",
+    "heading": "Recommended tool inventory",
+    "items": [
+      {
+        "label": "One spade",
+        "note": "Any spade. The spade is not the problem."
+      },
+      {
+        "label": "One pair of shears",
+        "note": "Sharpened once, in year one."
+      },
+      {
+        "label": "One mower",
+        "note": "The one already owned."
+      },
+      {
+        "label": "One mug",
+        "note": "Non-negotiable."
+      }
+    ],
+    "body": [
+      "Equipment beyond this list is permitted but will not improve the garden. It will improve the shed, which the subject may consider sufficient."
+    ],
+    "caption": "Fig. 2.4 - The inventory, unlabelled in artwork and labelled in type."
+  },
+  "illustration": {
+    "asset_id": "p020-inventory",
+    "concept": "Four garden tools laid out flat in a row, top-down view, flat colour, no words anywhere.",
+    "scene": "Four garden tools laid out flat in a row, top-down view, flat colour, no words anywhere.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "top",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p020",
+  "type": "diagram",
+  "title": "The tool inventory",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

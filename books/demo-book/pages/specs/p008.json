@@ -1,0 +1,40 @@
+{
+  "copy": {
+    "eyebrow": "1.3",
+    "heading": "Initial severity assessment",
+    "subheading": "Score one point per statement the subject would agree with",
+    "items": [
+      {
+        "label": "There is a bag of compost in the car.",
+        "note": "Purchased in April. Still in the boot."
+      },
+      {
+        "label": "The strimmer's power rating can be quoted from memory."
+      },
+      {
+        "label": "A plant is described as doing quite well, actually.",
+        "note": "The plant is visibly not doing quite well."
+      },
+      {
+        "label": "The shed was purchased before any tool was purchased."
+      },
+      {
+        "label": "One specific weed is referred to by name, with feeling."
+      },
+      {
+        "label": "There are three watering cans and no working watering can."
+      }
+    ],
+    "footnote": "Two points: within normal limits. Four points: the subject has begun buying equipment instead of gardening."
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p008",
+  "type": "checklist",
+  "title": "Initial severity assessment",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

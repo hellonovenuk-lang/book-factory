@@ -1,0 +1,18 @@
+{% extends "_base.html.j2" %}
+{% import "_illustration.html.j2" as art %}
+
+{% block content %}
+  {% if copy.eyebrow %}<p class="eyebrow">{{ copy.eyebrow }}</p>{% endif %}
+  {% if copy.heading %}<h2 class="heading">{{ copy.heading }}</h2>{% endif %}
+  {% if copy.subheading %}<p class="subheading">{{ copy.subheading }}</p>{% endif %}
+
+  {{ art.illustration(illustration) }}
+
+  {% if body_paragraphs %}
+  <div class="prose">
+    {% for para in body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if copy.footnote %}<p class="footnote">{{ copy.footnote }}</p>{% endif %}
+{% endblock %}

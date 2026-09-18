@@ -1,0 +1,38 @@
+{
+  "copy": {
+    "eyebrow": "2.4",
+    "heading": "Seasonal obligations",
+    "subheading": "The complete list, in full",
+    "items": [
+      {
+        "label": "April - cut the grass once.",
+        "note": "The first cut is ceremonial and may be photographed."
+      },
+      {
+        "label": "June - cut the grass again.",
+        "note": "Enthusiasm at this point is a warning sign."
+      },
+      {
+        "label": "August - cut the grass, or do not.",
+        "note": "August is understood to be a negotiation."
+      },
+      {
+        "label": "October - move the furniture into the shed."
+      },
+      {
+        "label": "February - look at the garden from the window."
+      }
+    ],
+    "footnote": "No other obligation exists. Any additional task the subject performs is voluntary and should not be mentioned to the household, who will come to expect it."
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p018",
+  "type": "checklist",
+  "title": "Seasonal obligations",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

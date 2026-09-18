@@ -1,0 +1,34 @@
+{% extends "_base.html.j2" %}
+{% import "_illustration.html.j2" as art %}
+
+{% block content %}
+  {% if copy.eyebrow %}<p class="eyebrow">{{ copy.eyebrow }}</p>{% endif %}
+  <h2 class="heading">{{ copy.heading or page.title }}</h2>
+  {% if copy.subheading %}<p class="subheading">{{ copy.subheading }}</p>{% endif %}
+
+  {% if body_paragraphs %}
+  <div class="prose prose--tight" style="margin-bottom:1.4em">
+    {% for para in body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="comparison">
+    {% for column in copy.columns %}
+    <div class="comparison__column">
+      <p class="comparison__title">{{ column.title }}</p>
+      {% if column.image %}
+      <figure class="illustration illustration--spot" style="margin:0 0 1em 0">
+        <img src="{{ column.image }}" alt="">
+      </figure>
+      {% endif %}
+      <ul class="checklist">
+        {% for item in column['items'] %}
+        <li><span class="checklist__label">{{ item }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if copy.footnote %}<p class="footnote">{{ copy.footnote }}</p>{% endif %}
+{% endblock %}

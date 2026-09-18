@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-release",
+  "book_id": "demo-book",
+  "type": "operator_decision",
+  "stage": "kdp_preflight",
+  "summary": "Mark the book release ready",
+  "instructions": "Interior assembled and preflight passed.\n\nRun: bookfactory advance demo-book --to release_ready",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:47:58Z",
+  "closed_at": "2026-09-18T12:47:58Z"
+}
