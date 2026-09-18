@@ -17,12 +17,13 @@ from pathlib import Path
 from bookfactory.core import stages, tasks as task_module
 from bookfactory.core.book import ASSET, PAGE, Book
 from bookfactory.core.errors import ValidationError
-from bookfactory.core.jsonio import read_json
+from bookfactory.core.jsonio import read_json, write_json
 from bookfactory.core.paths import books_dir
 
 __all__ = [
-    "list_books", "create_book", "status", "next_task", "get_task", "plan_pages",
-    "write_page_spec", "register_asset", "submit_asset", "approve", "reject", "revise",
+    "list_books", "create_book", "create_from_idea", "status", "next_task", "get_task",
+    "plan_pages", "write_page_spec", "register_asset", "submit_asset", "submit_intake",
+    "approve", "reject", "revise",
     "lock", "advance", "validate", "render", "qa", "assemble", "review", "preflight",
     "audit_history", "relock",
 ]
@@ -71,6 +72,34 @@ def create_book(title: str, **kwargs) -> dict:
             str(p.relative_to(book.paths.root))
             for p in book.paths.root.rglob("*") if p.is_file()
         ),
+    }
+
+
+def _title_from_idea(idea: str) -> str:
+    text = " ".join(idea.strip().split())
+    if not text:
+        return "Untitled"
+    return " ".join(text.split(" ")[:8])[:80]
+
+
+def create_from_idea(idea: str, *, title: str | None = None, **kwargs) -> dict:
+    """Start a book from nothing but a one-line idea.
+
+    Unlike `create_book`, this marks the intake questionnaire required: the
+    book cannot proceed past it until the operator's answers are persisted.
+    `bookfactory create` stays available for callers (including scripts and
+    tests) that already know every production detail up front.
+    """
+    root = kwargs.pop("root", None)
+    book = Book.create(title or _title_from_idea(idea), root=root, idea=idea, **kwargs)
+    book.state.intake.required = True
+    book.save()
+    task_module.sync_open_task(book)
+    return {
+        "book_id": book.state.book_id,
+        "path": str(book.paths.root),
+        "stage": book.state.stage,
+        "next_action": book.state.next_action,
     }
 
 
@@ -182,6 +211,43 @@ def register_asset(book_id: str, asset_id: str, *, root: str | Path | None = Non
     return record.to_dict()
 
 
+def submit_intake(book_id: str, answers: dict, *, root: str | Path | None = None) -> dict:
+    """Persist the operator's one-time answers to the intake questionnaire.
+
+    This is the only way `book.json`'s `intake` and `production_policy` get
+    set. A fresh session never needs to ask again - it reads
+    `brief/intake.json` or `book.json`'s `intake` block instead.
+    """
+    from bookfactory.core import intake as intake_module, production
+
+    problems = intake_module.validate_answers(answers)
+    if problems:
+        raise ValidationError(
+            "Questionnaire answers are incomplete or invalid",
+            problems=problems,
+            remedy="Fix the listed answers and submit again.",
+        )
+    book = Book.load(book_id, root)
+    from bookfactory.core import clock
+
+    book.state.intake.completed = True
+    book.state.intake.completed_at = clock.timestamp()
+    book.state.intake.answers = dict(answers)
+    policy = production.policy_from_choice(answers["production_policy"])
+    policy.authorized_at = clock.timestamp()
+    policy.source = "intake_questionnaire"
+    book.state.production_policy = policy
+    write_json(book.paths.brief_dir / "intake.json", {
+        "answers": book.state.intake.answers,
+        "completed_at": book.state.intake.completed_at,
+    })
+    book.log("intake_submitted", production_policy=policy.mode,
+             operator_authorized=policy.operator_authorized)
+    book.save()
+    task_module.sync_open_task(book)
+    return status(book_id, root=root)
+
+
 # ----------------------------------------------------------------------
 # Drafts and approvals
 # ----------------------------------------------------------------------
@@ -197,10 +263,11 @@ def submit_asset(book_id: str, identifier: str, file: str | Path, *, kind: str =
 
 
 def approve(book_id: str, identifier: str, *, kind: str = PAGE, revision: str | None = None,
-            by: str | None = None, note: str | None = None,
+            by: str | None = None, note: str | None = None, autonomous: bool = False,
             root: str | Path | None = None) -> dict:
     book = Book.load(book_id, root)
-    approval = book.approve(kind, identifier, revision=revision, by=by, note=note)
+    approval = book.approve(kind, identifier, revision=revision, by=by, note=note,
+                            autonomous=autonomous)
     task_module.sync_open_task(book)
     return {"kind": kind, "id": identifier, **approval.to_dict(with_dimensions=True)}
 

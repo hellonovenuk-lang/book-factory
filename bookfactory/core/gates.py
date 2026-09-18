@@ -132,6 +132,22 @@ def assembly(book) -> GateResult:
     return GateResult("assembly", not reasons, reasons)
 
 
+def autonomous_approval_authorized(book) -> GateResult:
+    """May an agent record an approval as granted under autonomous authorization?
+
+    This is never "silence means approval" - it only passes when the operator
+    explicitly selected FULL AUTONOMOUS or VISUAL CHECKPOINT at intake and that
+    choice was persisted as `production_policy`.
+    """
+    reasons = []
+    policy = book.state.production_policy
+    if not policy.operator_authorized:
+        reasons.append("production_policy.operator_authorized is not set")
+    if policy.mode not in ("autonomous", "visual_checkpoint"):
+        reasons.append(f"production_policy.mode is {policy.mode!r}, not autonomous or visual_checkpoint")
+    return GateResult("autonomous_approval_authorized", not reasons, reasons)
+
+
 def release_ready(book) -> GateResult:
     reasons = []
     if not book.paths.interior_pdf.is_file():

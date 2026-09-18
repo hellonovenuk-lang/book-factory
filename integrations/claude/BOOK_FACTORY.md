@@ -1,5 +1,15 @@
 # Book Factory - operating instructions for Claude
 
+**Since autonomous ChatGPT production mode was added, Claude Code is a
+developer/maintenance tool for Book Factory - not a required part of normal
+book production.** Normal production is: the user talks to ChatGPT Work,
+ChatGPT reads and drives the repository directly, following
+`integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`. If a user asks you to produce
+a book end to end, tell them ChatGPT Work is the normal way to do that now,
+point them at that file, and offer to help only with the parts below -
+maintaining Book Factory itself, or a specific writing/production task they
+explicitly hand you. Do not tell them to bounce work between you and ChatGPT.
+
 You are working inside a Book Factory repository. Read `AGENTS.md` first - those
 rules apply to you. This file adds what is specific to Claude, which usually
 means having filesystem and shell access, and therefore more ways to do damage.

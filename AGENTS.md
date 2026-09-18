@@ -48,6 +48,32 @@ command.
 
 Silence is not approval. Enthusiasm is not approval.
 
+**The one exception**: a book whose recorded `production_policy` explicitly
+authorizes autonomous production (the operator chose this at intake, not by
+saying nothing). Even then, `bookfactory approve` refuses `--autonomous`
+unless that authorization is actually on record, and every such approval is
+written to the audit log as granted under it - never as an ordinary approval.
+See `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` for the full contract.
+This does not relax the rule for a `checkpointed` book, and it never means
+"the operator probably would have said yes".
+
+## 3a. Read `mode`, do not guess it
+
+Every task from `bookfactory next` carries a `mode`: `continue_automatically`,
+`wait_for_operator`, `remediate`, `blocked`, or `complete`. It already encodes
+the book's recorded production policy plus whether a prior attempt failed a
+measurable requirement - do the task, or stop, accordingly, instead of
+re-deriving that judgement from the task's `type` or `approval_required`.
+
+## 3b. Intake happens once, if it is required at all
+
+A book started with `bookfactory create-from-idea` requires the intake
+questionnaire before anything else - `next` returns a `type: "intake"` task
+until it is answered. A book started with `bookfactory create` does not (its
+operator already supplied every production detail up front). Either way, once
+`book.json`'s `intake.completed` is true, never ask again - read
+`brief/intake.json` instead.
+
 ## 4. Never mutate approved work
 
 Anything under `pages/approved/` or `assets/approved/` is finished. Do not
@@ -97,6 +123,14 @@ changed between chapters.
 Read `style/visual-bible.md` before generating anything. It is the whole
 specification, and it was written so that you do not need any prior
 conversation.
+
+A task's `references` only ever lists real, approved artwork suitable for
+style matching - Book Factory filters out any reference tagged
+`deterministic_layout` (a synthetic fixture built to test the renderer's
+geometry, never real art) before building a visual task. If you ever need a
+fixture purely to test layout, register it with
+`--reference-role deterministic_layout` so it can never leak into a real
+illustration task.
 
 ## 6a. Some constraints are measured, not judged
 
@@ -155,6 +189,9 @@ as draft v2; awaiting approval".
 
 | You want to | Run |
 | --- | --- |
+| Start a book from one idea | `bookfactory create-from-idea "<idea>" --json` |
+| See the intake questionnaire | `bookfactory questionnaire --json` |
+| Persist questionnaire answers | `bookfactory intake <book> --from-file <answers.json>` |
 | Know where the book is | `bookfactory status <book> --json` |
 | Know what to do next | `bookfactory next <book> --json` |
 | See a task in full | `bookfactory task <book> --json` |

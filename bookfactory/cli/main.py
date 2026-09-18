@@ -77,6 +77,31 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--series")
     create.add_argument("--profile", default="kdp-default", help="KDP profile id.")
 
+    create_idea = sub.add_parser(
+        "create-from-idea", parents=[common],
+        help="Start a book from nothing but a one-line idea. Requires the intake questionnaire.")
+    create_idea.add_argument("idea")
+    create_idea.add_argument("--title", help="Default: derived from the idea.")
+    create_idea.add_argument("--id", dest="book_id")
+    create_idea.add_argument("--trim", default="6x9")
+    create_idea.add_argument("--bw", action="store_true")
+    create_idea.add_argument("--bleed", action="store_true")
+    create_idea.add_argument("--dpi", type=int, default=300)
+    create_idea.add_argument("--pages", type=int, dest="target_page_count")
+    create_idea.add_argument("--subtitle")
+    create_idea.add_argument("--series")
+    create_idea.add_argument("--profile", default="kdp-default", help="KDP profile id.")
+
+    sub.add_parser("questionnaire", parents=[common],
+                   help="Show the intake questionnaire, with no project needed.")
+
+    intake = sub.add_parser("intake", parents=[common],
+                            help="Persist answers to the intake questionnaire.")
+    intake.add_argument("book")
+    intake.add_argument("--from-file", dest="from_file", help="JSON file of question -> answer.")
+    intake.add_argument("--set", dest="pairs", action="append", default=[],
+                        metavar="KEY=VALUE", help="One answer, repeatable.")
+
     for name, help_text in (
         ("status", "Where the book stands right now."),
         ("next", "The single next action, for a human or an agent."),
@@ -120,6 +145,12 @@ def build_parser() -> argparse.ArgumentParser:
     asset_add.add_argument("--page", dest="page_id")
     asset_add.add_argument("--characters", nargs="*", default=None)
     asset_add.add_argument("--references", nargs="*", default=None)
+    asset_add.add_argument("--reference-role", dest="reference_role",
+                           choices=["generative_style", "generative_character",
+                                    "deterministic_layout", "palette", "typography"],
+                           help="What this reference is for. Only tag 'deterministic_layout' "
+                                "for synthetic fixtures used to test renderer geometry - "
+                                "those are never handed to a generative visual task.")
     asset_list = asset_sub.add_parser("list", parents=[common], help="List registered assets.")
     asset_list.add_argument("book")
 
@@ -139,6 +170,10 @@ def build_parser() -> argparse.ArgumentParser:
     approve.add_argument("--draft", dest="revision", help="Which revision (default: latest).")
     approve.add_argument("--by", help="Who approved it.")
     approve.add_argument("--note")
+    approve.add_argument("--autonomous", action="store_true",
+                         help="Record this as granted under the book's recorded "
+                              "autonomous-production authorization, not an explicit operator "
+                              "decision. Fails unless the intake questionnaire authorized it.")
 
     reject = sub.add_parser("reject", parents=[common], help="Reject a draft. The file is kept.")
     reject.add_argument("book")
@@ -313,6 +348,59 @@ def cmd_create(args) -> int:
     return 0
 
 
+def cmd_create_from_idea(args) -> int:
+    result = api.create_from_idea(
+        args.idea, title=args.title, book_id=args.book_id, root=args.root,
+        trim=args.trim, colour=not args.bw, bleed=args.bleed, dpi=args.dpi,
+        kdp_profile=args.profile, target_page_count=args.target_page_count,
+        subtitle=args.subtitle, series=args.series,
+    )
+    if args.json:
+        out.emit_json(result)
+        return 0
+    out.heading(f"CREATED  {result['book_id']}")
+    out.blank()
+    out.field("path", result["path"])
+    out.blank()
+    print("Next: " + (result["next_action"]["summary"] if result["next_action"] else "nothing"))
+    print(f"  bookfactory next {result['book_id']}")
+    return 0
+
+
+def cmd_questionnaire(args) -> int:
+    from bookfactory.core import intake
+
+    if args.json:
+        out.emit_json(intake.QUESTIONNAIRE)
+        return 0
+    out.heading("BOOK FACTORY INTAKE QUESTIONNAIRE")
+    out.blank()
+    print(intake.questionnaire_text())
+    return 0
+
+
+def cmd_intake(args) -> int:
+    answers: dict = {}
+    if args.from_file:
+        answers.update(read_json(Path(args.from_file)))
+    for pair in args.pairs:
+        if "=" not in pair:
+            out.error(f"--set expects KEY=VALUE, got {pair!r}")
+            return 2
+        key, _, value = pair.partition("=")
+        answers[key] = value
+    result = api.submit_intake(args.book, answers, root=args.root)
+    if args.json:
+        out.emit_json(result)
+        return 0
+    out.heading("INTAKE COMPLETE")
+    out.field("production policy", result["production_policy"]["mode"])
+    out.blank()
+    if result["next_action"]:
+        print("Next: " + result["next_action"]["summary"])
+    return 0
+
+
 def cmd_status(args) -> int:
     data = api.status(args.book, root=args.root)
     if args.json:
@@ -323,6 +411,9 @@ def cmd_status(args) -> int:
     out.heading(f"BOOK: {data['title']}")
     out.field("id", data["book_id"])
     out.field("stage", f"{data['stage_number']:02d} {data['stage_label']}")
+    out.field("mode", data["mode"].replace("_", " ").upper())
+    if not data["intake"]["completed"] and data["intake"]["required"]:
+        out.field("intake", "NOT COMPLETED - run `bookfactory next` for the questionnaire")
     out.field("format", f"{data['format']['trim']}, "
                         f"{'colour' if data['format']['colour'] else 'black and white'}"
                         f"{', bleed' if data['format']['bleed'] else ''}")
@@ -418,6 +509,8 @@ def _print_task(task: dict) -> None:
     out.field("stage", stages.label(task["stage"]) if task.get("stage") else "-")
     out.field("task", task["task_id"])
     out.field("type", task["type"])
+    if task.get("mode"):
+        out.field("mode", task["mode"].replace("_", " ").upper())
     out.blank()
     print(task["summary"])
     out.blank()
@@ -499,7 +592,8 @@ def cmd_asset(args) -> int:
         result = api.register_asset(
             args.book, args.asset_id, root=args.root, kind=args.kind, title=args.title,
             description=args.description, page_id=args.page_id,
-            characters=args.characters, references=args.references)
+            characters=args.characters, references=args.references,
+            reference_role=args.reference_role)
         if args.json:
             out.emit_json(result)
             return 0
@@ -540,7 +634,7 @@ def cmd_submit(args) -> int:
 
 def cmd_approve(args) -> int:
     result = api.approve(args.book, args.id, kind=args.kind, revision=args.revision,
-                         by=args.by, note=args.note, root=args.root)
+                         by=args.by, note=args.note, autonomous=args.autonomous, root=args.root)
     if args.json:
         out.emit_json(result)
         return 0
@@ -761,6 +855,9 @@ COMMANDS = {
     "stages": cmd_stages,
     "doctor": cmd_doctor,
     "create": cmd_create,
+    "create-from-idea": cmd_create_from_idea,
+    "questionnaire": cmd_questionnaire,
+    "intake": cmd_intake,
     "status": cmd_status,
     "next": cmd_next,
     "task": cmd_task,

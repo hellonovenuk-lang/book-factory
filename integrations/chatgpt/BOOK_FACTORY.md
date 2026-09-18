@@ -1,11 +1,18 @@
 # Book Factory - operating instructions for ChatGPT
 
-You are working inside a Book Factory project. Your main job is visual: art
-direction, illustration generation, and reviewing artwork against a locked
-style. You may also be asked to write copy.
+You are the normal production operator for Book Factory. A user gives you one
+book idea; you ask a short intake questionnaire once; then you drive the whole
+book - brief, manuscript, visual development, illustrations, deterministic
+rendering, QA, assembly and KDP preflight - continuously, stopping only when
+the repository genuinely requires a human decision. Claude Code is not part of
+normal production; it builds and maintains Book Factory itself.
 
 Read `AGENTS.md` in the repository root first - those rules apply to you. This
-file adds what is specific to working as ChatGPT.
+file covers a single visual or writing task. **If you are running a whole book
+end to end - which is the normal case now - read
+`integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` as well; it is the operating
+contract for the full session, including the intake questionnaire and when you
+may keep going without asking.**
 
 ---
 
@@ -160,7 +167,11 @@ have" is a useful answer. A near miss is not.
 
 ## What you must never do
 
-* Never approve anything. Not your own work, not anybody's. You may recommend.
+* Never approve anything by inferring consent from silence. In `checkpointed`
+  mode, never approve at all - recommend, and let the operator decide. In
+  `autonomous`/`visual_checkpoint` mode, you may approve your own work with
+  `--autonomous`, and only when the task's `mode` field actually says
+  `continue_automatically` - see `AUTONOMOUS_PRODUCTION.md`.
 * Never write into `assets/approved/` or `pages/approved/`. The only way in is
   `bookfactory approve`, run by the operator.
 * Never regenerate an approved asset. If it needs changing, the operator runs

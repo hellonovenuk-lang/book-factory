@@ -12,7 +12,7 @@
     "book_id": { "type": "string" },
     "type": {
       "type": "string",
-      "enum": ["authoring", "illustration", "character_reference", "layout_reference",
+      "enum": ["intake", "authoring", "illustration", "character_reference", "layout_reference",
                "page_render", "approval", "review", "qa", "assembly", "preflight", "operator_decision"]
     },
     "stage": { "type": "string" },
@@ -50,6 +50,25 @@
     },
     "approval_required": { "type": "boolean" },
     "status": { "type": "string", "enum": ["open", "done", "cancelled"] },
+    "gate": {
+      "type": ["string", "null"],
+      "enum": [null, "intake", "concept_lock", "voice_lock", "manuscript_lock", "visual_lock", "release_ready"],
+      "description": "Which production gate this task represents, if any."
+    },
+    "remediation": {
+      "type": "boolean",
+      "description": "True when this task exists only because a prior draft failed a hard, measurable constraint."
+    },
+    "retry_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many prior drafts have already failed a hard constraint on this artefact."
+    },
+    "mode": {
+      "type": ["string", "null"],
+      "enum": [null, "continue_automatically", "wait_for_operator", "remediate", "blocked", "complete"],
+      "description": "The production-loop continuation state - see bookfactory.core.production."
+    },
     "created_at": { "type": "string" },
     "closed_at": { "type": ["string", "null"] }
   }

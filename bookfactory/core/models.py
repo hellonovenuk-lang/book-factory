@@ -65,6 +65,37 @@ class PagePlanState:
     planned_at: str | None = None
 
 
+#: The intake questionnaire is answered once. A fresh session must never need
+#: to ask it again unless the operator explicitly wants to revise it.
+@dataclass
+class IntakeState:
+    required: bool = False
+    completed: bool = False
+    completed_at: str | None = None
+    #: The raw questionnaire answers, persisted verbatim. See
+    #: `bookfactory.core.intake` for the question set and validation.
+    answers: dict = field(default_factory=dict)
+
+
+#: Explicit, recorded authorization for how far production may proceed without
+#: asking the operator. Set once, at intake, from the operator's own answer -
+#: never inferred from silence.
+PRODUCTION_MODES = ("autonomous", "visual_checkpoint", "checkpointed")
+
+
+@dataclass
+class ProductionPolicy:
+    mode: str = "checkpointed"
+    operator_authorized: bool = False
+    visual_checkpoint: bool = True
+    major_gate_checkpoints: bool = True
+    stop_on_soft_qa_failure: bool = True
+    stop_on_hard_failure: bool = True
+    authorized_at: str | None = None
+    #: What set this policy, e.g. "intake_questionnaire".
+    source: str | None = None
+
+
 @dataclass
 class BookState:
     book_id: str
@@ -77,6 +108,11 @@ class BookState:
     manuscript: ManuscriptState = field(default_factory=ManuscriptState)
     style: StyleState = field(default_factory=StyleState)
     page_plan: PagePlanState = field(default_factory=PagePlanState)
+    intake: IntakeState = field(default_factory=IntakeState)
+    production_policy: ProductionPolicy = field(default_factory=ProductionPolicy)
+    #: Cached copy of the current task's continuation mode - see
+    #: `bookfactory.core.production`. Derived state, recomputed on every save.
+    production_mode: str = "complete"
     blocked: dict | None = None
     next_action: dict | None = None
     last_transition: dict | None = None
@@ -98,6 +134,9 @@ class BookState:
             "manuscript": asdict(self.manuscript),
             "style": asdict(self.style),
             "page_plan": asdict(self.page_plan),
+            "intake": asdict(self.intake),
+            "production_policy": asdict(self.production_policy),
+            "production_mode": self.production_mode,
             "blocked": self.blocked,
             "next_action": self.next_action,
             "last_transition": self.last_transition,
@@ -120,6 +159,9 @@ class BookState:
                 manuscript=ManuscriptState(**data.get("manuscript", {})),
                 style=StyleState(**data.get("style", {})),
                 page_plan=PagePlanState(**data.get("page_plan", {})),
+                intake=IntakeState(**data.get("intake", {})),
+                production_policy=ProductionPolicy(**data.get("production_policy", {})),
+                production_mode=data.get("production_mode", "complete"),
                 blocked=data.get("blocked"),
                 next_action=data.get("next_action"),
                 last_transition=data.get("last_transition"),
@@ -211,6 +253,11 @@ class ApprovalRecord:
     height: int | None = None
     superseded_at: str | None = None
     superseded_reason: str | None = None
+    #: Set only when this approval was granted under the book's recorded
+    #: autonomous-production authorization rather than an explicit operator
+    #: decision, e.g. "autonomous_production_policy:autonomous". Never inferred
+    #: from silence - see `bookfactory.core.production`.
+    authorization: str | None = None
 
     def to_dict(self, *, with_dimensions: bool = False) -> dict:
         data = {
@@ -223,6 +270,7 @@ class ApprovalRecord:
             "note": self.note,
             "superseded_at": self.superseded_at,
             "superseded_reason": self.superseded_reason,
+            "authorization": self.authorization,
         }
         if with_dimensions:
             data["width"] = self.width
@@ -369,6 +417,30 @@ ASSET_KINDS = ("illustration", "character_reference", "layout_reference", "page_
                "palette_reference", "decoration")
 REFERENCE_KINDS = ("character_reference", "layout_reference", "page_reference", "palette_reference")
 
+#: What a reference is *for*. The distinction that matters is generative vs
+#: deterministic: a fixture built to test the renderer's geometry must never be
+#: handed to an image-generation task as a style example, no matter what kind
+#: it was registered under.
+REFERENCE_ROLES = ("generative_style", "generative_character", "deterministic_layout",
+                    "palette", "typography")
+
+#: Fallback role by kind, used when an asset was not tagged explicitly. Every
+#: entry here is generative - a deterministic fixture must be tagged on
+#: purpose, never fall into that bucket by default.
+_DEFAULT_REFERENCE_ROLE_BY_KIND = {
+    "character_reference": "generative_character",
+    "layout_reference": "generative_style",
+    "page_reference": "generative_style",
+    "palette_reference": "palette",
+}
+
+
+def effective_reference_role(asset: "AssetRecord") -> str | None:
+    """The role this asset plays as a reference, explicit or defaulted."""
+    if asset.reference_role:
+        return asset.reference_role
+    return _DEFAULT_REFERENCE_ROLE_BY_KIND.get(asset.kind)
+
 
 @dataclass
 class AssetRecord:
@@ -382,6 +454,10 @@ class AssetRecord:
     status: str = "planned"
     revision_open: bool = False
     locked: bool = False
+    #: See REFERENCE_ROLES. None means "use the kind-based default" - a
+    #: generative one. Only ever "deterministic_layout" for synthetic fixtures
+    #: built to test renderer geometry, and those must be tagged explicitly.
+    reference_role: str | None = None
     drafts: list[DraftRecord] = field(default_factory=list)
     approved: ApprovalRecord | None = None
     approval_history: list[ApprovalRecord] = field(default_factory=list)
@@ -399,6 +475,7 @@ class AssetRecord:
             "status": self.status,
             "revision_open": self.revision_open,
             "locked": self.locked,
+            "reference_role": self.reference_role,
             "drafts": [d.to_dict(with_dimensions=True) for d in self.drafts],
             "approved": self.approved.to_dict(with_dimensions=True) if self.approved else None,
             "approval_history": [a.to_dict(with_dimensions=True) for a in self.approval_history],
@@ -414,6 +491,12 @@ class AssetRecord:
                 f"Unknown asset kind {kind!r} for {data.get('asset_id')}",
                 remedy="Valid kinds: " + ", ".join(ASSET_KINDS),
             )
+        reference_role = data.get("reference_role")
+        if reference_role is not None and reference_role not in REFERENCE_ROLES:
+            raise ValidationError(
+                f"Unknown reference_role {reference_role!r} for {data.get('asset_id')}",
+                remedy="Valid roles: " + ", ".join(REFERENCE_ROLES),
+            )
         return cls(
             asset_id=ids.validate_asset_id(data["asset_id"]),
             kind=kind,
@@ -425,6 +508,7 @@ class AssetRecord:
             status=data.get("status", "planned"),
             revision_open=bool(data.get("revision_open", False)),
             locked=bool(data.get("locked", False)),
+            reference_role=reference_role,
             drafts=[DraftRecord.from_dict(d) for d in data.get("drafts", [])],
             approved=ApprovalRecord.from_dict(approved) if approved else None,
             approval_history=[ApprovalRecord.from_dict(a) for a in data.get("approval_history", [])],
@@ -494,6 +578,22 @@ class Task:
     output: dict = field(default_factory=dict)
     approval_required: bool = False
     status: str = "open"
+    #: Which production gate this task represents, if any: "intake",
+    #: "concept_lock", "voice_lock", "manuscript_lock", "visual_lock" or
+    #: "release_ready". None for ordinary production work.
+    gate: str | None = None
+    #: True when this task exists only because a prior draft failed a hard,
+    #: measurable constraint (not a judgement call) - see
+    #: `bookfactory.core.constraints`.
+    remediation: bool = False
+    #: How many prior drafts of this asset/page have already failed a hard
+    #: constraint. Used to stop retrying and ask the operator instead.
+    retry_count: int = 0
+    #: The production-loop continuation state a driving agent should read
+    #: instead of guessing from `type`/`approval_required` - see
+    #: `bookfactory.core.production`. Set once the task is derived; never
+    #: hand-edited.
+    mode: str | None = None
     created_at: str = field(default_factory=clock.timestamp)
     closed_at: str | None = None
     schema_version: str = SCHEMA_VERSION
@@ -517,6 +617,10 @@ class Task:
             "output": dict(self.output),
             "approval_required": self.approval_required,
             "status": self.status,
+            "gate": self.gate,
+            "remediation": self.remediation,
+            "retry_count": self.retry_count,
+            "mode": self.mode,
             "created_at": self.created_at,
             "closed_at": self.closed_at,
         }
@@ -536,11 +640,14 @@ class Task:
             "page_id": self.page_id,
             "asset_id": self.asset_id,
             "approval_required": self.approval_required,
+            "mode": self.mode,
         }
 
 
 __all__ = [
-    "BookFormat", "LockState", "ManuscriptState", "StyleState", "PagePlanState", "BookState",
+    "BookFormat", "LockState", "ManuscriptState", "StyleState", "PagePlanState",
+    "IntakeState", "ProductionPolicy", "PRODUCTION_MODES", "BookState",
     "DraftRecord", "ApprovalRecord", "PageRecord", "AssetRecord", "Task",
-    "PAGE_STATUS", "ASSET_KINDS", "REFERENCE_KINDS", "derive_status",
+    "PAGE_STATUS", "ASSET_KINDS", "REFERENCE_KINDS", "REFERENCE_ROLES",
+    "effective_reference_role", "derive_status",
 ]

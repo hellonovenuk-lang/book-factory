@@ -77,6 +77,36 @@
         "planned_at": { "type": ["string", "null"] }
       }
     },
+    "intake": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean" },
+        "completed": { "type": "boolean" },
+        "completed_at": { "type": ["string", "null"] },
+        "answers": { "type": "object" }
+      }
+    },
+    "production_policy": {
+      "description": "Explicit, recorded authorization for how far production may proceed without asking the operator. Set once, from the operator's own intake answer - never inferred from silence.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "type": "string", "enum": ["autonomous", "visual_checkpoint", "checkpointed"] },
+        "operator_authorized": { "type": "boolean" },
+        "visual_checkpoint": { "type": "boolean" },
+        "major_gate_checkpoints": { "type": "boolean" },
+        "stop_on_soft_qa_failure": { "type": "boolean" },
+        "stop_on_hard_failure": { "type": "boolean" },
+        "authorized_at": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      }
+    },
+    "production_mode": {
+      "description": "Cached continuation state for the current task - see bookfactory.core.production. Derived, recomputed on every save.",
+      "type": "string",
+      "enum": ["continue_automatically", "wait_for_operator", "remediate", "blocked", "complete"]
+    },
     "blocked": {
       "description": "Set when a human decision is required before anything else can proceed.",
       "oneOf": [
