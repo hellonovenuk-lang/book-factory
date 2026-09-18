@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "demo-book",
-  "updated_at": "2026-09-18T13:59:44Z",
+  "updated_at": "2026-09-18T14:07:30Z",
   "assets": [
     {
       "asset_id": "p006-scope",
@@ -82,8 +82,8 @@
           "sha256": "0af31f3548be59f252b163b75c13095dacf208e6d18eca9aa8cc09d9128e008c",
           "submitted_at": "2026-09-18T13:59:44Z",
           "source": "chatgpt-image",
-          "status": "draft",
-          "note": "Operator explicitly authorised following the visual bible alone for this demo task, waiving matching the synthetic locked reference images. Generated rear-view subject at kitchen window with mug. Review limitation: generator returned 1254x1254 despite explicit 2048x2048 requests; below task min_pixels=1800, not print-ready. Figure extends slightly above lower third; palette and fill uniformity require visual review. No approval granted.",
+          "status": "rejected",
+          "note": "Rejected by explicit operator instruction: draft v2 is 1254x1254 pixels and fails the task hard minimum resolution requirement of 1800 pixels.",
           "width": 1254,
           "height": 1254
         }
