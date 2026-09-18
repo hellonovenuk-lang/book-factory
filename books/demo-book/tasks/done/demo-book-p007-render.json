@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-p007-render",
+  "book_id": "demo-book",
+  "type": "page_render",
+  "stage": "page_production",
+  "summary": "Render page p007 - The window observation",
+  "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render demo-book --page p007 --submit",
+  "page_id": "p007",
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "pages/specs/p007.json",
+    "assets/approved/p007-window-the-window-observation.png"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/drafts/p007/",
+    "submit_command": "bookfactory submit demo-book p007 --kind page --file <path>",
+    "expected_format": "pdf"
+  },
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:25:38Z",
+  "closed_at": "2026-09-18T12:25:38Z"
+}

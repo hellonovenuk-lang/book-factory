@@ -1,0 +1,25 @@
+{
+  "copy": {
+    "eyebrow": "Notice of issue",
+    "heading": "Conditions of use",
+    "body": [
+      "This manual is issued to the holder of a garden and to no other person. It confers no expertise and creates no obligation to garden.",
+      "The publisher accepts no responsibility for outcomes arising from the advice contained in these pages, including but not limited to the purchase of a second strimmer."
+    ],
+    "footnote": "First edition. Printed on paper that has seen a shed."
+  },
+  "layout": {
+    "show_page_number": false,
+    "show_running_head": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p002",
+  "type": "front_matter",
+  "title": "Notice of issue",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

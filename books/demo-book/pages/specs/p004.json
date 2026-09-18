@@ -1,0 +1,16 @@
+{
+  "copy": {
+    "quote": "The garden is not a project. The garden is a tenant who was here first and has no intention of leaving.",
+    "attribution": "Section 0.1, purpose of this manual"
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p004",
+  "type": "quote",
+  "title": "Epigraph",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

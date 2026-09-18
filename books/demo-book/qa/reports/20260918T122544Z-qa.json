@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "run_at": "2026-09-18T12:25:44Z",
+  "layers": [
+    {
+      "layer": "content",
+      "status": "pass",
+      "findings": [
+        {
+          "level": "info",
+          "code": "content.human_review",
+          "message": "Humour, pacing and whether each page earns its place cannot be machine-checked. Read the review PDF before approving the book.",
+          "page_id": null,
+          "asset_id": null,
+          "remedy": "Run `bookfactory review <book>` and read output/review/.",
+          "needs_human": true
+        }
+      ]
+    },
+    {
+      "layer": "visual",
+      "status": "pass",
+      "findings": [
+        {
+          "level": "info",
+          "code": "visual.human_review",
+          "message": "Character drift, style drift, composition and visual repetition cannot be machine-checked. Compare the contact sheet against the locked references.",
+          "page_id": null,
+          "asset_id": null,
+          "remedy": "Run `bookfactory review <book>` and compare with style/references/.",
+          "needs_human": true
+        }
+      ]
+    },
+    {
+      "layer": "technical",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "layer": "assembly",
+      "status": "pass",
+      "findings": []
+    }
+  ],
+  "summary": {
+    "status": "pass",
+    "errors": 0,
+    "warnings": 0,
+    "human_review_required": [
+      "Character drift, style drift, composition and visual repetition cannot be machine-checked. Compare the contact sheet against the locked references.",
+      "Humour, pacing and whether each page earns its place cannot be machine-checked. Read the review PDF before approving the book."
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-manuscript",
+  "book_id": "demo-book",
+  "type": "authoring",
+  "stage": "voice_lock",
+  "summary": "Write the manuscript",
+  "instructions": "Write manuscript/manuscript.md against the locked voice bible and the outline.\nCopy that will appear on a page must appear here first - page specs quote the locked manuscript, so nothing gets invented at layout time.\n\nBlocking: manuscript/manuscript.md is too short to be a manuscript",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/outline.md",
+    "style/voice-bible.md",
+    "manuscript/writing-sample.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "manuscript/manuscript.md",
+    "expected_format": "markdown"
+  },
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:25:30Z",
+  "closed_at": "2026-09-18T12:25:30Z"
+}

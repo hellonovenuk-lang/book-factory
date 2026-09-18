@@ -1,0 +1,24 @@
+{
+  "copy": {
+    "eyebrow": "Colophon",
+    "heading": "About this edition",
+    "body": [
+      "Set in a serif face at ten and a half point. Pages composed deterministically from page specifications; artwork generated separately and approved before use.",
+      "This is a synthetic demonstration book. It exists to prove the production system works before real artwork is migrated into it."
+    ],
+    "footnote": "Book Factory demo fixture"
+  },
+  "layout": {
+    "show_running_head": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p024",
+  "type": "front_matter",
+  "title": "Colophon",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

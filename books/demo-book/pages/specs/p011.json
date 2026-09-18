@@ -1,0 +1,16 @@
+{
+  "copy": {
+    "quote": "Bindweed will be named. The shrub by the fence will remain that one.",
+    "attribution": "Section 1.5, terminology"
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p011",
+  "type": "quote",
+  "title": "On terminology",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

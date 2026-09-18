@@ -1,0 +1,53 @@
+{
+  "copy": {
+    "eyebrow": "1.4.1",
+    "heading": "Anatomy of an equipment acquisition",
+    "items": [
+      {
+        "label": "Trigger",
+        "note": "A neighbour's lawn, seen on a Sunday."
+      },
+      {
+        "label": "Research",
+        "note": "Four evenings. Comparison of nine models."
+      },
+      {
+        "label": "Purchase",
+        "note": "The most powerful model, in the sale."
+      },
+      {
+        "label": "Deployment",
+        "note": "Once, for eleven minutes."
+      },
+      {
+        "label": "Storage",
+        "note": "Original packaging, retained for resale."
+      }
+    ],
+    "caption": "Fig. 1.4 - All labelling on this diagram is typeset, not drawn. Generated artwork carries no words anywhere in this book."
+  },
+  "illustration": {
+    "asset_id": "p010-anatomy",
+    "concept": "An unlabelled schematic of a strimmer broken into five parts, flat colour, technical-manual style, no text of any kind.",
+    "scene": "An unlabelled schematic of a strimmer broken into five parts, flat colour, technical-manual style, no text of any kind.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "top",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p010",
+  "type": "diagram",
+  "title": "Anatomy of the acquisition",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

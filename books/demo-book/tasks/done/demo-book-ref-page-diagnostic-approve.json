@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-ref-page-diagnostic-approve",
+  "book_id": "demo-book",
+  "type": "approval",
+  "stage": "visual_development",
+  "summary": "Review reference artwork 'ref-page-diagnostic'",
+  "instructions": "Draft v1 of ref-page-diagnostic is waiting for an explicit decision.\nFile: assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png\n\nNothing is approved by silence. Approve or reject explicitly:\n  bookfactory approve demo-book ref-page-diagnostic --kind asset --draft v1\n  bookfactory reject demo-book ref-page-diagnostic --kind asset --draft v1 --reason \"...\"",
+  "page_id": null,
+  "asset_id": "ref-page-diagnostic",
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:25:32Z",
+  "closed_at": "2026-09-18T12:25:32Z"
+}

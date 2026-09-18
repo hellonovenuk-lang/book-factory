@@ -1,0 +1,34 @@
+{
+  "copy": {
+    "eyebrow": "1.4",
+    "heading": "The equipment phase",
+    "body": [
+      "The equipment phase begins with a strimmer and ends with a second strimmer. It is characterised by purchases that exceed the requirements of the garden by a factor the subject can justify at length and cannot defend briefly."
+    ],
+    "caption": "Fig. 1.3 - Equipment, as stored."
+  },
+  "illustration": {
+    "asset_id": "p009-equipment",
+    "concept": "A shed interior with boxed tools still in packaging, stacked against one wall.",
+    "scene": "A shed interior with boxed tools still in packaging, stacked against one wall.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "top",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p009",
+  "type": "editorial_illustration",
+  "title": "The equipment phase",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

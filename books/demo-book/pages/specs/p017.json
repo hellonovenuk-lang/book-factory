@@ -1,0 +1,40 @@
+{
+  "copy": {
+    "eyebrow": "2.3",
+    "heading": "Comparison of approaches",
+    "subheading": "Two available approaches, assessed",
+    "columns": [
+      {
+        "title": "Approach A",
+        "items": [
+          "Ninety minutes once a fortnight",
+          "Two tools, both owned",
+          "No new purchases",
+          "Visible from the neighbour's window",
+          "Sustainable across a season"
+        ]
+      },
+      {
+        "title": "Approach B",
+        "items": [
+          "Ninety minutes once a fortnight",
+          "Two tools, both owned",
+          "No new purchases",
+          "Visible from the neighbour's window",
+          "Sustainable across a season"
+        ]
+      }
+    ],
+    "footnote": "The manual recommends Approach B. Reasons are not given. A manual that gives reasons invites discussion."
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p017",
+  "type": "comparison",
+  "title": "Comparison of approaches",
+  "chapter": 2,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

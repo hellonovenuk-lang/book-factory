@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "demo-book-p006-render",
+  "book_id": "demo-book",
+  "type": "page_render",
+  "stage": "page_production",
+  "summary": "Render page p006 - Scope of the manual",
+  "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render demo-book --page p006 --submit",
+  "page_id": "p006",
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "pages/specs/p006.json",
+    "assets/approved/p006-scope-scope-of-the-manual.png"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/drafts/p006/",
+    "submit_command": "bookfactory submit demo-book p006 --kind page --file <path>",
+    "expected_format": "pdf"
+  },
+  "approval_required": true,
+  "status": "done",
+  "created_at": "2026-09-18T12:25:38Z",
+  "closed_at": "2026-09-18T12:25:38Z"
+}

@@ -1,0 +1,20 @@
+{
+  "copy": {
+    "eyebrow": "Chapter one",
+    "heading": "Assessment of the Situation",
+    "subheading": "In which the subject discovers that the garden came with opinions.",
+    "body": [
+      "Every garden arrives with a previous owner's opinions still in it. Bulbs in the wrong place. A path to nowhere. A shrub that was clearly somebody's favourite and is now nobody's problem but the subject's."
+    ]
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p005",
+  "type": "chapter_opener",
+  "title": "Assessment of the Situation",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

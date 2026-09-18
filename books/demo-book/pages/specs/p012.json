@@ -1,0 +1,35 @@
+{
+  "copy": {
+    "eyebrow": "1.6",
+    "heading": "Summary of assessment",
+    "body": [
+      "The subject owns a garden, did not want a garden, and has responded by buying a shed. This is the ordinary course of events and requires no intervention beyond the guidance that follows.",
+      "Inspectors completing this section should record the severity score and proceed to chapter two without discussing the score with the subject."
+    ],
+    "caption": "Fig. 1.5 - The mug, at rest."
+  },
+  "illustration": {
+    "asset_id": "p012-summary",
+    "concept": "A single mug on a windowsill, cold, half full, flat colour.",
+    "scene": "A single mug on a windowsill, cold, half full, flat colour.",
+    "characters": [
+      "subject"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-page-editorial"
+    ],
+    "placement": "spot",
+    "embedded_text": false
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p012",
+  "type": "text_illustration",
+  "title": "Summary of chapter one",
+  "chapter": 1,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

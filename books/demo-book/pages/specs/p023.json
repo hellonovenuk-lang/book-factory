@@ -1,0 +1,24 @@
+{
+  "copy": {
+    "eyebrow": "Issued under section 2.6",
+    "heading": "Certificate of Partial Compliance",
+    "body": [
+      "This certifies that the holder has read a manual about their garden, which is more than the garden expected."
+    ],
+    "items": [
+      "Name of subject",
+      "Date of issue",
+      "Signature of inspector"
+    ]
+  },
+  "schema_version": "1.0",
+  "book_id": "demo-book",
+  "page_id": "p023",
+  "type": "certificate",
+  "title": "Certificate of partial compliance",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}
