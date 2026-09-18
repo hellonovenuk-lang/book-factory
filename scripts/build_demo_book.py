@@ -47,7 +47,7 @@ ART_SIZES = {
     "top": (1800, 1350),
     "bottom": (1800, 1350),
     "spot": (900, 900),
-    "reference": (1400, 1400),
+    "reference": (1800, 1800),
 }
 
 REFERENCE_DESCRIPTIONS = {

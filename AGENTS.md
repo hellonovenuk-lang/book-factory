@@ -98,6 +98,17 @@ Read `style/visual-bible.md` before generating anything. It is the whole
 specification, and it was written so that you do not need any prior
 conversation.
 
+## 6a. Some constraints are measured, not judged
+
+A task's `constraints` block mixes two kinds of requirement. `min_pixels` and
+`readable_image` are measured on submission; a draft that fails one is kept and
+recorded, but it never becomes an approval task and `approve` will refuse it.
+`next` returns a remediation task naming the failure instead.
+
+The rest - matching the character, holding the style, keeping text out of the
+artwork - are judgements for the operator. They still bind you; they are just
+not enforced mechanically.
+
 ## 7. Write output where the task says
 
 Every task carries `output.destination` and `output.submit_command`. Put the

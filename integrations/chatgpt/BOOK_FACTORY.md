@@ -104,8 +104,12 @@ Work through it in this order:
    Your output has to sit beside them without looking like a different book.
 2. **Generate the scene**, matching character appearance, line style, medium,
    palette and edge treatment.
-3. **Check `constraints.min_pixels`.** Artwork below 300 DPI at its printed size
-   is rejected by visual QA. When in doubt, generate bigger.
+3. **Check `constraints.min_pixels`.** This one is measured on submission, not
+   later: a draft below it is recorded as failing and is never put in front of
+   the operator for approval. The number is the width in pixels needed for 300
+   DPI at that artwork's printed size, so it varies with placement - a spot
+   illustration needs far fewer pixels than a full-page one. When in doubt,
+   generate bigger.
 4. **Save it to `output.destination`.**
 5. **Run `output.submit_command`** (or give it to the operator to run).
 6. **Tell the operator what you made and what you were unsure about.** Then
@@ -123,6 +127,25 @@ spec.
 If you are asked to generate something with words in it, refuse and explain:
 generated type contains spelling errors, and it has shipped in a book before.
 That is why this rule exists.
+
+## If a draft fails a hard constraint
+
+Some requirements are measured, not judged: whether the file is a readable
+image, and whether it is wide enough to print. Submit something that fails one
+and Book Factory will:
+
+- keep the draft - it is evidence, and the next attempt is judged against it;
+- record the failure on the draft, with the expected and actual values;
+- refuse to create an approval task for it;
+- return a remediation task from `next` naming the exact failure;
+- refuse `bookfactory approve` on it, re-measuring the file at that point.
+
+So there is nothing to argue with. Read the failure, produce a corrected
+version, and submit it as a new draft. Do not overwrite the failed one.
+
+Everything else in `constraints` - matching the character, holding the style,
+keeping text out of the artwork - is a judgement, and those reach the operator
+normally. That is not licence to ignore them.
 
 ## If you cannot match the references
 

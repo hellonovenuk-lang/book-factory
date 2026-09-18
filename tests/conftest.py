@@ -211,7 +211,7 @@ def locked_book(workspace: Path) -> Book:
         asset_id = item["asset_id"]
         api.register_asset("test-book", asset_id, root=workspace, kind=item["kind"],
                            title=item["title"], description=item["description"])
-        art = make_image(staging / f"{asset_id}.png", (1400, 1400), seed=index)
+        art = make_image(staging / f"{asset_id}.png", (1800, 1800), seed=index)
         api.submit_asset("test-book", asset_id, art, kind=ASSET, root=workspace)
         api.approve("test-book", asset_id, kind=ASSET, root=workspace, by="tester")
 

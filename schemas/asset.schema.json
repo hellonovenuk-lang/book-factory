@@ -4,73 +4,294 @@
   "title": "Asset registry",
   "description": "Illustration assets and locked visual references. Same draft/approved discipline as pages: generative work is cheap before approval and immutable after it.",
   "type": "object",
-  "required": ["schema_version", "book_id", "assets"],
+  "required": [
+    "schema_version",
+    "book_id",
+    "assets"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schema_version": { "type": "string" },
-    "book_id": { "type": "string" },
-    "updated_at": { "type": "string" },
-    "assets": { "type": "array", "items": { "$ref": "#/definitions/asset" } }
+    "schema_version": {
+      "type": "string"
+    },
+    "book_id": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/asset"
+      }
+    }
   },
   "definitions": {
     "asset": {
       "type": "object",
-      "required": ["asset_id", "kind", "status"],
+      "required": [
+        "asset_id",
+        "kind",
+        "status"
+      ],
       "additionalProperties": false,
       "properties": {
-        "asset_id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "asset_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
         "kind": {
           "type": "string",
-          "enum": ["illustration", "character_reference", "layout_reference", "page_reference", "palette_reference", "decoration"]
+          "enum": [
+            "illustration",
+            "character_reference",
+            "layout_reference",
+            "page_reference",
+            "palette_reference",
+            "decoration"
+          ]
         },
-        "title": { "type": ["string", "null"] },
-        "description": { "type": ["string", "null"] },
-        "page_id": { "type": ["string", "null"] },
-        "characters": { "type": "array", "items": { "type": "string" } },
-        "references": { "type": "array", "items": { "type": "string" } },
-        "status": { "type": "string", "enum": ["planned", "draft_submitted", "approved", "rejected"] },
-        "revision_open": { "type": "boolean" },
-        "locked": { "type": "boolean", "description": "True for approved reference-set members after visual lock." },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "draft_submitted",
+            "approved",
+            "rejected"
+          ]
+        },
+        "revision_open": {
+          "type": "boolean"
+        },
+        "locked": {
+          "type": "boolean",
+          "description": "True for approved reference-set members after visual lock."
+        },
         "drafts": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["revision", "path", "sha256", "submitted_at"],
+            "required": [
+              "revision",
+              "path",
+              "sha256",
+              "submitted_at"
+            ],
             "additionalProperties": false,
             "properties": {
-              "revision": { "type": "string", "pattern": "^v\\d+$" },
-              "path": { "type": "string" },
-              "sha256": { "type": "string" },
-              "submitted_at": { "type": "string" },
-              "source": { "type": ["string", "null"] },
-              "status": { "type": "string", "enum": ["draft", "approved", "rejected", "superseded"] },
-              "note": { "type": ["string", "null"] },
-              "width": { "type": ["integer", "null"] },
-              "height": { "type": ["integer", "null"] }
+              "revision": {
+                "type": "string",
+                "pattern": "^v\\d+$"
+              },
+              "path": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "submitted_at": {
+                "type": "string"
+              },
+              "source": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "approved",
+                  "rejected",
+                  "superseded"
+                ]
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "width": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "height": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "constraint_failures": {
+                "type": "array",
+                "description": "Measurable requirements this draft does not meet, recorded on submission. A draft with any of these is kept but is never offered for approval.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "constraint",
+                    "message"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "constraint": {
+                      "type": "string"
+                    },
+                    "expected": {
+                      "type": [
+                        "integer",
+                        "number",
+                        "string",
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "actual": {
+                      "type": [
+                        "integer",
+                        "number",
+                        "string",
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "remedy": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
             }
           }
         },
-        "approved": { "oneOf": [{ "type": "null" }, { "$ref": "#/definitions/approval" }] },
-        "approval_history": { "type": "array", "items": { "$ref": "#/definitions/approval" } },
-        "notes": { "type": ["string", "null"] }
+        "approved": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/approval"
+            }
+          ]
+        },
+        "approval_history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/approval"
+          }
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "approval": {
       "type": "object",
-      "required": ["revision", "path", "sha256", "approved_at"],
+      "required": [
+        "revision",
+        "path",
+        "sha256",
+        "approved_at"
+      ],
       "additionalProperties": false,
       "properties": {
-        "revision": { "type": "string", "pattern": "^v\\d+$" },
-        "path": { "type": "string" },
-        "sha256": { "type": "string" },
-        "approved_at": { "type": "string" },
-        "approved_by": { "type": ["string", "null"] },
-        "source_draft": { "type": ["string", "null"] },
-        "note": { "type": ["string", "null"] },
-        "width": { "type": ["integer", "null"] },
-        "height": { "type": ["integer", "null"] },
-        "superseded_at": { "type": ["string", "null"] },
-        "superseded_reason": { "type": ["string", "null"] }
+        "revision": {
+          "type": "string",
+          "pattern": "^v\\d+$"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "approved_at": {
+          "type": "string"
+        },
+        "approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_draft": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "superseded_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "superseded_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     }
   }

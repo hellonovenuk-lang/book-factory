@@ -94,6 +94,26 @@ class ChecksumMismatch(BookFactoryError):
         self.actual = actual
 
 
+class HardConstraintViolation(BookFactoryError):
+    """A draft does not meet a measurable requirement of its task.
+
+    Not a judgement call and not a warning: the artwork cannot be used as it
+    is, so it never reaches the operator for approval.
+    """
+
+    exit_code = 12
+
+    def __init__(self, message: str, failures: list[dict], *,
+                 remedy: str | None = None) -> None:
+        super().__init__(message, remedy=remedy)
+        self.failures = failures
+
+    def to_dict(self) -> dict:
+        data = super().to_dict()
+        data["constraint_failures"] = self.failures
+        return data
+
+
 class RenderError(BookFactoryError):
     exit_code = 8
 

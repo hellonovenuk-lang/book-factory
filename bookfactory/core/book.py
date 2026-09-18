@@ -16,6 +16,7 @@ from bookfactory.core.errors import (
     BookAlreadyExists,
     BookNotFound,
     GateBlocked,
+    HardConstraintViolation,
     ImmutableAssetError,
     ValidationError,
 )
@@ -450,6 +451,38 @@ class Book:
     # ------------------------------------------------------------------
     # Draft / approval engine (shared by pages and assets)
     # ------------------------------------------------------------------
+    def asset_placement(self, asset) -> str | None:
+        """Where this artwork sits on its page, which decides how big it must be."""
+        if not asset.page_id:
+            return None
+        page = self.manifest.find(asset.page_id)
+        if page is None or not page.spec:
+            return None
+        try:
+            spec = self.read_page_spec(asset.page_id)
+        except Exception:  # noqa: BLE001 - a bad spec is reported by QA
+            return None
+        illustration = spec.get("illustration") or {}
+        if illustration.get("asset_id") != asset.asset_id:
+            return None
+        return illustration.get("placement")
+
+    def asset_constraints(self, asset) -> dict:
+        """The constraint block published in this asset's task."""
+        from bookfactory.core import constraints
+
+        return constraints.expected_constraints(
+            self, asset, placement=self.asset_placement(asset))
+
+    def check_asset_constraints(self, asset, path: str | Path) -> list[dict]:
+        """Measure a file against the hard constraints of the asset's task."""
+        from bookfactory.core import constraints
+
+        expected = constraints.hard_constraints(self.asset_constraints(asset))
+        failures = constraints.evaluate(
+            path, expected, context={"placement": self.asset_placement(asset)})
+        return [failure.to_dict() for failure in failures]
+
     def _target(self, kind: str, identifier: str):
         if kind == PAGE:
             return self.manifest.get(identifier)
@@ -502,6 +535,8 @@ class Book:
         if kind == ASSET:
             width, height = _image_size(destination)
 
+        failures = self.check_asset_constraints(record, destination) if kind == ASSET else []
+
         draft = DraftRecord(
             revision=revision,
             path=self.paths.relative(destination),
@@ -512,11 +547,17 @@ class Book:
             note=note,
             width=width,
             height=height,
+            constraint_failures=failures,
         )
         record.drafts.append(draft)
-        record.status = "draft_submitted"
+        record.refresh_status()
         self.log("draft_submitted", kind=kind, id=identifier, revision=revision,
                  path=draft.path, sha256=digest, source=source, note=note)
+        if failures:
+            #: The draft is kept - it is evidence, and the next attempt is judged
+            #: against it - but it will not be offered for approval.
+            self.log("constraints_failed", kind=kind, id=identifier, revision=revision,
+                     failed=[f["constraint"] for f in failures])
         self.save()
         return draft
 
@@ -550,6 +591,26 @@ class Book:
         draft_path = self.paths.resolve(draft.path)
         checksums.verify(draft_path, draft.sha256)
 
+        failures = self.check_asset_constraints(record, draft_path) if kind == ASSET else []
+        if failures or draft.constraint_failures:
+            from bookfactory.core import constraints
+
+            #: Prefer what the file says now over what the registry remembers.
+            failures = failures or list(draft.constraint_failures)
+            draft.constraint_failures = failures
+            record.refresh_status()
+            self.save()
+            raise HardConstraintViolation(
+                f"Draft {revision} of {identifier} fails a hard constraint of its task:\n  - "
+                + constraints.describe(failures),
+                failures,
+                remedy=(
+                    "This is not a judgement call - the artwork cannot be used as it is. "
+                    f"Submit a corrected draft: `bookfactory submit {self.state.book_id} "
+                    f"{identifier} --kind {kind} --file <path>`."
+                ),
+            )
+
         replacing = record.is_approved
         if replacing and not record.revision_open:
             raise ImmutableAssetError(
@@ -577,9 +638,9 @@ class Book:
             height=draft.height,
         )
         record.approved = approval
-        record.status = "approved"
         record.revision_open = False
         draft.status = "approved"
+        record.refresh_status()
         self.log("approved", kind=kind, id=identifier, revision=revision,
                  path=approval.path, sha256=digest, by=by, note=note)
 
@@ -606,7 +667,7 @@ class Book:
             if not page.is_approved or page.revision_open:
                 continue
             page.revision_open = True
-            page.status = "in_production"
+            page.refresh_status()
             reopened.append(page.page_id)
             self.log("revision_opened", kind=PAGE, id=page.page_id,
                      reason=f"artwork {asset_id} replaced by {revision}",
@@ -658,9 +719,10 @@ class Book:
             )
         draft.status = "rejected"
         draft.note = reason or draft.note
-        if not record.is_approved:
-            live = [d for d in record.drafts if d.status == "draft"]
-            record.status = "draft_submitted" if live else "rejected"
+        #: Rejecting the replacement does not un-approve what is already
+        #: canonical, and it does not close the revision - another attempt is
+        #: still expected. The status has to say so.
+        record.refresh_status()
         self.log("rejected", kind=kind, id=identifier, revision=revision, reason=reason, by=by)
         self.save()
         return draft
@@ -683,7 +745,7 @@ class Book:
             return {"already_open": True, "next_revision":
                     ids.next_revision([d.revision for d in record.drafts])}
         record.revision_open = True
-        record.status = "in_production" if kind == PAGE else "draft_submitted"
+        record.refresh_status()
         next_rev = ids.next_revision([d.revision for d in record.drafts])
         self.log("revision_opened", kind=kind, id=identifier, reason=reason,
                  current_revision=record.approved.revision, next_revision=next_rev, by=by)

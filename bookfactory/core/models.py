@@ -163,6 +163,9 @@ class DraftRecord:
     note: str | None = None
     width: int | None = None
     height: int | None = None
+    #: Measurable requirements this file does not meet, recorded on submission.
+    #: A draft with any of these is kept, but it is not a candidate for approval.
+    constraint_failures: list[dict] = field(default_factory=list)
 
     def to_dict(self, *, with_dimensions: bool = False) -> dict:
         data = {
@@ -173,6 +176,7 @@ class DraftRecord:
             "source": self.source,
             "status": self.status,
             "note": self.note,
+            "constraint_failures": [dict(f) for f in self.constraint_failures],
         }
         if with_dimensions:
             data["width"] = self.width
@@ -182,6 +186,16 @@ class DraftRecord:
     @classmethod
     def from_dict(cls, data: dict) -> "DraftRecord":
         return cls(**data)
+
+    @property
+    def is_reviewable(self) -> bool:
+        """Can an operator be asked to approve or reject this?
+
+        A draft that fails a hard constraint cannot: the answer is already
+        known, and putting it in front of a human invites them to wave it
+        through.
+        """
+        return self.status == "draft" and not self.constraint_failures
 
 
 @dataclass
@@ -218,6 +232,25 @@ class ApprovalRecord:
     @classmethod
     def from_dict(cls, data: dict) -> "ApprovalRecord":
         return cls(**data)
+
+
+def derive_status(record, *, revision_status: str = "approved") -> str:
+    """Aggregate status, derived from what is actually on the record.
+
+    Set it anywhere else and it drifts - which is how a rejected draft left an
+    asset reporting `draft_submitted` while its approved version was sitting
+    there, canonical and untouched.
+
+    `revision_open` carries the fact that a replacement is still expected; it
+    is deliberately not folded into this one word.
+    """
+    if any(draft.status == "draft" for draft in record.drafts):
+        return "draft_submitted"
+    if record.approved is not None:
+        return revision_status if record.revision_open else "approved"
+    if any(draft.status == "rejected" for draft in record.drafts):
+        return "rejected"
+    return "planned"
 
 
 # --------------------------------------------------------------------------
@@ -301,6 +334,27 @@ class PageRecord:
         if not candidates:
             return None
         return max(candidates, key=lambda d: ids.revision_number(d.revision))
+
+    def reviewable_draft(self) -> DraftRecord | None:
+        """The newest draft an operator could actually be asked to decide on."""
+        candidates = [d for d in self.drafts if d.is_reviewable]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda d: ids.revision_number(d.revision))
+
+    def failing_draft(self) -> DraftRecord | None:
+        """The newest submitted draft that failed a hard constraint."""
+        candidates = [d for d in self.drafts
+                      if d.status == "draft" and d.constraint_failures]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda d: ids.revision_number(d.revision))
+
+    def refresh_status(self) -> str:
+        #: A page under revision is still being worked on, and the page status
+        #: enum has a word for that. Assets do not.
+        self.status = derive_status(self, revision_status="in_production")
+        return self.status
 
     @property
     def is_approved(self) -> bool:
@@ -389,6 +443,25 @@ class AssetRecord:
             return None
         return max(candidates, key=lambda d: ids.revision_number(d.revision))
 
+    def reviewable_draft(self) -> DraftRecord | None:
+        """The newest draft an operator could actually be asked to decide on."""
+        candidates = [d for d in self.drafts if d.is_reviewable]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda d: ids.revision_number(d.revision))
+
+    def failing_draft(self) -> DraftRecord | None:
+        """The newest submitted draft that failed a hard constraint."""
+        candidates = [d for d in self.drafts
+                      if d.status == "draft" and d.constraint_failures]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda d: ids.revision_number(d.revision))
+
+    def refresh_status(self) -> str:
+        self.status = derive_status(self)
+        return self.status
+
     @property
     def is_reference(self) -> bool:
         return self.kind in REFERENCE_KINDS
@@ -469,5 +542,5 @@ class Task:
 __all__ = [
     "BookFormat", "LockState", "ManuscriptState", "StyleState", "PagePlanState", "BookState",
     "DraftRecord", "ApprovalRecord", "PageRecord", "AssetRecord", "Task",
-    "PAGE_STATUS", "ASSET_KINDS", "REFERENCE_KINDS",
+    "PAGE_STATUS", "ASSET_KINDS", "REFERENCE_KINDS", "derive_status",
 ]

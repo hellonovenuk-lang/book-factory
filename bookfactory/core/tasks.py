@@ -246,9 +246,9 @@ def _visual_reference_task(book) -> Task | None:
             )
         if asset.is_approved and not asset.revision_open:
             continue
-        latest = asset.latest_draft()
-        if latest and latest.status == "draft":
-            return _approval_task(book, "asset", asset_id, latest.revision,
+        reviewable = asset.reviewable_draft()
+        if reviewable is not None:
+            return _approval_task(book, "asset", asset_id, reviewable.revision,
                                   f"Review reference artwork '{asset_id}'")
         return _task(
             book, f"{asset_id}-generate",
@@ -265,10 +265,7 @@ def _visual_reference_task(book) -> Task | None:
             characters=asset.characters,
             references=book.reference_paths(asset.references),
             required_inputs=["style/visual-bible.md", "style/design-tokens.json"],
-            constraints={"embedded_text": False, "maintain_style": True,
-                         "maintain_character_identity": True,
-                         "colour": book.state.format.colour,
-                         "min_pixels": book.state.format.dpi * 6},
+            constraints=book.asset_constraints(asset),
             output={"destination": f"assets/drafts/{asset_id}/",
                     "submit_command": _cmd(book, "submit", "<book>", asset_id,
                                            "--kind asset --file <path>"),
@@ -384,10 +381,9 @@ def _page_production_task(book) -> Task | None:
                 )
             if asset.is_approved and not asset.revision_open:
                 continue
-            latest = asset.latest_draft()
-            if latest and latest.status == "draft":
-                return _approval_task(book, "asset", asset_id,
-                                      latest.revision,
+            reviewable = asset.reviewable_draft()
+            if reviewable is not None:
+                return _approval_task(book, "asset", asset_id, reviewable.revision,
                                       f"Review artwork '{asset_id}' for page {page.page_id}")
             return _illustration_task(book, page, asset)
 
@@ -430,6 +426,20 @@ def _illustration_task(book, page, asset) -> Task:
         spec = {}
     illustration = spec.get("illustration") or {}
     reference_ids = illustration.get("references") or asset.references or book.required_reference_ids()
+    failing = asset.failing_draft()
+    remediation = ""
+    if failing is not None:
+        from bookfactory.core import constraints as constraint_rules
+
+        remediation = (
+            f"\n\nDraft {failing.revision} was submitted and does NOT meet the "
+            "requirements of this task, so it was not put forward for approval:\n  - "
+            + constraint_rules.describe(failing.constraint_failures)
+            + "\n\nProduce a corrected version and submit it as a new draft. The failed "
+            "draft is kept at "
+            f"{failing.path} - do not overwrite it."
+        )
+
     revising = ""
     if asset.revision_open and asset.approved:
         revising = (
@@ -440,16 +450,19 @@ def _illustration_task(book, page, asset) -> Task:
     return _task(
         book, f"{asset.asset_id}-illustration",
         type="illustration",
-        summary=(f"Create replacement illustration '{asset.asset_id}' for page {page.page_id}"
-                 if asset.revision_open else
-                 f"Create illustration '{asset.asset_id}' for page {page.page_id}"),
+        summary=(
+            f"Re-do illustration '{asset.asset_id}' for page {page.page_id} - "
+            f"draft {failing.revision} failed a hard constraint" if failing is not None else
+            f"Create replacement illustration '{asset.asset_id}' for page {page.page_id}"
+            if asset.revision_open else
+            f"Create illustration '{asset.asset_id}' for page {page.page_id}"),
         instructions=(
             f"{illustration.get('concept') or asset.description or ''}\n\n"
             "Match the locked references exactly - same character, same line style, same "
             "palette, same edge treatment. If you cannot match them, stop and say so rather "
             "than producing something near enough.\n"
             "No text, numbers, labels or signatures inside the artwork."
-            f"{revising}"
+            f"{revising}{remediation}"
         ).strip(),
         page_id=page.page_id,
         asset_id=asset.asset_id,
@@ -458,11 +471,8 @@ def _illustration_task(book, page, asset) -> Task:
         references=book.reference_paths(reference_ids),
         required_inputs=[page.spec, "style/visual-bible.md"],
         constraints={
+            **book.asset_constraints(asset),
             "embedded_text": bool(illustration.get("embedded_text", False)),
-            "maintain_character_identity": True,
-            "maintain_style": True,
-            "colour": book.state.format.colour,
-            "min_pixels": book.state.format.dpi * 6,
         },
         output={"destination": f"assets/drafts/{asset.asset_id}/",
                 "submit_command": _cmd(book, "submit", "<book>", asset.asset_id,
