@@ -42,10 +42,10 @@
   },
   "blocked": null,
   "next_action": {
-    "task_id": "demo-book-p007-window-illustration",
-    "type": "illustration",
-    "summary": "Create replacement illustration 'p007-window' for page p007",
-    "page_id": "p007",
+    "task_id": "demo-book-p007-window-approve",
+    "type": "approval",
+    "summary": "Review artwork 'p007-window' for page p007",
+    "page_id": null,
     "asset_id": "p007-window",
     "approval_required": true
   },
@@ -57,5 +57,5 @@
     "note": null
   },
   "created_at": "2026-09-18T12:47:42Z",
-  "updated_at": "2026-09-18T12:52:32Z"
+  "updated_at": "2026-09-18T13:59:44Z"
 }

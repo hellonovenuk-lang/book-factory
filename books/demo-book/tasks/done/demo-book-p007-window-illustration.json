@@ -33,7 +33,7 @@
     "expected_format": "png"
   },
   "approval_required": true,
-  "status": "open",
-  "created_at": "2026-09-18T12:52:32Z",
-  "closed_at": null
+  "status": "done",
+  "created_at": "2026-09-18T13:56:13Z",
+  "closed_at": "2026-09-18T13:59:44Z"
 }
