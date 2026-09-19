@@ -7,6 +7,8 @@ retained in their ChatGPT Library. These links require the operator's access:
 - [Publication-page preview](https://chatgpt.com/api/library/files/libfile_a25f6826e97c81918a19989f8f1948cc/download)
 - [Publication-details draft, 80 pages](https://chatgpt.com/api/library/files/libfile_c80dd91cca688191bc23043465efdfa4/download)
 - [Updated one-page publication proof](https://chatgpt.com/api/library/files/libfile_9d19268ac06881918360f5e41984b39d/download)
+- [Recovery bundle with original PDF, preview, extracted images and text,
+  and project record](https://chatgpt.com/api/library/files/libfile_9459059d139481919c5d2e1b4105ea5f/download)
 
 The publication-details draft was built from the unchanged v2 interior:
 PDF page 2 adds the author, and PDF page 4 replaces the treatment-conditions
