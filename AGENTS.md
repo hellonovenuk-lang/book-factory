@@ -27,6 +27,21 @@ which case change the repository, then proceed.
 Never reconstruct project state from memory or from what a previous message
 said. Read the files.
 
+## 1a. Work on main and verify persistence.
+
+Work directly on the repository's `main` branch unless the operator explicitly
+instructs you to use another branch for the specific task. Do not create a
+feature, recovery, or temporary branch by default. Fetch remote `main` and
+inspect Git status before changing files; preserve any newer remote work.
+
+A local commit is not a completed handoff. Push finished work to remote `main`
+and verify that the commit and required artifacts are actually present there.
+If write access, file-size limits, or another gate prevents this, preserve
+important outputs in durable storage, link them from the repository when
+possible, and report precisely what remains local and what is remote. Never
+claim a project is restored or release ready merely because it exists in a
+scratch checkout.
+
 ## 2. Do the task you were given. One at a time.
 
 `bookfactory next` returns exactly one task. Do that task. Then run `next`
