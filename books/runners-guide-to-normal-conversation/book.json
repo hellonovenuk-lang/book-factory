@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "book_id": "runners-guide-to-normal-conversation",
+  "title": "The Runner’s Guide to Normal Conversation",
+  "subtitle": null,
+  "series": null,
+  "stage": "book_brief",
+  "format": {
+    "trim": "6x9",
+    "colour": false,
+    "bleed": false,
+    "dpi": 300,
+    "kdp_profile": "kdp-default",
+    "target_page_count": 80
+  },
+  "concept": {
+    "locked": false,
+    "locked_at": null,
+    "sha256": null
+  },
+  "manuscript": {
+    "version": "v0",
+    "locked": false,
+    "locked_at": null,
+    "sha256": null,
+    "path": null
+  },
+  "style": {
+    "visual_version": "v0",
+    "visual_locked": false,
+    "visual_locked_at": null,
+    "visual_sha256": null,
+    "voice_version": "v0",
+    "voice_locked": false,
+    "voice_locked_at": null,
+    "voice_sha256": null
+  },
+  "page_plan": {
+    "planned": false,
+    "page_count": 0,
+    "planned_at": null
+  },
+  "intake": {
+    "required": false,
+    "completed": false,
+    "completed_at": null,
+    "answers": {}
+  },
+  "production_policy": {
+    "mode": "checkpointed",
+    "operator_authorized": false,
+    "visual_checkpoint": true,
+    "major_gate_checkpoints": true,
+    "stop_on_soft_qa_failure": true,
+    "stop_on_hard_failure": true,
+    "authorized_at": null,
+    "source": null
+  },
+  "production_mode": "continue_automatically",
+  "blocked": null,
+  "next_action": {
+    "task_id": "runners-guide-to-normal-conversation-brief",
+    "type": "authoring",
+    "summary": "Complete the book brief",
+    "page_id": null,
+    "asset_id": null,
+    "approval_required": true,
+    "mode": "continue_automatically"
+  },
+  "last_transition": {
+    "from": "idea",
+    "to": "book_brief",
+    "at": "2026-09-19T15:39:25Z",
+    "by": "system",
+    "note": "stage derived from repository state"
+  },
+  "created_at": "2026-09-19T15:39:25Z",
+  "updated_at": "2026-09-19T15:39:25Z"
+}

@@ -1,0 +1,3 @@
+{"at": "2026-09-19T15:39:25Z", "event": "cover_required", "paper": "white", "finish": "matte"}
+{"at": "2026-09-19T15:39:25Z", "event": "stage_advanced", "from": "idea", "to": "book_brief", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-09-19T15:39:25Z", "event": "book_created", "book_id": "runners-guide-to-normal-conversation", "title": "The Runner’s Guide to Normal Conversation", "trim": "6x9", "colour": false}
