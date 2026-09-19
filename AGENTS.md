@@ -160,7 +160,7 @@ Locks exist to stop expensive mistakes:
 * No mass page production before the manuscript **and** the visual style are
   locked.
 * No assembly before every page is approved.
-* No release before preflight passes.
+* No print-book release before both interior and cover preflight pass.
 
 If a gate blocks you, it will tell you exactly what is missing. Fix that, or
 report it. `--force` exists for the operator, not for you.
@@ -170,6 +170,26 @@ report it. `--force` exists for the operator, not for you.
 `bookfactory assemble` reads approved files and concatenates them. If you are
 tempted to generate a missing page so assembly can finish, stop. A missing page
 is a finding, not an obstacle.
+
+## 9a. Print covers are part of production
+
+New print projects include `cover/cover.json`. After the final interior PDF,
+record cover direction, paper, finish, author and back copy. Calculate the
+bleeding full wrap with `bookfactory cover dimensions`. Make native text-free
+artwork against the approved character and editorial references. Submit it as
+`cover-front-artwork`; native width AND height must reach 300 DPI at its actual
+printed size. Never upscale a small file. Set title, author, spine text only
+when it safely fits, and back copy as real selectable type. Reserve the KDP
+barcode area and check the wrap at print size and the front as a thumbnail.
+Submit a versioned draft with `bookfactory cover submit`.
+
+In `visual_checkpoint` mode, the full wrap is an explicit operator approval
+even if interior pages proceeded automatically. Do not run `cover approve` for
+them. Their explicit approval promotes the reviewed artwork and PDF together;
+then run `cover preflight`. `status.readiness` distinguishes interior and cover.
+An old project without `cover/cover.json` remains legacy interior-only until
+`bookfactory cover init` migrates it. This command reopens a former
+`release_ready` project and logs why, preserving interior approval history.
 
 ## 10. Say what you did, in terms of the repository
 

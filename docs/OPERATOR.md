@@ -280,13 +280,45 @@ they do, that file is the only thing that needs updating.
 Warnings are informational - a short gift book cannot carry text on its spine,
 which is not a defect. Failures must be fixed.
 
-## 12. Done
+## 12. Full-wrap print cover
+
+New print books require `cover/cover.json`. Set paper, finish, direction,
+author, back copy and the intended artwork placement. After the interior is
+final, `bookfactory cover dimensions <book>` calculates bleed and spine from
+its actual PDF page count. Register `cover-front-artwork` as `cover_artwork`
+against locked references. Submit native text-free art through the normal
+asset draft workflow. Typeset one PDF containing back, spine and front with
+real selectable type; reserve KDP's barcode zone. Inspect the wrap at print
+size and the front at Amazon thumbnail size, then:
+
+```bash
+bookfactory cover submit <book> --file <full-wrap.pdf>
+```
+
+Under `visual_checkpoint`, wait for the operator's explicit approval:
+
+```bash
+bookfactory cover approve <book> --draft vN --by '<operator>'
+bookfactory cover preflight <book>
+```
+
+Approval preserves previous drafts, promotes their native artwork, and copies
+the chosen PDF to `output/cover.pdf`. The separate cover preflight checks the
+final size, printable text, barcode clearance, and native image resolution at
+actual placement. A new submission never silently approves itself.
+
+For an older interior-only project, run `bookfactory cover init <book>` to
+opt into this new gate. If it was already `release_ready`, that command logs a
+move back to `cover_production`. Its prior interior and approvals stay intact.
+
+## 13. Done
 
 ```bash
 bookfactory advance golf-addict --to release_ready
 ```
 
-`output/interior.pdf` is your interior file.
+`output/interior.pdf` and `output/cover.pdf` are the two upload files for a
+cover-required print project. `status.readiness` reports their states separately.
 
 ---
 

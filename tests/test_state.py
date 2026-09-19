@@ -104,7 +104,7 @@ _KNOWN_EVENTS = {
     "book_created", "stage_advanced", "concept_locked", "voice_locked", "manuscript_locked",
     "visual_locked", "page_planned", "draft_submitted", "approved", "rejected",
     "revision_opened", "qa_run", "assembled", "review_generated", "preflight_run",
-    "blocked", "unblocked",
+    "blocked", "unblocked", "cover_required", "cover_draft_submitted", "cover_approved",
 }
 
 

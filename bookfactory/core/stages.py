@@ -30,6 +30,8 @@ VISUAL_QA = "visual_qa"
 TECHNICAL_QA = "technical_qa"
 ASSEMBLY = "assembly"
 KDP_PREFLIGHT = "kdp_preflight"
+COVER_PRODUCTION = "cover_production"
+COVER_PREFLIGHT = "cover_preflight"
 RELEASE_READY = "release_ready"
 
 
@@ -72,7 +74,9 @@ STAGES: tuple[Stage, ...] = (
     Stage(TECHNICAL_QA, 16, "Technical QA", "Dimensions, sequence, checksums, resolution."),
     Stage(ASSEMBLY, 17, "Assembly", "Deterministic, non-creative PDF assembly."),
     Stage(KDP_PREFLIGHT, 18, "KDP Preflight", "Checked against the configured KDP profile."),
-    Stage(RELEASE_READY, 19, "Release Ready", "Production files are complete and valid."),
+    Stage(COVER_PRODUCTION, 19, "Cover Production", "Cover artwork and typeset full wrap under review."),
+    Stage(COVER_PREFLIGHT, 20, "Cover Preflight", "Approved cover checked for KDP upload."),
+    Stage(RELEASE_READY, 21, "Release Ready", "Interior and required cover are complete and valid."),
 )
 
 BY_KEY = {stage.key: stage for stage in STAGES}

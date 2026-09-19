@@ -114,6 +114,12 @@ def status(book_id: str, *, root: str | Path | None = None) -> dict:
                          if book.paths.interior_pdf.is_file() else None),
         "preflight": (book.latest_preflight() or {}).get("status"),
     }
+    from bookfactory.core import cover, gates
+    summary["readiness"] = cover.readiness(book)
+    summary["outputs"]["cover_pdf"] = "output/cover.pdf" if (book.paths.root / "output/cover.pdf").is_file() else None
+    summary["outputs"]["cover_preflight"] = (cover.load(book).get("preflight") or {}).get("status")
+    if summary["stage"] == stages.RELEASE_READY and not gates.release_ready(book).ok:
+        summary["stage_label"] = "Cover pending (interior ready)"
     return summary
 
 

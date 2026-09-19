@@ -59,6 +59,7 @@ def next_task(book) -> Task | None:
         _qa_task,
         _assembly_task,
         _preflight_task,
+        _cover_task,
         _release_task,
     ):
         task = derive(book)
@@ -602,12 +603,60 @@ def _release_task(book) -> Task | None:
         type="operator_decision",
         summary="Mark the book release ready",
         instructions=(
-            "Interior assembled and preflight passed.\n\n"
+            "Interior and required cover passed their separate preflights.\n\n"
             f"Run: {_cmd(book, 'advance', '<book>', '--to release_ready')}"
         ),
         approval_required=True,
         gate="release_ready",
     )
+
+
+def _cover_task(book) -> Task | None:
+    from bookfactory.core import cover
+    if not book.paths.interior_pdf.is_file() or not cover.required(book):
+        return None
+    data = cover.load(book)
+    refs = book.reference_paths(book.required_reference_ids(), generative_only=True)
+    asset = book.registry.find(cover.ART_ID)
+    if not data.get("direction") or not data.get("author") or not data.get("back_copy"):
+        return _task(book, "cover-direction", type="authoring",
+                     summary="Record the cover direction, paper, finish, author and back copy",
+                     instructions="Fill cover/cover.json from intake and the locked visual bible. "
+                                  "Confirm paper and finish before calculating the spine.")
+    if asset is None:
+        return _task(book, "cover-register", type="authoring",
+                     summary="Register cover-front-artwork with locked references",
+                     instructions=f"Register as cover_artwork with references {refs}.")
+    if not asset.is_approved and not asset.reviewable_draft():
+        return _task(book, "cover-artwork", type="illustration",
+                     summary="Produce native text-free cover artwork",
+                     instructions="Match locked character and editorial references. No lettering, "
+                                  "logos or recreated app interfaces. Never upscale native pixels.",
+                     asset_id=cover.ART_ID, references=refs,
+                     constraints=book.asset_constraints(asset),
+                     output={"destination": f"assets/drafts/{cover.ART_ID}/",
+                             "submit_command":f"bookfactory submit {book.state.book_id} {cover.ART_ID} --kind asset --file <path>"})
+    if not data.get("drafts"):
+        return _task(book, "cover-layout", type="authoring",
+                     summary="Typeset and visually inspect the full-wrap cover",
+                     instructions="Size from final page count and paper. Set title, author and back "
+                                  "copy as real type. Keep KDP barcode space clear. Review print "
+                                  "size and Amazon-size thumbnail, then submit a versioned cover PDF.",
+                     output={"destination":"cover/drafts/","expected_format":"pdf"})
+    if not data.get("approved"):
+        draft = data["drafts"][-1]
+        return _task(book, "cover-approval", type="approval",
+                     summary="Review the full-wrap cover draft",
+                     instructions=f"Operator visual checkpoint: inspect {draft['path']}. "
+                                  f"If accepted, bookfactory cover approve {book.state.book_id} "
+                                  f"--draft {draft['revision']} --by <operator>. "
+                                  "An agent must not approve for the operator.",
+                     approval_required=True, gate="cover_visual_checkpoint")
+    if not cover.preflight_current(book):
+        return _task(book, "cover-preflight", type="preflight",
+                     summary="Preflight the approved KDP full-wrap cover",
+                     instructions=f"Run bookfactory cover preflight {book.state.book_id}.")
+    return None
 
 
 # ----------------------------------------------------------------------

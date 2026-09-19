@@ -158,7 +158,15 @@ def release_ready(book) -> GateResult:
     elif report.get("status") == "fail":
         failed = [c["check"] for c in report.get("checks", []) if c.get("status") == "fail"]
         reasons.append("KDP preflight failed: " + ", ".join(failed))
+    from bookfactory.core import cover
+    reasons.extend(cover.release_reasons(book))
     return GateResult("release_ready", not reasons, reasons)
+
+
+def cover_preflight(book) -> GateResult:
+    from bookfactory.core import cover
+    reasons = cover.release_reasons(book)
+    return GateResult("cover_preflight", not reasons, reasons)
 
 
 #: Gates that must pass before the book may *enter* a given stage.
@@ -170,6 +178,7 @@ ENTRY_GATES = {
     stages.PAGE_PRODUCTION: page_production,
     stages.CONTENT_QA: page_approval_complete,
     stages.ASSEMBLY: assembly,
+    stages.COVER_PREFLIGHT: cover_preflight,
     stages.RELEASE_READY: release_ready,
 }
 

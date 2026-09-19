@@ -17,7 +17,8 @@
       "enum": ["idea", "book_brief", "concept_lock", "outline", "writing_sample", "voice_lock",
                "manuscript", "manuscript_lock", "visual_development", "visual_lock",
                "page_planning", "page_production", "page_approval", "content_qa", "visual_qa",
-               "technical_qa", "assembly", "kdp_preflight", "release_ready"]
+               "technical_qa", "assembly", "kdp_preflight", "cover_production",
+               "cover_preflight", "release_ready"]
     },
     "format": {
       "type": "object",

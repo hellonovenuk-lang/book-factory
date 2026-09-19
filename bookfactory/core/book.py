@@ -101,6 +101,8 @@ class Book:
         )
         book = cls(paths, state, PageManifest.empty(book_id), AssetRegistry.empty(book_id))
         book._scaffold_documents(idea=idea)
+        from bookfactory.core import cover
+        cover.initialize(book)
         book.save()
         audit.record(paths.audit_log, "book_created", book_id=book_id, title=title,
                      trim=trim, colour=colour)
@@ -312,6 +314,7 @@ class Book:
 
     def _stage_evidence(self, stage_key: str) -> bool:
         """Is there something on disk showing this stage has actually begun?"""
+        from bookfactory.core import cover
         if stage_key in self._LOCK_STAGES:
             return True
 
@@ -338,6 +341,9 @@ class Book:
             stages.ASSEMBLY: lambda: self.paths.interior_pdf.is_file(),
             stages.KDP_PREFLIGHT: lambda: (self.latest_preflight() or {}).get("status") in
                                           ("pass", "warn"),
+            stages.COVER_PRODUCTION: lambda: self.paths.interior_pdf.is_file(),
+            stages.COVER_PREFLIGHT: lambda: cover.preflight_current(self)
+                if cover.required(self) else True,
         }
         check = checks.get(stage_key)
         return check() if check else True
@@ -483,6 +489,9 @@ class Book:
         """The constraint block published in this asset's task."""
         from bookfactory.core import constraints
 
+        from bookfactory.core import cover
+        if asset.asset_id == cover.ART_ID and cover.required(self):
+            return cover.artwork_constraints(self)
         return constraints.expected_constraints(
             self, asset, placement=self.asset_placement(asset))
 
@@ -493,7 +502,10 @@ class Book:
         expected = constraints.hard_constraints(self.asset_constraints(asset))
         failures = constraints.evaluate(
             path, expected, context={"placement": self.asset_placement(asset)})
-        return [failure.to_dict() for failure in failures]
+        from bookfactory.core import cover
+        height = (cover.artwork_failures(self, path)
+                  if asset.asset_id == cover.ART_ID and cover.required(self) else [])
+        return [failure.to_dict() for failure in failures] + height
 
     def _target(self, kind: str, identifier: str):
         if kind == PAGE:

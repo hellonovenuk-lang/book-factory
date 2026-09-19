@@ -52,7 +52,7 @@
     "status": { "type": "string", "enum": ["open", "done", "cancelled"] },
     "gate": {
       "type": ["string", "null"],
-      "enum": [null, "intake", "concept_lock", "voice_lock", "manuscript_lock", "visual_lock", "release_ready"],
+      "enum": [null, "intake", "concept_lock", "voice_lock", "manuscript_lock", "visual_lock", "cover_visual_checkpoint", "release_ready"],
       "description": "Which production gate this task represents, if any."
     },
     "remediation": {

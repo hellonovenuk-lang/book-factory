@@ -104,6 +104,8 @@ def compute_mode(book, task) -> str:
 
     if task.gate == "visual_lock" and policy.visual_checkpoint:
         return WAIT_FOR_OPERATOR
+    if task.gate == "cover_visual_checkpoint" and policy.visual_checkpoint:
+        return WAIT_FOR_OPERATOR
     if task.gate in _MAJOR_GATES and policy.major_gate_checkpoints:
         return WAIT_FOR_OPERATOR
 

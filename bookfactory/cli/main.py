@@ -237,6 +237,20 @@ def build_parser() -> argparse.ArgumentParser:
     preflight = sub.add_parser("preflight", parents=[common], help="Check the interior against the KDP profile.")
     preflight.add_argument("book")
 
+    cover = sub.add_parser("cover", parents=[common], help="Manage a full-wrap print cover.")
+    cover_sub = cover.add_subparsers(dest="cover_command", required=True)
+    for name in ("init", "dimensions", "submit", "approve", "preflight"):
+        operation = cover_sub.add_parser(name, parents=[common])
+        operation.add_argument("book")
+        if name == "init":
+            operation.add_argument("--paper", choices=["white", "cream"], default="white")
+            operation.add_argument("--finish", choices=["matte", "glossy"], default="matte")
+        if name == "submit":
+            operation.add_argument("--file", required=True)
+        if name == "approve":
+            operation.add_argument("--draft", required=True)
+            operation.add_argument("--by", required=True)
+
     history = sub.add_parser("history", parents=[common], help="Show the audit log.")
     history.add_argument("book")
     history.add_argument("--limit", type=int, default=20)
@@ -850,6 +864,25 @@ def cmd_history(args) -> int:
     return 0
 
 
+def cmd_cover(args) -> int:
+    from bookfactory.core import cover, tasks as task_module
+    from bookfactory.core.book import Book
+    book = Book.load(args.book, args.root)
+    if args.cover_command == "init":
+        result = cover.initialize(book, paper=args.paper, finish=args.finish)
+    elif args.cover_command == "dimensions":
+        result = cover.dimensions(book)
+    elif args.cover_command == "submit":
+        result = cover.submit(book, args.file)
+    elif args.cover_command == "approve":
+        result = cover.approve(book, args.draft, by=args.by)
+    else:
+        result = cover.preflight(book)
+    task_module.sync_open_task(book)
+    out.emit_json(result)
+    return 0
+
+
 COMMANDS = {
     "list": cmd_list,
     "stages": cmd_stages,
@@ -879,6 +912,7 @@ COMMANDS = {
     "assemble": cmd_assemble,
     "review": cmd_review,
     "preflight": cmd_preflight,
+    "cover": cmd_cover,
     "history": cmd_history,
 }
 

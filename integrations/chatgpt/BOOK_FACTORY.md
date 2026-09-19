@@ -195,6 +195,19 @@ The same discipline applies to words:
 
 ## Handing back
 
+## Print cover after interior preflight
+
+Read `cover/cover.json`, the locked visual bible and approved character and
+editorial references. The final page count, trim and selected paper determine
+wrap size; the cover always bleeds even if the interior does not. Keep native
+generated art without lettering. Set every word as real type, reserve the KDP
+barcode area, and review at print and Amazon thumbnail sizes. Submit the
+one-page PDF with `bookfactory cover submit`. In `visual_checkpoint` mode,
+stop at the full-wrap visual approval. After explicit operator approval,
+`bookfactory cover preflight` checks the upload-ready PDF. Do not fabricate a
+free ISBN number or custom imprint.
+
+
 Finish with something a fresh session could verify:
 
 > Generated `p058-mate-taxonomy`, submitted as draft v2 at

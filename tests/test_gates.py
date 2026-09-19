@@ -95,4 +95,4 @@ def test_release_ready_needs_an_assembled_interior_and_a_preflight(produced_book
     with pytest.raises(GateBlocked) as excinfo:
         api.advance("test-book", stages.RELEASE_READY, root=workspace)
     joined = " ".join(excinfo.value.reasons)
-    assert "interior.pdf" in joined or "preflight" in joined
+    assert "cover" in joined.lower() or "interior.pdf" in joined or "preflight" in joined

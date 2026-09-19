@@ -49,7 +49,8 @@
             "layout_reference",
             "page_reference",
             "palette_reference",
-            "decoration"
+            "decoration",
+            "cover_artwork"
           ]
         },
         "title": {

@@ -414,7 +414,7 @@ class PageRecord:
 # --------------------------------------------------------------------------
 
 ASSET_KINDS = ("illustration", "character_reference", "layout_reference", "page_reference",
-               "palette_reference", "decoration")
+               "palette_reference", "decoration", "cover_artwork")
 REFERENCE_KINDS = ("character_reference", "layout_reference", "page_reference", "palette_reference")
 
 #: What a reference is *for*. The distinction that matters is generative vs

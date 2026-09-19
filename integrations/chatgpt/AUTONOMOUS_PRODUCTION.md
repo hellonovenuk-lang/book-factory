@@ -152,7 +152,9 @@ stage by name, `next` walks you through it:
 idea -> intake -> brief -> concept lock -> outline -> writing sample -> voice
 lock -> manuscript -> manuscript lock -> visual bible -> visual references ->
 visual lock -> page plan -> page specs -> illustrations -> deterministic
-rendering -> QA -> assembly -> KDP preflight -> release ready.
+rendering -> QA -> assembly -> interior KDP preflight -> cover direction ->
+native cover art -> typeset full wrap -> visual checkpoint -> cover preflight
+-> release ready.
 
 Two things worth naming explicitly:
 
@@ -229,7 +231,7 @@ does exactly what this file describes from step 1.
 
 ## 11. Finishing
 
-When `bookfactory next` returns nothing, the book is complete:
-`output/interior.pdf` exists, preflight has passed (or has only warnings), and
-the stage is `release_ready`. Tell the user plainly what was produced and
-where the files are. There is nothing further to hand to Claude.
+When `bookfactory next` returns nothing for a new print project, both
+`output/interior.pdf` and `output/cover.pdf` exist and have passed separate
+preflights. Existing books without an explicit cover configuration retain
+legacy interior-only behaviour until migrated.

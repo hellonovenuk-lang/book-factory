@@ -51,6 +51,13 @@ TODO
 
 ## Typography rules
 
+For a print book, also record cover composition, colour and actual artwork
+placement. Cover art must match locked character and editorial references and
+contain no lettering, logos or copied app interfaces. The full-wrap layout
+sets title, author and back copy as real type. Include spine lettering only
+when KDP's page-count and safe-margin rules allow legible type. Check the front
+at an Amazon-size thumbnail.
+
 Set deterministically by the renderer; recorded here so art direction and
 layout agree.
 
