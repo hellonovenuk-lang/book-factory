@@ -1,7 +1,7 @@
 # Book Brief - The Runner’s Guide to Normal Conversation
 
 > This file is the answer to "what is this book and who buys it?".
-> `bookfactory lock concept` refuses to run while this still says TODO.
+> Reconstructed from the preserved 80-page interior; review before concept lock.
 
 **Book id:** `runners-guide-to-normal-conversation`
 **Created:** 2026-09-19T15:39:25Z
