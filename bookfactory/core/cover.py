@@ -186,7 +186,7 @@ def submit(book, file: str | Path) -> dict:
     output.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(file, output)
     for prior in data["drafts"]:
-        if prior["status"] == "draft":
+        if prior["status"] in ("draft", "review_approved"):
             prior["status"] = "superseded"
     asset, art = _artwork(book)
     record = {"revision": revision, "path": book.paths.relative(output),
@@ -202,8 +202,6 @@ def submit(book, file: str | Path) -> dict:
 def approve(book, revision: str, *, by: str) -> dict:
     if not by.strip():
         raise ValidationError("The operator must explicitly identify cover approval")
-    if not book.paths.interior_pdf.is_file():
-        raise ValidationError("Assemble the final interior before promoting a preview cover to upload-ready")
     data = load(book)
     candidate = next((d for d in data["drafts"] if d["revision"] == revision), None)
     if not candidate or candidate["status"] != "draft":
@@ -219,6 +217,36 @@ def approve(book, revision: str, *, by: str) -> dict:
     if not asset.approved:
         book.approve("asset", ART_ID, revision=art.revision, by=by,
                      note=f"Explicit operator cover approval {revision}")
+    candidate["status"] = "review_approved"
+    candidate["review_approval"] = {"at": clock.timestamp(), "by": by}
+    write_json(path(book), data)
+    book.log("cover_visual_approved", revision=revision, by=by,
+             provisional=not book.paths.interior_pdf.is_file())
+    book.save()
+    if not book.paths.interior_pdf.is_file():
+        return {"revision": revision, "by": by, "status": "review_approved",
+                "awaiting": "final_interior_and_cover_finalization"}
+    return finalize(book, revision)
+
+
+def finalize(book, revision: str) -> dict:
+    """Promote an operator-approved draft only after final interior sizing agrees."""
+    if not book.paths.interior_pdf.is_file():
+        raise ValidationError("Assemble the final interior before finalizing the cover")
+    data = load(book)
+    candidate = next((d for d in data["drafts"] if d["revision"] == revision), None)
+    if not candidate or candidate["status"] != "review_approved" or not candidate.get("review_approval"):
+        raise ValidationError("The operator must approve this cover draft first")
+    if candidate["dimensions"] != dimensions(book):
+        raise ValidationError("Final interior dimensions changed; submit a resized cover for review")
+    source = book.paths.resolve(candidate["path"])
+    checksums.verify(source, candidate["sha256"])
+    asset, art = _artwork(book)
+    if not asset or not asset.approved or asset.approved.sha256 != candidate["artwork_sha256"]:
+        raise ValidationError("Approved cover artwork changed since review")
+    failures = check_pdf(book, source)
+    if failures:
+        raise ValidationError("Cover no longer passes checks: " + "; ".join(failures))
     destination = book.paths.root / "output/cover.pdf"
     destination.parent.mkdir(exist_ok=True)
     if destination.exists():
@@ -228,10 +256,10 @@ def approve(book, revision: str, *, by: str) -> dict:
     shutil.copy2(source, destination)
     candidate["status"] = "approved"
     data["approved"] = {"revision": revision, "sha256": candidate["sha256"],
-                        "at": clock.timestamp(), "by": by}
+                        "at": clock.timestamp(), "by": candidate["review_approval"]["by"]}
     data["preflight"] = None
     write_json(path(book), data)
-    book.log("cover_approved", revision=revision, by=by)
+    book.log("cover_approved", revision=revision, by=candidate["review_approval"]["by"])
     book.save()
     return data["approved"]
 
@@ -264,7 +292,10 @@ def preflight_current(book) -> bool:
 def release_reasons(book) -> list[str]:
     if not required(book):
         return []
-    if not load(book).get("approved"):
+    data = load(book)
+    if any(d["status"] == "review_approved" for d in data.get("drafts", [])):
+        return ["Reviewed cover awaits final interior and cover finalization"]
+    if not data.get("approved"):
         return ["Full-wrap cover awaits operator approval"]
     if not preflight_current(book):
         return ["Approved cover has not passed current cover preflight"]
@@ -277,6 +308,7 @@ def readiness(book) -> dict:
     data = load(book)
     cover_state = ("legacy_not_required" if not required(book) else
                    "ready" if preflight_current(book) else
+                   "awaiting_final_interior" if any(d["status"] == "review_approved" for d in data.get("drafts", [])) else
                    "awaiting_approval" if data.get("drafts") and not data.get("approved") else
                    "pending_preflight" if data.get("approved") else "in_production")
     return {"interior": "ready" if interior else "pending", "cover": cover_state,

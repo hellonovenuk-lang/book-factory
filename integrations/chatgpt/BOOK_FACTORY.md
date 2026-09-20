@@ -204,7 +204,12 @@ generated art without lettering. Set every word as real type, reserve the KDP
 barcode area, and review at print and Amazon thumbnail sizes. Submit the
 one-page PDF with `bookfactory cover submit`. In `visual_checkpoint` mode,
 stop at the full-wrap visual approval. After explicit operator approval,
-`bookfactory cover preflight` checks the upload-ready PDF. Do not fabricate a
+`bookfactory cover approve --draft vN --by <operator>` records the decision.
+If the draft used a checksummed preserved interior, its approval remains a
+review decision while assembly is pending. When the final interior has the
+same wrap dimensions, run `bookfactory cover finalize --draft vN` and then
+`bookfactory cover preflight`. Changed dimensions need a new draft and review.
+Do not fabricate a
 free ISBN number or custom imprint.
 
 

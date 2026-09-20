@@ -200,8 +200,12 @@ Submit a versioned draft with `bookfactory cover submit`.
 
 In `visual_checkpoint` mode, the full wrap is an explicit operator approval
 even if interior pages proceeded automatically. Do not run `cover approve` for
-them. Their explicit approval promotes the reviewed artwork and PDF together;
-then run `cover preflight`. `status.readiness` distinguishes interior and cover.
+them. Their explicit approval records the reviewed artwork and PDF together.
+For a provisional draft sized from a checksummed preserved interior,
+`cover approve` records visual approval while the final interior is pending.
+Once the assembled interior has matching dimensions, run
+`cover finalize --draft <revision>` and then `cover preflight`. A changed
+page count requires a revised draft and review. `status.readiness` distinguishes interior and cover.
 An old project without `cover/cover.json` remains legacy interior-only until
 `bookfactory cover init` migrates it. This command reopens a former
 `release_ready` project and logs why, preserving interior approval history.

@@ -239,7 +239,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     cover = sub.add_parser("cover", parents=[common], help="Manage a full-wrap print cover.")
     cover_sub = cover.add_subparsers(dest="cover_command", required=True)
-    for name in ("init", "dimensions", "submit", "approve", "preflight"):
+    for name in ("init", "dimensions", "submit", "approve", "finalize", "preflight"):
         operation = cover_sub.add_parser(name, parents=[common])
         operation.add_argument("book")
         if name == "init":
@@ -247,8 +247,9 @@ def build_parser() -> argparse.ArgumentParser:
             operation.add_argument("--finish", choices=["matte", "glossy"], default="matte")
         if name == "submit":
             operation.add_argument("--file", required=True)
-        if name == "approve":
+        if name in ("approve", "finalize"):
             operation.add_argument("--draft", required=True)
+        if name == "approve":
             operation.add_argument("--by", required=True)
 
     history = sub.add_parser("history", parents=[common], help="Show the audit log.")
@@ -876,6 +877,8 @@ def cmd_cover(args) -> int:
         result = cover.submit(book, args.file)
     elif args.cover_command == "approve":
         result = cover.approve(book, args.draft, by=args.by)
+    elif args.cover_command == "finalize":
+        result = cover.finalize(book, args.draft)
     else:
         result = cover.preflight(book)
     task_module.sync_open_task(book)

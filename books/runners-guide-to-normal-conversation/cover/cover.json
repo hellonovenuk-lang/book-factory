@@ -13,7 +13,7 @@
       "path": "cover/drafts/cover-v1.pdf",
       "sha256": "93b1415a5720517fb0ca1f5b9c70247552b29759adc720ce26f102758e6b86fd",
       "artwork_sha256": "e4a88d3405918b92edc7c2ef260547f45c66b8864c5f6d7103870a76bd7dc2d5",
-      "status": "draft",
+      "status": "review_approved",
       "submitted_at": "2026-09-20T09:35:50Z",
       "dimensions": {
         "page_count": 80,
@@ -24,6 +24,10 @@
         "trim_width_in": 6.0,
         "trim_height_in": 9.0,
         "bleed_in": 0.125
+      },
+      "review_approval": {
+        "at": "2026-09-20T14:23:45Z",
+        "by": "Kieran Smith"
       }
     }
   ],

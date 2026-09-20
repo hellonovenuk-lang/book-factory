@@ -57,7 +57,7 @@ def test_recovered_preview_can_size_draft_without_claiming_interior_readiness(ne
     assert cover.dimensions(new_book)["width_in"] == 12.43016
     assert cover.readiness(new_book)["interior"] == "pending"
     with pytest.raises(ValidationError, match="Assemble the final interior"):
-        cover.approve(new_book, "v1", by="Operator")
+        cover.finalize(new_book, "v1")
 
     preserved.write_bytes(preserved.read_bytes() + b"changed")
     with pytest.raises(ValidationError, match="missing or has changed"):
@@ -152,3 +152,44 @@ def test_explicit_cover_approval_then_preflight(new_book, workspace):
     cover.approve(book, draft["revision"], by="Test Operator")
     assert cover.preflight(book)["status"] == "pass"
     assert cover.readiness(book)["cover"] == "ready"
+
+
+def test_provisional_cover_approval_waits_for_matching_final_interior(new_book, workspace):
+    _interior(new_book)
+    preserved = new_book.paths.root / "releases/preserved.pdf"
+    preserved.parent.mkdir(exist_ok=True)
+    new_book.paths.interior_pdf.rename(preserved)
+    data = cover.load(new_book)
+    data.update(direction="Match locked art", author="A Writer", back_copy="Gift for runners",
+                preview_interior={"path": "releases/preserved.pdf",
+                                  "sha256": checksums.sha256_file(preserved)})
+    write_json(cover.path(new_book), data)
+    new_book.register_asset(cover.ART_ID, kind="cover_artwork")
+    new_book.save()
+    art = workspace / "native.png"
+    Image.new("RGB", (1100, 1600), "yellow").save(art)
+    api.submit_asset("test-book", cover.ART_ID, art, kind="asset", root=workspace)
+    wrap = workspace / "wrap.pdf"
+    dim = cover.dimensions(new_book)
+    pdfmetrics.registerFont(TTFont("CoverTestProvisional", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
+    pdf = canvas.Canvas(str(wrap), pagesize=(dim["width_in"]*72, dim["height_in"]*72))
+    pdf.setFont("CoverTestProvisional", 18)
+    pdf.drawString(6.6*72, 8*72, "Test Book")
+    pdf.drawString(6.6*72, .5*72, "A Writer")
+    pdf.drawString(.5*72, 5*72, "Gift for runners")
+    pdf.drawImage(str(art), 7*72, 1.3*72, width=3.4*72, height=5.1*72)
+    pdf.save()
+    book = Book.load("test-book", workspace)
+    draft = cover.submit(book, wrap)
+    approval = cover.approve(book, draft["revision"], by="Operator")
+    assert approval["status"] == "review_approved"
+    assert cover.readiness(book)["cover"] == "awaiting_final_interior"
+    assert not (book.paths.root / "output/cover.pdf").exists()
+    with pytest.raises(ValidationError, match="Assemble the final interior"):
+        cover.finalize(book, draft["revision"])
+    _interior(book, 82)
+    with pytest.raises(ValidationError, match="dimensions changed"):
+        cover.finalize(book, draft["revision"])
+    _interior(book, 80)
+    assert cover.finalize(book, draft["revision"])["by"] == "Operator"
+    assert cover.preflight(book)["status"] == "pass"

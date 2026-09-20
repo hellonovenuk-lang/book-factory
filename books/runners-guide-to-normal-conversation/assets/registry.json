@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "runners-guide-to-normal-conversation",
-  "updated_at": "2026-09-20T09:35:50Z",
+  "updated_at": "2026-09-20T14:23:45Z",
   "assets": [
     {
       "asset_id": "cover-front-artwork",
@@ -15,7 +15,7 @@
         "assets/approved/ref-character-support-sam-supporting-character-reference.png",
         "assets/approved/ref-page-editorial-internal-editorial-illustration-reference.png"
       ],
-      "status": "draft_submitted",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
@@ -26,14 +26,27 @@
           "sha256": "e4a88d3405918b92edc7c2ef260547f45c66b8864c5f6d7103870a76bd7dc2d5",
           "submitted_at": "2026-09-20T09:33:56Z",
           "source": "chatgpt-image",
-          "status": "draft",
+          "status": "approved",
           "note": "Native 1024x1536 generated with no lettering; intended print 3.4x5.1 inches; cover draft review only",
           "constraint_failures": [],
           "width": 1024,
           "height": 1536
         }
       ],
-      "approved": null,
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/cover-front-artwork-alex-and-sam-caf-cover-scene.png",
+        "sha256": "e4a88d3405918b92edc7c2ef260547f45c66b8864c5f6d7103870a76bd7dc2d5",
+        "approved_at": "2026-09-20T14:23:45Z",
+        "approved_by": "Kieran Smith",
+        "source_draft": "assets/drafts/cover-front-artwork/cover-front-artwork-v1.png",
+        "note": "Explicit operator cover approval v1",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1024,
+        "height": 1536
+      },
       "approval_history": [],
       "notes": null
     },
