@@ -27,3 +27,4 @@
 {"at": "2026-09-20T09:35:50Z", "event": "cover_draft_submitted", "revision": "v1", "path": "cover/drafts/cover-v1.pdf"}
 {"at": "2026-09-20T14:23:45Z", "event": "approved", "kind": "asset", "id": "cover-front-artwork", "revision": "v1", "path": "assets/approved/cover-front-artwork-alex-and-sam-caf-cover-scene.png", "sha256": "e4a88d3405918b92edc7c2ef260547f45c66b8864c5f6d7103870a76bd7dc2d5", "by": "Kieran Smith", "note": "Explicit operator cover approval v1"}
 {"at": "2026-09-20T14:23:45Z", "event": "cover_visual_approved", "revision": "v1", "by": "Kieran Smith", "provisional": true}
+{"at": "2026-09-20T14:31:44Z", "event": "preflight_run", "status": "fail", "failures": 1, "warnings": 0, "profile": "kdp-default"}
