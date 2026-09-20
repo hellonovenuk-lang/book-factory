@@ -4,7 +4,7 @@
   "title": "The Runner’s Guide to Normal Conversation",
   "subtitle": null,
   "series": null,
-  "stage": "manuscript",
+  "stage": "visual_development",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -19,11 +19,11 @@
     "sha256": "2d35fd934c1c4fd21dee1dd88cfe2787e0f5fa26f8fab687d80088bb214bb388"
   },
   "manuscript": {
-    "version": "v0",
-    "locked": false,
-    "locked_at": null,
-    "sha256": null,
-    "path": null
+    "version": "v1",
+    "locked": true,
+    "locked_at": "2026-09-20T07:22:49Z",
+    "sha256": "f0884873b0de23c0b46624959f1423577f21fd0fb211da9ee80f3d514aba1b8c",
+    "path": "manuscript/versions/manuscript-v1.md"
   },
   "style": {
     "visual_version": "v0",
@@ -59,21 +59,21 @@
   "production_mode": "wait_for_operator",
   "blocked": null,
   "next_action": {
-    "task_id": "runners-guide-to-normal-conversation-lock-manuscript",
-    "type": "operator_decision",
-    "summary": "Approve and lock the manuscript",
+    "task_id": "runners-guide-to-normal-conversation-ref-character-main-approve",
+    "type": "approval",
+    "summary": "Review reference artwork 'ref-character-main'",
     "page_id": null,
-    "asset_id": null,
+    "asset_id": "ref-character-main",
     "approval_required": true,
     "mode": "wait_for_operator"
   },
   "last_transition": {
-    "from": "voice_lock",
-    "to": "manuscript",
-    "at": "2026-09-20T07:18:17Z",
+    "from": "manuscript_lock",
+    "to": "visual_development",
+    "at": "2026-09-20T07:24:43Z",
     "by": "system",
     "note": "stage derived from repository state"
   },
   "created_at": "2026-09-19T15:39:25Z",
-  "updated_at": "2026-09-20T07:18:17Z"
+  "updated_at": "2026-09-20T07:26:25Z"
 }

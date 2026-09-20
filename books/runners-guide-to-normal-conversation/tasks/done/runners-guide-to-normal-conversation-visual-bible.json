@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-visual-bible",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "authoring",
+  "stage": "manuscript_lock",
+  "summary": "Finish the visual bible",
+  "instructions": "Replace every TODO in style/visual-bible.md. Be concrete about character appearance, line style, medium, palette and edge treatment.\nA fresh agent with no chat history must be able to draw on-style from this file alone. Vague entries here are what caused the drift last time.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "brief/brief.md",
+    "style/design-tokens.json"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "style/visual-bible.md",
+    "expected_format": "markdown"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-20T07:22:49Z",
+  "closed_at": "2026-09-20T07:24:53Z"
+}

@@ -1,6 +1,37 @@
 {
   "schema_version": "1.0",
   "book_id": "runners-guide-to-normal-conversation",
-  "updated_at": "2026-09-19T15:39:25Z",
-  "assets": []
+  "updated_at": "2026-09-20T07:26:25Z",
+  "assets": [
+    {
+      "asset_id": "ref-character-main",
+      "kind": "character_reference",
+      "title": "Main character reference",
+      "description": "Alex from recovered 80-page interior, PDF page 7; source image is extracted PDF artwork, not proven native original",
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "draft_submitted",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": "generative_character",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-character-main/ref-character-main-v1.png",
+          "sha256": "8a5b80acb1a820b1a64d8e1e9efe6af499eafbba186bc7a9b6b11303e1d8e65e",
+          "submitted_at": "2026-09-20T07:26:25Z",
+          "source": "chatgpt-image",
+          "status": "draft",
+          "note": "Draft reconstructed from recovered PDF art; generated native 1536x1024, no lettering; operator visual approval required",
+          "constraint_failures": [],
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    }
+  ]
 }

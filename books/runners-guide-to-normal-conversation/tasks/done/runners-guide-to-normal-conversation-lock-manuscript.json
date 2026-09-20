@@ -3,7 +3,7 @@
   "task_id": "runners-guide-to-normal-conversation-lock-manuscript",
   "book_id": "runners-guide-to-normal-conversation",
   "type": "operator_decision",
-  "stage": "voice_lock",
+  "stage": "manuscript",
   "summary": "Approve and lock the manuscript",
   "instructions": "Read the manuscript. Locking snapshots it to manuscript/versions/ and checksums it, so page copy can never drift from an unlocked working file.\n\nRun: bookfactory lock manuscript runners-guide-to-normal-conversation",
   "page_id": null,
@@ -17,11 +17,11 @@
   "constraints": {},
   "output": {},
   "approval_required": true,
-  "status": "open",
+  "status": "done",
   "gate": "manuscript_lock",
   "remediation": false,
   "retry_count": 0,
   "mode": "wait_for_operator",
-  "created_at": "2026-09-20T07:18:17Z",
-  "closed_at": null
+  "created_at": "2026-09-20T07:22:37Z",
+  "closed_at": "2026-09-20T07:22:49Z"
 }
