@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-page-plan",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "authoring",
+  "stage": "visual_lock",
+  "summary": "Create the page plan",
+  "instructions": "Turn the locked manuscript into a page manifest: every page that will exist, in order, with a type and a title.\n\nRun: bookfactory plan runners-guide-to-normal-conversation --from-file <plan.json>\nor add pages one at a time with `bookfactory plan <book> --add`.\n\nPage types: chapter_opener, editorial_illustration, text_illustration, checklist, diagnostic_test, comparison, diagram, quote, certificate, closing, front_matter, contents.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/manuscript.md",
+    "manuscript/outline.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/manifest.json"
+  },
+  "approval_required": false,
+  "status": "open",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-20T09:35:50Z",
+  "closed_at": null
+}

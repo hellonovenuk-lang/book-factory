@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-lock-visual",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "operator_decision",
+  "stage": "visual_development",
+  "summary": "Approve the reference set and lock the visual style",
+  "instructions": "Every required visual reference is approved. Locking freezes them and lets mass page production begin. Until this lock, page production is refused - generating eighty pages before the style settled is the single most expensive mistake this system exists to prevent.\n\nRun: bookfactory lock visual runners-guide-to-normal-conversation",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "style/visual-bible.md",
+    "style/reference-set.json"
+  ],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "done",
+  "gate": "visual_lock",
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "wait_for_operator",
+  "created_at": "2026-09-20T09:29:08Z",
+  "closed_at": "2026-09-20T09:29:23Z"
+}

@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+import pytest
 from PIL import Image
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
-from bookfactory.core import api, cover, gates, production, tasks
+from bookfactory.core import api, checksums, cover, gates, production, tasks
 from bookfactory.core.book import Book
+from bookfactory.core.errors import ValidationError
 from bookfactory.core.jsonio import write_json
 
 
@@ -40,6 +42,26 @@ def test_wrap_dimensions_follow_final_pdf_and_paper(new_book):
     data["paper"] = "cream"
     write_json(cover.path(new_book), data)
     assert cover.dimensions(new_book)["spine_in"] == .2
+
+
+def test_recovered_preview_can_size_draft_without_claiming_interior_readiness(new_book):
+    _interior(new_book, 80)
+    preserved = new_book.paths.root / "releases/preserved-interior.pdf"
+    preserved.parent.mkdir(parents=True, exist_ok=True)
+    new_book.paths.interior_pdf.rename(preserved)
+    data = cover.load(new_book)
+    data["preview_interior"] = {"path": "releases/preserved-interior.pdf",
+                                "sha256": checksums.sha256_file(preserved)}
+    write_json(cover.path(new_book), data)
+
+    assert cover.dimensions(new_book)["width_in"] == 12.43016
+    assert cover.readiness(new_book)["interior"] == "pending"
+    with pytest.raises(ValidationError, match="Assemble the final interior"):
+        cover.approve(new_book, "v1", by="Operator")
+
+    preserved.write_bytes(preserved.read_bytes() + b"changed")
+    with pytest.raises(ValidationError, match="missing or has changed"):
+        cover.dimensions(new_book)
 
 
 def test_artwork_native_height_is_checked_and_draft_is_preserved(new_book, workspace):

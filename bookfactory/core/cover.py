@@ -59,9 +59,19 @@ def dimensions(book) -> dict:
     data = load(book)
     if data.get("paper") not in SPINE_PER_PAGE:
         raise ValidationError("Select paper before calculating the cover")
-    if not book.paths.interior_pdf.is_file():
-        raise ValidationError("Assemble the final interior before sizing the cover")
-    pages = len(PdfReader(str(book.paths.interior_pdf)).pages)
+    interior = book.paths.interior_pdf
+    if not interior.is_file():
+        # A recovered project can develop a review draft against an immutable
+        # preserved interior. This does not establish interior readiness.
+        preview = data.get("preview_interior") or {}
+        if not preview.get("path") or not preview.get("sha256"):
+            raise ValidationError("Assemble the final interior before sizing the cover, or record a checksummed preview_interior")
+        interior = book.paths.resolve(preview["path"])
+        if not interior.resolve().is_relative_to(book.paths.root.resolve()):
+            raise ValidationError("The preview interior must be inside this book project")
+        if not interior.is_file() or checksums.sha256_file(interior) != preview["sha256"]:
+            raise ValidationError("The preserved preview interior is missing or has changed")
+    pages = len(PdfReader(str(interior)).pages)
     trim_w, trim_h = trim_inches(book.state.format.trim, book.state.format.kdp_profile)
     spine = pages * SPINE_PER_PAGE[data["paper"]]
     return {"page_count": pages, "paper": data["paper"], "spine_in": round(spine, 6),
@@ -192,6 +202,8 @@ def submit(book, file: str | Path) -> dict:
 def approve(book, revision: str, *, by: str) -> dict:
     if not by.strip():
         raise ValidationError("The operator must explicitly identify cover approval")
+    if not book.paths.interior_pdf.is_file():
+        raise ValidationError("Assemble the final interior before promoting a preview cover to upload-ready")
     data = load(book)
     candidate = next((d for d in data["drafts"] if d["revision"] == revision), None)
     if not candidate or candidate["status"] != "draft":

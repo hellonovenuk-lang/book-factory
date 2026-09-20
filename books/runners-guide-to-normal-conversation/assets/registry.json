@@ -1,8 +1,42 @@
 {
   "schema_version": "1.0",
   "book_id": "runners-guide-to-normal-conversation",
-  "updated_at": "2026-09-20T07:26:25Z",
+  "updated_at": "2026-09-20T09:35:50Z",
   "assets": [
+    {
+      "asset_id": "cover-front-artwork",
+      "kind": "cover_artwork",
+      "title": "Alex and Sam café cover scene",
+      "description": "Text-free native full-colour art for 3.4x5.1-inch front placement, matching locked Alex, Sam and editorial ink references",
+      "page_id": null,
+      "characters": [],
+      "references": [
+        "assets/approved/ref-character-main-main-character-reference.png",
+        "assets/approved/ref-character-support-sam-supporting-character-reference.png",
+        "assets/approved/ref-page-editorial-internal-editorial-illustration-reference.png"
+      ],
+      "status": "draft_submitted",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v1.png",
+          "sha256": "e4a88d3405918b92edc7c2ef260547f45c66b8864c5f6d7103870a76bd7dc2d5",
+          "submitted_at": "2026-09-20T09:33:56Z",
+          "source": "chatgpt-image",
+          "status": "draft",
+          "note": "Native 1024x1536 generated with no lettering; intended print 3.4x5.1 inches; cover draft review only",
+          "constraint_failures": [],
+          "width": 1024,
+          "height": 1536
+        }
+      ],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
     {
       "asset_id": "ref-character-main",
       "kind": "character_reference",
@@ -11,9 +45,9 @@
       "page_id": null,
       "characters": [],
       "references": [],
-      "status": "draft_submitted",
+      "status": "approved",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": "generative_character",
       "drafts": [
         {
@@ -22,14 +56,242 @@
           "sha256": "8a5b80acb1a820b1a64d8e1e9efe6af499eafbba186bc7a9b6b11303e1d8e65e",
           "submitted_at": "2026-09-20T07:26:25Z",
           "source": "chatgpt-image",
-          "status": "draft",
+          "status": "approved",
           "note": "Draft reconstructed from recovered PDF art; generated native 1536x1024, no lettering; operator visual approval required",
           "constraint_failures": [],
           "width": 1536,
           "height": 1024
         }
       ],
-      "approved": null,
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-character-main-main-character-reference.png",
+        "sha256": "8a5b80acb1a820b1a64d8e1e9efe6af499eafbba186bc7a9b6b11303e1d8e65e",
+        "approved_at": "2026-09-20T08:51:50Z",
+        "approved_by": "operator",
+        "source_draft": "assets/drafts/ref-character-main/ref-character-main-v1.png",
+        "note": "Kieran Smith explicitly approved Alex reference v1 in chat on 2026-09-20",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1536,
+        "height": 1024
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-character-support",
+      "kind": "character_reference",
+      "title": "Sam supporting character reference",
+      "description": "Sam from preserved PDF, recurring partner; reconstruct from PDF pages 17 and 23",
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": true,
+      "reference_role": "generative_character",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-character-support/ref-character-support-v1.png",
+          "sha256": "5e2020821da3dbfb5b7b0127b0be053197f2711ea33ffd032881cf677dbfd9bc",
+          "submitted_at": "2026-09-20T08:52:53Z",
+          "source": "chatgpt-image",
+          "status": "approved",
+          "note": "Sam character draft v1 from recovered PDF; native 1536x1024, no lettering; explicit operator review required",
+          "constraint_failures": [],
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-character-support-sam-supporting-character-reference.png",
+        "sha256": "5e2020821da3dbfb5b7b0127b0be053197f2711ea33ffd032881cf677dbfd9bc",
+        "approved_at": "2026-09-20T09:27:21Z",
+        "approved_by": "operator",
+        "source_draft": "assets/drafts/ref-character-support/ref-character-support-v1.png",
+        "note": "Kieran Smith explicitly approved remaining references to proceed to cover design in chat on 2026-09-20",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1536,
+        "height": 1024
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-layout-chapter-opener",
+      "kind": "layout_reference",
+      "title": "Chapter opener example",
+      "description": "Recovered original PDF page 7, chapter-one opener, deterministic page layout",
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": true,
+      "reference_role": "deterministic_layout",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
+          "sha256": "72612b250504cf550f3a9e221fd86e1920f23be6b80660db565b98508e4ab6d6",
+          "submitted_at": "2026-09-20T09:27:43Z",
+          "source": "recovered-pdf-raster",
+          "status": "approved",
+          "note": "Deterministic layout reference from existing typeset PDF page 7; real original type, not generated artwork or generative style input",
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+        "sha256": "72612b250504cf550f3a9e221fd86e1920f23be6b80660db565b98508e4ab6d6",
+        "approved_at": "2026-09-20T09:27:48Z",
+        "approved_by": "operator",
+        "source_draft": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
+        "note": "Kieran Smith explicitly approved remaining reference checkpoints to proceed to cover in chat on 2026-09-20; recovered PDF layout",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-page-diagnostic",
+      "kind": "page_reference",
+      "title": "Diagnostic checklist page example",
+      "description": "Recovered PDF page 10 initial severity assessment; deterministic typeset layout",
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": true,
+      "reference_role": "deterministic_layout",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
+          "sha256": "d9a94a985c40748f74d0878e1e2d8817e98122a6f7b000ad415d1ed8dcdcf4f4",
+          "submitted_at": "2026-09-20T09:28:21Z",
+          "source": "recovered-pdf-raster",
+          "status": "approved",
+          "note": "Deterministic checklist layout from preserved typeset PDF, not generative artwork input",
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-page-diagnostic-diagnostic-checklist-page-example.png",
+        "sha256": "d9a94a985c40748f74d0878e1e2d8817e98122a6f7b000ad415d1ed8dcdcf4f4",
+        "approved_at": "2026-09-20T09:28:26Z",
+        "approved_by": "operator",
+        "source_draft": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
+        "note": "Kieran Smith explicitly approved reference checkpoints to proceed to cover; recovered PDF checklist layout",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-page-editorial",
+      "kind": "page_reference",
+      "title": "Internal editorial illustration reference",
+      "description": "Actual text-free editorial illustration embedded in preserved PDF page 9; not proven native generated original",
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": true,
+      "reference_role": "generative_style",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
+          "sha256": "10516d6582fc99ac898fbee8d0624962d1c7c04e670ef35b69f1b6fdadeeb3d3",
+          "submitted_at": "2026-09-20T09:28:06Z",
+          "source": "recovered-pdf-embedded-art",
+          "status": "approved",
+          "note": "Original editorial illustration as embedded in PDF page 9, text-free, 1536x1024; original native art not proven",
+          "constraint_failures": [],
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-page-editorial-internal-editorial-illustration-reference.png",
+        "sha256": "10516d6582fc99ac898fbee8d0624962d1c7c04e670ef35b69f1b6fdadeeb3d3",
+        "approved_at": "2026-09-20T09:28:11Z",
+        "approved_by": "operator",
+        "source_draft": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
+        "note": "Kieran Smith explicitly approved reference checkpoints to proceed to cover; original recovered editorial illustration",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1536,
+        "height": 1024
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-palette",
+      "kind": "palette_reference",
+      "title": "Palette and type reference",
+      "description": "Deterministic swatch/type sheet from visual bible and design tokens; cover-only vivid colours distinguished from interior",
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": true,
+      "reference_role": "palette",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-palette/ref-palette-v1.png",
+          "sha256": "2b64e8adb837615e04b34ec19867c643d9b346d60b5a25b531f526eb044546da",
+          "submitted_at": "2026-09-20T09:28:57Z",
+          "source": "deterministic-palette-render",
+          "status": "approved",
+          "note": "Typeset swatches and font sample, derived from design tokens and recovered visual bible; not AI-generated artwork",
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 1220
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-palette-palette-and-type-reference.png",
+        "sha256": "2b64e8adb837615e04b34ec19867c643d9b346d60b5a25b531f526eb044546da",
+        "approved_at": "2026-09-20T09:29:08Z",
+        "approved_by": "operator",
+        "source_draft": "assets/drafts/ref-palette/ref-palette-v1.png",
+        "note": "Kieran Smith explicitly approved reference checkpoints to proceed to cover; deterministic palette and type sheet",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1800,
+        "height": 1220
+      },
       "approval_history": [],
       "notes": null
     }
