@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-lock-voice",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "operator_decision",
+  "stage": "concept_lock",
+  "summary": "Approve the writing sample and lock the voice",
+  "instructions": "Read manuscript/writing-sample.md. If it sounds right, lock the voice.\nEverything written afterwards references style/voice-bible.md.\n\nRun: bookfactory lock voice runners-guide-to-normal-conversation",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/writing-sample.md",
+    "style/voice-bible.md"
+  ],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "open",
+  "gate": "voice_lock",
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "wait_for_operator",
+  "created_at": "2026-09-20T07:13:41Z",
+  "closed_at": null
+}

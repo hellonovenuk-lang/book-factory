@@ -4,7 +4,7 @@
   "title": "The Runner’s Guide to Normal Conversation",
   "subtitle": null,
   "series": null,
-  "stage": "book_brief",
+  "stage": "concept_lock",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -14,9 +14,9 @@
     "target_page_count": 80
   },
   "concept": {
-    "locked": false,
-    "locked_at": null,
-    "sha256": null
+    "locked": true,
+    "locked_at": "2026-09-20T07:12:58Z",
+    "sha256": "2d35fd934c1c4fd21dee1dd88cfe2787e0f5fa26f8fab687d80088bb214bb388"
   },
   "manuscript": {
     "version": "v0",
@@ -56,24 +56,24 @@
     "authorized_at": null,
     "source": null
   },
-  "production_mode": "continue_automatically",
+  "production_mode": "wait_for_operator",
   "blocked": null,
   "next_action": {
-    "task_id": "runners-guide-to-normal-conversation-brief",
-    "type": "authoring",
-    "summary": "Complete the book brief",
+    "task_id": "runners-guide-to-normal-conversation-lock-voice",
+    "type": "operator_decision",
+    "summary": "Approve the writing sample and lock the voice",
     "page_id": null,
     "asset_id": null,
     "approval_required": true,
-    "mode": "continue_automatically"
+    "mode": "wait_for_operator"
   },
   "last_transition": {
-    "from": "idea",
-    "to": "book_brief",
-    "at": "2026-09-19T15:39:25Z",
-    "by": "system",
-    "note": "stage derived from repository state"
+    "from": "book_brief",
+    "to": "concept_lock",
+    "at": "2026-09-20T07:12:58Z",
+    "by": "operator",
+    "note": "Kieran Smith explicitly approved reconstructed concept in chat on 2026-09-20"
   },
   "created_at": "2026-09-19T15:39:25Z",
-  "updated_at": "2026-09-19T15:39:25Z"
+  "updated_at": "2026-09-20T07:13:41Z"
 }

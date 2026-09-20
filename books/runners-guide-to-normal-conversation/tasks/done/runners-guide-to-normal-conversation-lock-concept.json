@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-lock-concept",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "operator_decision",
+  "stage": "book_brief",
+  "summary": "Approve and lock the concept",
+  "instructions": "The brief is complete. Read it, and if you are happy, lock it.\nAfter the lock, later stages may not renegotiate the concept.\n\nRun: bookfactory lock concept runners-guide-to-normal-conversation",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "brief/brief.md",
+    "brief/concept.md"
+  ],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "done",
+  "gate": "concept_lock",
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "wait_for_operator",
+  "created_at": "2026-09-20T07:12:48Z",
+  "closed_at": "2026-09-20T07:12:58Z"
+}

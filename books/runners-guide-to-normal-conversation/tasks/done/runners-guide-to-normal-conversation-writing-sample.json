@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-writing-sample",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "authoring",
+  "stage": "concept_lock",
+  "summary": "Write the calibration writing sample",
+  "instructions": "Write manuscript/writing-sample.md: one typical internal passage, one structured piece (checklist or test copy) and one chapter opener.\nThis is written BEFORE the manuscript on purpose - the voice gets judged on real prose, and the whole manuscript is then written to match it.\nFollow style/voice-bible.md.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "brief/brief.md",
+    "style/voice-bible.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "manuscript/writing-sample.md",
+    "expected_format": "markdown"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-20T07:12:58Z",
+  "closed_at": "2026-09-20T07:13:41Z"
+}

@@ -1,3 +1,5 @@
 {"at": "2026-09-19T15:39:25Z", "event": "cover_required", "paper": "white", "finish": "matte"}
 {"at": "2026-09-19T15:39:25Z", "event": "stage_advanced", "from": "idea", "to": "book_brief", "by": "system", "note": "stage derived from repository state"}
 {"at": "2026-09-19T15:39:25Z", "event": "book_created", "book_id": "runners-guide-to-normal-conversation", "title": "The Runner’s Guide to Normal Conversation", "trim": "6x9", "colour": false}
+{"at": "2026-09-20T07:12:58Z", "event": "stage_advanced", "from": "book_brief", "to": "concept_lock", "by": "operator", "note": "Kieran Smith explicitly approved reconstructed concept in chat on 2026-09-20"}
+{"at": "2026-09-20T07:12:58Z", "event": "concept_locked", "sha256": "2d35fd934c1c4fd21dee1dd88cfe2787e0f5fa26f8fab687d80088bb214bb388", "by": "operator", "note": "Kieran Smith explicitly approved reconstructed concept in chat on 2026-09-20"}

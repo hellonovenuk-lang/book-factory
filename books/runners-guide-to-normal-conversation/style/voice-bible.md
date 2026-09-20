@@ -8,14 +8,11 @@
 
 ## The voice in one paragraph
 
-TODO
+An earnest institutional service addresses the runner in the second person, using sober assessment language for habits that everyone around them recognises. The humour arrives through precise social detail: a watch interrupting a meal, a colleague trapped beside a kettle, or a hotel chosen for a flat route. The clinician remains calm; Alex’s need to explain does the comic work. A paragraph generally builds one situation before a short final observation. The voice has warmth for the runner and sympathy for Sam and Pat without announcing either.
 
 ## Reference points
 
-Comedians, books or writers whose register this sits near. Not to imitate - to
-calibrate.
-
-TODO
+The recovered interior is the only authority for calibration. Read PDF pages 7–10 and the recovered examples in `manuscript/writing-sample.md`. No external writer or comic is a style source for this reconstruction.
 
 ## Rules - do
 
@@ -43,17 +40,19 @@ TODO
 
 A living list. Add to it whenever something grating survives into a draft.
 
-- TODO
+- Generic encouragement such as “embrace your journey” or “unlock your potential”.
+- Explanatory punchline tags such as “and that’s the joke”.
+- Repetitive “it’s not X, it’s Y” reframing.
 
 ## Person, tense, address
 
-TODO (e.g. second person, present tense, addressed to the sufferer)
+Primarily second person and present tense, addressing the referred runner directly. Use third person for Alex’s case files and named scenes involving Sam, Pat and Dr Hughes. The Service may speak in a formal collective voice when issuing instructions.
 
 ## Spelling and conventions
 
 - British English throughout (-ise, colour, whilst sparingly).
 - Numbers under ten spelled out except in scores, measurements and prices.
-- TODO
+- Keep race distances and measurements legible, as in “10 km” and “15 km”; preserve specific times and scores where the joke depends on them.
 
 ## Approved sample
 

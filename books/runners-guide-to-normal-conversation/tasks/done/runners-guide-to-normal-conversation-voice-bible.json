@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-voice-bible",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "authoring",
+  "stage": "concept_lock",
+  "summary": "Finish the humour / voice bible",
+  "instructions": "Replace every TODO in style/voice-bible.md with real rules, drawn from what worked in the writing sample. Add anything grating you had to edit out to the banned phrases list - that list is how the same mistakes stop recurring.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/writing-sample.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "style/voice-bible.md",
+    "expected_format": "markdown"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-20T07:13:25Z",
+  "closed_at": "2026-09-20T07:13:41Z"
+}
