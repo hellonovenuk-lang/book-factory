@@ -3,3 +3,6 @@
 {"at": "2026-09-19T15:39:25Z", "event": "book_created", "book_id": "runners-guide-to-normal-conversation", "title": "The Runner’s Guide to Normal Conversation", "trim": "6x9", "colour": false}
 {"at": "2026-09-20T07:12:58Z", "event": "stage_advanced", "from": "book_brief", "to": "concept_lock", "by": "operator", "note": "Kieran Smith explicitly approved reconstructed concept in chat on 2026-09-20"}
 {"at": "2026-09-20T07:12:58Z", "event": "concept_locked", "sha256": "2d35fd934c1c4fd21dee1dd88cfe2787e0f5fa26f8fab687d80088bb214bb388", "by": "operator", "note": "Kieran Smith explicitly approved reconstructed concept in chat on 2026-09-20"}
+{"at": "2026-09-20T07:17:14Z", "event": "stage_advanced", "from": "concept_lock", "to": "voice_lock", "by": "operator", "note": "Kieran Smith explicitly approved recovered voice in chat on 2026-09-20"}
+{"at": "2026-09-20T07:17:14Z", "event": "voice_locked", "version": "v1", "sha256": "1276737b991ab6eb3021a0fd4e7ce1a480fad6cd0b026cbf615b8406621d3141", "by": "operator", "note": "Kieran Smith explicitly approved recovered voice in chat on 2026-09-20"}
+{"at": "2026-09-20T07:18:17Z", "event": "stage_advanced", "from": "voice_lock", "to": "manuscript", "by": "system", "note": "stage derived from repository state"}

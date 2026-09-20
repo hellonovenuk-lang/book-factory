@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "task_id": "runners-guide-to-normal-conversation-lock-manuscript",
+  "book_id": "runners-guide-to-normal-conversation",
+  "type": "operator_decision",
+  "stage": "voice_lock",
+  "summary": "Approve and lock the manuscript",
+  "instructions": "Read the manuscript. Locking snapshots it to manuscript/versions/ and checksums it, so page copy can never drift from an unlocked working file.\n\nRun: bookfactory lock manuscript runners-guide-to-normal-conversation",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/manuscript.md"
+  ],
+  "constraints": {},
+  "output": {},
+  "approval_required": true,
+  "status": "open",
+  "gate": "manuscript_lock",
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "wait_for_operator",
+  "created_at": "2026-09-20T07:18:17Z",
+  "closed_at": null
+}
