@@ -51,39 +51,44 @@ def run_qa(book, *, layers: list[str] | None = None, write_report: bool = True) 
     }
     schema.validate("qa-report", report, context="qa report")
 
-    _stamp_pages(book, results, selected)
-
     if write_report:
+        #: The report is the only thing QA writes. Later stages read it
+        #: (tasks._latest_qa, the QA stage evidence, production mode), so it
+        #: stays; the stage, next action and per-page verdicts that follow
+        #: from it are derived from it, and persisted by the next command that
+        #: changes the book.
         stamp = clock.compact_timestamp()
         write_json(book.paths.qa_reports_dir / f"{stamp}-qa.json", report)
         write_json(book.paths.qa_latest, report)
-        book.log("qa_run", status=status, errors=errors, warnings=warnings,
-                 layers=selected)
-        book.save()
+    stamp_pages(book, report)
     return report
 
 
-def _stamp_pages(book, results: list[LayerResult], selected: list[str]) -> None:
-    """Record each layer's verdict on the page it concerns, so the manifest
-    shows QA state per page without anyone opening a report."""
-    by_layer = {r.layer: r for r in results}
-    for layer in PAGE_QA_FIELDS:
-        if layer not in selected:
-            continue
-        result = by_layer.get(layer)
-        if result is None:
+def stamp_pages(book, report: dict) -> None:
+    """Record each layer's verdict on the page it concerns, in memory, so the
+    manifest shows QA state per page without anyone opening a report."""
+    for layer in report.get("layers", []):
+        if layer.get("layer") not in PAGE_QA_FIELDS:
             continue
         verdicts: dict[str, str] = {}
-        for finding in result.findings:
-            if not finding.page_id:
+        for finding in layer.get("findings", []):
+            page_id = finding.get("page_id")
+            if not page_id:
                 continue
-            current = verdicts.get(finding.page_id, "pass")
-            if finding.level == "error":
-                verdicts[finding.page_id] = "fail"
-            elif finding.level == "warning" and current != "fail":
-                verdicts[finding.page_id] = "warn"
+            current = verdicts.get(page_id, "pass")
+            if finding.get("level") == "error":
+                verdicts[page_id] = "fail"
+            elif finding.get("level") == "warning" and current != "fail":
+                verdicts[page_id] = "warn"
         for page in book.manifest:
-            page.qa[layer] = verdicts.get(page.page_id, "pass")
+            page.qa[layer["layer"]] = verdicts.get(page.page_id, "pass")
+
+
+def apply_latest_verdicts(book) -> None:
+    """Make every page's `qa` field match qa/latest.json, in memory."""
+    report = latest_report(book)
+    if report is not None:
+        stamp_pages(book, report)
 
 
 def latest_report(book) -> dict | None:

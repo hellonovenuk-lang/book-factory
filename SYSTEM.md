@@ -44,6 +44,14 @@ No database. State is JSON and Markdown in a git repository, because:
 `books/<book-id>/book.json` is the entry point. It is deliberately small - a
 dashboard, not a data store - and it carries a cached copy of the next action so
 that reading one file answers "where is this book and what happens next?".
+Every command that changes the book refreshes that cache and `tasks/open/`.
+
+Looking never writes. `status`, `next`, `task` and `validate` change nothing in
+the repository; they recompute the stage and next task in memory. `qa` writes
+its report (`qa/reports/` and `qa/latest.json`, which later stages read) and
+nothing else. `next --persist` is the explicit way to refresh the cached next
+action and `tasks/open/` without changing anything else - useful after
+hand-editing a file, for an agent that reads the repository without a shell.
 
 ### Generative and deterministic work are separated by construction
 
@@ -97,7 +105,8 @@ if a record somehow claims a path another record already has.
 ### Stages are derived, not declared
 
 A book has exactly one stage, and it is recomputed from evidence on disk after
-every state change (`Book.autoadvance`). A stage is never a flag somebody
+every state change (`Book.autoadvance`); read-only commands report the same
+derived stage without recording it (`Book.derived_stage`). A stage is never a flag somebody
 remembered to set. Two kinds of stage are exempt: the four lock stages, which
 require an explicit `bookfactory lock`, and release ready, which is the
 operator's call.

@@ -103,15 +103,21 @@ def build_parser() -> argparse.ArgumentParser:
                         metavar="KEY=VALUE", help="One answer, repeatable.")
 
     for name, help_text in (
-        ("status", "Where the book stands right now."),
-        ("next", "The single next action, for a human or an agent."),
-        ("validate", "Structural check: schemas, manifest, checksums."),
+        ("status", "Where the book stands right now. Writes nothing."),
+        ("next", "The single next action, for a human or an agent. Writes nothing."),
+        ("validate", "Structural check: schemas, manifest, checksums. Writes nothing."),
         ("relock", "Re-apply read-only permissions to approved artefacts."),
     ):
         command = sub.add_parser(name, parents=[common], help=help_text)
         command.add_argument("book")
+        if name == "next":
+            command.add_argument("--persist", action="store_true",
+                                 help="Also write the task to tasks/open/ and refresh "
+                                      "book.json's next_action (mutating commands do this "
+                                      "anyway).")
 
-    task = sub.add_parser("task", parents=[common], help="Show a task in full (defaults to the next one).")
+    task = sub.add_parser("task", parents=[common],
+                          help="Show a task in full (defaults to the next one). Writes nothing.")
     task.add_argument("book")
     task.add_argument("task_id", nargs="?")
 
@@ -505,7 +511,7 @@ def cmd_status(args) -> int:
 
 
 def cmd_next(args) -> int:
-    task = api.next_task(args.book, root=args.root)
+    task = api.next_task(args.book, root=args.root, persist=args.persist)
     if args.json:
         out.emit_json(task)
         return 0

@@ -17,7 +17,9 @@ bookfactory status <book-id>
 bookfactory next <book-id>
 ```
 
-Add `--json` if you would rather parse it.
+Add `--json` if you would rather parse it. Both are read-only, as are `task`
+and `validate`: they change nothing in the repository, so looking at a book
+never leaves anything to commit. `qa` writes only its report.
 
 The repository is the state of the project. Conversation history is not. If
 something you were told in chat contradicts what is in the repository, **the

@@ -69,7 +69,13 @@ class Book:
                     if paths.manifest_file.is_file() else PageManifest.empty(book_id))
         registry = (AssetRegistry.load(paths.asset_registry)
                     if paths.asset_registry.is_file() else AssetRegistry.empty(book_id))
-        return cls(paths, state, manifest, registry)
+        book = cls(paths, state, manifest, registry)
+        #: Per-page QA verdicts mirror qa/latest.json. `bookfactory qa` writes
+        #: only its report, so they are applied here and persisted by the next
+        #: command that saves the book.
+        from bookfactory.qa.runner import apply_latest_verdicts
+        apply_latest_verdicts(book)
+        return book
 
     @classmethod
     def exists(cls, book_id: str, root: str | Path | None = None) -> bool:
@@ -165,6 +171,23 @@ class Book:
 
     def log(self, event: str, /, **fields) -> None:
         audit.record(self.paths.audit_log, event, **fields)
+
+    def refresh_view(self) -> None:
+        """Bring the in-memory state up to date with the repository, writing nothing.
+
+        Read-only commands (`status`, `next`, `task`) call this instead of
+        `save()`: the stage the evidence on disk supports, the next action and
+        the production mode are recomputed in memory only. The stage
+        transitions themselves are recorded - with their audit entries - by
+        the next command that changes the book. Never call `save()` after this
+        on the same object; it would skip those audit entries.
+        """
+        self.state.stage = self.derived_stage()
+        from bookfactory.core.tasks import next_task
+
+        task = next_task(self)
+        self.state.next_action = task.summary_dict() if task else None
+        self.state.production_mode = task.mode if task else production.COMPLETE
 
     # ------------------------------------------------------------------
     # Reference set / style config
@@ -323,22 +346,37 @@ class Book:
             return self.state.stage
         self._advancing = True
         try:
-            while True:
-                target = stages.next_stage(self.state.stage)
-                if target is None or target == stages.RELEASE_READY:
-                    break
-                lock_check = self._LOCK_STAGES.get(target)
-                if lock_check and not lock_check(self.state):
-                    break
-                result = gates.for_stage(self, target)
-                if result is not None and not result.ok:
-                    break
-                if not self._stage_evidence(target):
-                    break
+            for target in self._derivable_stages():
                 self._transition(target, by="system", note="stage derived from repository state")
         finally:
             self._advancing = False
         return self.state.stage
+
+    def derived_stage(self) -> str:
+        """The stage the evidence on disk supports. Pure: moves and writes nothing."""
+        reachable = self._derivable_stages()
+        return reachable[-1] if reachable else self.state.stage
+
+    def _derivable_stages(self) -> list[str]:
+        """The stages `autoadvance` would enter from here, in order. Gates and
+        stage evidence only read the repository, so this changes nothing."""
+        reachable = []
+        stage = self.state.stage
+        while True:
+            target = stages.next_stage(stage)
+            if target is None or target == stages.RELEASE_READY:
+                break
+            lock_check = self._LOCK_STAGES.get(target)
+            if lock_check and not lock_check(self.state):
+                break
+            result = gates.for_stage(self, target)
+            if result is not None and not result.ok:
+                break
+            if not self._stage_evidence(target):
+                break
+            reachable.append(target)
+            stage = target
+        return reachable
 
     def _stage_evidence(self, stage_key: str) -> bool:
         """Is there something on disk showing this stage has actually begun?"""

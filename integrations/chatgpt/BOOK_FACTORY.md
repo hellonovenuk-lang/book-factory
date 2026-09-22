@@ -50,7 +50,11 @@ directly. They hold exactly the same information - the CLI only formats them:
 | `books/<book-id>/assets/registry.json` | Every asset, its status, and its approved file and checksum. |
 
 `book.json` -> `next_action` names the task id; the matching file in
-`tasks/open/` is the same task the CLI would have printed.
+`tasks/open/` is the same task the CLI would have printed. Both are written by
+the last command that changed the book. `status` and `next` never write, so if
+files were edited by hand since then (a manuscript, a brief), the cached task
+can be one step behind: whoever has a shell refreshes it with
+`bookfactory next <book-id> --persist`.
 
 ### Route 3 - no repository access at all
 

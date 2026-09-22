@@ -104,7 +104,9 @@ def create_from_idea(idea: str, *, title: str | None = None, **kwargs) -> dict:
 
 
 def status(book_id: str, *, root: str | Path | None = None) -> dict:
+    """Where the book stands. Read-only: it writes nothing to the repository."""
     book = Book.load(book_id, root)
+    book.refresh_view()
     summary = book.summary()
     summary["gates"] = _gate_summary(book)
     summary["approved_integrity"] = book.verify_approved()
@@ -142,19 +144,31 @@ def _qa_summary(book) -> dict | None:
     return {"run_at": report["run_at"], **report["summary"]}
 
 
-def next_task(book_id: str, *, root: str | Path | None = None, persist: bool = True) -> dict | None:
+def next_task(book_id: str, *, root: str | Path | None = None,
+              persist: bool = False) -> dict | None:
+    """The single next task. Read-only unless `persist` is set.
+
+    Every command that changes a book already rewrites `tasks/open/` and
+    `book.json`'s `next_action`. `persist=True` (`next --persist`) does the
+    same on demand - for example after hand-editing a manuscript or brief, so
+    an agent reading files without a shell sees the current task.
+    """
     book = Book.load(book_id, root)
-    task = task_module.sync_open_task(book) if persist else task_module.next_task(book)
-    if task is None:
-        return None
-    book.save()
-    return task.to_dict()
+    if persist:
+        task = task_module.sync_open_task(book)
+        book.save()
+    else:
+        book.refresh_view()
+        task = task_module.next_task(book)
+    return task.to_dict() if task else None
 
 
 def get_task(book_id: str, task_id: str | None = None, *,
              root: str | Path | None = None) -> dict | None:
+    """A task in full: the current one by default, or a recorded one by id. Read-only."""
     book = Book.load(book_id, root)
     if task_id is None:
+        book.refresh_view()
         task = task_module.next_task(book)
         return task.to_dict() if task else None
     for directory in (book.paths.open_tasks_dir, book.paths.done_tasks_dir):
@@ -352,7 +366,7 @@ def unblock(book_id: str, *, root: str | Path | None = None) -> dict:
 
 
 def validate(book_id: str, *, root: str | Path | None = None) -> dict:
-    """Structural validation only - schemas, manifest integrity, checksums."""
+    """Structural validation only - schemas, manifest integrity, checksums. Read-only."""
     book = Book.load(book_id, root)
     problems: list[str] = []
     problems.extend(f"page manifest: {p}" for p in book.manifest.problems())
@@ -422,9 +436,10 @@ def qa(book_id: str, *, layers: list[str] | None = None,
     from bookfactory.qa.runner import run_qa
 
     book = Book.load(book_id, root)
-    report = run_qa(book, layers=layers)
-    task_module.sync_open_task(book)
-    return report
+    #: Writes the QA report (qa/reports/ and qa/latest.json) and nothing else.
+    #: Later stages depend on it; the stage and next task it unlocks are picked
+    #: up by `next`/`status` at once and recorded by the next mutating command.
+    return run_qa(book, layers=layers)
 
 
 def assemble(book_id: str, *, root: str | Path | None = None,
