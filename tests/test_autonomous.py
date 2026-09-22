@@ -220,7 +220,7 @@ def test_autonomous_approval_is_recorded_in_the_audit_trail(planned_book, worksp
 def _briefed_book(workspace, policy: str) -> Book:
     from tests.conftest import BRIEF
 
-    api.create_book("Test Book", book_id="test-book", root=workspace)
+    api.create_book("Test Book", policy="checkpointed", book_id="test-book", root=workspace)
     book = Book.load("test-book", workspace)
     book.paths.brief_file.write_text(BRIEF, encoding="utf-8")
     book.state.production_policy = production.policy_from_choice(policy)

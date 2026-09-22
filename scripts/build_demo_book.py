@@ -84,7 +84,9 @@ def build(*, clean: bool = True) -> Book:
         _force_remove(paths.root)
 
     step(1, "Create the project")
-    api.create_book(TITLE, book_id=BOOK_ID, root=REPO_ROOT, trim="6x9", colour=True,
+    # Checkpointed: every approval below is an explicit operator decision.
+    api.create_book(TITLE, policy="checkpointed", book_id=BOOK_ID, root=REPO_ROOT,
+                    trim="6x9", colour=True,
                     target_page_count=24,
                     subtitle="A field manual issued to persons who did not want one",
                     idea="A straight-faced field manual for someone who inherited a garden.")

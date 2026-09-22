@@ -90,7 +90,8 @@ def main() -> int:
 
 def _run(workspace: Path, book: Path) -> int:  # noqa: C901 - a checklist, read top to bottom
     step(1, "Create the project")
-    check("create", run(workspace, "create", "End To End", "--id", BOOK, "--pages", "24") == 0)
+    check("create", run(workspace, "create", "End To End", "--id", BOOK, "--pages", "24",
+                               "--policy", "checkpointed") == 0)
 
     step(2, "Inspect status")
     check("status", run(workspace, "status", BOOK) == 0)

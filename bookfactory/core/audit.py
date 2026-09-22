@@ -30,6 +30,8 @@ MEANINGFUL_EVENTS = {
     "preflight_run",
     "blocked",
     "unblocked",
+    "production_policy_recorded",
+    "production_policy_changed",
 }
 
 

@@ -60,7 +60,7 @@ class Book:
             raise BookNotFound(
                 f"No book '{book_id}' in {books_dir(root)}",
                 remedy=("Available books: " + ", ".join(available)) if available
-                else "Create one with `bookfactory create \"<Title>\"`.",
+                else "Create one with `bookfactory create \"<Title>\" --policy <choice>`.",
             )
         data = read_json(paths.state_file)
         schema.validate("book", data, context=str(paths.state_file))

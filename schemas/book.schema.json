@@ -89,7 +89,7 @@
       }
     },
     "production_policy": {
-      "description": "Explicit, recorded authorization for how far production may proceed without asking the operator. Set once, from the operator's own intake answer - never inferred from silence.",
+      "description": "Explicit, recorded authorization for how far production may proceed without asking the operator. Always the operator's own choice - at `create --policy`, at intake, or with `policy set` (see `source`) - never inferred from silence.",
       "type": "object",
       "additionalProperties": false,
       "properties": {

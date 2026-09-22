@@ -13,7 +13,7 @@ from bookfactory.core.models import BookState
 
 
 def test_create_book_writes_canonical_state(workspace):
-    result = api.create_book("Golf Addict", root=workspace, target_page_count=90)
+    result = api.create_book("Golf Addict", policy="checkpointed", root=workspace, target_page_count=90)
     assert result["book_id"] == "golf-addict"
 
     book = Book.load("golf-addict", workspace)
@@ -47,13 +47,13 @@ def test_state_round_trips_without_losing_anything(new_book):
 
 
 def test_duplicate_book_id_is_refused(workspace):
-    api.create_book("Test Book", book_id="test-book", root=workspace)
+    api.create_book("Test Book", policy="checkpointed", book_id="test-book", root=workspace)
     with pytest.raises(BookAlreadyExists):
-        api.create_book("Test Book", book_id="test-book", root=workspace)
+        api.create_book("Test Book", policy="checkpointed", book_id="test-book", root=workspace)
 
 
 def test_unknown_book_is_reported_with_what_is_available(workspace):
-    api.create_book("Test Book", book_id="test-book", root=workspace)
+    api.create_book("Test Book", policy="checkpointed", book_id="test-book", root=workspace)
     with pytest.raises(BookNotFound) as excinfo:
         Book.load("no-such-book", workspace)
     assert "test-book" in excinfo.value.remedy
@@ -61,7 +61,7 @@ def test_unknown_book_is_reported_with_what_is_available(workspace):
 
 def test_invalid_book_id_is_rejected(workspace):
     with pytest.raises(ValidationError):
-        api.create_book("Test", book_id="Not A Valid Id", root=workspace)
+        api.create_book("Test", policy="checkpointed", book_id="Not A Valid Id", root=workspace)
 
 
 def test_corrupt_state_file_is_rejected_not_guessed(new_book):
@@ -105,6 +105,7 @@ _KNOWN_EVENTS = {
     "visual_locked", "page_planned", "draft_submitted", "approved", "rejected",
     "revision_opened", "qa_run", "assembled", "review_generated", "preflight_run",
     "blocked", "unblocked", "cover_required", "cover_draft_submitted", "cover_approved",
+    "production_policy_recorded", "production_policy_changed",
 }
 
 

@@ -38,8 +38,34 @@ RETRY_LIMIT = 3
 _MAJOR_GATES = ("concept_lock", "voice_lock", "manuscript_lock", "release_ready")
 
 
-def policy_from_choice(choice: str) -> ProductionPolicy:
-    """The `ProductionPolicy` implied by the intake questionnaire's Q12 answer."""
+#: What recorded a book's policy. Each is an explicit operator choice - there
+#: is deliberately no source for "nobody said anything".
+POLICY_SOURCES = ("create_command", "intake_questionnaire", "policy_set_command")
+
+
+def policy_from_choice(choice: str, *, source: str | None = None) -> ProductionPolicy:
+    """The `ProductionPolicy` implied by an operator's explicit choice.
+
+    The choice is the same three-way answer wherever it is made: intake
+    question 12, `bookfactory create --policy`, or `bookfactory policy set`.
+    Given a `source`, the policy is also stamped with it and with the time it
+    was recorded, so every entry point records the same fields.
+    """
+    policy = _policy_for(choice)
+    if source is not None:
+        if source not in POLICY_SOURCES:
+            from bookfactory.core.errors import ValidationError
+
+            raise ValidationError(f"Unknown production policy source {source!r}",
+                                  remedy="Use one of: " + ", ".join(POLICY_SOURCES))
+        from bookfactory.core import clock
+
+        policy.authorized_at = clock.timestamp()
+        policy.source = source
+    return policy
+
+
+def _policy_for(choice: str) -> ProductionPolicy:
     choice = (choice or "").strip().lower()
     if choice == "autonomous":
         return ProductionPolicy(
@@ -121,5 +147,5 @@ def compute_mode(book, task) -> str:
 
 __all__ = [
     "CONTINUE_AUTOMATICALLY", "WAIT_FOR_OPERATOR", "REMEDIATE", "BLOCKED", "COMPLETE", "MODES",
-    "RETRY_LIMIT", "policy_from_choice", "is_autonomous", "compute_mode",
+    "RETRY_LIMIT", "POLICY_SOURCES", "policy_from_choice", "is_autonomous", "compute_mode",
 ]

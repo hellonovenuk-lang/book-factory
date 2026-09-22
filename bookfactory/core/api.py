@@ -23,6 +23,7 @@ from bookfactory.core.paths import books_dir
 __all__ = [
     "list_books", "create_book", "create_from_idea", "status", "next_task", "get_task",
     "plan_pages", "write_page_spec", "register_asset", "submit_asset", "submit_intake",
+    "show_policy", "set_policy",
     "approve", "reject", "revise",
     "lock", "advance", "validate", "render", "qa", "assemble", "review", "preflight",
     "audit_history", "relock",
@@ -59,9 +60,41 @@ def list_books(root: str | Path | None = None) -> list[dict]:
 # ----------------------------------------------------------------------
 
 
-def create_book(title: str, **kwargs) -> dict:
+def _require_policy_choice(policy: str | None) -> str:
+    """The operator's explicit policy choice, or a refusal that says how to give one."""
+    from bookfactory.core.intake import PRODUCTION_POLICIES
+
+    choice = (policy or "").strip().lower()
+    if not choice:
+        raise ValidationError(
+            "A production policy is required: the operator must choose one explicitly",
+            remedy="Pass policy= (CLI: --policy) as one of: " + ", ".join(PRODUCTION_POLICIES)
+                   + ". visual_checkpoint is recommended.",
+        )
+    if choice not in PRODUCTION_POLICIES:
+        raise ValidationError(f"Unknown production policy {policy!r}",
+                              remedy="Choose one of: " + ", ".join(PRODUCTION_POLICIES) + ".")
+    return choice
+
+
+def create_book(title: str, *, policy: str, **kwargs) -> dict:
+    """Start a book whose operator supplies every production detail up front.
+
+    `policy` is required - `checkpointed`, `visual_checkpoint` or
+    `autonomous` - because a book's autonomy is the operator's explicit
+    choice, never a default nobody picked (`AGENTS.md` section 3). It is
+    recorded as `production_policy` with source `create_command`.
+    """
+    from bookfactory.core import production
+
+    choice = _require_policy_choice(policy)
     root = kwargs.pop("root", None)
     book = Book.create(title, root=root, **kwargs)
+    recorded = production.policy_from_choice(choice, source="create_command")
+    book.state.production_policy = recorded
+    book.log("production_policy_recorded", production_policy=recorded.mode,
+             operator_authorized=recorded.operator_authorized, source=recorded.source)
+    book.save()
     task_module.sync_open_task(book)
     return {
         "book_id": book.state.book_id,
@@ -234,9 +267,11 @@ def register_asset(book_id: str, asset_id: str, *, root: str | Path | None = Non
 def submit_intake(book_id: str, answers: dict, *, root: str | Path | None = None) -> dict:
     """Persist the operator's one-time answers to the intake questionnaire.
 
-    This is the only way `book.json`'s `intake` and `production_policy` get
-    set. A fresh session never needs to ask again - it reads
-    `brief/intake.json` or `book.json`'s `intake` block instead.
+    This is the only way `book.json`'s `intake` gets set, and it records
+    `production_policy` from question 12 (`create_book` and `set_policy` are
+    the other two ways a policy is chosen). A fresh session never needs to ask
+    again - it reads `brief/intake.json` or `book.json`'s `intake` block
+    instead.
     """
     from bookfactory.core import intake as intake_module, production
 
@@ -253,9 +288,8 @@ def submit_intake(book_id: str, answers: dict, *, root: str | Path | None = None
     book.state.intake.completed = True
     book.state.intake.completed_at = clock.timestamp()
     book.state.intake.answers = dict(answers)
-    policy = production.policy_from_choice(answers["production_policy"])
-    policy.authorized_at = clock.timestamp()
-    policy.source = "intake_questionnaire"
+    policy = production.policy_from_choice(answers["production_policy"],
+                                           source="intake_questionnaire")
     book.state.production_policy = policy
     write_json(book.paths.brief_dir / "intake.json", {
         "answers": book.state.intake.answers,
@@ -266,6 +300,52 @@ def submit_intake(book_id: str, answers: dict, *, root: str | Path | None = None
     book.save()
     task_module.sync_open_task(book)
     return status(book_id, root=root)
+
+
+def show_policy(book_id: str, *, root: str | Path | None = None) -> dict:
+    """The book's recorded production policy and the current task's mode. Read-only."""
+    from dataclasses import asdict
+
+    book = Book.load(book_id, root)
+    book.refresh_view()
+    return {"book_id": book_id, "production_policy": asdict(book.state.production_policy),
+            "mode": book.state.production_mode}
+
+
+def set_policy(book_id: str, mode: str, *, by: str, reason: str | None = None,
+               root: str | Path | None = None) -> dict:
+    """Switch an existing book's production policy. Operator only.
+
+    This is how autonomy is granted (or withdrawn) after creation, so it is
+    never something an agent decides: `by` names the operator who chose it,
+    and the change - old mode, new mode, who, when and why - is written to
+    the audit log as `production_policy_changed`. The next task's `mode`
+    reflects the new policy at once.
+    """
+    from dataclasses import asdict
+
+    from bookfactory.core import production
+
+    if not (by or "").strip():
+        raise ValidationError("Changing a production policy needs the operator's name",
+                              remedy="Pass by= (CLI: --by <operator>).")
+    choice = _require_policy_choice(mode)
+    book = Book.load(book_id, root)
+    if book.state.intake.required and not book.state.intake.completed:
+        raise ValidationError(
+            "This book's intake questionnaire is not answered yet, and its answers set the policy",
+            remedy="Answer question 12 of the questionnaire (`bookfactory intake`) instead.",
+        )
+    previous = book.state.production_policy.mode
+    policy = production.policy_from_choice(choice, source="policy_set_command")
+    book.state.production_policy = policy
+    book.log("production_policy_changed", old_mode=previous, new_mode=policy.mode,
+             operator_authorized=policy.operator_authorized, by=by.strip(), reason=reason)
+    book.save()
+    task_module.sync_open_task(book)
+    return {"book_id": book_id, "previous_mode": previous,
+            "production_policy": asdict(policy), "mode": book.state.production_mode,
+            "next_action": book.state.next_action}
 
 
 # ----------------------------------------------------------------------

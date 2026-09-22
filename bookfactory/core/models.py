@@ -92,7 +92,9 @@ class ProductionPolicy:
     stop_on_soft_qa_failure: bool = True
     stop_on_hard_failure: bool = True
     authorized_at: str | None = None
-    #: What set this policy, e.g. "intake_questionnaire".
+    #: What set this policy: "create_command", "intake_questionnaire" or
+    #: "policy_set_command". None means the dataclass default - an older book
+    #: whose operator never chose a policy explicitly.
     source: str | None = None
 
 

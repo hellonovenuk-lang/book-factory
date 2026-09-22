@@ -183,7 +183,7 @@ def workspace(tmp_path: Path) -> Path:
 @pytest.fixture
 def new_book(workspace: Path) -> Book:
     """A book that has just been created and nothing else."""
-    api.create_book("Test Book", book_id="test-book", root=workspace,
+    api.create_book("Test Book", policy="checkpointed", book_id="test-book", root=workspace,
                     idea="A small book used to prove the production system works.")
     return Book.load("test-book", workspace)
 
@@ -191,7 +191,7 @@ def new_book(workspace: Path) -> Book:
 @pytest.fixture
 def locked_book(workspace: Path) -> Book:
     """A book with concept, voice, manuscript and visual style all locked."""
-    api.create_book("Test Book", book_id="test-book", root=workspace,
+    api.create_book("Test Book", policy="checkpointed", book_id="test-book", root=workspace,
                     idea="A small book used to prove the production system works.")
     book = Book.load("test-book", workspace)
     book.paths.brief_file.write_text(BRIEF, encoding="utf-8")

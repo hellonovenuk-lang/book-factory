@@ -28,6 +28,19 @@ Full walkthrough: docs/OPERATOR.md
 Agent rules:      AGENTS.md
 """
 
+POLICY_CHOICES = ["checkpointed", "visual_checkpoint", "autonomous"]
+
+POLICY_HELP = """\
+Production policies (how far production may go without asking the operator):
+
+  visual_checkpoint  recommended. Runs automatically, but stops for the operator
+                     at the visual lock and at the full-wrap cover.
+  checkpointed       stops for the operator at every approval and every lock.
+  autonomous         runs to the end, stopping only when genuinely blocked.
+
+Only the operator chooses a policy. An agent never picks one on their behalf.
+"""
+
 
 # ----------------------------------------------------------------------
 # Parser
@@ -63,8 +76,16 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("stages", parents=[common], help="Show the production stages in order.")
     sub.add_parser("doctor", parents=[common], help="Check that this machine can render and assemble.")
 
-    create = sub.add_parser("create", parents=[common], help="Start a new book project.")
+    create = sub.add_parser("create", parents=[common],
+                            formatter_class=argparse.RawDescriptionHelpFormatter,
+                            help="Start a new book project (--policy is required).",
+                            epilog=POLICY_HELP)
     create.add_argument("title")
+    # Not argparse-required: the API refuses a missing policy with a message
+    # that names the choices and the recommendation, in --json form too.
+    create.add_argument("--policy", choices=POLICY_CHOICES,
+                        help="REQUIRED. Production policy - the operator's explicit choice, "
+                             "no default. visual_checkpoint is recommended; see below.")
     create.add_argument("--id", dest="book_id", help="Book id (default: slug of the title).")
     create.add_argument("--idea", help="One sentence describing the book.")
     create.add_argument("--trim", default="6x9", help="Trim size key (default 6x9).")
@@ -91,6 +112,22 @@ def build_parser() -> argparse.ArgumentParser:
     create_idea.add_argument("--subtitle")
     create_idea.add_argument("--series")
     create_idea.add_argument("--profile", default="kdp-default", help="KDP profile id.")
+
+    policy = sub.add_parser("policy", parents=[common],
+                            help="Show or change a book's production policy (set: operator only).")
+    policy_sub = policy.add_subparsers(dest="policy_command", metavar="<subcommand>",
+                                       required=True)
+    policy_show = policy_sub.add_parser("show", parents=[common],
+                                        help="The recorded policy and current mode. Writes nothing.")
+    policy_show.add_argument("book")
+    policy_set = policy_sub.add_parser(
+        "set", parents=[common], formatter_class=argparse.RawDescriptionHelpFormatter,
+        help="Switch the book's policy. Operator only: this is how autonomy is granted.",
+        epilog=POLICY_HELP)
+    policy_set.add_argument("book")
+    policy_set.add_argument("mode", choices=POLICY_CHOICES)
+    policy_set.add_argument("--by", required=True, help="The operator making this choice.")
+    policy_set.add_argument("--reason", help="Why, for the audit log.")
 
     sub.add_parser("questionnaire", parents=[common],
                    help="Show the intake questionnaire, with no project needed.")
@@ -289,7 +326,8 @@ def cmd_list(args) -> int:
         out.emit_json(books)
         return 0
     if not books:
-        print("No books yet. Start one with:  bookfactory create \"Your Title\"")
+        print("No books yet. Start one with:  "
+              "bookfactory create \"Your Title\" --policy visual_checkpoint")
         return 0
     out.table(
         [[b["book_id"], b["title"] or "", b["stage_label"], b["updated_at"] or ""] for b in books],
@@ -354,6 +392,7 @@ def cmd_doctor(args) -> int:
 def cmd_create(args) -> int:
     result = api.create_book(
         args.title,
+        policy=args.policy,
         book_id=args.book_id,
         root=args.root,
         trim=args.trim,
@@ -373,6 +412,7 @@ def cmd_create(args) -> int:
     out.blank()
     out.field("path", result["path"])
     out.field("files", str(len(result["created_files"])))
+    out.field("policy", args.policy)
     out.blank()
     print("Next:")
     out.bullet(result["next_action"]["summary"] if result["next_action"] else "nothing", level="info")
@@ -397,6 +437,28 @@ def cmd_create_from_idea(args) -> int:
     out.blank()
     print("Next: " + (result["next_action"]["summary"] if result["next_action"] else "nothing"))
     print(f"  bookfactory next {result['book_id']}")
+    return 0
+
+
+def cmd_policy(args) -> int:
+    if args.policy_command == "show":
+        result = api.show_policy(args.book, root=args.root)
+    else:
+        result = api.set_policy(args.book, args.mode, by=args.by, reason=args.reason,
+                                root=args.root)
+    if args.json:
+        out.emit_json(result)
+        return 0
+    policy = result["production_policy"]
+    out.heading("PRODUCTION POLICY" if args.policy_command == "show" else "POLICY CHANGED")
+    if args.policy_command == "set":
+        out.field("was", result["previous_mode"])
+    out.field("policy", policy["mode"])
+    out.field("authorized", "yes" if policy["operator_authorized"] else "no")
+    out.field("source", policy["source"] or "default (never chosen explicitly)")
+    if policy["authorized_at"]:
+        out.field("recorded at", policy["authorized_at"])
+    out.field("next task", result["mode"].replace("_", " ").upper())
     return 0
 
 
@@ -913,6 +975,7 @@ COMMANDS = {
     "doctor": cmd_doctor,
     "create": cmd_create,
     "create-from-idea": cmd_create_from_idea,
+    "policy": cmd_policy,
     "questionnaire": cmd_questionnaire,
     "intake": cmd_intake,
     "status": cmd_status,
