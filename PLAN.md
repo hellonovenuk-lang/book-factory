@@ -11,13 +11,12 @@ here.
 
 ## Start here
 
-> **Doing:** Claude Code setup, Phase 2 (Planning and handing out work): all 7 tasks built, test-drive next.
-> **Finished:** `/plan-phase`, `/fan-out`, the three helpers (builder, checker, docs keeper), the guide `integrations/claude/WORKFLOW.md` with a cheat sheet in `CLAUDE.md`, and the usage rules. Phase 1 moved to `docs/PLAN-ARCHIVE.md`.
-> **Next action:** test-drive: run `/plan-phase` on Phase 3 with Kieran and go through the plan line by line.
+> **Doing:** Claude Code setup, Phase 3 (Safety checks and proof): planned, nothing built yet.
+> **Finished:** Phase 2, including its test-drive (`/plan-phase` planned Phase 3; operator agreed). Phase 2 moved to `docs/PLAN-ARCHIVE.md`.
+> **Next action:** run `/fan-out` for round 1 (tasks 3.2, 3.3, 3.4) after showing Kieran the one-line preview.
 
 **Unfinished, carried over:**
-- Phase 2 "Done when": the `/plan-phase` test-drive on Phase 3. New commands may only show up in a fresh session; if `/plan-phase` isn't recognised, start a new session and say "continue".
-- The helpers and `/fan-out` haven't been used for real yet; their first real use is Phase 3.
+- The helpers and `/fan-out` haven't been used for real yet; Phase 3 round 1 is their first use.
 
 **Don't try again:**
 - `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
@@ -48,38 +47,37 @@ itself: `docs/REVIEW-2026-09.md`.
 
 Phase 1: Foundations (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 2: Planning and handing out work (open: built, test-drive next)
+Phase 2: Planning and handing out work (done, see `docs/PLAN-ARCHIVE.md`)
 
-| # | Task | Files | Status |
-|---|---|---|---|
-| 2.1 | `/plan-phase`: turns an idea into a small phase; maps which files each task touches *before* any work is handed out; plain-words "Done when" | `.claude/skills/plan-phase/` | [x] |
-| 2.2 | `/fan-out` plus the standard brief (read first / files you may touch / parts / done when / decisions you made on your own); hands out only tasks whose files don't overlap | `.claude/skills/fan-out/` | [x] |
-| 2.3 | Helper *builder*: edits only the files its brief names; never commits, pushes, approves or locks | `.claude/agents/implementer.md` | [x] |
-| 2.4 | Helper *checker*: cannot edit; runs the checks and reports evidence | `.claude/agents/verifier.md` | [x] |
-| 2.5 | Helper *docs keeper*: the only helper that edits `AGENTS.md`, `docs/OPERATOR.md`, `integrations/*` | `.claude/agents/docs-sync.md` | [x] |
-| 2.6 | One-page guide, with the cheat sheet near the top of `CLAUDE.md` | `integrations/claude/WORKFLOW.md`, `CLAUDE.md` | [x] |
-| 2.7 | Usage rules for helpers: at most 3 at once; small jobs done by the main session instead; helpers on Sonnet by default, Opus only when the brief says the job is tricky; a turn limit (`maxTurns`) on every helper; `/fan-out` shows a one-line preview (how many helpers, which model, rough size) and waits for the operator's OK; finished phases moved out of `PLAN.md` (it loads into every session and helper, about 7,000 tokens of rules already); checker reports in plain English | `.claude/skills/fan-out/`, `.claude/agents/*.md`, `.claude/skills/handover/SKILL.md`, `integrations/claude/WORKFLOW.md` | [x] |
+## Phase 3: Safety checks and proof (open)
 
-**Test-drive:** use `/plan-phase` to plan Phase 3.
+Planned with `/plan-phase` on 2026-09-22; operator agreed every line.
 
-**Done when:**
-- [ ] Phase 3's plan is written here and the operator understands every line of it.
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 3.1 | `/verify-phase`: proves every "Done when" item with fresh command output. Runs `scripts/build_demo_book.py` on a throwaway copy of the repository, because it rewrites about 200 tracked demo files | main | `.claude/skills/verify-phase/SKILL.md` | [ ] |
+| 3.2 | Approval guard hook: before any Bash command, asks the operator if it runs `bookfactory approve / lock / policy set / reject / revise / cover approve / cover finalize / advance --force` (including disguised forms such as `python -m bookfactory ...` or chained commands); blocks Bash writes into `approved/` folders and the approved cover | helper: builder, **tricky (Opus)**: must catch disguised commands; a gap is a real risk | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` | [ ] |
+| 3.3 | Quick-check hook: after a `.py` or `.json` file is saved, checks it still parses | helper: builder, routine (Sonnet) | `.claude/hooks/quick-check.py`, `tests/test_hook_quick_check.py` | [ ] |
+| 3.4 | Session-start hook: in web sessions installs what the tests need (`pip install -e ".[dev]"`); always warns if not on `main`; shows "Start here" | helper: builder, routine (Sonnet) | `.claude/hooks/session-start.sh` | [ ] |
+| 3.5 | Settings: switches on the three hooks; forbids editing approved pages, assets and the approved cover; pre-approves safe read-only commands. The only task that edits the settings file, done after 3.2-3.4 | main | `.claude/settings.json` | [ ] |
+| 3.6 | Add the safety checks to the guide and glossary | main | `integrations/claude/WORKFLOW.md`, `GLOSSARY.md` | [ ] |
 
-## Phase 3: Safety checks and proof (not started)
+**Order:** round 1: helpers on 3.2, 3.3, 3.4 while the main session writes
+3.1. Round 2: main session does 3.5 and 3.6, then the checker checks
+everything.
 
-| # | Task | Files |
-|---|---|---|
-| 3.1 | `/verify-phase`: proves every "Done when" item with fresh command output; decides what to do about `build_demo_book.py` rewriting tracked demo files | `.claude/skills/verify-phase/` |
-| 3.2 | Ask the operator before `bookfactory approve / lock / policy set / reject / revise / cover approve / advance --force`; block Bash writes into approved folders | `.claude/hooks/guard-authority.py` |
-| 3.3 | Instant check that a saved `.py` or `.json` file isn't broken | `.claude/hooks/quick-check.py` |
-| 3.4 | Session start: in web sessions install what the tests need; always warn if not on `main`; show "Start here" | `.claude/hooks/session-start.sh` |
-| 3.5 | Permissions: never edit approved pages, assets or the approved cover; pre-approve safe read-only commands so helpers ask less | `.claude/settings.json` |
+**Note:** "Nothing is installed from outside the repository" (rules above)
+means Claude plugins and add-ons. The Python packages Book Factory's own
+tests need (listed in `pyproject.toml`) are fine to install.
 
 **Test-drive:** built with `/fan-out`, checked with `/verify-phase`, closed
 with `/handover`.
 
-**Done when:** the checker shows the tests passing, and a pretend "approve" is
-stopped and handed to the operator.
+**Done when:**
+- [ ] The checker shows all tests passing.
+- [ ] A pretend "approve" is stopped and handed to the operator.
+- [ ] A pretend write into an approved folder is blocked.
+- [ ] `/verify-phase` proves those three with fresh results.
 
 ## After Phase 3
 
@@ -117,5 +115,3 @@ Run the whole routine on one small, real Book Factory job from
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
-| 2026-09-22 | 2 | Header of every new command and helper file is valid | all 6 parsed OK |
-| 2026-09-22 | 2 | Every file the new guides point to exists | none missing |
