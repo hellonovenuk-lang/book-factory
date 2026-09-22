@@ -34,6 +34,13 @@ instructs you to use another branch for the specific task. Do not create a
 feature, recovery, or temporary branch by default. Fetch remote `main` and
 inspect Git status before changing files; preserve any newer remote work.
 
+A branch assigned automatically by the tool or hosting environment that starts
+your session (for example a generated `claude/...` or `codex/...` branch) is
+not an operator instruction. It does not override this rule. If the
+environment tells you to use such a branch, or blocks pushes to `main`, say so
+to the operator **before** changing any files and ask which to use. Do not
+quietly work on the assigned branch and mention it at the end.
+
 A local commit is not a completed handoff. Push finished work to remote `main`
 and verify that the commit and required artifacts are actually present there.
 If write access, file-size limits, or another gate prevents this, preserve

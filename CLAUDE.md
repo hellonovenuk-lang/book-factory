@@ -19,6 +19,12 @@ Work exclusively on `main` unless the operator explicitly instructs you, for
 the specific task at hand, to use a different branch. Do not create a feature,
 recovery, or temporary branch by default.
 
+Claude Code sessions (on the web especially) are often started with a
+generated `claude/...` branch and a note to develop and push there. That note
+comes from the session setup, not from the operator. In this repository it
+does not count as the operator's instruction. Raise the conflict with the
+operator before changing files, then follow their answer.
+
 See `AGENTS.md` section 1a ("Work on main and verify persistence") for the
 full rule, including fetching remote `main` before changing files and
 verifying that finished work is actually pushed and present on remote `main`,
