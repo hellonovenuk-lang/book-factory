@@ -11,12 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Claude Code setup, Phase 1 (Foundations): built, now being test-driven.
-> **Finished:** all Phase 1 files built and on GitHub `main`; task 2.7 (usage rules for helpers) added to Phase 2.
-> **Next action:** ask Kieran whether this summary matched where we left off; if yes, tick Phase 1's first "Done when" item and mark Phase 1 (done).
-
-**Unfinished, carried over:**
-- Phase 1 "Done when": the fresh-session test (a new session, told only "continue", explains where we are). This note is what that session should read.
+> **Doing:** Claude Code setup. Phase 1 (Foundations) is done; Phase 2 (Planning and handing out work) not started.
+> **Finished:** Phase 1, including the fresh-session test (passed 2026-09-22: a new session told only "continue" explained where we were).
+> **Next action:** start Phase 2 with task 2.1 (`/plan-phase`), unless Kieran picks a different Phase 2 task first.
 
 **Don't try again:**
 - `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
@@ -45,7 +42,7 @@ itself: `docs/REVIEW-2026-09.md`.
 
 ---
 
-## Phase 1: Foundations (open)
+## Phase 1: Foundations (done)
 
 Built directly by the main session, no helpers yet.
 
@@ -61,7 +58,7 @@ Built directly by the main session, no helpers yet.
 **Test-drive:** run `/handover`, open a fresh session, say only "continue".
 
 **Done when:**
-- [ ] The fresh session says where we are and what is next without being told.
+- [x] The fresh session says where we are and what is next without being told.
 - [x] All Phase 1 files are on GitHub's `main`.
 
 ## Phase 2: Planning and handing out work (not started)
@@ -138,3 +135,4 @@ Run the whole routine on one small, real Book Factory job from
 | 2026-09-22 | 1 | Only the intended files changed; personal settings are git-ignored | confirmed with `git status`, `git check-ignore` |
 | 2026-09-22 | 1 | Phase 1 commits are on GitHub `main` | local and remote both at `0ebf942` |
 | 2026-09-22 | 1 | `/handover` runs as a command in the session that created it | worked |
+| 2026-09-22 | 1 | Fresh session told only "continue" explains where we are | passed; operator confirmed the summary |
