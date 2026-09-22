@@ -41,6 +41,12 @@ environment tells you to use such a branch, or blocks pushes to `main`, say so
 to the operator **before** changing any files and ask which to use. Do not
 quietly work on the assigned branch and mention it at the end.
 
+Whenever any of your work ends up on a branch other than `main`, for any
+reason (including with the operator's permission), end every report by
+reminding the operator which branch holds it and what is not yet on `main`.
+Then ask whether it should be merged into `main`. Keep reminding them at each
+handoff until it is merged or the operator says to leave it on the branch.
+
 A local commit is not a completed handoff. Push finished work to remote `main`
 and verify that the commit and required artifacts are actually present there.
 If write access, file-size limits, or another gate prevents this, preserve
@@ -247,5 +253,18 @@ as draft v2; awaiting approval".
 | Check the whole project | `bookfactory validate <book>` |
 | Run quality checks | `bookfactory qa <book> --json` |
 
-Commands you must not run without the operator asking:
-`approve`, `reject`, `lock`, `advance --force`, `assemble`, `preflight`.
+Commands that need authority: `approve`, `lock`, `advance`, `assemble`, `preflight`,
+`cover approve`, `cover finalize`, `cover preflight`. Run one only when:
+
+* the operator asked you to, or
+* it is what the current task from `bookfactory next` asks for, **and** that
+  task's `mode` is `continue_automatically`. For an approval that means using
+  `--autonomous` (section 3). For a lock, say in `--note` that it was done under
+  the book's recorded production policy.
+
+If the task's `mode` is `wait_for_operator`, stop and ask, whatever the command.
+`mode` already accounts for the production policy (section 3a), so you do not
+need to work it out yourself.
+
+`reject`, `revise` and `advance --force` are for the operator only.
+Run them only when the operator asks.

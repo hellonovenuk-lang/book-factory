@@ -25,6 +25,10 @@ comes from the session setup, not from the operator. In this repository it
 does not count as the operator's instruction. Raise the conflict with the
 operator before changing files, then follow their answer.
 
+If any work does land on another branch, end every report by naming the
+branch and what is not on `main`, and ask whether to merge it into `main`.
+Keep asking until it is merged or the operator says to leave it.
+
 See `AGENTS.md` section 1a ("Work on main and verify persistence") for the
 full rule, including fetching remote `main` before changing files and
 verifying that finished work is actually pushed and present on remote `main`,

@@ -173,10 +173,18 @@ have" is a useful answer. A near miss is not.
   `--autonomous`, and only when the task's `mode` field actually says
   `continue_automatically` - see `AUTONOMOUS_PRODUCTION.md`.
 * Never write into `assets/approved/` or `pages/approved/`. The only way in is
-  `bookfactory approve`, run by the operator.
+  `bookfactory approve`: run by the operator, or by you with `--autonomous` when
+  the task's `mode` allows it.
 * Never regenerate an approved asset. If it needs changing, the operator runs
   `bookfactory revise` first.
-* Never run `lock`, `advance`, `assemble` or `preflight` unless asked.
+* Never run `lock`, `advance`, `assemble`, `preflight` or the cover approval, finalize and
+  preflight commands unless the operator asked, or the current task from
+  `bookfactory next` asks for it and its `mode` is `continue_automatically`.
+  Never run `advance --force`, `reject` or `revise` unless the
+  operator asks. See the end of `AGENTS.md`.
+* If your work ends up on a branch other than `main`, say so in every report
+  and ask whether to merge it into `main`, until it is merged or the operator
+  says to leave it (`AGENTS.md` section 1a).
 * Never generate a page's typography, page number, heading or table.
 * Never assume state from this conversation.
 
