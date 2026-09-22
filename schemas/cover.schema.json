@@ -51,10 +51,12 @@
       }
     },
     "approved": {
+      "description": "The finalized cover. `path` is the tracked, checksummed draft it was promoted from (read-only once approved); output/cover.pdf is only a regenerable upload copy. Records written before `path` existed resolve to the draft of the same revision when its sha256 matches.",
       "type": ["object", "null"],
       "required": ["revision", "sha256", "at", "by"],
       "properties": {
         "revision": {"type": "string"},
+        "path": {"type": "string"},
         "sha256": {"type": "string"},
         "at": {"type": "string"},
         "by": {"type": "string"},

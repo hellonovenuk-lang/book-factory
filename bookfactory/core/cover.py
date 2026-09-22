@@ -333,7 +333,9 @@ def finalize(book, revision: str) -> dict:
 
     Finalizing records no new decision: it carries the review approval's `by`
     and `authorization` forward unchanged, so it needs no `--autonomous` of its
-    own.
+    own. The approved PDF is the tracked, checksummed draft itself
+    (`approved.path`), made read-only like any approved artefact - never a
+    second stored copy. `output/cover.pdf` is only a regenerable upload copy.
     """
     if not book.paths.interior_pdf.is_file():
         raise ValidationError("Assemble the final interior before finalizing the cover")
@@ -353,37 +355,106 @@ def finalize(book, revision: str) -> dict:
     failures = check_pdf(book, source)
     if failures:
         raise ValidationError("Cover no longer passes checks: " + "; ".join(failures))
-    destination = book.paths.root / "output/cover.pdf"
-    destination.parent.mkdir(exist_ok=True)
-    if destination.exists():
-        history = book.paths.root / "cover/_history"
-        history.mkdir(exist_ok=True)
-        shutil.copy2(destination, history / f"cover-{data['approved']['revision']}.pdf")
-    shutil.copy2(source, destination)
+    checksums.make_immutable(source)
+    previous = (data.get("approved") or {}).get("revision")
     review = candidate["review_approval"]
     candidate["status"] = "approved"
-    data["approved"] = {"revision": revision, "sha256": candidate["sha256"],
-                        "at": clock.timestamp(), "by": review["by"]}
+    data["approved"] = {"revision": revision, "path": candidate["path"],
+                        "sha256": candidate["sha256"], "at": clock.timestamp(),
+                        "by": review["by"]}
     if review.get("authorization"):
         data["approved"]["authorization"] = review["authorization"]
     data["preflight"] = None
     save(book, data)
-    book.log("cover_approved", revision=revision, by=review["by"],
+    _write_upload_copy(book, source)
+    book.log("cover_approved", revision=revision, path=candidate["path"],
+             sha256=candidate["sha256"], by=review["by"], previous=previous,
              authorization=review.get("authorization"))
     book.save()
     return data["approved"]
+
+
+def output_path(book) -> Path:
+    """The regenerable upload copy of the approved cover (gitignored, like the interior)."""
+    return book.paths.output_dir / "cover.pdf"
+
+
+def _write_upload_copy(book, source: Path) -> None:
+    destination = output_path(book)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.exists():
+        checksums.unlock_for_system(destination)
+    shutil.copyfile(source, destination)
+
+
+def approved_file(book, data: dict | None = None) -> str | None:
+    """Book-relative path of the approved cover PDF, or None if nothing tracks it.
+
+    Approvals record `path`. Older approval records have none and pointed at
+    the gitignored `output/cover.pdf`; they resolve to the tracked draft of
+    the same revision when its recorded checksum matches the approval, which
+    is how every earlier finalize produced that file. Nothing is rewritten.
+    """
+    data = load(book) if data is None else data
+    approved = data.get("approved") or {}
+    if not approved:
+        return None
+    if approved.get("path"):
+        return approved["path"]
+    draft = next((d for d in data.get("drafts", [])
+                  if d["revision"] == approved.get("revision")), None)
+    if draft and draft.get("sha256") == approved.get("sha256"):
+        return draft["path"]
+    return None
+
+
+def integrity_problems(book) -> list[str]:
+    """Is the approved cover still present, tracked and unchanged? Read-only."""
+    if not required(book):
+        return []
+    data = load(book)
+    approved = data.get("approved")
+    if not approved:
+        return []
+    relative = approved_file(book, data)
+    if relative is None:
+        return [f"approved cover {approved['revision']}: no tracked copy is recorded - only the "
+                "gitignored output/cover.pdf, which a fresh clone does not have. Submit the "
+                "cover again and have it approved, so the approval points at cover/drafts/"]
+    file = book.paths.resolve(relative)
+    if not file.is_file():
+        return [f"approved cover {approved['revision']}: file missing ({relative})"]
+    actual = checksums.sha256_file(file)
+    if actual != approved["sha256"]:
+        return [f"approved cover {approved['revision']}: checksum mismatch for {relative} "
+                f"(expected {approved['sha256'][:12]}..., found {actual[:12]}...)"]
+    return []
+
+
+def relock(book) -> int:
+    """Re-apply read-only permissions to the approved cover after a checkout."""
+    relative = approved_file(book) if required(book) else None
+    file = book.paths.resolve(relative) if relative else None
+    if file and file.is_file() and not checksums.is_immutable(file):
+        checksums.make_immutable(file)
+        return 1
+    return 0
 
 
 def preflight(book) -> dict:
     data = load(book)
     if not data.get("approved"):
         raise ValidationError("The operator must approve the cover draft first")
-    file = book.paths.root / "output/cover.pdf"
-    problems = check_pdf(book, file)
-    if checksums.sha256_file(file) != data["approved"]["sha256"]:
-        problems.append("Cover PDF differs from approved draft")
+    problems = integrity_problems(book)
+    file = book.paths.resolve(approved_file(book, data)) if not problems else None
+    if file is not None:
+        problems = check_pdf(book, file)
+        # Regenerate the upload copy from the tracked approved file, e.g. after a fresh clone.
+        if (not output_path(book).is_file() or
+                checksums.sha256_file(output_path(book)) != data["approved"]["sha256"]):
+            _write_upload_copy(book, file)
     record = {"status": "fail" if problems else "pass", "errors": problems,
-              "cover_sha256": checksums.sha256_file(file),
+              "cover_sha256": checksums.sha256_file(file) if file else None,
               "page_count": dimensions(book)["page_count"], "run_at": clock.timestamp()}
     data["preflight"] = record
     save(book, data)
@@ -406,7 +477,7 @@ def _require_same_mode(data: dict, candidate: dict) -> str:
 def preflight_current(book) -> bool:
     data = load(book)
     report, approved = data.get("preflight") or {}, data.get("approved") or {}
-    return (report.get("status") == "pass" and
+    return (report.get("status") == "pass" and not integrity_problems(book) and
             report.get("cover_sha256") == approved.get("sha256") and
             report.get("page_count") == dimensions(book)["page_count"])
 

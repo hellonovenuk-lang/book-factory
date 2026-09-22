@@ -390,3 +390,74 @@ def test_finalize_carries_the_reviewed_authorization_forward(new_book, workspace
     assert task.task_id.endswith("cover-finalize")
     finalized = cover.finalize(Book.load("test-book", workspace), draft["revision"])
     assert finalized["authorization"] == "autonomous_production_policy:autonomous"
+
+
+# ----------------------------------------------------------------------
+# The approved cover lives at a tracked, checksummed path
+# ----------------------------------------------------------------------
+
+
+def _approved_text_only_cover(new_book, workspace):
+    book = _text_only_book(new_book)
+    draft = cover.submit(book, _wrap(book, workspace, "tracked.pdf"))
+    cover.approve(Book.load("test-book", workspace), draft["revision"], by="Operator")
+    return Book.load("test-book", workspace), draft
+
+
+def test_approved_cover_is_the_tracked_draft_with_its_checksum(new_book, workspace):
+    book, draft = _approved_text_only_cover(new_book, workspace)
+    approved = cover.load(book)["approved"]
+    assert approved["path"] == draft["path"] == "cover/drafts/cover-v1.pdf"
+    tracked = book.paths.resolve(approved["path"])
+    assert approved["sha256"] == checksums.sha256_file(tracked)
+    assert checksums.is_immutable(tracked)
+    # Stored once: no second tracked copy, and output/ holds only the upload copy.
+    assert not (book.paths.root / "cover/_history").exists()
+    assert checksums.sha256_file(cover.output_path(book)) == approved["sha256"]
+    assert api.status("test-book", root=workspace)["outputs"]["cover_pdf"] == approved["path"]
+    assert api.validate("test-book", root=workspace)["ok"]
+
+
+def test_fresh_clone_without_output_still_has_the_approved_cover(new_book, workspace):
+    book, _draft = _approved_text_only_cover(new_book, workspace)
+    cover.output_path(book).unlink()  # books/*/output/ is gitignored
+    assert api.validate("test-book", root=workspace)["ok"]
+    assert cover.preflight(book)["status"] == "pass"
+    assert cover.output_path(book).is_file()  # regenerated from the tracked file
+
+
+def test_validate_and_status_flag_a_missing_or_tampered_approved_cover(new_book, workspace):
+    book, draft = _approved_text_only_cover(new_book, workspace)
+    assert cover.preflight(book)["status"] == "pass"
+    tracked = book.paths.resolve(draft["path"])
+
+    checksums.unlock_for_system(tracked)
+    tracked.write_bytes(tracked.read_bytes() + b"%tampered")
+    result = api.validate("test-book", root=workspace)
+    assert not result["ok"]
+    assert any("checksum mismatch" in p and draft["path"] in p for p in result["problems"])
+    status = api.status("test-book", root=workspace)
+    assert any("approved cover" in p for p in status["approved_integrity"])
+    assert status["readiness"]["cover"] != "ready"
+    assert cover.preflight(Book.load("test-book", workspace))["status"] == "fail"
+
+    tracked.unlink()
+    result = api.validate("test-book", root=workspace)
+    assert any("file missing" in p and draft["path"] in p for p in result["problems"])
+
+
+def test_old_format_approval_without_a_path_still_loads(new_book, workspace):
+    book, draft = _approved_text_only_cover(new_book, workspace)
+    data = cover.load(book)
+    del data["approved"]["path"]  # as written before approvals recorded their file
+    cover.save(book, data)
+    book = Book.load("test-book", workspace)
+    assert cover.approved_file(book) == draft["path"]
+    assert api.validate("test-book", root=workspace)["ok"]
+    assert api.status("test-book", root=workspace)["outputs"]["cover_pdf"] == draft["path"]
+
+    # With no matching tracked draft, validate says so and how to fix it.
+    data["drafts"][0]["sha256"] = "0" * 64
+    cover.save(book, data)
+    problems = api.validate("test-book", root=workspace)["problems"]
+    assert any("no tracked copy" in p for p in problems)

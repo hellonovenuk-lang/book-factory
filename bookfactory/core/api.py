@@ -142,16 +142,21 @@ def status(book_id: str, *, root: str | Path | None = None) -> dict:
     book.refresh_view()
     summary = book.summary()
     summary["gates"] = _gate_summary(book)
-    summary["approved_integrity"] = book.verify_approved()
+    from bookfactory.core import cover, gates
+    summary["approved_integrity"] = book.verify_approved() + cover.integrity_problems(book)
     summary["qa"] = _qa_summary(book)
     summary["outputs"] = {
         "interior_pdf": (book.paths.relative(book.paths.interior_pdf)
                          if book.paths.interior_pdf.is_file() else None),
         "preflight": (book.latest_preflight() or {}).get("status"),
     }
-    from bookfactory.core import cover, gates
     summary["readiness"] = cover.readiness(book)
-    summary["outputs"]["cover_pdf"] = "output/cover.pdf" if (book.paths.root / "output/cover.pdf").is_file() else None
+    #: The approved cover is the tracked, checksummed file cover.json records;
+    #: output/cover.pdf is only its regenerable upload copy.
+    approved_cover = cover.approved_file(book) if cover.required(book) else None
+    summary["outputs"]["cover_pdf"] = (
+        approved_cover if approved_cover and book.paths.resolve(approved_cover).is_file()
+        else None)
     summary["outputs"]["cover_preflight"] = (cover.load(book).get("preflight") or {}).get("status")
     if summary["stage"] == stages.RELEASE_READY and not gates.release_ready(book).ok:
         summary["stage_label"] = "Cover pending (interior ready)"
@@ -452,6 +457,8 @@ def validate(book_id: str, *, root: str | Path | None = None) -> dict:
     problems.extend(f"page manifest: {p}" for p in book.manifest.problems())
     problems.extend(f"asset registry: {p}" for p in book.registry.problems())
     problems.extend(book.verify_approved())
+    from bookfactory.core import cover
+    problems.extend(cover.integrity_problems(book))
 
     for page in book.manifest:
         if page.spec:
@@ -485,7 +492,8 @@ def validate(book_id: str, *, root: str | Path | None = None) -> dict:
 
 def relock(book_id: str, *, root: str | Path | None = None) -> dict:
     book = Book.load(book_id, root)
-    count = book.relock_approved()
+    from bookfactory.core import cover
+    count = book.relock_approved() + cover.relock(book)
     return {"book_id": book_id, "relocked": count}
 
 
