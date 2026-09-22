@@ -186,7 +186,8 @@ have" is a useful answer. A near miss is not.
 * Never run `lock`, `advance`, `assemble`, `preflight` or the cover approval, finalize and
   preflight commands unless the operator asked, or the current task from
   `bookfactory next` asks for it and its `mode` is `continue_automatically`.
-  A lock you run on that basis uses `--autonomous`, like an approval.
+  A lock or `cover approve` you run on that basis uses `--autonomous`, like
+  an approval.
   Never run `advance --force`, `reject`, `revise` or `policy set` unless the
   operator asks. `policy set` is how autonomy is granted: never change a
   book's policy yourself. See the end of `AGENTS.md`.
@@ -219,10 +220,15 @@ barcode area, and review at print and Amazon thumbnail sizes. Submit the
 one-page PDF with `bookfactory cover submit`. In `visual_checkpoint` mode,
 stop at the full-wrap visual approval. After explicit operator approval,
 `bookfactory cover approve --draft vN --by <operator>` records the decision.
+Only in `autonomous` mode, when the cover-approval task's `mode` reads
+`continue_automatically`, may you approve it yourself, with
+`--by <agent> --autonomous`; it is refused under any other policy.
 If the draft used a checksummed preserved interior, its approval remains a
 review decision while assembly is pending. When the final interior has the
 same wrap dimensions, run `bookfactory cover finalize --draft vN` and then
 `bookfactory cover preflight`. Changed dimensions need a new draft and review.
+The approved cover is the tracked draft `cover/cover.json` names in
+`approved.path`, read-only and checksummed; never edit or replace it.
 If `cover/cover.json` records `"artwork": "none"`, the operator chose a
 text-only cover: skip the artwork, typeset the wrap from type and simple
 shapes, and submit it the same way. Never set that mode yourself to get past

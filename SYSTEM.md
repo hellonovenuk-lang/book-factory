@@ -180,10 +180,12 @@ books/<book-id>/
     approved/               approved artwork, read-only, checksummed
   cover/
     cover.json              print cover settings, drafts, approval, cover preflight
-    drafts/                 versioned full-wrap cover PDFs, never deleted
+    drafts/                 versioned full-wrap cover PDFs, never deleted; the
+                            approved one is read-only and checksummed in cover.json
   tasks/open|done/          the current task, and the ones it replaced
   qa/                       QA reports
-  output/                   interior.pdf, cover.pdf, review material (regenerable)
+  output/                   interior.pdf, cover.pdf (copy of the approved draft),
+                            review material (regenerable)
 ```
 
 `output/` and `pages/renders/` are gitignored. Everything else is canonical and

@@ -140,9 +140,25 @@ a lock the policy keeps as a checkpoint (the visual lock under
 `authorization: autonomous_production_policy:...` marker as an autonomous
 approval.
 
+The full-wrap cover works the same way. Only in `autonomous` mode does the
+cover-approval task read `continue_automatically`; inspect the wrap at print
+size and as an Amazon thumbnail, then:
+
+```bash
+bookfactory cover approve golf-addict --draft v1 --by <agent> --autonomous
+```
+
+It records the same `authorization: autonomous_production_policy:...` marker,
+on the cover and on the cover artwork it promotes. It is refused under
+`visual_checkpoint` (the cover is the operator's approval there) and
+`checkpointed`. `cover finalize` and `cover preflight` take no `--autonomous`:
+finalize records no new decision, only carrying the reviewed approval (and its
+marker) forward once the final interior matches, and preflight is a check.
+
 In `visual_checkpoint` mode, the visual-lock task's `mode` will read
 `wait_for_operator` even though everything else in the book runs
-automatically - show the small reference set and stop there, once.
+automatically - show the small reference set and stop there. The
+full-wrap cover approval is the only other stop.
 
 In `checkpointed` mode, every approval and every lock reads
 `wait_for_operator`. Behave exactly as `integrations/chatgpt/BOOK_FACTORY.md`
@@ -259,5 +275,7 @@ does exactly what this file describes from step 1.
 
 When `bookfactory next` returns nothing for a new print project, both
 `output/interior.pdf` and `output/cover.pdf` exist and have passed separate
-preflights. Existing books without an explicit cover configuration retain
+preflights. The approved cover itself is the tracked, checksummed
+`cover/drafts/cover-vN.pdf` that `cover/cover.json`'s `approved.path` names;
+`output/cover.pdf` is its regenerable upload copy. Existing books without an explicit cover configuration retain
 legacy interior-only behaviour until migrated.

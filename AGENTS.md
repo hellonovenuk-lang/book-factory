@@ -81,11 +81,13 @@ Silence is not approval. Enthusiasm is not approval.
 **The one exception**: a book whose recorded `production_policy` explicitly
 authorizes autonomous production (the operator chose this - at intake, with
 `bookfactory create --policy`, or with `bookfactory policy set` - not by
-saying nothing). Even then, `bookfactory approve` and `bookfactory lock`
-refuse `--autonomous` unless that authorization is actually on record, and
-every such approval or lock is written to the audit log as granted under it -
-never as an ordinary one. `lock --autonomous` also refuses a lock the policy
-keeps as a checkpoint (the visual lock under `visual_checkpoint`).
+saying nothing). Even then, `bookfactory approve`, `bookfactory lock` and
+`bookfactory cover approve` refuse `--autonomous` unless that authorization is
+actually on record, and every such approval or lock is written to the audit
+log as granted under it - never as an ordinary one. `lock --autonomous` and
+`cover approve --autonomous` also refuse what the policy keeps as a
+checkpoint (the visual lock and the full-wrap cover under
+`visual_checkpoint`).
 See `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` for the full contract.
 This does not relax the rule for a `checkpointed` book, and it never means
 "the operator probably would have said yes".
@@ -115,8 +117,10 @@ without `--policy`; if the operator has not said which, ask them
 
 ## 4. Never mutate approved work
 
-Anything under `pages/approved/` or `assets/approved/` is finished. Do not
-overwrite it, do not regenerate it, do not "just fix" it.
+Anything under `pages/approved/` or `assets/approved/` is finished, and so
+is the approved cover PDF (the `cover/drafts/` file that `cover/cover.json`'s
+`approved.path` names). Do not overwrite it, do not regenerate it, do not
+"just fix" it.
 
 If an approved page needs changing:
 
@@ -233,11 +237,23 @@ image the wrap does place must still reach 300 DPI.
 In `visual_checkpoint` mode, the full wrap is an explicit operator approval
 even if interior pages proceeded automatically. Do not run `cover approve` for
 them. Their explicit approval records the reviewed artwork and PDF together.
+Only under `autonomous` does the cover-approval task read
+`continue_automatically`; then approve with
+`bookfactory cover approve <book> --draft vN --by <agent> --autonomous`, which
+records `authorization: autonomous_production_policy:autonomous` (on the
+cover and on the artwork it promotes). It is refused under
+`visual_checkpoint` and `checkpointed`. `cover finalize` records no new
+decision - it carries the reviewed approval, and its `authorization`,
+forward - so it has no `--autonomous` of its own.
 For a provisional draft sized from a checksummed preserved interior,
 `cover approve` records visual approval while the final interior is pending.
 Once the assembled interior has matching dimensions, run
 `cover finalize --draft <revision>` and then `cover preflight`. A changed
 page count requires a revised draft and review. `status.readiness` distinguishes interior and cover.
+The approved cover is the tracked draft itself (`cover/drafts/cover-vN.pdf`,
+read-only, its sha256 in `cover/cover.json`'s `approved`); `output/cover.pdf`
+is only a regenerable upload copy, recreated by `cover preflight`. `validate`
+and `status` report an approved cover whose file is missing or changed.
 An old project without `cover/cover.json` remains legacy interior-only until
 `bookfactory cover init` migrates it. This command reopens a former
 `release_ready` project and logs why, preserving interior approval history.
@@ -279,9 +295,9 @@ Commands that need authority: `approve`, `lock`, `advance`, `assemble`, `preflig
 
 * the operator asked you to, or
 * it is what the current task from `bookfactory next` asks for, **and** that
-  task's `mode` is `continue_automatically`. For an approval or a lock that
-  means using `--autonomous` (section 3), so the audit log records it as made
-  under the book's recorded production policy.
+  task's `mode` is `continue_automatically`. For an approval, a lock or
+  `cover approve` that means using `--autonomous` (section 3), so the audit
+  log records it as made under the book's recorded production policy.
 
 If the task's `mode` is `wait_for_operator`, stop and ask, whatever the command.
 `mode` already accounts for the production policy (section 3a), so you do not

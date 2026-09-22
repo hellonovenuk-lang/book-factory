@@ -324,8 +324,21 @@ bookfactory cover approve <book> --draft vN --by '<operator>'
 bookfactory cover preflight <book>
 ```
 
-Approval preserves previous drafts, promotes their native artwork, and copies
-the chosen PDF to `output/cover.pdf`. The separate cover preflight checks the
+Under `autonomous`, an agent may approve the cover itself with
+`cover approve ... --autonomous`; the audit log and `cover/cover.json` then
+carry `authorization: autonomous_production_policy:autonomous`. That flag is
+refused under `visual_checkpoint` and `checkpointed`.
+
+Approval preserves previous drafts and promotes their native artwork. The
+approved cover is the chosen draft itself, `cover/drafts/cover-vN.pdf`: it is
+made read-only and `cover/cover.json` records its path and sha256 under
+`approved`, so it survives a fresh clone and is stored once. A copy is written
+to `output/cover.pdf` for upload; that copy is gitignored and `cover preflight`
+recreates it. `bookfactory validate` and `status` report an approved cover
+whose tracked file is missing or changed. An approval recorded before `path`
+existed resolves to the draft of the same revision when the checksums match;
+if none does, `validate` says so and the cover needs submitting and approving
+again. The separate cover preflight checks the
 final size, printable text, barcode clearance, and native image resolution at
 actual placement. A new submission never silently approves itself.
 
@@ -356,7 +369,8 @@ bookfactory advance golf-addict --to release_ready
 ```
 
 `output/interior.pdf` and `output/cover.pdf` are the two upload files for a
-cover-required print project. `status.readiness` reports their states separately.
+cover-required print project (the latter a copy of the tracked approved cover
+draft). `status.readiness` reports their states separately.
 
 ---
 
