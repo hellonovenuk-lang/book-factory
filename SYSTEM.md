@@ -228,7 +228,7 @@ The API surface was designed to map directly onto tool calls:
 
 | MCP tool | Function |
 | --- | --- |
-| `book_factory.create_book` | `api.create_book` |
+| `book_factory.create_book` | `api.create_book` (`policy` required) |
 | `book_factory.status` | `api.status` |
 | `book_factory.next_task` | `api.next_task` |
 | `book_factory.get_task` | `api.get_task` |

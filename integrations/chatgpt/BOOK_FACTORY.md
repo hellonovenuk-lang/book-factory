@@ -187,8 +187,9 @@ have" is a useful answer. A near miss is not.
   preflight commands unless the operator asked, or the current task from
   `bookfactory next` asks for it and its `mode` is `continue_automatically`.
   A lock you run on that basis uses `--autonomous`, like an approval.
-  Never run `advance --force`, `reject` or `revise` unless the
-  operator asks. See the end of `AGENTS.md`.
+  Never run `advance --force`, `reject`, `revise` or `policy set` unless the
+  operator asks. `policy set` is how autonomy is granted: never change a
+  book's policy yourself. See the end of `AGENTS.md`.
 * If your work ends up on a branch other than `main`, say so in every report
   and ask whether to merge it into `main`, until it is merged or the operator
   says to leave it (`AGENTS.md` section 1a).

@@ -70,10 +70,31 @@ Run `next`, do what it says, run `next` again. That is the job.
 ## 1. Start a project
 
 ```bash
-bookfactory create "Golf Addict" --pages 90
+bookfactory create "Golf Addict" --pages 90 --policy visual_checkpoint
 ```
 
-This creates `books/golf-addict/` with guided templates already in it. Every
+This creates `books/golf-addict/` with guided templates already in it.
+
+`--policy` is required - there is no default, because it decides how often
+production stops for you:
+
+| Policy | Stops for you |
+| --- | --- |
+| `visual_checkpoint` (recommended) | At the visual lock (the small reference set) and the full-wrap cover. Everything else runs. |
+| `checkpointed` | At every approval and every lock. |
+| `autonomous` | Only when production is genuinely blocked. |
+
+You can change your mind at any point:
+
+```bash
+bookfactory policy show golf-addict
+bookfactory policy set golf-addict checkpointed --by "Your Name" --reason "Want to see every page"
+```
+
+`policy set` records who changed it, when, why, and from what, in the audit
+log (`bookfactory history golf-addict --event production_policy_changed`),
+and the next task's `mode` follows the new policy straight away. It is yours
+to run: agents are told never to run it unless you ask. Every
 template has TODO markers; the system will not let you lock anything while
 they are still there.
 
@@ -384,10 +405,12 @@ never have to explain the history again.
 ## The one-line reference
 
 ```
-bookfactory create "Title"                     start a project (manual, every detail up front)
+bookfactory create "Title" --policy <p>        start a project (manual, every detail up front)
 bookfactory create-from-idea "One-line idea"   start a project (autonomous flow, questionnaire required)
 bookfactory questionnaire                      show the intake questionnaire
 bookfactory intake <book> --from-file a.json   persist the questionnaire answers, once
+bookfactory policy show <book>                 the recorded production policy
+bookfactory policy set <book> <p> --by <you>   change it (operator only, audited)
 bookfactory status <book>                      where it stands
 bookfactory next <book>                        what to do next
 bookfactory task <book>                        the current task in full

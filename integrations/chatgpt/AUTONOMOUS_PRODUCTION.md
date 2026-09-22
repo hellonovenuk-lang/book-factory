@@ -86,7 +86,9 @@ bookfactory intake golf-addict --from-file answers.json
 
 or with individual `--set key=value` pairs. This writes `brief/intake.json`,
 sets `book.json`'s `intake.completed`, and derives and records
-`production_policy` from question 12. **A fresh session must never need to ask
+`production_policy` from question 12. Never answer question 12 yourself, and
+never start the book with `bookfactory create --policy ...` to skip it: the
+policy is the operator's choice. **A fresh session must never need to ask
 this again.** If you are resuming a project, check `book.json`'s `intake`
 block first - if `completed` is true, do not ask.
 
@@ -145,6 +147,12 @@ automatically - show the small reference set and stop there, once.
 In `checkpointed` mode, every approval and every lock reads
 `wait_for_operator`. Behave exactly as `integrations/chatgpt/BOOK_FACTORY.md`
 already describes: submit, recommend, never approve.
+
+The operator can change a book's policy later with
+`bookfactory policy set <book> <mode> --by <operator>`, and `mode` follows it
+from the next task. That command is theirs alone: never run it unless they
+explicitly ask you to, and never suggest that a checkpoint is a reason to.
+If a checkpoint seems unnecessary, say so and let them decide.
 
 ## 5. Do not stop just because one task finished
 

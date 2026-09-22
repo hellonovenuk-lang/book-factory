@@ -26,8 +26,10 @@ Book Factory         holds canonical state, enforces the rules
 ChatGPT              reads state, drives the book task by task: writes,
                      generates artwork, submits drafts, and keeps going
                      wherever the recorded production policy allows
-You                  answer the intake once; approve or reject wherever the
-                     policy keeps a checkpoint (every approval if checkpointed)
+You                  choose the production policy (at intake, or
+                     `create --policy`; change it with `policy set`);
+                     approve or reject wherever the policy keeps a
+                     checkpoint (every approval if checkpointed)
 Book Factory         locks approved work, continues production
 ```
 

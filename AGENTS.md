@@ -79,7 +79,8 @@ command.
 Silence is not approval. Enthusiasm is not approval.
 
 **The one exception**: a book whose recorded `production_policy` explicitly
-authorizes autonomous production (the operator chose this at intake, not by
+authorizes autonomous production (the operator chose this - at intake, with
+`bookfactory create --policy`, or with `bookfactory policy set` - not by
 saying nothing). Even then, `bookfactory approve` and `bookfactory lock`
 refuse `--autonomous` unless that authorization is actually on record, and
 every such approval or lock is written to the audit log as granted under it -
@@ -102,7 +103,13 @@ re-deriving that judgement from the task's `type` or `approval_required`.
 A book started with `bookfactory create-from-idea` requires the intake
 questionnaire before anything else - `next` returns a `type: "intake"` task
 until it is answered. A book started with `bookfactory create` does not (its
-operator already supplied every production detail up front). Either way, once
+operator already supplied every production detail up front, including the
+required `--policy`).
+
+Never choose a production policy for the operator. `create` refuses to run
+without `--policy`; if the operator has not said which, ask them
+(`visual_checkpoint` is the recommended answer). `bookfactory policy show
+<book>` shows the recorded policy and is read-only. Either way, once
 `book.json`'s `intake.completed` is true, never ask again - read
 `brief/intake.json` instead.
 
@@ -254,6 +261,8 @@ as draft v2; awaiting approval".
 | You want to | Run |
 | --- | --- |
 | Start a book from one idea | `bookfactory create-from-idea "<idea>" --json` |
+| Start a book, every detail known | `bookfactory create "<title>" --policy <policy chosen by the operator>` |
+| See the recorded production policy | `bookfactory policy show <book> --json` |
 | See the intake questionnaire | `bookfactory questionnaire --json` |
 | Persist questionnaire answers | `bookfactory intake <book> --from-file <answers.json>` |
 | Know where the book is | `bookfactory status <book> --json` |
@@ -278,5 +287,11 @@ If the task's `mode` is `wait_for_operator`, stop and ask, whatever the command.
 `mode` already accounts for the production policy (section 3a), so you do not
 need to work it out yourself.
 
-`reject`, `revise` and `advance --force` are for the operator only.
-Run them only when the operator asks.
+`reject`, `revise`, `advance --force` and `policy set` are for the operator
+only. Run them only when the operator asks.
+
+`policy set <book> <mode> --by <operator>` is how autonomy is granted or
+withdrawn after a book is created. Never run it unless the operator
+explicitly asks for that change, in those terms - not to unblock yourself, not
+because a checkpoint seems unnecessary, and never with your own name in
+`--by`. Every change is audited as `production_policy_changed`.

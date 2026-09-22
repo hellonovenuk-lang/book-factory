@@ -58,9 +58,15 @@ bookfactory doctor        # check this machine can render and assemble
 Then start a book:
 
 ```bash
-bookfactory create "Golf Addict" --pages 90
+bookfactory create "Golf Addict" --pages 90 --policy visual_checkpoint
 bookfactory next golf-addict
 ```
+
+`--policy` is required, because how far production may run without you is
+your decision, never a default: `visual_checkpoint` (recommended) stops for
+you at the visual set and the cover, `checkpointed` at every approval and
+lock, `autonomous` only when genuinely blocked. Change it later with
+`bookfactory policy set golf-addict <policy> --by <you>`.
 
 `next` will always tell you the one thing to do. Do it, run `next` again.
 That is the whole operating loop.
