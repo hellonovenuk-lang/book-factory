@@ -49,7 +49,8 @@ PAPER = HexColor("#fbf8f1")
 YELLOW = HexColor("#f6dc45")
 CORAL = HexColor("#ed5a3a")
 
-c = canvas.Canvas(str(PDF), pagesize=(width, height), pageCompression=1)
+c = canvas.Canvas(str(PDF), pagesize=(width, height), pageCompression=1,
+                  initialFontName="Body")
 c.setTitle("The Runner’s Guide to Normal Conversation — text-only cover proposal v2")
 c.setAuthor(cover.load(BOOK)["author"])
 

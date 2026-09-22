@@ -11,7 +11,7 @@ approval. The operator chooses the cover and presses Publish.
 | --- | --- | --- |
 | Manuscript (interior) | `releases/interior-v3-publication-draft.pdf` | `675ff470d239e292e0f7f6433f7ae24a9d94cab234bec5399c695e33ca942d63` |
 | Cover, option A: illustrated (operator review-approved 2026-09-20) | `cover/drafts/cover-v1.pdf` | `93b1415a5720517fb0ca1f5b9c70247552b29759adc720ce26f102758e6b86fd` |
-| Cover, option B: text only (proposal, not approved) | `cover/proposals/cover-v2-text-only.pdf` | `c8f875697d0f1d8b690272d91b39d73b01b262434f9c92aa3210a0292aa24cf4` |
+| Cover, option B: text only (proposal, not approved) | `cover/proposals/cover-v2-text-only.pdf` | `6b4d1176fd8c23dddec11ef970f7f27ad626bf32616c87450b55d47fdc1557c4` |
 
 Upload **one** cover. Choose "Upload a cover you already have (print-ready
 PDF only)". Do not use Cover Creator.
