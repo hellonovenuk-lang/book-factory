@@ -124,7 +124,9 @@ Work through it in this order:
 4. **Save it to `output.destination`.**
 5. **Run `output.submit_command`** (or give it to the operator to run).
 6. **Tell the operator what you made and what you were unsure about.** Then
-   stop. The decision is theirs.
+   stop - the decision is theirs - unless you are running the book under
+   `AUTONOMOUS_PRODUCTION.md` and the next task's `mode` says
+   `continue_automatically`.
 
 ## The rule that matters most here
 
@@ -206,8 +208,6 @@ The same discipline applies to words:
    "it's not X, it's Y" shape, corporate vocabulary, three-part aphorisms used
    as rhythm. Write without them in the first place.
 
-## Handing back
-
 ## Print cover after interior preflight
 
 Read `cover/cover.json`, the locked visual bible and approved character and
@@ -225,10 +225,9 @@ same wrap dimensions, run `bookfactory cover finalize --draft vN` and then
 If `cover/cover.json` records `"artwork": "none"`, the operator chose a
 text-only cover: skip the artwork, typeset the wrap from type and simple
 shapes, and submit it the same way. Never set that mode yourself to get past
-missing artwork.
-Do not fabricate a
-free ISBN number or custom imprint.
+missing artwork. Do not fabricate a free ISBN number or custom imprint.
 
+## Handing back
 
 Finish with something a fresh session could verify:
 

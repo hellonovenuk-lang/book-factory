@@ -167,7 +167,8 @@ illustration task.
 ## 6a. Some constraints are measured, not judged
 
 A task's `constraints` block mixes two kinds of requirement. `min_pixels` and
-`readable_image` are measured on submission; a draft that fails one is kept and
+`readable_image` (and, for cover artwork, `min_height_pixels`) are measured on
+submission; a draft that fails one is kept and
 recorded, but it never becomes an approval task and `approve` will refuse it.
 `next` returns a remediation task naming the failure instead.
 

@@ -38,8 +38,9 @@ You create a project. You fill in a brief and lock it. You write a sample, agree
 the voice, and lock it. You write the manuscript and lock it. You get a small set
 of reference artwork approved and lock the visual style. Only then do you plan
 pages and produce them. Each page gets specified, illustrated, rendered and
-explicitly approved. Then quality checks, then assembly, then a KDP check. At
-every point, `bookfactory next` tells you what to do.
+explicitly approved. Then quality checks, then assembly, then a KDP check, then
+the full-wrap print cover. At every point, `bookfactory next` tells you what to
+do.
 
 ---
 

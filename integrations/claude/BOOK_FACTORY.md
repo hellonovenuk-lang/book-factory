@@ -40,8 +40,10 @@ Be clear which one you are doing, because the rules differ.
 You are using Book Factory to produce a book: writing briefs, manuscripts, page
 specs, planning pages, rendering, running QA.
 
-Follow `AGENTS.md` exactly. In particular: one task at a time, never approve,
-never touch approved artefacts, never skip a gate.
+Follow `AGENTS.md` exactly. In particular: one task at a time, never approve or
+lock on the operator's behalf (the only exception is `--autonomous` under a
+recorded production policy, `AGENTS.md` section 3), never touch approved
+artefacts, never skip a gate.
 
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.

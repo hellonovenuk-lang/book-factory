@@ -6,8 +6,9 @@ nothing more.
 
 | File | Use it when |
 | --- | --- |
-| `chatgpt/BOOK_FACTORY.md` | Using ChatGPT, mainly for artwork and art direction. |
-| `claude/BOOK_FACTORY.md` | Using Claude Code or Claude in a repository. |
+| `chatgpt/BOOK_FACTORY.md` | Using ChatGPT - the normal production operator - for any task, visual or written. |
+| `chatgpt/AUTONOMOUS_PRODUCTION.md` | ChatGPT running a whole book end to end: intake, production policy, when to keep going. |
+| `claude/BOOK_FACTORY.md` | Using Claude Code, which builds and maintains Book Factory itself. |
 
 **No business logic lives in these files.** Every rule they describe is enforced
 by the system itself - if an adapter disappeared tomorrow, nothing about how the
@@ -22,9 +23,11 @@ what is specific to how that assistant is used in practice.
 ```
 Claude Code          builds and maintains Book Factory
 Book Factory         holds canonical state, enforces the rules
-ChatGPT              reads state, takes visual tasks, generates artwork,
-                     submits drafts, hands control back
-You                  approve or reject
+ChatGPT              reads state, drives the book task by task: writes,
+                     generates artwork, submits drafts, and keeps going
+                     wherever the recorded production policy allows
+You                  answer the intake once; approve or reject wherever the
+                     policy keeps a checkpoint (every approval if checkpointed)
 Book Factory         locks approved work, continues production
 ```
 

@@ -106,8 +106,8 @@ if a record somehow claims a path another record already has.
 
 A book has exactly one stage, and it is recomputed from evidence on disk after
 every state change (`Book.autoadvance`); read-only commands report the same
-derived stage without recording it (`Book.derived_stage`). A stage is never a flag somebody
-remembered to set. Two kinds of stage are exempt: the four lock stages, which
+derived stage without recording it (`Book.derived_stage`). A stage is never a
+flag somebody remembered to set. Two kinds of stage are exempt: the four lock stages, which
 require an explicit `bookfactory lock`, and release ready, which is the
 operator's call.
 
@@ -126,7 +126,7 @@ bookfactory/
     registry.py   the asset registry
     tasks.py      the `next` engine - derives the next action from state alone
     models.py     typed views over the state files
-    stages.py     the nineteen production stages
+    stages.py     the twenty-one production stages
     checksums.py  SHA-256 and approved-artefact protection
     paths.py      the canonical on-disk layout, in one place
     schema.py     JSON Schema validation on read and write
@@ -178,9 +178,12 @@ books/<book-id>/
     registry.json           illustration assets and visual references
     drafts/<asset>/         candidate artwork
     approved/               approved artwork, read-only, checksummed
+  cover/
+    cover.json              print cover settings, drafts, approval, cover preflight
+    drafts/                 versioned full-wrap cover PDFs, never deleted
   tasks/open|done/          the current task, and the ones it replaced
   qa/                       QA reports
-  output/                   interior.pdf, review material (regenerable)
+  output/                   interior.pdf, cover.pdf, review material (regenerable)
 ```
 
 `output/` and `pages/renders/` are gitignored. Everything else is canonical and
@@ -189,7 +192,7 @@ belongs in version control.
 ## Schemas
 
 `schemas/` holds the published contract: book state, page manifest, page spec,
-asset registry, task, QA report. They are validated on write and on read, and
+asset registry, task, QA report, print cover. They are validated on write and on read, and
 they exist as plain JSON Schema so a non-Python tool - ChatGPT, a future MCP
 server - can check its own output before submitting it.
 

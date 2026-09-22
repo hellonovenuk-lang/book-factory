@@ -31,8 +31,8 @@ was built to replace.
 
 ## 1. Read the repository directly. Never trust conversation memory.
 
-Every step below assumes you can run the CLI or read the files in
-`AGENTS.md`'s "Route 1/2" sense. If this is a brand new chat and the user says
+Every step below assumes you can run the CLI or read the files directly - the
+"Route 1/2" of `integrations/chatgpt/BOOK_FACTORY.md`. If this is a brand new chat and the user says
 "continue Book Factory project golf-addict", do not ask what has happened -
 read it:
 
@@ -188,8 +188,8 @@ one, a representative editorial illustration, a representative chapter-opener
 illustration, and a diagram/graphic treatment if the book needs one. In
 autonomous mode, evaluate each against the visual bible and lock the set
 yourself (`bookfactory lock visual <book> --autonomous`) once every required
-item passes. In visual-checkpoint mode, stop and
-show this small set before mass-producing eighty more pages against it.
+item passes. In visual-checkpoint mode, stop and show this small set before
+mass-producing eighty more pages against it.
 
 ## 7. Generative vs deterministic references - do not mix them up
 
@@ -210,7 +210,8 @@ leak into a real illustration task by accident.
 at that artwork's *actual placement* on the page - a spot illustration needs
 far fewer pixels than a full-bleed one. The same number is enforced at
 submission, at approval, and in QA; there is no second, contradictory
-threshold anywhere in the system. So:
+threshold anywhere in the system. Cover artwork carries one more measured
+requirement, `min_height_pixels`, because its printed height is fixed too. So:
 
 - Generate at the size that comfortably clears `min_pixels` for the stated
   placement. A 1200px image is a completely valid submission for a 4-inch

@@ -655,7 +655,8 @@ def _cover_task(book) -> Task | None:
                      instructions=f"Operator visual checkpoint: inspect {draft['path']}. "
                                   f"If accepted, bookfactory cover approve {book.state.book_id} "
                                   f"--draft {draft['revision']} --by <operator>. "
-                                  "An agent must not approve for the operator.",
+                                  "An agent must not approve for the operator unless this "
+                                  "task's mode is continue_automatically (AGENTS.md 9a).",
                      approval_required=True, gate="cover_visual_checkpoint")
     if not cover.preflight_current(book):
         return _task(book, "cover-preflight", type="preflight",
