@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://book-factory/schemas/cover.schema.json",
+  "title": "Print cover",
+  "description": "cover/cover.json: the full-wrap print cover's settings, versioned drafts, approval and cover preflight. A book without this file is a legacy interior-only project.",
+  "type": "object",
+  "required": [
+    "required"
+  ],
+  "properties": {
+    "required": {
+      "type": "boolean"
+    },
+    "paper": {
+      "type": "string",
+      "enum": ["white", "cream"]
+    },
+    "finish": {
+      "type": "string",
+      "enum": ["matte", "glossy"]
+    },
+    "artwork": {
+      "description": "'native' (the default when absent): the wrap is built around registered cover-front-artwork, which must reach 300 DPI at its printed size. 'none': a deliberately text-only cover with no artwork asset; every other cover check still applies. Set it with `bookfactory cover artwork`, which records who chose it.",
+      "type": "string",
+      "enum": ["native", "none"]
+    },
+    "direction": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "back_copy": {
+      "type": "string"
+    },
+    "spine_text": {
+      "type": ["boolean", "string", "null"]
+    },
+    "artwork_width_in": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "artwork_height_in": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "drafts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/draft"
+      }
+    },
+    "approved": {
+      "type": ["object", "null"],
+      "required": ["revision", "sha256", "at", "by"]
+    },
+    "preflight": {
+      "type": ["object", "null"],
+      "required": ["status"]
+    },
+    "preview_interior": {
+      "type": ["object", "null"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string"}
+      }
+    }
+  },
+  "definitions": {
+    "draft": {
+      "type": "object",
+      "required": ["revision", "path"],
+      "properties": {
+        "revision": {
+          "type": "string",
+          "pattern": "^v[0-9]+$"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "artwork": {
+          "description": "The artwork mode the draft was checked under. Absent on drafts submitted before text-only covers existed, which were all 'native'.",
+          "type": "string",
+          "enum": ["native", "none"]
+        },
+        "artwork_sha256": {
+          "type": ["string", "null"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review_approved", "approved", "superseded"]
+        }
+      }
+    }
+  }
+}

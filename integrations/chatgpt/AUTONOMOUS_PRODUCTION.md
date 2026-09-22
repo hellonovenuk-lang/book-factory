@@ -153,7 +153,8 @@ idea -> intake -> brief -> concept lock -> outline -> writing sample -> voice
 lock -> manuscript -> manuscript lock -> visual bible -> visual references ->
 visual lock -> page plan -> page specs -> illustrations -> deterministic
 rendering -> QA -> assembly -> interior KDP preflight -> cover direction ->
-native cover art -> typeset full wrap -> visual checkpoint -> cover preflight
+native cover art (skipped only when the operator recorded a text-only cover)
+-> typeset full wrap -> visual checkpoint -> cover preflight
 -> release ready.
 
 Two things worth naming explicitly:

@@ -622,12 +622,17 @@ def _cover_task(book) -> Task | None:
         return _task(book, "cover-direction", type="authoring",
                      summary="Record the cover direction, paper, finish, author and back copy",
                      instructions="Fill cover/cover.json from intake and the locked visual bible. "
-                                  "Confirm paper and finish before calculating the spine.")
-    if asset is None:
+                                  "Confirm paper and finish before calculating the spine. "
+                                  "A text-only cover is the operator's choice, recorded with "
+                                  f"bookfactory cover artwork {book.state.book_id} --mode none "
+                                  "--by <operator>.")
+    #: A text-only cover the operator recorded has no artwork to register or draw.
+    native = cover.artwork_mode(data) == cover.NATIVE
+    if native and asset is None:
         return _task(book, "cover-register", type="authoring",
                      summary="Register cover-front-artwork with locked references",
                      instructions=f"Register as cover_artwork with references {refs}.")
-    if not asset.is_approved and not asset.reviewable_draft():
+    if native and not asset.is_approved and not asset.reviewable_draft():
         return _task(book, "cover-artwork", type="illustration",
                      summary="Produce native text-free cover artwork",
                      instructions="Match locked character and editorial references. No lettering, "

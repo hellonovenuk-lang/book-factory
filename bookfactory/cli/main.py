@@ -239,12 +239,20 @@ def build_parser() -> argparse.ArgumentParser:
 
     cover = sub.add_parser("cover", parents=[common], help="Manage a full-wrap print cover.")
     cover_sub = cover.add_subparsers(dest="cover_command", required=True)
-    for name in ("init", "dimensions", "submit", "approve", "finalize", "preflight"):
+    for name in ("init", "dimensions", "artwork", "submit", "approve", "finalize", "preflight"):
         operation = cover_sub.add_parser(name, parents=[common])
         operation.add_argument("book")
         if name == "init":
             operation.add_argument("--paper", choices=["white", "cream"], default="white")
             operation.add_argument("--finish", choices=["matte", "glossy"], default="matte")
+            operation.add_argument("--text-only", action="store_true", dest="text_only",
+                                   help="Record a text-only cover (no artwork asset).")
+        if name == "artwork":
+            operation.add_argument("--mode", choices=["native", "none"], required=True,
+                                   help="'none' records a text-only cover; 'native' needs "
+                                        "cover-front-artwork at 300 DPI.")
+            operation.add_argument("--by", required=True, help="Who chose it.")
+            operation.add_argument("--reason")
         if name == "submit":
             operation.add_argument("--file", required=True)
         if name in ("approve", "finalize"):
@@ -870,9 +878,12 @@ def cmd_cover(args) -> int:
     from bookfactory.core.book import Book
     book = Book.load(args.book, args.root)
     if args.cover_command == "init":
-        result = cover.initialize(book, paper=args.paper, finish=args.finish)
+        result = cover.initialize(book, paper=args.paper, finish=args.finish,
+                                  artwork=cover.TEXT_ONLY if args.text_only else cover.NATIVE)
     elif args.cover_command == "dimensions":
         result = cover.dimensions(book)
+    elif args.cover_command == "artwork":
+        result = cover.set_artwork(book, args.mode, by=args.by, reason=args.reason)
     elif args.cover_command == "submit":
         result = cover.submit(book, args.file)
     elif args.cover_command == "approve":

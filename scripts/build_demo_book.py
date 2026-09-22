@@ -34,7 +34,6 @@ import demo_content as content  # noqa: E402
 
 from bookfactory.core import api, cover  # noqa: E402
 from bookfactory.core.book import ASSET, PAGE, Book  # noqa: E402
-from bookfactory.core.jsonio import write_json  # noqa: E402
 from bookfactory.core.paths import BookPaths  # noqa: E402
 
 BOOK_ID = "demo-book"
@@ -251,7 +250,7 @@ def _build_cover() -> None:
                            "inherited garden. Palette and edge treatment from the locked "
                            "references. No lettering in the artwork."),
                 author=AUTHOR, back_copy=BACK_COPY)
-    write_json(cover.path(book), data)
+    cover.save(book, data)
     log("cover direction, author and back copy recorded in cover/cover.json")
 
     api.register_asset(BOOK_ID, cover.ART_ID, root=REPO_ROOT, kind="cover_artwork",

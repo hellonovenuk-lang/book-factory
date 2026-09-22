@@ -193,3 +193,104 @@ def test_provisional_cover_approval_waits_for_matching_final_interior(new_book, 
     _interior(book, 80)
     assert cover.finalize(book, draft["revision"])["by"] == "Operator"
     assert cover.preflight(book)["status"] == "pass"
+
+
+def _wrap(book, workspace, name, *, art=None, dpi_art_size=None):
+    """A full wrap with real embedded type, optionally placing an image on the front."""
+    dim = cover.dimensions(book)
+    wrap = workspace / name
+    font = f"CoverTest-{name}"
+    pdfmetrics.registerFont(TTFont(font, "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
+    pdf = canvas.Canvas(str(wrap), pagesize=(dim["width_in"]*72, dim["height_in"]*72))
+    pdf.setFont(font, 18)
+    pdf.drawString(6.6*72, 8*72, "Test Book")
+    pdf.drawString(6.6*72, .5*72, "A Writer")
+    pdf.drawString(.5*72, 5*72, "Gift for runners")
+    if art is not None:
+        pdf.drawImage(str(art), 7*72, 1.3*72, width=3.4*72, height=5.1*72)
+    pdf.save()
+    return wrap
+
+
+def _text_only_book(new_book):
+    _interior(new_book)
+    data = cover.load(new_book)
+    data.update(direction="Type only", author="A Writer", back_copy="Gift for runners")
+    cover.save(new_book, data)
+    cover.set_artwork(new_book, cover.TEXT_ONLY, by="Test Operator", reason="Operator choice")
+    return Book.load("test-book", new_book.paths.root.parent.parent)
+
+
+def test_text_only_cover_is_submitted_approved_and_preflighted_without_artwork(new_book, workspace):
+    book = _text_only_book(new_book)
+    assert book.registry.find(cover.ART_ID) is None
+    # No artwork steps: the next cover task is the layout itself.
+    assert tasks._cover_task(book).task_id.endswith("cover-layout")
+    draft = cover.submit(book, _wrap(book, workspace, "text-only.pdf"))
+    assert draft["artwork"] == "none" and draft["artwork_sha256"] is None
+    assert tasks._cover_task(Book.load("test-book", workspace)).gate == "cover_visual_checkpoint"
+    approved = cover.approve(Book.load("test-book", workspace), draft["revision"], by="Test Operator")
+    assert approved["by"] == "Test Operator"
+    book = Book.load("test-book", workspace)
+    assert cover.preflight(book)["status"] == "pass"
+    assert cover.readiness(book)["cover"] == "ready"
+    events = [r for r in api.audit_history("test-book", root=workspace)
+              if r["event"] == "cover_artwork_mode_set"]
+    assert events and events[0]["mode"] == "none" and events[0]["by"] == "Test Operator"
+
+
+def test_native_cover_still_requires_artwork(new_book, workspace):
+    _interior(new_book)
+    data = cover.load(new_book)
+    data.update(author="A Writer", back_copy="Gift for runners")
+    cover.save(new_book, data)
+    assert cover.artwork_mode(cover.load(new_book)) == "native"
+    failures = cover.check_pdf(new_book, _wrap(new_book, workspace, "no-art.pdf"))
+    assert "No reviewable native cover artwork" in failures
+    assert "Cover PDF contains no artwork image" in failures
+    with pytest.raises(ValidationError, match="native cover artwork"):
+        cover.submit(new_book, _wrap(new_book, workspace, "no-art-2.pdf"))
+
+
+def test_text_only_cover_still_holds_placed_images_to_300_dpi(new_book, workspace):
+    book = _text_only_book(new_book)
+    small = workspace / "small.png"
+    Image.new("RGB", (340, 510), "yellow").save(small)
+    failures = cover.check_pdf(book, _wrap(book, workspace, "low-dpi.pdf", art=small))
+    assert "Artwork below 300 DPI at actual PDF placement" in failures
+
+
+def test_changing_artwork_mode_supersedes_pending_drafts(new_book, workspace):
+    book = _text_only_book(new_book)
+    draft = cover.submit(book, _wrap(book, workspace, "switch.pdf"))
+    result = cover.set_artwork(Book.load("test-book", workspace), cover.NATIVE, by="Operator")
+    assert result["superseded"] == [draft["revision"]]
+    with pytest.raises(ValidationError, match="No reviewable cover draft"):
+        cover.approve(Book.load("test-book", workspace), draft["revision"], by="Operator")
+    # A draft recorded under the other mode is refused even if its status is hand-restored.
+    data = cover.load(book)
+    data["drafts"][0]["status"] = "draft"
+    cover.save(book, data)
+    with pytest.raises(ValidationError, match="artwork='none'"):
+        cover.approve(Book.load("test-book", workspace), draft["revision"], by="Operator")
+
+
+def test_artwork_mode_must_be_a_known_value(new_book):
+    with pytest.raises(ValidationError):
+        cover.set_artwork(new_book, "text", by="Operator")
+    with pytest.raises(ValidationError):
+        cover.set_artwork(new_book, cover.TEXT_ONLY, by=" ")
+    data = cover.load(new_book)
+    data["artwork"] = "None"
+    with pytest.raises(ValidationError, match="cover.schema.json"):
+        cover.save(new_book, data)
+
+
+def test_cli_records_text_only_cover(new_book, workspace, capsys):
+    from bookfactory.cli.main import main as cli
+
+    assert cli(["cover", "artwork", "test-book", "--mode", "none", "--by", "Operator",
+                "--root", str(workspace)]) == 0
+    assert cover.text_only(Book.load("test-book", workspace))
+    with pytest.raises(SystemExit):  # --by is required: the choice must name who made it
+        cli(["cover", "artwork", "test-book", "--mode", "native", "--root", str(workspace)])

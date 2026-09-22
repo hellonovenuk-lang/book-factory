@@ -307,6 +307,22 @@ the chosen PDF to `output/cover.pdf`. The separate cover preflight checks the
 final size, printable text, barcode clearance, and native image resolution at
 actual placement. A new submission never silently approves itself.
 
+A cover with no artwork - type and simple vector shapes only - is a recorded
+choice, not a missing file:
+
+```bash
+bookfactory cover artwork <book> --mode none --by '<operator>' --reason '...'
+```
+
+That sets `"artwork": "none"` in `cover/cover.json` (see
+`schemas/cover.schema.json`) and logs `cover_artwork_mode_set`. `next` then
+skips registering and drawing `cover-front-artwork`, and submission and
+approval no longer look for it. Everything else is checked as before: wrap
+size, selectable title/author/back copy, embedded fonts, safety margins, the
+barcode zone, and 300 DPI for any image the wrap does contain. Switching mode
+supersedes drafts still awaiting review and clears the cover preflight, so
+submit a new draft afterwards. `--mode native` switches back.
+
 For an older interior-only project, run `bookfactory cover init <book>` to
 opt into this new gate. If it was already `release_ready`, that command logs a
 move back to `cover_production`. Its prior interior and approvals stay intact.

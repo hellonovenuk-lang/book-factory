@@ -217,6 +217,10 @@ If the draft used a checksummed preserved interior, its approval remains a
 review decision while assembly is pending. When the final interior has the
 same wrap dimensions, run `bookfactory cover finalize --draft vN` and then
 `bookfactory cover preflight`. Changed dimensions need a new draft and review.
+If `cover/cover.json` records `"artwork": "none"`, the operator chose a
+text-only cover: skip the artwork, typeset the wrap from type and simple
+shapes, and submit it the same way. Never set that mode yourself to get past
+missing artwork.
 Do not fabricate a
 free ISBN number or custom imprint.
 

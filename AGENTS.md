@@ -211,6 +211,13 @@ when it safely fits, and back copy as real selectable type. Reserve the KDP
 barcode area and check the wrap at print size and the front as a thumbnail.
 Submit a versioned draft with `bookfactory cover submit`.
 
+A text-only cover (no artwork at all) is the operator's decision, never a
+shortcut when artwork is late. It is recorded with
+`bookfactory cover artwork <book> --mode none --by <operator>`, which writes
+`"artwork": "none"` to `cover/cover.json` and logs who chose it. Only the
+artwork steps are then skipped; every other cover check still applies, and any
+image the wrap does place must still reach 300 DPI.
+
 In `visual_checkpoint` mode, the full wrap is an explicit operator approval
 even if interior pages proceeded automatically. Do not run `cover approve` for
 them. Their explicit approval records the reviewed artwork and PDF together.

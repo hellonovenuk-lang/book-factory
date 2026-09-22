@@ -23,6 +23,7 @@ SCHEMA_FILES = {
     "asset": "asset.schema.json",
     "task": "task.schema.json",
     "qa-report": "qa-report.schema.json",
+    "cover": "cover.schema.json",
 }
 
 

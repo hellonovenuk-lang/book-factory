@@ -2,6 +2,13 @@
 
 Projects created before this feature have no cover/cover.json and remain legacy
 interior-only projects until explicitly migrated with `cover init`.
+
+A cover is either built around native artwork (`"artwork": "native"`, the
+default) or is deliberately text-only (`"artwork": "none"`). The choice is
+recorded in cover/cover.json and the audit log by `set_artwork`; it is never
+inferred from a missing file. A text-only cover skips only the artwork steps -
+the wrap size, real selectable type, font embedding, barcode and safety checks
+all still apply, and any image it does contain must still reach 300 DPI.
 """
 
 from __future__ import annotations
@@ -13,13 +20,16 @@ from pathlib import Path
 from PIL import Image
 from pypdf import PdfReader
 
-from bookfactory.core import checksums, clock
+from bookfactory.core import checksums, clock, schema
 from bookfactory.core.errors import ValidationError
 from bookfactory.core.jsonio import read_json, write_json
 
 BLEED = .125
 SPINE_PER_PAGE = {"white": .002252, "cream": .0025}
 ART_ID = "cover-front-artwork"
+NATIVE = "native"
+TEXT_ONLY = "none"
+ARTWORK_MODES = (NATIVE, TEXT_ONLY)
 
 
 def path(book) -> Path:
@@ -27,24 +37,46 @@ def path(book) -> Path:
 
 
 def load(book) -> dict:
-    return read_json(path(book)) if path(book).is_file() else {}
+    if not path(book).is_file():
+        return {}
+    data = read_json(path(book))
+    schema.validate("cover", data, context=str(path(book)))
+    return data
+
+
+def save(book, data: dict) -> None:
+    schema.validate("cover", data, context=str(path(book)))
+    write_json(path(book), data)
+
+
+def artwork_mode(data: dict) -> str:
+    """`native` unless the cover explicitly records that it has no artwork."""
+    return data.get("artwork") or NATIVE
+
+
+def text_only(book) -> bool:
+    return artwork_mode(load(book)) == TEXT_ONLY
 
 
 def required(book) -> bool:
     return bool(load(book).get("required"))
 
 
-def initialize(book, *, paper: str = "white", finish: str = "matte") -> dict:
+def initialize(book, *, paper: str = "white", finish: str = "matte",
+               artwork: str = NATIVE) -> dict:
     if paper not in SPINE_PER_PAGE or finish not in ("matte", "glossy"):
         raise ValidationError("Choose KDP white/cream paper and matte/glossy finish")
+    if artwork not in ARTWORK_MODES:
+        raise ValidationError(f"Unknown cover artwork mode {artwork!r}",
+                              remedy="Use 'native' or 'none' (text-only).")
     if path(book).exists():
         raise ValidationError("Cover already configured")
-    data = {"required": True, "paper": paper, "finish": finish,
+    data = {"required": True, "paper": paper, "finish": finish, "artwork": artwork,
             "direction": "", "author": "", "back_copy": "",
             "artwork_width_in": 3.4, "artwork_height_in": 5.1,
             "drafts": [], "approved": None, "preflight": None}
-    write_json(path(book), data)
-    book.log("cover_required", paper=paper, finish=finish)
+    save(book, data)
+    book.log("cover_required", paper=paper, finish=finish, artwork=artwork)
     # Older print books must be explicitly reopened for cover production.
     from bookfactory.core import stages
     if book.state.stage == stages.RELEASE_READY:
@@ -80,6 +112,38 @@ def dimensions(book) -> dict:
             "trim_width_in": trim_w, "trim_height_in": trim_h, "bleed_in": BLEED}
 
 
+def set_artwork(book, mode: str, *, by: str, reason: str | None = None) -> dict:
+    """Record whether the cover uses native artwork or is text-only.
+
+    This is the operator's design decision, so it names who made it. Switching
+    supersedes any draft still awaiting review or finalization - it was checked
+    under the other mode - and clears the cover preflight, so the change can
+    never carry an old result through to release.
+    """
+    if mode not in ARTWORK_MODES:
+        raise ValidationError(f"Unknown cover artwork mode {mode!r}",
+                              remedy="Use 'native' or 'none' (text-only).")
+    if not (by or "").strip():
+        raise ValidationError("Name who chose the cover artwork mode with --by")
+    if not required(book):
+        raise ValidationError("Enable cover production with cover init")
+    data = load(book)
+    previous = artwork_mode(data)
+    superseded = []
+    if previous != mode:
+        for draft in data["drafts"]:
+            if draft["status"] in ("draft", "review_approved"):
+                draft["status"] = "superseded"
+                superseded.append(draft["revision"])
+        data["preflight"] = None
+    data["artwork"] = mode
+    save(book, data)
+    book.log("cover_artwork_mode_set", mode=mode, previous=previous, by=by, reason=reason,
+             superseded=superseded)
+    book.save()
+    return {"artwork": mode, "previous": previous, "superseded": superseded}
+
+
 def artwork_constraints(book) -> dict:
     data = load(book)
     return {"embedded_text": False, "maintain_character_identity": True,
@@ -109,6 +173,7 @@ def _artwork(book):
 
 def check_pdf(book, file: str | Path) -> list[str]:
     data, dim = load(book), dimensions(book)
+    has_artwork = artwork_mode(data) == NATIVE
     problems = []
     pdf = PdfReader(str(file))
     if len(pdf.pages) != 1:
@@ -121,12 +186,13 @@ def check_pdf(book, file: str | Path) -> list[str]:
     for value in (book.state.title, data.get("author"), data.get("back_copy")):
         if not value or "".join(c for c in value.casefold() if c.isalnum()) not in extracted:
             problems.append(f"Missing selectable cover type: {str(value)[:50]}")
-    asset, artwork = _artwork(book)
-    if not artwork:
-        problems.append("No reviewable native cover artwork")
-    else:
-        problems.extend(f["message"] for f in book.check_asset_constraints(
-            asset, book.paths.resolve(artwork.path)))
+    if has_artwork:
+        asset, artwork = _artwork(book)
+        if not artwork:
+            problems.append("No reviewable native cover artwork")
+        else:
+            problems.extend(f["message"] for f in book.check_asset_constraints(
+                asset, book.paths.resolve(artwork.path)))
     if data.get("spine_text") and (dim["page_count"] < 79 or dim["spine_in"]-.125 < 7/72):
         problems.append("Spine text cannot fit KDP's page count, 7 pt minimum and fold clearances")
     try:
@@ -155,8 +221,10 @@ def check_pdf(book, file: str | Path) -> list[str]:
                         if box.intersects(barcode):
                             problems.append("Type enters the KDP barcode zone")
             images = page.get_images(full=True)
-            if not images:
+            if has_artwork and not images:
                 problems.append("Cover PDF contains no artwork image")
+            # A text-only cover needs no image, but any it does place is held
+            # to the same print resolution and barcode clearance.
             for image in images:
                 for box in page.get_image_rects(image[0]):
                     if min(image[2]*72/box.width, image[3]*72/box.height) < 299.99:
@@ -188,12 +256,14 @@ def submit(book, file: str | Path) -> dict:
     for prior in data["drafts"]:
         if prior["status"] in ("draft", "review_approved"):
             prior["status"] = "superseded"
-    asset, art = _artwork(book)
+    mode = artwork_mode(data)
+    art = _artwork(book)[1] if mode == NATIVE else None
     record = {"revision": revision, "path": book.paths.relative(output),
-              "sha256": checksums.sha256_file(output), "artwork_sha256": art.sha256,
+              "sha256": checksums.sha256_file(output), "artwork": mode,
+              "artwork_sha256": art.sha256 if art else None,
               "status": "draft", "submitted_at": clock.timestamp(), "dimensions": dimensions(book)}
     data["drafts"].append(record)
-    write_json(path(book), data)
+    save(book, data)
     book.log("cover_draft_submitted", revision=revision, path=record["path"])
     book.save()
     return record
@@ -208,18 +278,20 @@ def approve(book, revision: str, *, by: str) -> dict:
         raise ValidationError("No reviewable cover draft with that revision")
     source = book.paths.resolve(candidate["path"])
     checksums.verify(source, candidate["sha256"])
-    asset, art = _artwork(book)
-    if not art or art.sha256 != candidate["artwork_sha256"]:
-        raise ValidationError("Cover artwork changed since draft submission")
+    mode = _require_same_mode(data, candidate)
+    if mode == NATIVE:
+        asset, art = _artwork(book)
+        if not art or art.sha256 != candidate["artwork_sha256"]:
+            raise ValidationError("Cover artwork changed since draft submission")
     failures = check_pdf(book, source)
     if failures:
         raise ValidationError("Cover no longer passes checks: " + "; ".join(failures))
-    if not asset.approved:
+    if mode == NATIVE and not asset.approved:
         book.approve("asset", ART_ID, revision=art.revision, by=by,
                      note=f"Explicit operator cover approval {revision}")
     candidate["status"] = "review_approved"
     candidate["review_approval"] = {"at": clock.timestamp(), "by": by}
-    write_json(path(book), data)
+    save(book, data)
     book.log("cover_visual_approved", revision=revision, by=by,
              provisional=not book.paths.interior_pdf.is_file())
     book.save()
@@ -241,9 +313,11 @@ def finalize(book, revision: str) -> dict:
         raise ValidationError("Final interior dimensions changed; submit a resized cover for review")
     source = book.paths.resolve(candidate["path"])
     checksums.verify(source, candidate["sha256"])
-    asset, art = _artwork(book)
-    if not asset or not asset.approved or asset.approved.sha256 != candidate["artwork_sha256"]:
-        raise ValidationError("Approved cover artwork changed since review")
+    if _require_same_mode(data, candidate) == NATIVE:
+        asset, _art = _artwork(book)
+        if (not asset or not asset.approved or
+                asset.approved.sha256 != candidate["artwork_sha256"]):
+            raise ValidationError("Approved cover artwork changed since review")
     failures = check_pdf(book, source)
     if failures:
         raise ValidationError("Cover no longer passes checks: " + "; ".join(failures))
@@ -258,7 +332,7 @@ def finalize(book, revision: str) -> dict:
     data["approved"] = {"revision": revision, "sha256": candidate["sha256"],
                         "at": clock.timestamp(), "by": candidate["review_approval"]["by"]}
     data["preflight"] = None
-    write_json(path(book), data)
+    save(book, data)
     book.log("cover_approved", revision=revision, by=candidate["review_approval"]["by"])
     book.save()
     return data["approved"]
@@ -276,9 +350,21 @@ def preflight(book) -> dict:
               "cover_sha256": checksums.sha256_file(file),
               "page_count": dimensions(book)["page_count"], "run_at": clock.timestamp()}
     data["preflight"] = record
-    write_json(path(book), data)
+    save(book, data)
     book.save()
     return record
+
+
+def _require_same_mode(data: dict, candidate: dict) -> str:
+    """A draft is only reviewable under the artwork mode it was checked against."""
+    mode = artwork_mode(data)
+    if (candidate.get("artwork") or NATIVE) != mode:
+        raise ValidationError(
+            f"Cover draft {candidate['revision']} was submitted as "
+            f"artwork={candidate.get('artwork') or NATIVE!r}, but the cover is now "
+            f"artwork={mode!r}",
+            remedy="Submit a new cover draft under the current artwork mode.")
+    return mode
 
 
 def preflight_current(book) -> bool:
