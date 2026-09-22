@@ -6,9 +6,14 @@ Run from the repository root:
     python scripts/build_demo_book.py
 
 It walks the entire production process - brief, locks, references, page plan,
-specs, artwork, rendering, approval, a revision, QA, assembly, review and
-preflight - so the fixture in `books/demo-book/` is always reproducible rather
-than a directory somebody once hand-made.
+specs, artwork, rendering, approval, a revision, QA, assembly, review,
+preflight and the full-wrap print cover - so the fixture in `books/demo-book/`
+is always reproducible rather than a directory somebody once hand-made.
+
+The script plays the operator as well as the producing agent, so it runs the
+commands that need the operator's authority (`approve`, `lock`, `cover
+approve`, `advance`). Those steps are labelled as the operator's. An agent
+driving a real book must not copy them - see AGENTS.md sections 3 and 9a.
 
 This script is a fixture builder. It is not part of Book Factory and nothing in
 `bookfactory/` imports it.
@@ -27,13 +32,19 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 import demo_art  # noqa: E402
 import demo_content as content  # noqa: E402
 
-from bookfactory.core import api  # noqa: E402
+from bookfactory.core import api, cover  # noqa: E402
 from bookfactory.core.book import ASSET, PAGE, Book  # noqa: E402
+from bookfactory.core.jsonio import write_json  # noqa: E402
 from bookfactory.core.paths import BookPaths  # noqa: E402
 
 BOOK_ID = "demo-book"
 TITLE = "The Reluctant Gardener"
 OPERATOR = "demo-operator"
+AUTHOR = "The Garden Standards Office"
+BACK_COPY = ("You did not ask for a garden. The garden did not ask for you. This "
+             "field manual sets out the minimum standard of care expected of the "
+             "subject, and the tests the subject will fail.")
+
 
 #: The finished book is left with exactly one open illustration task, so a fresh
 #: ChatGPT session can be handed the repository and asked to produce real
@@ -208,11 +219,14 @@ def build(*, clean: bool = True) -> Book:
         if check["status"] != "pass":
             log(f"  {check['check']}: {check['message']}")
 
-    step(16, "Mark release ready")
+    step(16, "Produce, approve and preflight the full-wrap print cover")
+    _build_cover()
+
+    step(17, "Mark release ready (operator's step)")
     if preflight["status"] != "fail":
         api.advance(BOOK_ID, "release_ready", by=OPERATOR, root=REPO_ROOT)
 
-    step(17, "Leave one illustration task open for the cross-agent smoke test")
+    step(18, "Leave one illustration task open for the cross-agent smoke test")
     api.revise(BOOK_ID, SMOKE_TEST_ASSET, kind=ASSET, root=REPO_ROOT, by=OPERATOR,
                reason=("Cross-agent visual smoke test: the subject's posture reads as "
                        "relaxed rather than resigned."))
@@ -227,6 +241,89 @@ def build(*, clean: bool = True) -> Book:
     print(f"Demo book built: stage {book.state.stage_label}, "
           f"{len(book.manifest)} pages, {len(book.registry)} assets.")
     return book
+
+
+def _build_cover() -> None:
+    """Walk the cover tasks `bookfactory next` hands out, in order (AGENTS.md 9a)."""
+    book = Book.load(BOOK_ID, REPO_ROOT)
+    data = cover.load(book)
+    data.update(direction=("Deadpan field-manual cover: the subject's back, one mug, one "
+                           "inherited garden. Palette and edge treatment from the locked "
+                           "references. No lettering in the artwork."),
+                author=AUTHOR, back_copy=BACK_COPY)
+    write_json(cover.path(book), data)
+    log("cover direction, author and back copy recorded in cover/cover.json")
+
+    api.register_asset(BOOK_ID, cover.ART_ID, root=REPO_ROOT, kind="cover_artwork",
+                       title="Front cover artwork",
+                       description="Native, text-free front cover illustration.",
+                       references=book.required_reference_ids())
+    book = Book.load(BOOK_ID, REPO_ROOT)
+    needed = cover.artwork_constraints(book)
+    art = _make_art(cover.ART_ID, needed["min_pixels"] + 30,
+                    round((needed["min_pixels"] + 30) * needed["min_height_pixels"]
+                          / needed["min_pixels"]))
+    api.submit_asset(BOOK_ID, cover.ART_ID, art, kind=ASSET, root=REPO_ROOT,
+                     source="demo-fixture", note="Synthetic placeholder cover artwork.")
+    log(f"cover artwork submitted: {cover.ART_ID}")
+
+    book = Book.load(BOOK_ID, REPO_ROOT)
+    wrap = _typeset_cover(book, art)
+    draft = cover.submit(book, wrap)
+    log(f"cover draft {draft['revision']} submitted: {draft['path']}")
+
+    # The operator's step. In a real book only the operator runs `cover approve`
+    # (AGENTS.md 9a); this script is standing in for them.
+    book = Book.load(BOOK_ID, REPO_ROOT)
+    approved = cover.approve(book, draft["revision"], by=OPERATOR)
+    log(f"cover {approved['revision']} approved by {approved['by']} (operator's step)")
+
+    book = Book.load(BOOK_ID, REPO_ROOT)
+    report = cover.preflight(book)
+    log(f"cover preflight: {report['status']}")
+    for problem in report["errors"]:
+        log(f"  {problem}")
+
+
+def _typeset_cover(book: Book, art: Path) -> Path:
+    """Set the full wrap as real, embedded type around the native artwork.
+
+    Uses WeasyPrint, which the page renderer already depends on and which
+    embeds (subsets of) every font it uses - the cover gate checks for that.
+    """
+    from html import escape
+
+    from weasyprint import HTML
+
+    dim = cover.dimensions(book)
+    data = cover.load(book)
+    back_fold = dim["bleed_in"] + dim["trim_width_in"]
+    front_fold = back_fold + dim["spine_in"]
+    margin = .5
+    front_width = dim["trim_width_in"] + dim["bleed_in"] - 2 * margin
+    html = f"""<!doctype html><html><head><style>
+      @page {{ size: {dim["width_in"]}in {dim["height_in"]}in; margin: 0; }}
+      body {{ margin: 0; font-family: "DejaVu Sans", sans-serif; color: #1c1a17;
+              background: #fbf8f1; }}
+      .box {{ position: absolute; }}
+      .title {{ left: {front_fold + margin}in; top: {margin}in; width: {front_width}in;
+                font-size: 24pt; text-align: center; }}
+      .art {{ left: {front_fold + margin + (front_width - data["artwork_width_in"]) / 2}in;
+              top: 1.7in; width: {data["artwork_width_in"]}in;
+              height: {data["artwork_height_in"]}in; }}
+      .author {{ left: {front_fold + margin}in; top: {dim["height_in"] - 1}in;
+                 width: {front_width}in; font-size: 12pt; text-align: center; }}
+      .back {{ left: {margin}in; top: {margin}in; width: {back_fold - 2 * margin}in;
+               font-size: 11pt; line-height: 1.4; }}
+    </style></head><body>
+      <div class="box title">{escape(book.state.title)}</div>
+      <img class="box art" src="{art.resolve().as_uri()}">
+      <div class="box author">{escape(data["author"])}</div>
+      <div class="box back">{escape(data["back_copy"])}</div>
+    </body></html>"""
+    path = REPO_ROOT / ".demo-art" / "cover-wrap.pdf"
+    HTML(string=html, base_url=str(REPO_ROOT)).write_pdf(str(path))
+    return path
 
 
 def _make_art(asset_id: str, width: int, height: int) -> Path:
