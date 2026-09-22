@@ -118,6 +118,7 @@ Every command takes `--json` for agents. `bookfactory --help` lists the rest.
 | `integrations/chatgpt/BOOK_FACTORY.md` | Paste into ChatGPT when using it for artwork. |
 | `integrations/claude/BOOK_FACTORY.md` | For Claude sessions. |
 | `docs/RENDERING.md` | How pages are rendered, and how to debug a layout. |
+| `docs/REVIEW-2026-09.md` | Production speed review, the ranked improvement plan, and which books to make first. |
 
 ## Requirements
 
