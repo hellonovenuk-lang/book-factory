@@ -10,13 +10,18 @@ approval. The operator chooses the cover and presses Publish.
 | KDP field | File | SHA-256 |
 | --- | --- | --- |
 | Manuscript (interior) | `releases/interior-v3-publication-draft.pdf` | `675ff470d239e292e0f7f6433f7ae24a9d94cab234bec5399c695e33ca942d63` |
-| Cover, option A: illustrated (operator review-approved 2026-09-20) | `cover/drafts/cover-v1.pdf` | `93b1415a5720517fb0ca1f5b9c70247552b29759adc720ce26f102758e6b86fd` |
-| Cover, option B: text only (proposal, not approved) | `cover/proposals/cover-v2-text-only.pdf` | `6b4d1176fd8c23dddec11ef970f7f27ad626bf32616c87450b55d47fdc1557c4` |
+| **Cover (chosen): text only** | `cover/proposals/cover-v2-text-only.pdf` | `6b4d1176fd8c23dddec11ef970f7f27ad626bf32616c87450b55d47fdc1557c4` |
+| Cover, not used: illustrated v1 (review-approved 2026-09-20) | `cover/drafts/cover-v1.pdf` | `93b1415a5720517fb0ca1f5b9c70247552b29759adc720ce26f102758e6b86fd` |
 
-Upload **one** cover. Choose "Upload a cover you already have (print-ready
-PDF only)". Do not use Cover Creator.
+**Cover decision:** on 2026-09-22 Kieran Smith chose the text-only cover for
+the KDP upload. This is recorded in `audit.jsonl` as `cover_decision`. It is not a
+Book Factory `cover approve`: that gate currently requires native cover
+artwork, so the project's cover record still lists v1.
 
-Option B is rebuilt with `python books/runners-guide-to-normal-conversation/cover/build_cover_text_v2.py`
+Choose "Upload a cover you already have (print-ready PDF only)". Do not use
+Cover Creator.
+
+The text-only cover is rebuilt with `python books/runners-guide-to-normal-conversation/cover/build_cover_text_v2.py`
 from the repository root. Its fonts (Anton and Archivo Black, SIL Open Font
 Licence, so commercial use and embedding are allowed) are in `cover/fonts/`.
 
@@ -34,7 +39,7 @@ Interior (checked 2026-09-22 against `bookfactory/kdp/profiles/kdp-default.json`
 Covers: both are single full-wrap PDFs, 12.430 × 9.250 in (6 × 9 trim,
 0.180 in spine for 80 white pages, 0.125 in bleed). They have selectable
 embedded type, nothing on the spine, and a clear barcode area on the back.
-Option B passes Book Factory's cover check except for "contains no artwork
+The text-only cover passes Book Factory's cover check except for "contains no artwork
 image". That failure is expected, because it is text only by design.
 
 ## 3. KDP form - Paperback details
@@ -43,7 +48,7 @@ image". That failure is expected, because it is text only by design.
 | --- | --- |
 | Language | English |
 | Book title | The Runner's Guide to Normal Conversation |
-| Subtitle | **Option B:** A Rehabilitation Manual for Runners Who Can No Longer Answer a Simple Question. **Option A:** leave blank (KDP wants any subtitle printed on the cover to match this field) |
+| Subtitle | A Rehabilitation Manual for Runners Who Can No Longer Answer a Simple Question. It must match the subtitle printed on the cover |
 | Series | Leave blank for now. Add it once a second title in the series exists |
 | Edition number | Leave blank |
 | Author | Kieran Smith |
@@ -92,8 +97,8 @@ image". That failure is expected, because it is text only by design.
 | Publication date | Leave blank |
 | Print options | Black & white interior, white paper. Trim 6 × 9 in. Bleed: No bleed. Cover finish: Matte |
 | Manuscript | Upload the interior PDF above |
-| Cover | Upload the chosen cover PDF above |
-| AI-generated content | Answer honestly for how this book was made. If ChatGPT drafted the text, answer **Yes** for text. The illustrations were generated, so answer **Yes** for images. For option B the cover has no generated images, but the interior still does. Amazon does not show buyers this answer |
+| Cover | Upload `cover/proposals/cover-v2-text-only.pdf` |
+| AI-generated content | Answer honestly for how this book was made. If ChatGPT drafted the text, answer **Yes** for text. The illustrations were generated, so answer **Yes** for images. The cover has no generated images, but the interior does. Amazon does not show buyers this answer |
 
 Then open the **Print Previewer** and check every page, the spine and the barcode area.
 
@@ -115,7 +120,7 @@ It pays much less per copy and is not needed for Amazon gift sales.
 
 ## 6. Order of work (aim: on sale by mid-October)
 
-1. Pick the cover, A or B.
+1. ~~Pick the cover.~~ Done: text only.
 2. Create the paperback in KDP, fill in sections 3-5, and run the Print Previewer.
 3. **Order a printed proof** from the Paperback content page before you publish.
    It arrives in about a week. Check the cover colour, the illustration
@@ -127,9 +132,9 @@ It pays much less per copy and is not needed for Amazon gift sales.
 
 ## 7. Open decisions for the operator
 
-- **Which cover.** Option A was review-approved on 2026-09-20. Option B is a proposal.
+- ~~**Which cover.**~~ Decided 2026-09-22: text only.
 - **Interior illustrations.** The 25 interior images use the same illustration
-  style as cover option A. If you dislike that style, decide whether that
+  style as the unused illustrated cover. If you dislike that style, decide whether that
   matters inside the book, where the jokes carry it, before you publish.
   Replacing them is a larger job.
 - **AI disclosure answers** for text and images (section 4).
