@@ -306,6 +306,11 @@ def build_parser() -> argparse.ArgumentParser:
             operation.add_argument("--draft", required=True)
         if name == "approve":
             operation.add_argument("--by", required=True)
+            operation.add_argument("--autonomous", action="store_true",
+                                   help="Record this approval as granted under the book's "
+                                        "autonomous-production authorization. Refused unless "
+                                        "the policy is FULL AUTONOMOUS: under visual_checkpoint "
+                                        "the cover is the operator's approval.")
 
     history = sub.add_parser("history", parents=[common], help="Show the audit log.")
     history.add_argument("book")
@@ -959,7 +964,7 @@ def cmd_cover(args) -> int:
     elif args.cover_command == "submit":
         result = cover.submit(book, args.file)
     elif args.cover_command == "approve":
-        result = cover.approve(book, args.draft, by=args.by)
+        result = cover.approve(book, args.draft, by=args.by, autonomous=args.autonomous)
     elif args.cover_command == "finalize":
         result = cover.finalize(book, args.draft)
     else:

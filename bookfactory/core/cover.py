@@ -269,9 +269,32 @@ def submit(book, file: str | Path) -> dict:
     return record
 
 
-def approve(book, revision: str, *, by: str) -> dict:
-    if not by.strip():
-        raise ValidationError("The operator must explicitly identify cover approval")
+def approval_authorization(book, autonomous: bool) -> str | None:
+    """The audit marker for a cover approval, refusing `autonomous` unless it is on record.
+
+    The same marker as an autonomous page or asset approval or lock, so the
+    audit log never shows a cover an agent approved under the recorded policy
+    as an ordinary operator approval. Refused whenever the policy keeps the
+    cover for the operator (`visual_checkpoint`, AGENTS.md 9a).
+    """
+    if not autonomous:
+        return None
+    from bookfactory.core import gates
+    result = gates.autonomous_cover_approval_authorized(book)
+    if not result.ok:
+        raise ValidationError(
+            "This book's production_policy does not authorize an autonomous cover approval",
+            problems=result.reasons,
+            remedy=("Ask the operator to approve the full wrap explicitly (without "
+                    "--autonomous). Only FULL AUTONOMOUS lets an agent approve the cover."),
+        )
+    return f"autonomous_production_policy:{book.state.production_policy.mode}"
+
+
+def approve(book, revision: str, *, by: str, autonomous: bool = False) -> dict:
+    authorization = approval_authorization(book, autonomous)
+    if not (by or "").strip():
+        raise ValidationError("Name who approved the cover with --by")
     data = load(book)
     candidate = next((d for d in data["drafts"] if d["revision"] == revision), None)
     if not candidate or candidate["status"] != "draft":
@@ -287,22 +310,31 @@ def approve(book, revision: str, *, by: str) -> dict:
     if failures:
         raise ValidationError("Cover no longer passes checks: " + "; ".join(failures))
     if mode == NATIVE and not asset.approved:
-        book.approve("asset", ART_ID, revision=art.revision, by=by,
-                     note=f"Explicit operator cover approval {revision}")
+        book.approve("asset", ART_ID, revision=art.revision, by=by, autonomous=autonomous,
+                     note=(f"Autonomous cover approval {revision}" if authorization else
+                           f"Explicit operator cover approval {revision}"))
     candidate["status"] = "review_approved"
     candidate["review_approval"] = {"at": clock.timestamp(), "by": by}
+    if authorization:
+        candidate["review_approval"]["authorization"] = authorization
     save(book, data)
     book.log("cover_visual_approved", revision=revision, by=by,
-             provisional=not book.paths.interior_pdf.is_file())
+             provisional=not book.paths.interior_pdf.is_file(), authorization=authorization)
     book.save()
     if not book.paths.interior_pdf.is_file():
         return {"revision": revision, "by": by, "status": "review_approved",
-                "awaiting": "final_interior_and_cover_finalization"}
+                "awaiting": "final_interior_and_cover_finalization",
+                **({"authorization": authorization} if authorization else {})}
     return finalize(book, revision)
 
 
 def finalize(book, revision: str) -> dict:
-    """Promote an operator-approved draft only after final interior sizing agrees."""
+    """Promote a review-approved draft only after final interior sizing agrees.
+
+    Finalizing records no new decision: it carries the review approval's `by`
+    and `authorization` forward unchanged, so it needs no `--autonomous` of its
+    own.
+    """
     if not book.paths.interior_pdf.is_file():
         raise ValidationError("Assemble the final interior before finalizing the cover")
     data = load(book)
@@ -328,12 +360,16 @@ def finalize(book, revision: str) -> dict:
         history.mkdir(exist_ok=True)
         shutil.copy2(destination, history / f"cover-{data['approved']['revision']}.pdf")
     shutil.copy2(source, destination)
+    review = candidate["review_approval"]
     candidate["status"] = "approved"
     data["approved"] = {"revision": revision, "sha256": candidate["sha256"],
-                        "at": clock.timestamp(), "by": candidate["review_approval"]["by"]}
+                        "at": clock.timestamp(), "by": review["by"]}
+    if review.get("authorization"):
+        data["approved"]["authorization"] = review["authorization"]
     data["preflight"] = None
     save(book, data)
-    book.log("cover_approved", revision=revision, by=candidate["review_approval"]["by"])
+    book.log("cover_approved", revision=revision, by=review["by"],
+             authorization=review.get("authorization"))
     book.save()
     return data["approved"]
 

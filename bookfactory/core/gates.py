@@ -166,6 +166,22 @@ def autonomous_lock_authorized(book, what: str) -> GateResult:
     return GateResult("autonomous_lock_authorized", not reasons, reasons)
 
 
+def autonomous_cover_approval_authorized(book) -> GateResult:
+    """May an agent approve the full-wrap cover under the recorded authorization?
+
+    The same authorization as an autonomous approval, and never while the
+    policy keeps the cover as an operator checkpoint: under `visual_checkpoint`
+    the full wrap is always the operator's explicit approval (AGENTS.md 9a).
+    `next` reads that task as `wait_for_operator` for the same reason
+    (`production.compute_mode`, gate `cover_visual_checkpoint`).
+    """
+    reasons = list(autonomous_approval_authorized(book).reasons)
+    if book.state.production_policy.visual_checkpoint:
+        reasons.append("production_policy.visual_checkpoint keeps the full-wrap cover approval "
+                       "for the operator")
+    return GateResult("autonomous_cover_approval_authorized", not reasons, reasons)
+
+
 def release_ready(book) -> GateResult:
     reasons = []
     if not book.paths.interior_pdf.is_file():

@@ -294,3 +294,99 @@ def test_cli_records_text_only_cover(new_book, workspace, capsys):
     assert cover.text_only(Book.load("test-book", workspace))
     with pytest.raises(SystemExit):  # --by is required: the choice must name who made it
         cli(["cover", "artwork", "test-book", "--mode", "native", "--root", str(workspace)])
+
+
+# ----------------------------------------------------------------------
+# cover approve --autonomous
+# ----------------------------------------------------------------------
+
+
+def _native_cover_draft(new_book, workspace, policy):
+    """A native-artwork cover draft awaiting approval, under `policy`."""
+    _interior(new_book)
+    data = cover.load(new_book)
+    data.update(direction="Match locked art", author="A Writer", back_copy="Gift for runners")
+    cover.save(new_book, data)
+    new_book.register_asset(cover.ART_ID, kind="cover_artwork")
+    new_book.state.production_policy = production.policy_from_choice(policy)
+    new_book.save()
+    art = workspace / "native.png"
+    Image.new("RGB", (1100, 1600), "yellow").save(art)
+    api.submit_asset("test-book", cover.ART_ID, art, kind="asset", root=workspace)
+    book = Book.load("test-book", workspace)
+    return cover.submit(book, _wrap(book, workspace, f"{policy}.pdf", art=art))
+
+
+def test_autonomous_cover_approval_is_recorded_under_the_autonomous_policy(new_book, workspace):
+    draft = _native_cover_draft(new_book, workspace, "autonomous")
+    book = Book.load("test-book", workspace)
+    task = tasks._cover_task(book)
+    assert production.compute_mode(book, task) == "continue_automatically"
+    assert "--autonomous" in task.instructions
+
+    approved = cover.approve(book, draft["revision"], by="agent", autonomous=True)
+    marker = "autonomous_production_policy:autonomous"
+    assert approved["authorization"] == marker
+    assert cover.load(book)["approved"]["authorization"] == marker
+    for event in ("cover_visual_approved", "cover_approved"):
+        assert api.audit_history("test-book", event=event, root=workspace)[-1][
+            "authorization"] == marker
+    # The native artwork it promoted is marked the same way.
+    art = api.audit_history("test-book", event="approved", root=workspace)[-1]
+    assert art["id"] == cover.ART_ID and art["authorization"] == marker
+
+
+def test_autonomous_cover_approval_is_refused_where_the_operator_keeps_the_cover(
+        new_book, workspace):
+    from bookfactory.cli.main import main as cli
+
+    draft = _native_cover_draft(new_book, workspace, "visual_checkpoint")
+    book = Book.load("test-book", workspace)
+    assert not gates.autonomous_cover_approval_authorized(book).ok
+    assert "--autonomous" not in tasks._cover_task(book).instructions
+    before = cover.path(book).read_bytes(), book.paths.audit_log.read_bytes()
+    with pytest.raises(ValidationError, match="autonomous cover approval"):
+        cover.approve(book, draft["revision"], by="agent", autonomous=True)
+    assert cli(["cover", "approve", "test-book", "--draft", draft["revision"], "--by", "agent",
+                "--autonomous", "--root", str(workspace)]) != 0
+    book = Book.load("test-book", workspace)
+    book.state.production_policy = production.policy_from_choice("checkpointed")
+    book.save()
+    with pytest.raises(ValidationError, match="autonomous cover approval"):
+        cover.approve(Book.load("test-book", workspace), draft["revision"], by="agent",
+                      autonomous=True)
+    # A refusal changes nothing: no approval, no artwork promotion, no audit entry.
+    book = Book.load("test-book", workspace)
+    assert cover.path(book).read_bytes() == before[0]
+    assert not book.registry.get(cover.ART_ID).is_approved
+    assert api.audit_history("test-book", event="cover_visual_approved", root=workspace) == []
+
+
+def test_an_ordinary_cover_approval_carries_no_autonomous_marker(new_book, workspace):
+    draft = _native_cover_draft(new_book, workspace, "autonomous")
+    approved = cover.approve(Book.load("test-book", workspace), draft["revision"],
+                             by="Operator")
+    assert "authorization" not in approved
+    for event in ("cover_visual_approved", "cover_approved"):
+        assert "authorization" not in api.audit_history(
+            "test-book", event=event, root=workspace)[-1]
+
+
+def test_finalize_carries_the_reviewed_authorization_forward(new_book, workspace):
+    draft = _native_cover_draft(new_book, workspace, "autonomous")
+    book = Book.load("test-book", workspace)
+    preserved = book.paths.root / "releases/preserved.pdf"
+    preserved.parent.mkdir(exist_ok=True)
+    book.paths.interior_pdf.rename(preserved)
+    data = cover.load(book)
+    data["preview_interior"] = {"path": "releases/preserved.pdf",
+                                "sha256": checksums.sha256_file(preserved)}
+    cover.save(book, data)
+    review = cover.approve(book, draft["revision"], by="agent", autonomous=True)
+    assert review["status"] == "review_approved"
+    assert review["authorization"] == "autonomous_production_policy:autonomous"
+    _interior(book)
+    task = tasks._cover_task(Book.load("test-book", workspace))
+    assert task.task_id.endswith("cover-finalize")
+    finalized = cover.finalize(Book.load("test-book", workspace), draft["revision"])
+    assert finalized["authorization"] == "autonomous_production_policy:autonomous"

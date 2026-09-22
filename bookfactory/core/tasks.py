@@ -648,15 +648,36 @@ def _cover_task(book) -> Task | None:
                                   "copy as real type. Keep KDP barcode space clear. Review print "
                                   "size and Amazon-size thumbnail, then submit a versioned cover PDF.",
                      output={"destination":"cover/drafts/","expected_format":"pdf"})
+    reviewed = next((d for d in reversed(data["drafts"]) if d.get("status") == "review_approved"), None)
+    if reviewed:
+        # The decision is already recorded; finalizing only checks the final
+        # interior agrees with it and carries that approval forward.
+        return _task(book, "cover-finalize", type="assembly",
+                     summary="Finalize the reviewed cover against the final interior",
+                     instructions=f"Cover draft {reviewed['revision']} was approved for review. "
+                                  f"Run bookfactory cover finalize {book.state.book_id} "
+                                  f"--draft {reviewed['revision']}. If the final interior's "
+                                  "dimensions changed, submit a resized draft for a new review "
+                                  "instead.")
     if not data.get("approved"):
         draft = data["drafts"][-1]
+        approve = (f"bookfactory cover approve {book.state.book_id} "
+                   f"--draft {draft['revision']} --by")
+        if gates.autonomous_cover_approval_authorized(book).ok:
+            #: Only FULL AUTONOMOUS reaches here; the task's mode reads
+            #: continue_automatically and the approval must say so in the audit log.
+            instructions = (f"Inspect {draft['path']} at print size and as an Amazon "
+                            "thumbnail against the locked references. The recorded policy "
+                            f"authorizes you to approve it: {approve} <agent> --autonomous. "
+                            "If it is a near miss or anything is ambiguous, stop and ask the "
+                            "operator instead.")
+        else:
+            instructions = (f"Operator visual checkpoint: inspect {draft['path']}. "
+                            f"If accepted, {approve} <operator>. "
+                            "An agent must not approve for the operator (AGENTS.md 9a).")
         return _task(book, "cover-approval", type="approval",
                      summary="Review the full-wrap cover draft",
-                     instructions=f"Operator visual checkpoint: inspect {draft['path']}. "
-                                  f"If accepted, bookfactory cover approve {book.state.book_id} "
-                                  f"--draft {draft['revision']} --by <operator>. "
-                                  "An agent must not approve for the operator unless this "
-                                  "task's mode is continue_automatically (AGENTS.md 9a).",
+                     instructions=instructions,
                      approval_required=True, gate="cover_visual_checkpoint")
     if not cover.preflight_current(book):
         return _task(book, "cover-preflight", type="preflight",

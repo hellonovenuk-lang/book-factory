@@ -52,7 +52,17 @@
     },
     "approved": {
       "type": ["object", "null"],
-      "required": ["revision", "sha256", "at", "by"]
+      "required": ["revision", "sha256", "at", "by"],
+      "properties": {
+        "revision": {"type": "string"},
+        "sha256": {"type": "string"},
+        "at": {"type": "string"},
+        "by": {"type": "string"},
+        "authorization": {
+          "description": "Present only when an agent approved the cover under the recorded production policy (`cover approve --autonomous`), e.g. 'autonomous_production_policy:autonomous'. Absent for an operator approval.",
+          "type": "string"
+        }
+      }
     },
     "preflight": {
       "type": ["object", "null"],
