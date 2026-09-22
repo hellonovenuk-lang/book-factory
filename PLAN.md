@@ -11,9 +11,13 @@ here.
 
 ## Start here
 
-> **Doing:** Claude Code setup. Phase 1 (Foundations) is done; Phase 2 (Planning and handing out work) not started.
-> **Finished:** Phase 1, including the fresh-session test (passed 2026-09-22: a new session told only "continue" explained where we were).
-> **Next action:** start Phase 2 with task 2.1 (`/plan-phase`), unless Kieran picks a different Phase 2 task first.
+> **Doing:** Claude Code setup, Phase 2 (Planning and handing out work): all 7 tasks built, test-drive next.
+> **Finished:** `/plan-phase`, `/fan-out`, the three helpers (builder, checker, docs keeper), the guide `integrations/claude/WORKFLOW.md` with a cheat sheet in `CLAUDE.md`, and the usage rules. Phase 1 moved to `docs/PLAN-ARCHIVE.md`.
+> **Next action:** test-drive: run `/plan-phase` on Phase 3 with Kieran and go through the plan line by line.
+
+**Unfinished, carried over:**
+- Phase 2 "Done when": the `/plan-phase` test-drive on Phase 3. New commands may only show up in a fresh session; if `/plan-phase` isn't recognised, start a new session and say "continue".
+- The helpers and `/fan-out` haven't been used for real yet; their first real use is Phase 3.
 
 **Don't try again:**
 - `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
@@ -42,41 +46,24 @@ itself: `docs/REVIEW-2026-09.md`.
 
 ---
 
-## Phase 1: Foundations (done)
+Phase 1: Foundations (done, see `docs/PLAN-ARCHIVE.md`)
 
-Built directly by the main session, no helpers yet.
+## Phase 2: Planning and handing out work (open: built, test-drive next)
 
 | # | Task | Files | Status |
 |---|---|---|---|
-| 1.1 | Load the rules for real: `@`-import `AGENTS.md` and `integrations/claude/BOOK_FACTORY.md` (and this file) from `CLAUDE.md`; update the "exists only to point" line | `CLAUDE.md` | [x] |
-| 1.2 | "Working with Kieran" section: plain English, terms explained, recommendation first, one question at a time, every reply ends with "Your next step" | `CLAUDE.md` | [x] |
-| 1.3 | Ideas parking lot | `IDEAS.md` | [x] |
-| 1.4 | Glossary, seeded with the terms used so far | `GLOSSARY.md` | [x] |
-| 1.5 | `/handover` command: updates "Start here", ticks tasks, saves, sends to GitHub, checks it arrived | `.claude/skills/handover/SKILL.md` | [x] |
-| 1.6 | Keep personal settings files out of GitHub | `.gitignore` | [x] |
-
-**Test-drive:** run `/handover`, open a fresh session, say only "continue".
-
-**Done when:**
-- [x] The fresh session says where we are and what is next without being told.
-- [x] All Phase 1 files are on GitHub's `main`.
-
-## Phase 2: Planning and handing out work (not started)
-
-| # | Task | Files |
-|---|---|---|
-| 2.1 | `/plan-phase`: turns an idea into a small phase; maps which files each task touches *before* any work is handed out; plain-words "Done when" | `.claude/skills/plan-phase/` |
-| 2.2 | `/fan-out` plus the standard brief (read first / files you may touch / parts / done when / decisions you made on your own); hands out only tasks whose files don't overlap | `.claude/skills/fan-out/` |
-| 2.3 | Helper *builder*: edits only the files its brief names; never commits, pushes, approves or locks | `.claude/agents/implementer.md` |
-| 2.4 | Helper *checker*: cannot edit; runs the checks and reports evidence | `.claude/agents/verifier.md` |
-| 2.5 | Helper *docs keeper*: the only helper that edits `AGENTS.md`, `docs/OPERATOR.md`, `integrations/*` | `.claude/agents/docs-sync.md` |
-| 2.6 | One-page guide, with the cheat sheet near the top of `CLAUDE.md` | `integrations/claude/WORKFLOW.md`, `CLAUDE.md` |
-| 2.7 | Usage rules for helpers: at most 3 at once; small jobs done by the main session instead; helpers on Sonnet by default, Opus only when the brief says the job is tricky; a turn limit (`maxTurns`) on every helper; `/fan-out` shows a one-line preview (how many helpers, which model, rough size) and waits for the operator's OK; finished phases moved out of `PLAN.md` (it loads into every session and helper, about 7,000 tokens of rules already); checker reports in plain English | `.claude/skills/fan-out/`, `.claude/agents/*.md`, `.claude/skills/handover/SKILL.md`, `integrations/claude/WORKFLOW.md` |
+| 2.1 | `/plan-phase`: turns an idea into a small phase; maps which files each task touches *before* any work is handed out; plain-words "Done when" | `.claude/skills/plan-phase/` | [x] |
+| 2.2 | `/fan-out` plus the standard brief (read first / files you may touch / parts / done when / decisions you made on your own); hands out only tasks whose files don't overlap | `.claude/skills/fan-out/` | [x] |
+| 2.3 | Helper *builder*: edits only the files its brief names; never commits, pushes, approves or locks | `.claude/agents/implementer.md` | [x] |
+| 2.4 | Helper *checker*: cannot edit; runs the checks and reports evidence | `.claude/agents/verifier.md` | [x] |
+| 2.5 | Helper *docs keeper*: the only helper that edits `AGENTS.md`, `docs/OPERATOR.md`, `integrations/*` | `.claude/agents/docs-sync.md` | [x] |
+| 2.6 | One-page guide, with the cheat sheet near the top of `CLAUDE.md` | `integrations/claude/WORKFLOW.md`, `CLAUDE.md` | [x] |
+| 2.7 | Usage rules for helpers: at most 3 at once; small jobs done by the main session instead; helpers on Sonnet by default, Opus only when the brief says the job is tricky; a turn limit (`maxTurns`) on every helper; `/fan-out` shows a one-line preview (how many helpers, which model, rough size) and waits for the operator's OK; finished phases moved out of `PLAN.md` (it loads into every session and helper, about 7,000 tokens of rules already); checker reports in plain English | `.claude/skills/fan-out/`, `.claude/agents/*.md`, `.claude/skills/handover/SKILL.md`, `integrations/claude/WORKFLOW.md` | [x] |
 
 **Test-drive:** use `/plan-phase` to plan Phase 3.
 
-**Done when:** Phase 3's plan is written here and the operator understands
-every line of it.
+**Done when:**
+- [ ] Phase 3's plan is written here and the operator understands every line of it.
 
 ## Phase 3: Safety checks and proof (not started)
 
@@ -130,9 +117,5 @@ Run the whole routine on one small, real Book Factory job from
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
-| 2026-09-22 | 1 | `@` imports in `CLAUDE.md` point at existing files | all 3 found |
-| 2026-09-22 | 1 | `/handover` settings header is valid | parsed OK |
-| 2026-09-22 | 1 | Only the intended files changed; personal settings are git-ignored | confirmed with `git status`, `git check-ignore` |
-| 2026-09-22 | 1 | Phase 1 commits are on GitHub `main` | local and remote both at `0ebf942` |
-| 2026-09-22 | 1 | `/handover` runs as a command in the session that created it | worked |
-| 2026-09-22 | 1 | Fresh session told only "continue" explains where we are | passed; operator confirmed the summary |
+| 2026-09-22 | 2 | Header of every new command and helper file is valid | all 6 parsed OK |
+| 2026-09-22 | 2 | Every file the new guides point to exists | none missing |

@@ -14,6 +14,12 @@ ChatGPT, anything else). The most important file for behaviour.
 one. Web sessions sometimes start on a side branch with a name like
 `claude/...`; our rule is to work on `main`.
 
+**Brief.** The written instructions a helper gets: what to read first, which files it may change, the steps, "Done when", and what to report back.
+
+**Builder.** The helper that makes a change (`implementer`). It edits only the files its brief lists.
+
+**Checker.** The helper that checks finished work (`verifier`). It can't edit anything; it runs the checks and reports what it found.
+
 **CLAUDE.md.** The file Claude Code reads automatically at the start of every
 session. Ours loads `AGENTS.md`, the Claude notes, the current plan and your
 working preferences.
@@ -26,6 +32,8 @@ a saved routine, e.g. `/handover`. Behind each one is a skill.
 
 **Commit.** A saved snapshot of changes, with a short message saying what
 changed. Saved on this computer only until it is pushed.
+
+**Docs keeper.** The helper that keeps the shared rule and guide files (`AGENTS.md`, `docs/OPERATOR.md`, `integrations/`) accurate. The only helper allowed to edit them.
 
 **Done when.** The checklist, written before work starts, that says in plain
 words what "finished" means for a phase or task.
@@ -57,6 +65,8 @@ out work to helpers, checks their work and saves it.
 
 **Phase.** A small block of work that fits one sitting, with its own "Done
 when". Only one is open at a time.
+
+**Plan archive.** `docs/PLAN-ARCHIVE.md`: where finished phases go, so `PLAN.md` stays short.
 
 **Plugin.** A downloadable bundle of commands, helpers and hooks made by
 someone else. We don't install any; we write our own.

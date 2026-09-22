@@ -43,6 +43,11 @@ Only the main session edits `PLAN.md`.
 - If the phase's "Done when" is fully ticked, mark the phase **(done)**. Set
   "Next action" to choosing the next phase: the next one in `PLAN.md`, or one
   from `IDEAS.md`.
+- **Move finished phases out.** `PLAN.md` loads into every session and every
+  helper, so keep it short. Move each phase marked **(done)**, with its
+  Verification log rows, to the end of `docs/PLAN-ARCHIVE.md` (create it if
+  missing, headed `# PLAN archive`). Leave one line in `PLAN.md` in its place:
+  `Phase N: Name (done, see docs/PLAN-ARCHIVE.md)`.
 
 ## 3. Park ideas and terms
 
