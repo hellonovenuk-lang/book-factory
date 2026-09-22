@@ -48,8 +48,12 @@ to do one job. It gets its own instructions and reports back when done.
 **Hook.** A small script that runs automatically at a set moment, e.g. when a
 session starts or before a command runs. Used for safety checks.
 
+**Import.** A line like `@AGENTS.md` inside `CLAUDE.md` that pulls a whole other file in automatically. A plain link only points at the file; an import actually loads it.
+
 **Main session.** The Claude conversation you are talking to. It plans, hands
 out work to helpers, checks their work and saves it.
+
+**Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
 
 **Phase.** A small block of work that fits one sitting, with its own "Done
 when". Only one is open at a time.
@@ -71,6 +75,10 @@ Typing its name as a command runs it.
 
 **Test suite (tests).** Automatic checks that make sure Book Factory still
 works after a change. Run with `pytest`.
+
+**Token.** The unit Claude's usage is counted in, roughly three-quarters of a word. Everything Claude reads or writes uses tokens from your plan's allowance.
+
+**Turn limit.** The most steps a helper may take before it has to stop and report, so one that goes round in circles can't burn through usage.
 
 **Worktree.** A second working copy of the repository on a side branch. We
 deliberately don't use them because we work on `main`.

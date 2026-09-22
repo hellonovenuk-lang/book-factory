@@ -11,12 +11,15 @@ here.
 
 ## Start here
 
-> **Doing:** Claude Code setup, Phase 1 (Foundations).
-> **Finished:** nothing yet in this phase.
-> **Next action:** build Phase 1 tasks 1.1 to 1.6 below, then run `/handover`.
+> **Doing:** Claude Code setup, Phase 1 (Foundations): built, now being test-driven.
+> **Finished:** all Phase 1 files built and on GitHub `main`; task 2.7 (usage rules for helpers) added to Phase 2.
+> **Next action:** ask Kieran whether this summary matched where we left off; if yes, tick Phase 1's first "Done when" item and mark Phase 1 (done).
 
-**Unfinished, carried over:** none.
-**Don't try again:** none yet.
+**Unfinished, carried over:**
+- Phase 1 "Done when": the fresh-session test (a new session, told only "continue", explains where we are). This note is what that session should read.
+
+**Don't try again:**
+- `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
 
 ---
 
@@ -48,18 +51,18 @@ Built directly by the main session, no helpers yet.
 
 | # | Task | Files | Status |
 |---|---|---|---|
-| 1.1 | Load the rules for real: `@`-import `AGENTS.md` and `integrations/claude/BOOK_FACTORY.md` (and this file) from `CLAUDE.md`; update the "exists only to point" line | `CLAUDE.md` | [ ] |
-| 1.2 | "Working with Kieran" section: plain English, terms explained, recommendation first, one question at a time, every reply ends with "Your next step" | `CLAUDE.md` | [ ] |
-| 1.3 | Ideas parking lot | `IDEAS.md` | [ ] |
-| 1.4 | Glossary, seeded with the terms used so far | `GLOSSARY.md` | [ ] |
-| 1.5 | `/handover` command: updates "Start here", ticks tasks, saves, sends to GitHub, checks it arrived | `.claude/skills/handover/SKILL.md` | [ ] |
-| 1.6 | Keep personal settings files out of GitHub | `.gitignore` | [ ] |
+| 1.1 | Load the rules for real: `@`-import `AGENTS.md` and `integrations/claude/BOOK_FACTORY.md` (and this file) from `CLAUDE.md`; update the "exists only to point" line | `CLAUDE.md` | [x] |
+| 1.2 | "Working with Kieran" section: plain English, terms explained, recommendation first, one question at a time, every reply ends with "Your next step" | `CLAUDE.md` | [x] |
+| 1.3 | Ideas parking lot | `IDEAS.md` | [x] |
+| 1.4 | Glossary, seeded with the terms used so far | `GLOSSARY.md` | [x] |
+| 1.5 | `/handover` command: updates "Start here", ticks tasks, saves, sends to GitHub, checks it arrived | `.claude/skills/handover/SKILL.md` | [x] |
+| 1.6 | Keep personal settings files out of GitHub | `.gitignore` | [x] |
 
 **Test-drive:** run `/handover`, open a fresh session, say only "continue".
 
 **Done when:**
 - [ ] The fresh session says where we are and what is next without being told.
-- [ ] All Phase 1 files are on GitHub's `main`.
+- [x] All Phase 1 files are on GitHub's `main`.
 
 ## Phase 2: Planning and handing out work (not started)
 
@@ -130,3 +133,8 @@ Run the whole routine on one small, real Book Factory job from
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-22 | 1 | `@` imports in `CLAUDE.md` point at existing files | all 3 found |
+| 2026-09-22 | 1 | `/handover` settings header is valid | parsed OK |
+| 2026-09-22 | 1 | Only the intended files changed; personal settings are git-ignored | confirmed with `git status`, `git check-ignore` |
+| 2026-09-22 | 1 | Phase 1 commits are on GitHub `main` | local and remote both at `0ebf942` |
+| 2026-09-22 | 1 | `/handover` runs as a command in the session that created it | worked |
