@@ -32,7 +32,6 @@ THUMB = OUT / "cover-v2-text-only-amazon-thumbnail.png"
 pdfmetrics.registerFont(TTFont("Title", str(FONTS / "Anton-Regular.ttf")))
 pdfmetrics.registerFont(TTFont("Heavy", str(FONTS / "ArchivoBlack-Regular.ttf")))
 pdfmetrics.registerFont(TTFont("Body", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"))
-pdfmetrics.registerFont(TTFont("BodyItalic", "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf"))
 
 inch = 72
 d = cover.dimensions(BOOK)
@@ -47,7 +46,6 @@ front_centre = (front_left + front_right) / 2
 
 BLUE = HexColor("#2445a2")
 PAPER = HexColor("#fbf8f1")
-INK = HexColor("#1b1f2e")
 YELLOW = HexColor("#f6dc45")
 CORAL = HexColor("#ed5a3a")
 
@@ -95,58 +93,36 @@ c.rect(front_fold, 8.38 * inch, d["trim_width_in"] * inch + d["bleed_in"] * inch
        0.34 * inch, fill=1, stroke=0)
 centred("THE NORMAL CONVERSATION REHABILITATION SERVICE", 8.49 * inch, "Heavy", 9.5, PAPER)
 
-# The title dominates: it has to read at Amazon thumbnail size on its own.
-centred("THE RUNNER’S GUIDE TO", 7.62 * inch, "Title", 44, YELLOW)
-centred("NORMAL", 6.02 * inch, "Title", 160, PAPER)
-centred("CONVERSATION", 5.20 * inch, "Title", 90, CORAL)
-
-# The joke, typeset as a speech bubble: the question, then the answer.
-bubble_top, bubble_bottom = 4.72 * inch, 2.42 * inch
-c.setFillColor(PAPER)
-c.roundRect(front_left, bubble_bottom, front_width, bubble_top - bubble_bottom,
-            0.16 * inch, fill=1, stroke=0)
-tail = c.beginPath()
-tail.moveTo(front_left + 0.55 * inch, bubble_bottom + 1)
-tail.lineTo(front_left + 0.40 * inch, bubble_bottom - 0.32 * inch)
-tail.lineTo(front_left + 1.05 * inch, bubble_bottom + 1)
-tail.close()
-c.drawPath(tail, fill=1, stroke=0)
-
-text_left = front_left + 0.28 * inch
-c.setFillColor(CORAL)
-c.setFont("Heavy", 11)
-c.drawString(text_left, 4.32 * inch, "QUESTION ASKED")
-c.setFillColor(INK)
-c.setFont("BodyItalic", 16)
-c.drawString(text_left, 4.02 * inch, "“How was your weekend?”")
-
-c.setStrokeColor(BLUE)
-c.setLineWidth(1.2)
-c.line(text_left, 3.74 * inch, front_right - 0.28 * inch, 3.74 * inch)
-
-c.setFillColor(CORAL)
-c.setFont("Heavy", 11)
-c.drawString(text_left, 3.44 * inch, "ANSWER GIVEN")
-c.setFillColor(INK)
-c.setFont("Body", 13)
-answer = ("“So I was out the door at 6:15, and the first 3k felt heavy, "
-          "which I put down to the porridge…”")
-baseline = 3.16 * inch
-for line in wrap_words(answer, front_width - 0.56 * inch, "Body", 13):
-    c.drawString(text_left, baseline, line)
-    baseline -= 17
-c.setFillColor(BLUE)
-c.setFont("Heavy", 11)
-c.drawString(text_left, baseline - 6, "DURATION: 47 MINUTES AND COUNTING")
+# The title fills the front on its own: each line is set as wide as the
+# front allows, and the lines are spread evenly down the space between the
+# strap and the subtitle. It has to read at Amazon thumbnail size.
+CAP_HEIGHT = {name: pdfmetrics.getFont(name).face.capHeight / 1000 for name in ("Title",)}
+title_lines = [
+    ("THE RUNNER’S", YELLOW),
+    ("GUIDE TO", YELLOW),
+    ("NORMAL", PAPER),
+    ("CONVERSATION", CORAL),
+]
+sizes = [fit(text, "Title", 200, front_width) for text, _ in title_lines]
+# Every line is as wide as the front allows, with equal space between lines.
+gap_weights = [1.0, 1.0, 1.0]
+region_top, region_bottom = 8.05 * inch, 2.05 * inch
+caps = [size * CAP_HEIGHT["Title"] for size in sizes]
+unit = (region_top - region_bottom - sum(caps)) / sum(gap_weights)
+top = region_top
+for index, ((text, colour), size, cap) in enumerate(zip(title_lines, sizes, caps)):
+    centred(text, top - cap, "Title", size, colour)
+    if index < len(gap_weights):
+        top -= cap + unit * gap_weights[index]
 
 # Subtitle, then the author.
 c.setFillColor(PAPER)
-c.setFont("Body", 13.5)
+c.setFont("Body", 14)
 baseline = 1.50 * inch
 for line in wrap_words("A rehabilitation manual for runners who can no longer "
-                       "answer a simple question", front_width, "Body", 13.5):
+                       "answer a simple question", front_width, "Body", 14):
     c.drawCentredString(front_centre, baseline, line)
-    baseline -= 18
+    baseline -= 19
 centred(cover.load(BOOK)["author"].upper(), 0.62 * inch, "Heavy", 17, YELLOW)
 
 # ----------------------------------------------------------------- back
