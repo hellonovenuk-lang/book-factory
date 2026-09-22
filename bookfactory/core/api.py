@@ -309,16 +309,17 @@ LOCKS = {
 
 
 def lock(book_id: str, what: str, *, version: str | None = None, by: str | None = None,
-         note: str | None = None, root: str | Path | None = None) -> dict:
+         note: str | None = None, autonomous: bool = False,
+         root: str | Path | None = None) -> dict:
     if what not in LOCKS:
         raise ValidationError(f"Cannot lock {what!r}",
                               remedy="Lockable: " + ", ".join(LOCKS))
     book = Book.load(book_id, root)
     method = getattr(book, LOCKS[what])
     if what == "concept":
-        method(by=by, note=note)
+        method(by=by, note=note, autonomous=autonomous)
     else:
-        method(version=version, by=by, note=note)
+        method(version=version, by=by, note=note, autonomous=autonomous)
     task_module.sync_open_task(book)
     return status(book_id, root=root)
 

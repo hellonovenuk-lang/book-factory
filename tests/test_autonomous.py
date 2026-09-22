@@ -217,6 +217,70 @@ def test_autonomous_approval_is_recorded_in_the_audit_trail(planned_book, worksp
     assert history[-1]["authorization"] == "autonomous_production_policy:autonomous"
 
 
+def _briefed_book(workspace, policy: str) -> Book:
+    from tests.conftest import BRIEF
+
+    api.create_book("Test Book", book_id="test-book", root=workspace)
+    book = Book.load("test-book", workspace)
+    book.paths.brief_file.write_text(BRIEF, encoding="utf-8")
+    book.state.production_policy = production.policy_from_choice(policy)
+    book.save()
+    return book
+
+
+def test_autonomous_lock_requires_a_recorded_authorization(workspace):
+    _briefed_book(workspace, "checkpointed")
+    with pytest.raises(ValidationError, match="does not authorize an autonomous concept lock"):
+        api.lock("test-book", "concept", root=workspace, autonomous=True)
+    assert not Book.load("test-book", workspace).state.concept.locked
+    assert api.audit_history("test-book", event="concept_locked", root=workspace) == []
+
+
+def test_autonomous_lock_is_recorded_in_the_audit_trail(workspace):
+    _briefed_book(workspace, "autonomous")
+    api.lock("test-book", "concept", root=workspace, autonomous=True,
+             note="Brief complete; locked under the recorded policy.")
+    assert Book.load("test-book", workspace).state.concept.locked
+    history = api.audit_history("test-book", event="concept_locked", root=workspace)
+    assert history[-1]["authorization"] == "autonomous_production_policy:autonomous"
+
+
+def test_an_ordinary_lock_carries_no_autonomous_marker(workspace):
+    _briefed_book(workspace, "autonomous")
+    api.lock("test-book", "concept", root=workspace, by="operator")
+    history = api.audit_history("test-book", event="concept_locked", root=workspace)
+    assert history[-1].get("authorization") is None
+
+
+def test_autonomous_lock_never_covers_a_checkpoint_the_policy_keeps(workspace):
+    from bookfactory.core import gates
+
+    book = _briefed_book(workspace, "visual_checkpoint")
+    assert gates.autonomous_lock_authorized(book, "concept").ok
+    visual = gates.autonomous_lock_authorized(book, "visual")
+    assert not visual.ok
+    assert any("visual_checkpoint" in reason for reason in visual.reasons)
+    assert gates.autonomous_lock_authorized(
+        _set_policy(book, "autonomous"), "visual").ok
+
+
+def _set_policy(book, policy):
+    book.state.production_policy = production.policy_from_choice(policy)
+    return book
+
+
+def test_cli_lock_autonomous_flag(workspace):
+    from bookfactory.cli.main import main as cli
+
+    _briefed_book(workspace, "checkpointed")
+    assert cli(["lock", "concept", "test-book", "--autonomous", "--root", str(workspace)]) != 0
+    book = Book.load("test-book", workspace)
+    _set_policy(book, "autonomous").save()
+    assert cli(["lock", "concept", "test-book", "--autonomous", "--root", str(workspace)]) == 0
+    history = api.audit_history("test-book", event="concept_locked", root=workspace)
+    assert history[-1]["authorization"] == "autonomous_production_policy:autonomous"
+
+
 # ----------------------------------------------------------------------
 # Generative vs deterministic references
 # ----------------------------------------------------------------------

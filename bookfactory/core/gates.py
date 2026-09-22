@@ -148,6 +148,24 @@ def autonomous_approval_authorized(book) -> GateResult:
     return GateResult("autonomous_approval_authorized", not reasons, reasons)
 
 
+def autonomous_lock_authorized(book, what: str) -> GateResult:
+    """May an agent lock `what` under the recorded autonomous authorization?
+
+    The same authorization as an autonomous approval, and additionally never a
+    lock the recorded policy keeps as an operator checkpoint: the visual lock
+    under `visual_checkpoint`, or a major lock when `major_gate_checkpoints`
+    is set. Those read `wait_for_operator` in `next`, and this agrees.
+    """
+    reasons = list(autonomous_approval_authorized(book).reasons)
+    policy = book.state.production_policy
+    if what == "visual" and policy.visual_checkpoint:
+        reasons.append("production_policy.visual_checkpoint keeps the visual lock for the operator")
+    if what in ("concept", "voice", "manuscript") and policy.major_gate_checkpoints:
+        reasons.append(f"production_policy.major_gate_checkpoints keeps the {what} lock "
+                       "for the operator")
+    return GateResult("autonomous_lock_authorized", not reasons, reasons)
+
+
 def release_ready(book) -> GateResult:
     reasons = []
     if not book.paths.interior_pdf.is_file():

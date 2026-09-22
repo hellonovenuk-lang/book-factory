@@ -196,6 +196,10 @@ def build_parser() -> argparse.ArgumentParser:
     lock.add_argument("--version")
     lock.add_argument("--by")
     lock.add_argument("--note")
+    lock.add_argument("--autonomous", action="store_true",
+                      help="Record this lock as made under the book's recorded "
+                           "autonomous-production authorization, not an explicit operator "
+                           "decision. Fails unless the recorded policy authorizes it.")
 
     advance = sub.add_parser("advance", parents=[common], help="Move the book to the next stage.")
     advance.add_argument("book")
@@ -702,7 +706,7 @@ def cmd_revise(args) -> int:
 
 def cmd_lock(args) -> int:
     result = api.lock(args.book, args.what, version=args.version, by=args.by,
-                      note=args.note, root=args.root)
+                      note=args.note, autonomous=args.autonomous, root=args.root)
     if args.json:
         out.emit_json(result)
         return 0

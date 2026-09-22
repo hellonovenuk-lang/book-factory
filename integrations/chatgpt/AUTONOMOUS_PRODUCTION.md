@@ -123,6 +123,21 @@ draft is a near miss, that is still `wait_for_operator` in substance even if
 the field says otherwise - use your judgement about what "no ambiguity" means,
 and when genuinely unsure, ask instead of approving.
 
+Locks work the same way. When a lock task (`lock concept`, `voice`,
+`manuscript` or `visual`) reads `continue_automatically`, run it with
+`--autonomous`:
+
+```bash
+bookfactory lock manuscript golf-addict --autonomous \
+  --note "Manuscript complete against the locked voice bible."
+```
+
+It is refused unless the recorded policy authorizes it, and it is refused for
+a lock the policy keeps as a checkpoint (the visual lock under
+`visual_checkpoint`). The audit entry carries the same
+`authorization: autonomous_production_policy:...` marker as an autonomous
+approval.
+
 In `visual_checkpoint` mode, the visual-lock task's `mode` will read
 `wait_for_operator` even though everything else in the book runs
 automatically - show the small reference set and stop there, once.
@@ -172,7 +187,8 @@ character reference, a supporting-character reference if the concept needs
 one, a representative editorial illustration, a representative chapter-opener
 illustration, and a diagram/graphic treatment if the book needs one. In
 autonomous mode, evaluate each against the visual bible and lock the set
-yourself once every required item passes. In visual-checkpoint mode, stop and
+yourself (`bookfactory lock visual <book> --autonomous`) once every required
+item passes. In visual-checkpoint mode, stop and
 show this small set before mass-producing eighty more pages against it.
 
 ## 7. Generative vs deterministic references - do not mix them up

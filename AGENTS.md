@@ -78,9 +78,11 @@ Silence is not approval. Enthusiasm is not approval.
 
 **The one exception**: a book whose recorded `production_policy` explicitly
 authorizes autonomous production (the operator chose this at intake, not by
-saying nothing). Even then, `bookfactory approve` refuses `--autonomous`
-unless that authorization is actually on record, and every such approval is
-written to the audit log as granted under it - never as an ordinary approval.
+saying nothing). Even then, `bookfactory approve` and `bookfactory lock`
+refuse `--autonomous` unless that authorization is actually on record, and
+every such approval or lock is written to the audit log as granted under it -
+never as an ordinary one. `lock --autonomous` also refuses a lock the policy
+keeps as a checkpoint (the visual lock under `visual_checkpoint`).
 See `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` for the full contract.
 This does not relax the rule for a `checkpointed` book, and it never means
 "the operator probably would have said yes".
@@ -265,9 +267,9 @@ Commands that need authority: `approve`, `lock`, `advance`, `assemble`, `preflig
 
 * the operator asked you to, or
 * it is what the current task from `bookfactory next` asks for, **and** that
-  task's `mode` is `continue_automatically`. For an approval that means using
-  `--autonomous` (section 3). For a lock, say in `--note` that it was done under
-  the book's recorded production policy.
+  task's `mode` is `continue_automatically`. For an approval or a lock that
+  means using `--autonomous` (section 3), so the audit log records it as made
+  under the book's recorded production policy.
 
 If the task's `mode` is `wait_for_operator`, stop and ask, whatever the command.
 `mode` already accounts for the production policy (section 3a), so you do not

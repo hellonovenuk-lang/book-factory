@@ -190,19 +190,43 @@ class Book:
         if not result.ok:
             raise GateBlocked(result.gate, result.reasons)
 
-    def lock_concept(self, *, by: str | None = None, note: str | None = None) -> None:
+    def _lock_authorization(self, what: str, autonomous: bool) -> str | None:
+        """The audit marker for a lock, refusing `autonomous` unless it is on record.
+
+        Uses the same marker as an autonomous approval, so the audit log shows
+        every lock an agent made under the recorded policy as exactly that -
+        never as an ordinary operator lock.
+        """
+        if not autonomous:
+            return None
+        result = gates.autonomous_lock_authorized(self, what)
+        if not result.ok:
+            raise ValidationError(
+                f"This book's production_policy does not authorize an autonomous {what} lock",
+                problems=result.reasons,
+                remedy=("Ask the operator to lock it explicitly (without --autonomous). "
+                        "Autonomous locks need FULL AUTONOMOUS or VISUAL CHECKPOINT recorded "
+                        "at intake, and never cover a lock the policy keeps as a checkpoint."),
+            )
+        return f"autonomous_production_policy:{self.state.production_policy.mode}"
+
+    def lock_concept(self, *, by: str | None = None, note: str | None = None,
+                     autonomous: bool = False) -> None:
         self._require_gate("concept_lock")
+        authorization = self._lock_authorization("concept", autonomous)
         digest = checksums.sha256_file(self.paths.brief_file)
         self.state.concept.locked = True
         self.state.concept.locked_at = clock.timestamp()
         self.state.concept.sha256 = digest
         self._set_stage_at_least(stages.CONCEPT_LOCK, by=by, note=note)
-        self.log("concept_locked", sha256=digest, by=by, note=note)
+        self.log("concept_locked", sha256=digest, by=by, note=note,
+                 authorization=authorization)
         self.save()
 
     def lock_voice(self, *, version: str | None = None, by: str | None = None,
-                   note: str | None = None) -> None:
+                   note: str | None = None, autonomous: bool = False) -> None:
         self._require_gate("voice_lock")
+        authorization = self._lock_authorization("voice", autonomous)
         digest = checksums.sha256_file(self.paths.voice_bible)
         self.state.style.voice_version = version or _bump(self.state.style.voice_version)
         self.state.style.voice_locked = True
@@ -210,12 +234,13 @@ class Book:
         self.state.style.voice_sha256 = digest
         self._set_stage_at_least(stages.VOICE_LOCK, by=by, note=note)
         self.log("voice_locked", version=self.state.style.voice_version, sha256=digest,
-                 by=by, note=note)
+                 by=by, note=note, authorization=authorization)
         self.save()
 
     def lock_manuscript(self, *, version: str | None = None, by: str | None = None,
-                        note: str | None = None) -> None:
+                        note: str | None = None, autonomous: bool = False) -> None:
         self._require_gate("manuscript_lock")
+        authorization = self._lock_authorization("manuscript", autonomous)
         version = version or _bump(self.state.manuscript.version)
         ids.validate_revision(version)
         snapshot = self.paths.manuscript_version_file(version)
@@ -234,12 +259,14 @@ class Book:
         self.state.manuscript.sha256 = digest
         self.state.manuscript.path = self.paths.relative(snapshot)
         self._set_stage_at_least(stages.MANUSCRIPT_LOCK, by=by, note=note)
-        self.log("manuscript_locked", version=version, sha256=digest, by=by, note=note)
+        self.log("manuscript_locked", version=version, sha256=digest, by=by, note=note,
+                 authorization=authorization)
         self.save()
 
     def lock_visual(self, *, version: str | None = None, by: str | None = None,
-                    note: str | None = None) -> None:
+                    note: str | None = None, autonomous: bool = False) -> None:
         self._require_gate("visual_lock")
+        authorization = self._lock_authorization("visual", autonomous)
         version = version or _bump(self.state.style.visual_version)
         ids.validate_revision(version)
         digest = checksums.sha256_file(self.paths.visual_bible)
@@ -252,7 +279,8 @@ class Book:
         self.state.style.visual_sha256 = digest
         self._set_stage_at_least(stages.VISUAL_LOCK, by=by, note=note)
         self.log("visual_locked", version=version, sha256=digest,
-                 references=self.required_reference_ids(), by=by, note=note)
+                 references=self.required_reference_ids(), by=by, note=note,
+                 authorization=authorization)
         self.save()
 
     # ------------------------------------------------------------------

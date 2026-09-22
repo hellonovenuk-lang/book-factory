@@ -180,6 +180,7 @@ have" is a useful answer. A near miss is not.
 * Never run `lock`, `advance`, `assemble`, `preflight` or the cover approval, finalize and
   preflight commands unless the operator asked, or the current task from
   `bookfactory next` asks for it and its `mode` is `continue_automatically`.
+  A lock you run on that basis uses `--autonomous`, like an approval.
   Never run `advance --force`, `reject` or `revise` unless the
   operator asks. See the end of `AGENTS.md`.
 * If your work ends up on a branch other than `main`, say so in every report
