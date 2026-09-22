@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(bookfactory status *)",
+      "Bash(bookfactory next *)",
+      "Bash(bookfactory task *)",
+      "Bash(bookfactory validate *)",
+      "Bash(bookfactory list)",
+      "Bash(bookfactory list *)",
+      "Bash(bookfactory policy show *)",
+      "Bash(bookfactory questionnaire *)",
+      "Bash(bookfactory --help)",
+      "Bash(git status *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git diff)",
+      "Bash(git log *)",
+      "Bash(git branch --show-current)",
+      "Bash(git fetch origin main)",
+      "Bash(python3 -m pytest *)",
+      "Bash(python3 -m pytest)",
+      "Bash(pytest *)",
+      "Bash(pytest)"
+    ],
+    "deny": [
+      "Edit(**/pages/approved/**)",
+      "Write(**/pages/approved/**)",
+      "Edit(**/assets/approved/**)",
+      "Write(**/assets/approved/**)",
+      "Edit(**/cover/drafts/*.pdf)",
+      "Write(**/cover/drafts/*.pdf)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-start.sh",
+            "timeout": 600
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-authority.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/quick-check.py"
+          }
+        ]
+      }
+    ]
+  }
+}
