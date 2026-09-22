@@ -71,6 +71,7 @@ Built directly by the main session, no helpers yet.
 | 2.4 | Helper *checker*: cannot edit; runs the checks and reports evidence | `.claude/agents/verifier.md` |
 | 2.5 | Helper *docs keeper*: the only helper that edits `AGENTS.md`, `docs/OPERATOR.md`, `integrations/*` | `.claude/agents/docs-sync.md` |
 | 2.6 | One-page guide, with the cheat sheet near the top of `CLAUDE.md` | `integrations/claude/WORKFLOW.md`, `CLAUDE.md` |
+| 2.7 | Usage rules for helpers: at most 3 at once; small jobs done by the main session instead; helpers on Sonnet by default, Opus only when the brief says the job is tricky; a turn limit (`maxTurns`) on every helper; `/fan-out` shows a one-line preview (how many helpers, which model, rough size) and waits for the operator's OK; finished phases moved out of `PLAN.md` (it loads into every session and helper, about 7,000 tokens of rules already); checker reports in plain English | `.claude/skills/fan-out/`, `.claude/agents/*.md`, `.claude/skills/handover/SKILL.md`, `integrations/claude/WORKFLOW.md` |
 
 **Test-drive:** use `/plan-phase` to plan Phase 3.
 
@@ -120,6 +121,10 @@ Run the whole routine on one small, real Book Factory job from
   `/code-review`, `/simplify`). Don't use `/batch` here: it works in worktrees.
 - **Everything lives in the repository**, not in `~/.claude/`, because web
   sessions start in a fresh container each time.
+- **Helpers cost usage.** Each one is a separate Claude worker that reads the
+  rules before starting. Fan out only when it saves real time, keep it to 3 at
+  once, and use the cheaper model for routine jobs (task 2.7, added
+  2026-09-22 at the operator's request).
 
 ## Verification log
 
