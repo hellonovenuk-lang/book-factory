@@ -11,3 +11,7 @@ venv/
 books/*/output/
 books/*/pages/renders/
 books/*/.tmp/
+
+# Personal Claude Code settings and notes: never shared.
+.claude/settings.local.json
+CLAUDE.local.md
