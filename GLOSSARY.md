@@ -53,8 +53,7 @@ pick up exactly where we stopped. Lives at the top of `PLAN.md`.
 **Helper (subagent).** A separate Claude worker that the main session starts
 to do one job. It gets its own instructions and reports back when done.
 
-**Hook.** A small script that runs automatically at a set moment, e.g. when a
-session starts or before a command runs. Used for safety checks.
+**Hook.** A small script that Claude Code runs automatically at a set moment, e.g. when a session starts, before a command runs, or after a file is saved. Ours are in `.claude/hooks/` and act as safety checks.
 
 **Import.** A line like `@AGENTS.md` inside `CLAUDE.md` that pulls a whole other file in automatically. A plain link only points at the file; an import actually loads it.
 
@@ -80,6 +79,8 @@ Book Factory's lives on GitHub.
 **Session.** One conversation with Claude Code. A fresh session remembers
 nothing from the last one except what is written in the repository.
 
+**Settings file.** `.claude/settings.json`: the switchboard that turns hooks on and says which commands and edits Claude may do without asking, must ask about, or may never do.
+
 **Skill.** A saved set of instructions Claude follows for a particular job.
 Typing its name as a command runs it.
 
@@ -89,6 +90,8 @@ works after a change. Run with `pytest`.
 **Token.** The unit Claude's usage is counted in, roughly three-quarters of a word. Everything Claude reads or writes uses tokens from your plan's allowance.
 
 **Turn limit.** The most steps a helper may take before it has to stop and report, so one that goes round in circles can't burn through usage.
+
+**Verify.** Prove something is finished by running a check now and reading its output, rather than trusting an earlier message. `/verify-phase` does this for a whole phase.
 
 **Worktree.** A second working copy of the repository on a side branch. We
 deliberately don't use them because we work on `main`.
