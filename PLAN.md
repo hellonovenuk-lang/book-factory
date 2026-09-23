@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 6 (Series presets), chosen by Kieran 2026-09-23 ("go"). Run without stopping for OKs; summary at the end.
-> **Finished:** Phase 5 (cover build). 392 tests passing, 2 skipped.
-> **Next action:** round 1 of Phase 6: task 6.1 (builder) and 6.2 (docs keeper).
+> **Doing:** Phase 6 (Series presets) is done. The next phase isn't chosen yet.
+> **Finished:** `bookfactory create "<title>" --policy <p> --series-from <book>` starts a book from a locked book's voice, visual rules, design tokens, reference set and cover design; references arrive as drafts with their source recorded; nothing approved or locked. 396 tests passing, 2 skipped.
+> **Next action:** choose the next phase. Candidates from `docs/REVIEW-2026-09.md`: #7 one-prompt start, the rest of #2 (approve every draft that passes its checks in one command), #4 image API. `PLAN.md` is getting long: archive Phases 4-6 to `docs/PLAN-ARCHIVE.md` at the next `/handover`. Also in `IDEAS.md`: helper turn limits.
 
 **Unfinished, carried over:**
 - none
@@ -152,7 +152,7 @@ does 5.2, then the checker.
 
 ---
 
-## Phase 6: Series presets (not started)
+## Phase 6: Series presets (done)
 
 Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #6. Book 2
 of a series should start from book 1's locked look and voice instead of
@@ -173,10 +173,16 @@ lists every file copied and its sha256.
 
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
-| 6.1 | `create --series-from`: copy the locked style, submit the references as drafts with provenance, record series and audit; refuse if the source isn't locked; tests | helper: builder, routine (Sonnet) | `bookfactory/core/series.py` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_series.py` (new) | [ ] |
-| 6.2 | Rules and guides explain starting a series book | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/BOOK_FACTORY.md` | [ ] |
-| 6.3 | Mark review item #6 done; glossary entry for "series preset" | main | `docs/REVIEW-2026-09.md`, `GLOSSARY.md` | [ ] |
-| 6.4 | Check everything with proof; test-drive by starting a series book from the demo book on a throwaway copy | helper: checker | none (read-only) | [ ] |
+| 6.1 | `create --series-from`: copy the locked style, submit the references as drafts with provenance, record series and audit; refuse if the source isn't locked; tests | helper: builder, routine (Sonnet) | `bookfactory/core/series.py` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_series.py` (new) | [x] |
+| 6.2 | Rules and guides explain starting a series book | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/BOOK_FACTORY.md` | [x] |
+| 6.3 | Mark review item #6 done; glossary entry for "series preset" | main | `docs/REVIEW-2026-09.md`, `GLOSSARY.md` | [x] |
+| 6.4 | Check everything with proof; test-drive by starting a series book from the demo book on a throwaway copy | helper: checker | none (read-only) | [x] |
+
+**Notes:** the 6.1 builder hit its 40-turn limit with one wrong test (it
+expected the new book's next task to be the visual lock; a new book
+rightly starts at its own brief). Main rewrote that test to check what is
+true, and made an explicit `create --series` name win over the source's.
+The checker also needed a second turn budget to report.
 
 **Order:** round 1: 6.1 and 6.2 together; main does 6.3. Then the checker.
 
@@ -185,15 +191,20 @@ it, and read `status` and `next`: the style files match, the references wait
 as drafts, and nothing is approved or locked.
 
 **Done when:**
-- [ ] One command starts a new book with the earlier book's voice, visual rules, design settings and references already in place.
-- [ ] Nothing is approved or locked on anyone's behalf; the references arrive as drafts that say where they came from.
-- [ ] `pytest` passes and the demo build passes.
-- [ ] Everything is saved to GitHub `main` and checked there.
+- [x] One command starts a new book with the earlier book's voice, visual rules, design settings and references already in place.
+- [x] Nothing is approved or locked on anyone's behalf; the references arrive as drafts that say where they came from.
+- [x] `pytest` passes and the demo build passes.
+- [x] Everything is saved to GitHub `main` and checked there.
 
 **Verification log**
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-23 | 6 | Checker: only the phase's files changed | confirmed |
+| 2026-09-23 | 6 | Checker: full `pytest` | exit 0; 396 passed, 2 skipped (392 + 4 new; counted from the progress marks, the summary line wasn't written to the log) |
+| 2026-09-23 | 6 | Checker: demo build on a throwaway copy | Release Ready, 24 pages |
+| 2026-09-23 | 6 | Test-drive: `create --series-from demo-book` | exit 0; 5 style files byte-identical; 6 references as drafts, 0 approved, source `series:demo-book`; voice and visual unlocked; `next` = its own brief |
+| 2026-09-23 | 6 | Test-drive: `--series-from` an unlocked book | refused (exit 5), no folder created |
 
 ---
 

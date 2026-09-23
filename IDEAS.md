@@ -12,3 +12,4 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 
 - 2026-09-22: Publish the Claude Code audit report as a private page to refer back to (audit session)
 - 2026-09-23: Approval guard blocks a plain Python text edit of `PLAN.md` because the text mentions "approve"; make it tell real commands from words in text (Phase 4 planning)
+- 2026-09-23: The builder helper hit its 40-turn limit in Phases 5 and 6 on normal-sized tasks (work nearly done both times); consider 60 turns, or smaller briefs (Phases 5-6)
