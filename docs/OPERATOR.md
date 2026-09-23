@@ -320,13 +320,27 @@ author, back copy and the intended artwork placement. After the interior is
 final, `bookfactory cover dimensions <book>` calculates bleed and spine from
 its actual PDF page count. Register `cover-front-artwork` as `cover_artwork`
 against locked references. Submit native text-free art through the normal
-asset draft workflow. Typeset one PDF containing back, spine and front with
-real selectable type; reserve KDP's barcode zone. Inspect the wrap at print
-size and the front at Amazon thumbnail size, then:
+asset draft workflow.
+
+Build the wrap from `cover/cover.json` rather than typesetting it by hand:
 
 ```bash
-bookfactory cover submit <book> --file <full-wrap.pdf>
+bookfactory cover build <book>
 ```
+
+This places the front artwork (or none, for a text-only cover), sets title,
+author, back copy and, when the page count allows it, spine text - all as
+real selectable type - and reserves KDP's barcode zone. It writes a
+print-size preview and an Amazon-thumbnail preview to look at, and runs the
+cover checks. If something needs to change, edit `cover/cover.json`, never
+the PDF, and build again. Once the checks pass, register the draft:
+
+```bash
+bookfactory cover build <book> --submit
+```
+
+(`bookfactory cover submit <book> --file <full-wrap.pdf>` still registers a
+cover PDF made another way.)
 
 Under `visual_checkpoint`, wait for the operator's explicit approval:
 

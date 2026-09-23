@@ -215,9 +215,13 @@ The same discipline applies to words:
 Read `cover/cover.json`, the locked visual bible and approved character and
 editorial references. The final page count, trim and selected paper determine
 wrap size; the cover always bleeds even if the interior does not. Keep native
-generated art without lettering. Set every word as real type, reserve the KDP
-barcode area, and review at print and Amazon thumbnail sizes. Submit the
-one-page PDF with `bookfactory cover submit`. In `visual_checkpoint` mode,
+generated art without lettering. Once artwork is submitted, run
+`bookfactory cover build <book>` to typeset the wrap - it sets title, author,
+back copy and spine text (when the page count allows it) as real type,
+reserves the KDP barcode area, and writes print-size and Amazon-thumbnail
+previews plus the cover checks. Review both previews; if `cover/cover.json`
+needs a change, edit it and build again. Once the checks pass, register the
+draft with `bookfactory cover build <book> --submit`. In `visual_checkpoint` mode,
 stop at the full-wrap visual approval. After explicit operator approval,
 `bookfactory cover approve --draft vN --by <operator>` records the decision.
 Only in `autonomous` mode, when the cover-approval task's `mode` reads
@@ -230,9 +234,10 @@ same wrap dimensions, run `bookfactory cover finalize --draft vN` and then
 The approved cover is the tracked draft `cover/cover.json` names in
 `approved.path`, read-only and checksummed; never edit or replace it.
 If `cover/cover.json` records `"artwork": "none"`, the operator chose a
-text-only cover: skip the artwork, typeset the wrap from type and simple
-shapes, and submit it the same way. Never set that mode yourself to get past
-missing artwork. Do not fabricate a free ISBN number or custom imprint.
+text-only cover: `cover build` leaves out the artwork and typesets the wrap
+from type and simple shapes; submit it the same way. Never set that mode
+yourself to get past missing artwork. Do not fabricate a free ISBN number or
+custom imprint.
 
 ## Handing back
 

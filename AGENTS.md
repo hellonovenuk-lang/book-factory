@@ -222,10 +222,14 @@ record cover direction, paper, finish, author and back copy. Calculate the
 bleeding full wrap with `bookfactory cover dimensions`. Make native text-free
 artwork against the approved character and editorial references. Submit it as
 `cover-front-artwork`; native width AND height must reach 300 DPI at its actual
-printed size. Never upscale a small file. Set title, author, spine text only
-when it safely fits, and back copy as real selectable type. Reserve the KDP
-barcode area and check the wrap at print size and the front as a thumbnail.
-Submit a versioned draft with `bookfactory cover submit`.
+printed size. Never upscale a small file. `bookfactory cover build <book>`
+then typesets the full wrap from `cover/cover.json`: title, author, back copy,
+and spine text only when it safely fits, all as real selectable type; it
+places the artwork (or none, for a text-only cover) and reserves the KDP
+barcode area. It writes a print-size preview and a thumbnail preview and runs
+the cover checks. Look at both previews; change `cover/cover.json`, never the
+PDF, and rebuild until the wrap works at print size and as a thumbnail. Then
+register the versioned draft with `bookfactory cover build <book> --submit`.
 
 A text-only cover (no artwork at all) is the operator's decision, never a
 shortcut when artwork is late. It is recorded with
@@ -287,6 +291,7 @@ as draft v2; awaiting approval".
 | Register artwork you made | `bookfactory submit <book> <asset-id> --kind asset --file <path>` |
 | Register a page render | `bookfactory submit <book> <page-id> --kind page --file <path>` |
 | Render a page from its spec | `bookfactory render <book> --page <page-id> --submit` |
+| Typeset the full-wrap cover | `bookfactory cover build <book> [--submit]` |
 | Check the whole project | `bookfactory validate <book>` |
 | Run quality checks | `bookfactory qa <book> --json` |
 
