@@ -41,6 +41,8 @@ each printed inch. KDP needs at least 300 for interior images.
 **Done when.** The checklist, written before work starts, that says in plain
 words what "finished" means for a phase or task.
 
+**Dry run.** Running a command in "show me what you would do" mode: it lists the changes and makes none. `approve --all-passing --dry-run` is one.
+
 **Fan out.** Handing several tasks to helpers at the same time, so they work
 in parallel.
 

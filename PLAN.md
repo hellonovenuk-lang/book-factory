@@ -11,12 +11,12 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 7 (Batch approval) is done. The next phase isn't chosen yet.
-> **Finished:** `bookfactory approve <book> --all-passing --by <name> [--dry-run]` approves every draft that passed its measured checks, through the normal single approval; the operator's command, `--autonomous` only under an authorizing policy; the guard blocks agents from it. 410 tests passing, 2 skipped. Kieran hasn't run it live yet.
-> **Next action:** choose the next phase. Left in `docs/REVIEW-2026-09.md`: #3 (page plan and specs in one file, auto-registered assets), #7 (one-prompt start), #4 (image API), #8 (one `produce` loop), rest of #2 (`next --batch`). First, archive Phases 4-7 to `docs/PLAN-ARCHIVE.md` (`/handover`).
+> **Doing:** no phase open. Phases 4-7 are done and archived.
+> **Finished:** this session (2026-09-23) built four speed-ups from `docs/REVIEW-2026-09.md`: whole-book `render --submit` (4), `cover build` (5), `create --series-from` (6), `approve --all-passing` (7). Helper turn limits raised; 410 tests passing, 2 skipped. Kieran asked to run phases without stopping for OKs, with a summary at the end.
+> **Next action:** plan Phase 8 with `/plan-phase` from review item #3 (page plan and specs in one file, assets registered automatically from each spec), which Kieran agreed to next.
 
 **Unfinished, carried over:**
-- none
+- none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
 
 **Don't try again:**
 - `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
@@ -57,216 +57,13 @@ Phase 2: Planning and handing out work (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 3: Safety checks and proof (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 4: Render every page in one go (done)
+Phase 4: Render every page in one go (done, see `docs/PLAN-ARCHIVE.md`)
 
-Planned 2026-09-23 with Kieran; the first real job for the routine, from
-`docs/REVIEW-2026-09.md` item #2. `bookfactory render <book> --submit`
-without `--page` already renders and submits every page, but it stops at the
-first approved page, at the first page with no spec, and at the first page
-that fails to render. This phase makes it safe to run on a real book.
+Phase 5: Cover build (done, see `docs/PLAN-ARCHIVE.md`)
 
-| # | Task | Who | Files | Status |
-|---|---|---|---|---|
-| 4.1 | Whole-book render: with `--submit`, skips approved pages (unless a revision is open); always skips pages with no spec; carries on past a page that fails; reports rendered / skipped / failed with reasons; the command exits non-zero if any page failed. Tests for each case | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_render.py` | [x] |
-| 4.2 | Operator guide explains rendering the whole book and what is skipped | helper: docs keeper, routine (Sonnet) | `docs/OPERATOR.md` | [x] |
-| 4.3 | Mark review item #2 as partly done | main | `docs/REVIEW-2026-09.md` | [x] |
-| 4.4 | Check everything with proof (`/verify-phase`) | helper: checker | none (read-only) | [x] |
+Phase 6: Series presets (done, see `docs/PLAN-ARCHIVE.md`)
 
-**Order:** round 1: 4.1 and 4.2 together while the main session does 4.3.
-Then the checker checks everything.
-
-**Test-drive:** on a throwaway copy of the demo book, approve one page, break
-another, run `render --submit` on the whole book and read what it reports.
-
-**Done when:**
-- [x] One command renders and submits every page that is ready, and approved pages are never touched.
-- [x] A broken page is listed as failed, and the other pages still get done.
-- [x] `pytest` passes and the demo build passes.
-- [x] Everything is saved to GitHub `main` and checked there.
-
-**Verification log**
-
-| Date | Phase | Check | Result |
-|---|---|---|---|
-| 2026-09-23 | 4 | Checker: only the 3 files of task 4.1 uncommitted | confirmed |
-| 2026-09-23 | 4 | Checker: full `pytest` | 383 passed, 2 skipped (baseline 378 + 5 new) |
-| 2026-09-23 | 4 | Checker: demo build on a throwaway copy | finished, Release Ready, 24 pages |
-| 2026-09-23 | 4 | Test-drive: whole-book `render --submit` on the built demo book, one spec broken | all 24 pages skipped as approved, exit 0; approved PDFs' sha256 unchanged |
-| 2026-09-23 | 4 | Broken page fails, rest carry on (demo book had no unapproved page, so by tests) | 5 new tests in `tests/test_render.py` pass |
-
----
-
-## Phase 5: Cover build (done)
-
-Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #5. Today
-each cover is typeset by a one-off script (the running book has three:
-`build_cover_v1.py`, `_text_v2.py`, `_v3.py`; the demo script has its own).
-`bookfactory cover build <book>` does it from `cover/cover.json` in seconds,
-the same way every time.
-
-**The command:** `bookfactory cover build <book> [--submit]`. Reads title
-(the book's), optional `subtitle`, `author`, `back_copy`, optional
-`spine_text` (set only when KDP allows it, else left off and reported) and an
-optional `design` block (`background`, `ink`, `accent` colours;
-`title_font`, `body_font` font files inside the book). Places the approved
-(or latest reviewable) `cover-front-artwork` on the front, or none for a
-text-only cover. Keeps the barcode area clear. Writes
-`output/cover-build/cover-wrap.pdf` plus a full-wrap preview PNG and a
-front thumbnail PNG (regenerable, not tracked), runs the cover checks, and
-with `--submit` registers a new cover draft only if they pass. It never
-approves.
-
-| # | Task | Who | Files | Status |
-|---|---|---|---|---|
-| 5.1 | `cover build` with template, previews, checks, `--submit`, schema fields, the cover-layout task pointing to it, and tests | helper: builder, routine (Sonnet) | `bookfactory/render/cover.py` (new), `templates/cover/wrap.html.j2` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `bookfactory/core/tasks.py`, `schemas/cover.schema.json`, `tests/test_cover_build.py` (new) | [x] |
-| 5.2 | Demo script uses `cover build` instead of its own typesetting | main, after 5.1 | `scripts/build_demo_book.py` | [x] |
-| 5.3 | Rules and guides say covers are built with `cover build` | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/*` | [x] |
-| 5.4 | Mark review item #5 done | main | `docs/REVIEW-2026-09.md` | [x] |
-| 5.5 | Check everything with proof, and test-drive on a throwaway copy of the running book | helper: checker | none (read-only) | [x] |
-
-**Notes:** the 5.1 builder hit its 40-turn limit, most likely waiting on the
-slow full test run; its work was complete and its 8 tests passed. Main then
-found that WeasyPrint ignores CSS `writing-mode`, so spine text came out
-horizontal across both covers. Fixed by rotating it, sized from the spine
-width, with a test that renders real spine text. Main also tightened the
-AGENTS.md 9a wording so both previews must be looked at.
-
-**Order:** round 1: 5.1 and 5.3 together; main does 5.4. Round 2: main
-does 5.2, then the checker.
-
-**Test-drive:** on a throwaway copy, build the running book's cover from its
-`cover.json` and look at the preview and thumbnail.
-
-**Done when:**
-- [x] One command builds a full-wrap cover PDF and previews from `cover.json`, and it passes Book Factory's own cover checks.
-- [x] With `--submit` it becomes a new cover draft; it never approves.
-- [x] `pytest` passes and the demo build (now using `cover build`) passes.
-- [x] Everything is saved to GitHub `main` and checked there.
-
-**Verification log**
-
-| Date | Phase | Check | Result |
-|---|---|---|---|
-| 2026-09-23 | 5 | Main: WeasyPrint spine test | `writing-mode` ignored (text horizontal, 1.7in wide); rotation keeps it vertical inside the spine |
-| 2026-09-23 | 5 | Checker: only the phase's 12 files changed | confirmed |
-| 2026-09-23 | 5 | Checker: full `pytest` | 392 passed, 2 skipped (383 + 9 new) |
-| 2026-09-23 | 5 | Checker: demo build on a throwaway copy, now via `cover build --submit` | Release Ready; cover draft v1 built and submitted, cover preflight pass |
-| 2026-09-23 | 5 | Test-drive: `cover build` on a throwaway copy of the running book | no problems; previews legible, artwork clear, nothing crosses the spine |
-
----
-
-## Phase 6: Series presets (done)
-
-Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #6. Book 2
-of a series should start from book 1's locked look and voice instead of
-redoing visual development, the slowest creative stage.
-
-**The command:** `bookfactory create "<title>" --policy <policy> --series-from
-<source-book>` (other `create` options as usual). The source must have its
-voice and visual style locked. It copies into the new book: the voice bible
-and writing sample, the visual bible, design tokens and reference set, and
-the cover `design` block with any font files it names. Each required
-reference's **approved** file from the source is registered and submitted in
-the new book as a **draft** recording where it came from (source book,
-revision, sha256). Nothing is approved or locked: the new book's own policy
-and `next` decide who approves the references and locks voice and visual
-(under `visual_checkpoint`, the operator's one visual lock). `series` is set
-to the source's series name, or its title if it has none. An audit entry
-lists every file copied and its sha256.
-
-| # | Task | Who | Files | Status |
-|---|---|---|---|---|
-| 6.1 | `create --series-from`: copy the locked style, submit the references as drafts with provenance, record series and audit; refuse if the source isn't locked; tests | helper: builder, routine (Sonnet) | `bookfactory/core/series.py` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_series.py` (new) | [x] |
-| 6.2 | Rules and guides explain starting a series book | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/BOOK_FACTORY.md` | [x] |
-| 6.3 | Mark review item #6 done; glossary entry for "series preset" | main | `docs/REVIEW-2026-09.md`, `GLOSSARY.md` | [x] |
-| 6.4 | Check everything with proof; test-drive by starting a series book from the demo book on a throwaway copy | helper: checker | none (read-only) | [x] |
-
-**Notes:** the 6.1 builder hit its 40-turn limit with one wrong test (it
-expected the new book's next task to be the visual lock; a new book
-rightly starts at its own brief). Main rewrote that test to check what is
-true, and made an explicit `create --series` name win over the source's.
-The checker also needed a second turn budget to report.
-
-**Order:** round 1: 6.1 and 6.2 together; main does 6.3. Then the checker.
-
-**Test-drive:** on a throwaway copy, build the demo book, start "book 2" from
-it, and read `status` and `next`: the style files match, the references wait
-as drafts, and nothing is approved or locked.
-
-**Done when:**
-- [x] One command starts a new book with the earlier book's voice, visual rules, design settings and references already in place.
-- [x] Nothing is approved or locked on anyone's behalf; the references arrive as drafts that say where they came from.
-- [x] `pytest` passes and the demo build passes.
-- [x] Everything is saved to GitHub `main` and checked there.
-
-**Verification log**
-
-| Date | Phase | Check | Result |
-|---|---|---|---|
-| 2026-09-23 | 6 | Checker: only the phase's files changed | confirmed |
-| 2026-09-23 | 6 | Checker: full `pytest` | exit 0; 396 passed, 2 skipped (392 + 4 new; counted from the progress marks, the summary line wasn't written to the log) |
-| 2026-09-23 | 6 | Checker: demo build on a throwaway copy | Release Ready, 24 pages |
-| 2026-09-23 | 6 | Test-drive: `create --series-from demo-book` | exit 0; 5 style files byte-identical; 6 references as drafts, 0 approved, source `series:demo-book`; voice and visual unlocked; `next` = its own brief |
-| 2026-09-23 | 6 | Test-drive: `--series-from` an unlocked book | refused (exit 5), no folder created |
-
----
-
-## Phase 7: Batch approval (done)
-
-Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #2 (its
-last big piece). After `render --submit` puts a whole book's pages up as
-drafts, approving them one at a time is about 60 commands.
-
-**The command:** `bookfactory approve <book> --all-passing --by <name>
-[--kind page|asset] [--dry-run] [--autonomous]`. Approves, one by one through
-the normal single approval (so every existing check still applies), the
-newest reviewable draft of every page and asset that has one and is not
-already approved (or has a revision open). A draft that failed a measured
-check is never reviewable, so it is never included. Skips the cover artwork
-(the cover has its own approval). Assets before pages. Carries on past one
-that fails and reports approved / failed; exit code 1 if any failed.
-`--dry-run` lists what would be approved and changes nothing. `--by` is
-required. It is the operator's command, like `approve`: an agent may run it
-only as `--autonomous`, which is refused unless the book's recorded policy
-authorizes autonomous approval (the same check as a single approval). The
-approval guard already blocks any `bookfactory ... approve` an agent runs in
-auto mode.
-
-| # | Task | Who | Files | Status |
-|---|---|---|---|---|
-| 7.1 | `approve --all-passing` with `--kind`, `--dry-run`, `--autonomous`, required `--by`; tests | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_batch_approve.py` (new) | [x] |
-| 7.2 | Rules and guides: batch approval is the operator's; `--autonomous` only under the policy | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` | [x] |
-| 7.3 | Guard test: `approve --all-passing` is caught; mark review item #2 done | main | `tests/test_hook_guard_authority.py`, `docs/REVIEW-2026-09.md` | [x] |
-| 7.4 | Raise helper turn limits (builder 40 to 60, checker 25 to 40), from `IDEAS.md` | main | `.claude/agents/implementer.md`, `.claude/agents/verifier.md`, `IDEAS.md` | [x] |
-| 7.5 | Check everything with proof; test-drive on a throwaway demo copy | helper: checker | none (read-only) | [x] |
-
-**Notes:** with the higher turn limits, the builder (41 tool uses) and the
-checker (30) both finished and reported first time.
-
-**Order:** round 1: 7.1 and 7.2 together; main does 7.3 and 7.4. Then the
-checker.
-
-**Test-drive:** the approval guard (rightly) blocks helpers from running
-`approve`, and it must not be worked around. So the proof is the CLI tests,
-which drive the real command end to end in a temporary folder, plus the
-checker confirming that the guard blocks `approve --all-passing`. The first
-live run is Kieran's, on a real book.
-
-**Done when:**
-- [x] One command approves every draft that passed its checks, and lists them first with `--dry-run`.
-- [x] A draft that failed a check is never approved, and an agent can't use it without the book's autonomous policy.
-- [x] `pytest` passes and the demo build passes.
-- [x] Everything is saved to GitHub `main` and checked there.
-
-**Verification log**
-
-| Date | Phase | Check | Result |
-|---|---|---|---|
-| 2026-09-23 | 7 | Main: guard tests with the 2 new `approve --all-passing` cases | all pass (asks, so blocked in auto mode) |
-| 2026-09-23 | 7 | Checker: only the phase's files changed | confirmed |
-| 2026-09-23 | 7 | Checker: full `pytest` (junit XML) | 410 passed, 2 skipped (396 + 12 + 2) |
-| 2026-09-23 | 7 | Checker: demo build on a throwaway copy | Release Ready, 24 pages |
-| 2026-09-23 | 7 | Checker: contract read against tests | each point proved by a named test in `tests/test_batch_approve.py` |
+Phase 7: Batch approval (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
 
