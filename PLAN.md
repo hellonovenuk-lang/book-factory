@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 12 (`produce`, first slice), planned and agreed by Kieran 2026-09-23; no task started yet.
-> **Finished:** Phases 8-11 (one-file page plan, one-prompt start, Higgsfield picture test, picture budget). 446 tests passing, 2 skipped at the end of Phase 11.
-> **Next action:** run `/fan-out` for Phase 12: task 12.1 first (12.2 needs its function), then 12.2, then the docs keeper (12.3).
+> **Doing:** no phase open. Phase 12 (`produce`, first slice) is done; not yet moved to `docs/PLAN-ARCHIVE.md`.
+> **Finished:** Phases 8-12. `bookfactory produce <book>` runs renders, QA, assembly and interior preflight by itself and stops with a plain reason at anything else; it never approves, locks or advances. 471 tests passing, 2 skipped.
+> **Next action:** `/handover` (archive Phase 12), then Kieran picks the next slice of #8 from `IDEAS.md`. Recommended: slice 2 (approve passing drafts with `--autonomous`, only under an autonomous policy), because without it `produce` renders one page and then stops at its approval.
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -73,7 +73,7 @@ Phase 10: Test one picture through Higgsfield (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 11: Picture budget and the Higgsfield routine (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 12: `produce`, first slice (not started)
+## Phase 12: `produce`, first slice (done)
 
 Chosen 2026-09-23 by Kieran: review item #8 (`docs/REVIEW-2026-09.md`),
 hands-off production. #8 is bigger than one sitting; this is its first slice.
@@ -98,17 +98,17 @@ The later slices are parked in `IDEAS.md`.
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
 | 12.1 | The loop in the core, `api.produce`, and tests: runs each mechanical task, stops at every other kind with a reason, never approves/locks/advances, obeys `mode`, step limit, no-progress stop, dry run changes nothing | helper: builder, tricky (Opus: it sits on the safety rules) | `bookfactory/core/produce.py` (new), `bookfactory/core/api.py`, `tests/test_produce.py` (new) | [x] |
-| 12.2 | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]`, after 12.1 | helper: builder, routine (Sonnet) | `bookfactory/cli/main.py`, `tests/test_produce_cli.py` (new) | [ ] |
-| 12.3 | Rules and guides: what `produce` does and never does; quick-reference line | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [ ] |
+| 12.2 | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]`, after 12.1 | helper: builder, routine (Sonnet) | `bookfactory/cli/main.py`, `tests/test_produce_cli.py` (new) | [x] |
+| 12.3 | Rules and guides: what `produce` does and never does; quick-reference line | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [x] |
 | 12.4 | Park the later slices; new glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [x] |
 
 **Test-drive:** run `produce` on a throwaway copy of the demo book
 (`/verify-phase`) and see where it stops and what it says.
 
 **Done when:**
-- [ ] `bookfactory produce <book>` runs the mechanical steps by itself and stops with a plain reason at the first thing that needs writing, a picture or the operator.
-- [ ] Tests prove it never approves, locks or skips a gate.
-- [ ] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
+- [x] `bookfactory produce <book>` runs the mechanical steps by itself and stops with a plain reason at the first thing that needs writing, a picture or the operator.
+- [x] Tests prove it never approves, locks or skips a gate.
+- [x] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
 
 ---
 
@@ -142,3 +142,4 @@ The later slices are parked in `IDEAS.md`.
 | Date | Phase | Check | Result |
 |---|---|---|---|
 | 2026-09-23 | 12.1 | Checker: scope, produce.py calls only render/qa/assemble/preflight/next, full suite, demo build + produce on a throwaway copy | Pass: 466 tests, 0 failed, 2 skipped; demo build passed; produce stopped at an illustration task with a plain reason |
+| 2026-09-23 | 12.2, 12.3 | Checker: scope, CLI calls only api.produce, exit codes, `--max-steps 0` refused, docs match the code, full suite, demo build + `produce` (plain, `--dry-run`, `--json`) on a throwaway copy | Pass: 471 tests, 0 failed, 2 skipped. A live render run wasn't shown, because making one needed `revise`, which the guard rightly blocks for helpers; the render path is proved by tests |
