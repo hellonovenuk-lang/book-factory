@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 14, Claude writes the copy (`produce` slice 3). Planned and agreed 2026-09-23; no task started.
-> **Finished:** Phase 13, `produce` slice 2: on an `autonomous` or `visual_checkpoint` book, `produce` approves each page it renders (signed `produce`, audited under the recorded policy) and carries on to QA, assembly and preflight; on a `checkpointed` book it stops at the first page approval. Never pictures, locks, the cover or force. 481 tests passing, 2 skipped.
-> **Next action:** run `/fan-out` for Phase 14 (task 14.1 first; 14.2 and 14.3 build on its stop code).
+> **Doing:** Phase 14, Claude writes the copy (`produce` slice 3). All four tasks done and checked; "Done when" ticked.
+> **Finished:** `produce` stops with `writing` when the next job is copy; `/write-book <book>` has Claude write it and run `produce` again, stopping at locks, pictures, the cover and anything else needing Kieran. 488 tests passing, 2 skipped.
+> **Next action:** `/handover` to archive Phase 14 and push to `main`; then Kieran's first live `/write-book` run on a real book.
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing` and of `produce` page approvals are Kieran's, on a real book; helpers are rightly blocked from them)
@@ -108,18 +108,26 @@ his subscription, and `produce` does the rest.
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
 | 14.1 | The `writing` stop code in `produce`, with tests: an `authoring` task in `continue_automatically` gives `writing`; cover writing tasks, lock steps and `wait_for_operator` writing tasks do not; the stop changes nothing on disk; dry run reports it too | helper: builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce.py` | [x] |
-| 14.2 | The `/write-book` skill: produce → write → save → produce, with the stop rules above; after 14.1 | main | `.claude/skills/write-book/SKILL.md` (new) | [ ] |
-| 14.3 | Rules and guides: the `writing` stop code; how `/write-book` works and what it never does; after 14.1 | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [ ] |
-| 14.4 | Tick slice 3 off in `IDEAS.md`; glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [ ] |
+| 14.2 | The `/write-book` skill: produce → write → save → produce, with the stop rules above; after 14.1 | main | `.claude/skills/write-book/SKILL.md` (new) | [x] |
+| 14.3 | Rules and guides: the `writing` stop code; how `/write-book` works and what it never does; after 14.1 | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [x] |
+| 14.4 | Tick slice 3 off in `IDEAS.md`; glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [x] |
 
 **Test-drive:** make a throwaway `visual_checkpoint` book in a temporary
 folder and run `/write-book` on it: it writes the brief, then stops at the
 concept lock with a plain reason.
 
 **Done when:**
-- [ ] `produce` says "writing" when the next job is copy, and tests prove it still never writes, locks or approves anything by itself.
-- [ ] `/write-book` on a throwaway book writes the brief and stops at the concept lock with a plain reason.
-- [ ] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
+- [x] `produce` says "writing" when the next job is copy, and tests prove it still never writes, locks or approves anything by itself.
+- [x] `/write-book` on a throwaway book writes the brief and stops at the concept lock with a plain reason.
+- [x] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
+
+**Notes:** the test-drive found that the placeholder check is literal: the
+brief template's own guidance note contains "TODO", so a fully written brief
+still failed the gate until that note was removed. The skill now says to
+remove the template's `>` notes. Under `visual_checkpoint` the concept lock
+reads `continue_automatically`, but `produce` and `/write-book` both stop
+there; the lock stays Kieran's (autonomous locks are an idea in `IDEAS.md`).
+The first live `/write-book` run on a real book is Kieran's.
 
 ---
 
@@ -153,3 +161,5 @@ concept lock with a plain reason.
 | Date | Phase | Check | Result |
 |---|---|---|---|
 | 2026-09-23 | 14.1 | Checker: scope, `_stop_for` read, no new API call, full suite (junit XML), demo build + `produce` on a fresh `visual_checkpoint` book, both on a throwaway copy | Pass: 488 tests, 0 failed, 2 skipped; demo build Release Ready; fresh book stopped with `writing` at the brief, no steps taken |
+| 2026-09-23 | 14.2 | Test-drive by main session: `/write-book` steps followed on a throwaway `visual_checkpoint` book in a scratch clone | Pass: wrote brief, concept and audience; `produce` then stopped at "Approve and lock the concept" (`not_mechanical`), nothing locked |
+| 2026-09-23 | 14.2, 14.3 | Checker: scope, docs and skill match `_stop_for`, no authority command told to run, AGENTS.md additions only and vendor-neutral, every skill command exists, full suite (junit XML) | Pass: 488 tests, 0 failed, 2 skipped |
