@@ -13,6 +13,7 @@ from pathlib import Path
 from bookfactory import __version__
 from bookfactory.cli import output as out
 from bookfactory.core import api, stages
+from bookfactory.core import produce as produce_loop
 from bookfactory.core.book import ASSET, PAGE
 from bookfactory.core.errors import BookFactoryError
 from bookfactory.core.jsonio import read_json
@@ -333,6 +334,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     preflight = sub.add_parser("preflight", parents=[common], help="Check the interior against the KDP profile.")
     preflight.add_argument("book")
+
+    produce = sub.add_parser(
+        "produce", parents=[common],
+        help="Run a book's mechanical tasks (render, QA, assembly, preflight) until one "
+             "needs a person. Never approves, locks or advances.")
+    produce.add_argument("book")
+    produce.add_argument("--max-steps", type=int, default=produce_loop.DEFAULT_MAX_STEPS,
+                         dest="max_steps",
+                         help=f"Stop after at most this many steps "
+                              f"(default {produce_loop.DEFAULT_MAX_STEPS}).")
+    produce.add_argument("--dry-run", action="store_true",
+                         help="Report the first step it would take, or why it would stop. "
+                              "Changes nothing.")
 
     cover = sub.add_parser("cover", parents=[common], help="Manage a full-wrap print cover.")
     cover_sub = cover.add_subparsers(dest="cover_command", required=True)
@@ -1141,6 +1155,45 @@ def cmd_preflight(args) -> int:
     return 0 if report["status"] != "fail" else 1
 
 
+def cmd_produce(args) -> int:
+    result = api.produce(args.book, root=args.root, max_steps=args.max_steps,
+                         dry_run=args.dry_run)
+    if args.json:
+        out.emit_json(result)
+        return _produce_exit_code(result)
+
+    out.heading("PRODUCE")
+    if not result["steps"]:
+        out.bullet("no steps taken", level="info")
+    for step in result["steps"]:
+        level = "error" if str(step["result"]).startswith("error:") else "ok"
+        out.bullet(f"{step['task_id']} ({step['type']}): {step['result']}", level=level)
+    out.blank()
+    if result["stopped_because"] == "error":
+        error_info = result.get("error") or {}
+        out.error(error_info.get("message", result["message"]), error_info.get("remedy"))
+    else:
+        print(result["message"])
+    next_task = result.get("next_task")
+    if next_task:
+        out.blank()
+        out.heading("NEXT TASK")
+        out.field("task", next_task["task_id"])
+        out.field("type", next_task["type"])
+        print(next_task["summary"])
+    return _produce_exit_code(result)
+
+
+def _produce_exit_code(result: dict) -> int:
+    """Same non-zero code and reasoning the CLI uses for a raised `BookFactoryError`."""
+    if result["stopped_because"] != "error":
+        return 0
+    from bookfactory.core import errors as errors_module
+    error_info = result.get("error") or {}
+    error_cls = getattr(errors_module, error_info.get("error", ""), None)
+    return error_cls.exit_code if error_cls is not None else BookFactoryError.exit_code
+
+
 def cmd_history(args) -> int:
     records = api.audit_history(args.book, limit=args.limit, event=args.event, root=args.root)
     if args.json:
@@ -1212,6 +1265,7 @@ COMMANDS = {
     "assemble": cmd_assemble,
     "review": cmd_review,
     "preflight": cmd_preflight,
+    "produce": cmd_produce,
     "cover": cmd_cover,
     "history": cmd_history,
 }
