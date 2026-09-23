@@ -107,7 +107,7 @@ his subscription, and `produce` does the rest.
 
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
-| 14.1 | The `writing` stop code in `produce`, with tests: an `authoring` task in `continue_automatically` gives `writing`; cover writing tasks, lock steps and `wait_for_operator` writing tasks do not; the stop changes nothing on disk; dry run reports it too | helper: builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce.py` | [ ] |
+| 14.1 | The `writing` stop code in `produce`, with tests: an `authoring` task in `continue_automatically` gives `writing`; cover writing tasks, lock steps and `wait_for_operator` writing tasks do not; the stop changes nothing on disk; dry run reports it too | helper: builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce.py` | [x] |
 | 14.2 | The `/write-book` skill: produce → write → save → produce, with the stop rules above; after 14.1 | main | `.claude/skills/write-book/SKILL.md` (new) | [ ] |
 | 14.3 | Rules and guides: the `writing` stop code; how `/write-book` works and what it never does; after 14.1 | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [ ] |
 | 14.4 | Tick slice 3 off in `IDEAS.md`; glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [ ] |
@@ -152,3 +152,4 @@ concept lock with a plain reason.
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-23 | 14.1 | Checker: scope, `_stop_for` read, no new API call, full suite (junit XML), demo build + `produce` on a fresh `visual_checkpoint` book, both on a throwaway copy | Pass: 488 tests, 0 failed, 2 skipped; demo build Release Ready; fresh book stopped with `writing` at the brief, no steps taken |
