@@ -199,7 +199,7 @@ stage by name, `next` walks you through it:
 
 idea -> intake -> brief -> concept lock -> outline -> writing sample -> voice
 lock -> manuscript -> manuscript lock -> visual bible -> visual references ->
-visual lock -> page plan -> page specs -> illustrations -> deterministic
+visual lock -> page plan and specs (one file, `bookfactory plan --from-file`) -> illustrations -> deterministic
 rendering -> QA -> assembly -> interior KDP preflight -> cover direction ->
 native cover art (skipped only when the operator recorded a text-only cover)
 -> typeset full wrap -> visual checkpoint -> cover preflight

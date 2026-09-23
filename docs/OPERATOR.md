@@ -216,7 +216,9 @@ on points at these exact files.
 
 ## 6. Plan the pages
 
-Write a JSON file listing every page in order:
+Write a JSON file listing every page in order. The recommended way is to
+write each page's spec (the exact final copy, and the brief for its artwork)
+in the same file, in one pass from the locked manuscript:
 
 ```json
 {
@@ -225,7 +227,14 @@ Write a JSON file listing every page in order:
     {"title": "Contents", "type": "contents"},
     {"title": "The First Warning Sign", "type": "chapter_opener", "chapter": 1},
     {"title": "The Mate Taxonomy", "type": "editorial_illustration", "chapter": 1,
-     "required_assets": ["p004-mate-taxonomy"]}
+     "spec": {
+       "copy": {"heading": "The Mate Taxonomy", "caption": "..."},
+       "illustration": {
+         "asset_id": "p004-mate-taxonomy",
+         "concept": "A field guide to golf-obsessed boyfriends",
+         "characters": ["dave"]
+       }
+     }}
   ]
 }
 ```
@@ -234,13 +243,24 @@ Write a JSON file listing every page in order:
 bookfactory plan golf-addict --from-file plan.json --front-matter 2
 ```
 
-`--front-matter 2` means the first two pages carry no printed number.
+`--front-matter 2` means the first two pages carry no printed number. Every
+spec in the file is checked against the page-spec schema before anything is
+written: one bad spec and the command refuses the whole file, leaving the
+book unchanged.
+
+Where a page's spec names its illustration's `asset_id`, that artwork is
+registered automatically (kind illustration, described from the spec's
+concept, characters and references) - you no longer need `required_assets`
+in the plan entry or a separate `bookfactory asset add` for it.
+`bookfactory asset add` is still how you register reference artwork and
+anything that is not a page's own illustration.
 
 Page types available: `chapter_opener`, `editorial_illustration`,
 `text_illustration`, `checklist`, `diagnostic_test`, `comparison`, `diagram`,
 `quote`, `certificate`, `closing`, `front_matter`, `contents`.
 
-You can also add pages one at a time:
+You can also add pages one at a time, without a spec, and write the spec
+later:
 
 ```bash
 bookfactory plan golf-addict --add --title "The Mate Taxonomy" --type editorial_illustration --chapter 1
@@ -248,11 +268,15 @@ bookfactory plan golf-addict --add --title "The Mate Taxonomy" --type editorial_
 
 ## 7. Produce the pages
 
-For each page, `next` will ask for three things in order:
+If you wrote every spec in the plan file (step 6), most pages already have
+what they need and `next` moves straight to the artwork. Otherwise, for each
+page `next` will ask for three things in order:
 
 **A page spec** - `pages/specs/p004.json`, holding the exact final copy and a
 brief for the illustration. Copy comes before artwork, always: the picture is
-drawn to fit the words.
+drawn to fit the words. Writing it (with `bookfactory spec <book> p004
+--from-file s.json`, or already in the plan file) registers its illustration
+asset automatically when the spec names one.
 
 **The artwork** - hand the task to ChatGPT, get a picture, submit and approve it.
 
@@ -487,9 +511,9 @@ bookfactory policy set <book> <p> --by <you>   change it (operator only, audited
 bookfactory status <book>                      where it stands
 bookfactory next <book>                        what to do next
 bookfactory task <book>                        the current task in full
-bookfactory plan <book> --from-file plan.json  plan the pages
-bookfactory spec <book> p004 --from-file s.json write a page spec
-bookfactory asset add <book> <asset-id>        register artwork
+bookfactory plan <book> --from-file plan.json  plan the pages, with each page's spec (and its artwork) in the same file
+bookfactory spec <book> p004 --from-file s.json write or replace one page's spec
+bookfactory asset add <book> <asset-id>        register a reference or other asset (page artwork registers itself from the spec)
 bookfactory submit <book> <id> --file art.png  register a draft
 bookfactory approve <book> <id>                approve it
 bookfactory reject <book> <id> --reason "..."  reject it

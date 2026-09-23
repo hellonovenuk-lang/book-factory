@@ -296,6 +296,7 @@ as draft v2; awaiting approval".
 | Know where the book is | `bookfactory status <book> --json` |
 | Know what to do next | `bookfactory next <book> --json` |
 | See a task in full | `bookfactory task <book> --json` |
+| Plan every page with its spec in one file | `bookfactory plan <book> --from-file <plan.json>` |
 | Register artwork you made | `bookfactory submit <book> <asset-id> --kind asset --file <path>` |
 | Register a page render | `bookfactory submit <book> <page-id> --kind page --file <path>` |
 | Render a page from its spec | `bookfactory render <book> --page <page-id> --submit` |

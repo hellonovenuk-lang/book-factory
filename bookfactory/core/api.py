@@ -242,8 +242,16 @@ def get_task(book_id: str, task_id: str | None = None, *,
 
 def plan_pages(book_id: str, pages: list[dict], *, root: str | Path | None = None,
                renumber: bool = True, front_matter_pages: int = 0) -> dict:
+    """Add pages to the plan, each optionally with its spec.
+
+    Every spec is checked before anything is written, so one bad spec leaves
+    the book unchanged. Artwork a spec names is registered for its page.
+    """
     book = Book.load(book_id, root)
+    known_assets = {asset.asset_id for asset in book.registry.assets}
     added = []
+    specs = []
+    problems = []
     for entry in pages:
         record = book.add_page(
             title=entry["title"],
@@ -256,24 +264,44 @@ def plan_pages(book_id: str, pages: list[dict], *, root: str | Path | None = Non
         )
         added.append(record.page_id)
         if entry.get("spec"):
-            book.write_page_spec(record.page_id, entry["spec"])
+            try:
+                book.prepare_page_spec(record.page_id, entry["spec"])
+            except ValidationError as exc:
+                problems.extend(f"{record.page_id}: {p}" for p in exc.problems or [str(exc)])
+                continue
+            specs.append((record.page_id, entry["spec"]))
+    if problems:
+        raise ValidationError(
+            f"{len(problems)} problem(s) in the page specs; nothing was planned",
+            problems=problems,
+            remedy="Fix the listed specs in the plan file and run the command again.",
+        )
+    for page_id, spec in specs:
+        book.write_page_spec(page_id, spec)
+    registered = [asset.asset_id for asset in book.registry.assets
+                  if asset.asset_id not in known_assets]
     if renumber:
         book.manifest.renumber_printed(front_matter=front_matter_pages)
     book.state.page_plan.page_count = len(book.manifest)
-    book.log("page_planned", added=added, total=len(book.manifest))
+    book.log("page_planned", added=added, total=len(book.manifest),
+             specs=len(specs), assets_registered=registered or None)
     book.save()
     task_module.sync_open_task(book)
-    return {"added": added, "total": len(book.manifest),
-            "problems": book.manifest.problems()}
+    return {"added": added, "total": len(book.manifest), "specs": len(specs),
+            "assets_registered": registered, "problems": book.manifest.problems()}
 
 
 def write_page_spec(book_id: str, page_id: str, spec: dict, *,
                     root: str | Path | None = None) -> dict:
     book = Book.load(book_id, root)
+    known_assets = {asset.asset_id for asset in book.registry.assets}
     path = book.write_page_spec(page_id, spec)
     book.save()
     task_module.sync_open_task(book)
-    return {"page_id": page_id, "spec": book.paths.relative(path)}
+    registered = [asset.asset_id for asset in book.registry.assets
+                  if asset.asset_id not in known_assets]
+    return {"page_id": page_id, "spec": book.paths.relative(path),
+            "assets_registered": registered}
 
 
 def register_asset(book_id: str, asset_id: str, *, root: str | Path | None = None,

@@ -256,8 +256,7 @@ def planned_book(locked_book: Book, workspace: Path) -> Book:
     book.save()
 
     staging = workspace / "staging"
-    api.register_asset("test-book", "fig-scope", root=workspace, kind="illustration",
-                       title="Scope", page_id="p002")
+    # fig-scope was registered from p002's spec when the spec was written.
     art = make_image(staging / "fig-scope.png", (1800, 1350), seed=9)
     api.submit_asset("test-book", "fig-scope", art, kind=ASSET, root=workspace)
     api.approve("test-book", "fig-scope", kind=ASSET, root=workspace, by="tester")

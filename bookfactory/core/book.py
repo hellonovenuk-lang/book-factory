@@ -476,6 +476,22 @@ class Book:
 
     def write_page_spec(self, page_id: str, spec: dict) -> Path:
         page = self.manifest.get(page_id)
+        spec = self.prepare_page_spec(page_id, spec)
+        path = self.paths.spec_file(page_id)
+        write_json(path, spec)
+        page.spec = self.paths.relative(path)
+        if page.status == "planned":
+            page.status = "spec_ready"
+        self.register_spec_artwork(page_id, spec)
+        return path
+
+    def prepare_page_spec(self, page_id: str, spec: dict) -> dict:
+        """The spec as it will be written, with defaults filled in. Writes nothing.
+
+        Raises ValidationError if it does not match the page-spec schema, so a
+        caller writing many specs can check them all before writing any.
+        """
+        page = self.manifest.get(page_id)
         spec = dict(spec)
         spec.setdefault("schema_version", SCHEMA_VERSION)
         spec.setdefault("book_id", self.state.book_id)
@@ -488,12 +504,36 @@ class Book:
             "visual_style_version": self.state.style.visual_version,
         })
         schema.validate("page-spec", spec, context=f"page spec {page_id}")
-        path = self.paths.spec_file(page_id)
-        write_json(path, spec)
-        page.spec = self.paths.relative(path)
-        if page.status == "planned":
-            page.status = "spec_ready"
-        return path
+        return spec
+
+    def register_spec_artwork(self, page_id: str, spec: dict) -> str | None:
+        """Make the artwork a spec names part of its page.
+
+        The asset is added to the page's required assets and, if it is not in
+        the registry yet, registered as an illustration for this page from the
+        spec's own description of it - so nobody has to run `asset add` for
+        page artwork. An asset that is already registered is left as it is.
+        Returns the asset id if it was newly registered.
+        """
+        illustration = spec.get("illustration") or {}
+        asset_id = illustration.get("asset_id")
+        if not asset_id:
+            return None
+        page = self.manifest.get(page_id)
+        if asset_id not in page.required_assets:
+            page.required_assets.append(asset_id)
+        if self.registry.find(asset_id) is not None:
+            return None
+        self.register_asset(
+            asset_id,
+            kind="illustration",
+            title=page.title,
+            description=illustration.get("concept"),
+            page_id=page_id,
+            characters=illustration.get("characters"),
+            references=illustration.get("references"),
+        )
+        return asset_id
 
     def read_page_spec(self, page_id: str) -> dict:
         page = self.manifest.get(page_id)

@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phases 4-7 are done and archived.
-> **Finished:** this session (2026-09-23) built four speed-ups from `docs/REVIEW-2026-09.md`: whole-book `render --submit` (4), `cover build` (5), `create --series-from` (6), `approve --all-passing` (7). Helper turn limits raised; 410 tests passing, 2 skipped. Kieran asked to run phases without stopping for OKs, with a summary at the end.
-> **Next action:** plan Phase 8 with `/plan-phase` from review item #3 (page plan and specs in one file, assets registered automatically from each spec), which Kieran agreed to next.
+> **Doing:** no phase open. Phase 8 is done and archived.
+> **Finished:** this session (2026-09-23) built Phase 8 from review item #3: one plan file now holds every page with its spec, each spec's artwork is registered by itself, and a plan with one bad spec is refused whole. 419 tests passing, 2 skipped; demo build passes. Kieran asked to run phases without stopping for OKs, with a summary at the end.
+> **Next action:** choose Phase 9 with Kieran: review item #7 (one-prompt start) is next in the suggested order; the new `IDEAS.md` line (many specs at once for an existing plan) is a small alternative.
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -64,6 +64,8 @@ Phase 5: Cover build (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 6: Series presets (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 7: Batch approval (done, see `docs/PLAN-ARCHIVE.md`)
+
+Phase 8: Page plan and specs in one file (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
 

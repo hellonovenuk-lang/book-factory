@@ -67,6 +67,10 @@ out work to helpers, checks their work and saves it.
 
 **Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
 
+**Page plan.** The list of every page in a book, in order, with its type and title (`pages/manifest.json`). It can carry each page's spec too, so the whole plan is written in one file.
+
+**Page spec.** One page's exact words, layout and illustration brief (`pages/specs/<page>.json`). The renderer sets the page from it. If it names an artwork (`illustration.asset_id`), that artwork is registered for the page automatically.
+
 **Permission mode.** How much Claude Code may do without asking. In "default" mode it shows you a question before risky commands; in "auto" mode its own safety check answers most questions for you, so the approval guard blocks operator-only commands there instead of asking.
 
 **Phase.** A small block of work that fits one sitting, with its own "Done

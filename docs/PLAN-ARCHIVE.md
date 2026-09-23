@@ -318,3 +318,52 @@ live run is Kieran's, on a real book.
 | 2026-09-23 | 7 | Checker: full `pytest` (junit XML) | 410 passed, 2 skipped (396 + 12 + 2) |
 | 2026-09-23 | 7 | Checker: demo build on a throwaway copy | Release Ready, 24 pages |
 | 2026-09-23 | 7 | Checker: contract read against tests | each point proved by a named test in `tests/test_batch_approve.py` |
+
+## Phase 8: Page plan and specs in one file (done)
+
+Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #3. Today a
+book of 40 pages takes a page-plan task, then 40 separate "write the spec"
+tasks, then a "register the artwork" task for each illustration: about 120
+small tasks.
+
+**What changes:** `bookfactory plan <book> --from-file plan.json` already
+accepts a `spec` inside each page entry, but nothing says so, and the artwork
+still has to be registered by hand. After this phase:
+- Writing a spec whose `illustration` names an `asset_id` adds that asset to
+  the page's required assets and registers it (kind illustration, for that
+  page, with the spec's concept, characters and references) if it isn't
+  registered yet. This works for `plan --from-file` and `spec` alike.
+- `plan --from-file` checks every spec in the file before writing anything,
+  so one bad spec leaves the book unchanged instead of half-planned.
+- The page-plan task tells the writer to put each page's spec in the plan
+  file, so the whole plan is written in one pass from the manuscript.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 8.1 | Spec names its artwork: add it to the page and register it; plan checks every spec first; tests | main (one tight change across two core files; briefing it out costs more than doing it) | `bookfactory/core/book.py`, `bookfactory/core/api.py`, `bookfactory/cli/main.py` (plan/spec output, added while building), `tests/test_plan_specs.py` (new), `tests/conftest.py` (fixture no longer registers artwork by hand) | [x] |
+| 8.2 | Page-plan and spec task instructions describe the one-file plan | main | `bookfactory/core/tasks.py` | [x] |
+| 8.3 | Demo build writes plan and specs in one go and stops registering artwork by hand (the test-drive) | main | `scripts/build_demo_book.py` | [x] |
+| 8.4 | Rules and guides: one-file plan, artwork registered from the spec | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` | [x] |
+| 8.5 | Mark review item #3 done; glossary | main | `docs/REVIEW-2026-09.md`, `GLOSSARY.md` | [x] |
+| 8.6 | Check everything with proof on a throwaway demo copy | helper: checker (Sonnet) | none (read-only) | [x] |
+
+**Notes:** the docs keeper's first example spec had `"copy": "..."`, which the spec check refuses (copy is a set of named parts); caught in review and fixed. Existing callers that ran `asset add` after writing a spec now get "already exists"; the test fixture was updated for that.
+
+**Order:** main does 8.1 to 8.3 while the docs keeper does 8.4; then 8.5;
+then the checker.
+
+**Test-drive:** the demo build (8.3) plans all its pages with their specs
+from one list and never calls `asset add` for page artwork; it must still
+walk the whole pipeline to the end.
+
+**Done when:**
+- [x] One plan file creates every page with its spec, and the artwork each spec names is registered without a separate command.
+- [x] A plan file with one bad spec is refused and leaves the book unchanged.
+- [x] `pytest` passes and the demo build passes.
+- [x] Everything is saved to GitHub `main` and checked there.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-23 | 8 | Full test suite (checker, junit XML) | 419 tests, 0 failures, 0 errors, 2 skipped |
+| 2026-09-23 | 8 | Demo build on a throwaway copy | Finished to release ready; step 8: 24 pages planned, 24 specs written, 10 artwork assets registered from the specs |
+| 2026-09-23 | 8 | Diff of rules and guides against the plan | No contradictions; no rule's meaning changed |

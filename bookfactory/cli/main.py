@@ -165,7 +165,8 @@ def build_parser() -> argparse.ArgumentParser:
     plan = sub.add_parser("plan", parents=[common], help="Create or extend the page plan.")
     plan.add_argument("book")
     plan.add_argument("--from-file", dest="from_file",
-                      help="JSON file: a list of pages, or {\"pages\": [...]}.")
+                      help="JSON file: a list of pages, or {\"pages\": [...]}. Each page may "
+                           "carry its \"spec\"; artwork a spec names is registered.")
     plan.add_argument("--add", action="store_true", help="Add a single page.")
     plan.add_argument("--title")
     plan.add_argument("--type", dest="page_type")
@@ -704,6 +705,9 @@ def cmd_plan(args) -> int:
     out.heading("PAGE PLAN")
     out.field("added", str(len(result["added"])))
     out.field("total pages", str(result["total"]))
+    out.field("specs written", str(result["specs"]))
+    if result["assets_registered"]:
+        out.field("new artwork", ", ".join(result["assets_registered"]))
     if result["problems"]:
         out.blank()
         out.heading("PROBLEMS")
@@ -720,6 +724,8 @@ def cmd_spec(args) -> int:
         out.emit_json(result)
         return 0
     out.bullet(f"wrote {result['spec']}", level="ok")
+    for asset_id in result["assets_registered"]:
+        out.bullet(f"registered artwork {asset_id} for {result['page_id']}", level="ok")
     return 0
 
 

@@ -86,6 +86,12 @@ it.
 
 ## Doing a visual task
 
+A page's illustration asset is registered automatically, from the page spec
+that named it (`pages/specs/<page-id>.json`, `illustration.asset_id`) - by
+whoever wrote the plan or the spec, usually in one pass with every other page.
+You never need to register it yourself; you only submit the artwork once it
+is drawn.
+
 A task looks like this:
 
 ```json
@@ -211,7 +217,9 @@ The same discipline applies to words:
    phrases list.
 2. Read `manuscript/writing-sample.md`. That is the calibration - match it.
 3. Page copy goes in the page spec (`pages/specs/<page-id>.json`), not into
-   artwork.
+   artwork. Specs are usually written together with the page plan, in one
+   file (`bookfactory plan <book> --from-file plan.json`), each entry's
+   `spec` holding that page's copy and illustration brief.
 4. Content QA will flag AI constructions the voice bible bans - the
    "it's not X, it's Y" shape, corporate vocabulary, three-part aphorisms used
    as rhythm. Write without them in the first place.

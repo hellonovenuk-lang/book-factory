@@ -137,29 +137,22 @@ def build(*, clean: bool = True) -> Book:
     step(7, "Lock the visual style - mass page production is now permitted")
     api.lock(BOOK_ID, "visual", version="v1", by=OPERATOR, root=REPO_ROOT)
 
-    step(8, "Create the page plan and write every page spec")
+    step(8, "Create the page plan with every page spec in one go")
+    # One plan, each page carrying its spec. The artwork each spec names is
+    # registered for its page automatically - no `asset add` for page art.
     pages = [{"title": page["title"], "type": page["type"], "chapter": page.get("chapter"),
-              "required_assets": page.get("assets", [])} for page in content.PAGES]
+              "spec": page["spec"]} for page in content.PAGES]
     result = api.plan_pages(BOOK_ID, pages, root=REPO_ROOT, front_matter_pages=2)
-    log(f"{result['total']} pages planned")
-
-    book = Book.load(BOOK_ID, REPO_ROOT)
-    for index, page in enumerate(content.PAGES, start=1):
-        page_id = f"p{index:03d}"
-        book.write_page_spec(page_id, page["spec"])
-    book.save()
-    log(f"{len(content.PAGES)} page specs written")
+    log(f"{result['total']} pages planned, {result['specs']} specs written, "
+        f"{len(result['assets_registered'])} artwork assets registered from the specs")
 
     step(9, "Generate, submit and approve the illustration artwork")
     book = Book.load(BOOK_ID, REPO_ROOT)
     for index, page in enumerate(content.PAGES, start=1):
         for asset_id in page.get("assets", []):
             illustration = page["spec"]["illustration"]
-            api.register_asset(BOOK_ID, asset_id, root=REPO_ROOT, kind="illustration",
-                               title=page["title"], description=illustration["concept"],
-                               page_id=f"p{index:03d}",
-                               characters=illustration.get("characters"),
-                               references=illustration.get("references"))
+            if book.registry.find(asset_id) is None:
+                raise SystemExit(f"{asset_id} was not registered from its spec")
             width, height = ART_SIZES[illustration.get("placement", "full_page")]
             draft = _make_art(asset_id, width, height)
             api.submit_asset(BOOK_ID, asset_id, draft, kind=ASSET, root=REPO_ROOT,

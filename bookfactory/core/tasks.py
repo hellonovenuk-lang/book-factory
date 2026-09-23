@@ -332,13 +332,20 @@ def _page_plan_task(book) -> Task | None:
         instructions=(
             "Turn the locked manuscript into a page manifest: every page that will exist, in "
             "order, with a type and a title.\n\n"
+            "Write the whole plan in one pass, with each page's spec inside its entry: "
+            "{\"title\": ..., \"type\": ..., \"chapter\": ..., \"spec\": {...}}. A spec holds the "
+            "exact final copy from the locked manuscript plus the illustration brief "
+            "(schemas/page-spec.schema.json). Artwork a spec names in illustration.asset_id is "
+            "registered for its page automatically. Every spec is checked before anything is "
+            "written; if one is wrong, nothing is planned and the problems are listed.\n\n"
             f"Run: {_cmd(book, 'plan', '<book>', '--from-file <plan.json>')}\n"
             "or add pages one at a time with `bookfactory plan <book> --add`.\n\n"
             "Page types: chapter_opener, editorial_illustration, text_illustration, checklist, "
             "diagnostic_test, comparison, diagram, quote, certificate, closing, front_matter, "
             "contents."
         ),
-        required_inputs=["manuscript/manuscript.md", "manuscript/outline.md"],
+        required_inputs=["manuscript/manuscript.md", "manuscript/outline.md",
+                         "style/visual-bible.md"],
         output={"destination": "pages/manifest.json"},
     )
 
@@ -388,6 +395,9 @@ def _page_production_task(book) -> Task | None:
                     f"manuscript ({book.state.manuscript.version}), plus the illustration brief.\n"
                     "Copy comes before artwork, always: the picture is drawn to fit the words, "
                     "not the other way round.\n"
+                    "Artwork named in illustration.asset_id is registered for this page "
+                    "automatically when the spec is written.\n"
+                    f"Run: {_cmd(book, 'spec', '<book>', page.page_id, '--from-file <spec.json>')}\n"
                     "Schema: schemas/page-spec.schema.json"
                 ),
                 page_id=page.page_id,
