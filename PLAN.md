@@ -13,7 +13,7 @@ here.
 
 > **Doing:** no phase open. Phase 13 is done and archived.
 > **Finished:** Phase 13, `produce` slice 2: on an `autonomous` or `visual_checkpoint` book, `produce` approves each page it renders (signed `produce`, audited under the recorded policy) and carries on to QA, assembly and preflight; on a `checkpointed` book it stops at the first page approval. Never pictures, locks, the cover or force. 481 tests passing, 2 skipped.
-> **Next action:** plan Phase 14 with `/plan-phase`, first asking Kieran whether slice 3 writes copy through the paid Claude API or has Claude Code write it inside the morning routine on his subscription (Claude recommended the second, 2026-09-23; see `IDEAS.md`).
+> **Next action:** plan Phase 14 with `/plan-phase`: `produce` slice 3, with Claude Code writing the copy itself (Kieran decided 2026-09-23: no Claude API call; see `IDEAS.md`).
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing` and of `produce` page approvals are Kieran's, on a real book; helpers are rightly blocked from them)
