@@ -244,6 +244,17 @@ drawn to fit the words.
 bookfactory render golf-addict --page p004 --submit
 ```
 
+Leave off `--page` to render and submit every page that is ready in one go:
+
+```bash
+bookfactory render golf-addict --submit
+```
+
+It skips a page with no spec yet, and skips a page that is already approved
+(unless you have opened a revision on it) - approved work is never touched. If
+a page fails to render, it is listed with the reason and the command still
+renders the rest; fix the spec and re-run just that page with `--page`.
+
 Then look at it and decide:
 
 ```bash
