@@ -338,7 +338,8 @@ def build_parser() -> argparse.ArgumentParser:
     produce = sub.add_parser(
         "produce", parents=[common],
         help="Run a book's mechanical tasks (render, QA, assembly, preflight) until one "
-             "needs a person. Never approves, locks or advances.")
+             "needs a person. Approves pages only when the book's recorded policy "
+             "authorizes it; never pictures, locks, the cover or advances.")
     produce.add_argument("book")
     produce.add_argument("--max-steps", type=int, default=produce_loop.DEFAULT_MAX_STEPS,
                          dest="max_steps",

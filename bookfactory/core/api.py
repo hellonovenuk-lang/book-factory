@@ -877,7 +877,9 @@ def preflight(book_id: str, *, root: str | Path | None = None) -> dict:
 def produce(book_id: str, *, root: str | Path | None = None, max_steps: int = 50,
             dry_run: bool = False) -> dict:
     """Run the book's mechanical tasks (render, QA, assembly, preflight) until one
-    needs a person. Never approves, locks or advances. See `core/produce.py`."""
+    needs a person. Approves page drafts only under a recorded policy that
+    authorizes it; never pictures, locks, the cover or advances. See
+    `core/produce.py`."""
     from bookfactory.core import produce as produce_loop
 
     return produce_loop.run(book_id, root=root, max_steps=max_steps, dry_run=dry_run)
