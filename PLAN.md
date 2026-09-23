@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 12 is done and archived.
-> **Finished:** Phase 12, the first slice of review #8: `bookfactory produce <book>` runs page renders, QA, assembly and interior preflight by itself, and stops with a plain reason at anything else. It never approves, locks or advances. 471 tests passing, 2 skipped.
-> **Next action:** plan Phase 13 with `/plan-phase`, using the next `produce` slice Kieran picks from `IDEAS.md`. Recommended: slice 2 (approve passing drafts with `--autonomous`, only under an autonomous policy), because without it `produce` renders one page and then stops at its approval.
+> **Doing:** Phase 13 (`produce` approves pages under the recorded policy), planned and agreed 2026-09-23, not started.
+> **Finished:** Phase 12, the first slice of review #8: `bookfactory produce <book>` runs page renders, QA, assembly and interior preflight by itself, and stops with a plain reason at anything else. 471 tests passing, 2 skipped.
+> **Next action:** run `/fan-out` for Phase 13.
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -76,6 +76,45 @@ Phase 10: Test one picture through Higgsfield (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 11: Picture budget and the Higgsfield routine (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 12: `produce`, first slice (done, see `docs/PLAN-ARCHIVE.md`)
+
+## Phase 13: `produce` approves pages (not started)
+
+Chosen 2026-09-23 by Kieran: `produce` slice 2 from `IDEAS.md`. Kieran
+decided that page approvals run under **both** `autonomous` and
+`visual_checkpoint` (the two policies `gates.autonomous_approval_authorized`
+already accepts, and under which `next` already gives page approvals
+`continue_automatically`).
+
+**What changes:**
+- `produce` takes one more kind of task: a **page** approval (`type:
+  approval`, a `page_id`, task id `<page>-approve`), only when its `mode` is
+  `continue_automatically` and `gates.autonomous_approval_authorized` passes.
+  It approves exactly the reviewable draft the task is about, through
+  `api.approve(..., kind="page", autonomous=True, by="produce")`, so every
+  existing check applies and the audit log records it as granted under the
+  recorded policy.
+- It still stops at asset (picture) approvals, locks, the cover, remediation,
+  writing and operator decisions. It never passes `force`, never calls
+  `approve_passing`, `lock`, `advance`, `reject`, `revise` or a policy or
+  picture-budget change. A `checkpointed` book stops at the first page approval.
+- `--dry-run` reports the approval it would make and changes nothing.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 13.1 | Page approvals in the loop, as above, with tests: approves pages under `autonomous` and `visual_checkpoint`; stops on `checkpointed`; never approves assets, locks or the cover; never forces; dry run changes nothing; a whole planned book runs render → approve → … → QA → assembly | helper: builder, tricky (Opus: it hands the loop approval power) | `bookfactory/core/produce.py`, `tests/test_produce.py` | [ ] |
+| 13.2 | `produce` help text no longer says "never approves"; CLI test that the JSON shows an approval step | main | `bookfactory/cli/main.py`, `tests/test_produce_cli.py` | [ ] |
+| 13.3 | Rules and guides: what `produce` now approves (pages only, under the recorded policy) and what it still never does | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [ ] |
+| 13.4 | Tick slice 2 off in `IDEAS.md`; glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [ ] |
+
+**Test-drive:** tests on a `visual_checkpoint` book show `produce` running
+render → approve → render → … → QA → assembly; on a `checkpointed` book it
+stops at the first page's approval. Checker runs the full suite and the demo
+build on a throwaway copy (`/verify-phase`).
+
+**Done when:**
+- [ ] On a `visual_checkpoint` or `autonomous` book, `produce` approves each page it renders and keeps going; on a `checkpointed` book it stops and waits for Kieran.
+- [ ] Tests prove it never approves a picture, a lock or the cover, and never forces anything.
+- [ ] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
 
 ---
 
