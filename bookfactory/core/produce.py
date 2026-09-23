@@ -1,10 +1,12 @@
-"""The `produce` loop: run a book's mechanical tasks until one needs a person.
+"""The `produce` loop: run a book's routine tasks until one needs a person.
 
 `bookfactory next` says what the single next task is. `produce` repeats
-"read the next task, do it" - but only for the tasks that are purely
-mechanical and already have a deterministic command behind them:
+"read the next task, do it" - but only for these tasks, each of which already
+has a deterministic command behind it:
 
     page_render  -> render the page from its spec and submit it as a draft
+    approval     -> approve a PAGE draft, only under a recorded policy that
+                    authorizes autonomous approval (see below)
     qa           -> run QA
     assembly     -> assemble the interior PDF
     preflight    -> run the interior KDP preflight
@@ -12,11 +14,21 @@ mechanical and already have a deterministic command behind them:
 and only while the task's `mode` is `continue_automatically` (AGENTS.md 3a),
 so it follows the book's recorded production policy without re-deriving it.
 
+A page approval is the one decision it takes, and only when all of these
+hold: the task is a page's own approval task, its `mode` is
+`continue_automatically`, and `gates.autonomous_approval_authorized` passes -
+that is, the operator recorded an `autonomous` or `visual_checkpoint` policy.
+It approves exactly the page's current reviewable draft through the ordinary
+`api.approve(..., autonomous=True)`, so every existing check applies and the
+audit log records the approval as granted under that policy (AGENTS.md 3).
+A `checkpointed` book stops at its first page approval.
+
 It stops, with a plain reason, at the first task of any other kind: writing,
-a picture, an approval, a lock, an operator decision, remediation, a blocked
-book, or a finished one. It never approves, locks, advances, rejects,
-revises, changes a policy or a picture budget, and never passes `force` or
-`autonomous` to anything - those stay decisions (AGENTS.md 3 and 8).
+a picture, a picture's approval, the cover, a lock, an operator decision,
+remediation, a blocked book, or a finished one. It never approves pictures or
+the cover, never locks, advances, rejects, revises, changes a policy or a
+picture budget, never batch-approves, and never passes `force` to anything -
+those stay decisions (AGENTS.md 3 and 8).
 
 Two guards keep it from looping: a step limit, and a no-progress stop when a
 step leaves the same task next (for example a preflight that keeps failing).
@@ -28,11 +40,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from bookfactory.core import api, production
+from bookfactory.core import api, gates, production
+from bookfactory.core.book import PAGE, Book
 from bookfactory.core.errors import BookFactoryError, ValidationError
 
-#: The only task types `produce` ever runs.
+#: The only task types `produce` ever runs without a decision.
 MECHANICAL_TYPES = ("page_render", "qa", "assembly", "preflight")
+
+#: The name the audit log records for an approval `produce` makes.
+APPROVER = "produce"
 
 #: Codes for `stopped_because`.
 COMPLETE = "complete"
@@ -92,7 +108,54 @@ def _mechanical_action(book_id: str, task: dict) -> str | None:
     return None
 
 
-def _stop_for(book_id: str, task: dict | None) -> tuple[str, str] | None:
+def _page_approval(book_id: str, task: dict,
+                   root=None) -> tuple[dict | None, str | None]:
+    """The page approval `produce` may make for this task, or why it may not.
+
+    Returns `({page_id, revision, policy, action}, None)` when every condition
+    holds, else `(None, reason)`. Assumes the caller has already checked that
+    the task's `mode` is `continue_automatically`. Only reads the book.
+    """
+    page_id = task.get("page_id")
+    if task.get("asset_id"):
+        return None, "approving a picture stays with the operator"
+    if (task.get("gate") == "cover_visual_checkpoint"
+            or task.get("task_id") == f"{book_id}-cover-approval"):
+        return None, "approving the cover stays with the operator"
+    if not page_id or task.get("gate") is not None \
+            or task.get("task_id") != f"{book_id}-{page_id}-approve":
+        return None, "only a page's own approval task can be approved by produce"
+
+    book = Book.load(book_id, root)
+    authorized = gates.autonomous_approval_authorized(book)
+    if not authorized.ok:
+        return None, ("the book's recorded production policy does not authorize autonomous "
+                      "approval (" + "; ".join(authorized.reasons) + ")")
+    page = book.manifest.get(page_id)
+    if page is None:
+        return None, f"page {page_id} is not in the manifest"
+    if page.is_approved and not page.revision_open:
+        return None, f"page {page_id} is already approved"
+    draft = page.reviewable_draft()
+    latest = page.latest_draft()
+    if draft is None or latest is None or draft.revision != latest.revision:
+        return None, (f"page {page_id} has no reviewable draft matching the task, so there is "
+                      "nothing produce could safely approve")
+    policy = book.state.production_policy.mode
+    return {"page_id": page_id, "revision": draft.revision, "policy": policy,
+            "action": (f"bookfactory approve {book_id} {page_id} --kind page "
+                       f"--draft {draft.revision} --by {APPROVER} --autonomous")}, None
+
+
+def _action_for(book_id: str, task: dict, root=None) -> str | None:
+    """The command `produce` would run for a task it may take, else None."""
+    if task.get("type") == "approval":
+        approval, _ = _page_approval(book_id, task, root)
+        return approval["action"] if approval else None
+    return _mechanical_action(book_id, task)
+
+
+def _stop_for(book_id: str, task: dict | None, root=None) -> tuple[str, str] | None:
     """(code, message) if `produce` must stop before this task, else None."""
     if task is None:
         return COMPLETE, "Nothing left to do: the book has no next task."
@@ -108,6 +171,13 @@ def _stop_for(book_id: str, task: dict | None) -> tuple[str, str] | None:
             return WAIT_FOR_OPERATOR, (f"Stopped: the next task, {_describe(task)}, waits for "
                                        "the operator's decision.")
         return str(mode), f"Stopped: the next task, {_describe(task)}, has mode {mode!r}."
+    if task.get("type") == "approval":
+        _, reason = _page_approval(book_id, task, root)
+        if reason is not None:
+            return NOT_MECHANICAL, (f"Stopped: the next task, {_describe(task)}, needs an "
+                                    f"approval that produce does not make: {reason}. Pictures "
+                                    "and the cover always stay with the operator.")
+        return None
     if _mechanical_action(book_id, task) is None:
         kind = task.get("type")
         needs = _NEEDS.get(kind)
@@ -125,8 +195,18 @@ def _stop_for(book_id: str, task: dict | None) -> tuple[str, str] | None:
 
 
 def _run_step(book_id: str, task: dict, root) -> str:
-    """Run exactly the one existing API call for a mechanical task; return a summary."""
+    """Run exactly the one existing API call for the task; return a summary."""
     kind = task["type"]
+    if kind == "approval":
+        approval, reason = _page_approval(book_id, task, root)
+        if approval is None:  # pragma: no cover - _stop_for already refused it
+            raise AssertionError(f"produce may not approve {task.get('task_id')}: {reason}")
+        #: The ordinary single approval: every existing check applies, and the
+        #: audit log records it as granted under the recorded policy. Never force.
+        api.approve(book_id, approval["page_id"], kind=PAGE, revision=approval["revision"],
+                    by=APPROVER, autonomous=True, root=root)
+        return (f"approved {approval['page_id']} draft {approval['revision']} under the "
+                f"recorded {approval['policy']} policy")
     if kind == "page_render":
         page_id = task["page_id"]
         result = api.render(book_id, page_id=page_id, submit=True, root=root)
@@ -152,7 +232,7 @@ def _run_step(book_id: str, task: dict, root) -> str:
 
 def run(book_id: str, *, root: str | Path | None = None, max_steps: int = DEFAULT_MAX_STEPS,
         dry_run: bool = False) -> dict:
-    """Run the book's mechanical tasks until one needs a person, then say why it stopped.
+    """Run the book's routine tasks until one needs a person, then say why it stopped.
 
     Returns a JSON-friendly dict: `book_id`, `dry_run`, `steps` (each
     `{task_id, type, action, result}`), `stopped_because` (one of
@@ -174,11 +254,11 @@ def run(book_id: str, *, root: str | Path | None = None, max_steps: int = DEFAUL
         #: Read-only, exactly as `bookfactory next` reads it.
         task = api.next_task(book_id, root=root)
 
-        stop = _stop_for(book_id, task)
+        stop = _stop_for(book_id, task, root)
         if stop is not None:
             return finish(*stop, task)
 
-        action = _mechanical_action(book_id, task)
+        action = _action_for(book_id, task, root)
         if task["task_id"] == last_run:
             return finish(NO_PROGRESS, (
                 f"Stopped: after running {task['task_id']} ({steps[-1]['result']}), the same "
