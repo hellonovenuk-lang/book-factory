@@ -357,6 +357,27 @@ command never touches it. It carries on past anything that fails and reports
 what was approved and what failed. `--dry-run` changes nothing - use it to see
 the list before you commit to it.
 
+### Let it run the mechanical steps by itself
+
+Some of this loop has nothing to judge - rendering a page once its spec and
+artwork are approved, running QA, assembling the interior, checking it
+against KDP. You can let the system do those in a row instead of running
+`next` and the matching command yourself each time:
+
+```bash
+bookfactory produce golf-addict
+```
+
+It keeps going through page renders, QA, assembly and the interior preflight
+- but only the steps your recorded policy already says can run without you
+(section 1, `mode: continue_automatically`) - and stops the moment the next
+task needs writing, a picture, an approval, a lock, or your own decision,
+telling you which and why. It never approves, locks or advances anything on
+its own, and it never touches the cover. `bookfactory produce golf-addict
+--dry-run` shows the one step it would take next without changing anything;
+`--max-steps N` caps how many steps it takes in one run (default 50); `--json`
+is for scripting.
+
 ## 8. Look at the whole book
 
 ```bash
@@ -563,6 +584,8 @@ bookfactory reject <book> <id> --reason "..."  reject it
 bookfactory revise <book> <id>                 change approved work
 bookfactory lock concept|voice|manuscript|visual <book>
 bookfactory render <book> --page p004 --submit
+bookfactory produce <book> [--max-steps N] [--dry-run] [--json]
+                                                run the mechanical steps (render/QA/assemble/preflight) until one needs you
 bookfactory review <book>                      contact sheet and review PDFs
 bookfactory qa <book>                          quality checks
 bookfactory validate <book>                    structural check

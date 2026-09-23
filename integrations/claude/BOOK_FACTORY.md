@@ -45,6 +45,15 @@ lock on the operator's behalf (the only exception is `--autonomous` under a
 recorded production policy, `AGENTS.md` section 3), never touch approved
 artefacts, never skip a gate.
 
+For a run of purely mechanical tasks - page renders, QA, assembly, interior
+preflight - you may use `bookfactory produce <book>` (`AGENTS.md` section 2a)
+instead of stepping through `next` by hand. It only ever runs a step whose
+task `mode` is `continue_automatically`, and it stops, and says why, at
+anything else: writing, a picture, an approval, a lock, an operator decision,
+remediation, or a blocked or finished book. It never touches the cover and
+never approves, locks or advances on its own. Report where it stopped and
+why, the same as you would for any other task.
+
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.
 Do not. Every one of those bypasses a check that exists because of a real

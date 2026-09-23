@@ -66,6 +66,34 @@ easy.
 `bookfactory task <book-id> --json` gives you the full task, including the
 locked references you must match and the exact path your output belongs at.
 
+## 2a. `produce` runs the mechanical tasks for you, one at a time
+
+```bash
+bookfactory produce <book-id> [--max-steps N] [--dry-run] [--json]
+```
+
+This repeats "read the next task, do it" without you running `next` and the
+matching command yourself each time - but only for tasks that are purely
+mechanical and already have a deterministic command behind them: rendering a
+page (`render --page <id> --submit`), the book's own QA, assembly and interior
+preflight. It runs one of those only when the task's `mode` is
+`continue_automatically` (section 3a) - it does not re-derive the production
+policy, it follows it. Cover steps are never part of this loop, whatever the
+policy.
+
+It stops, and says why, at the first task of any other kind: writing, a
+picture, an approval, a lock, an operator decision, remediation, a blocked
+book, or a finished one - as well as at its step limit (default 50) or if a
+step leaves the same task next (no progress, so running it again would not
+help). It never approves, locks, advances, or uses `--force` or
+`--autonomous`, even under an autonomous policy. `--dry-run` changes nothing:
+it reports only the first step it would take, or why it would stop.
+
+This does not replace rule 2: it takes the same tasks `next` would, in the
+same order, one at a time, through the same commands - it is just a shorthand
+for running them yourself. Use it anywhere those commands are already
+allowed.
+
 ## 3. Never approve anything on the user's behalf
 
 Approval is a decision only the operator makes. It has to be an explicit
@@ -344,6 +372,7 @@ as draft v2; awaiting approval".
 | Typeset the full-wrap cover | `bookfactory cover build <book> [--submit]` |
 | Check the whole project | `bookfactory validate <book>` |
 | Run quality checks | `bookfactory qa <book> --json` |
+| Run the mechanical tasks until one needs a person | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]` |
 
 Commands that need authority: `approve`, `approve --all-passing`, `lock`,
 `advance`, `assemble`, `preflight`, `cover approve`, `cover finalize`,
