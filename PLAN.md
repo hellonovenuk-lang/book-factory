@@ -13,7 +13,7 @@ here.
 
 > **Doing:** no phase open. Phase 14 is done and archived.
 > **Finished:** Phase 14, `produce` slice 3: `produce` stops with `writing` when the next job is copy, and `/write-book <book>` has Claude write it (no API call) and run `produce` again, stopping at locks, pictures, the cover and anything else needing Kieran. 488 tests passing, 2 skipped.
-> **Next action:** plan Phase 15 with `/plan-phase`: `produce` slice 4, pictures through Higgsfield inside the loop (see `IDEAS.md`).
+> **Next action:** plan Phase 15 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. `produce` slice 4 (pictures in the loop) moves to Phase 16.
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
