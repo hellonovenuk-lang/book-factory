@@ -114,6 +114,8 @@ Change the page count and the wrap-around cover must be rebuilt to match.
 **Skill.** A saved set of instructions Claude follows for a particular job.
 Typing its name as a command runs it.
 
+**Stop code.** The short label `produce` gives for why it stopped, e.g. `writing` (the next job is copy), `wait_for_operator` (it needs you) or `complete` (nothing left).
+
 **Test suite (tests).** Automatic checks that make sure Book Factory still
 works after a change. Run with `pytest`.
 

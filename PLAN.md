@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 13 is done and archived.
+> **Doing:** Phase 14, Claude writes the copy (`produce` slice 3). Planned and agreed 2026-09-23; no task started.
 > **Finished:** Phase 13, `produce` slice 2: on an `autonomous` or `visual_checkpoint` book, `produce` approves each page it renders (signed `produce`, audited under the recorded policy) and carries on to QA, assembly and preflight; on a `checkpointed` book it stops at the first page approval. Never pictures, locks, the cover or force. 481 tests passing, 2 skipped.
-> **Next action:** plan Phase 14 with `/plan-phase`: `produce` slice 3, with Claude Code writing the copy itself (Kieran decided 2026-09-23: no Claude API call; see `IDEAS.md`).
+> **Next action:** run `/fan-out` for Phase 14 (task 14.1 first; 14.2 and 14.3 build on its stop code).
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing` and of `produce` page approvals are Kieran's, on a real book; helpers are rightly blocked from them)
@@ -78,6 +78,48 @@ Phase 11: Picture budget and the Higgsfield routine (done, see `docs/PLAN-ARCHIV
 Phase 12: `produce`, first slice (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 13: `produce` approves pages (done, see `docs/PLAN-ARCHIVE.md`)
+
+## Phase 14: Claude writes the copy (not started)
+
+Chosen 2026-09-23 by Kieran: `produce` slice 3 from `IDEAS.md`. Kieran
+decided there is no Claude API call: Claude Code writes the copy itself, on
+his subscription, and `produce` does the rest.
+
+**What changes:**
+- `produce` stops with its own code, `writing`, when the next task is a
+  writing (`authoring`) task whose `mode` is `continue_automatically`. It
+  still writes nothing itself. Cover writing tasks (`cover-*`) and lock
+  steps (`operator_decision`) are not `writing`: they keep their current
+  stop codes.
+- A new Claude Code skill, `/write-book <book>`, repeats: run
+  `bookfactory produce <book> --json`; if it stopped with `writing`, read the
+  full task (`bookfactory task <book> --json`), write that copy following
+  `style/voice-bible.md` and `manuscript/writing-sample.md` (and the
+  "Writing copy" rules in `integrations/claude/BOOK_FACTORY.md`), save it
+  where the task's `output.destination` says (through `spec --from-file` or
+  `plan --from-file` where the task names them), then run `produce` again.
+  It stops, reporting where and why, at any other stop code.
+- The skill never locks (the brief task's `submit_command` is the concept
+  lock: the skill only writes the files, and the lock waits for Kieran),
+  never approves pictures, never touches the cover, never raises the picture
+  budget, never chooses or changes a policy, and never uses `--force`.
+  Doing locks under an `autonomous` policy is a later idea, in `IDEAS.md`.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 14.1 | The `writing` stop code in `produce`, with tests: an `authoring` task in `continue_automatically` gives `writing`; cover writing tasks, lock steps and `wait_for_operator` writing tasks do not; the stop changes nothing on disk; dry run reports it too | helper: builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce.py` | [ ] |
+| 14.2 | The `/write-book` skill: produce → write → save → produce, with the stop rules above; after 14.1 | main | `.claude/skills/write-book/SKILL.md` (new) | [ ] |
+| 14.3 | Rules and guides: the `writing` stop code; how `/write-book` works and what it never does; after 14.1 | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [ ] |
+| 14.4 | Tick slice 3 off in `IDEAS.md`; glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [ ] |
+
+**Test-drive:** make a throwaway `visual_checkpoint` book in a temporary
+folder and run `/write-book` on it: it writes the brief, then stops at the
+concept lock with a plain reason.
+
+**Done when:**
+- [ ] `produce` says "writing" when the next job is copy, and tests prove it still never writes, locks or approves anything by itself.
+- [ ] `/write-book` on a throwaway book writes the brief and stops at the concept lock with a plain reason.
+- [ ] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
 
 ---
 
