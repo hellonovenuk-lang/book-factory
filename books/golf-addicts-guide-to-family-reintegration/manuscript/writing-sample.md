@@ -56,7 +56,7 @@ In this stage you will be reintroduced to the people you live with, shown round 
 
 What is right, what is wrong, what to change before the manuscript is written.
 
-Awaiting Kieran's review. Claude's notes on the choices made, for Kieran to accept or change:
+Approved by Kieran as written (2026-09-23). The choices below stand for the manuscript:
 
 - The Programme speaks to the reader as "you", like the Runner's Guide, so any golfer can be the reader. When the official voice cracks it calls him Dave, and Dave is the man in the pictures and in Sue's case notes.
 - Swearing is rationed as agreed: "bollocks" in Sue's notes, one "fuck" saved for the last line of the scoring. The rest is dry and clean.
