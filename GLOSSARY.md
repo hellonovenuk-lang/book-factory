@@ -35,6 +35,9 @@ changed. Saved on this computer only until it is pushed.
 
 **Docs keeper.** The helper that keeps the shared rule and guide files (`AGENTS.md`, `docs/OPERATOR.md`, `integrations/`) accurate. The only helper allowed to edit them.
 
+**DPI (dots per inch).** How sharp a picture prints: how many pixels land in
+each printed inch. KDP needs at least 300 for interior images.
+
 **Done when.** The checklist, written before work starts, that says in plain
 words what "finished" means for a phase or task.
 
@@ -82,6 +85,9 @@ Book Factory's lives on GitHub.
 nothing from the last one except what is written in the repository.
 
 **Settings file.** `.claude/settings.json`: the switchboard that turns hooks on and says which commands and edits Claude may do without asking, must ask about, or may never do.
+
+**Spine width.** The thickness of the book's spine, set by the page count.
+Change the page count and the wrap-around cover must be rebuilt to match.
 
 **Skill.** A saved set of instructions Claude follows for a particular job.
 Typing its name as a command runs it.
