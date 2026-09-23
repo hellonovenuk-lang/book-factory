@@ -26,7 +26,7 @@ __all__ = [
     "draft_intake", "confirm_intake", "show_pictures", "set_pictures", "show_policy", "set_policy",
     "approve", "reject", "revise",
     "lock", "advance", "validate", "render", "qa", "assemble", "review", "preflight",
-    "audit_history", "relock",
+    "audit_history", "relock", "produce",
 ]
 
 
@@ -872,6 +872,15 @@ def preflight(book_id: str, *, root: str | Path | None = None) -> dict:
     report = do_preflight(book)
     task_module.sync_open_task(book)
     return report
+
+
+def produce(book_id: str, *, root: str | Path | None = None, max_steps: int = 50,
+            dry_run: bool = False) -> dict:
+    """Run the book's mechanical tasks (render, QA, assembly, preflight) until one
+    needs a person. Never approves, locks or advances. See `core/produce.py`."""
+    from bookfactory.core import produce as produce_loop
+
+    return produce_loop.run(book_id, root=root, max_steps=max_steps, dry_run=dry_run)
 
 
 def cover_build(book_id: str, *, submit: bool = False,
