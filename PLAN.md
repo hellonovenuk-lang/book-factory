@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 6 (Series presets) is done. The next phase isn't chosen yet.
-> **Finished:** `bookfactory create "<title>" --policy <p> --series-from <book>` starts a book from a locked book's voice, visual rules, design tokens, reference set and cover design; references arrive as drafts with their source recorded; nothing approved or locked. 396 tests passing, 2 skipped.
-> **Next action:** choose the next phase. Candidates from `docs/REVIEW-2026-09.md`: #7 one-prompt start, the rest of #2 (approve every draft that passes its checks in one command), #4 image API. `PLAN.md` is getting long: archive Phases 4-6 to `docs/PLAN-ARCHIVE.md` at the next `/handover`. Also in `IDEAS.md`: helper turn limits.
+> **Doing:** Phase 7 (Batch approval), chosen by Kieran 2026-09-23 ("go"). Run without stopping for OKs; summary at the end.
+> **Finished:** Phase 6 (series presets). 396 tests passing, 2 skipped.
+> **Next action:** round 1 of Phase 7: task 7.1 (builder) and 7.2 (docs keeper). `PLAN.md` is getting long: archive Phases 4-7 to `docs/PLAN-ARCHIVE.md` at the next `/handover`.
 
 **Unfinished, carried over:**
 - none
@@ -205,6 +205,57 @@ as drafts, and nothing is approved or locked.
 | 2026-09-23 | 6 | Checker: demo build on a throwaway copy | Release Ready, 24 pages |
 | 2026-09-23 | 6 | Test-drive: `create --series-from demo-book` | exit 0; 5 style files byte-identical; 6 references as drafts, 0 approved, source `series:demo-book`; voice and visual unlocked; `next` = its own brief |
 | 2026-09-23 | 6 | Test-drive: `--series-from` an unlocked book | refused (exit 5), no folder created |
+
+---
+
+## Phase 7: Batch approval (not started)
+
+Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #2 (its
+last big piece). After `render --submit` puts a whole book's pages up as
+drafts, approving them one at a time is about 60 commands.
+
+**The command:** `bookfactory approve <book> --all-passing --by <name>
+[--kind page|asset] [--dry-run] [--autonomous]`. Approves, one by one through
+the normal single approval (so every existing check still applies), the
+newest reviewable draft of every page and asset that has one and is not
+already approved (or has a revision open). A draft that failed a measured
+check is never reviewable, so it is never included. Skips the cover artwork
+(the cover has its own approval). Assets before pages. Carries on past one
+that fails and reports approved / failed; exit code 1 if any failed.
+`--dry-run` lists what would be approved and changes nothing. `--by` is
+required. It is the operator's command, like `approve`: an agent may run it
+only as `--autonomous`, which is refused unless the book's recorded policy
+authorizes autonomous approval (the same check as a single approval). The
+approval guard already blocks any `bookfactory ... approve` an agent runs in
+auto mode.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 7.1 | `approve --all-passing` with `--kind`, `--dry-run`, `--autonomous`, required `--by`; tests | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_batch_approve.py` (new) | [ ] |
+| 7.2 | Rules and guides: batch approval is the operator's; `--autonomous` only under the policy | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` | [ ] |
+| 7.3 | Guard test: `approve --all-passing` is caught; mark review item #2 done | main | `tests/test_hook_guard_authority.py`, `docs/REVIEW-2026-09.md` | [ ] |
+| 7.4 | Raise helper turn limits (builder 40 to 60, checker 25 to 40), from `IDEAS.md` | main | `.claude/agents/implementer.md`, `.claude/agents/verifier.md`, `IDEAS.md` | [ ] |
+| 7.5 | Check everything with proof; test-drive on a throwaway demo copy | helper: checker | none (read-only) | [ ] |
+
+**Order:** round 1: 7.1 and 7.2 together; main does 7.3 and 7.4. Then the
+checker.
+
+**Test-drive:** the approval guard (rightly) blocks helpers from running
+`approve`, and it must not be worked around. So the proof is the CLI tests,
+which drive the real command end to end in a temporary folder, plus the
+checker confirming that the guard blocks `approve --all-passing`. The first
+live run is Kieran's, on a real book.
+
+**Done when:**
+- [ ] One command approves every draft that passed its checks, and lists them first with `--dry-run`.
+- [ ] A draft that failed a check is never approved, and an agent can't use it without the book's autonomous policy.
+- [ ] `pytest` passes and the demo build passes.
+- [ ] Everything is saved to GitHub `main` and checked there.
+
+**Verification log**
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
 
 ---
 
