@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-intake",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "intake",
+  "stage": "book_brief",
+  "summary": "Show the operator the drafted intake answers and wait for their reply",
+  "instructions": "claude drafted these answers from the idea (brief/intake-draft.json):\n  idea: A mock self-help manual for the golf-obsessed, teaching them how to rejoin family life: talking about things other than their round, turning up to birthdays, and surviving a weekend without a tee time.\n  buyer: A partner, grown-up child or friend of a golf addict, buying it as a birthday, Christmas or Father's Day gift.\n  recipient: An adult golf addict, most likely a man aged 40 to 70, who plays several times a week and talks about it constantly.\n  recognition_trigger: Replaying every shot of his round at the dinner table, checking the weather forecast only for tee times, 'popping out for nine holes' and coming back five hours later, and practising his swing with whatever he is holding.\n  humour_level: medium\n  visual_feel: classic_editorial_caricature\n  colour_direction: muted\n  main_character: book_factory_invents\n  length: 80\n\nCould not tell from the idea: must_include, must_avoid\n\nShow the operator this summary once, ask the unclear questions, and ask them to choose the production policy (autonomous, visual_checkpoint or checkpointed; visual_checkpoint is recommended). Never choose it for them. Nothing is complete until they reply. Then record their reply:\n\n  bookfactory intake golf-addicts-guide-to-family-reintegration --confirm --by <operator> --policy <their choice> [--set key=value ...]\n\n--set carries their corrections and their answers to the unclear questions. A new draft may replace this one if the idea changes.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {
+    "destination": "brief/intake.json",
+    "expected_format": "json"
+  },
+  "approval_required": true,
+  "status": "open",
+  "gate": "intake",
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "wait_for_operator",
+  "created_at": "2026-09-23T18:45:15Z",
+  "closed_at": null
+}

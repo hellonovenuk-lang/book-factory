@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "title": "The Golf Addict's Guide to Family Reintegration",
+  "subtitle": null,
+  "series": null,
+  "stage": "book_brief",
+  "format": {
+    "trim": "6x9",
+    "colour": true,
+    "bleed": false,
+    "dpi": 300,
+    "kdp_profile": "kdp-default",
+    "target_page_count": null
+  },
+  "concept": {
+    "locked": false,
+    "locked_at": null,
+    "sha256": null
+  },
+  "manuscript": {
+    "version": "v0",
+    "locked": false,
+    "locked_at": null,
+    "sha256": null,
+    "path": null
+  },
+  "style": {
+    "visual_version": "v0",
+    "visual_locked": false,
+    "visual_locked_at": null,
+    "visual_sha256": null,
+    "voice_version": "v0",
+    "voice_locked": false,
+    "voice_locked_at": null,
+    "voice_sha256": null
+  },
+  "page_plan": {
+    "planned": false,
+    "page_count": 0,
+    "planned_at": null
+  },
+  "intake": {
+    "required": true,
+    "completed": false,
+    "completed_at": null,
+    "answers": {},
+    "draft": {
+      "answers": {
+        "idea": "A mock self-help manual for the golf-obsessed, teaching them how to rejoin family life: talking about things other than their round, turning up to birthdays, and surviving a weekend without a tee time.",
+        "buyer": "A partner, grown-up child or friend of a golf addict, buying it as a birthday, Christmas or Father's Day gift.",
+        "recipient": "An adult golf addict, most likely a man aged 40 to 70, who plays several times a week and talks about it constantly.",
+        "recognition_trigger": "Replaying every shot of his round at the dinner table, checking the weather forecast only for tee times, 'popping out for nine holes' and coming back five hours later, and practising his swing with whatever he is holding.",
+        "humour_level": "medium",
+        "visual_feel": "classic_editorial_caricature",
+        "colour_direction": "muted",
+        "main_character": "book_factory_invents",
+        "length": "80"
+      },
+      "unclear": [
+        "must_include",
+        "must_avoid"
+      ],
+      "drafted_by": "claude",
+      "drafted_at": "2026-09-23T18:45:15Z"
+    },
+    "drafted_by": null,
+    "confirmed_by": null,
+    "changed_on_confirm": []
+  },
+  "production_policy": {
+    "mode": "checkpointed",
+    "operator_authorized": false,
+    "visual_checkpoint": true,
+    "major_gate_checkpoints": true,
+    "stop_on_soft_qa_failure": true,
+    "stop_on_hard_failure": true,
+    "authorized_at": null,
+    "source": null
+  },
+  "pictures": {
+    "budget": "chapter_openers",
+    "count": null,
+    "set_by": null,
+    "set_at": "2026-09-23T18:45:01Z",
+    "source": "new_book_default"
+  },
+  "production_mode": "wait_for_operator",
+  "blocked": null,
+  "next_action": {
+    "task_id": "golf-addicts-guide-to-family-reintegration-intake",
+    "type": "intake",
+    "summary": "Show the operator the drafted intake answers and wait for their reply",
+    "page_id": null,
+    "asset_id": null,
+    "approval_required": true,
+    "mode": "wait_for_operator"
+  },
+  "last_transition": {
+    "from": "idea",
+    "to": "book_brief",
+    "at": "2026-09-23T18:45:02Z",
+    "by": "system",
+    "note": "stage derived from repository state"
+  },
+  "created_at": "2026-09-23T18:45:01Z",
+  "updated_at": "2026-09-23T18:45:15Z"
+}

@@ -1,0 +1,19 @@
+{
+  "answers": {
+    "idea": "A mock self-help manual for the golf-obsessed, teaching them how to rejoin family life: talking about things other than their round, turning up to birthdays, and surviving a weekend without a tee time.",
+    "buyer": "A partner, grown-up child or friend of a golf addict, buying it as a birthday, Christmas or Father's Day gift.",
+    "recipient": "An adult golf addict, most likely a man aged 40 to 70, who plays several times a week and talks about it constantly.",
+    "recognition_trigger": "Replaying every shot of his round at the dinner table, checking the weather forecast only for tee times, 'popping out for nine holes' and coming back five hours later, and practising his swing with whatever he is holding.",
+    "humour_level": "medium",
+    "visual_feel": "classic_editorial_caricature",
+    "colour_direction": "muted",
+    "main_character": "book_factory_invents",
+    "length": "80"
+  },
+  "unclear": [
+    "must_include",
+    "must_avoid"
+  ],
+  "drafted_by": "claude",
+  "drafted_at": "2026-09-23T18:45:15Z"
+}
