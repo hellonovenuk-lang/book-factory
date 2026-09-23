@@ -268,10 +268,11 @@ def _build_cover() -> None:
                      source="demo-fixture", note="Synthetic placeholder cover artwork.")
     log(f"cover artwork submitted: {cover.ART_ID}")
 
-    book = Book.load(BOOK_ID, REPO_ROOT)
-    wrap = _typeset_cover(book, art)
-    draft = cover.submit(book, wrap)
-    log(f"cover draft {draft['revision']} submitted: {draft['path']}")
+    built = api.cover_build(BOOK_ID, submit=True, root=REPO_ROOT)
+    if built["problems"]:
+        raise SystemExit("cover build failed its checks: " + "; ".join(built["problems"]))
+    draft = built["submitted"]
+    log(f"cover built ({built['pdf']}) and draft {draft['revision']} submitted: {draft['path']}")
 
     # The operator's step. In a real book only the operator runs `cover approve`
     # (AGENTS.md 9a); this script is standing in for them.
@@ -284,47 +285,6 @@ def _build_cover() -> None:
     log(f"cover preflight: {report['status']}")
     for problem in report["errors"]:
         log(f"  {problem}")
-
-
-def _typeset_cover(book: Book, art: Path) -> Path:
-    """Set the full wrap as real, embedded type around the native artwork.
-
-    Uses WeasyPrint, which the page renderer already depends on and which
-    embeds (subsets of) every font it uses - the cover gate checks for that.
-    """
-    from html import escape
-
-    from weasyprint import HTML
-
-    dim = cover.dimensions(book)
-    data = cover.load(book)
-    back_fold = dim["bleed_in"] + dim["trim_width_in"]
-    front_fold = back_fold + dim["spine_in"]
-    margin = .5
-    front_width = dim["trim_width_in"] + dim["bleed_in"] - 2 * margin
-    html = f"""<!doctype html><html><head><style>
-      @page {{ size: {dim["width_in"]}in {dim["height_in"]}in; margin: 0; }}
-      body {{ margin: 0; font-family: "DejaVu Sans", sans-serif; color: #1c1a17;
-              background: #fbf8f1; }}
-      .box {{ position: absolute; }}
-      .title {{ left: {front_fold + margin}in; top: {margin}in; width: {front_width}in;
-                font-size: 24pt; text-align: center; }}
-      .art {{ left: {front_fold + margin + (front_width - data["artwork_width_in"]) / 2}in;
-              top: 1.7in; width: {data["artwork_width_in"]}in;
-              height: {data["artwork_height_in"]}in; }}
-      .author {{ left: {front_fold + margin}in; top: {dim["height_in"] - 1}in;
-                 width: {front_width}in; font-size: 12pt; text-align: center; }}
-      .back {{ left: {margin}in; top: {margin}in; width: {back_fold - 2 * margin}in;
-               font-size: 11pt; line-height: 1.4; }}
-    </style></head><body>
-      <div class="box title">{escape(book.state.title)}</div>
-      <img class="box art" src="{art.resolve().as_uri()}">
-      <div class="box author">{escape(data["author"])}</div>
-      <div class="box back">{escape(data["back_copy"])}</div>
-    </body></html>"""
-    path = REPO_ROOT / ".demo-art" / "cover-wrap.pdf"
-    HTML(string=html, base_url=str(REPO_ROOT)).write_pdf(str(path))
-    return path
 
 
 def _make_art(asset_id: str, width: int, height: int) -> Path:
