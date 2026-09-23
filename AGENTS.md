@@ -81,13 +81,24 @@ preflight. It runs one of those only when the task's `mode` is
 policy, it follows it. Cover steps are never part of this loop, whatever the
 policy.
 
+It also takes one kind of judgement step: approving a **page** draft, when
+that page's approval task is next and its `mode` is `continue_automatically`
+(only possible when the recorded production policy authorizes autonomous
+approval - `autonomous` or `visual_checkpoint`, section 3). It approves
+exactly the one draft the task names, the same way a single
+`bookfactory approve <book> <page-id> --autonomous --by produce` would, so the
+audit log records it as granted under the recorded policy. A `checkpointed`
+book gives that task `wait_for_operator` instead, so `produce` stops there
+like it stops at anything else needing a person.
+
 It stops, and says why, at the first task of any other kind: writing, a
-picture, an approval, a lock, an operator decision, remediation, a blocked
-book, or a finished one - as well as at its step limit (default 50) or if a
-step leaves the same task next (no progress, so running it again would not
-help). It never approves, locks, advances, or uses `--force` or
-`--autonomous`, even under an autonomous policy. `--dry-run` changes nothing:
-it reports only the first step it would take, or why it would stop.
+picture (asset) approval, a lock, an operator decision, remediation, a
+blocked book, or a finished one - as well as at its step limit (default 50)
+or if a step leaves the same task next (no progress, so running it again
+would not help). It never approves an asset, never locks, never touches the
+cover, never advances, and never uses `--force` or `--all-passing`.
+`--dry-run` changes nothing: it reports only the first step it would take
+(including which page it would approve), or why it would stop.
 
 This does not replace rule 2: it takes the same tasks `next` would, in the
 same order, one at a time, through the same commands - it is just a shorthand
@@ -372,7 +383,7 @@ as draft v2; awaiting approval".
 | Typeset the full-wrap cover | `bookfactory cover build <book> [--submit]` |
 | Check the whole project | `bookfactory validate <book>` |
 | Run quality checks | `bookfactory qa <book> --json` |
-| Run the mechanical tasks until one needs a person | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]` |
+| Run the mechanical tasks and page approvals until one needs a person | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]` |
 
 Commands that need authority: `approve`, `approve --all-passing`, `lock`,
 `advance`, `assemble`, `preflight`, `cover approve`, `cover finalize`,

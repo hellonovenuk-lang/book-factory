@@ -48,11 +48,17 @@ artefacts, never skip a gate.
 For a run of purely mechanical tasks - page renders, QA, assembly, interior
 preflight - you may use `bookfactory produce <book>` (`AGENTS.md` section 2a)
 instead of stepping through `next` by hand. It only ever runs a step whose
-task `mode` is `continue_automatically`, and it stops, and says why, at
-anything else: writing, a picture, an approval, a lock, an operator decision,
-remediation, or a blocked or finished book. It never touches the cover and
-never approves, locks or advances on its own. Report where it stopped and
-why, the same as you would for any other task.
+task `mode` is `continue_automatically`. That now includes approving a page
+draft, but only when the recorded production policy authorizes autonomous
+approval (`autonomous` or `visual_checkpoint`); it approves that one page the
+same way `approve --autonomous --by produce` would, so the audit log shows it
+was granted under the recorded policy. On a `checkpointed` book that same
+task is `wait_for_operator`, so `produce` stops there instead. It stops, and
+says why, at anything else: writing, a picture (asset) approval, a lock, an
+operator decision, remediation, or a blocked or finished book. It never
+approves an asset, never touches the cover, and never locks or advances on
+its own. Report where it stopped and why, the same as you would for any
+other task - and if it approved pages along the way, say which ones.
 
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.

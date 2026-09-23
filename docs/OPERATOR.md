@@ -372,9 +372,17 @@ It keeps going through page renders, QA, assembly and the interior preflight
 - but only the steps your recorded policy already says can run without you
 (section 1, `mode: continue_automatically`) - and stops the moment the next
 task needs writing, a picture, an approval, a lock, or your own decision,
-telling you which and why. It never approves, locks or advances anything on
-its own, and it never touches the cover. `bookfactory produce golf-addict
---dry-run` shows the one step it would take next without changing anything;
+telling you which and why.
+
+On a book whose policy is `autonomous` or `visual_checkpoint`, it also
+approves each page draft itself as it goes - the same page approval you
+would otherwise run by hand, recorded in the audit trail (`bookfactory
+history <book>`) as approved under that policy, by `produce`. On a
+`checkpointed` book it stops and waits for you at the first page ready to
+approve, same as it always has. Either way it never approves a picture
+(asset), never locks anything, never touches the cover, and never advances.
+`bookfactory produce golf-addict --dry-run` shows the one step it would take
+next - including which page it would approve - without changing anything;
 `--max-steps N` caps how many steps it takes in one run (default 50); `--json`
 is for scripting.
 
@@ -585,7 +593,9 @@ bookfactory revise <book> <id>                 change approved work
 bookfactory lock concept|voice|manuscript|visual <book>
 bookfactory render <book> --page p004 --submit
 bookfactory produce <book> [--max-steps N] [--dry-run] [--json]
-                                                run the mechanical steps (render/QA/assemble/preflight) until one needs you
+                                                run the mechanical steps (render/QA/assemble/preflight) and, on an
+                                                autonomous/visual_checkpoint book, approve each page as it's rendered -
+                                                until one needs you
 bookfactory review <book>                      contact sheet and review PDFs
 bookfactory qa <book>                          quality checks
 bookfactory validate <book>                    structural check
