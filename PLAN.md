@@ -13,7 +13,7 @@ here.
 
 > **Doing:** no phase open. Phase 11 is done and archived.
 > **Finished:** this session built Phases 8-11: one-file page plan, one-prompt start, a Higgsfield picture test (approved by Kieran), and a picture budget per book (default: chapter openers only; only the operator raises it) with the Higgsfield routine in the rules. 446 tests passing, 2 skipped.
-> **Next action:** choose the next phase with Kieran from `docs/REVIEW-2026-09.md` (#8 hands-off production, #2 `next --batch`, #9 smaller repository) or `IDEAS.md` (typeset chart page type; approval-guard false alarms).
+> **Next action:** plan Phase 12 with `/plan-phase` from `docs/REVIEW-2026-09.md` item #8 (hands-off production: one `bookfactory produce <book>` loop that runs a book's tasks and stops only at the operator's checkpoints), which Kieran chose on 2026-09-23. #8 is bigger than one sitting: plan only its first slice, park the rest in `IDEAS.md`. Pictures now come from the Higgsfield connector (Phases 10-11), within each book's picture budget.
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
