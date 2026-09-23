@@ -125,6 +125,15 @@ draft is a near miss, that is still `wait_for_operator` in substance even if
 the field says otherwise - use your judgement about what "no ambiguity" means,
 and when genuinely unsure, ask instead of approving.
 
+To approve several ready pages or assets in one pass, `approve --all-passing`
+takes the same `--autonomous` flag and the same authorization check as a
+single approval above - it is refused unless the recorded policy authorizes
+autonomous approval, and every approval it makes is audited the same way. It
+never touches the cover (that stays `cover approve`), and the visual-lock and
+full-wrap cover checkpoints below are unchanged: a draft passing its measured
+checks only makes it eligible for this batch, not a substitute for your
+visual/content review of each one.
+
 Locks work the same way. When a lock task (`lock concept`, `voice`,
 `manuscript` or `visual`) reads `continue_automatically`, run it with
 `--autonomous`:

@@ -303,8 +303,9 @@ as draft v2; awaiting approval".
 | Check the whole project | `bookfactory validate <book>` |
 | Run quality checks | `bookfactory qa <book> --json` |
 
-Commands that need authority: `approve`, `lock`, `advance`, `assemble`, `preflight`,
-`cover approve`, `cover finalize`, `cover preflight`. Run one only when:
+Commands that need authority: `approve`, `approve --all-passing`, `lock`,
+`advance`, `assemble`, `preflight`, `cover approve`, `cover finalize`,
+`cover preflight`. Run one only when:
 
 * the operator asked you to, or
 * it is what the current task from `bookfactory next` asks for, **and** that
@@ -315,6 +316,15 @@ Commands that need authority: `approve`, `lock`, `advance`, `assemble`, `preflig
 If the task's `mode` is `wait_for_operator`, stop and ask, whatever the command.
 `mode` already accounts for the production policy (section 3a), so you do not
 need to work it out yourself.
+
+`approve --all-passing` batches ordinary `approve` over every reviewable
+draft; it needs the same authority as a single `approve` and follows the same
+rule. An agent may run it only with `--autonomous`, and only when the book's
+recorded production policy authorizes autonomous approval - exactly the check
+a single `approve --autonomous` makes, and every approval it makes is audited
+the same way. A draft passing its measured checks (section 6a) is not the
+operator's judgement that it is right; it only means the draft is eligible to
+be reviewed.
 
 `reject`, `revise`, `advance --force` and `policy set` are for the operator
 only. Run them only when the operator asks.

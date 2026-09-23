@@ -281,6 +281,22 @@ bookfactory approve golf-addict p004 --kind page
 
 Nothing is approved because you did not complain. Approval is always a command.
 
+To approve a batch of pages and assets in one go, look at the drafts first,
+then check what would be approved before actually approving anything:
+
+```bash
+bookfactory approve golf-addict --all-passing --by '<operator>' --dry-run
+bookfactory approve golf-addict --all-passing --by '<operator>'
+```
+
+This runs the normal single approval, one item at a time, over every page and
+asset that has a reviewable draft and is not already approved (a draft that
+failed a measured check, like resolution, is never reviewable, and is listed
+as not ready instead). The cover has its own approval, `cover approve`; this
+command never touches it. It carries on past anything that fails and reports
+what was approved and what failed. `--dry-run` changes nothing - use it to see
+the list before you commit to it.
+
 ## 8. Look at the whole book
 
 ```bash
