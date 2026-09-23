@@ -115,6 +115,19 @@ without `--policy`; if the operator has not said which, ask them
 `book.json`'s `intake.completed` is true, never ask again - read
 `brief/intake.json` instead.
 
+An agent may draft the intake answers from the idea, to save the operator
+retyping what they already said: `bookfactory intake <book> --draft --by
+<agent> --from-file <answers.json>` saves a best-guess draft
+(`book.json`'s `intake.draft`, `brief/intake-draft.json`), listing any
+question it could not answer under `"unclear"`. A draft never completes
+intake - `next` still returns the intake task - and it must never include
+`production_policy`: the agent drafts answers, never the policy. Show the
+operator one summary (the drafted answers, the unclear questions, and the
+policy question) and wait for their reply. Only the operator's own reply is
+recorded, with `bookfactory intake <book> --confirm --by <operator> --policy
+<policy they chose> [--set key=value ...]`, which merges their corrections
+and completes intake, on record as agent-drafted and operator-confirmed.
+
 `create --series-from <book>` still requires `--policy`, chosen the same way.
 It copies the source book's locked voice and visual style and its approved
 references into the new book, but only as drafts recording where they came
@@ -293,6 +306,8 @@ as draft v2; awaiting approval".
 | See the recorded production policy | `bookfactory policy show <book> --json` |
 | See the intake questionnaire | `bookfactory questionnaire --json` |
 | Persist questionnaire answers | `bookfactory intake <book> --from-file <answers.json>` |
+| Draft intake answers from the idea | `bookfactory intake <book> --draft --by <agent> --from-file <answers.json>` |
+| Confirm drafted intake answers (operator only) | `bookfactory intake <book> --confirm --by <operator> --policy <policy> [--set key=value ...]` |
 | Know where the book is | `bookfactory status <book> --json` |
 | Know what to do next | `bookfactory next <book> --json` |
 | See a task in full | `bookfactory task <book> --json` |

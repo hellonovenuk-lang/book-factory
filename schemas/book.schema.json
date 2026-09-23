@@ -85,7 +85,11 @@
         "required": { "type": "boolean" },
         "completed": { "type": "boolean" },
         "completed_at": { "type": ["string", "null"] },
-        "answers": { "type": "object" }
+        "answers": { "type": "object" },
+        "draft": { "type": ["object", "null"] },
+        "drafted_by": { "type": ["string", "null"] },
+        "confirmed_by": { "type": ["string", "null"] },
+        "changed_on_confirm": { "type": "array", "items": { "type": "string" } }
       }
     },
     "production_policy": {

@@ -142,6 +142,18 @@ def build_parser() -> argparse.ArgumentParser:
     intake.add_argument("--from-file", dest="from_file", help="JSON file of question -> answer.")
     intake.add_argument("--set", dest="pairs", action="append", default=[],
                         metavar="KEY=VALUE", help="One answer, repeatable.")
+    intake_step = intake.add_mutually_exclusive_group()
+    intake_step.add_argument("--draft", action="store_true",
+                             help="Save an agent's best-guess answers for the operator to "
+                                  "confirm. Never includes the production policy; list "
+                                  "questions you cannot tell in the file's \"unclear\".")
+    intake_step.add_argument("--confirm", action="store_true",
+                             help="Complete intake from the draft, as the operator confirmed "
+                                  "it. --set gives their corrections.")
+    intake.add_argument("--by", help="With --draft: who drafted it. With --confirm: the "
+                                     "operator confirming it.")
+    intake.add_argument("--policy", choices=POLICY_CHOICES,
+                        help="With --confirm: the production policy the operator chose.")
 
     for name, help_text in (
         ("status", "Where the book stands right now. Writes nothing."),
@@ -526,7 +538,36 @@ def cmd_intake(args) -> int:
             return 2
         key, _, value = pair.partition("=")
         answers[key] = value
-    result = api.submit_intake(args.book, answers, root=args.root)
+    if args.draft:
+        if not args.by:
+            out.error("--draft needs --by: who drafted it")
+            return 2
+        unclear = answers.pop("unclear", [])
+        if isinstance(answers.get("answers"), dict):
+            # The file may nest them: {"answers": {...}, "unclear": [...]}.
+            nested = answers.pop("answers")
+            answers = {**nested, **answers}
+        result = api.draft_intake(args.book, answers, by=args.by, unclear=unclear,
+                                  root=args.root)
+        if args.json:
+            out.emit_json(result)
+            return 0
+        out.heading("INTAKE DRAFTED - WAITING FOR THE OPERATOR")
+        for key, value in result["draft"]["answers"].items():
+            out.field(key.replace("_", " "), value, width=22)
+        out.blank()
+        print("Still to ask the operator: " + ", ".join(result["still_to_ask"]))
+        print("Nothing is complete until they confirm: "
+              f"bookfactory intake {args.book} --confirm --by <operator> --policy <mode>")
+        return 0
+    if args.confirm:
+        if not (args.by and args.policy):
+            out.error("--confirm needs --by (the operator) and --policy (their choice)")
+            return 2
+        result = api.confirm_intake(args.book, by=args.by, policy=args.policy,
+                                    changes=answers, root=args.root)
+    else:
+        result = api.submit_intake(args.book, answers, root=args.root)
     if args.json:
         out.emit_json(result)
         return 0
@@ -549,7 +590,9 @@ def cmd_status(args) -> int:
     out.field("id", data["book_id"])
     out.field("stage", f"{data['stage_number']:02d} {data['stage_label']}")
     out.field("mode", data["mode"].replace("_", " ").upper())
-    if not data["intake"]["completed"] and data["intake"]["required"]:
+    if not data["intake"]["completed"] and data["intake"]["draft_waiting"]:
+        out.field("intake", "DRAFTED - waiting for the operator to confirm the answers")
+    elif not data["intake"]["completed"] and data["intake"]["required"]:
         out.field("intake", "NOT COMPLETED - run `bookfactory next` for the questionnaire")
     out.field("format", f"{data['format']['trim']}, "
                         f"{'colour' if data['format']['colour'] else 'black and white'}"

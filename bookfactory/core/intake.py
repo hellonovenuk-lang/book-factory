@@ -90,8 +90,39 @@ def validate_answers(answers: dict) -> list[str]:
     return problems
 
 
+def validate_draft(answers: dict, unclear: list[str]) -> list[str]:
+    """What is wrong with an agent's draft. Empty list means it can be saved.
+
+    A draft may leave questions out, but only ones it lists as unclear, and
+    every answer it does give must be valid. It may never answer
+    `production_policy`: that is always the operator's own choice.
+    """
+    problems: list[str] = []
+    keys = {question["key"] for question in QUESTIONNAIRE}
+    if "production_policy" in answers:
+        problems.append("'production_policy' is the operator's choice and cannot be drafted; "
+                        "leave it out and ask the operator")
+    for key in unclear:
+        if key not in keys:
+            problems.append(f"unclear lists {key!r}, which is not a question")
+    for key in answers:
+        if key not in keys:
+            problems.append(f"{key!r} is not a question")
+    for key in keys - {"production_policy"}:
+        if key in unclear:
+            continue
+        if key not in answers:
+            problems.append(f"'{key}' has no drafted answer; answer it or list it as unclear")
+    full = {key: value for key, value in answers.items() if key not in unclear}
+    for problem in validate_answers(full):
+        key = problem.split("'")[1]
+        if key in full:
+            problems.append(problem)
+    return problems
+
+
 __all__ = [
     "QUESTIONNAIRE", "HUMOUR_LEVELS", "VISUAL_FEELS", "COLOUR_DIRECTIONS",
     "MAIN_CHARACTER_SOURCES", "LENGTH_CHOICES", "PRODUCTION_POLICIES",
-    "questionnaire_text", "validate_answers",
+    "questionnaire_text", "validate_answers", "validate_draft",
 ]

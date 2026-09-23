@@ -15,9 +15,11 @@ You are the normal production operator.
 ```
 USER: "Create a Book Factory book about men who are addicted to golf."
   -> you create the project from the idea
-  -> you ask the intake questionnaire, once
-  -> the user answers, once
-  -> you persist the answers
+  -> you draft your best-guess intake answers from the idea
+  -> you show the user one summary: drafted answers, unclear questions,
+     and the production policy question
+  -> the user replies once, confirming or correcting it and choosing the policy
+  -> you persist the confirmed answers
   -> you drive the book through every stage, continuously,
      stopping only when the repository or the policy genuinely requires it
   -> finished, QA'd, KDP-checked files
@@ -52,10 +54,80 @@ This creates the project and marks the intake questionnaire required.
 anything else - including before the brief. Do not skip it and do not
 improvise the answers yourself.
 
-## 3. The intake questionnaire - ask it once
+## 3. Intake - draft it from the idea, the operator confirms once
 
-Ask the user, in one compact, natural exchange (not a form, not forty
-questions):
+The recommended routine is draft-then-confirm, not a twelve-question form.
+The user already gave you the idea; use it to answer what you reasonably can,
+and only ask them to react to a summary.
+
+1. **Draft your best-guess answers** for as many of the twelve questions as
+   the idea supports (the full list is below, and `bookfactory questionnaire
+   --json` returns it machine-readably). Every answer you do give must be
+   valid - a choice question (`humour_level`, `visual_feel`,
+   `colour_direction`, `main_character`, `length`) needs one of its listed
+   choices, not free text. Anything you cannot reasonably infer, leave out of
+   `answers` and list its key in `unclear` instead of guessing. Never include
+   `production_policy` in the draft - that question is always the operator's,
+   never the agent's, to answer.
+
+   Example `answers.json`:
+
+   ```json
+   {
+     "answers": {
+       "idea": "A fake rehabilitation manual for men addicted to golf.",
+       "buyer": "Partners and friends buying a joke gift.",
+       "recipient": "A man who golfs most weekends and won't admit it's a problem.",
+       "recognition_trigger": "The excuses for 'just nine holes' turning into a full day.",
+       "humour_level": "medium",
+       "visual_feel": "classic_editorial_caricature",
+       "main_character": "book_factory_invents",
+       "length": "80",
+       "must_include": "none",
+       "must_avoid": "none"
+     },
+     "unclear": ["colour_direction"]
+   }
+   ```
+
+   Persist it as a draft - this does not complete intake, and `next` keeps
+   returning the intake task:
+
+   ```bash
+   bookfactory intake golf-addict --draft --by chatgpt --from-file answers.json
+   ```
+
+2. **Show the operator one summary**, not a repeat of the form: every
+   drafted answer, the unclear questions, and the production policy question
+   (FULL AUTONOMOUS / VISUAL CHECKPOINT / CHECKPOINTED - recommend
+   `visual_checkpoint` if asked). Wait for one reply.
+
+3. **Record only the operator's own reply.** Merge any corrections they gave
+   and the policy they chose:
+
+   ```bash
+   bookfactory intake golf-addict --confirm --by <operator> --policy visual_checkpoint --set colour_direction=muted
+   ```
+
+   Use `--by` with the operator's own name, never yours, and `--policy` with
+   the policy they actually said, never inferred from silence. This is what
+   writes `brief/intake.json`, sets `book.json`'s `intake.completed`, and
+   records that the answers were drafted by you and confirmed by the
+   operator, including anything they changed. **A fresh session must never
+   need to ask again** - check `book.json`'s `intake` block first, and if
+   `completed` is true, do not ask.
+
+Never start the book with `bookfactory create --policy ...` to skip this: the
+policy is the operator's choice, made through their own confirmed reply, not
+yours to set in advance.
+
+If the idea is too thin to draft from, fall back to asking the full
+questionnaire in one compact, natural exchange, then persist the operator's
+own answers directly with `bookfactory intake golf-addict --from-file
+answers.json` (or individual `--set key=value` pairs) - the same command as
+before, still never answering `production_policy` yourself.
+
+The twelve questions, for reference:
 
 1. What is the book, in one or two sentences?
 2. Who will buy it?
@@ -73,24 +145,8 @@ questions):
 11. Anything that must be avoided?
 12. Production policy: FULL AUTONOMOUS (keep going unless genuinely blocked),
     VISUAL CHECKPOINT (show the visual set before mass production), or
-    CHECKPOINTED (ask at every major creative gate)?
-
-`bookfactory questionnaire --json` returns this same list machine-readably if
-you want it verbatim.
-
-Persist the answers immediately - do not hold them in the conversation:
-
-```bash
-bookfactory intake golf-addict --from-file answers.json
-```
-
-or with individual `--set key=value` pairs. This writes `brief/intake.json`,
-sets `book.json`'s `intake.completed`, and derives and records
-`production_policy` from question 12. Never answer question 12 yourself, and
-never start the book with `bookfactory create --policy ...` to skip it: the
-policy is the operator's choice. **A fresh session must never need to ask
-this again.** If you are resuming a project, check `book.json`'s `intake`
-block first - if `completed` is true, do not ask.
+    CHECKPOINTED (ask at every major creative gate)? Never answered by the
+    agent, drafted or otherwise.
 
 ## 4. Follow `production_policy`, not your own judgement, about when to stop
 

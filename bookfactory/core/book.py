@@ -981,7 +981,8 @@ class Book:
             "stage_number": self.state.stage_number,
             "mode": self.state.production_mode,
             "intake": {"required": self.state.intake.required,
-                       "completed": self.state.intake.completed},
+                       "completed": self.state.intake.completed,
+                       "draft_waiting": bool(self.state.intake.draft)},
             "production_policy": _asdict(self.state.production_policy),
             "format": {
                 "trim": self.state.format.trim,

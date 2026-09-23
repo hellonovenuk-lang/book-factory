@@ -75,6 +75,15 @@ class IntakeState:
     #: The raw questionnaire answers, persisted verbatim. See
     #: `bookfactory.core.intake` for the question set and validation.
     answers: dict = field(default_factory=dict)
+    #: Answers an agent drafted from the idea, waiting for the operator to
+    #: confirm them: {"answers", "unclear", "drafted_by", "drafted_at"}. A
+    #: draft never completes intake. Cleared when intake is confirmed.
+    draft: dict | None = None
+    #: Who drafted the confirmed answers (None if the operator answered all of
+    #: them), who confirmed them, and which answers the operator changed.
+    drafted_by: str | None = None
+    confirmed_by: str | None = None
+    changed_on_confirm: list = field(default_factory=list)
 
 
 #: Explicit, recorded authorization for how far production may proceed without

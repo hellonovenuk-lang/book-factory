@@ -13,15 +13,24 @@ hand. Open a fresh ChatGPT Work session with access to this repository and say
 something like:
 
 > Create a new Book Factory project. Idea: a fake rehabilitation manual for
-> men who are addicted to golf. Ask me the setup questionnaire, then continue
-> autonomously through the whole book unless you genuinely need my judgement.
+> men who are addicted to golf. Draft the setup questionnaire from that, then
+> continue autonomously through the whole book unless you genuinely need my
+> judgement.
 
-ChatGPT will create the project, ask you a short, one-time questionnaire
-(twelve questions, covering the idea, the buyer, the humour level, the visual
-feel, and how hands-off you want it to be), and then drive the entire
-pipeline - brief, manuscript, visual development, illustrations, rendering,
-QA, assembly and KDP preflight - stopping only where the repository or your
-own answers say it must. If the session ends partway through, open a new one
+ChatGPT will create the project and use your idea to draft its own best-guess
+answers to the setup questionnaire (twelve questions, covering the idea, the
+buyer, the humour level, the visual feel, and how hands-off you want it to
+be). You will not see the form itself - you will see one short summary: what
+it guessed, which questions it could not guess (marked "unclear"), and one
+question it never guesses for you: which of FULL AUTONOMOUS, VISUAL
+CHECKPOINT or CHECKPOINTED you want. Reply once, correcting anything that is
+wrong and answering the unclear questions and the policy question - "looks
+right, visual checkpoint" is a fine reply if the draft is good. ChatGPT then
+records your reply and drives the entire pipeline - brief, manuscript, visual
+development, illustrations, rendering, QA, assembly and KDP preflight -
+stopping only where the repository or your own answers say it must. If your
+idea is too thin for ChatGPT to draft from, it will ask the full
+questionnaire instead. If the session ends partway through, open a new one
 and say "Continue Book Factory project \<book-id\>" - it resumes from exactly
 where the repository left off.
 
@@ -505,7 +514,11 @@ never have to explain the history again.
 bookfactory create "Title" --policy <p>        start a project (manual, every detail up front)
 bookfactory create-from-idea "One-line idea"   start a project (autonomous flow, questionnaire required)
 bookfactory questionnaire                      show the intake questionnaire
-bookfactory intake <book> --from-file a.json   persist the questionnaire answers, once
+bookfactory intake <book> --draft --by <agent> --from-file a.json
+                                                agent's best-guess answers, saved as a draft
+bookfactory intake <book> --confirm --by <you> --policy <p> [--set k=v ...]
+                                                your reply: corrections plus the policy, once
+bookfactory intake <book> --from-file a.json   or: persist your own answers directly, once
 bookfactory policy show <book>                 the recorded production policy
 bookfactory policy set <book> <p> --by <you>   change it (operator only, audited)
 bookfactory status <book>                      where it stands

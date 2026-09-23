@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 8 is done and archived.
-> **Finished:** this session (2026-09-23) built Phase 8 from review item #3: one plan file now holds every page with its spec, each spec's artwork is registered by itself, and a plan with one bad spec is refused whole. 419 tests passing, 2 skipped; demo build passes. Kieran asked to run phases without stopping for OKs, with a summary at the end.
-> **Next action:** choose Phase 9 with Kieran: review item #7 (one-prompt start) is next in the suggested order; the new `IDEAS.md` line (many specs at once for an existing plan) is a small alternative.
+> **Doing:** no phase open. Phase 9 is done and archived.
+> **Finished:** this session (2026-09-23) built Phase 8 (one-file page plan) and Phase 9 (one-prompt start: the agent drafts the 12 intake answers, the operator confirms in one reply). 431 tests passing, 2 skipped; demo build passes. Kieran asked to run phases without stopping for OKs, with a summary at the end.
+> **Next action:** review item #4 (pictures): once Kieran has connected the Higgsfield connector and opened a fresh session, plan a small phase that test-drives one illustration through it (see `IDEAS.md`).
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -66,6 +66,8 @@ Phase 6: Series presets (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 7: Batch approval (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 8: Page plan and specs in one file (done, see `docs/PLAN-ARCHIVE.md`)
+
+Phase 9: One-prompt start (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
 

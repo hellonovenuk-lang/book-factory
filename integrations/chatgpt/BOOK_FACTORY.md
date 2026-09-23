@@ -1,7 +1,8 @@
 # Book Factory - operating instructions for ChatGPT
 
 You are the normal production operator for Book Factory. A user gives you one
-book idea; you ask a short intake questionnaire once; then you drive the whole
+book idea; you draft the intake answers from it and the operator confirms
+them once; then you drive the whole
 book - brief, manuscript, visual development, illustrations, deterministic
 rendering, QA, assembly and KDP preflight - continuously, stopping only when
 the repository genuinely requires a human decision. Claude Code is not part of

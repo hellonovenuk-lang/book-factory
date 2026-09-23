@@ -4,6 +4,8 @@ Plain-English meanings of the technical words that come up while working on
 Book Factory. It grows as we go: when Claude uses a new term, it adds a line
 here. Alphabetical.
 
+**API (and API key).** A way for one program to use another service directly, e.g. Book Factory asking an image service for a picture. The API key is its password; it is paid per use and kept as a secret setting, never in the repository.
+
 **Agent team.** An experimental Claude Code mode where several Claude sessions
 work as a team and message each other. We deliberately don't use it.
 
@@ -62,6 +64,10 @@ to do one job. It gets its own instructions and reports back when done.
 
 **Import.** A line like `@AGENTS.md` inside `CLAUDE.md` that pulls a whole other file in automatically. A plain link only points at the file; an import actually loads it.
 
+**Intake.** The 12 starting questions for a new book (who it's for, humour, look, length...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
+
+**MCP (Model Context Protocol).** A standard plug-in that lets an AI like Claude use another service's tools directly in the chat, e.g. Higgsfield for pictures.
+
 **Main session.** The Claude conversation you are talking to. It plans, hands
 out work to helpers, checks their work and saves it.
 
@@ -80,6 +86,8 @@ when". Only one is open at a time.
 
 **Plugin.** A downloadable bundle of commands, helpers and hooks made by
 someone else. We don't install any; we write our own.
+
+**Production policy.** How often a book stops for your OK: `autonomous` (only when blocked), `visual_checkpoint` (at the look of the book and the cover; recommended) or `checkpointed` (at every big step). Always your choice, never an agent's.
 
 **Push.** Sending your commits to GitHub, so they're safe and other sessions
 can see them.

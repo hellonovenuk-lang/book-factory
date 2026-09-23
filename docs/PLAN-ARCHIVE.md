@@ -367,3 +367,59 @@ walk the whole pipeline to the end.
 | 2026-09-23 | 8 | Full test suite (checker, junit XML) | 419 tests, 0 failures, 0 errors, 2 skipped |
 | 2026-09-23 | 8 | Demo build on a throwaway copy | Finished to release ready; step 8: 24 pages planned, 24 specs written, 10 artwork assets registered from the specs |
 | 2026-09-23 | 8 | Diff of rules and guides against the plan | No contradictions; no rule's meaning changed |
+
+## Phase 9: One-prompt start (done)
+
+Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #7. Today a
+book started from one idea stops at a 12-question form that the operator
+answers in full before anything happens.
+
+**What changes:** the agent drafts the answers from the idea; the operator
+checks one summary, fixes anything wrong and confirms in one reply.
+- `bookfactory intake <book> --draft --by <agent> --from-file <answers.json>`
+  saves the agent's best guesses as a **draft**, with an optional `unclear`
+  list of the questions it could not answer from the idea. A draft never
+  completes intake. Any answer given must be valid; an answer left out must
+  be listed as unclear. A draft that contains `production_policy` is refused:
+  the policy is always the operator's own choice (`AGENTS.md` 3b).
+- `bookfactory intake <book> --confirm --by <operator> --policy <mode>
+  [--set key=value ...]` merges the operator's corrections into the draft,
+  checks the full set, and completes intake exactly as today, recording that
+  the answers were drafted by the agent and confirmed by the operator, and
+  which answers the operator changed.
+- The intake task explains both steps: draft and show the summary if there is
+  no draft yet; otherwise show the draft and wait for the operator's reply.
+  Its mode stays `wait_for_operator`.
+- The plain `intake --from-file` (the operator answering everything) keeps
+  working.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 9.1 | Draft and confirm in the core: draft state, checks, audit entries; tests | main (tight change across small core files) | `bookfactory/core/intake.py`, `bookfactory/core/models.py`, `bookfactory/core/api.py`, `bookfactory/core/audit.py`, `schemas/book.schema.json`, `bookfactory/core/book.py` (status shows a waiting draft, added while building), `tests/test_intake_draft.py` (new) | [x] |
+| 9.2 | `intake --draft` and `intake --confirm` on the command line; `status` shows a waiting draft | main | `bookfactory/cli/main.py` | [x] |
+| 9.3 | Intake task instructions for the draft-then-confirm routine | main | `bookfactory/core/tasks.py` | [x] |
+| 9.4 | Rules and guides: one-prompt start; the policy is still only the operator's | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`, `integrations/README.md` (checked, no change needed) | [x] |
+| 9.5 | Mark review item #7 done; glossary | main | `docs/REVIEW-2026-09.md`, `GLOSSARY.md` | [x] |
+| 9.6 | Check everything with proof on a throwaway demo copy | helper: checker (Sonnet) | none (read-only) | [x] |
+
+**Notes:** review caught two doc slips, both fixed: the example draft file nested its answers (the command now accepts both layouts), and one rule sentence ("never start with `create` to skip intake") had been dropped. The safety guard blocked a Bash edit of `api.py` because the new text mentioned the policy; the normal file-edit tool was used instead (the `IDEAS.md` guard item).
+
+**Order:** main does 9.1 to 9.3 while the docs keeper does 9.4; then 9.5;
+then the checker.
+
+**Test-drive:** a test starts a book from one sentence, saves a draft with
+one unclear answer, confirms it with one correction and a policy, and the
+next task moves past intake.
+
+**Done when:**
+- [x] A book started from one sentence can have its 12 answers drafted by the agent and confirmed by the operator in one step.
+- [x] A draft never completes intake on its own, and can never contain the production policy.
+- [x] `pytest` passes and the demo build passes.
+- [x] Everything is saved to GitHub `main` and checked there.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-23 | 9 | Full test suite (checker, junit XML) | 431 tests, 0 failures, 0 errors, 2 skipped |
+| 2026-09-23 | 9 | Demo build on a throwaway copy | Finished to release ready, 24 pages |
+| 2026-09-23 | 9 | Real command-line try-out in a temp folder | Draft saved and shown as waiting; a draft with the policy refused; confirm completed intake with drafted_by, confirmed_by and the changed answer recorded |
+| 2026-09-23 | 9 | Diff of rules and guides against the plan | No contradictions; the operator-only policy rule is intact |

@@ -23,7 +23,7 @@ from bookfactory.core.paths import books_dir
 __all__ = [
     "list_books", "create_book", "create_from_idea", "status", "next_task", "get_task",
     "plan_pages", "write_page_spec", "register_asset", "submit_asset", "submit_intake",
-    "show_policy", "set_policy",
+    "draft_intake", "confirm_intake", "show_policy", "set_policy",
     "approve", "reject", "revise",
     "lock", "advance", "validate", "render", "qa", "assemble", "review", "preflight",
     "audit_history", "relock",
@@ -320,9 +320,16 @@ def submit_intake(book_id: str, answers: dict, *, root: str | Path | None = None
     `production_policy` from question 12 (`create_book` and `set_policy` are
     the other two ways a policy is chosen). A fresh session never needs to ask
     again - it reads `brief/intake.json` or `book.json`'s `intake` block
-    instead.
+    instead. `confirm_intake` completes intake through the same path.
     """
-    from bookfactory.core import intake as intake_module, production
+    book = Book.load(book_id, root)
+    return _complete_intake(book, dict(answers), root=root)
+
+
+def _complete_intake(book, answers: dict, *, root, drafted_by: str | None = None,
+                     confirmed_by: str | None = None,
+                     changed: list[str] | None = None) -> dict:
+    from bookfactory.core import clock, intake as intake_module, production
 
     problems = intake_module.validate_answers(answers)
     if problems:
@@ -331,24 +338,116 @@ def submit_intake(book_id: str, answers: dict, *, root: str | Path | None = None
             problems=problems,
             remedy="Fix the listed answers and submit again.",
         )
-    book = Book.load(book_id, root)
-    from bookfactory.core import clock
-
     book.state.intake.completed = True
     book.state.intake.completed_at = clock.timestamp()
     book.state.intake.answers = dict(answers)
+    book.state.intake.draft = None
+    book.state.intake.drafted_by = drafted_by
+    book.state.intake.confirmed_by = confirmed_by
+    book.state.intake.changed_on_confirm = list(changed or [])
     policy = production.policy_from_choice(answers["production_policy"],
                                            source="intake_questionnaire")
     book.state.production_policy = policy
-    write_json(book.paths.brief_dir / "intake.json", {
-        "answers": book.state.intake.answers,
-        "completed_at": book.state.intake.completed_at,
-    })
+    record = {"answers": book.state.intake.answers,
+              "completed_at": book.state.intake.completed_at}
+    if drafted_by:
+        record.update({"drafted_by": drafted_by, "confirmed_by": confirmed_by,
+                       "changed_on_confirm": book.state.intake.changed_on_confirm})
+    write_json(book.paths.brief_dir / "intake.json", record)
+    draft_file = book.paths.brief_dir / "intake-draft.json"
+    if draft_file.is_file():
+        draft_file.unlink()
     book.log("intake_submitted", production_policy=policy.mode,
-             operator_authorized=policy.operator_authorized)
+             operator_authorized=policy.operator_authorized,
+             drafted_by=drafted_by, confirmed_by=confirmed_by,
+             changed_on_confirm=list(changed or []) if drafted_by else None)
     book.save()
     task_module.sync_open_task(book)
-    return status(book_id, root=root)
+    return status(book.state.book_id, root=root)
+
+
+def _require_open_intake(book) -> None:
+    if book.state.intake.completed:
+        raise ValidationError(
+            "Intake is already complete for this book",
+            remedy="Intake happens once. Read brief/intake.json instead of asking again.",
+        )
+
+
+def draft_intake(book_id: str, answers: dict, *, by: str, unclear: list[str] | None = None,
+                 root: str | Path | None = None) -> dict:
+    """Save an agent's best-guess intake answers for the operator to confirm.
+
+    A draft never completes intake, and it may never contain the production
+    policy: that stays the operator's own choice, made at `confirm_intake`.
+    Questions the agent could not answer from the idea go in `unclear`. A new
+    draft replaces an older one.
+    """
+    from bookfactory.core import clock, intake as intake_module
+
+    if not by or not by.strip():
+        raise ValidationError("A draft needs --by: who drafted it")
+    answers = dict(answers)
+    unclear = list(unclear or [])
+    book = Book.load(book_id, root)
+    _require_open_intake(book)
+    problems = intake_module.validate_draft(answers, unclear)
+    if problems:
+        raise ValidationError(
+            "The drafted intake answers cannot be saved",
+            problems=problems,
+            remedy="Fix the listed answers; list anything you cannot tell from the idea "
+                   "as unclear.",
+        )
+    draft = {"answers": answers, "unclear": unclear, "drafted_by": by,
+             "drafted_at": clock.timestamp()}
+    book.state.intake.draft = draft
+    write_json(book.paths.brief_dir / "intake-draft.json", draft)
+    book.log("intake_drafted", drafted_by=by, unclear=unclear or None)
+    book.save()
+    task_module.sync_open_task(book)
+    return {"book_id": book_id, "draft": draft,
+            "still_to_ask": unclear + ["production_policy"]}
+
+
+def confirm_intake(book_id: str, *, by: str, policy: str, changes: dict | None = None,
+                   root: str | Path | None = None) -> dict:
+    """Complete intake from the drafted answers, as the operator confirmed them.
+
+    `changes` are the operator's corrections and their answers to the unclear
+    questions; `policy` is the production policy they chose. The full set is
+    checked exactly as `submit_intake` checks it, and the book records who
+    drafted and who confirmed the answers, and which the operator changed.
+    """
+    if not by or not by.strip():
+        raise ValidationError("Confirming intake needs --by: the operator confirming it")
+    book = Book.load(book_id, root)
+    _require_open_intake(book)
+    draft = book.state.intake.draft
+    if not draft:
+        raise ValidationError(
+            "There is no drafted intake to confirm",
+            remedy="Draft the answers first with `bookfactory intake <book> --draft`, "
+                   "or submit all of them with `bookfactory intake <book> --from-file`.",
+        )
+    changes = dict(changes or {})
+    if "production_policy" in changes:
+        raise ValidationError("Give the production policy with --policy, not as a change")
+    unclear = draft.get("unclear", [])
+    answers = {key: value for key, value in draft["answers"].items() if key not in unclear}
+    changed = sorted(key for key, value in changes.items()
+                     if draft["answers"].get(key) != value)
+    answers.update(changes)
+    missing = [key for key in unclear if key not in answers]
+    if missing:
+        raise ValidationError(
+            "Some questions the draft left unclear have no answer yet",
+            problems=[f"'{key}' is still unclear" for key in missing],
+            remedy="Ask the operator and pass each answer with --set key=value.",
+        )
+    answers["production_policy"] = policy
+    return _complete_intake(book, answers, root=root, drafted_by=draft["drafted_by"],
+                            confirmed_by=by, changed=changed)
 
 
 def show_policy(book_id: str, *, root: str | Path | None = None) -> dict:

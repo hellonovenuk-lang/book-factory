@@ -76,14 +76,51 @@ def _intake_task(book) -> Task | None:
         return None
     from bookfactory.core import intake
 
+    confirm = _cmd(book, "intake", "<book>",
+                   "--confirm --by <operator> --policy <their choice> [--set key=value ...]")
+    draft = book.state.intake.draft
+    if draft:
+        answers = "\n".join(f"  {key}: {value}" for key, value in draft["answers"].items()
+                            if key not in draft.get("unclear", []))
+        unclear = ", ".join(draft.get("unclear", [])) or "none"
+        return _task(
+            book, "intake",
+            type="intake",
+            summary="Show the operator the drafted intake answers and wait for their reply",
+            instructions=(
+                f"{draft['drafted_by']} drafted these answers from the idea "
+                "(brief/intake-draft.json):\n"
+                f"{answers}\n\n"
+                f"Could not tell from the idea: {unclear}\n\n"
+                "Show the operator this summary once, ask the unclear questions, and ask "
+                "them to choose the production policy (autonomous, visual_checkpoint or "
+                "checkpointed; visual_checkpoint is recommended). Never choose it for them. "
+                "Nothing is complete until they reply. Then record their reply:\n\n"
+                f"  {confirm}\n\n"
+                "--set carries their corrections and their answers to the unclear questions. "
+                "A new draft may replace this one if the idea changes."
+            ),
+            output={"destination": "brief/intake.json", "expected_format": "json"},
+            approval_required=True,
+            gate="intake",
+        )
+
     return _task(
         book, "intake",
         type="intake",
         summary="Complete the Book Factory intake questionnaire",
         instructions=(
             intake.questionnaire_text()
-            + "\n\nAsk the user these questions once, in one compact exchange - not a "
-            "forty-question creative brief. Then persist the answers:\n\n"
+            + f"\n\nThe idea is in {book.paths.relative(book.paths.brief_file)}.\n\n"
+            "Recommended: draft every answer you can from the idea yourself, and list "
+            "the questions you cannot tell as unclear. Never draft the production policy: "
+            "it is always the operator's own choice. Save the draft:\n\n"
+            f"  {_cmd(book, 'intake', '<book>', '--draft --by <you> --from-file <draft.json>')}\n\n"
+            "(draft.json: each question's key and answer, plus \"unclear\": [keys]). Then "
+            "show the operator one summary and wait for their reply; record it with\n\n"
+            f"  {confirm}\n\n"
+            "If the idea is too thin to draft from, ask the questions once, in one compact "
+            "exchange, and persist all the answers instead:\n\n"
             f"  {_cmd(book, 'intake', '<book>', '--from-file <answers.json>')}\n\n"
             "This never needs asking again. A fresh session reads brief/intake.json "
             "and book.json's `intake` block instead of asking twice."
