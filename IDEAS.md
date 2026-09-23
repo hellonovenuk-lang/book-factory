@@ -13,4 +13,4 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 - 2026-09-22: Publish the Claude Code audit report as a private page to refer back to (audit session)
 - 2026-09-23: Approval guard blocks a plain Python text edit of `PLAN.md` because the text mentions "approve"; make it tell real commands from words in text (Phase 4 planning)
 - 2026-09-23: `spec <book> --from-file` for many pages at once, for a book whose plan already exists without specs (Phase 8 planning)
-- 2026-09-23: For review item #4 (image API), consider the Higgsfield API: one key, 50+ image models, pay-as-you-go in dollars; separate from the higgsfield.ai subscription (Kieran has a subscription)
+- 2026-09-23: For review item #4 (images), try the Higgsfield MCP first: it uses Kieran's existing subscription credits (no API key), so Claude could draw and submit illustrations in chat. The Higgsfield API (pay-as-you-go dollars, separate from the subscription) is the fully automatic route later
