@@ -423,3 +423,64 @@ next task moves past intake.
 | 2026-09-23 | 9 | Demo build on a throwaway copy | Finished to release ready, 24 pages |
 | 2026-09-23 | 9 | Real command-line try-out in a temp folder | Draft saved and shown as waiting; a draft with the policy refused; confirm completed intake with drafted_by, confirmed_by and the changed answer recorded |
 | 2026-09-23 | 9 | Diff of rules and guides against the plan | No contradictions; the operator-only policy rule is intact |
+
+## Phase 10: Test one picture through Higgsfield (done)
+
+Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #4 and the
+`IDEAS.md` line on the Higgsfield connector (MCP, paid from Kieran's plan
+credits: 70 at the start; a 4K picture costs 4). A test only: nothing is
+changed in any real book, and no rule changes until Kieran has judged the
+picture.
+
+**How:** in a throwaway copy of the repository, give the runner book one test
+page whose spec names a test illustration (registered automatically, Phase
+8). Take the illustration task Book Factory then issues, send its approved
+reference pictures to Higgsfield, generate one picture (Nano Banana Pro,
+4K), bring the file back and submit it as a draft, so Book Factory's measured
+checks (size, readable image) judge it. Show Kieran the picture beside the
+references.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 10.1 | Throwaway test: task, references to Higgsfield, one picture, download, submit, measured checks | main | none in the repository (throwaway copy; picture kept in the scratchpad for Kieran) | [x] |
+| 10.2 | Record what worked, what didn't, the cost, and the routine to write into the rules if Kieran is happy | main | `PLAN.md`, `IDEAS.md` | [x] |
+
+**Findings (2026-09-23 test):**
+- The whole route works from this cloud session: a test page planned with
+  its spec registered its artwork by itself (Phase 8); `task` issued the
+  illustration task with 3 approved references; the references were uploaded
+  to Higgsfield (`media_upload`, then `curl` PUT from here, then
+  `media_confirm`); `generate_image` made the picture; `curl` downloaded it;
+  `submit` accepted it as draft v1 and its measured checks passed (1792x2400,
+  needs 1530 wide). The next task became the operator's review, as it should.
+- **Plan limit:** Nano Banana Pro at 4K is refused on the basic plan
+  ("Requires plus plan or higher"). 2K works: 2 credits, and a portrait 3:4
+  picture comes out 1792 wide, enough for a 6x9 book's full page. The job
+  reported running as `nano_banana_2`, not `nano_banana_pro`. Credits: 70
+  before, 68 after. Each picture took about 2 minutes.
+- **Quality (Claude's review, for Kieran to judge):** Alex and Sam clearly
+  match their references and the ink-and-grey style is close; the joke reads;
+  no text. But a **brand logo appeared on Alex's shorts** (banned by the
+  visual bible), there are **two kettles**, the background is busier than the
+  reference and the paper slightly pinker. As submitted it would need a
+  revision. A prompt that explicitly says "plain unbranded shorts, one
+  kettle, sparse background" is the obvious next try.
+- **Second try (Kieran asked):** the prompt added "completely plain unbranded
+  shorts", "a single kettle", "nothing on the table except Sam's mug", "plain
+  white paper, very sparse background, like the third reference". Result
+  (draft v2, 1792x2400, measured checks passed, 2 more credits): no logo, one
+  kettle, white paper, sparse background, characters still match. Clean on
+  Claude's review. Lesson for the routine: name the visual bible's "Never"
+  items and the reference's sparseness in every prompt, not just the scene.
+- **Kieran's verdict (2026-09-23):** second picture approved.
+- Rule 6 still holds: an operator (or an agent under `autonomous`) must
+  judge the match; the measured checks cannot see a logo.
+
+**Done when:**
+- [x] One picture made through Higgsfield from a real Book Factory task, with the book's approved references, has been submitted as a draft in a throwaway copy, and its measured checks are reported.
+- [x] Kieran has seen it beside the references, and the findings and cost are written down.
+- [x] Everything is saved to GitHub `main` and checked there.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-23 | 10 | Higgsfield picture from a real task, in a throwaway copy | Draft v1 and v2 both passed measured checks (1792x2400); v2 clean on review and approved by Kieran; 4 credits used, 66 left |

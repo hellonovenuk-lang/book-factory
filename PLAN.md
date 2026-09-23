@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 10 (test one picture through Higgsfield). The test ran and is written up under Phase 10's findings; waiting for Kieran's verdict on the picture.
-> **Finished:** Phases 8 and 9 this session; Higgsfield connected and one test picture made, submitted and checked in a throwaway copy (2 credits; 68 left).
-> **Next action:** get Kieran's verdict on the test picture, then either try one more picture with a tighter prompt, or plan the phase that writes the Higgsfield routine into the rules (docs keeper: `integrations/claude/BOOK_FACTORY.md` "Images").
+> **Doing:** no phase open. Phase 10 is done and archived.
+> **Finished:** this session built Phases 8 and 9 and ran Phase 10: Higgsfield makes book pictures from real Book Factory tasks (2 credits each on the basic plan at 2K; the second test picture was approved by Kieran). 431 tests passing, 2 skipped.
+> **Next action:** plan the phase that writes the Higgsfield picture routine into the rules (docs keeper: `integrations/claude/BOOK_FACTORY.md` "Images", with the prompt lesson from Phase 10), together with Kieran's answer on a picture budget per book (`IDEAS.md`).
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -69,61 +69,7 @@ Phase 8: Page plan and specs in one file (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 9: One-prompt start (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 10: Test one picture through Higgsfield (in progress)
-
-Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #4 and the
-`IDEAS.md` line on the Higgsfield connector (MCP, paid from Kieran's plan
-credits: 70 at the start; a 4K picture costs 4). A test only: nothing is
-changed in any real book, and no rule changes until Kieran has judged the
-picture.
-
-**How:** in a throwaway copy of the repository, give the runner book one test
-page whose spec names a test illustration (registered automatically, Phase
-8). Take the illustration task Book Factory then issues, send its approved
-reference pictures to Higgsfield, generate one picture (Nano Banana Pro,
-4K), bring the file back and submit it as a draft, so Book Factory's measured
-checks (size, readable image) judge it. Show Kieran the picture beside the
-references.
-
-| # | Task | Who | Files | Status |
-|---|---|---|---|---|
-| 10.1 | Throwaway test: task, references to Higgsfield, one picture, download, submit, measured checks | main | none in the repository (throwaway copy; picture kept in the scratchpad for Kieran) | [x] |
-| 10.2 | Record what worked, what didn't, the cost, and the routine to write into the rules if Kieran is happy | main | `PLAN.md`, `IDEAS.md` | [ ] |
-
-**Findings (2026-09-23 test):**
-- The whole route works from this cloud session: a test page planned with
-  its spec registered its artwork by itself (Phase 8); `task` issued the
-  illustration task with 3 approved references; the references were uploaded
-  to Higgsfield (`media_upload`, then `curl` PUT from here, then
-  `media_confirm`); `generate_image` made the picture; `curl` downloaded it;
-  `submit` accepted it as draft v1 and its measured checks passed (1792x2400,
-  needs 1530 wide). The next task became the operator's review, as it should.
-- **Plan limit:** Nano Banana Pro at 4K is refused on the basic plan
-  ("Requires plus plan or higher"). 2K works: 2 credits, and a portrait 3:4
-  picture comes out 1792 wide, enough for a 6x9 book's full page. The job
-  reported running as `nano_banana_2`, not `nano_banana_pro`. Credits: 70
-  before, 68 after. Each picture took about 2 minutes.
-- **Quality (Claude's review, for Kieran to judge):** Alex and Sam clearly
-  match their references and the ink-and-grey style is close; the joke reads;
-  no text. But a **brand logo appeared on Alex's shorts** (banned by the
-  visual bible), there are **two kettles**, the background is busier than the
-  reference and the paper slightly pinker. As submitted it would need a
-  revision. A prompt that explicitly says "plain unbranded shorts, one
-  kettle, sparse background" is the obvious next try.
-- **Second try (Kieran asked):** the prompt added "completely plain unbranded
-  shorts", "a single kettle", "nothing on the table except Sam's mug", "plain
-  white paper, very sparse background, like the third reference". Result
-  (draft v2, 1792x2400, measured checks passed, 2 more credits): no logo, one
-  kettle, white paper, sparse background, characters still match. Clean on
-  Claude's review. Lesson for the routine: name the visual bible's "Never"
-  items and the reference's sparseness in every prompt, not just the scene.
-- Rule 6 still holds: an operator (or an agent under `autonomous`) must
-  judge the match; the measured checks cannot see a logo.
-
-**Done when:**
-- [x] One picture made through Higgsfield from a real Book Factory task, with the book's approved references, has been submitted as a draft in a throwaway copy, and its measured checks are reported.
-- [ ] Kieran has seen it beside the references, and the findings and cost are written down.
-- [ ] Everything is saved to GitHub `main` and checked there.
+Phase 10: Test one picture through Higgsfield (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
 
