@@ -2,3 +2,4 @@
 {"at": "2026-09-23T18:45:02Z", "event": "stage_advanced", "from": "idea", "to": "book_brief", "by": "system", "note": "stage derived from repository state"}
 {"at": "2026-09-23T18:45:02Z", "event": "book_created", "book_id": "golf-addicts-guide-to-family-reintegration", "title": "The Golf Addict's Guide to Family Reintegration", "trim": "6x9", "colour": true}
 {"at": "2026-09-23T18:45:15Z", "event": "intake_drafted", "drafted_by": "claude", "unclear": ["must_include", "must_avoid"]}
+{"at": "2026-09-23T18:47:47Z", "event": "intake_submitted", "production_policy": "visual_checkpoint", "operator_authorized": true, "drafted_by": "claude", "confirmed_by": "kieran", "changed_on_confirm": ["must_avoid", "must_include"]}
