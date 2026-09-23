@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 4 (Render every page in one go), planned with Kieran 2026-09-23.
-> **Finished:** Phases 1-3. Phase 4's plan is written below; no task started yet.
-> **Next action:** `/fan-out` Phase 4's helper tasks (4.1 builder, 4.2 docs keeper), after a one-line preview and Kieran's OK.
+> **Doing:** Phase 4 (Render every page in one go) is done. The next phase isn't chosen yet.
+> **Finished:** `bookfactory render <book> --submit` without `--page` now renders the whole book, skipping pages with no spec and approved pages, and carrying on past a page that fails. 383 tests passing, 2 skipped; demo build passes. Ran with Kieran's standing OK to work without asking (2026-09-23).
+> **Next action:** choose the next phase from `docs/REVIEW-2026-09.md` (the rest of item #2, or #3 / #5 / #7), planned with `/plan-phase`. Kieran wants effort on what makes books faster, not more process.
 
 **Unfinished, carried over:**
 - none
@@ -54,7 +54,7 @@ Phase 2: Planning and handing out work (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 3: Safety checks and proof (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 4: Render every page in one go (not started)
+## Phase 4: Render every page in one go (done)
 
 Planned 2026-09-23 with Kieran; the first real job for the routine, from
 `docs/REVIEW-2026-09.md` item #2. `bookfactory render <book> --submit`
@@ -64,10 +64,10 @@ that fails to render. This phase makes it safe to run on a real book.
 
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
-| 4.1 | Whole-book render: with `--submit`, skips approved pages (unless a revision is open); always skips pages with no spec; carries on past a page that fails; reports rendered / skipped / failed with reasons; the command exits non-zero if any page failed. Tests for each case | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_render.py` | [ ] |
-| 4.2 | Operator guide explains rendering the whole book and what is skipped | helper: docs keeper, routine (Sonnet) | `docs/OPERATOR.md` | [ ] |
-| 4.3 | Mark review item #2 as partly done | main | `docs/REVIEW-2026-09.md` | [ ] |
-| 4.4 | Check everything with proof (`/verify-phase`) | helper: checker | none (read-only) | [ ] |
+| 4.1 | Whole-book render: with `--submit`, skips approved pages (unless a revision is open); always skips pages with no spec; carries on past a page that fails; reports rendered / skipped / failed with reasons; the command exits non-zero if any page failed. Tests for each case | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_render.py` | [x] |
+| 4.2 | Operator guide explains rendering the whole book and what is skipped | helper: docs keeper, routine (Sonnet) | `docs/OPERATOR.md` | [x] |
+| 4.3 | Mark review item #2 as partly done | main | `docs/REVIEW-2026-09.md` | [x] |
+| 4.4 | Check everything with proof (`/verify-phase`) | helper: checker | none (read-only) | [x] |
 
 **Order:** round 1: 4.1 and 4.2 together while the main session does 4.3.
 Then the checker checks everything.
@@ -76,15 +76,20 @@ Then the checker checks everything.
 another, run `render --submit` on the whole book and read what it reports.
 
 **Done when:**
-- [ ] One command renders and submits every page that is ready, and approved pages are never touched.
-- [ ] A broken page is listed as failed, and the other pages still get done.
-- [ ] `pytest` passes and the demo build passes.
-- [ ] Everything is saved to GitHub `main` and checked there.
+- [x] One command renders and submits every page that is ready, and approved pages are never touched.
+- [x] A broken page is listed as failed, and the other pages still get done.
+- [x] `pytest` passes and the demo build passes.
+- [x] Everything is saved to GitHub `main` and checked there.
 
 **Verification log**
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-23 | 4 | Checker: only the 3 files of task 4.1 uncommitted | confirmed |
+| 2026-09-23 | 4 | Checker: full `pytest` | 383 passed, 2 skipped (baseline 378 + 5 new) |
+| 2026-09-23 | 4 | Checker: demo build on a throwaway copy | finished, Release Ready, 24 pages |
+| 2026-09-23 | 4 | Test-drive: whole-book `render --submit` on the built demo book, one spec broken | all 24 pages skipped as approved, exit 0; approved PDFs' sha256 unchanged |
+| 2026-09-23 | 4 | Broken page fails, rest carry on (demo book had no unapproved page, so by tests) | 5 new tests in `tests/test_render.py` pass |
 
 ---
 
