@@ -212,8 +212,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     approve = sub.add_parser("approve", parents=[common], help="Approve a draft. The only way work becomes canonical.")
     approve.add_argument("book")
-    approve.add_argument("id")
-    approve.add_argument("--kind", choices=[PAGE, ASSET], default=PAGE)
+    approve.add_argument("id", nargs="?", help="The page or asset to approve. Omit with --all-passing.")
+    approve.add_argument("--kind", choices=[PAGE, ASSET],
+                         help="Default: page for a single approval, both for --all-passing.")
     approve.add_argument("--draft", dest="revision", help="Which revision (default: latest).")
     approve.add_argument("--by", help="Who approved it.")
     approve.add_argument("--note")
@@ -221,6 +222,13 @@ def build_parser() -> argparse.ArgumentParser:
                          help="Record this as granted under the book's recorded "
                               "autonomous-production authorization, not an explicit operator "
                               "decision. Fails unless the intake questionnaire authorized it.")
+    approve.add_argument("--all-passing", action="store_true",
+                         help="Approve the newest reviewable draft of every page and asset "
+                              "that passed its measured checks and isn't approved yet. The "
+                              "operator's command; an agent may use it only with --autonomous "
+                              "under a policy that authorizes it.")
+    approve.add_argument("--dry-run", action="store_true",
+                         help="With --all-passing, list what would be approved and change nothing.")
 
     reject = sub.add_parser("reject", parents=[common], help="Reject a draft. The file is kept.")
     reject.add_argument("book")
@@ -761,7 +769,17 @@ def cmd_submit(args) -> int:
 
 
 def cmd_approve(args) -> int:
-    result = api.approve(args.book, args.id, kind=args.kind, revision=args.revision,
+    if args.all_passing and args.id:
+        print("Give either an id or --all-passing, not both.", file=sys.stderr)
+        return 2
+    if not args.all_passing and not args.id:
+        print("Give an id to approve, or --all-passing to approve every passing draft.",
+              file=sys.stderr)
+        return 2
+    if args.all_passing:
+        return _cmd_approve_all_passing(args)
+    kind = args.kind or PAGE
+    result = api.approve(args.book, args.id, kind=kind, revision=args.revision,
                          by=args.by, note=args.note, autonomous=args.autonomous, root=args.root)
     if args.json:
         out.emit_json(result)
@@ -775,6 +793,52 @@ def cmd_approve(args) -> int:
     out.bullet("This artefact is now immutable. Changing it requires "
                f"`bookfactory revise {args.book} {result['id']}`.", level="info")
     return 0
+
+
+def _cmd_approve_all_passing(args) -> int:
+    if args.revision:
+        print("--draft is not allowed with --all-passing.", file=sys.stderr)
+        return 2
+    result = api.approve_passing(args.book, by=args.by, kind=args.kind, dry_run=args.dry_run,
+                                 autonomous=args.autonomous, note=args.note, root=args.root)
+    failed = result.get("failed") or []
+    if args.json:
+        out.emit_json(result)
+        return 1 if failed else 0
+
+    if result["dry_run"]:
+        out.heading("WOULD APPROVE")
+        would = result.get("would_approve") or []
+        if not would:
+            out.bullet("none", level="info")
+        for entry in would:
+            out.bullet(f"{entry['id']} ({entry['kind']}) draft {entry['revision']}", level="info")
+    else:
+        out.heading("APPROVED")
+        if not result["approved"]:
+            out.bullet("none", level="info")
+        for entry in result["approved"]:
+            out.bullet(f"{entry['id']} ({entry['kind']}) -> {entry['revision']}", level="ok")
+
+    not_ready = result.get("not_ready") or []
+    if not_ready:
+        out.blank()
+        out.heading("NOT READY")
+        for entry in not_ready:
+            failures = ", ".join(f.get("message", str(f)) if isinstance(f, dict) else str(f)
+                                 for f in entry.get("failures", []))
+            out.bullet(f"{entry['id']} ({entry['kind']}) draft {entry['revision']}: {failures}",
+                      level="warning")
+
+    if failed:
+        out.blank()
+        out.heading("FAILED")
+        for entry in failed:
+            out.bullet(f"{entry['id']} ({entry['kind']}): {entry['error']}", level="error")
+            if entry.get("remedy"):
+                print(f"      {out.DIM}{entry['remedy']}{out.RESET}")
+
+    return 1 if failed else 0
 
 
 def cmd_reject(args) -> int:

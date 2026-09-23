@@ -393,6 +393,103 @@ def approve(book_id: str, identifier: str, *, kind: str = PAGE, revision: str | 
     return {"kind": kind, "id": identifier, **approval.to_dict(with_dimensions=True)}
 
 
+def approve_passing(book_id: str, *, by: str | None = None, kind: str | None = None,
+                    dry_run: bool = False, autonomous: bool = False, note: str | None = None,
+                    root: str | Path | None = None) -> dict:
+    """Approve, one by one through the normal single approval, the newest
+    reviewable draft of every asset and page that has one and is not already
+    approved (or has a revision open).
+
+    Assets before pages, each through `Book.approve` so every existing check
+    (checksum, constraints, immutability, autonomous authorization) still
+    applies. A draft that failed a measured constraint is never reviewable, so
+    it is never a candidate - it is listed under "not_ready" instead, for
+    information only. The cover artwork asset has its own approval and is
+    never included. `dry_run` changes nothing.
+    """
+    from bookfactory.core import gates
+    from bookfactory.core.cover import ART_ID
+    from bookfactory.core.errors import BookFactoryError
+
+    if not (by or "").strip():
+        raise ValidationError("Batch approval needs the operator's name",
+                              remedy="Pass by= (CLI: --by <operator>).")
+    if kind is not None and kind not in (PAGE, ASSET):
+        raise ValidationError(f"Cannot batch-approve kind {kind!r}",
+                              remedy=f"Valid kinds: {PAGE}, {ASSET}.")
+
+    book = Book.load(book_id, root)
+    if autonomous and not gates.autonomous_approval_authorized(book).ok:
+        raise ValidationError(
+            "This book's production_policy does not authorize autonomous approval",
+            remedy=("Answer the intake questionnaire's production policy question with "
+                    "FULL AUTONOMOUS or VISUAL CHECKPOINT, or approve explicitly without "
+                    "--autonomous."),
+        )
+
+    candidates: list[tuple[str, str]] = []  # (kind, identifier)
+    not_ready: list[dict] = []
+
+    if kind in (None, ASSET):
+        for asset in book.registry:
+            if asset.asset_id == ART_ID:
+                continue
+            reviewable = asset.reviewable_draft()
+            if reviewable is not None and (not asset.is_approved or asset.revision_open):
+                candidates.append((ASSET, asset.asset_id))
+                continue
+            failing = asset.failing_draft()
+            if failing is not None and reviewable is None:
+                not_ready.append({"kind": ASSET, "id": asset.asset_id,
+                                  "revision": failing.revision,
+                                  "failures": list(failing.constraint_failures)})
+
+    if kind in (None, PAGE):
+        for page in book.manifest:
+            reviewable = page.reviewable_draft()
+            if reviewable is not None and (not page.is_approved or page.revision_open):
+                candidates.append((PAGE, page.page_id))
+                continue
+            failing = page.failing_draft()
+            if failing is not None and reviewable is None:
+                not_ready.append({"kind": PAGE, "id": page.page_id,
+                                  "revision": failing.revision,
+                                  "failures": list(failing.constraint_failures)})
+
+    if dry_run:
+        would_approve = []
+        for item_kind, identifier in candidates:
+            record = book.registry.get(identifier) if item_kind == ASSET else book.manifest.get(identifier)
+            reviewable = record.reviewable_draft()
+            would_approve.append({"kind": item_kind, "id": identifier,
+                                  "revision": reviewable.revision})
+        return {"book_id": book_id, "dry_run": True, "approved": [],
+                "would_approve": would_approve, "not_ready": not_ready, "failed": []}
+
+    approved: list[dict] = []
+    failed: list[dict] = []
+    for item_kind, identifier in candidates:
+        record = book.registry.get(identifier) if item_kind == ASSET else book.manifest.get(identifier)
+        reviewable = record.reviewable_draft()
+        if reviewable is None:
+            continue
+        try:
+            approval = book.approve(item_kind, identifier, revision=reviewable.revision,
+                                    by=by, note=note, autonomous=autonomous)
+            approved.append({"kind": item_kind, "id": identifier, "revision": reviewable.revision,
+                             "path": approval.path, "sha256": approval.sha256})
+        except BookFactoryError as exc:
+            failure = {"kind": item_kind, "id": identifier, "revision": reviewable.revision,
+                      "error": exc.message}
+            if exc.remedy:
+                failure["remedy"] = exc.remedy
+            failed.append(failure)
+
+    task_module.sync_open_task(book)
+    return {"book_id": book_id, "dry_run": False, "approved": approved,
+            "not_ready": not_ready, "failed": failed}
+
+
 def reject(book_id: str, identifier: str, *, kind: str = PAGE, revision: str | None = None,
            reason: str | None = None, by: str | None = None,
            root: str | Path | None = None) -> dict:
