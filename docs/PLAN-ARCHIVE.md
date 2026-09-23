@@ -579,3 +579,52 @@ The later slices are parked in `IDEAS.md`.
 |---|---|---|---|
 | 2026-09-23 | 12.1 | Checker: scope, produce.py calls only render/qa/assemble/preflight/next, full suite, demo build + produce on a throwaway copy | Pass: 466 tests, 0 failed, 2 skipped; demo build passed; produce stopped at an illustration task with a plain reason |
 | 2026-09-23 | 12.2, 12.3 | Checker: scope, CLI calls only api.produce, exit codes, `--max-steps 0` refused, docs match the code, full suite, demo build + `produce` (plain, `--dry-run`, `--json`) on a throwaway copy | Pass: 471 tests, 0 failed, 2 skipped. A live render run wasn't shown, because making one needed `revise`, which the guard rightly blocks for helpers; the render path is proved by tests |
+
+## Phase 13: `produce` approves pages (done)
+
+Chosen 2026-09-23 by Kieran: `produce` slice 2 from `IDEAS.md`. Kieran
+decided that page approvals run under **both** `autonomous` and
+`visual_checkpoint` (the two policies `gates.autonomous_approval_authorized`
+already accepts, and under which `next` already gives page approvals
+`continue_automatically`).
+
+**What changes:**
+- `produce` takes one more kind of task: a **page** approval (`type:
+  approval`, a `page_id`, task id `<book>-<page>-approve`), only when its
+  `mode` is `continue_automatically` and `gates.autonomous_approval_authorized`
+  passes. It approves exactly the reviewable draft the task is about, through
+  `api.approve(..., kind="page", autonomous=True, by="produce")`, so every
+  existing check applies and the audit log records it as granted under the
+  recorded policy.
+- It still stops at asset (picture) approvals, locks, the cover, remediation,
+  writing and operator decisions. It never passes `force`, never calls
+  `approve_passing`, `lock`, `advance`, `reject`, `revise` or a policy or
+  picture-budget change. A `checkpointed` book stops at the first page approval.
+- `--dry-run` reports the approval it would make and changes nothing.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 13.1 | Page approvals in the loop, as above, with tests: approves pages under `autonomous` and `visual_checkpoint`; stops on `checkpointed`; never approves assets, locks or the cover; never forces; dry run changes nothing; a whole planned book runs render → approve → … → QA → assembly | helper: builder, tricky (Opus: it hands the loop approval power) | `bookfactory/core/produce.py`, `tests/test_produce.py` | [x] |
+| 13.2 | `produce` help text no longer says "never approves"; CLI test that the JSON shows an approval step | main | `bookfactory/cli/main.py`, `tests/test_produce_cli.py`, `bookfactory/core/api.py` (docstring, found by 13.1) | [x] |
+| 13.3 | Rules and guides: what `produce` now approves (pages only, under the recorded policy) and what it still never does | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [x] |
+| 13.4 | Tick slice 2 off in `IDEAS.md`; glossary terms (none new); this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [x] |
+
+**Test-drive:** tests on a `visual_checkpoint` book show `produce` running
+render → approve → render → … → QA → assembly; on a `checkpointed` book it
+stops at the first page's approval. Checker ran the full suite and the demo
+build on a throwaway copy.
+
+**Done when:**
+- [x] On a `visual_checkpoint` or `autonomous` book, `produce` approves each page it renders and keeps going; on a `checkpointed` book it stops and waits for Kieran.
+- [x] Tests prove it never approves a picture, a lock or the cover, and never forces anything.
+- [x] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
+
+**Notes:** real task ids carry the book prefix (`<book>-<page>-approve`); the
+builder matched that. `produce` approves a page only when its reviewable draft
+is also its latest draft. Approvals are signed `produce` and audited as
+`autonomous_production_policy:<mode>`. The first live run on a real book is
+Kieran's.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-23 | 13 | Checker: full suite (junit XML), demo build on a throwaway copy, code read of `produce.py`, file list | 481 passed, 2 skipped; demo build Release Ready (24 pages, 17 assets); only the 8 briefed files changed; no leftover "never approves" wording |
