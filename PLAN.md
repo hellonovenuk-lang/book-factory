@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 4 (Render every page in one go) is done. The next phase isn't chosen yet.
-> **Finished:** `bookfactory render <book> --submit` without `--page` now renders the whole book, skipping pages with no spec and approved pages, and carrying on past a page that fails. 383 tests passing, 2 skipped; demo build passes. Ran with Kieran's standing OK to work without asking (2026-09-23).
-> **Next action:** choose the next phase from `docs/REVIEW-2026-09.md` (the rest of item #2, or #3 / #5 / #7), planned with `/plan-phase`. Kieran wants effort on what makes books faster, not more process.
+> **Doing:** Phase 5 (Cover build), chosen by Kieran 2026-09-23. Kieran asked to run it without stopping for OKs and get a summary at the end.
+> **Finished:** Phase 4 (whole-book render). 383 tests passing, 2 skipped.
+> **Next action:** round 1 of Phase 5: task 5.1 (builder) and 5.3 (docs keeper).
 
 **Unfinished, carried over:**
 - none
@@ -90,6 +90,53 @@ another, run `render --submit` on the whole book and read what it reports.
 | 2026-09-23 | 4 | Checker: demo build on a throwaway copy | finished, Release Ready, 24 pages |
 | 2026-09-23 | 4 | Test-drive: whole-book `render --submit` on the built demo book, one spec broken | all 24 pages skipped as approved, exit 0; approved PDFs' sha256 unchanged |
 | 2026-09-23 | 4 | Broken page fails, rest carry on (demo book had no unapproved page, so by tests) | 5 new tests in `tests/test_render.py` pass |
+
+---
+
+## Phase 5: Cover build (not started)
+
+Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #5. Today
+each cover is typeset by a one-off script (the running book has three:
+`build_cover_v1.py`, `_text_v2.py`, `_v3.py`; the demo script has its own).
+`bookfactory cover build <book>` does it from `cover/cover.json` in seconds,
+the same way every time.
+
+**The command:** `bookfactory cover build <book> [--submit]`. Reads title
+(the book's), optional `subtitle`, `author`, `back_copy`, optional
+`spine_text` (set only when KDP allows it, else left off and reported) and an
+optional `design` block (`background`, `ink`, `accent` colours;
+`title_font`, `body_font` font files inside the book). Places the approved
+(or latest reviewable) `cover-front-artwork` on the front, or none for a
+text-only cover. Keeps the barcode area clear. Writes
+`output/cover-build/cover-wrap.pdf` plus a full-wrap preview PNG and a
+front thumbnail PNG (regenerable, not tracked), runs the cover checks, and
+with `--submit` registers a new cover draft only if they pass. It never
+approves.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 5.1 | `cover build` with template, previews, checks, `--submit`, schema fields, the cover-layout task pointing to it, and tests | helper: builder, routine (Sonnet) | `bookfactory/render/cover.py` (new), `templates/cover/wrap.html.j2` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `bookfactory/core/tasks.py`, `schemas/cover.schema.json`, `tests/test_cover_build.py` (new) | [ ] |
+| 5.2 | Demo script uses `cover build` instead of its own typesetting | main, after 5.1 | `scripts/build_demo_book.py` | [ ] |
+| 5.3 | Rules and guides say covers are built with `cover build` | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/*` | [ ] |
+| 5.4 | Mark review item #5 done | main | `docs/REVIEW-2026-09.md` | [ ] |
+| 5.5 | Check everything with proof, and test-drive on a throwaway copy of the running book | helper: checker | none (read-only) | [ ] |
+
+**Order:** round 1: 5.1 and 5.3 together; main does 5.4. Round 2: main
+does 5.2, then the checker.
+
+**Test-drive:** on a throwaway copy, build the running book's cover from its
+`cover.json` and look at the preview and thumbnail.
+
+**Done when:**
+- [ ] One command builds a full-wrap cover PDF and previews from `cover.json`, and it passes Book Factory's own cover checks.
+- [ ] With `--submit` it becomes a new cover draft; it never approves.
+- [ ] `pytest` passes and the demo build (now using `cover build`) passes.
+- [ ] Everything is saved to GitHub `main` and checked there.
+
+**Verification log**
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
 
 ---
 
