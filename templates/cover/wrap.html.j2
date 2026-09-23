@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  {% for font in font_faces %}
+  @font-face { font-family: "{{ font.family }}"; src: url("{{ font.uri }}"); }
+  {% endfor %}
+  @page { size: {{ width_in }}in {{ height_in }}in; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    position: relative;
+    width: {{ width_in }}in;
+    height: {{ height_in }}in;
+    background: {{ background }};
+    color: {{ ink }};
+    font-family: "{{ body_font_family }}", "DejaVu Sans", sans-serif;
+  }
+  .box { position: absolute; box-sizing: border-box; }
+  p { margin: 0 0 0.16in; }
+
+  /* -------- front panel -------- */
+  .front {
+    left: {{ front_fold_in + margin_in }}in;
+    top: {{ margin_in }}in;
+    width: {{ front_width_in }}in;
+    text-align: center;
+  }
+  .title {
+    font-family: "{{ title_font_family }}", "DejaVu Sans", sans-serif;
+    font-weight: bold;
+    font-size: 26pt;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .subtitle {
+    font-size: 13pt;
+    color: {{ accent }};
+    margin: 0.14in 0 0;
+  }
+  .artwork {
+    display: block;
+    width: {{ artwork_width_in }}in;
+    height: {{ artwork_height_in }}in;
+    margin: 0.3in auto 0;
+    object-fit: cover;
+  }
+  .author {
+    left: {{ front_fold_in + margin_in }}in;
+    top: {{ height_in - margin_in - 0.3 }}in;
+    width: {{ front_width_in }}in;
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+  }
+
+  /* -------- spine -------- */
+  /* WeasyPrint ignores writing-mode, so the spine is a horizontal line of
+     type centred on the spine's midpoint and rotated 90deg: it then reads
+     top to bottom, as KDP expects, within the spine's width. */
+  .spine {
+    left: {{ back_fold_in + spine_in / 2 }}in;
+    top: {{ height_in / 2 }}in;
+    width: 0;
+    height: 0;
+  }
+  .spine-text {
+    position: absolute;
+    width: {{ height_in - 2 * (bleed_in + 0.5) }}in;
+    left: {{ -(height_in - 2 * (bleed_in + 0.5)) / 2 }}in;
+    top: -0.07in;
+    line-height: 0.14in;
+    text-align: center;
+    transform: rotate(90deg);
+    font-size: {{ spine_font_pt }}pt;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  /* -------- back panel -------- */
+  .back {
+    left: {{ margin_in }}in;
+    top: {{ margin_in }}in;
+    width: {{ back_width_in }}in;
+    font-size: 11pt;
+    line-height: 1.42;
+  }
+</style>
+</head>
+<body>
+
+  <div class="box front">
+    <h1 class="title">{{ title }}</h1>
+    {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+    {% if artwork_uri %}<img class="artwork" src="{{ artwork_uri }}">{% endif %}
+  </div>
+  <div class="box author">{{ author }}</div>
+
+  {% if spine_text %}
+  <div class="box spine"><div class="spine-text">{{ spine_text }}</div></div>
+  {% endif %}
+
+  <div class="box back">
+    {% for paragraph in back_paragraphs %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

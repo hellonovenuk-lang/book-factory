@@ -583,6 +583,16 @@ def preflight(book_id: str, *, root: str | Path | None = None) -> dict:
     return report
 
 
+def cover_build(book_id: str, *, submit: bool = False,
+                root: str | Path | None = None) -> dict:
+    from bookfactory.render import cover as cover_builder
+
+    book = Book.load(book_id, root)
+    result = cover_builder.build(book, submit=submit)
+    task_module.sync_open_task(book)
+    return result
+
+
 def audit_history(book_id: str, *, limit: int | None = None, event: str | None = None,
                   root: str | Path | None = None) -> list[dict]:
     from bookfactory.core import audit

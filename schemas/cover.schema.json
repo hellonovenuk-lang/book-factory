@@ -27,6 +27,10 @@
     "direction": {
       "type": "string"
     },
+    "subtitle": {
+      "description": "Optional line set beneath the title on the front panel by `cover build`.",
+      "type": "string"
+    },
     "author": {
       "type": "string"
     },
@@ -75,6 +79,18 @@
       "properties": {
         "path": {"type": "string"},
         "sha256": {"type": "string"}
+      }
+    },
+    "design": {
+      "description": "Optional look-and-feel overrides read by `cover build`. Fonts are paths to .ttf/.otf files inside this book's project (e.g. style/fonts/Title.ttf).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {"type": "string"},
+        "ink": {"type": "string"},
+        "accent": {"type": "string"},
+        "title_font": {"type": "string"},
+        "body_font": {"type": "string"}
       }
     }
   },

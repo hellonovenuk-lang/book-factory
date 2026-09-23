@@ -644,10 +644,16 @@ def _cover_task(book) -> Task | None:
     if not data.get("drafts"):
         return _task(book, "cover-layout", type="authoring",
                      summary="Typeset and visually inspect the full-wrap cover",
-                     instructions="Size from final page count and paper. Set title, author and back "
-                                  "copy as real type. Keep KDP barcode space clear. Review print "
-                                  "size and Amazon-size thumbnail, then submit a versioned cover PDF.",
-                     output={"destination":"cover/drafts/","expected_format":"pdf"})
+                     instructions=(
+                         f"Run {_cmd(book, 'cover', 'build', '<book>')}. Inspect "
+                         "output/cover-build/cover-wrap.png (full wrap) and "
+                         "cover-thumb.png (Amazon-size front thumbnail). If anything needs "
+                         "changing, edit cover/cover.json - not the PDF - and build again. "
+                         f"Once it looks right, run {_cmd(book, 'cover', 'build', '<book>', '--submit')} "
+                         "to register it as a versioned draft; it only submits if the cover "
+                         "checks pass."),
+                     output={"destination": "cover/drafts/", "expected_format": "pdf",
+                             "submit_command": _cmd(book, "cover", "build", "<book>", "--submit")})
     reviewed = next((d for d in reversed(data["drafts"]) if d.get("status") == "review_approved"), None)
     if reviewed:
         # The decision is already recorded; finalizing only checks the final

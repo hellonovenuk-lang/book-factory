@@ -292,9 +292,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     cover = sub.add_parser("cover", parents=[common], help="Manage a full-wrap print cover.")
     cover_sub = cover.add_subparsers(dest="cover_command", required=True)
-    for name in ("init", "dimensions", "artwork", "submit", "approve", "finalize", "preflight"):
+    for name in ("init", "dimensions", "artwork", "build", "submit", "approve", "finalize",
+                "preflight"):
         operation = cover_sub.add_parser(name, parents=[common])
         operation.add_argument("book")
+        if name == "build":
+            operation.add_argument("--submit", action="store_true",
+                                   help="Also register the built cover as a new draft if it "
+                                        "passes the cover checks. Never approves.")
         if name == "init":
             operation.add_argument("--paper", choices=["white", "cream"], default="white")
             operation.add_argument("--finish", choices=["matte", "glossy"], default="matte")
@@ -983,6 +988,10 @@ def cmd_cover(args) -> int:
         result = cover.dimensions(book)
     elif args.cover_command == "artwork":
         result = cover.set_artwork(book, args.mode, by=args.by, reason=args.reason)
+    elif args.cover_command == "build":
+        result = api.cover_build(args.book, submit=args.submit, root=args.root)
+        out.emit_json(result)
+        return 1 if result["problems"] else 0
     elif args.cover_command == "submit":
         result = cover.submit(book, args.file)
     elif args.cover_command == "approve":
