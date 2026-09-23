@@ -17,10 +17,16 @@ Before Claude runs a Bash command, the hook reads the command and answers:
               lives).
 * nothing   - anything else: the hook has no opinion.
 
+An **ask** only reaches the operator in the "default" permission mode. In
+auto mode (and bypass or don't-ask modes) Claude Code settles an ask without
+showing it, so the guard turns it into a **deny** there, or whenever the mode
+is missing or unknown. The reason tells Claude to stop and ask the operator
+in the chat.
+
 Contract (Claude Code PreToolUse): JSON on stdin; an ask/deny decision is
 printed to stdout as `hookSpecificOutput` JSON and the exit code is 0. If the
 hook cannot read its input, or fails in any way, it asks (never a silent
-allow, never a traceback).
+allow, never a traceback), which becomes a deny outside "default" mode.
 
 Registered in `.claude/settings.json` with matcher "Bash" and the command
 `python3 "$CLAUDE_PROJECT_DIR/.claude/hooks/guard-authority.py"`.
@@ -44,6 +50,11 @@ MAX_DEPTH = 6  # nesting of bash -c / $(...) / eval the guard follows
 
 APPROVED_REASON = ("Approved work is never changed directly (AGENTS.md section 4). "
                    "Use `bookfactory revise` instead.")
+BLOCKED_SUFFIX = (" Blocked, because in this permission mode the question would not reach "
+                  "Kieran. Stop and ask Kieran in the chat. To run it, Kieran switches to "
+                  "the default permission mode (the question then appears) or runs it "
+                  "themselves.")
+ASK_MODES = {"default"}  # permission modes where an ask is shown to the operator
 UNREADABLE_REASON = ("The approval guard couldn't read this command, so it is asking to be "
                      "safe. Kieran must confirm.")
 
@@ -806,7 +817,15 @@ def decide(payload) -> tuple[str, str]:
     return analyzer.decision, analyzer.reason
 
 
-def emit(decision: str, reason: str) -> None:
+def emit(decision: str, reason: str, mode=None) -> None:
+    if decision == ALLOW:
+        return
+    if decision == ASK and mode not in ASK_MODES:
+        decision, reason = DENY, reason + BLOCKED_SUFFIX
+    _write(decision, reason)
+
+
+def _write(decision: str, reason: str) -> None:
     if decision == ALLOW:
         return
     sys.stdout.write(json.dumps({
@@ -828,7 +847,8 @@ def main() -> int:
             emit(ASK, UNREADABLE_REASON)
             return 0
         decision, reason = decide(payload)
-        emit(decision, reason)
+        mode = payload.get("permission_mode") if isinstance(payload, dict) else None
+        emit(decision, reason, mode)
     except Exception:  # never crash: fail safe by asking
         try:
             emit(ASK, UNREADABLE_REASON)

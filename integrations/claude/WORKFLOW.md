@@ -49,7 +49,7 @@ on in `.claude/settings.json`:
 
 | Hook | When | What it does |
 |---|---|---|
-| `.claude/hooks/guard-authority.py` | before every shell command | Stops `approve`, `lock`, `policy set`, `reject`, `revise`, `cover approve/finalize`, `advance --force` and similar, and asks the operator. Blocks any write into approved pages, assets or the approved cover |
+| `.claude/hooks/guard-authority.py` | before every shell command | Stops `approve`, `lock`, `policy set`, `reject`, `revise`, `cover approve/finalize`, `advance --force` and similar. In the default permission mode it asks the operator; in auto mode (where a question would be settled without reaching the operator) it blocks the command and Claude asks in the chat instead. Blocks any write into approved pages, assets or the approved cover |
 | `.claude/hooks/quick-check.py` | after a file is saved | Checks a `.py` or `.json` file still reads correctly, so a slip is caught at once |
 | `.claude/hooks/session-start.sh` | when a session starts | In web sessions installs what the tests need; warns if not on `main`; shows "Start here" |
 

@@ -3,7 +3,8 @@
 The hook is run exactly as Claude Code runs it: a subprocess with the
 PreToolUse JSON on stdin. It must ask before any operator-authority
 bookfactory command, deny Bash writes into approved material, and stay quiet
-for ordinary read-only commands.
+for ordinary read-only commands. Outside the "default" permission mode an ask
+would never reach the operator, so it must become a deny.
 """
 
 from __future__ import annotations
@@ -30,9 +31,12 @@ def run_hook(stdin: str) -> tuple[str, dict | None, subprocess.CompletedProcess]
     return spec["permissionDecision"], spec, proc
 
 
-def decide(command: str, *, tool: str = "Bash", cwd: str | None = None) -> str:
+def decide(command: str, *, tool: str = "Bash", cwd: str | None = None,
+           mode: str | None = "default") -> str:
     payload = {"hook_event_name": "PreToolUse", "tool_name": tool,
                "tool_input": {"command": command}}
+    if mode is not None:
+        payload["permission_mode"] = mode
     if cwd is not None:
         payload["cwd"] = cwd
     decision, spec, proc = run_hook(json.dumps(payload))
@@ -198,7 +202,7 @@ def test_stays_quiet_for_ordinary_commands(command):
 
 
 def test_ask_reason_is_plain_english():
-    _, spec, _ = run_hook(json.dumps({"tool_name": "Bash",
+    _, spec, _ = run_hook(json.dumps({"tool_name": "Bash", "permission_mode": "default",
                                       "tool_input": {"command": "bookfactory approve b p1"}}))
     reason = spec["permissionDecisionReason"]
     assert "`bookfactory approve`" in reason
@@ -231,9 +235,27 @@ def test_other_tools_are_left_alone(tool):
     json.dumps({"tool_name": "Bash", "tool_input": {"command": 42}}),
     json.dumps({"tool_name": "Bash"}),
 ])
-def test_unreadable_input_asks_instead_of_crashing(stdin):
+def test_unreadable_input_blocks_instead_of_crashing(stdin):
     decision, spec, proc = run_hook(stdin)
     assert proc.returncode == 0
     assert proc.stderr == ""
-    assert decision == "ask"
+    assert decision == "deny"
     assert "couldn't read" in spec["permissionDecisionReason"]
+
+
+@pytest.mark.parametrize("mode", ["auto", "bypassPermissions", "dontAsk", "acceptEdits",
+                                  "plan", "something-new", None])
+def test_asks_become_blocks_where_the_question_would_not_reach_kieran(mode):
+    # Live trial 2026-09-23: in auto mode an "ask" ran `bookfactory approve`
+    # without Kieran ever seeing a question.
+    assert decide("bookfactory approve demo-book p001", mode=mode) == "deny"
+    assert decide("python -m bookfactory lock visual demo-book", mode=mode) == "deny"
+    assert decide("bookfactory status demo-book", mode=mode) == "allow"
+
+
+def test_block_reason_says_to_ask_kieran_in_the_chat():
+    _, spec, _ = run_hook(json.dumps({"tool_name": "Bash", "permission_mode": "auto",
+                                      "tool_input": {"command": "bookfactory approve b p1"}}))
+    reason = spec["permissionDecisionReason"]
+    assert "`bookfactory approve`" in reason
+    assert "ask Kieran in the chat" in reason

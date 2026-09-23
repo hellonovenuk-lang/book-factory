@@ -60,3 +60,48 @@ Built directly by the main session, no helpers yet.
 | 2026-09-22 | 2 | Header of every new command and helper file is valid | all 6 parsed OK |
 | 2026-09-22 | 2 | Every file the new guides point to exists | none missing |
 | 2026-09-22 | 2 | `/plan-phase` test-drive: Phase 3 planned with the operator | operator said OK to every line |
+
+---
+
+## Phase 3: Safety checks and proof (done)
+
+Planned with `/plan-phase` on 2026-09-22; operator agreed every line.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 3.1 | `/verify-phase`: proves every "Done when" item with fresh command output. Runs `scripts/build_demo_book.py` on a throwaway copy of the repository, because it rewrites about 200 tracked demo files | main | `.claude/skills/verify-phase/SKILL.md` | [x] |
+| 3.2 | Approval guard hook: before any Bash command, asks the operator if it runs `bookfactory approve / lock / policy set / reject / revise / cover approve / cover finalize / advance --force` (including disguised forms such as `python -m bookfactory ...` or chained commands); blocks Bash writes into `approved/` folders and the approved cover | helper: builder, **tricky (Opus)**: must catch disguised commands; a gap is a real risk | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` | [x] |
+| 3.3 | Quick-check hook: after a `.py` or `.json` file is saved, checks it still parses | helper: builder, routine (Sonnet) | `.claude/hooks/quick-check.py`, `tests/test_hook_quick_check.py` | [x] |
+| 3.4 | Session-start hook: in web sessions installs what the tests need (`pip install -e ".[dev]"`); always warns if not on `main`; shows "Start here" | helper: builder, routine (Sonnet) | `.claude/hooks/session-start.sh` | [x] |
+| 3.5 | Settings: switches on the three hooks; forbids editing approved pages, assets and the approved cover; pre-approves safe read-only commands. The only task that edits the settings file, done after 3.2-3.4 | main | `.claude/settings.json` | [x] |
+| 3.6 | Add the safety checks to the guide and glossary | main | `integrations/claude/WORKFLOW.md`, `GLOSSARY.md` | [x] |
+
+**Order:** round 1: helpers on 3.2, 3.3, 3.4 while the main session writes
+3.1. Round 2: main session does 3.5 and 3.6, then the checker checks
+everything.
+
+**Note:** "Nothing is installed from outside the repository" (rules above)
+means Claude plugins and add-ons. The Python packages Book Factory's own
+tests need (listed in `pyproject.toml`) are fine to install.
+
+**Test-drive:** built with `/fan-out`, checked with `/verify-phase`, closed
+with `/handover`.
+
+**Done when:**
+- [x] The checker shows all tests passing.
+- [x] A pretend "approve" is stopped and handed to the operator. (Live trial 2026-09-23: in auto mode the guard's "ask" was settled without reaching the operator, so the guard now blocks outside the default permission mode; the retried trial was blocked.)
+- [x] A pretend write into an approved folder is blocked.
+- [x] `/verify-phase` proves those three with fresh results.
+
+**Verification log**
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-22 | 3 | Baseline before Phase 3 | 225 passed, 2 skipped |
+| 2026-09-22 | 3 | Main session's own 13 test commands against the guard | all correct (ask / deny / allow) |
+| 2026-09-22 | 3 | Live: Write into an approved folder | refused by the settings file's deny rule |
+| 2026-09-22 | 3 | Live: pretend approve in the session that created the hooks | not stopped (hooks load at session start); book didn't exist, nothing changed |
+| 2026-09-22 | 3 | Checker, following `/verify-phase` | passed: 370 passed, 2 skipped; guard asks on approve, denies approved write; demo build OK on a throwaway copy; only the 9 planned files changed |
+| 2026-09-23 | 3 | Live: pretend approve in a fresh session (auto mode) | not stopped: guard said "ask" but auto mode let it run; book didn't exist, nothing changed |
+| 2026-09-23 | 3 | Guard changed: asks become blocks outside the default permission mode | guard tests pass; full suite 378 passed, 2 skipped |
+| 2026-09-23 | 3 | Live: same pretend approve, retried | blocked, with the reason telling Claude to ask Kieran in the chat |

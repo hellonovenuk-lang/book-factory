@@ -62,6 +62,8 @@ out work to helpers, checks their work and saves it.
 
 **Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
 
+**Permission mode.** How much Claude Code may do without asking. In "default" mode it shows you a question before risky commands; in "auto" mode its own safety check answers most questions for you, so the approval guard blocks operator-only commands there instead of asking.
+
 **Phase.** A small block of work that fits one sitting, with its own "Done
 when". Only one is open at a time.
 
