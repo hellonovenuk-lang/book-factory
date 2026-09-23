@@ -4,7 +4,7 @@
 
 ## Premise
 
-Graham has spent years on long postings at his golf club. His family has applied for his return. This book is the official Family Reintegration Programme that takes him from arrival at the front door to full, weekend-inclusive membership of the household, or at least to a signed certificate saying he tried.
+Dave has spent years on a long tour of duty at his golf club. His family has formally applied for his return. This book is the official Family Reintegration Programme that takes him from turning up at the front door with his clubs to full, weekends-included membership of the household, or at least to a signed certificate saying he gave it a go.
 
 ## Structure of the book
 
@@ -13,14 +13,14 @@ severity? A diagnosis-to-cure arc?)
 
 A re-entry programme in stages, each a chapter with an opener picture:
 
-1. Arrival: induction, a family members' who's who, and a self-assessment of how far gone he is.
-2. Communication: talking about things that are not his round, and listening to answers.
-3. The Household: the garage, the lawn (not a practice green) and finding the kitchen.
-4. Time: what "a quick nine" means to other people, and reading a calendar that is not the fixture list.
-5. Family Occasions: birthdays, anniversaries, school events and weddings that clash with the medal.
-6. Holidays: choosing a destination for reasons other than the course.
-7. Relapse Prevention: triggers, warning signs and a plan for the first sunny Saturday.
-8. Graduation: a final assessment and the certificate of reintegration.
+1. Arrival: the induction pack, a who's who of family members he may not recognise, and a self-assessment of how far gone he is.
+2. Communication: talking about something other than his round, and listening to the answer without looking at his phone for the club results.
+3. The Household: the garage, the lawn (not a practice green), the downstairs loo (not a bag store) and where the kitchen is.
+4. Time: what "a quick nine" means to everyone else, and reading a calendar that isn't the club fixture list.
+5. Family Occasions: birthdays, anniversaries, school sports day and a wedding on medal day.
+6. Holidays: choosing somewhere for reasons other than the courses, and surviving a week in Cornwall without clubs.
+7. Relapse Prevention: triggers, warning signs and a plan for the first sunny Saturday in April.
+8. Graduation: a final assessment and the Certificate of Reintegration.
 
 Each chapter mixes short text pages, checklists, diagnostic tests, case notes and comparisons, with the picture budget spent on chapter openers.
 
@@ -28,20 +28,21 @@ Each chapter mixes short text pages, checklists, diagnostic tests, case notes an
 
 | ID | Name | Who they are | Why they recur |
 | -- | ---- | ------------ | -------------- |
-| graham | Graham | The golf addict under reintegration, late 50s, cap always on | He is the patient on every page |
-| sue | Sue | His wife and case sponsor, patient and dry | The outside view; her notes appear in case files |
-| becky | Becky | Their grown-up daughter, who texts him fixtures to get his attention | Evidence that the family has adapted around him |
-| programme-officer | The Programme Officer | The unseen narrator who runs the programme | The calm institutional voice of the whole book | |
+| dave | Dave | The golf addict under reintegration, late 50s, a bit of a geezer, cap always on | He is the patient on every page |
+| sue | Sue | His wife and case sponsor, patient, dry and done with it | The outside view; her notes appear in the case files |
+| becky | Becky | Their grown-up daughter, who texts him the club results to get a reply | Proof the family has adapted around him |
+| programme-officer | The Programme Officer | The unseen narrator who runs the programme | The deadpan official voice of the whole book, cracking now and then |
 
 ## Running jokes
 
 Bits that reappear. Note where each one pays off.
 
-- The quick nine: every estimate of time is followed by the real time. Pays off in Relapse Prevention with a conversion table, and in Graduation when he says "back in an hour" and is.
-- Swinging household objects: an umbrella, then a newspaper, then barbecue tongs. Pays off with the cover image and a final picture where he hands the tongs to someone else.
-- The lipped-out putt on the 7th: mentioned whenever he is asked anything. Pays off at graduation, where he tells the story and the family recites the ending with him.
-- Sue's case notes: short, dry entries that track his progress and relapses across chapters.
+- The quick nine: every time Dave estimates how long he'll be, the real time follows. Pays off in Relapse Prevention with a conversion table ("back by one" = teatime), and at Graduation when he says "back in an hour" and actually is.
+- Swinging whatever he's holding: an umbrella, the Sunday paper, the barbecue tongs, a French stick. Pays off with the cover image and a final picture where he hands the tongs to someone else.
+- The putt on the 7th that lipped out: he brings it up whatever he's asked. Pays off at Graduation, where he starts the story and the whole family recites the ending with him.
+- Sue's case notes: short, dry, increasingly sweary entries that track his progress and relapses across the chapters.
+- The club committee: Dave's feud with the committee over the state of the greens runs in the background and is never resolved.
 
 ## What this book is NOT
 
-A golf instruction book, a real guide to addiction or recovery, a book about a failing marriage, or a collection of jokes about bad golf shots. The golf is the setting; the family is the subject.
+A golf instruction book, a real guide to addiction or recovery, a book about a failing marriage, or a pile of jokes about bad golf shots. The golf is the setting; the family is the subject.

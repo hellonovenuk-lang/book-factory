@@ -7,7 +7,7 @@
   "stage": "book_brief",
   "format": {
     "trim": "6x9",
-    "colour": true,
+    "colour": false,
     "bleed": false,
     "dpi": 300,
     "kdp_profile": "kdp-default",

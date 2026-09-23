@@ -19,5 +19,6 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 - 2026-09-23: `produce` slice 3: write briefs, manuscript and page copy through the Claude API (review #8, Phase 12 planning). *Decided by Kieran 2026-09-23: no API call. Claude Code writes the copy itself (on his subscription), inside the slice 5 morning routine, following the voice rules; `produce` does the rest.* *Done in Phase 14: `/write-book`.*
 - 2026-09-23: `produce` slice 4: make pictures through Higgsfield inside the loop, within the picture budget (review #8, Phase 12 planning)
 - 2026-09-23: Update `integrations/claude/BOOK_FACTORY.md`: it still calls ChatGPT Work the normal production route, but Kieran produces in Claude Code with pictures through the Higgsfield connector (Kieran, Golf Addict's Guide start)
+- 2026-09-23: A command to change a book's format after `create` (colour or black and white, trim, page count), audited; the Golf Addict's Guide needed `book.json` edited by hand to switch to black and white (Golf Addict's Guide brief)
 - 2026-09-23: `produce` slice 5: a scheduled Claude Code routine that starts `produce` in the morning and reports where it stopped (review #8, Phase 12 planning)
 - 2026-09-23: Let `/write-book` also do the concept, voice and manuscript locks when a book's policy is `autonomous` (Phase 14 planning)
