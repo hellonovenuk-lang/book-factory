@@ -16,7 +16,6 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 - 2026-09-23: For review item #4 (images), try the Higgsfield MCP first: it uses Kieran's existing subscription credits (no API key), so Claude could draw and submit illustrations in chat. The Higgsfield API (pay-as-you-go dollars, separate from the subscription) is the fully automatic route later
 - 2026-09-23: When the roadmap is finished: publish artifacts (private pages) explaining each workflow, plus one page showing the complete pipeline and how the workflows connect (Kieran)
 - 2026-09-23: A picture budget per book, chosen by the operator (e.g. cover + chapter openers only; rest typeset text, checklists, exercises and diagrams), recorded on the book and checked when the page plan is written. Nothing limits the number of pictures today. (Kieran). *Done in Phase 11. The chart was only an example; Kieran dropped it 2026-09-23.*
-- 2026-09-23: `produce` slice 2: approve drafts that pass their checks with `--autonomous`, only when the book's recorded policy allows it (review #8, Phase 12 planning)
 - 2026-09-23: `produce` slice 3: write briefs, manuscript and page copy through the Claude API (review #8, Phase 12 planning)
 - 2026-09-23: `produce` slice 4: make pictures through Higgsfield inside the loop, within the picture budget (review #8, Phase 12 planning)
 - 2026-09-23: `produce` slice 5: a scheduled Claude Code routine that starts `produce` in the morning and reports where it stopped (review #8, Phase 12 planning)
