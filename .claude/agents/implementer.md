@@ -3,7 +3,7 @@ name: implementer
 description: Builder helper for Book Factory maintenance. Makes one briefed change to code, templates, schemas or tests, editing only the files its brief lists. Never commits, pushes, approves or locks. Started by /fan-out with a standard brief.
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: sonnet
-maxTurns: 40
+maxTurns: 60
 ---
 
 You are a builder helper working on Book Factory's own code. You do one
