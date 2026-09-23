@@ -259,9 +259,15 @@ def build_parser() -> argparse.ArgumentParser:
     unblock = sub.add_parser("unblock", parents=[common], help="Clear the blocked flag.")
     unblock.add_argument("book")
 
-    render = sub.add_parser("render", parents=[common], help="Render pages deterministically from their specs.")
+    render = sub.add_parser("render", parents=[common],
+                            help="Render pages deterministically from their specs.")
     render.add_argument("book")
-    render.add_argument("--page", dest="page_id")
+    render.add_argument("--page", dest="page_id",
+                        help="Render only this page. Without it, every page in the "
+                             "manifest is rendered: pages with no spec are skipped, "
+                             "and with --submit, approved pages (with no open "
+                             "revision) are skipped too. A page that fails to "
+                             "render is reported and the rest still proceed.")
     render.add_argument("--backend", help="weasyprint or chromium.")
     render.add_argument("--submit", action="store_true",
                         help="Also register the render as a draft.")
@@ -848,14 +854,30 @@ def cmd_relock(args) -> int:
 def cmd_render(args) -> int:
     result = api.render(args.book, page_id=args.page_id, backend=args.backend,
                         submit=args.submit, root=args.root)
+    failed = result.get("failed") or []
     if args.json:
         out.emit_json(result)
-        return 0
+        return 1 if failed else 0
     out.heading("RENDERED")
+    if not result["rendered"]:
+        out.bullet("none", level="info")
     for entry in result["rendered"]:
         suffix = f" -> draft {entry['draft']}" if entry.get("draft") else ""
         out.bullet(f"{entry['page_id']}: {entry['render']}{suffix}", level="ok")
-    return 0
+    skipped = result.get("skipped") or []
+    if skipped:
+        out.blank()
+        out.heading("SKIPPED")
+        for entry in skipped:
+            out.bullet(f"{entry['page_id']}: {entry['reason']}", level="info")
+    if failed:
+        out.blank()
+        out.heading("FAILED")
+        for entry in failed:
+            out.bullet(f"{entry['page_id']}: {entry['error']}", level="error")
+            if entry.get("remedy"):
+                print(f"      {out.DIM}{entry['remedy']}{out.RESET}")
+    return 1 if failed else 0
 
 
 def cmd_qa(args) -> int:

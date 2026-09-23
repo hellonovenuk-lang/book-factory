@@ -499,24 +499,49 @@ def relock(book_id: str, *, root: str | Path | None = None) -> dict:
 
 def render(book_id: str, *, page_id: str | None = None, backend: str | None = None,
            submit: bool = False, root: str | Path | None = None) -> dict:
-    from bookfactory.render.renderer import render_all, render_page
+    from bookfactory.core.errors import BookFactoryError
+    from bookfactory.render.renderer import render_page
 
     book = Book.load(book_id, root)
     rendered: list[dict] = []
-    targets = [page_id] if page_id else [p.page_id for p in book.manifest]
-    for target in targets:
-        path = render_page(book, target, backend=backend)
-        entry = {"page_id": target, "render": book.paths.relative(path)}
+    skipped: list[dict] = []
+    failed: list[dict] = []
+
+    if page_id:
+        # Single-page renders keep today's behaviour exactly: errors raise.
+        path = render_page(book, page_id, backend=backend)
+        entry = {"page_id": page_id, "render": book.paths.relative(path)}
         if submit:
-            draft = book.submit(PAGE, target, path, source=f"renderer:{backend or 'default'}")
+            draft = book.submit(PAGE, page_id, path, source=f"renderer:{backend or 'default'}")
             entry["draft"] = draft.revision
             entry["sha256"] = draft.sha256
         rendered.append(entry)
-    if not page_id and not submit:
-        render_all(book, backend=backend)
+    else:
+        for page in list(book.manifest):
+            target = page.page_id
+            if not page.spec:
+                skipped.append({"page_id": target, "reason": "no spec"})
+                continue
+            if submit and page.is_approved and not page.revision_open:
+                skipped.append({"page_id": target, "reason": "approved"})
+                continue
+            try:
+                path = render_page(book, target, backend=backend)
+                entry = {"page_id": target, "render": book.paths.relative(path)}
+                if submit:
+                    draft = book.submit(PAGE, target, path, source=f"renderer:{backend or 'default'}")
+                    entry["draft"] = draft.revision
+                    entry["sha256"] = draft.sha256
+                rendered.append(entry)
+            except BookFactoryError as exc:
+                failure = {"page_id": target, "error": exc.message}
+                if exc.remedy:
+                    failure["remedy"] = exc.remedy
+                failed.append(failure)
+
     book.save()
     task_module.sync_open_task(book)
-    return {"book_id": book_id, "rendered": rendered}
+    return {"book_id": book_id, "rendered": rendered, "skipped": skipped, "failed": failed}
 
 
 def qa(book_id: str, *, layers: list[str] | None = None,
