@@ -8,8 +8,8 @@ request (2026-09-23).
 moves listed below. Recorded in `../audit.jsonl` as `interior_decision`
 (sha256 `195e5e1e…a65a22a6`). The committed PDF is the approved file:
 rebuilding it gives a new checksum, so don't overwrite it. It replaces v3 for
-upload once a matching 58-page cover is chosen (see
-`../cover/proposals/cover-v3-weekend.pdf`).
+upload, paired with the approved 58-page cover
+`../cover/proposals/cover-v3-weekend.pdf` (see `../releases/KDP-UPLOAD.md`).
 
 - `interior-v4-proposal.pdf`: the 58-page interior (6 × 9 in, no bleed, black
   and white).
@@ -52,7 +52,7 @@ and activities, Anton for numbers. Archivo Black and Anton match the text-only
 cover. All are SIL Open Font Licence (commercial use and embedding allowed);
 licences are in `fonts/`.
 
-## Removed (please confirm)
+## Removed (approved 2026-09-23)
 
 - v3 page 15, a full-page pull quote repeating a paragraph from page 8, and its
   label "Common referral sources".
@@ -62,7 +62,7 @@ licences are in `fonts/`.
   pages 9 and 41; v4 uses it once, in "The office kitchen". Its page-9
   caption, "Pat only asked about the weekend.", went with it.
 
-## Moved within a chapter, to fill pages (please confirm)
+## Moved within a chapter, to fill pages (approved 2026-09-23)
 
 - Ch 1: "Case file: Alex" now follows "Reason for referral". "The
   conversational capture cycle" now comes before the severity assessment.
@@ -88,14 +88,12 @@ note" and "Patient file" tags; "Notice to the patient"; the "Normal
 Conversation Rehabilitation Service" line on the certificate; and a lined
 "Notes" page, which keeps the page count even.
 
-## Before this could replace v3
+## Notes
 
-1. **The cover must be rebuilt.** Spine width depends on page count. The
-   current cover was sized for 80 pages (0.180 in spine); 58 white pages give
-   about 0.131 in. Nothing may be printed on the spine at that width either way.
-2. The operator reviews the removals, moves and labels above.
-3. Any further change to the drawings themselves is image-generation work
-   (ChatGPT). This proposal only improves how the existing ones print.
+- The cover's spine is sized for exactly 58 pages (0.131 in). If the page
+  count ever changes, rebuild the cover with `../cover/build_cover_v3.py`.
+- Any further change to the drawings themselves is image-generation work
+  (ChatGPT). This layout only improves how the existing ones print.
 
 ## Rebuild
 

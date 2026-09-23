@@ -1,53 +1,52 @@
 # KDP upload pack - The Runner's Guide to Normal Conversation
 
-> **Update 2026-09-23 (branch `claude/running-book-interior-review-rp6cu9`).**
-> The operator approved the redesigned 58-page interior
-> `interior/interior-v4-proposal.pdf`. It replaces the 80-page v3 below, and
-> the covers below are sized for 80 pages, so neither fits it. A new 58-page
-> cover, `cover/proposals/cover-v3-weekend.pdf`, is awaiting the operator's
-> decision. Sections 1-2 are updated once it is chosen.
-
-Prepared 2026-09-22. This pack is for uploading the existing 80-page interior
-directly to KDP. It does **not** make the Book Factory project
-`release_ready`: that project has no page manifest yet, and nothing here is an
-approval. The operator chooses the cover and presses Publish.
+Updated 2026-09-23. This pack is for uploading the redesigned 58-page
+interior and its matching cover directly to KDP. It does **not** make the
+Book Factory project `release_ready`: that project has no page manifest yet.
+Both files were approved by the operator in chat and are recorded in
+`audit.jsonl` (`interior_decision` and `cover_decision`, 2026-09-23). The
+operator presses Publish.
 
 ## 1. Files to upload
 
 | KDP field | File | SHA-256 |
 | --- | --- | --- |
-| Manuscript (interior) | `releases/interior-v3-publication-draft.pdf` | `675ff470d239e292e0f7f6433f7ae24a9d94cab234bec5399c695e33ca942d63` |
-| **Cover (chosen): text only** | `cover/proposals/cover-v2-text-only.pdf` | `6b4d1176fd8c23dddec11ef970f7f27ad626bf32616c87450b55d47fdc1557c4` |
-| Cover, not used: illustrated v1 (review-approved 2026-09-20) | `cover/drafts/cover-v1.pdf` | `93b1415a5720517fb0ca1f5b9c70247552b29759adc720ce26f102758e6b86fd` |
+| **Manuscript (interior)** | `interior/interior-v4-proposal.pdf` (58 pages) | `195e5e1e9bce3a3218b6484d9f19d3e5bcde8f9f3e33ee90e9d37cb4a65a22a6` |
+| **Cover** | `cover/proposals/cover-v3-weekend.pdf` ("How was your weekend?") | `3fc886310ac18b97792fb026bb6b31c6842eeb53e3e3c1babff2248015006fa1` |
+| Superseded interior (80 pages) | `releases/interior-v3-publication-draft.pdf` | `675ff470d239e292e0f7f6433f7ae24a9d94cab234bec5399c695e33ca942d63` |
+| Superseded covers (sized for 80 pages, do not use) | `cover/proposals/cover-v2-text-only.pdf`, `cover/drafts/cover-v1.pdf` | |
 
-**Cover decision:** on 2026-09-22 Kieran Smith chose the text-only cover for
-the KDP upload. This is recorded in `audit.jsonl` as `cover_decision`. It is not a
-Book Factory `cover approve`: that gate currently requires native cover
-artwork, so the project's cover record still lists v1.
+The interior and cover belong together: the cover's spine is sized for exactly
+58 pages. If the interior ever changes page count, the cover must be rebuilt
+with `python books/runners-guide-to-normal-conversation/cover/build_cover_v3.py`.
+The committed PDFs are the approved files; rebuilding produces new checksums.
 
 Choose "Upload a cover you already have (print-ready PDF only)". Do not use
 Cover Creator.
 
-The text-only cover is rebuilt with `python books/runners-guide-to-normal-conversation/cover/build_cover_text_v2.py`
-from the repository root. Its fonts (Anton and Archivo Black, SIL Open Font
-Licence, so commercial use and embedding are allowed) are in `cover/fonts/`.
-
 ## 2. Pre-upload checks already run
 
-Interior (checked 2026-09-22 against `bookfactory/kdp/profiles/kdp-default.json`):
+Interior (checked 2026-09-23):
 
-- 80 pages, an even count; every page is 6 × 9 in with no bleed.
-- All fonts are embedded (DejaVu Serif and DejaVu Sans subsets).
-- The lowest image resolution is 341 DPI at its printed size (page 9). KDP's minimum is 300.
+- 58 pages, an even count; every page is 6 × 9 in with no bleed, on white.
+- All fonts are embedded (Source Serif 4, Archivo, Archivo Black, Anton and
+  DejaVu Sans subsets; all free to embed).
+- Every image is at least 300 DPI at its printed size.
 - Content sits at least 0.875 in from the gutter and 0.625 in from the outside
-  edge. KDP needs 0.375 in and 0.25 in at 80 pages.
-- The file is 4.9 MB.
+  edge. KDP needs 0.375 in and 0.25 in.
+- The file is 11.9 MB.
 
-Covers: both are single full-wrap PDFs, 12.430 × 9.250 in (6 × 9 trim,
-0.180 in spine for 80 white pages, 0.125 in bleed). They have selectable
-embedded type, nothing on the spine, and a clear barcode area on the back.
-The text-only cover passes Book Factory's cover check except for "contains no artwork
-image". That failure is expected, because it is text only by design.
+Cover (checked 2026-09-23):
+
+- A single full-wrap PDF, 12.381 × 9.250 in (6 × 9 trim, 0.131 in spine for
+  58 white pages, 0.125 in bleed).
+- Passes Book Factory's own cover check (`bookfactory.core.cover.check_pdf`)
+  at those dimensions: title, author and back copy are selectable embedded
+  type, nothing under 7 pt, all type clear of the edges and spine folds, and
+  the barcode area is empty.
+- The spine is blank; KDP allows spine text only from 79 pages.
+- No white box is drawn for the barcode: KDP adds its own 2 × 1.2 in barcode
+  panel at the bottom right of the back.
 
 ## 3. KDP form - Paperback details
 
@@ -104,8 +103,8 @@ image". That failure is expected, because it is text only by design.
 | Publication date | Leave blank |
 | Print options | Black & white interior, white paper. Trim 6 × 9 in. Bleed: No bleed. Cover finish: Matte |
 | Manuscript | Upload the interior PDF above |
-| Cover | Upload `cover/proposals/cover-v2-text-only.pdf` |
-| AI-generated content | Answer honestly for how this book was made. If ChatGPT drafted the text, answer **Yes** for text. The illustrations were generated, so answer **Yes** for images. The cover has no generated images, but the interior does. Amazon does not show buyers this answer |
+| Cover | Upload `cover/proposals/cover-v3-weekend.pdf` |
+| AI-generated content | Answer honestly for how this book was made. If ChatGPT drafted the text, answer **Yes** for text. The illustrations were generated, so answer **Yes** for images. The cover has no generated images (it is typeset and drawn by code), but the interior does. Amazon does not show buyers this answer |
 
 Then open the **Print Previewer** and check every page, the spine and the barcode area.
 
@@ -127,7 +126,7 @@ It pays much less per copy and is not needed for Amazon gift sales.
 
 ## 6. Order of work (aim: on sale by mid-October)
 
-1. ~~Pick the cover.~~ Done: text only.
+1. ~~Pick the cover.~~ Done: cover v3, "How was your weekend?" (2026-09-23).
 2. Create the paperback in KDP, fill in sections 3-5, and run the Print Previewer.
 3. **Order a printed proof** from the Paperback content page before you publish.
    It arrives in about a week. Check the cover colour, the illustration
@@ -139,9 +138,6 @@ It pays much less per copy and is not needed for Amazon gift sales.
 
 ## 7. Open decisions for the operator
 
-- ~~**Which cover.**~~ Decided 2026-09-22: text only.
-- **Interior illustrations.** The 25 interior images use the same illustration
-  style as the unused illustrated cover. If you dislike that style, decide whether that
-  matters inside the book, where the jokes carry it, before you publish.
-  Replacing them is a larger job.
+- ~~**Which cover.**~~ Decided 2026-09-23: cover v3, replacing the text-only choice of 2026-09-22.
+- ~~**Interior layout and illustrations.**~~ Decided 2026-09-23: interior v4, with the existing drawings cleaned up for print.
 - **AI disclosure answers** for text and images (section 4).
