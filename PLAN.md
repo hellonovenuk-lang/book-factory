@@ -110,6 +110,13 @@ references.
   reference and the paper slightly pinker. As submitted it would need a
   revision. A prompt that explicitly says "plain unbranded shorts, one
   kettle, sparse background" is the obvious next try.
+- **Second try (Kieran asked):** the prompt added "completely plain unbranded
+  shorts", "a single kettle", "nothing on the table except Sam's mug", "plain
+  white paper, very sparse background, like the third reference". Result
+  (draft v2, 1792x2400, measured checks passed, 2 more credits): no logo, one
+  kettle, white paper, sparse background, characters still match. Clean on
+  Claude's review. Lesson for the routine: name the visual bible's "Never"
+  items and the reference's sparseness in every prompt, not just the scene.
 - Rule 6 still holds: an operator (or an agent under `autonomous`) must
   judge the match; the measured checks cannot see a logo.
 
