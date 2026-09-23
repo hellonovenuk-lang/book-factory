@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 3 (Safety checks and proof) is done. The next phase isn't chosen yet.
-> **Finished:** the live trial caught a gap: in auto mode the guard's "ask" never reached Kieran. The guard now blocks operator-only commands outside the default permission mode, and the retried trial was blocked. 378 tests passing, 2 skipped.
-> **Next action:** choose the next phase: run the whole routine on one small, real Book Factory job from `docs/REVIEW-2026-09.md` ("After Phase 3" below), planned with `/plan-phase`.
+> **Doing:** Phase 4 (Render every page in one go), planned with Kieran 2026-09-23.
+> **Finished:** Phases 1-3. Phase 4's plan is written below; no task started yet.
+> **Next action:** `/fan-out` Phase 4's helper tasks (4.1 builder, 4.2 docs keeper), after a one-line preview and Kieran's OK.
 
 **Unfinished, carried over:**
 - none
@@ -54,10 +54,37 @@ Phase 2: Planning and handing out work (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 3: Safety checks and proof (done, see `docs/PLAN-ARCHIVE.md`)
 
-## After Phase 3
+## Phase 4: Render every page in one go (not started)
 
-Run the whole routine on one small, real Book Factory job from
-`docs/REVIEW-2026-09.md`.
+Planned 2026-09-23 with Kieran; the first real job for the routine, from
+`docs/REVIEW-2026-09.md` item #2. `bookfactory render <book> --submit`
+without `--page` already renders and submits every page, but it stops at the
+first approved page, at the first page with no spec, and at the first page
+that fails to render. This phase makes it safe to run on a real book.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 4.1 | Whole-book render: with `--submit`, skips approved pages (unless a revision is open); always skips pages with no spec; carries on past a page that fails; reports rendered / skipped / failed with reasons; the command exits non-zero if any page failed. Tests for each case | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_render.py` | [ ] |
+| 4.2 | Operator guide explains rendering the whole book and what is skipped | helper: docs keeper, routine (Sonnet) | `docs/OPERATOR.md` | [ ] |
+| 4.3 | Mark review item #2 as partly done | main | `docs/REVIEW-2026-09.md` | [ ] |
+| 4.4 | Check everything with proof (`/verify-phase`) | helper: checker | none (read-only) | [ ] |
+
+**Order:** round 1: 4.1 and 4.2 together while the main session does 4.3.
+Then the checker checks everything.
+
+**Test-drive:** on a throwaway copy of the demo book, approve one page, break
+another, run `render --submit` on the whole book and read what it reports.
+
+**Done when:**
+- [ ] One command renders and submits every page that is ready, and approved pages are never touched.
+- [ ] A broken page is listed as failed, and the other pages still get done.
+- [ ] `pytest` passes and the demo build passes.
+- [ ] Everything is saved to GitHub `main` and checked there.
+
+**Verification log**
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
 
 ---
 
