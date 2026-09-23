@@ -23,7 +23,7 @@ from bookfactory.core.paths import books_dir
 __all__ = [
     "list_books", "create_book", "create_from_idea", "status", "next_task", "get_task",
     "plan_pages", "write_page_spec", "register_asset", "submit_asset", "submit_intake",
-    "draft_intake", "confirm_intake", "show_policy", "set_policy",
+    "draft_intake", "confirm_intake", "show_pictures", "set_pictures", "show_policy", "set_policy",
     "approve", "reject", "revise",
     "lock", "advance", "validate", "render", "qa", "assemble", "review", "preflight",
     "audit_history", "relock",
@@ -252,6 +252,7 @@ def plan_pages(book_id: str, pages: list[dict], *, root: str | Path | None = Non
     added = []
     specs = []
     problems = []
+    planned_pictures: set[str] = set()
     for entry in pages:
         record = book.add_page(
             title=entry["title"],
@@ -265,11 +266,15 @@ def plan_pages(book_id: str, pages: list[dict], *, root: str | Path | None = Non
         added.append(record.page_id)
         if entry.get("spec"):
             try:
-                book.prepare_page_spec(record.page_id, entry["spec"])
+                book.prepare_page_spec(record.page_id, entry["spec"],
+                                       planned_pictures=planned_pictures)
             except ValidationError as exc:
                 problems.extend(f"{record.page_id}: {p}" for p in exc.problems or [str(exc)])
                 continue
             specs.append((record.page_id, entry["spec"]))
+            picture = (entry["spec"].get("illustration") or {}).get("asset_id")
+            if picture:
+                planned_pictures.add(picture)
     if problems:
         raise ValidationError(
             f"{len(problems)} problem(s) in the page specs; nothing was planned",
@@ -448,6 +453,52 @@ def confirm_intake(book_id: str, *, by: str, policy: str, changes: dict | None =
     answers["production_policy"] = policy
     return _complete_intake(book, answers, root=root, drafted_by=draft["drafted_by"],
                             confirmed_by=by, changed=changed)
+
+
+def show_pictures(book_id: str, *, root: str | Path | None = None) -> dict:
+    """The book's picture budget and how many page pictures it has. Read-only."""
+    from dataclasses import asdict
+
+    book = Book.load(book_id, root)
+    return {"book_id": book_id, "pictures": asdict(book.state.pictures),
+            "page_pictures": sorted(book.page_picture_ids())}
+
+
+def set_pictures(book_id: str, budget: str, *, by: str, count: int | None = None,
+                 reason: str | None = None, root: str | Path | None = None) -> dict:
+    """Change a book's picture budget. Operator only.
+
+    Each page picture costs image credits and a review, so how many a book
+    has is the operator's decision: `by` names them, and the change - old and
+    new budget, who, when and why - is written to the audit log as
+    `picture_budget_changed`. Pictures already planned are left as they are;
+    the budget is checked when a spec is written.
+    """
+    from dataclasses import asdict
+
+    from bookfactory.core import clock
+    from bookfactory.core.models import PICTURE_BUDGETS, PictureBudget
+
+    if not by or not by.strip():
+        raise ValidationError("Changing the picture budget needs --by: the operator choosing it")
+    if budget not in PICTURE_BUDGETS:
+        raise ValidationError(f"Unknown picture budget {budget!r}",
+                              remedy="Choose one of: " + ", ".join(PICTURE_BUDGETS))
+    if budget == "limit":
+        if count is None or count < 0:
+            raise ValidationError("The limit budget needs --count: how many page pictures")
+    elif count is not None:
+        raise ValidationError("--count only goes with the limit budget")
+    book = Book.load(book_id, root)
+    old = asdict(book.state.pictures)
+    book.state.pictures = PictureBudget(budget=budget, count=count, set_by=by,
+                                        set_at=clock.timestamp(),
+                                        source="pictures_set_command")
+    book.log("picture_budget_changed", old_budget=old["budget"], old_count=old["count"],
+             budget=budget, count=count, by=by, reason=reason)
+    book.save()
+    task_module.sync_open_task(book)
+    return show_pictures(book_id, root=root)
 
 
 def show_policy(book_id: str, *, root: str | Path | None = None) -> dict:

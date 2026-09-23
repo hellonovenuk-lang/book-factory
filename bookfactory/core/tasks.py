@@ -359,6 +359,15 @@ def _visual_reference_task(book) -> Task | None:
     )
 
 
+def _picture_budget_text(book) -> str:
+    budget = book.state.pictures
+    if budget.budget == "chapter_openers":
+        return "chapter_openers - a picture only on chapter_opener pages."
+    if budget.budget == "limit":
+        return f"limit - at most {budget.count or 0} page pictures in the whole book."
+    return "unlimited."
+
+
 def _page_plan_task(book) -> Task | None:
     if len(book.manifest) > 0:
         return None
@@ -375,6 +384,10 @@ def _page_plan_task(book) -> Task | None:
             "(schemas/page-spec.schema.json). Artwork a spec names in illustration.asset_id is "
             "registered for its page automatically. Every spec is checked before anything is "
             "written; if one is wrong, nothing is planned and the problems are listed.\n\n"
+            f"Picture budget: {_picture_budget_text(book)} The cover is separate and never "
+            "counted. Fill the other pages with typeset text, checklists, tests, comparisons "
+            "and quotes (\"illustration\": null). Never raise the budget yourself; if the "
+            "book needs more pictures, ask the operator (bookfactory pictures set).\n\n"
             f"Run: {_cmd(book, 'plan', '<book>', '--from-file <plan.json>')}\n"
             "or add pages one at a time with `bookfactory plan <book> --add`.\n\n"
             "Page types: chapter_opener, editorial_illustration, text_illustration, checklist, "

@@ -92,6 +92,24 @@ class IntakeState:
 PRODUCTION_MODES = ("autonomous", "visual_checkpoint", "checkpointed")
 
 
+#: How many page pictures a book may have. The cover artwork and the visual
+#: references are never counted. Chosen by the operator; see
+#: `bookfactory.core.pictures`.
+PICTURE_BUDGETS = ("chapter_openers", "limit", "unlimited")
+
+
+@dataclass
+class PictureBudget:
+    #: Loads as "unlimited" for books made before budgets existed, so nothing
+    #: already planned breaks; `Book.create` gives new books "chapter_openers".
+    budget: str = "unlimited"
+    count: int | None = None
+    set_by: str | None = None
+    set_at: str | None = None
+    #: "new_book_default", "pictures_set_command", or None for a legacy book.
+    source: str | None = None
+
+
 @dataclass
 class ProductionPolicy:
     mode: str = "checkpointed"
@@ -121,6 +139,7 @@ class BookState:
     page_plan: PagePlanState = field(default_factory=PagePlanState)
     intake: IntakeState = field(default_factory=IntakeState)
     production_policy: ProductionPolicy = field(default_factory=ProductionPolicy)
+    pictures: PictureBudget = field(default_factory=PictureBudget)
     #: Cached copy of the current task's continuation mode - see
     #: `bookfactory.core.production`. Derived state, recomputed on every save.
     production_mode: str = "complete"
@@ -147,6 +166,7 @@ class BookState:
             "page_plan": asdict(self.page_plan),
             "intake": asdict(self.intake),
             "production_policy": asdict(self.production_policy),
+            "pictures": asdict(self.pictures),
             "production_mode": self.production_mode,
             "blocked": self.blocked,
             "next_action": self.next_action,
@@ -172,6 +192,7 @@ class BookState:
                 page_plan=PagePlanState(**data.get("page_plan", {})),
                 intake=IntakeState(**data.get("intake", {})),
                 production_policy=ProductionPolicy(**data.get("production_policy", {})),
+                pictures=PictureBudget(**data.get("pictures", {})),
                 production_mode=data.get("production_mode", "complete"),
                 blocked=data.get("blocked"),
                 next_action=data.get("next_action"),

@@ -133,6 +133,25 @@ def build_parser() -> argparse.ArgumentParser:
     policy_set.add_argument("--by", required=True, help="The operator making this choice.")
     policy_set.add_argument("--reason", help="Why, for the audit log.")
 
+    pictures = sub.add_parser("pictures", parents=[common],
+                              help="Show or change a book's picture budget (set: operator only).")
+    pictures_sub = pictures.add_subparsers(dest="pictures_command", metavar="<subcommand>",
+                                           required=True)
+    pictures_show = pictures_sub.add_parser("show", parents=[common],
+                                            help="The picture budget and page pictures so far. "
+                                                 "Writes nothing.")
+    pictures_show.add_argument("book")
+    pictures_set = pictures_sub.add_parser(
+        "set", parents=[common],
+        help="Change how many page pictures the book may have. Operator only.")
+    pictures_set.add_argument("book")
+    pictures_set.add_argument("budget", choices=["chapter_openers", "limit", "unlimited"],
+                              help="chapter_openers: pictures only on chapter openers (the "
+                                   "default); limit: at most --count; unlimited.")
+    pictures_set.add_argument("--count", type=int, help="With limit: how many page pictures.")
+    pictures_set.add_argument("--by", required=True, help="The operator making this choice.")
+    pictures_set.add_argument("--reason", help="Why, for the audit log.")
+
     sub.add_parser("questionnaire", parents=[common],
                    help="Show the intake questionnaire, with no project needed.")
 
@@ -516,6 +535,29 @@ def cmd_policy(args) -> int:
     return 0
 
 
+def cmd_pictures(args) -> int:
+    if args.pictures_command == "show":
+        result = api.show_pictures(args.book, root=args.root)
+    else:
+        result = api.set_pictures(args.book, args.budget, by=args.by, count=args.count,
+                                  reason=args.reason, root=args.root)
+    if args.json:
+        out.emit_json(result)
+        return 0
+    budget = result["pictures"]
+    out.heading("PICTURE BUDGET" if args.pictures_command == "show" else "PICTURE BUDGET CHANGED")
+    shown = budget["budget"]
+    if budget["budget"] == "limit":
+        shown += f" ({budget['count']} page pictures)"
+    out.field("budget", shown)
+    out.field("page pictures", str(len(result["page_pictures"])))
+    out.field("set by", budget["set_by"] or {
+        "new_book_default": "new-book default",
+        None: "none (book made before budgets; treated as unlimited)",
+    }.get(budget["source"], budget["source"]))
+    return 0
+
+
 def cmd_questionnaire(args) -> int:
     from bookfactory.core import intake
 
@@ -590,6 +632,10 @@ def cmd_status(args) -> int:
     out.field("id", data["book_id"])
     out.field("stage", f"{data['stage_number']:02d} {data['stage_label']}")
     out.field("mode", data["mode"].replace("_", " ").upper())
+    pictures = data["pictures"]
+    out.field("pictures", f"{pictures['page_pictures']} page pictures, budget "
+                          + (f"limit {pictures['count']}" if pictures["budget"] == "limit"
+                             else pictures["budget"].replace("_", " ")))
     if not data["intake"]["completed"] and data["intake"]["draft_waiting"]:
         out.field("intake", "DRAFTED - waiting for the operator to confirm the answers")
     elif not data["intake"]["completed"] and data["intake"]["required"]:
@@ -1142,6 +1188,7 @@ COMMANDS = {
     "create": cmd_create,
     "create-from-idea": cmd_create_from_idea,
     "policy": cmd_policy,
+    "pictures": cmd_pictures,
     "questionnaire": cmd_questionnaire,
     "intake": cmd_intake,
     "status": cmd_status,

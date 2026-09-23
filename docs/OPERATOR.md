@@ -275,6 +275,33 @@ later:
 bookfactory plan golf-addict --add --title "The Mate Taxonomy" --type editorial_illustration --chapter 1
 ```
 
+### How many pictures a book gets
+
+Every book has a picture budget, recorded in `book.json`. New books start at
+**chapter openers only** - a picture (an "editorial illustration") only on
+the page that opens each chapter, nothing extra. That keeps the number of
+pictures - and reviews, and credits - predictable by default. You can raise
+it at any point:
+
+```bash
+bookfactory pictures show golf-addict
+bookfactory pictures set golf-addict limit --count 20 --by "Your Name" --reason "Want more variety"
+bookfactory pictures set golf-addict unlimited --by "Your Name"
+```
+
+`limit` caps the count of page pictures (not counting the cover or the
+reference set); `unlimited` removes the cap entirely. This is always your
+call - an agent will never raise it on its own, even if a plan you asked for
+would need more pictures than the current budget allows; it will tell you
+and wait. A page spec that names a picture Book Factory would refuse (over
+budget) is rejected with the page named, so you find out before ninety pages
+are planned, not after.
+
+Claude Code can now make book pictures itself, through the Higgsfield
+connector, using your Higgsfield credits - about 2 credits per picture at 2K
+resolution on the basic plan. This is in addition to the existing route of
+handing the illustration task to ChatGPT.
+
 ## 7. Produce the pages
 
 If you wrote every spec in the plan file (step 6), most pages already have
@@ -521,6 +548,9 @@ bookfactory intake <book> --confirm --by <you> --policy <p> [--set k=v ...]
 bookfactory intake <book> --from-file a.json   or: persist your own answers directly, once
 bookfactory policy show <book>                 the recorded production policy
 bookfactory policy set <book> <p> --by <you>   change it (operator only, audited)
+bookfactory pictures show <book>               the recorded picture budget
+bookfactory pictures set <book> <chapter_openers|limit|unlimited> [--count N] --by <you>
+                                                change it (operator only, audited)
 bookfactory status <book>                      where it stands
 bookfactory next <book>                        what to do next
 bookfactory task <book>                        the current task in full

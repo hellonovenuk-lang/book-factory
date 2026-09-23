@@ -173,6 +173,30 @@ as real type over or beneath it.
 If a page spec sets `illustration.embedded_text: true`, treat it as a mistake
 and raise it with the operator.
 
+## 5a. Stay within the picture budget
+
+Every book records a picture budget in `book.json` (the `pictures` block):
+`chapter_openers` (page pictures only on `chapter_opener` pages), `limit`
+with a count (at most that many page pictures), or `unlimited`. A new book
+starts at `chapter_openers`; a book created before this existed loads as
+`unlimited`. The cover artwork (`cover-front-artwork`) and visual references
+are never counted against it.
+
+Writing a page spec that names a picture (`illustration.asset_id`, whether
+through `bookfactory plan --from-file` or `bookfactory spec`) is refused if
+it would break the budget, naming the page; a plan file that breaks it is
+refused whole. Most page types carry no picture at all - checklist,
+diagnostic_test, comparison, quote, certificate, text pages - and that is how
+the rest of a book is filled without touching the budget.
+
+`bookfactory pictures show <book>` is read-only. Raising or changing the
+budget is the operator's decision alone, recorded with `bookfactory pictures
+set <book> <chapter_openers|limit|unlimited> [--count N] --by <operator>
+[--reason "..."]` and audited as `picture_budget_changed`. Never run it
+yourself, never with your own name in `--by`, and never just to fit a plan
+you wrote - if a plan needs more pictures than the budget allows, say so and
+ask the operator.
+
 ## 6. Match the locked references. Exactly.
 
 After visual lock, every illustration task lists the approved reference files it
@@ -304,6 +328,8 @@ as draft v2; awaiting approval".
 | Start a book, every detail known | `bookfactory create "<title>" --policy <policy chosen by the operator>` |
 | Start book 2 of a series | `bookfactory create "<title>" --policy <policy chosen by the operator> --series-from <book>` |
 | See the recorded production policy | `bookfactory policy show <book> --json` |
+| See the recorded picture budget | `bookfactory pictures show <book>` |
+| Change the picture budget (operator only) | `bookfactory pictures set <book> <chapter_openers\|limit\|unlimited> [--count N] --by <operator>` |
 | See the intake questionnaire | `bookfactory questionnaire --json` |
 | Persist questionnaire answers | `bookfactory intake <book> --from-file <answers.json>` |
 | Draft intake answers from the idea | `bookfactory intake <book> --draft --by <agent> --from-file <answers.json>` |
@@ -342,8 +368,8 @@ the same way. A draft passing its measured checks (section 6a) is not the
 operator's judgement that it is right; it only means the draft is eligible to
 be reviewed.
 
-`reject`, `revise`, `advance --force` and `policy set` are for the operator
-only. Run them only when the operator asks.
+`reject`, `revise`, `advance --force`, `policy set` and `pictures set` are for
+the operator only. Run them only when the operator asks.
 
 `policy set <book> <mode> --by <operator>` is how autonomy is granted or
 withdrawn after a book is created. Never run it unless the operator

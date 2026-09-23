@@ -270,6 +270,15 @@ manuscript. Re-reading your own last chapter for repeated rhetorical shapes
 before submitting the next one is cheap and catches most drift; do not build
 an automated humour scorer.
 
+**The picture budget.** Every book records one in `book.json`
+(`AGENTS.md` section 5a) - a new book starts at `chapter_openers` (a page
+picture only on each chapter's opening page). Check `bookfactory pictures
+show <book>` before planning pages, and plan within it: a page spec naming a
+picture that would break the budget is refused. If the book genuinely needs
+more pictures than the recorded budget, that is a `wait_for_operator`
+situation - say so and ask; never run `bookfactory pictures set` yourself,
+autonomous mode or not.
+
 **Visual references you generate yourself.** For a new book, produce, in
 order: a visual bible (from the questionnaire and the concept), the main
 character reference, a supporting-character reference if the concept needs

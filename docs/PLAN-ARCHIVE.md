@@ -484,3 +484,54 @@ references.
 | Date | Phase | Check | Result |
 |---|---|---|---|
 | 2026-09-23 | 10 | Higgsfield picture from a real task, in a throwaway copy | Draft v1 and v2 both passed measured checks (1792x2400); v2 clean on review and approved by Kieran; 4 credits used, 66 left |
+
+## Phase 11: Picture budget and the Higgsfield routine (done)
+
+Chosen 2026-09-23 by Kieran: "chapter openers only is the default; if I want
+more I'll request it." Nothing limits the number of pictures today, and each
+costs Higgsfield credits and an operator review. Phase 10 proved Claude can
+make book pictures through the Higgsfield connector; the rules still say
+Claude cannot.
+
+**What changes:**
+- Every book records a **picture budget**: `chapter_openers` (pictures only
+  on chapter-opener pages; the cover is separate and always allowed),
+  `limit` with a number (at most that many page pictures), or `unlimited`.
+  New books start at `chapter_openers`. Books made before this phase load as
+  `unlimited`, so nothing already planned breaks.
+- Writing a spec that names a picture (by `plan --from-file` or `spec`) is
+  refused when it would break the budget, naming the page and how to ask the
+  operator. A plan file that breaks it is refused whole (Phase 8's check).
+- `bookfactory pictures show <book>` (read-only) and `bookfactory pictures
+  set <book> <budget> [--count N] --by <operator>` (operator only, audited as
+  `picture_budget_changed`; the approval guard asks first, like `policy set`).
+- The page-plan task says what the budget allows.
+- The rules say: never raise the budget yourself; and when the Higgsfield
+  connector is available, Claude makes pictures through it with the Phase 10
+  routine and prompt lesson, then submits them as drafts. Approval rules are
+  unchanged.
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 11.1 | Budget in the core: state, show/set, the check on writing a spec, audit entry; tests | main | `bookfactory/core/models.py`, `bookfactory/core/book.py`, `bookfactory/core/api.py`, `bookfactory/core/audit.py`, `schemas/book.schema.json`, `tests/test_picture_budget.py` (new), `tests/conftest.py` | [x] |
+| 11.2 | `pictures show` / `pictures set` on the command line; `status` shows the budget | main | `bookfactory/cli/main.py` | [x] |
+| 11.3 | Page-plan task says what the budget allows | main | `bookfactory/core/tasks.py` | [x] |
+| 11.4 | Demo build records its budget (`unlimited`, it has 10 page pictures) as the operator's choice | main | `scripts/build_demo_book.py`, `scripts/end_to_end_check.py` (same need, found while building) | [x] |
+| 11.5 | Approval guard asks before `pictures set`; guard test | main | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` | [x] |
+| 11.6 | Rules and guides: the budget, and the Higgsfield picture routine for Claude | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` | [x] |
+| 11.7 | Check everything with proof on a throwaway demo copy | helper: checker (Sonnet) | none (read-only) | [x] |
+
+**Notes:** the checker found one real regression: `tests/test_state.py` keeps its own list of known audit events and lacked `picture_budget_changed`; added, and the full suite re-run clean. `scripts/end_to_end_check.py` also needed the budget raised (its p002 has a picture). The checker hit its 40-turn limit before reporting and was asked to report what it had.
+
+**Done when:**
+- [x] A new book allows pictures only on chapter openers (plus the cover), and a plan asking for more is refused with a clear message.
+- [x] Only the operator can raise the budget, and it is recorded who did.
+- [x] The rules tell Claude how to make pictures through Higgsfield.
+- [x] `pytest` passes, the demo build passes, and everything is saved to GitHub `main`.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-23 | 11 | Full test suite (after the fix, main session, junit XML) | 446 tests, 0 failures, 0 errors, 2 skipped |
+| 2026-09-23 | 11 | Demo build and end-to-end check on a throwaway copy (checker) | Demo release ready, 24 pages, budget unlimited recorded as the operator's; end-to-end 37/37 |
+| 2026-09-23 | 11 | Command-line try-out (checker) | New book shows chapter_openers; the guard stops `pictures set` and allows `pictures show` |
+| 2026-09-23 | 11 | Diff of rules and guides | No rule weakened; Higgsfield routine and budget rule consistent |

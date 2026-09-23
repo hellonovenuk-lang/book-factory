@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 10 is done and archived.
-> **Finished:** this session built Phases 8 and 9 and ran Phase 10: Higgsfield makes book pictures from real Book Factory tasks (2 credits each on the basic plan at 2K; the second test picture was approved by Kieran). 431 tests passing, 2 skipped.
-> **Next action:** plan the phase that writes the Higgsfield picture routine into the rules (docs keeper: `integrations/claude/BOOK_FACTORY.md` "Images", with the prompt lesson from Phase 10), together with Kieran's answer on a picture budget per book (`IDEAS.md`).
+> **Doing:** no phase open. Phase 11 is done and archived.
+> **Finished:** this session built Phases 8-11: one-file page plan, one-prompt start, a Higgsfield picture test (approved by Kieran), and a picture budget per book (default: chapter openers only; only the operator raises it) with the Higgsfield routine in the rules. 446 tests passing, 2 skipped.
+> **Next action:** choose the next phase with Kieran from `docs/REVIEW-2026-09.md` (#8 hands-off production, #2 `next --batch`, #9 smaller repository) or `IDEAS.md` (typeset chart page type; approval-guard false alarms).
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -70,6 +70,8 @@ Phase 8: Page plan and specs in one file (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 9: One-prompt start (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 10: Test one picture through Higgsfield (done, see `docs/PLAN-ARCHIVE.md`)
+
+Phase 11: Picture budget and the Higgsfield routine (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
 

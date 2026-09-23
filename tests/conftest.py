@@ -216,6 +216,9 @@ def locked_book(workspace: Path) -> Book:
         api.approve("test-book", asset_id, kind=ASSET, root=workspace, by="tester")
 
     api.lock("test-book", "visual", root=workspace, by="tester")
+    # PAGE_PLAN puts a picture on an editorial page, beyond the new-book
+    # default of chapter openers only (tests/test_picture_budget.py tests that).
+    api.set_pictures("test-book", "unlimited", by="tester", root=workspace)
     return Book.load("test-book", workspace)
 
 

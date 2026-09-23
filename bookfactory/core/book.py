@@ -29,6 +29,7 @@ from bookfactory.core.models import (
     BookState,
     DraftRecord,
     PageRecord,
+    PictureBudget,
     effective_reference_role,
 )
 from bookfactory.core.paths import BookPaths, books_dir
@@ -105,6 +106,8 @@ class Book:
             format=BookFormat(trim=trim, colour=colour, bleed=bleed, dpi=dpi,
                               kdp_profile=kdp_profile, target_page_count=target_page_count),
         )
+        state.pictures = PictureBudget(budget="chapter_openers", source="new_book_default",
+                                       set_at=clock.timestamp())
         book = cls(paths, state, PageManifest.empty(book_id), AssetRegistry.empty(book_id))
         book._scaffold_documents(idea=idea)
         from bookfactory.core import cover
@@ -485,11 +488,50 @@ class Book:
         self.register_spec_artwork(page_id, spec)
         return path
 
-    def prepare_page_spec(self, page_id: str, spec: dict) -> dict:
+    def page_picture_ids(self) -> set[str]:
+        """The page pictures the book already has: registered illustrations.
+
+        The cover artwork and visual references have other kinds and are never
+        counted against the picture budget.
+        """
+        return {asset.asset_id for asset in self.registry.assets
+                if asset.kind == "illustration"}
+
+    def picture_budget_problem(self, page_id: str, spec: dict,
+                               planned: set[str] | None = None) -> str | None:
+        """Why this spec's picture breaks the book's picture budget, or None.
+
+        `planned` holds pictures named by earlier specs in the same plan file,
+        so a whole plan is counted together.
+        """
+        asset_id = (spec.get("illustration") or {}).get("asset_id")
+        if not asset_id:
+            return None
+        budget = self.state.pictures
+        remedy = ("Leave the picture out of this page (\"illustration\": null) or ask the "
+                  "operator to raise the budget: bookfactory pictures set "
+                  f"{self.state.book_id} <budget> --by <operator>.")
+        if budget.budget == "chapter_openers":
+            page_type = spec.get("type") or self.manifest.get(page_id).type
+            if page_type != "chapter_opener":
+                return (f"page {page_id} ({page_type}) names picture {asset_id!r}, but the "
+                        "picture budget is chapter_openers: pictures only on chapter-opener "
+                        f"pages. {remedy}")
+        elif budget.budget == "limit":
+            counted = self.page_picture_ids() | set(planned or ())
+            if asset_id not in counted and len(counted) + 1 > (budget.count or 0):
+                return (f"page {page_id} names picture {asset_id!r}, but the picture budget "
+                        f"allows {budget.count or 0} page pictures and "
+                        f"{len(counted)} are already planned. {remedy}")
+        return None
+
+    def prepare_page_spec(self, page_id: str, spec: dict, *,
+                          planned_pictures: set[str] | None = None) -> dict:
         """The spec as it will be written, with defaults filled in. Writes nothing.
 
-        Raises ValidationError if it does not match the page-spec schema, so a
-        caller writing many specs can check them all before writing any.
+        Raises ValidationError if it does not match the page-spec schema or
+        breaks the picture budget, so a caller writing many specs can check
+        them all before writing any.
         """
         page = self.manifest.get(page_id)
         spec = dict(spec)
@@ -504,6 +546,10 @@ class Book:
             "visual_style_version": self.state.style.visual_version,
         })
         schema.validate("page-spec", spec, context=f"page spec {page_id}")
+        problem = self.picture_budget_problem(page_id, spec, planned_pictures)
+        if problem:
+            raise ValidationError(f"Page spec {page_id} breaks the picture budget",
+                                  problems=[problem])
         return spec
 
     def register_spec_artwork(self, page_id: str, spec: dict) -> str | None:
@@ -983,6 +1029,9 @@ class Book:
             "intake": {"required": self.state.intake.required,
                        "completed": self.state.intake.completed,
                        "draft_waiting": bool(self.state.intake.draft)},
+            "pictures": {"budget": self.state.pictures.budget,
+                         "count": self.state.pictures.count,
+                         "page_pictures": len(self.page_picture_ids())},
             "production_policy": _asdict(self.state.production_policy),
             "format": {
                 "trim": self.state.format.trim,

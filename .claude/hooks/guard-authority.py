@@ -81,6 +81,8 @@ COVER_AUTHORITY = {
 }
 POLICY_SET = ("changes the book's production policy, which only the operator may do, and "
               "only when they ask for it (AGENTS.md quick reference)")
+PICTURES_SET = ("changes how many pictures the book may have, which only the operator may "
+                "do, and only when they ask for it (AGENTS.md section 5a)")
 ADVANCE_FORCE = ("skips the stage gates, which only the operator may do "
                  "(AGENTS.md section 8)")
 
@@ -562,7 +564,7 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
         return ASK, ask_reason("bookfactory advance", NEEDS_AUTHORITY["advance"])
     if sub in NEEDS_AUTHORITY:
         return ASK, ask_reason(f"bookfactory {sub}", NEEDS_AUTHORITY[sub])
-    if sub in ("policy", "cover"):
+    if sub in ("policy", "cover", "pictures"):
         op = next((r for r in rest if not r.startswith("-")), None)
         if op is None:
             return ALLOW, ""
@@ -571,6 +573,8 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
                          "read. It might need the operator's authority. Kieran must confirm.")
         if sub == "policy" and op == "set":
             return ASK, ask_reason("bookfactory policy set", POLICY_SET)
+        if sub == "pictures" and op == "set":
+            return ASK, ask_reason("bookfactory pictures set", PICTURES_SET)
         if sub == "cover" and op in COVER_AUTHORITY:
             return ASK, ask_reason(f"bookfactory cover {op}", COVER_AUTHORITY[op])
     return ALLOW, ""

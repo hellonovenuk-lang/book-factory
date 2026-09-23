@@ -85,6 +85,18 @@ If the operator describes the style in chat and the visual bible says something
 different, the visual bible wins - say so, and ask whether they want to change
 it.
 
+## Stay within the picture budget
+
+Every book records a picture budget in `book.json` (`AGENTS.md` section 5a):
+`chapter_openers` (the default for a new book - a picture only on each
+chapter's opening page), a numeric `limit`, or `unlimited` for a book created
+before this existed. `bookfactory pictures show <book>` reads it. Writing a
+page spec that names a picture, whether through `bookfactory plan
+--from-file` or `bookfactory spec`, is refused if it would break the budget.
+Plan within it. If a book genuinely needs more pictures than its budget
+allows, say so and ask the operator - never run `bookfactory pictures set`
+yourself; that command, like `policy set`, is the operator's alone.
+
 ## Doing a visual task
 
 A page's illustration asset is registered automatically, from the page spec
@@ -201,9 +213,10 @@ have" is a useful answer. A near miss is not.
   `bookfactory next` asks for it and its `mode` is `continue_automatically`.
   A lock or `cover approve` you run on that basis uses `--autonomous`, like
   an approval.
-  Never run `advance --force`, `reject`, `revise` or `policy set` unless the
-  operator asks. `policy set` is how autonomy is granted: never change a
-  book's policy yourself. See the end of `AGENTS.md`.
+  Never run `advance --force`, `reject`, `revise`, `policy set` or
+  `pictures set` unless the operator asks. `policy set` is how autonomy is
+  granted and `pictures set` is how the picture budget is raised: never
+  change either yourself. See the end of `AGENTS.md`.
 * If your work ends up on a branch other than `main`, say so in every report
   and ask whether to merge it into `main`, until it is merged or the operator
   says to leave it (`AGENTS.md` section 1a).

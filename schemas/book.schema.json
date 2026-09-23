@@ -107,6 +107,18 @@
         "source": { "type": ["string", "null"] }
       }
     },
+    "pictures": {
+      "description": "The picture budget: how many page pictures the book may have. Always the operator's choice (`pictures set`); new books start at chapter_openers. The cover and visual references are never counted.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "budget": { "type": "string", "enum": ["chapter_openers", "limit", "unlimited"] },
+        "count": { "type": ["integer", "null"], "minimum": 0 },
+        "set_by": { "type": ["string", "null"] },
+        "set_at": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      }
+    },
     "production_mode": {
       "description": "Cached continuation state for the current task - see bookfactory.core.production. Derived, recomputed on every save.",
       "type": "string",

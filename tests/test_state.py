@@ -105,7 +105,7 @@ _KNOWN_EVENTS = {
     "visual_locked", "page_planned", "draft_submitted", "approved", "rejected",
     "revision_opened", "qa_run", "assembled", "review_generated", "preflight_run",
     "blocked", "unblocked", "cover_required", "cover_draft_submitted", "cover_approved",
-    "production_policy_recorded", "production_policy_changed",
+    "production_policy_recorded", "production_policy_changed", "picture_budget_changed",
 }
 
 

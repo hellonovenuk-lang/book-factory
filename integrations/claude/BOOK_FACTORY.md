@@ -85,13 +85,56 @@ catch it.
 
 ## Images
 
-Claude does not generate images. When the next task is an illustration, say so
-and hand it over:
+Every book has a recorded picture budget (`AGENTS.md` section 5a); read it
+with `bookfactory pictures show <book>` before planning or generating
+anything, and never raise it yourself.
 
-> The next task is illustration `p058-mate-taxonomy`. I cannot generate images.
-> Run `bookfactory task golf-addict --json`, give that to ChatGPT along with
-> `integrations/chatgpt/BOOK_FACTORY.md`, and it will generate and submit the
-> draft.
+When the next task is an illustration and the Higgsfield connector is
+available, generate it yourself:
+
+1. `bookfactory task <book> --json` gives the illustration task: its
+   references, its `constraints` (`min_pixels` etc.) and its
+   `output.destination` / `output.submit_command`. Read
+   `style/visual-bible.md` first.
+2. Upload each reference file to Higgsfield: `media_upload` (returns
+   presigned upload URLs), then `curl -X PUT -H "Content-Type: image/png"
+   --data-binary @<file> '<upload_url>'` from the session, then
+   `media_confirm`.
+3. `generate_image` with those media ids as `image_references`. On the basic
+   plan, Nano Banana Pro works at `2k` (2 credits); `4k` needs the Plus plan.
+   Pick an aspect ratio whose width at 2K meets the task's `min_pixels` (a
+   3:4 portrait at 2K came out 1792x2400, enough for a 6x9 full page). Check
+   cost first with `get_cost: true` if unsure. Never use a free-trial
+   "unlimited" allowance unless the operator says so.
+4. The prompt must describe the scene AND spell out: the visual bible's
+   style words, each character's fixed features from the references, the
+   visual bible's "Never" items (e.g. no brand logos), the reference's
+   sparseness/background, plain paper, and "no text, letters, numbers, logos
+   or signatures". A prompt that names only the scene has produced a brand
+   logo on clothing and a cluttered background; naming the "Never" items and
+   the sparseness fixed it (Phase 10, `docs/PLAN-ARCHIVE.md`).
+5. Wait with `jobs_wait`, download the result URL with curl, submit with the
+   task's `output.submit_command`. The measured checks (section 6a) run on
+   submission.
+6. Look at the picture yourself against the references before reporting. If
+   it breaks the visual bible (a logo, a wrong face, embedded text), make a
+   new draft rather than recommending it. Report the draft revision and
+   path. Never approve it yourself - approval stays the operator's, unless
+   `--autonomous` under a recorded policy that authorizes it (`AGENTS.md`
+   section 3).
+7. Each picture spends the operator's Higgsfield credits - check `balance`
+   and say how many were used.
+
+Rules 5 (image generation never sets type) and 6 (match the references
+exactly, or stop and say so) apply exactly as written, unchanged.
+
+If Higgsfield is not connected in this session, say so and hand the task
+over instead:
+
+> The next task is illustration `p058-mate-taxonomy`. Higgsfield is not
+> connected in this session. Run `bookfactory task golf-addict --json`, give
+> that to ChatGPT along with `integrations/chatgpt/BOOK_FACTORY.md`, and it
+> will generate and submit the draft.
 
 Then stop. Do not substitute a placeholder, do not describe the picture in the
 page spec as if it existed, and do not advance past it.

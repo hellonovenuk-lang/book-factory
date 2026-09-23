@@ -32,6 +32,7 @@ MEANINGFUL_EVENTS = {
     "unblocked",
     "production_policy_recorded",
     "intake_drafted",
+    "picture_budget_changed",
     "production_policy_changed",
 }
 

@@ -90,6 +90,10 @@ def build(*, clean: bool = True) -> Book:
                     target_page_count=24,
                     subtitle="A field manual issued to persons who did not want one",
                     idea="A straight-faced field manual for someone who inherited a garden.")
+    # The demo has 10 page pictures, more than the new-book default (chapter
+    # openers only), so the operator raises the picture budget.
+    api.set_pictures(BOOK_ID, "unlimited", by=OPERATOR, root=REPO_ROOT,
+                     reason="The demo walks every illustrated page type.")
     book = Book.load(BOOK_ID, REPO_ROOT)
     log(f"created {book.paths.root}")
 
