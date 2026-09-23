@@ -1,5 +1,12 @@
 # KDP upload pack - The Runner's Guide to Normal Conversation
 
+> **Update 2026-09-23 (branch `claude/running-book-interior-review-rp6cu9`).**
+> The operator approved the redesigned 58-page interior
+> `interior/interior-v4-proposal.pdf`. It replaces the 80-page v3 below, and
+> the covers below are sized for 80 pages, so neither fits it. A new 58-page
+> cover, `cover/proposals/cover-v3-weekend.pdf`, is awaiting the operator's
+> decision. Sections 1-2 are updated once it is chosen.
+
 Prepared 2026-09-22. This pack is for uploading the existing 80-page interior
 directly to KDP. It does **not** make the Book Factory project
 `release_ready`: that project has no page manifest yet, and nothing here is an

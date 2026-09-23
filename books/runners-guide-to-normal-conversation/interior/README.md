@@ -2,9 +2,14 @@
 
 A redesigned interior for *The Runner's Guide to Normal Conversation*, made on
 the branch `claude/running-book-interior-review-rp6cu9` at the operator's
-request (2026-09-23). **It is a proposal, not an approval.** The KDP upload
-file is still `../releases/interior-v3-publication-draft.pdf` until the
-operator decides otherwise.
+request (2026-09-23).
+
+**Status: approved by Kieran Smith on 2026-09-23**, including the removals and
+moves listed below. Recorded in `../audit.jsonl` as `interior_decision`
+(sha256 `195e5e1e…a65a22a6`). The committed PDF is the approved file:
+rebuilding it gives a new checksum, so don't overwrite it. It replaces v3 for
+upload once a matching 58-page cover is chosen (see
+`../cover/proposals/cover-v3-weekend.pdf`).
 
 - `interior-v4-proposal.pdf`: the 58-page interior (6 × 9 in, no bleed, black
   and white).
