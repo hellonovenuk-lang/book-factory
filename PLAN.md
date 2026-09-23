@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 12 (`produce`, first slice) is done; not yet moved to `docs/PLAN-ARCHIVE.md`.
-> **Finished:** Phases 8-12. `bookfactory produce <book>` runs renders, QA, assembly and interior preflight by itself and stops with a plain reason at anything else; it never approves, locks or advances. 471 tests passing, 2 skipped.
-> **Next action:** `/handover` (archive Phase 12), then Kieran picks the next slice of #8 from `IDEAS.md`. Recommended: slice 2 (approve passing drafts with `--autonomous`, only under an autonomous policy), because without it `produce` renders one page and then stops at its approval.
+> **Doing:** no phase open. Phase 12 is done and archived.
+> **Finished:** Phase 12, the first slice of review #8: `bookfactory produce <book>` runs page renders, QA, assembly and interior preflight by itself, and stops with a plain reason at anything else. It never approves, locks or advances. 471 tests passing, 2 skipped.
+> **Next action:** plan Phase 13 with `/plan-phase`, using the next `produce` slice Kieran picks from `IDEAS.md`. Recommended: slice 2 (approve passing drafts with `--autonomous`, only under an autonomous policy), because without it `produce` renders one page and then stops at its approval.
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -26,6 +26,8 @@ here.
 - Plain `pytest -q` took 10+ minutes and sometimes lost its summary line. `python3 -m pytest -q -p no:cacheprovider --junit-xml=<scratch>/junit.xml` ran the full suite in about 3 minutes (Phase 7); read the counts from the XML.
 - Waiting for tests with `until ! kill -0 $(pgrep -f "pytest -q")`: the loop's own command contains "pytest -q", so it finds itself and never ends (one ran for 2 hours in Phase 4). Run the tests in the foreground, or wait on the exact process id.
 - Test-driving `approve` through a helper: the guard blocks it, correctly. Don't work around it; prove it with tests in a temporary folder and leave the live run to Kieran.
+- Editing plan files with a Python or shell script whose text mentions approve/assemble: the approval guard blocks it (known false alarm, in `IDEAS.md`). Use the Edit tool, or a script that doesn't name those words.
+- Asking a checker to set up a live render on the demo copy with `revise`: the guard blocks it, correctly. Prove the render path with tests instead.
 
 ---
 
@@ -73,42 +75,7 @@ Phase 10: Test one picture through Higgsfield (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 11: Picture budget and the Higgsfield routine (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 12: `produce`, first slice (done)
-
-Chosen 2026-09-23 by Kieran: review item #8 (`docs/REVIEW-2026-09.md`),
-hands-off production. #8 is bigger than one sitting; this is its first slice.
-The later slices are parked in `IDEAS.md`.
-
-**What changes:**
-- `bookfactory produce <book>` repeats "read the next task, do it" for the
-  purely mechanical tasks only: `page_render` (`render --page <id>
-  --submit`), `qa`, `assembly` and `preflight`. It runs one only when that
-  task's `mode` is `continue_automatically`, so it follows the book's
-  recorded policy (`AGENTS.md` section 3a).
-- It stops at the first task of any other kind (writing, a picture, an
-  approval, a lock, an operator decision, remediation, blocked, complete)
-  and says in plain words why it stopped and what the next task is.
-- It never approves, locks, advances or forces anything. It has a step limit
-  (`--max-steps`) and stops if a step leaves the same task as next (no
-  progress). `--dry-run` shows the first step it would take and changes
-  nothing. `--json` for agents.
-- The logic lives in `bookfactory/core/produce.py`; the CLI is only an
-  adapter (`integrations/claude/BOOK_FACTORY.md`).
-
-| # | Task | Who | Files | Status |
-|---|---|---|---|---|
-| 12.1 | The loop in the core, `api.produce`, and tests: runs each mechanical task, stops at every other kind with a reason, never approves/locks/advances, obeys `mode`, step limit, no-progress stop, dry run changes nothing | helper: builder, tricky (Opus: it sits on the safety rules) | `bookfactory/core/produce.py` (new), `bookfactory/core/api.py`, `tests/test_produce.py` (new) | [x] |
-| 12.2 | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]`, after 12.1 | helper: builder, routine (Sonnet) | `bookfactory/cli/main.py`, `tests/test_produce_cli.py` (new) | [x] |
-| 12.3 | Rules and guides: what `produce` does and never does; quick-reference line | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [x] |
-| 12.4 | Park the later slices; new glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [x] |
-
-**Test-drive:** run `produce` on a throwaway copy of the demo book
-(`/verify-phase`) and see where it stops and what it says.
-
-**Done when:**
-- [x] `bookfactory produce <book>` runs the mechanical steps by itself and stops with a plain reason at the first thing that needs writing, a picture or the operator.
-- [x] Tests prove it never approves, locks or skips a gate.
-- [x] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
+Phase 12: `produce`, first slice (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
 
@@ -141,5 +108,3 @@ The later slices are parked in `IDEAS.md`.
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
-| 2026-09-23 | 12.1 | Checker: scope, produce.py calls only render/qa/assemble/preflight/next, full suite, demo build + produce on a throwaway copy | Pass: 466 tests, 0 failed, 2 skipped; demo build passed; produce stopped at an illustration task with a plain reason |
-| 2026-09-23 | 12.2, 12.3 | Checker: scope, CLI calls only api.produce, exit codes, `--max-steps 0` refused, docs match the code, full suite, demo build + `produce` (plain, `--dry-run`, `--json`) on a throwaway copy | Pass: 471 tests, 0 failed, 2 skipped. A live render run wasn't shown, because making one needed `revise`, which the guard rightly blocks for helpers; the render path is proved by tests |

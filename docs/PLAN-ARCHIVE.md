@@ -535,3 +535,47 @@ Claude cannot.
 | 2026-09-23 | 11 | Demo build and end-to-end check on a throwaway copy (checker) | Demo release ready, 24 pages, budget unlimited recorded as the operator's; end-to-end 37/37 |
 | 2026-09-23 | 11 | Command-line try-out (checker) | New book shows chapter_openers; the guard stops `pictures set` and allows `pictures show` |
 | 2026-09-23 | 11 | Diff of rules and guides | No rule weakened; Higgsfield routine and budget rule consistent |
+
+## Phase 12: `produce`, first slice (done)
+
+Chosen 2026-09-23 by Kieran: review item #8 (`docs/REVIEW-2026-09.md`),
+hands-off production. #8 is bigger than one sitting; this is its first slice.
+The later slices are parked in `IDEAS.md`.
+
+**What changes:**
+- `bookfactory produce <book>` repeats "read the next task, do it" for the
+  purely mechanical tasks only: `page_render` (`render --page <id>
+  --submit`), `qa`, `assembly` and `preflight`. It runs one only when that
+  task's `mode` is `continue_automatically`, so it follows the book's
+  recorded policy (`AGENTS.md` section 3a).
+- It stops at the first task of any other kind (writing, a picture, an
+  approval, a lock, an operator decision, remediation, blocked, complete)
+  and says in plain words why it stopped and what the next task is.
+- It never approves, locks, advances or forces anything. It has a step limit
+  (`--max-steps`) and stops if a step leaves the same task as next (no
+  progress). `--dry-run` shows the first step it would take and changes
+  nothing. `--json` for agents.
+- The logic lives in `bookfactory/core/produce.py`; the CLI is only an
+  adapter (`integrations/claude/BOOK_FACTORY.md`).
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 12.1 | The loop in the core, `api.produce`, and tests: runs each mechanical task, stops at every other kind with a reason, never approves/locks/advances, obeys `mode`, step limit, no-progress stop, dry run changes nothing | helper: builder, tricky (Opus: it sits on the safety rules) | `bookfactory/core/produce.py` (new), `bookfactory/core/api.py`, `tests/test_produce.py` (new) | [x] |
+| 12.2 | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]`, after 12.1 | helper: builder, routine (Sonnet) | `bookfactory/cli/main.py`, `tests/test_produce_cli.py` (new) | [x] |
+| 12.3 | Rules and guides: what `produce` does and never does; quick-reference line | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [x] |
+| 12.4 | Park the later slices; new glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [x] |
+
+**Test-drive:** run `produce` on a throwaway copy of the demo book
+(`/verify-phase`) and see where it stops and what it says.
+
+**Done when:**
+- [x] `bookfactory produce <book>` runs the mechanical steps by itself and stops with a plain reason at the first thing that needs writing, a picture or the operator.
+- [x] Tests prove it never approves, locks or skips a gate.
+- [x] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
+
+**Notes:** the second checker hit its 40-turn limit and was asked to report what it had. A live render on the demo copy was not shown: setting one up needed `revise`, which the guard rightly blocks for helpers; the render path is proved by tests. As built, `produce` renders one page and then stops at its approval; slice 2 (in `IDEAS.md`) is what lets it continue.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-23 | 12.1 | Checker: scope, produce.py calls only render/qa/assemble/preflight/next, full suite, demo build + produce on a throwaway copy | Pass: 466 tests, 0 failed, 2 skipped; demo build passed; produce stopped at an illustration task with a plain reason |
+| 2026-09-23 | 12.2, 12.3 | Checker: scope, CLI calls only api.produce, exit codes, `--max-steps 0` refused, docs match the code, full suite, demo build + `produce` (plain, `--dry-run`, `--json`) on a throwaway copy | Pass: 471 tests, 0 failed, 2 skipped. A live render run wasn't shown, because making one needed `revise`, which the guard rightly blocks for helpers; the render path is proved by tests |
