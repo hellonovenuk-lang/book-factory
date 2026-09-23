@@ -77,26 +77,39 @@ def _require_policy_choice(policy: str | None) -> str:
     return choice
 
 
-def create_book(title: str, *, policy: str, **kwargs) -> dict:
+def create_book(title: str, *, policy: str, series_from: str | None = None, **kwargs) -> dict:
     """Start a book whose operator supplies every production detail up front.
 
     `policy` is required - `checkpointed`, `visual_checkpoint` or
     `autonomous` - because a book's autonomy is the operator's explicit
     choice, never a default nobody picked (`AGENTS.md` section 3). It is
     recorded as `production_policy` with source `create_command`.
+
+    `series_from` starts the book from an earlier, locked book's voice,
+    visual style, design tokens, reference art (as drafts) and cover design
+    (`bookfactory.core.series`). The source is checked *before* anything is
+    created, so a refused preset leaves nothing behind. Nothing is approved
+    or locked on the operator's behalf either way.
     """
-    from bookfactory.core import production
+    from bookfactory.core import production, series as series_module
 
     choice = _require_policy_choice(policy)
     root = kwargs.pop("root", None)
+    source_book = None
+    if series_from:
+        source_book = Book.load(series_from, root)
+        series_module.check_source(source_book)
     book = Book.create(title, root=root, **kwargs)
     recorded = production.policy_from_choice(choice, source="create_command")
     book.state.production_policy = recorded
     book.log("production_policy_recorded", production_policy=recorded.mode,
              operator_authorized=recorded.operator_authorized, source=recorded.source)
+    series_preset = None
+    if source_book is not None:
+        series_preset = series_module.apply_preset(book, source_book)
     book.save()
     task_module.sync_open_task(book)
-    return {
+    result = {
         "book_id": book.state.book_id,
         "path": str(book.paths.root),
         "stage": book.state.stage,
@@ -106,6 +119,9 @@ def create_book(title: str, *, policy: str, **kwargs) -> dict:
             for p in book.paths.root.rglob("*") if p.is_file()
         ),
     }
+    if series_preset is not None:
+        result["series_preset"] = series_preset
+    return result
 
 
 def _title_from_idea(idea: str) -> str:

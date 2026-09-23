@@ -97,6 +97,10 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--subtitle")
     create.add_argument("--series")
     create.add_argument("--profile", default="kdp-default", help="KDP profile id.")
+    create.add_argument(
+        "--series-from", dest="series_from", metavar="<source-book>",
+        help="Start from an earlier book's locked voice, visual style, design tokens, "
+             "reference art (as drafts) and cover design. Nothing is approved or locked.")
 
     create_idea = sub.add_parser(
         "create-from-idea", parents=[common],
@@ -420,6 +424,7 @@ def cmd_create(args) -> int:
         subtitle=args.subtitle,
         series=args.series,
         idea=args.idea,
+        series_from=args.series_from,
     )
     if args.json:
         out.emit_json(result)
@@ -429,6 +434,18 @@ def cmd_create(args) -> int:
     out.field("path", result["path"])
     out.field("files", str(len(result["created_files"])))
     out.field("policy", args.policy)
+    preset = result.get("series_preset")
+    if preset:
+        out.blank()
+        out.field("series", preset.get("series") or "")
+        out.bullet(
+            f"copied from '{preset['source']}': {len(preset['files'])} style file(s), "
+            f"{len(preset['references'])} reference(s) submitted as drafts",
+            level="info",
+        )
+        if preset.get("skipped_files"):
+            out.bullet("skipped (not in source): " + ", ".join(preset["skipped_files"]),
+                      level="info")
     out.blank()
     print("Next:")
     out.bullet(result["next_action"]["summary"] if result["next_action"] else "nothing", level="info")
