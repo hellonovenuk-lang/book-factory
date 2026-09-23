@@ -81,6 +81,8 @@ can see them.
 **Repository (repo).** The project folder with its full history of changes.
 Book Factory's lives on GitHub.
 
+**Series preset.** Starting a new book from an earlier, locked book in the same series (`create --series-from`), so it reuses that book's voice, visual rules, design settings and reference art instead of making them again. The reused art arrives as drafts, still to be approved in the new book.
+
 **Session.** One conversation with Claude Code. A fresh session remembers
 nothing from the last one except what is written in the repository.
 
