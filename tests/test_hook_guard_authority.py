@@ -51,6 +51,8 @@ def decide(command: str, *, tool: str = "Bash", cwd: str | None = None,
 ASKS = [
     # every operator-authority command
     "bookfactory approve demo-book p001",
+    "bookfactory approve demo-book --all-passing --by kieran",
+    "bookfactory approve demo-book --all-passing --by agent --autonomous",
     "bookfactory lock visual demo-book --by kieran",
     "bookfactory reject demo-book p001 --reason blurry",
     "bookfactory revise demo-book p058 --reason typo",
