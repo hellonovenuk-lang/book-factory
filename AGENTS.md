@@ -115,6 +115,13 @@ without `--policy`; if the operator has not said which, ask them
 `book.json`'s `intake.completed` is true, never ask again - read
 `brief/intake.json` instead.
 
+`create --series-from <book>` still requires `--policy`, chosen the same way.
+It copies the source book's locked voice and visual style and its approved
+references into the new book, but only as drafts recording where they came
+from. Approving and locking them in the new book is decided by the new book's
+own production policy and `bookfactory next` - never assumed already done
+because the source book approved them.
+
 ## 4. Never mutate approved work
 
 Anything under `pages/approved/` or `assets/approved/` is finished, and so
@@ -282,6 +289,7 @@ as draft v2; awaiting approval".
 | --- | --- |
 | Start a book from one idea | `bookfactory create-from-idea "<idea>" --json` |
 | Start a book, every detail known | `bookfactory create "<title>" --policy <policy chosen by the operator>` |
+| Start book 2 of a series | `bookfactory create "<title>" --policy <policy chosen by the operator> --series-from <book>` |
 | See the recorded production policy | `bookfactory policy show <book> --json` |
 | See the intake questionnaire | `bookfactory questionnaire --json` |
 | Persist questionnaire answers | `bookfactory intake <book> --from-file <answers.json>` |

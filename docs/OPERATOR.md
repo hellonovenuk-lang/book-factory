@@ -98,6 +98,24 @@ to run: agents are told never to run it unless you ask. Every
 template has TODO markers; the system will not let you lock anything while
 they are still there.
 
+### Starting book 2 of a series
+
+If you already have an approved book and want the next one to look and sound
+the same, start it from that book instead of from scratch:
+
+```bash
+bookfactory create "Golf Addict 2" --policy visual_checkpoint --series-from golf-addict
+```
+
+The source book must already have its voice and visual style locked - if it
+does not, this refuses and creates nothing. It copies in the voice bible and
+writing sample, the visual bible, design tokens, the reference set, and the
+cover design, and it registers the source's approved reference images as
+drafts in the new book, each one noting which book, revision and file it came
+from. Nothing is approved or locked automatically: the new book still gets
+its own concept, brief and manuscript, and `--policy` still decides how much
+of the rest it stops for you to check.
+
 Useful options: `--bw` for a black and white interior, `--trim 5.5x8.5` for a
 different size, `--bleed` if artwork runs off the edge of the page,
 `--id` to choose the folder name yourself.

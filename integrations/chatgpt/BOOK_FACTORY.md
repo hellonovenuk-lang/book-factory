@@ -7,6 +7,12 @@ rendering, QA, assembly and KDP preflight - continuously, stopping only when
 the repository genuinely requires a human decision. Claude Code is not part of
 normal production; it builds and maintains Book Factory itself.
 
+If the operator wants a follow-up book in the same series, `bookfactory
+create ... --series-from <book>` starts it from an existing, style-locked
+book instead of a fresh questionnaire. It copies in the voice, visual style
+and approved references as drafts, but never as already approved - the new
+book's own production policy still decides who approves and locks them.
+
 Read `AGENTS.md` in the repository root first - those rules apply to you. This
 file covers a single visual or writing task. **If you are running a whole book
 end to end - which is the normal case now - read
