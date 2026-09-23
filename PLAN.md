@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 7 (Batch approval), chosen by Kieran 2026-09-23 ("go"). Run without stopping for OKs; summary at the end.
-> **Finished:** Phase 6 (series presets). 396 tests passing, 2 skipped.
-> **Next action:** round 1 of Phase 7: task 7.1 (builder) and 7.2 (docs keeper). `PLAN.md` is getting long: archive Phases 4-7 to `docs/PLAN-ARCHIVE.md` at the next `/handover`.
+> **Doing:** Phase 7 (Batch approval) is done. The next phase isn't chosen yet.
+> **Finished:** `bookfactory approve <book> --all-passing --by <name> [--dry-run]` approves every draft that passed its measured checks, through the normal single approval; the operator's command, `--autonomous` only under an authorizing policy; the guard blocks agents from it. 410 tests passing, 2 skipped. Kieran hasn't run it live yet.
+> **Next action:** choose the next phase. Left in `docs/REVIEW-2026-09.md`: #3 (page plan and specs in one file, auto-registered assets), #7 (one-prompt start), #4 (image API), #8 (one `produce` loop), rest of #2 (`next --batch`). First, archive Phases 4-7 to `docs/PLAN-ARCHIVE.md` (`/handover`).
 
 **Unfinished, carried over:**
 - none
@@ -23,6 +23,8 @@ here.
 - Testing a new hook in the same session that created `.claude/settings.json`: hooks load only when a session starts, so the trial does nothing. Permission deny rules do work straight away. (Edits to an already-registered hook script do take effect at once.)
 - Running `scripts/build_demo_book.py` in the real checkout: it rewrites about 200 tracked demo files. Use the throwaway copy in `/verify-phase`.
 - Relying on a hook's "ask" in auto mode: auto mode settles it without showing Kieran. Use "deny" there.
+- Plain `pytest -q` took 10+ minutes and sometimes lost its summary line. `python3 -m pytest -q -p no:cacheprovider --junit-xml=<scratch>/junit.xml` ran the full suite in about 3 minutes (Phase 7); read the counts from the XML.
+- Test-driving `approve` through a helper: the guard blocks it, correctly. Don't work around it; prove it with tests in a temporary folder and leave the live run to Kieran.
 
 ---
 
@@ -208,7 +210,7 @@ as drafts, and nothing is approved or locked.
 
 ---
 
-## Phase 7: Batch approval (not started)
+## Phase 7: Batch approval (done)
 
 Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #2 (its
 last big piece). After `render --submit` puts a whole book's pages up as
@@ -231,11 +233,14 @@ auto mode.
 
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
-| 7.1 | `approve --all-passing` with `--kind`, `--dry-run`, `--autonomous`, required `--by`; tests | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_batch_approve.py` (new) | [ ] |
-| 7.2 | Rules and guides: batch approval is the operator's; `--autonomous` only under the policy | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` | [ ] |
-| 7.3 | Guard test: `approve --all-passing` is caught; mark review item #2 done | main | `tests/test_hook_guard_authority.py`, `docs/REVIEW-2026-09.md` | [ ] |
-| 7.4 | Raise helper turn limits (builder 40 to 60, checker 25 to 40), from `IDEAS.md` | main | `.claude/agents/implementer.md`, `.claude/agents/verifier.md`, `IDEAS.md` | [ ] |
-| 7.5 | Check everything with proof; test-drive on a throwaway demo copy | helper: checker | none (read-only) | [ ] |
+| 7.1 | `approve --all-passing` with `--kind`, `--dry-run`, `--autonomous`, required `--by`; tests | helper: builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_batch_approve.py` (new) | [x] |
+| 7.2 | Rules and guides: batch approval is the operator's; `--autonomous` only under the policy | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` | [x] |
+| 7.3 | Guard test: `approve --all-passing` is caught; mark review item #2 done | main | `tests/test_hook_guard_authority.py`, `docs/REVIEW-2026-09.md` | [x] |
+| 7.4 | Raise helper turn limits (builder 40 to 60, checker 25 to 40), from `IDEAS.md` | main | `.claude/agents/implementer.md`, `.claude/agents/verifier.md`, `IDEAS.md` | [x] |
+| 7.5 | Check everything with proof; test-drive on a throwaway demo copy | helper: checker | none (read-only) | [x] |
+
+**Notes:** with the higher turn limits, the builder (41 tool uses) and the
+checker (30) both finished and reported first time.
 
 **Order:** round 1: 7.1 and 7.2 together; main does 7.3 and 7.4. Then the
 checker.
@@ -247,15 +252,20 @@ checker confirming that the guard blocks `approve --all-passing`. The first
 live run is Kieran's, on a real book.
 
 **Done when:**
-- [ ] One command approves every draft that passed its checks, and lists them first with `--dry-run`.
-- [ ] A draft that failed a check is never approved, and an agent can't use it without the book's autonomous policy.
-- [ ] `pytest` passes and the demo build passes.
-- [ ] Everything is saved to GitHub `main` and checked there.
+- [x] One command approves every draft that passed its checks, and lists them first with `--dry-run`.
+- [x] A draft that failed a check is never approved, and an agent can't use it without the book's autonomous policy.
+- [x] `pytest` passes and the demo build passes.
+- [x] Everything is saved to GitHub `main` and checked there.
 
 **Verification log**
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-23 | 7 | Main: guard tests with the 2 new `approve --all-passing` cases | all pass (asks, so blocked in auto mode) |
+| 2026-09-23 | 7 | Checker: only the phase's files changed | confirmed |
+| 2026-09-23 | 7 | Checker: full `pytest` (junit XML) | 410 passed, 2 skipped (396 + 12 + 2) |
+| 2026-09-23 | 7 | Checker: demo build on a throwaway copy | Release Ready, 24 pages |
+| 2026-09-23 | 7 | Checker: contract read against tests | each point proved by a named test in `tests/test_batch_approve.py` |
 
 ---
 
