@@ -100,6 +100,18 @@ cover, never advances, and never uses `--force` or `--all-passing`.
 `--dry-run` changes nothing: it reports only the first step it would take
 (including which page it would approve), or why it would stop.
 
+When the next task is copy to write - a brief, a writing sample, the voice
+bible, the manuscript, the visual bible or a page spec (an `authoring` task
+whose `mode` is `continue_automatically`, not a cover step and not
+registering an existing asset) - `produce` stops with its own code, `writing`.
+It never writes that copy itself. An agent may then write that one task's
+copy, following section 2 and the voice rules the task points to, save it
+where the task's `output.destination` says, and run `produce` again to carry
+on. Writing never includes running a lock, even when the task's
+`submit_command` is one: that command stays the operator's, exactly as
+section 3 and 8 already require. Cover writing tasks and lock steps keep
+their existing stop behaviour.
+
 This does not replace rule 2: it takes the same tasks `next` would, in the
 same order, one at a time, through the same commands - it is just a shorthand
 for running them yourself. Use it anywhere those commands are already

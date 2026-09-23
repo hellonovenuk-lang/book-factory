@@ -60,6 +60,19 @@ approves an asset, never touches the cover, and never locks or advances on
 its own. Report where it stopped and why, the same as you would for any
 other task - and if it approved pages along the way, say which ones.
 
+When the next task is copy to write, `produce` stops with the code
+`writing` instead of running it. The skill `/write-book <book>`
+(`.claude/skills/write-book/SKILL.md`) repeats: run `produce`; when it stops
+with `writing`, write that one task's copy yourself - brief, writing sample,
+voice bible, manuscript, page plan or page specs - on the operator's
+subscription, with no Claude API call, following the "Writing copy" rules
+below; save it where the task says; run `produce` again. It stops and
+reports at any other stop code. It never locks, approves, rejects, revises,
+touches the cover, generates or submits a picture, changes the picture
+budget, changes the production policy, or uses `--force` - even when a
+task's own `submit_command` is one of those, such as the brief's concept
+lock, which stays the operator's.
+
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.
 Do not. Every one of those bypasses a check that exists because of a real

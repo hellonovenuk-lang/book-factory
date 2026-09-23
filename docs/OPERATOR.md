@@ -386,6 +386,13 @@ next - including which page it would approve - without changing anything;
 `--max-steps N` caps how many steps it takes in one run (default 50); `--json`
 is for scripting.
 
+If the next thing the book needs is copy - a brief, the manuscript, a page
+spec - `produce` stops and says `writing`: it never writes prose itself. In
+Claude Code you can type `/write-book golf-addict` to have Claude write that
+copy for you (in that session, no extra cost beyond your subscription) and
+keep calling `produce` to carry on, stopping again the moment it needs you.
+You still read and lock the concept, the voice and the manuscript yourself.
+
 ## 8. Look at the whole book
 
 ```bash
