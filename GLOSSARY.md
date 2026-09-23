@@ -66,6 +66,8 @@ to do one job. It gets its own instructions and reports back when done.
 
 **Intake.** The 12 starting questions for a new book (who it's for, humour, look, length...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
 
+**Loop.** A program repeating the same steps ("read the next task, do it") until something tells it to stop. `bookfactory produce` is one.
+
 **MCP (Model Context Protocol).** A standard plug-in that lets an AI like Claude use another service's tools directly in the chat, e.g. Higgsfield for pictures.
 
 **Main session.** The Claude conversation you are talking to. It plans, hands
@@ -87,10 +89,14 @@ when". Only one is open at a time.
 **Plugin.** A downloadable bundle of commands, helpers and hooks made by
 someone else. We don't install any; we write our own.
 
+**Preflight.** The final print checks against Amazon KDP's rules (page size, margins, bleed) before a book or cover is uploaded.
+
 **Production policy.** How often a book stops for your OK: `autonomous` (only when blocked), `visual_checkpoint` (at the look of the book and the cover; recommended) or `checkpointed` (at every big step). Always your choice, never an agent's.
 
 **Push.** Sending your commits to GitHub, so they're safe and other sessions
 can see them.
+
+**QA (quality assurance).** Automatic checks across the whole book for wording, layout and technical problems. Some findings need a person to look.
 
 **Repository (repo).** The project folder with its full history of changes.
 Book Factory's lives on GitHub.

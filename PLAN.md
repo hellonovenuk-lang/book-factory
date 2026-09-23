@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 11 is done and archived.
-> **Finished:** this session built Phases 8-11: one-file page plan, one-prompt start, a Higgsfield picture test (approved by Kieran), and a picture budget per book (default: chapter openers only; only the operator raises it) with the Higgsfield routine in the rules. 446 tests passing, 2 skipped.
-> **Next action:** plan Phase 12 with `/plan-phase` from `docs/REVIEW-2026-09.md` item #8 (hands-off production: one `bookfactory produce <book>` loop that runs a book's tasks and stops only at the operator's checkpoints), which Kieran chose on 2026-09-23. #8 is bigger than one sitting: plan only its first slice, park the rest in `IDEAS.md`. Pictures now come from the Higgsfield connector (Phases 10-11), within each book's picture budget.
+> **Doing:** Phase 12 (`produce`, first slice), planned and agreed by Kieran 2026-09-23; no task started yet.
+> **Finished:** Phases 8-11 (one-file page plan, one-prompt start, Higgsfield picture test, picture budget). 446 tests passing, 2 skipped at the end of Phase 11.
+> **Next action:** run `/fan-out` for Phase 12: task 12.1 first (12.2 needs its function), then 12.2, then the docs keeper (12.3).
 
 **Unfinished, carried over:**
 - none (the first live run of `approve --all-passing` is Kieran's, on a real book; helpers are rightly blocked from it)
@@ -72,6 +72,43 @@ Phase 9: One-prompt start (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 10: Test one picture through Higgsfield (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 11: Picture budget and the Higgsfield routine (done, see `docs/PLAN-ARCHIVE.md`)
+
+## Phase 12: `produce`, first slice (not started)
+
+Chosen 2026-09-23 by Kieran: review item #8 (`docs/REVIEW-2026-09.md`),
+hands-off production. #8 is bigger than one sitting; this is its first slice.
+The later slices are parked in `IDEAS.md`.
+
+**What changes:**
+- `bookfactory produce <book>` repeats "read the next task, do it" for the
+  purely mechanical tasks only: `page_render` (`render --page <id>
+  --submit`), `qa`, `assembly` and `preflight`. It runs one only when that
+  task's `mode` is `continue_automatically`, so it follows the book's
+  recorded policy (`AGENTS.md` section 3a).
+- It stops at the first task of any other kind (writing, a picture, an
+  approval, a lock, an operator decision, remediation, blocked, complete)
+  and says in plain words why it stopped and what the next task is.
+- It never approves, locks, advances or forces anything. It has a step limit
+  (`--max-steps`) and stops if a step leaves the same task as next (no
+  progress). `--dry-run` shows the first step it would take and changes
+  nothing. `--json` for agents.
+- The logic lives in `bookfactory/core/produce.py`; the CLI is only an
+  adapter (`integrations/claude/BOOK_FACTORY.md`).
+
+| # | Task | Who | Files | Status |
+|---|---|---|---|---|
+| 12.1 | The loop in the core, `api.produce`, and tests: runs each mechanical task, stops at every other kind with a reason, never approves/locks/advances, obeys `mode`, step limit, no-progress stop, dry run changes nothing | helper: builder, tricky (Opus: it sits on the safety rules) | `bookfactory/core/produce.py` (new), `bookfactory/core/api.py`, `tests/test_produce.py` (new) | [ ] |
+| 12.2 | `bookfactory produce <book> [--max-steps N] [--dry-run] [--json]`, after 12.1 | helper: builder, routine (Sonnet) | `bookfactory/cli/main.py`, `tests/test_produce_cli.py` (new) | [ ] |
+| 12.3 | Rules and guides: what `produce` does and never does; quick-reference line | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md` | [ ] |
+| 12.4 | Park the later slices; new glossary terms; this plan | main | `IDEAS.md`, `GLOSSARY.md`, `PLAN.md` | [x] |
+
+**Test-drive:** run `produce` on a throwaway copy of the demo book
+(`/verify-phase`) and see where it stops and what it says.
+
+**Done when:**
+- [ ] `bookfactory produce <book>` runs the mechanical steps by itself and stops with a plain reason at the first thing that needs writing, a picture or the operator.
+- [ ] Tests prove it never approves, locks or skips a gate.
+- [ ] All tests pass (`pytest`) and the demo build passes (`python scripts/build_demo_book.py`, on a throwaway copy).
 
 ---
 
