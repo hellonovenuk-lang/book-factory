@@ -334,11 +334,62 @@ def test_a_nonsense_step_limit_is_refused(produced_book, workspace, bad):
 
 
 def test_stops_at_writing(new_book, workspace):
+    folder = workspace / "books" / BOOK
+    before = _snapshot(folder)
+
     result = produce.run(BOOK, root=workspace)
+
     assert result["steps"] == []
-    assert result["stopped_because"] == "not_mechanical"
+    assert result["stopped_because"] == "writing"
     assert result["next_task"]["type"] == "authoring"
-    assert "writing" in result["message"]
+    assert "copy written" in result["message"]
+    assert "/write-book" in result["message"]
+    assert _snapshot(folder) == before
+
+
+def test_a_dry_run_at_writing_also_reports_writing(new_book, workspace):
+    folder = workspace / "books" / BOOK
+    before = _snapshot(folder)
+
+    result = produce.run(BOOK, root=workspace, dry_run=True)
+
+    assert _snapshot(folder) == before
+    assert result["steps"] == []
+    assert result["stopped_because"] == "writing"
+    assert result["next_task"]["type"] == "authoring"
+
+
+def test_a_cover_authoring_task_is_not_writing():
+    task = {"task_id": f"{BOOK}-cover-direction", "type": "authoring",
+            "mode": "continue_automatically", "summary": "Record cover direction"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "not_mechanical"
+    assert code != "writing"
+
+
+def test_an_asset_register_task_is_not_writing():
+    task = {"task_id": "fig-scope-register", "type": "authoring", "asset_id": "fig-scope",
+            "mode": "continue_automatically", "summary": "Register required visual reference"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "not_mechanical"
+    assert code != "writing"
+
+
+def test_a_lock_operator_decision_task_is_never_writing():
+    task = {"task_id": f"{BOOK}-lock-concept", "type": "operator_decision",
+            "mode": "wait_for_operator", "summary": "Approve and lock the concept"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "wait_for_operator"
+    assert code != "writing"
+
+
+def test_a_checkpointed_books_authoring_task_still_waits_for_the_operator():
+    """Mode is decided before the authoring check, whatever the task type."""
+    task = {"task_id": f"{BOOK}-brief", "type": "authoring",
+            "mode": "wait_for_operator", "summary": "Complete the book brief"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "wait_for_operator"
+    assert code != "writing"
 
 
 def test_stops_at_a_picture(produced_book, workspace):
@@ -465,7 +516,7 @@ def test_a_dry_run_says_why_it_would_stop(new_book, workspace):
     before = _snapshot(folder)
     result = produce.run(BOOK, root=workspace, dry_run=True)
     assert _snapshot(folder) == before
-    assert result["stopped_because"] == "not_mechanical"
+    assert result["stopped_because"] == "writing"
 
 
 # ----------------------------------------------------------------------

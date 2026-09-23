@@ -30,6 +30,15 @@ the cover, never locks, advances, rejects, revises, changes a policy or a
 picture budget, never batch-approves, and never passes `force` to anything -
 those stay decisions (AGENTS.md 3 and 8).
 
+When the next task is ordinary copy - a brief, a writing sample, the voice
+bible, the manuscript, the visual bible or a page spec - `produce` stops with
+the distinct code `writing` rather than the generic `not_mechanical`, so a
+caller such as Claude Code's `/write-book` can tell "this needs copy written"
+apart from any other reason to stop and write it itself. `produce` never
+writes that copy. The cover's own authoring steps and registering an existing
+asset keep the ordinary `not_mechanical` code: they are not prose for an
+agent to draft.
+
 Two guards keep it from looping: a step limit, and a no-progress stop when a
 step leaves the same task next (for example a preflight that keeps failing).
 A dry run only reads: it reports the first step it would take, or why it
@@ -56,12 +65,13 @@ WAIT_FOR_OPERATOR = production.WAIT_FOR_OPERATOR
 REMEDIATE = production.REMEDIATE
 BLOCKED = production.BLOCKED
 NOT_MECHANICAL = "not_mechanical"
+WRITING = "writing"
 MAX_STEPS = "max_steps"
 NO_PROGRESS = "no_progress"
 ERROR = "error"
 DRY_RUN = "dry_run"
 
-STOP_REASONS = (COMPLETE, WAIT_FOR_OPERATOR, REMEDIATE, BLOCKED, NOT_MECHANICAL,
+STOP_REASONS = (COMPLETE, WAIT_FOR_OPERATOR, REMEDIATE, BLOCKED, NOT_MECHANICAL, WRITING,
                 MAX_STEPS, NO_PROGRESS, ERROR, DRY_RUN)
 
 DEFAULT_MAX_STEPS = 50
@@ -147,6 +157,16 @@ def _page_approval(book_id: str, task: dict,
                        f"--draft {draft.revision} --by {APPROVER} --autonomous")}, None
 
 
+def _is_cover_task(book_id: str, task: dict) -> bool:
+    task_id = task.get("task_id") or ""
+    return task_id.startswith(f"{book_id}-cover-")
+
+
+def _is_asset_register_task(task: dict) -> bool:
+    task_id = task.get("task_id") or ""
+    return bool(task.get("asset_id")) and task_id.endswith("-register")
+
+
 def _action_for(book_id: str, task: dict, root=None) -> str | None:
     """The command `produce` would run for a task it may take, else None."""
     if task.get("type") == "approval":
@@ -180,6 +200,10 @@ def _stop_for(book_id: str, task: dict | None, root=None) -> tuple[str, str] | N
         return None
     if _mechanical_action(book_id, task) is None:
         kind = task.get("type")
+        if (kind == "authoring" and not _is_cover_task(book_id, task)
+                and not _is_asset_register_task(task)):
+            return WRITING, (f"Stopped: the next task, {_describe(task)}, needs copy written, "
+                             "which produce does not do; Claude Code's /write-book can write it.")
         needs = _NEEDS.get(kind)
         if needs is None and kind in MECHANICAL_TYPES:
             needs = "a cover step"
@@ -287,4 +311,4 @@ def run(book_id: str, *, root: str | Path | None = None, max_steps: int = DEFAUL
         last_run = task["task_id"]
 
 
-__all__ = ["run", "MECHANICAL_TYPES", "STOP_REASONS", "DEFAULT_MAX_STEPS"]
+__all__ = ["run", "MECHANICAL_TYPES", "STOP_REASONS", "WRITING", "DEFAULT_MAX_STEPS"]
