@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 5 (Cover build), chosen by Kieran 2026-09-23. Kieran asked to run it without stopping for OKs and get a summary at the end.
-> **Finished:** Phase 4 (whole-book render). 383 tests passing, 2 skipped.
-> **Next action:** round 1 of Phase 5: task 5.1 (builder) and 5.3 (docs keeper).
+> **Doing:** Phase 5 (Cover build) is done. The next phase isn't chosen yet.
+> **Finished:** `bookfactory cover build <book> [--submit]` typesets the full wrap from `cover/cover.json` with previews and the cover checks; the demo script and the guides use it. Test-drive built the running book's cover cleanly (no problems). 392 tests passing, 2 skipped.
+> **Next action:** choose the next phase from `docs/REVIEW-2026-09.md`. Candidates: #6 series presets, #7 one-prompt start, the rest of #2 (batch approval of drafts that pass their checks). Kieran wants effort on what makes books faster.
 
 **Unfinished, carried over:**
 - none
@@ -93,7 +93,7 @@ another, run `render --submit` on the whole book and read what it reports.
 
 ---
 
-## Phase 5: Cover build (not started)
+## Phase 5: Cover build (done)
 
 Chosen 2026-09-23 by Kieran, from `docs/REVIEW-2026-09.md` item #5. Today
 each cover is typeset by a one-off script (the running book has three:
@@ -115,11 +115,18 @@ approves.
 
 | # | Task | Who | Files | Status |
 |---|---|---|---|---|
-| 5.1 | `cover build` with template, previews, checks, `--submit`, schema fields, the cover-layout task pointing to it, and tests | helper: builder, routine (Sonnet) | `bookfactory/render/cover.py` (new), `templates/cover/wrap.html.j2` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `bookfactory/core/tasks.py`, `schemas/cover.schema.json`, `tests/test_cover_build.py` (new) | [ ] |
-| 5.2 | Demo script uses `cover build` instead of its own typesetting | main, after 5.1 | `scripts/build_demo_book.py` | [ ] |
-| 5.3 | Rules and guides say covers are built with `cover build` | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/*` | [ ] |
-| 5.4 | Mark review item #5 done | main | `docs/REVIEW-2026-09.md` | [ ] |
-| 5.5 | Check everything with proof, and test-drive on a throwaway copy of the running book | helper: checker | none (read-only) | [ ] |
+| 5.1 | `cover build` with template, previews, checks, `--submit`, schema fields, the cover-layout task pointing to it, and tests | helper: builder, routine (Sonnet) | `bookfactory/render/cover.py` (new), `templates/cover/wrap.html.j2` (new), `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `bookfactory/core/tasks.py`, `schemas/cover.schema.json`, `tests/test_cover_build.py` (new) | [x] |
+| 5.2 | Demo script uses `cover build` instead of its own typesetting | main, after 5.1 | `scripts/build_demo_book.py` | [x] |
+| 5.3 | Rules and guides say covers are built with `cover build` | helper: docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/*` | [x] |
+| 5.4 | Mark review item #5 done | main | `docs/REVIEW-2026-09.md` | [x] |
+| 5.5 | Check everything with proof, and test-drive on a throwaway copy of the running book | helper: checker | none (read-only) | [x] |
+
+**Notes:** the 5.1 builder hit its 40-turn limit, most likely waiting on the
+slow full test run; its work was complete and its 8 tests passed. Main then
+found that WeasyPrint ignores CSS `writing-mode`, so spine text came out
+horizontal across both covers. Fixed by rotating it, sized from the spine
+width, with a test that renders real spine text. Main also tightened the
+AGENTS.md 9a wording so both previews must be looked at.
 
 **Order:** round 1: 5.1 and 5.3 together; main does 5.4. Round 2: main
 does 5.2, then the checker.
@@ -128,15 +135,20 @@ does 5.2, then the checker.
 `cover.json` and look at the preview and thumbnail.
 
 **Done when:**
-- [ ] One command builds a full-wrap cover PDF and previews from `cover.json`, and it passes Book Factory's own cover checks.
-- [ ] With `--submit` it becomes a new cover draft; it never approves.
-- [ ] `pytest` passes and the demo build (now using `cover build`) passes.
-- [ ] Everything is saved to GitHub `main` and checked there.
+- [x] One command builds a full-wrap cover PDF and previews from `cover.json`, and it passes Book Factory's own cover checks.
+- [x] With `--submit` it becomes a new cover draft; it never approves.
+- [x] `pytest` passes and the demo build (now using `cover build`) passes.
+- [x] Everything is saved to GitHub `main` and checked there.
 
 **Verification log**
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-23 | 5 | Main: WeasyPrint spine test | `writing-mode` ignored (text horizontal, 1.7in wide); rotation keeps it vertical inside the spine |
+| 2026-09-23 | 5 | Checker: only the phase's 12 files changed | confirmed |
+| 2026-09-23 | 5 | Checker: full `pytest` | 392 passed, 2 skipped (383 + 9 new) |
+| 2026-09-23 | 5 | Checker: demo build on a throwaway copy, now via `cover build --submit` | Release Ready; cover draft v1 built and submitted, cover preflight pass |
+| 2026-09-23 | 5 | Test-drive: `cover build` on a throwaway copy of the running book | no problems; previews legible, artwork clear, nothing crosses the spine |
 
 ---
 
