@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-page-plan",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "authoring",
+  "stage": "visual_lock",
+  "summary": "Create the page plan",
+  "instructions": "Turn the locked manuscript into a page manifest: every page that will exist, in order, with a type and a title.\n\nWrite the whole plan in one pass, with each page's spec inside its entry: {\"title\": ..., \"type\": ..., \"chapter\": ..., \"spec\": {...}}. A spec holds the exact final copy from the locked manuscript plus the illustration brief (schemas/page-spec.schema.json). Artwork a spec names in illustration.asset_id is registered for its page automatically. Every spec is checked before anything is written; if one is wrong, nothing is planned and the problems are listed.\n\nPicture budget: chapter_openers - a picture only on chapter_opener pages. The cover is separate and never counted. Fill the other pages with typeset text, checklists, tests, comparisons and quotes (\"illustration\": null). Never raise the budget yourself; if the book needs more pictures, ask the operator (bookfactory pictures set).\n\nRun: bookfactory plan golf-addicts-guide-to-family-reintegration --from-file <plan.json>\nor add pages one at a time with `bookfactory plan <book> --add`.\n\nPage types: chapter_opener, editorial_illustration, text_illustration, checklist, diagnostic_test, activity (numbered panels and typeset diagrams built from blocks), comparison, diagram, quote, certificate, closing, front_matter, contents.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/manuscript.md",
+    "manuscript/outline.md",
+    "style/visual-bible.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/manifest.json"
+  },
+  "approval_required": false,
+  "status": "open",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-24T10:22:51Z",
+  "closed_at": null
+}

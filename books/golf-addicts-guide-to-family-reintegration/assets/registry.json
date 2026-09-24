@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:12:21Z",
+  "updated_at": "2026-09-24T10:22:51Z",
   "assets": [
     {
       "asset_id": "ref-character-main",
@@ -13,7 +13,7 @@
       "references": [],
       "status": "draft_submitted",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": null,
       "drafts": [
         {
@@ -68,7 +68,7 @@
       "references": [],
       "status": "approved",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": null,
       "drafts": [
         {
@@ -111,7 +111,7 @@
       "references": [],
       "status": "draft_submitted",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": "deterministic_layout",
       "drafts": [
         {
@@ -166,7 +166,7 @@
       "references": [],
       "status": "approved",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": "deterministic_layout",
       "drafts": [
         {
@@ -209,7 +209,7 @@
       "references": [],
       "status": "approved",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": "generative_style",
       "drafts": [
         {
@@ -252,7 +252,7 @@
       "references": [],
       "status": "draft_submitted",
       "revision_open": false,
-      "locked": false,
+      "locked": true,
       "reference_role": "deterministic_layout",
       "drafts": [
         {

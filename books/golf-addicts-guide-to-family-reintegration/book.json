@@ -4,7 +4,7 @@
   "title": "The Golf Addict's Guide to Family Reintegration",
   "subtitle": null,
   "series": null,
-  "stage": "visual_development",
+  "stage": "visual_lock",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -26,10 +26,10 @@
     "path": "manuscript/versions/manuscript-v2.md"
   },
   "style": {
-    "visual_version": "v0",
-    "visual_locked": false,
-    "visual_locked_at": null,
-    "visual_sha256": null,
+    "visual_version": "v1",
+    "visual_locked": true,
+    "visual_locked_at": "2026-09-24T10:22:50Z",
+    "visual_sha256": "2d9c886121351f2992b9035af16bcb66aedfb32fadc059b22d9734a4d036a4c7",
     "voice_version": "v2",
     "voice_locked": true,
     "voice_locked_at": "2026-09-24T09:29:12Z",
@@ -83,24 +83,24 @@
     "set_at": "2026-09-23T18:45:01Z",
     "source": "new_book_default"
   },
-  "production_mode": "wait_for_operator",
+  "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
-    "task_id": "golf-addicts-guide-to-family-reintegration-lock-visual",
-    "type": "operator_decision",
-    "summary": "Approve the reference set and lock the visual style",
+    "task_id": "golf-addicts-guide-to-family-reintegration-page-plan",
+    "type": "authoring",
+    "summary": "Create the page plan",
     "page_id": null,
     "asset_id": null,
-    "approval_required": true,
-    "mode": "wait_for_operator"
+    "approval_required": false,
+    "mode": "continue_automatically"
   },
   "last_transition": {
-    "from": "manuscript_lock",
-    "to": "visual_development",
-    "at": "2026-09-24T08:30:01Z",
-    "by": "system",
-    "note": "stage derived from repository state"
+    "from": "visual_development",
+    "to": "visual_lock",
+    "at": "2026-09-24T10:22:50Z",
+    "by": "kieran",
+    "note": null
   },
   "created_at": "2026-09-23T18:45:01Z",
-  "updated_at": "2026-09-24T10:12:21Z"
+  "updated_at": "2026-09-24T10:22:51Z"
 }
