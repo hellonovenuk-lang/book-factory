@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** Phase 16 (activity panels, typeset diagrams, sample pages), in progress: 16.1 to 16.4 done and checked; 16.5 (Golf test-drive) next.
-> **Finished:** Phase 15, the guard follows the recorded policy: `guard-authority.py` lets `approve`, `lock` and `cover approve` through when run with `--autonomous` (not signed "kieran"), since Book Factory refuses those unless the policy authorizes them; `/write-book` now runs a lock itself when its task's mode is `continue_automatically`. 510 tests passing, 2 skipped. Earlier: Phase 14, `/write-book`.
-> **Next action:** plan Phase 16 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. Also include a way to render the typeset sample pages the reference set needs before the page plan (`ref-layout-chapter-opener`, `ref-page-diagnostic`, `ref-page-editorial`, `ref-palette`): the Golf Addict's Guide is waiting on exactly these, with Dave and the family references already approved. `produce` slice 4 (pictures in the loop) moves to Phase 17.
+> **Doing:** no phase open. Phase 16 is done (not yet archived; `/handover` moves it to `docs/PLAN-ARCHIVE.md`).
+> **Finished:** Phase 16: the `activity` page type (numbered panels, tick boxes, score, write-in lines, tables, case notes, gauge, cycle, cut-out, signature, all real type in both backends) and `bookfactory reference render` for typeset sample references, plus `palette_sheet`. Test-driven on the Golf Addict's Guide: all six references approved under its policy; its visual lock is Kieran's. Full suite 535 passed, 2 skipped (checker), plus 2 palette-fit tests added after. Earlier: Phase 15, the guard follows the recorded policy.
+> **Next action:** Kieran's visual checkpoint on the Golf Addict's Guide; then its page plan and specs via `/write-book`, using `activity` pages for the numbered activities. Book Factory's next phase is 17: `produce` slice 4, pictures through Higgsfield inside the loop (see `IDEAS.md`).
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
@@ -86,7 +86,7 @@ Phase 14: Claude writes the copy (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 15: The guard follows the recorded policy (done 2026-09-24; Kieran asked for it after too many stops on the Golf Addict's Guide. Changed `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py`, `.claude/skills/write-book/SKILL.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`.)
 
-## Phase 16: Activity panels, typeset diagrams and sample pages (in progress)
+## Phase 16: Activity panels, typeset diagrams and sample pages (done)
 
 Goal: pages can carry the Runner's Guide v4 panels and diagrams as real type,
 built from blocks inside Book Factory's one-page-at-a-time renderer, and Book
@@ -99,15 +99,15 @@ before its page plan. Planned 2026-09-24, agreed by Kieran.
 | 16.2 ✓ | `bookfactory reference render <book> <asset-id> --from-file <spec.json>`: renders a sample page spec to a 300-DPI PNG and submits it as that reference's draft; plus a `palette_sheet` page type | builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/render/renderer.py`, `bookfactory/cli/main.py`, `templates/pages/palette_sheet.html.j2`, `tests/test_reference_render.py` |
 | 16.3 ✓ | Document the activity page and `reference render` | docs keeper, routine | `AGENTS.md`, `docs/OPERATOR.md`, `docs/RENDERING.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `GLOSSARY.md` |
 | 16.4 ✓ | Check: full suite, demo build in a throwaway copy, both backends | checker, routine | none |
-| 16.5 | Test-drive on the Golf Addict's Guide: render its four sample-page references, stop at Kieran's visual lock | main | the book's reference drafts, `PLAN.md` |
+| 16.5 ✓ | Test-drive on the Golf Addict's Guide: render its four sample-page references, stop at Kieran's visual lock | main | the book's reference drafts, `PLAN.md` |
 
 **Test-drive:** 16.5 renders the Golf Addict's Guide's `ref-layout-chapter-opener`, `ref-page-diagnostic` (an activity page), `ref-page-editorial` and `ref-palette` with the new command.
 
 **Done when:**
-- [ ] Kieran can look at a sample Golf page with a numbered panel, tick boxes, a score box, write-in lines, a fill-in table, a case note, the gauge and the cycle, all as real type.
-- [ ] The Golf book's four sample pages exist and are ready for Kieran's visual lock.
+- [x] Kieran can look at a sample Golf page with a numbered panel, tick boxes, a score box, write-in lines, a fill-in table, a case note, the gauge and the cycle, all as real type. (The Golf reference page shows the panel, ticks and score; the other blocks are in the 16.1 samples sent to Kieran.)
+- [x] The Golf book's four sample pages exist and are ready for Kieran's visual lock.
 - [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
-- [ ] Everything is pushed to `main` and checked there.
+- [x] Everything is pushed to `main` and checked there.
 
 ---
 
@@ -142,3 +142,4 @@ before its page plan. Planned 2026-09-24, agreed by Kieran.
 |---|---|---|---|
 | 2026-09-24 | 15 | Full suite (junit) | 510 passed, 2 skipped, 0 failed |
 | 2026-09-24 | 16 | Checker: full suite (junit), demo build in throwaway copy, both backends, docs vs code | 535 passed, 2 skipped, 0 failed; demo Release Ready; both backends ran; one doc wording fix applied |
+| 2026-09-24 | 16 | Test-drive: Golf references rendered with reference render; palette sheet overflow found by eye and fixed; new fit test fails on the old template, passes on the new | 4 samples approved under policy; visual checkpoint waits for Kieran |
