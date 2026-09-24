@@ -31,12 +31,12 @@
 
 ### Stage Five - Family Occasions
 **Job:** Turning up to birthdays, anniversaries, school events and weddings, in full.
-**Best joke:** Becky's wedding on medal day ("Can't they move it?").
+**Best joke:** Claire's wedding on medal day ("Can't they move it?").
 **Page budget:** 9
 
 ### Stage Six - Holidays
 **Job:** Choosing and surviving a family holiday not picked for the courses.
-**Best joke:** Losing to his six-year-old grandson at crazy golf in Cornwall.
+**Best joke:** Losing to his six-year-old son at crazy golf in Cornwall.
 **Page budget:** 8
 
 ### Stage Seven - Relapse Prevention

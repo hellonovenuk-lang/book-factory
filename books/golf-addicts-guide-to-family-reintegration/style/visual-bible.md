@@ -50,36 +50,35 @@ the interior.
 
 ### dave - Dave, the golfer under reintegration
 
-- **Age / build:** Late fifties. Broad, solid, a bit of a belly, short neck, sturdy legs. About five foot ten.
-- **Face:** Round, cheerful, ruddy face (shown with light grey wash on the cheeks and nose), a large rounded nose, bushy greying eyebrows, small bright eyes with laughter lines, clean-shaven, a wide confident grin. He looks like a geezer: pleased with himself and likeable.
-- **Hair:** Short grey hair, visible only at the sides and back under the cap. Thinning on top (never seen, because the cap is always on).
+- **Age / build:** Late thirties. Broad, solid, the start of a dad bod (a small belly over his belt), sturdy legs. About five foot ten.
+- **Face:** Round, cheerful, ruddy face (shown with light grey wash on the cheeks and nose), a large rounded nose, thick dark eyebrows, small bright eyes, faint laughter lines, a hint of stubble, a wide confident grin. He looks like a geezer: pleased with himself and likeable.
+- **Hair:** Short dark-brown hair, cropped at the sides and back, visible under the cap. No grey.
 - **Clothing (default):** A plain light-grey golf cap with a curved peak, no logo, always on his head. A plain mid-grey quarter-zip pullover over a white collared polo shirt, collar out. Light tan chino trousers. One white golf glove poking out of his back pocket, always.
 - **Clothing (variants allowed):** Outdoors on the course: golf shoes and a golf bag on his shoulder. Indoors: plain slip-on shoes. Formal occasions (wedding): a dark suit and tie, still with the cap on. Holiday: shorts and a short-sleeved polo, cap still on. Graduation: a gown and mortarboard worn over the cap. Every variant needs a spec note.
 - **Proportions:** Head slightly large for the body, as caricature; hands big and expressive.
 - **Expression range:** Delighted mid-story, mid-swing concentration, innocent surprise ("what?"), mock outrage about the 7th, sheepish, and once or twice genuinely touched.
-- **Never:** Without the cap (except where a spec says so), a beard or moustache, glasses, a slim or athletic build, a mean or drunk look, branded clothing, logos on the cap, shirt, bag or clubs.
+- **Never:** Without the cap (except where a spec says so), older than about forty, grey hair, a full beard or moustache, glasses, a slim or athletic build, a mean or drunk look, branded clothing, logos on the cap, shirt, bag or clubs.
 
 ### sue - Sue, his wife and case sponsor
 
-- **Age / build:** Late fifties. Slim, small (about five foot four), neat, upright posture.
-- **Face:** Oval face, fine features, a dry, knowing expression: one eyebrow slightly raised, mouth pressed in patient restraint. Kind eyes.
-- **Hair:** Short, neat greying bob, tucked behind one ear.
-- **Clothing (default):** Reading glasses pushed up on her head. A long soft cardigan over a plain blouse, dark slim trousers, flat shoes. Often holding a mug of tea.
+- **Age / build:** Late thirties. Slim, small (about five foot four), quick and capable, slightly frazzled.
+- **Face:** Oval face, fine features, a dry, knowing expression: one eyebrow slightly raised, mouth pressed in patient restraint. Kind, tired eyes.
+- **Hair:** Shoulder-length dark hair twisted up in a claw clip, with loose strands falling out.
+- **Clothing (default):** A long soft cardigan over a plain T-shirt, dark jeans, trainers. Often holding a cold mug of tea, a child, a school bag, or all three.
 - **Clothing (variants allowed):** A smart dress and jacket for the wedding; a sun hat and light summer clothes on holiday.
 - **Proportions:** Realistic, slightly less caricatured than Dave.
 - **Expression range:** Dry patience, arms folded, raised eyebrow, tired amusement, the occasional warm smile at him when he isn't looking.
 - **Never:** Shrewish, shouting, cartoonish nagging, curlers or rolling pin clichés, a different haircut.
 
-### becky - Becky, their grown-up daughter
+### alfie - Alfie, their son
 
-- **Look:** Early thirties, average build, long straight dark hair in a ponytail, jumper and jeans (a bridal dress for the wedding scene), phone often in hand. Friendly, amused at her dad.
-- **Never:** A different hair colour or length, a child's proportions.
+- **Look:** Six, small and wiry, tousled light hair, gap-toothed grin, striped T-shirt and shorts or school jumper. Competitive and cheeky, copies his dad's stance.
+- **Never:** Older than six, a different hair colour, a football club badge or any logo.
 
-### grandchildren - Alfie and his older sister
+### poppy - Poppy, their daughter
 
-- **Alfie:** Six, small, tousled light hair, striped T-shirt, shorts, gap-toothed grin, competitive.
-- **His sister:** About eight or nine, hair in two plaits, dungarees or a simple dress.
-- **Never:** Babies, or older than stated.
+- **Look:** Four, round-faced, hair in two short bunches, dungarees or a simple dress, often on Sue's hip or holding her hand. Wide-eyed and blunt.
+- **Never:** A baby, older than four, a different hairstyle.
 
 ### biscuit - Biscuit, the family dog
 
@@ -102,8 +101,8 @@ page under typeset chapter headings, so leave calm space at the top of the
 picture.
 
 The front cover is a larger scene: Dave at the Sunday roast table, mid-swing
-with a French stick, while Sue, Becky and the grandchildren stare at him and
-Biscuit eyes the roast. Leave clear open space in the upper part for the
+with a French stick, while Sue, Alfie and Poppy stare at him and Biscuit eyes
+the roast. Leave clear open space in the upper part for the
 separately typeset title and author. Never draw those words.
 
 ## Illustration edge treatment

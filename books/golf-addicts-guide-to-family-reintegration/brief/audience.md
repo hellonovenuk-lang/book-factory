@@ -2,15 +2,15 @@
 
 ## Primary buyer
 
-A UK partner, grown-up son or daughter, or mate who loves a golf addict and has lost Saturdays, Sunday dinners and whole conversations to the game.
+A UK partner, usually a wife doing the weekend childcare on her own, or his mum, his sister or a mate, who loves a golf addict and has lost Saturdays, Sunday dinners and whole conversations to the game.
 
 ## Primary recipient
 
-A UK golfer, usually a bloke aged 40 to 70, who plays several times a week, owns more golf gear than garden tools, can describe every round in detail and has opinions about the club committee.
+A UK golfer, usually a bloke aged 30 to 50 with a job and small children, who still plays several times a week, owns more golf gear than garden tools, can describe every round in detail and has opinions about the club committee.
 
 ## Buying occasions
 
-Father's Day, birthdays, Christmas and Secret Santa, plus retirement (when the golf is about to get much worse) and joining a new club.
+Father's Day, birthdays, Christmas and Secret Santa, plus a new baby on the way (when the golf is about to get much harder) and joining a new club.
 
 ## Comparable titles
 

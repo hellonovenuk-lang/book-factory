@@ -1,7 +1,7 @@
 # Book Brief - The Golf Addict's Guide to Family Reintegration
 
 > This file is the answer to "what is this book and who buys it?".
-> Drafted by Claude from the confirmed intake, revised with Kieran's notes (2026-09-23): Dave, black and white interior, sharper jokes with some swearing, UK throughout.
+> Drafted by Claude from the confirmed intake, revised with Kieran's notes (2026-09-23): Dave, black and white interior, sharper jokes with some swearing, UK throughout. Revised again (2026-09-24): Dave is younger, working age, with two small children, which doubles the burden on his wife.
 
 **Book id:** `golf-addicts-guide-to-family-reintegration`
 **Created:** 2026-09-23T18:45:01Z
@@ -16,13 +16,13 @@ A straight-faced official programme for bringing Dave home from the golf club an
 
 Who actually pays for this? Not a demographic - a person.
 
-Dave's other half, his grown-up son or daughter, or his mate from the pub who hasn't seen him since he joined the club. They love him, they've lost more Saturdays to golf than they can count, and they want a gift that takes the piss out of him properly without starting a row.
+Dave's other half, who is doing bath time on her own again, or his mum, his sister, or his mate from the pub who hasn't seen him since he joined the club. They love him, they've lost more Saturdays to golf than they can count, and they want a gift that takes the piss out of him properly without starting a row.
 
 ## Gift recipient
 
 Who receives it, and what is the moment it gets handed over?
 
-Dave: a UK golf addict, usually a bloke aged 40 to 70, who plays three times a week, spends the rest of it talking about it, and is a bit of a geezer about the whole thing. It's handed over on Father's Day, his birthday or Christmas morning, ideally in front of the whole family, who will read the best bits out loud over the Christmas dinner.
+Dave: a UK golf addict, usually a bloke aged 30 to 50, with a job, a mortgage and small children, who still manages to play three times a week, spends the rest of it talking about it, and is a bit of a geezer about the whole thing. His wife is running the house, the school run and two kids while he's on the 14th. It's handed over on Father's Day, his birthday or Christmas morning, ideally in front of the whole family, who will read the best bits out loud over the Christmas dinner.
 
 ## Recognition trigger
 
@@ -34,10 +34,11 @@ point at and say *that is exactly him*? List at least five.
 3. He "pops out for a quick nine" and comes back five hours and four pints later, surprised anyone noticed.
 4. He practises his swing with whatever he's holding: an umbrella in the queue at Tesco, a rolled-up Sunday paper, the barbecue tongs.
 5. He knows the date of the club medal and the Ryder Cup for the next three years, and has no idea when his anniversary is.
-6. The family holiday to Portugal was chosen because there "happened to be" three courses within ten minutes of the villa.
+6. The family holiday to Portugal was chosen because there "happened to be" three courses within ten minutes of the villa, and the kids' club opened at nine.
 7. The garage, the boot of the car and the downstairs loo all hold golf gear, and none of it may be moved.
 8. He watches golf on the telly on Sunday afternoon after playing golf all Sunday morning, then falls asleep in front of it.
 9. He has a strong opinion on the club committee, the state of the greens and the new members, and none on what's for tea.
+10. He books a 7am tee time so he's "back before the kids are up". The kids are up at twenty to six, and so is his wife.
 
 ## Humour angle
 
@@ -66,4 +67,4 @@ UK throughout: British spelling, British words (mum, telly, pint, tea for the ev
 
 Rough direction only - the visual bible is where this gets decided properly.
 
-Classic editorial caricature in a fine black ink line with grey washes for the black and white interior. Dave is drawn the same in every picture: a broad, ruddy, cheerful face, a bit of a belly, a golf cap he never takes off, a quarter-zip pullover and a single glove poking out of his back pocket. Chapter openers show him in family settings he doesn't quite fit, usually still in his golf gear. The cover (full colour, muted greens, sand and navy) shows him at the Sunday roast, mid-swing with a French stick while the family stares at him.
+Classic editorial caricature in a fine black ink line with grey washes for the black and white interior. Dave is drawn the same in every picture: late thirties, a broad, ruddy, cheerful face, the start of a dad bod, a golf cap he never takes off, a quarter-zip pullover and a single glove poking out of his back pocket. Chapter openers show him in family settings he doesn't quite fit, usually still in his golf gear, with small children and a frazzled wife around him. The cover (full colour, muted greens, sand and navy) shows him at the Sunday roast, mid-swing with a French stick while his wife and two small kids stare at him.

@@ -8,13 +8,13 @@
 
 ### Why you are here
 
-Your family has applied for your return. The application was not made lightly. It followed a review which found that you had spent 212 of the last 365 days at the golf club, and most of the other 153 telling people about it.
+Your family has applied for your return. The application was not made lightly. It followed a review which found that you had spent 104 of the last 104 weekend mornings at the golf club, plus a number of Wednesday afternoons described to your employer as "working from home", and most of the rest of your time telling people about it.
 
-Nobody is taking your clubs away. The Programme exists to rebuild the skills that lapsed during your long tour of duty on the course: answering a question with the answer to that question, turning up to things that have no tee time, and finding the kitchen without asking. These skills are still in there somewhere. Sue has seen them. She describes 1994 as "a good year".
+Nobody is taking your clubs away. The Programme exists to rebuild the skills that lapsed during your long tour of duty on the course: answering a question with the answer to that question, turning up to things that have no tee time, and finding the kitchen without asking. These skills are still in there somewhere. Sue has seen them. She says they were last spotted on your honeymoon.
 
-Your case sponsor is Sue. Sue has been married to you for thirty-one years and has heard about the putt on the 7th on roughly four hundred occasions, including once during a minute's silence. She will be keeping notes on your progress. You are not to read them, and you are certainly not to reply to them in the margin in pencil, as happened during the pilot scheme.
+Your case sponsor is Sue. Sue has been married to you for eleven years, has two children under seven, and has heard about the putt on the 7th on roughly four hundred occasions, including once during a minute's silence. She will be keeping notes on your progress. You are not to read them, and you are certainly not to reply to them in the margin in pencil, as happened during the pilot scheme.
 
-> **Case notes (Sue), Day 1.** Said he'd be back by one. Back at twenty to seven. I asked how his day was and got forty minutes, hole by hole. The 7th came up twice. He then asked what was for tea like it was a normal question. Bollocks to this, I'm having a bath.
+> **Case notes (Sue), Day 1.** Said he'd be back by one. Back at twenty to seven. In that time I'd done swimming lessons, a birthday party and two meltdowns, one of them mine. I asked how his day was and got forty minutes, hole by hole. The 7th came up twice. He then asked what was for tea like it was a normal question. Bollocks to this, I'm having a bath.
 
 The Programme runs in eight stages. Most participants complete it. A small number go out for a quick nine halfway through Stage Four and are next seen in the clubhouse in late October.
 
@@ -27,7 +27,7 @@ Award yourself one point for each statement that is true. Sue will check your an
 1. You have gone out for "a quick nine" and come back in the dark.
 2. You have practised your swing with an umbrella in the queue at the post office, and the queue moved back.
 3. You know the date of next year's club medal, and not the date of your wedding anniversary.
-4. You checked the forecast for Saturday's tee time and did not notice it was also your granddaughter's birthday party.
+4. You checked the forecast for Saturday's tee time and did not notice it was also your daughter's fourth birthday party.
 5. There is a golf bag in the downstairs loo, and you consider this a storage solution.
 6. You have watched golf on the telly on a Sunday afternoon, having played golf all Sunday morning, and fallen asleep before the back nine.
 7. You have mentioned the 7th hole at a christening.

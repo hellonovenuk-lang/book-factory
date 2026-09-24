@@ -4,7 +4,7 @@
 
 ## Premise
 
-Dave has spent years on a long tour of duty at his golf club. His family has formally applied for his return. This book is the official Family Reintegration Programme that takes him from turning up at the front door with his clubs to full, weekends-included membership of the household, or at least to a signed certificate saying he gave it a go.
+Dave, late thirties, has spent years on a long tour of duty at his golf club, during which he acquired a mortgage and two small children and left most of them with his wife. His family has formally applied for his return. This book is the official Family Reintegration Programme that takes him from turning up at the front door with his clubs to full, weekends-included membership of the household, or at least to a signed certificate saying he gave it a go.
 
 ## Structure of the book
 
@@ -17,7 +17,7 @@ A re-entry programme in stages, each a chapter with an opener picture:
 2. Communication: talking about something other than his round, and listening to the answer without looking at his phone for the club results.
 3. The Household: the garage, the lawn (not a practice green), the downstairs loo (not a bag store) and where the kitchen is.
 4. Time: what "a quick nine" means to everyone else, and reading a calendar that isn't the club fixture list.
-5. Family Occasions: birthdays, anniversaries, school sports day and a wedding on medal day.
+5. Family Occasions: birthdays, anniversaries, school sports day, the nativity and a family wedding on medal day.
 6. Holidays: choosing somewhere for reasons other than the courses, and surviving a week in Cornwall without clubs.
 7. Relapse Prevention: triggers, warning signs and a plan for the first sunny Saturday in April.
 8. Graduation: a final assessment and the Certificate of Reintegration.
@@ -28,9 +28,10 @@ Each chapter mixes short text pages, checklists, diagnostic tests, case notes an
 
 | ID | Name | Who they are | Why they recur |
 | -- | ---- | ------------ | -------------- |
-| dave | Dave | The golf addict under reintegration, late 50s, a bit of a geezer, cap always on | He is the patient on every page |
-| sue | Sue | His wife and case sponsor, patient, dry and done with it | The outside view; her notes appear in the case files |
-| becky | Becky | Their grown-up daughter, who texts him the club results to get a reply | Proof the family has adapted around him |
+| dave | Dave | The golf addict under reintegration, late thirties, a bit of a geezer, cap always on | He is the patient on every page |
+| sue | Sue | His wife and case sponsor, late thirties, running the house, the school run and two kids, dry and done with it | The outside view; her notes appear in the case files |
+| alfie | Alfie | Their son, six, competitive, calls the golf club "Daddy's work" | Proof of what Dave is missing, and he beats Dave at crazy golf |
+| poppy | Poppy | Their daughter, four, calls him "Golf Daddy" | The little one he keeps missing milestones for |
 | programme-officer | The Programme Officer | The unseen narrator who runs the programme | The deadpan official voice of the whole book, cracking now and then |
 
 ## Running jokes
