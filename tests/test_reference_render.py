@@ -84,6 +84,24 @@ def test_palette_sheet_renders_the_hex_values_as_real_type(locked_book, workspac
         assert hex_value in text, f"{hex_value} missing from the rendered palette sheet"
 
 
+
+@pytest.mark.parametrize("backend", ["weasyprint", "chromium"])
+def test_palette_sheet_type_samples_all_fit_above_the_bottom_margin(locked_book, workspace,
+                                                                    backend):
+    """Its type samples are not book copy, so the render copy check can't see a clipped
+    row: measure that the last one (the folio) sits inside the text block."""
+    import pymupdf
+    from bookfactory.render import backends
+    if not getattr(backends, f"{backend}_available")():
+        pytest.skip(f"{backend} is not available")
+    pdf_path = render_reference_page(locked_book, PALETTE_SPEC, backend=backend,
+                                     destination=workspace / f"ref-palette-{backend}.pdf")
+    page = pymupdf.open(str(pdf_path))[0]
+    hits = page.search_for("folio -")
+    assert hits, "the folio row is missing"
+    bottom_margin_pt = locked_book.design_tokens()["margins_in"]["bottom"] * 72
+    assert hits[0].y1 < page.rect.height - bottom_margin_pt
+
 def test_reference_render_ignores_the_picture_budget(locked_book, workspace):
     """A reference is never a page picture (AGENTS.md section 5a)."""
     api.set_pictures("test-book", "chapter_openers", by="tester", root=workspace)
