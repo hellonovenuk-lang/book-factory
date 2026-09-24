@@ -1,6 +1,37 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-23T21:22:14Z",
-  "assets": []
+  "updated_at": "2026-09-24T08:32:27Z",
+  "assets": [
+    {
+      "asset_id": "ref-character-main",
+      "kind": "character_reference",
+      "title": "Main character reference",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "draft_submitted",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-character-main/ref-character-main-v1.png",
+          "sha256": "967be0ee24e25424c8991c239af92cfec19535f3d36284aa2f720541d4bd5ee1",
+          "submitted_at": "2026-09-24T08:32:27Z",
+          "source": null,
+          "status": "draft",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    }
+  ]
 }
