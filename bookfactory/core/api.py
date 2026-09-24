@@ -296,6 +296,38 @@ def plan_pages(book_id: str, pages: list[dict], *, root: str | Path | None = Non
             "assets_registered": registered, "problems": book.manifest.problems()}
 
 
+def plan_from_manuscript(book_id: str, out: str | Path, *,
+                         backends: list[str] | None = None,
+                         root: str | Path | None = None) -> dict:
+    """Turn the locked manuscript into a plan file, fit-tested page by page.
+
+    Writes `out` only: `{"pages": [...], "warnings": [...], "fit": [...]}`,
+    which `plan --from-file` loads as it stands. Nothing in the book changes;
+    the fit test renders in a temporary folder, and the Book it borrows is
+    never saved.
+    """
+    from bookfactory.core.manuscript_plan import parse_manuscript
+    from bookfactory.render.fit import fit_pages
+
+    book = Book.load(book_id, root)
+    if not book.state.manuscript.locked:
+        raise ValidationError(
+            "The manuscript is not locked, so a plan built from it would drift",
+            remedy="Lock the manuscript first; `bookfactory next` says how.",
+        )
+    parsed = parse_manuscript(book.paths.manuscript_file.read_text(encoding="utf-8"))
+    fitted = fit_pages(book, parsed["pages"], backends=backends)
+    plan = {"pages": fitted["pages"], "warnings": parsed["warnings"],
+            "fit": fitted["report"]}
+    path = write_json(out, plan)
+    counts: dict[str, int] = {}
+    for entry in fitted["report"]:
+        counts[entry["status"]] = counts.get(entry["status"], 0) + 1
+    return {"out": str(path), "pages": len(fitted["pages"]),
+            "manuscript_sections": len(parsed["pages"]), "warnings": parsed["warnings"],
+            "fit": fitted["report"], "fit_counts": counts}
+
+
 def write_page_spec(book_id: str, page_id: str, spec: dict, *,
                     root: str | Path | None = None) -> dict:
     book = Book.load(book_id, root)

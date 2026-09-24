@@ -199,6 +199,13 @@ def build_parser() -> argparse.ArgumentParser:
     plan.add_argument("--from-file", dest="from_file",
                       help="JSON file: a list of pages, or {\"pages\": [...]}. Each page may "
                            "carry its \"spec\"; artwork a spec names is registered.")
+    plan.add_argument("--from-manuscript", dest="from_manuscript", action="store_true",
+                      help="Build a plan file from the locked manuscript, fit-tested in "
+                           "both engines. Needs --out; changes nothing in the book.")
+    plan.add_argument("--out", help="Where --from-manuscript writes the plan file.")
+    plan.add_argument("--backend", dest="backends", action="append",
+                      help="With --from-manuscript: fit-test in this engine only "
+                           "(repeatable; default every available engine).")
     plan.add_argument("--add", action="store_true", help="Add a single page.")
     plan.add_argument("--title")
     plan.add_argument("--type", dest="page_type")
@@ -805,6 +812,8 @@ def _print_task(task: dict) -> None:
 
 
 def cmd_plan(args) -> int:
+    if args.from_manuscript:
+        return _plan_from_manuscript(args)
     pages: list[dict] = []
     if args.from_file:
         data = read_json(Path(args.from_file))
@@ -834,6 +843,36 @@ def cmd_plan(args) -> int:
             out.bullet(problem, level="error")
         return 1
     return 0
+
+
+def _plan_from_manuscript(args) -> int:
+    if args.from_file or args.add:
+        out.error("--from-manuscript cannot be combined with --from-file or --add")
+        return 2
+    if not args.out:
+        out.error("--from-manuscript needs --out <plan.json>")
+        return 2
+    result = api.plan_from_manuscript(args.book, args.out, backends=args.backends,
+                                      root=args.root)
+    trouble = [e for e in result["fit"] if e["status"] in ("too_long", "not_checked")]
+    if args.json:
+        out.emit_json(result)
+        return 1 if trouble else 0
+    out.heading("PLAN FILE FROM THE MANUSCRIPT")
+    out.field("written", result["out"])
+    out.field("pages", str(result["pages"]))
+    out.field("fit", ", ".join(f"{n} {status}" for status, n in
+                               sorted(result["fit_counts"].items())))
+    for entry in result["fit"]:
+        if entry["status"] != "fits":
+            level = "warning" if entry["status"] == "split" else "error"
+            out.bullet(f"{entry['title']}: {entry['status']} - {entry['detail']}", level=level)
+    for warning in result["warnings"]:
+        out.bullet(warning, level="warning")
+    out.blank()
+    print("  Nothing in the book has changed. Read the plan file, then load it with:")
+    print(f"  bookfactory plan {args.book} --from-file {result['out']}")
+    return 1 if trouble else 0
 
 
 def cmd_spec(args) -> int:
