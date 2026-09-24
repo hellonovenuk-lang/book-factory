@@ -276,3 +276,24 @@ def test_the_render_copy_check_covers_text_inside_blocks():
     assert "Golf bags in the downstairs loo" in strings
     assert "Putters behind the sofa" in strings   # the "[ ]" tick box is not copy
     assert "70%" not in strings                   # structure keys are not copy
+
+
+def test_the_copy_check_reads_ligatures_as_their_letters():
+    """Chromium sets "ff" in "official" as one ligature glyph; the words are
+    still all there, so the render check must not report them missing."""
+    assert _normalise("An oﬀicial proﬁle") == _normalise("An official profile")
+
+
+def test_an_activity_without_a_panel_number_is_a_plain_text_page(new_book):
+    """Only numbered activities are boxed; a prose section that needs a block
+    (a case note, a table) renders as an ordinary page with no box or tab."""
+    plain = _html(new_book, {"heading": "Why you are here", "blocks": [
+        {"type": "prose", "text": "Your family has applied for your return."},
+        {"type": "casenote", "label": "Case notes (Sue), Day 1", "text": "Back at twenty to seven."},
+    ]})
+    assert 'class="activity activity--plain"' in plain
+    assert 'class="activity__tab"' not in plain
+    boxed = _html(new_book, {"panel_number": "No. 01", "heading": "Initial assessment",
+                             "blocks": [{"type": "score", "out_of": 10}]})
+    assert 'class="activity activity--tabbed"' in boxed
+    assert 'class="activity activity--plain"' not in boxed

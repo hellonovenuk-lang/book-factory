@@ -332,8 +332,12 @@ def _normalise(text: str) -> str:
     """Letters and digits only.
 
     Justification, hyphenation and line breaks all change how text extracts from
-    a PDF; none of them change which characters the reader sees.
+    a PDF; none of them change which characters the reader sees. Ligatures
+    (Chromium sets "ff" as one glyph, U+FB00) are unfolded first.
     """
+    import unicodedata
+
+    text = unicodedata.normalize("NFKC", text)
     return "".join(character for character in text.lower() if character.isalnum())
 
 

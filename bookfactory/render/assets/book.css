@@ -576,6 +576,15 @@ h1, h2, h3, h4 {
   margin: 0;
   background: #ffffff;
 }
+.activity--plain {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+.activity--plain .activity__title {
+  font-size: var(--size-heading);
+}
 
 .activity--tabbed { margin-top: 10pt; padding-top: 16pt; }
 
