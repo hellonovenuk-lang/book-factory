@@ -22,3 +22,4 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 - 2026-09-23: A command to change a book's format after `create` (colour or black and white, trim, page count), audited; the Golf Addict's Guide needed `book.json` edited by hand to switch to black and white (Golf Addict's Guide brief)
 - 2026-09-23: `produce` slice 5: a scheduled Claude Code routine that starts `produce` in the morning and reports where it stopped (review #8, Phase 12 planning)
 - 2026-09-23: Let `/write-book` also do the concept, voice and manuscript locks when a book's policy is `autonomous` (Phase 14 planning)
+- 2026-09-24: Cover build doesn't notice when the author line overlaps the front artwork (Golf Addict's Guide cover, 4.7 x 7 in art); add an overlap check (found on the Golf Addict's Guide)

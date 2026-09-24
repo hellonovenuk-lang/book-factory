@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:58:02Z",
+  "updated_at": "2026-09-24T11:02:27Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -445,11 +445,24 @@
         "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
         "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png"
       ],
-      "status": "planned",
+      "status": "draft_submitted",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v1.png",
+          "sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac",
+          "submitted_at": "2026-09-24T11:01:29Z",
+          "source": null,
+          "status": "draft",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1696,
+          "height": 2528
+        }
+      ],
       "approved": null,
       "approval_history": [],
       "notes": null
