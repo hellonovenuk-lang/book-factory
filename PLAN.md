@@ -11,7 +11,7 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 15 (small, done in one sitting at Kieran's request) is done.
+> **Doing:** Phase 16 (activity panels, typeset diagrams, sample pages), in progress: round 1 is 16.1 and 16.2.
 > **Finished:** Phase 15, the guard follows the recorded policy: `guard-authority.py` lets `approve`, `lock` and `cover approve` through when run with `--autonomous` (not signed "kieran"), since Book Factory refuses those unless the policy authorizes them; `/write-book` now runs a lock itself when its task's mode is `continue_automatically`. 510 tests passing, 2 skipped. Earlier: Phase 14, `/write-book`.
 > **Next action:** plan Phase 16 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. Also include a way to render the typeset sample pages the reference set needs before the page plan (`ref-layout-chapter-opener`, `ref-page-diagnostic`, `ref-page-editorial`, `ref-palette`): the Golf Addict's Guide is waiting on exactly these, with Dave and the family references already approved. `produce` slice 4 (pictures in the loop) moves to Phase 17.
 
@@ -85,6 +85,29 @@ Phase 13: `produce` approves pages (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 14: Claude writes the copy (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 15: The guard follows the recorded policy (done 2026-09-24; Kieran asked for it after too many stops on the Golf Addict's Guide. Changed `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py`, `.claude/skills/write-book/SKILL.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`.)
+
+## Phase 16: Activity panels, typeset diagrams and sample pages (in progress)
+
+Goal: pages can carry the Runner's Guide v4 panels and diagrams as real type,
+built from blocks inside Book Factory's one-page-at-a-time renderer, and Book
+Factory can render the typeset sample pages a book's reference set needs
+before its page plan. Planned 2026-09-24, agreed by Kieran.
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 16.1 | `activity` page type built from blocks (panel header, ticks, checklist, score, lines, table, casenote, gauge, cycle, cutout, signature), right in both backends | builder, tricky (Opus: WeasyPrint and Chromium disagree on layout) | `templates/pages/_blocks.html.j2`, `templates/pages/activity.html.j2`, `bookfactory/render/assets/book.css`, `bookfactory/qa/content.py`, `tests/test_activity_page.py` |
+| 16.2 | `bookfactory reference render <book> <asset-id> --from-file <spec.json>`: renders a sample page spec to a 300-DPI PNG and submits it as that reference's draft; plus a `palette_sheet` page type | builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/render/renderer.py`, `bookfactory/cli/main.py`, `templates/pages/palette_sheet.html.j2`, `tests/test_reference_render.py` |
+| 16.3 | Document the activity page and `reference render` | docs keeper, routine | `AGENTS.md`, `docs/OPERATOR.md`, `docs/RENDERING.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `GLOSSARY.md` |
+| 16.4 | Check: full suite, demo build in a throwaway copy, both backends | checker, routine | none |
+| 16.5 | Test-drive on the Golf Addict's Guide: render its four sample-page references, stop at Kieran's visual lock | main | the book's reference drafts, `PLAN.md` |
+
+**Test-drive:** 16.5 renders the Golf Addict's Guide's `ref-layout-chapter-opener`, `ref-page-diagnostic` (an activity page), `ref-page-editorial` and `ref-palette` with the new command.
+
+**Done when:**
+- [ ] Kieran can look at a sample Golf page with a numbered panel, tick boxes, a score box, write-in lines, a fill-in table, a case note, the gauge and the cycle, all as real type.
+- [ ] The Golf book's four sample pages exist and are ready for Kieran's visual lock.
+- [ ] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
+- [ ] Everything is pushed to `main` and checked there.
 
 ---
 
