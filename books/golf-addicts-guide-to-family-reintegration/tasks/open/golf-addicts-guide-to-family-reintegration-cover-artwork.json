@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-cover-artwork",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "illustration",
+  "stage": "cover_production",
+  "summary": "Produce native text-free cover artwork",
+  "instructions": "Match locked character and editorial references. No lettering, logos or recreated app interfaces. Never upscale native pixels.",
+  "page_id": null,
+  "asset_id": "cover-front-artwork",
+  "scene": null,
+  "characters": [],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png"
+  ],
+  "required_inputs": [],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": true,
+    "readable_image": true,
+    "min_pixels": 1020,
+    "min_height_pixels": 1530
+  },
+  "output": {
+    "destination": "assets/drafts/cover-front-artwork/",
+    "submit_command": "bookfactory submit golf-addicts-guide-to-family-reintegration cover-front-artwork --kind asset --file <path>"
+  },
+  "approval_required": false,
+  "status": "open",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-24T10:58:02Z",
+  "closed_at": null
+}

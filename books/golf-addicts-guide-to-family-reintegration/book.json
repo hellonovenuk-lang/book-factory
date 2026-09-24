@@ -86,11 +86,11 @@
   "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
-    "task_id": "golf-addicts-guide-to-family-reintegration-cover-direction",
-    "type": "authoring",
-    "summary": "Record the cover direction, paper, finish, author and back copy",
+    "task_id": "golf-addicts-guide-to-family-reintegration-cover-artwork",
+    "type": "illustration",
+    "summary": "Produce native text-free cover artwork",
     "page_id": null,
-    "asset_id": null,
+    "asset_id": "cover-front-artwork",
     "approval_required": false,
     "mode": "continue_automatically"
   },
@@ -102,5 +102,5 @@
     "note": "stage derived from repository state"
   },
   "created_at": "2026-09-23T18:45:01Z",
-  "updated_at": "2026-09-24T10:56:22Z"
+  "updated_at": "2026-09-24T10:58:02Z"
 }

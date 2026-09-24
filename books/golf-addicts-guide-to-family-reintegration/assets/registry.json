@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:56:22Z",
+  "updated_at": "2026-09-24T10:58:02Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -424,6 +424,33 @@
         "width": 2528,
         "height": 1696
       },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "cover-front-artwork",
+      "kind": "cover_artwork",
+      "title": "Front cover: Dave swings a French stick at the Sunday roast",
+      "description": null,
+      "page_id": null,
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "assets/approved/ref-character-main-main-character-reference.png",
+        "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
+        "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
       "approval_history": [],
       "notes": null
     },
