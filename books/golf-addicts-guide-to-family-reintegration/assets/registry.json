@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:52:56Z",
+  "updated_at": "2026-09-24T10:55:03Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -127,12 +127,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-03-opener/art-stage-03-opener-v1.png",
+          "sha256": "8590838491215034b9001103428b6f14b80d154522b7b9c429f527487176f95d",
+          "submitted_at": "2026-09-24T10:54:52Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-03-opener-stage-three-the-household.png",
+        "sha256": "8590838491215034b9001103428b6f14b80d154522b7b9c429f527487176f95d",
+        "approved_at": "2026-09-24T10:54:52Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-03-opener/art-stage-03-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },
@@ -154,12 +180,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-04-opener/art-stage-04-opener-v1.png",
+          "sha256": "e6fbcca22f0647b601458dcfa442d0dad9a95822fb7d99cee1ab6b508b97ade1",
+          "submitted_at": "2026-09-24T10:54:58Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-04-opener-stage-four-time.png",
+        "sha256": "e6fbcca22f0647b601458dcfa442d0dad9a95822fb7d99cee1ab6b508b97ade1",
+        "approved_at": "2026-09-24T10:54:58Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-04-opener/art-stage-04-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },
