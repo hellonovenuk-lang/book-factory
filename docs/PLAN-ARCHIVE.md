@@ -684,3 +684,31 @@ The first live `/write-book` run on a real book is Kieran's.
 | 2026-09-23 | 14.1 | Checker: scope, `_stop_for` read, no new API call, full suite (junit XML), demo build + `produce` on a fresh `visual_checkpoint` book, both on a throwaway copy | Pass: 488 tests, 0 failed, 2 skipped; demo build Release Ready; fresh book stopped with `writing` at the brief, no steps taken |
 | 2026-09-23 | 14.2 | Test-drive by main session: `/write-book` steps followed on a throwaway `visual_checkpoint` book in a scratch clone | Pass: wrote brief, concept and audience; `produce` then stopped at "Approve and lock the concept" (`not_mechanical`), nothing locked |
 | 2026-09-23 | 14.2, 14.3 | Checker: scope, docs and skill match `_stop_for`, no authority command told to run, AGENTS.md additions only and vendor-neutral, every skill command exists, full suite (junit XML) | Pass: 488 tests, 0 failed, 2 skipped |
+
+## Phase 16: Activity panels, typeset diagrams and sample pages (done)
+
+Goal: pages can carry the Runner's Guide v4 panels and diagrams as real type,
+built from blocks inside Book Factory's one-page-at-a-time renderer, and Book
+Factory can render the typeset sample pages a book's reference set needs
+before its page plan. Planned 2026-09-24, agreed by Kieran.
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 16.1 ✓ | `activity` page type built from blocks (panel header, ticks, checklist, score, lines, table, casenote, gauge, cycle, cutout, signature), right in both backends | builder, tricky (Opus: WeasyPrint and Chromium disagree on layout) | `templates/pages/_blocks.html.j2`, `templates/pages/activity.html.j2`, `bookfactory/render/assets/book.css`, `bookfactory/qa/content.py`, `tests/test_activity_page.py` |
+| 16.2 ✓ | `bookfactory reference render <book> <asset-id> --from-file <spec.json>`: renders a sample page spec to a 300-DPI PNG and submits it as that reference's draft; plus a `palette_sheet` page type | builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/render/renderer.py`, `bookfactory/cli/main.py`, `templates/pages/palette_sheet.html.j2`, `tests/test_reference_render.py` |
+| 16.3 ✓ | Document the activity page and `reference render` | docs keeper, routine | `AGENTS.md`, `docs/OPERATOR.md`, `docs/RENDERING.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `GLOSSARY.md` |
+| 16.4 ✓ | Check: full suite, demo build in a throwaway copy, both backends | checker, routine | none |
+| 16.5 ✓ | Test-drive on the Golf Addict's Guide: render its four sample-page references, stop at Kieran's visual lock | main | the book's reference drafts, `PLAN.md` |
+
+**Test-drive:** 16.5 renders the Golf Addict's Guide's `ref-layout-chapter-opener`, `ref-page-diagnostic` (an activity page), `ref-page-editorial` and `ref-palette` with the new command.
+
+**Done when:**
+- [x] Kieran can look at a sample Golf page with a numbered panel, tick boxes, a score box, write-in lines, a fill-in table, a case note, the gauge and the cycle, all as real type. (The Golf reference page shows the panel, ticks and score; the other blocks are in the 16.1 samples sent to Kieran.)
+- [x] The Golf book's four sample pages exist and are ready for Kieran's visual lock.
+- [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
+- [x] Everything is pushed to `main` and checked there.
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-24 | 16 | Checker: full suite (junit), demo build in throwaway copy, both backends, docs vs code | 535 passed, 2 skipped, 0 failed; demo Release Ready; both backends ran; one doc wording fix applied |
+| 2026-09-24 | 16 | Test-drive: Golf references rendered with reference render; palette sheet overflow found by eye and fixed; new fit test fails on the old template, passes on the new | 4 samples approved under policy; visual checkpoint waits for Kieran |

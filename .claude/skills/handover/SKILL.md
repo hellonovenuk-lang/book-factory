@@ -13,9 +13,9 @@ session has.
 
 ## 1. Check where things stand
 
-- `git branch --show-current`. If it is not `main`, stop and tell the
-  operator which branch you're on and what is not on `main` (`CLAUDE.md`,
-  "Branch policy"). Ask before going on.
+- `git branch --show-current`. If it is not `main` and the operator did not
+  ask for this branch, switch to `main` yourself (`CLAUDE.md`, "Branch
+  policy"), bringing any unpushed work with you. Don't ask.
 - `git fetch origin main`, then `git status` and `git log --oneline origin/main..HEAD`.
   If remote `main` has commits you don't have, say so and bring them in
   before committing (never overwrite newer remote work).

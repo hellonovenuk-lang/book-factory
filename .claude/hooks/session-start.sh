@@ -28,9 +28,9 @@ fi
 # --- 2. Branch check ---
 CURRENT_BRANCH="$(git -C "$PROJECT_DIR" branch --show-current 2>/dev/null || true)"
 if [ -z "$CURRENT_BRANCH" ] && git -C "$PROJECT_DIR" rev-parse --git-dir >/dev/null 2>&1; then
-    echo "WARNING: this session is not on any branch (detached HEAD), not main. Book Factory works on main (CLAUDE.md, Branch policy). Tell the operator before changing any files and ask which branch to use."
+    echo "NOTE: this session is not on any branch (detached HEAD). Book Factory works on main (CLAUDE.md, Branch policy): switch to main yourself (fetch origin main, check out main matching origin/main) before changing files. Do not ask the operator."
 elif [ -n "$CURRENT_BRANCH" ] && [ "$CURRENT_BRANCH" != "main" ]; then
-    echo "WARNING: this session is on branch $CURRENT_BRANCH, not main. Book Factory works on main (CLAUDE.md, Branch policy). Tell the operator before changing any files and ask which branch to use."
+    echo "NOTE: this session started on branch $CURRENT_BRANCH, which the session setup chose, not the operator. Book Factory works on main (CLAUDE.md, Branch policy): switch to main yourself (fetch origin main, check out main matching origin/main) before changing files. Do not ask the operator."
 fi
 
 # --- 3. "Start here" block from PLAN.md ---

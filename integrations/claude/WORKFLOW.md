@@ -51,7 +51,7 @@ on in `.claude/settings.json`:
 |---|---|---|
 | `.claude/hooks/guard-authority.py` | before every shell command | Stops `approve`, `lock`, `policy set`, `reject`, `revise`, `cover approve/finalize`, `advance --force` and similar. In the default permission mode it asks the operator; in auto mode (where a question would be settled without reaching the operator) it blocks the command and Claude asks in the chat instead. It lets through `approve`, `lock` and `cover approve` run with `--autonomous` (not signed with the operator's name), because Book Factory itself refuses those unless the book's recorded production policy authorizes them Blocks any write into approved pages, assets or the approved cover |
 | `.claude/hooks/quick-check.py` | after a file is saved | Checks a `.py` or `.json` file still reads correctly, so a slip is caught at once |
-| `.claude/hooks/session-start.sh` | when a session starts | In web sessions installs what the tests need; warns if not on `main`; shows "Start here" |
+| `.claude/hooks/session-start.sh` | when a session starts | In web sessions installs what the tests need; if not on `main`, tells Claude to switch to `main` itself (no question to Kieran); shows "Start here" |
 
 The settings file also forbids editing approved pages, assets and the approved
 cover, and pre-approves safe read-only commands so helpers ask less.

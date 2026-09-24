@@ -38,10 +38,10 @@ inspect Git status before changing files; preserve any newer remote work.
 
 A branch assigned automatically by the tool or hosting environment that starts
 your session (for example a generated `claude/...` or `codex/...` branch) is
-not an operator instruction. It does not override this rule. If the
-environment tells you to use such a branch, or blocks pushes to `main`, say so
-to the operator **before** changing any files and ask which to use. Do not
-quietly work on the assigned branch and mention it at the end.
+not an operator instruction. It does not override this rule. Do not ask the
+operator about it: switch to `main` yourself (fetch it, check out `main`
+matching remote `main`) and carry on with the task. Only if pushing to `main`
+is actually refused do you stop and tell the operator, with the exact error.
 
 Whenever any of your work ends up on a branch other than `main`, for any
 reason (including with the operator's permission), end every report by

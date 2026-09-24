@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 16 is done (not yet archived; `/handover` moves it to `docs/PLAN-ARCHIVE.md`).
-> **Finished:** Phase 16: the `activity` page type (numbered panels, tick boxes, score, write-in lines, tables, case notes, gauge, cycle, cut-out, signature, all real type in both backends) and `bookfactory reference render` for typeset sample references, plus `palette_sheet`. Test-driven on the Golf Addict's Guide: all six references approved under its policy; its visual lock is Kieran's. Full suite 535 passed, 2 skipped (checker), plus 2 palette-fit tests added after. Earlier: Phase 15, the guard follows the recorded policy.
-> **Next action:** Kieran's visual checkpoint on the Golf Addict's Guide; then its page plan and specs via `/write-book`, using `activity` pages for the numbered activities. Book Factory's next phase is 17: `produce` slice 4, pictures through Higgsfield inside the loop (see `IDEAS.md`).
+> **Doing:** no phase open. Phase 16 is archived.
+> **Finished:** the Golf Addict's Guide is Release Ready (cover v3, text-only, approved by Kieran; cover preflight passed); its retrospective ideas are in `IDEAS.md`. Branch rule changed 2026-09-24 at Kieran's request: a session started on a generated branch switches to `main` itself and never asks (`AGENTS.md` 1a, `CLAUDE.md`, the session-start hook, `/handover`, `/plan-phase`).
+> **Next action:** pick and plan Phase 17 with `/plan-phase`. Candidates: `produce` slice 4 (pictures through Higgsfield inside the loop), `plan --from-manuscript`, or asking the big creative decisions at intake (all in `IDEAS.md`).
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
@@ -86,30 +86,10 @@ Phase 14: Claude writes the copy (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 15: The guard follows the recorded policy (done 2026-09-24; Kieran asked for it after too many stops on the Golf Addict's Guide. Changed `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py`, `.claude/skills/write-book/SKILL.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`.)
 
-## Phase 16: Activity panels, typeset diagrams and sample pages (done)
-
-Goal: pages can carry the Runner's Guide v4 panels and diagrams as real type,
-built from blocks inside Book Factory's one-page-at-a-time renderer, and Book
-Factory can render the typeset sample pages a book's reference set needs
-before its page plan. Planned 2026-09-24, agreed by Kieran.
-
-| # | Task | Who | Files |
-|---|---|---|---|
-| 16.1 ✓ | `activity` page type built from blocks (panel header, ticks, checklist, score, lines, table, casenote, gauge, cycle, cutout, signature), right in both backends | builder, tricky (Opus: WeasyPrint and Chromium disagree on layout) | `templates/pages/_blocks.html.j2`, `templates/pages/activity.html.j2`, `bookfactory/render/assets/book.css`, `bookfactory/qa/content.py`, `tests/test_activity_page.py` |
-| 16.2 ✓ | `bookfactory reference render <book> <asset-id> --from-file <spec.json>`: renders a sample page spec to a 300-DPI PNG and submits it as that reference's draft; plus a `palette_sheet` page type | builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/render/renderer.py`, `bookfactory/cli/main.py`, `templates/pages/palette_sheet.html.j2`, `tests/test_reference_render.py` |
-| 16.3 ✓ | Document the activity page and `reference render` | docs keeper, routine | `AGENTS.md`, `docs/OPERATOR.md`, `docs/RENDERING.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/chatgpt/BOOK_FACTORY.md`, `GLOSSARY.md` |
-| 16.4 ✓ | Check: full suite, demo build in a throwaway copy, both backends | checker, routine | none |
-| 16.5 ✓ | Test-drive on the Golf Addict's Guide: render its four sample-page references, stop at Kieran's visual lock | main | the book's reference drafts, `PLAN.md` |
-
-**Test-drive:** 16.5 renders the Golf Addict's Guide's `ref-layout-chapter-opener`, `ref-page-diagnostic` (an activity page), `ref-page-editorial` and `ref-palette` with the new command.
-
-**Done when:**
-- [x] Kieran can look at a sample Golf page with a numbered panel, tick boxes, a score box, write-in lines, a fill-in table, a case note, the gauge and the cycle, all as real type. (The Golf reference page shows the panel, ticks and score; the other blocks are in the 16.1 samples sent to Kieran.)
-- [x] The Golf book's four sample pages exist and are ready for Kieran's visual lock.
-- [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
-- [x] Everything is pushed to `main` and checked there.
+Phase 16: Activity panels, typeset diagrams and sample pages (done, see `docs/PLAN-ARCHIVE.md`)
 
 ---
+
 
 ## Decisions (from the 2026-09-22 audit)
 
@@ -141,5 +121,3 @@ before its page plan. Planned 2026-09-24, agreed by Kieran.
 | Date | Phase | Check | Result |
 |---|---|---|---|
 | 2026-09-24 | 15 | Full suite (junit) | 510 passed, 2 skipped, 0 failed |
-| 2026-09-24 | 16 | Checker: full suite (junit), demo build in throwaway copy, both backends, docs vs code | 535 passed, 2 skipped, 0 failed; demo Release Ready; both backends ran; one doc wording fix applied |
-| 2026-09-24 | 16 | Test-drive: Golf references rendered with reference render; palette sheet overflow found by eye and fixed; new fit test fails on the old template, passes on the new | 4 samples approved under policy; visual checkpoint waits for Kieran |

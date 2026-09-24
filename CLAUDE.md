@@ -64,8 +64,9 @@ recovery, or temporary branch by default.
 Claude Code sessions (on the web especially) are often started with a
 generated `claude/...` branch and a note to develop and push there. That note
 comes from the session setup, not from the operator. In this repository it
-does not count as the operator's instruction. Raise the conflict with the
-operator before changing files, then follow their answer.
+does not count as the operator's instruction. Do not ask Kieran about it
+(he has said so, 2026-09-24): switch to `main` yourself and carry on. Stop
+and tell him only if a push to `main` is actually refused.
 
 If any work does land on another branch, end every report by naming the
 branch and what is not on `main`, and ask whether to merge it into `main`.

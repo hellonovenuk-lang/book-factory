@@ -17,8 +17,9 @@ isn't one, offer the top ideas in `IDEAS.md` and ask which one.)
 
 ## 1. Check the ground
 
-- `git branch --show-current` must be `main`. If it isn't, stop and raise it
-  (`CLAUDE.md`, "Branch policy").
+- `git branch --show-current` must be `main`. If it isn't and the operator
+  did not ask for this branch, switch to `main` yourself (`CLAUDE.md`,
+  "Branch policy"). Don't ask.
 - `git fetch origin main`. If remote `main` is ahead, say so before planning.
 - Read `PLAN.md`. If a phase is still open (its "Done when" isn't fully
   ticked), stop. Say which items are left and offer to finish those first.
