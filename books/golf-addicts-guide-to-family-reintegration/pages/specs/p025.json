@@ -1,0 +1,58 @@
+{
+  "type": "activity",
+  "title": "Garage inventory",
+  "copy": {
+    "panel_number": "No. 08",
+    "panel_kind": "Worksheet",
+    "heading": "Garage inventory",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Item",
+          "Number"
+        ],
+        "rows": [
+          [
+            "Golf bags",
+            ""
+          ],
+          [
+            "Trolleys (including the electric one \"for when my knee goes\")",
+            ""
+          ],
+          [
+            "Drivers, including ones you have \"retired\"",
+            ""
+          ],
+          [
+            "Putters",
+            ""
+          ],
+          [
+            "Buckets of practice balls",
+            ""
+          ],
+          [
+            "Things belonging to anyone else in the family",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If the last line is lower than the number of putters, please read on."
+      }
+    ],
+    "instructions": "Count and record the golf items in the garage. Then count the items that belong to anybody else."
+  },
+  "illustration": null,
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p025",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Swinging household objects",
+  "copy": {
+    "heading": "Swinging household objects",
+    "body": [
+      "Returning golfers are known to swing whatever they are holding. The Programme's records include an umbrella at a bus stop, a rolled-up Sunday paper in the lounge, a French stick at a family meal, and the barbecue tongs, which hit a lampshade.",
+      "The swing is often done without the golfer noticing. It is a half-swing, stopping at the top, with a small look down the imaginary fairway. It is usually followed by a nod."
+    ]
+  },
+  "illustration": null,
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p029",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

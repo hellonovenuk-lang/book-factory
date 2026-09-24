@@ -1,0 +1,36 @@
+{
+  "type": "activity",
+  "title": "The quick nine",
+  "copy": {
+    "heading": "The quick nine",
+    "blocks": [
+      {
+        "type": "cycle",
+        "steps": [
+          "Just popping out",
+          "Might as well play eighteen",
+          "Quick one in the bar",
+          "Car park debrief",
+          "Back home, surprised anyone noticed"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "\"I'm just popping out for a quick nine\" is the most common sentence in the Programme's files. Research shows that it is also the least accurate."
+      },
+      {
+        "type": "prose",
+        "text": "A quick nine is described by the golfer as an hour and a half. In practice it includes a drive to the club, a coffee, a chat in the car park, a warm-up on the range \"to loosen off\", a four-ball ahead that is \"an absolute joke\", nine holes, the decision to play \"the back nine as well, seeing as we're out\", a pint, a second pint because Keith is buying, and a debrief in the car park. Then the drive home."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p032",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

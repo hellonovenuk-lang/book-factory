@@ -1,0 +1,35 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Seven: Relapse Prevention",
+  "copy": {
+    "eyebrow": "Stage Seven",
+    "heading": "Relapse Prevention",
+    "subheading": "Triggers, warning signs and a plan for the first sunny Saturday in April.",
+    "body": []
+  },
+  "illustration": {
+    "asset_id": "art-stage-07-opener",
+    "concept": "Dave at the kitchen window on a bright spring morning, one hand on the curtain, gazing out at a clear blue sky, while his golf bag waits by the back door with a hopeful look about it.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p052",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

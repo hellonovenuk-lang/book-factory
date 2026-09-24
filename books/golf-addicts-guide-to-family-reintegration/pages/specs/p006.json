@@ -1,0 +1,19 @@
+{
+  "type": "text_illustration",
+  "title": "Stage One: Arrival (introduction)",
+  "chapter": 1,
+  "copy": {
+    "eyebrow": "Stage One",
+    "body": [
+      "In this stage you will be reintroduced to the people you live with, shown round the house, and asked to complete a short assessment of how far gone you are. Take your cap off for the photographs."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p006",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

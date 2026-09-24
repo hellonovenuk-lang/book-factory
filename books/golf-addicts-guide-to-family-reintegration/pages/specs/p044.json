@@ -1,0 +1,32 @@
+{
+  "type": "activity",
+  "title": "Presents that are not golf",
+  "copy": {
+    "heading": "Presents that are not golf",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "The Programme has compiled a short list of presents that are suitable for family members. None of them are sold in a pro shop."
+      },
+      {
+        "type": "prose",
+        "text": [
+          "• Flowers, from a shop, not the clubhouse raffle.",
+          "• A meal out at a restaurant that is not in a golf club.",
+          "• A weekend away somewhere without a course. The Programme accepts that this will take some research.",
+          "• Tickets for something your wife wants to see, which you will also attend.",
+          "• Your time, given willingly, on a Saturday."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p044",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

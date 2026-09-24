@@ -1,0 +1,37 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Four: Time",
+  "copy": {
+    "eyebrow": "Stage Four",
+    "heading": "Time",
+    "subheading": "What \"a quick nine\" means to everybody else, and how to read a calendar that is not the fixture list.",
+    "body": [
+      "Golf time runs at a different speed from family time. A round that feels like three hours to you has lasted most of a day for the people at home. This stage is about the gap between the two, and how to close it."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-stage-04-opener",
+    "concept": "Dave walking in through the front door in the dark, bag on his shoulder, cheerfully raising a hand in greeting, while behind him the kitchen clock shows twenty to nine and a plate of dinner sits under cling film.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p031",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

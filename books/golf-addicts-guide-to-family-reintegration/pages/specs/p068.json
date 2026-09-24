@@ -1,0 +1,32 @@
+{
+  "type": "activity",
+  "title": "Promises",
+  "copy": {
+    "panel_number": "No. 24",
+    "panel_kind": "Worksheet",
+    "heading": "Promises",
+    "blocks": [
+      {
+        "type": "lines",
+        "count": 3
+      },
+      {
+        "type": "signature",
+        "fields": [
+          "Signed",
+          "Date"
+        ]
+      }
+    ],
+    "instructions": "Write three promises to your family, to keep after the Programme ends. Sue will put this page on the fridge."
+  },
+  "illustration": null,
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p068",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

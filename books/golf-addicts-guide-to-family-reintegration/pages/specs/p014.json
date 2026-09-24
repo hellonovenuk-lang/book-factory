@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "How a question works",
+  "copy": {
+    "heading": "How a question works",
+    "body": [
+      "A question is a request for information. It usually has a short answer. When Sue asks, \"How was your day?\", she is asking for a general summary, roughly the length of a weather forecast. She is not asking for the 1st, the 2nd, the drive on the 3rd that \"should have been a birdie chance\", or the 7th.",
+      "The Programme recommends the following method. Hear the question. Give an answer of no more than two sentences. Ask a question back, and then listen to the answer to that question, even if it is about the neighbours' extension."
+    ]
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p014",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

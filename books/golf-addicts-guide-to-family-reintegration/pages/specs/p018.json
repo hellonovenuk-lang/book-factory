@@ -1,0 +1,33 @@
+{
+  "type": "activity",
+  "title": "Topics of conversation other than golf",
+  "copy": {
+    "heading": "Topics of conversation other than golf",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Many returning golfers report that they no longer know what people talk about. Research carried out by the Programme with real households shows that families discuss the following, often for several minutes at a time and with nobody keeping score."
+      },
+      {
+        "type": "prose",
+        "text": [
+          "• Other people's holidays.",
+          "• What was on the telly last night, if it was not golf.",
+          "• Someone at work who has done something annoying.",
+          "• The price of things at the big Tesco compared with the small Tesco.",
+          "• Whether the car is making a noise.",
+          "• The children, in detail, including their reading books and who pushed who at nursery."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p018",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

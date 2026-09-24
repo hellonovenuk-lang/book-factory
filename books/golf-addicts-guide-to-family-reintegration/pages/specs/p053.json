@@ -1,0 +1,19 @@
+{
+  "type": "text_illustration",
+  "title": "Stage Seven: Relapse Prevention (introduction)",
+  "chapter": 7,
+  "copy": {
+    "eyebrow": "Stage Seven",
+    "body": [
+      "By this stage most participants have made progress. They have attended a family occasion, mown a lawn and spoken for three minutes without mentioning the 7th. This progress is fragile. It can be undone by one sunny weekend, a text from Keith or the arrival of the new season fixture list. This stage is about recognising the danger in time."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p053",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

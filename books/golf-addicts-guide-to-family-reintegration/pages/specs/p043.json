@@ -1,0 +1,50 @@
+{
+  "type": "activity",
+  "title": "Family dates",
+  "copy": {
+    "panel_number": "No. 15",
+    "panel_kind": "Worksheet",
+    "heading": "Family dates",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Occasion",
+          "Date"
+        ],
+        "rows": [
+          [
+            "My wife's birthday",
+            ""
+          ],
+          [
+            "Our wedding anniversary",
+            ""
+          ],
+          [
+            "My son's birthday",
+            ""
+          ],
+          [
+            "My daughter's birthday",
+            ""
+          ],
+          [
+            "The dog's birthday (approximately)",
+            ""
+          ]
+        ]
+      }
+    ],
+    "instructions": "Fill in the dates below. Then add them to your phone, next to the fixtures."
+  },
+  "illustration": null,
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p043",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

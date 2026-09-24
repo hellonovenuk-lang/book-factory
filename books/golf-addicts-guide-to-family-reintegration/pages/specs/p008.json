@@ -1,0 +1,41 @@
+{
+  "type": "activity",
+  "title": "Initial assessment",
+  "copy": {
+    "panel_number": "No. 01",
+    "panel_kind": "Assessment",
+    "heading": "Initial assessment",
+    "blocks": [
+      {
+        "type": "ticks",
+        "items": [
+          "You have gone out for \"a quick nine\" and come back in the dark.",
+          "You have practised your swing with an umbrella in the queue at the post office, and the queue moved back.",
+          "You know the date of next year's club medal, and not the date of your wedding anniversary.",
+          "You checked the forecast for Saturday's tee time and did not notice it was also your daughter's fourth birthday party.",
+          "There is a golf bag in the downstairs loo, and you consider this a storage solution.",
+          "You have watched golf on the telly on a Sunday afternoon, having played golf all Sunday morning, and fallen asleep before the back nine.",
+          "You have mentioned the 7th hole at a christening.",
+          "You have shared your views on the new committee with somebody who is not a member of the club, such as the man who came to read the meter.",
+          "You chose the family holiday in the Algarve because there \"happened to be\" a course nearby. There were three. You played all of them.",
+          "You are reading this list and still think the 7th was a genuinely unlucky lip-out."
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 10
+      }
+    ],
+    "instructions": "Award yourself one point for each statement that is true. Sue will check your answers."
+  },
+  "illustration": null,
+  "chapter": 1,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p008",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

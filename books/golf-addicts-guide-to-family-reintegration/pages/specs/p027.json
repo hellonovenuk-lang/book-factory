@@ -1,0 +1,44 @@
+{
+  "type": "activity",
+  "title": "Jobs I can do",
+  "copy": {
+    "panel_number": "No. 09",
+    "panel_kind": "Checklist",
+    "heading": "Jobs I can do",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "Put the bins out on the right night.",
+          "Loaded the dishwasher without being told how afterwards.",
+          "Mowed the lawn without mowing a green into the middle of it.",
+          "Hoovered, including under things.",
+          "Rung the man about the gutter.",
+          "Cooked a meal that was not a barbecue.",
+          "Done bath time and bedtime on my own, including the second story and the glass of water.",
+          "Changed a duvet cover without getting inside it."
+        ]
+      },
+      {
+        "type": "signature",
+        "fields": [
+          "Countersigned (Sue)"
+        ]
+      }
+    ],
+    "instructions": "Tick each job you have done since arriving. Sue will countersign.",
+    "eyebrow": "Household jobs",
+    "body": [
+      "During your posting the following jobs were done by other people. The Programme would like you to learn them in order of difficulty."
+    ]
+  },
+  "illustration": null,
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p027",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

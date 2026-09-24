@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "Keith",
+  "copy": {
+    "heading": "Keith",
+    "body": [
+      "The Programme wishes to say a word about Keith.",
+      "Keith is a member of your four-ball. He has a handicap of eighteen and plays off twelve. He is retired, lives on his own, and is at the club seven days a week. He has no one at home who has applied for his return. Keith is a nice man, and a high-risk contact.",
+      "The Programme recommends that you limit your contact with Keith during reintegration to one round a week and do not reply to messages from him sent after 9pm, which usually say \"Early one tomorrow?\""
+    ]
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p062",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Two: Communication",
+  "copy": {
+    "eyebrow": "Stage Two",
+    "heading": "Communication",
+    "subheading": "Talking about something that is not your round, and listening to the answer.",
+    "body": [
+      "The most common complaint the Programme receives concerns conversation. Households report that a returning golfer can turn any question, from \"Did you pick up the milk?\" to \"How's your mum?\", into a hole-by-hole account of the morning. This stage will teach you to hear a question, answer it, and ask one back."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-stage-02-opener",
+    "concept": "Dave at the family tea table mid-story, using a knife and fork to show the line of a putt across his plate, while Sue and the two small children stare at him and their fish fingers go cold.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p013",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

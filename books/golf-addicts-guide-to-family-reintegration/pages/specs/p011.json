@@ -1,0 +1,60 @@
+{
+  "type": "activity",
+  "title": "Who lives here?",
+  "copy": {
+    "panel_number": "No. 02",
+    "panel_kind": "Worksheet",
+    "heading": "Who lives here?",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Family member",
+          "Name",
+          "Age",
+          "Something they did this year"
+        ],
+        "rows": [
+          [
+            "Your wife",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Your son",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Your daughter",
+            "",
+            "",
+            ""
+          ],
+          [
+            "The dog",
+            "",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If you have written \"the little one\" or \"mate\" in the name column, that counts as blank."
+      }
+    ],
+    "instructions": "Fill in the table without looking at the fridge, a phone or a Christmas card."
+  },
+  "illustration": null,
+  "chapter": 1,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p011",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

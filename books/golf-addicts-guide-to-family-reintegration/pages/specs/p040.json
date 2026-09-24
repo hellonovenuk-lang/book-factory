@@ -1,0 +1,23 @@
+{
+  "type": "text_illustration",
+  "title": "Occasion guidance",
+  "copy": {
+    "heading": "Occasion guidance",
+    "body": [
+      "Birthdays. Give a present that is not golf-related, and has not come from the pro shop. A voucher for the pro shop is still the pro shop.",
+      "Anniversaries. Remember them. The date is in the family calendar, circled, with the word \"ANNIVERSARY\" and three exclamation marks. You will find it easier to remember if you think of it as a major.",
+      "School events. Sports day, nativity plays, parents' evenings. Stand with the other parents and grandparents. Do not assess the egg and spoon race for technique.",
+      "Weddings. Attend the ceremony, the meal and the speeches. Do not ask the best man his handicap. Do not refer to the church as \"a par four from the car park\".",
+      "Funerals. No golf. None. Not even if the deceased \"would have loved to know\" about the new clubhouse."
+    ]
+  },
+  "illustration": null,
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p040",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

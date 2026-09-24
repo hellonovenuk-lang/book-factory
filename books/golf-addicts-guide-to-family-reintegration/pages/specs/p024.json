@@ -1,0 +1,23 @@
+{
+  "type": "text_illustration",
+  "title": "A tour of your home",
+  "copy": {
+    "heading": "A tour of your home",
+    "body": [
+      "The kitchen. The room with the kettle. Meals are made here, by somebody, every day. There is a dishwasher, which you may load. The cutlery basket goes in the bottom. Plates face the middle.",
+      "The living room. Where the family sit in the evening and talk. It contains a television, which also shows programmes that are not golf. There are four of these on at any one time.",
+      "The garden. A lawn with borders. It is not a practice green. The Programme has been made aware of the flag.",
+      "The downstairs loo. A toilet and a small sink. It is not a bag store, and a golf umbrella should not be propped behind the door, where it falls on guests.",
+      "The garage. Originally for a car. Now for golf. See the inventory on the next page."
+    ]
+  },
+  "illustration": null,
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p024",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

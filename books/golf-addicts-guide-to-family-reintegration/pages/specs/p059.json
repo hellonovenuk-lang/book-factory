@@ -1,0 +1,56 @@
+{
+  "type": "activity",
+  "title": "My sunny Saturday plan",
+  "copy": {
+    "panel_number": "No. 21",
+    "panel_kind": "Worksheet",
+    "heading": "My sunny Saturday plan",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Question",
+          "My answer"
+        ],
+        "rows": [
+          [
+            "What time will I leave?",
+            ""
+          ],
+          [
+            "How many holes will I play?",
+            ""
+          ],
+          [
+            "What time will I be home?",
+            ""
+          ],
+          [
+            "What will I do with the family in the afternoon?",
+            ""
+          ],
+          [
+            "Who will check I'm home on time?",
+            "Sue"
+          ]
+        ]
+      },
+      {
+        "type": "signature",
+        "fields": [
+          "Signed",
+          "Witnessed (Sue)"
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p059",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

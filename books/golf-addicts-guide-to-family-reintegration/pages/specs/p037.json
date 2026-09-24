@@ -1,0 +1,79 @@
+{
+  "type": "activity",
+  "title": "Seven-day time audit",
+  "copy": {
+    "panel_number": "No. 13",
+    "panel_kind": "Tracker",
+    "heading": "Seven-day time audit",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Day",
+          "What I said",
+          "Time I said",
+          "Time I got back"
+        ],
+        "rows": [
+          [
+            "Monday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Tuesday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Wednesday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Thursday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Friday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Saturday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Sunday",
+            "",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "lines",
+        "count": 1,
+        "label": "Total hours missing"
+      }
+    ],
+    "instructions": "For one week, write down what you said and what really happened. Sue will fill in the right-hand column."
+  },
+  "illustration": null,
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p037",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

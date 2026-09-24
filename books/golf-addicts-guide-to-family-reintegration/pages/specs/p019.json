@@ -1,0 +1,50 @@
+{
+  "type": "activity",
+  "title": "Three minutes without golf",
+  "copy": {
+    "panel_number": "No. 06",
+    "panel_kind": "Worksheet",
+    "heading": "Three minutes without golf",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Attempt",
+          "Topic",
+          "Time before golf came up"
+        ],
+        "rows": [
+          [
+            "1",
+            "",
+            ""
+          ],
+          [
+            "2",
+            "",
+            ""
+          ],
+          [
+            "3",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "A time of under forty seconds means golf came up in the first sentence and should be marked as a relapse."
+      }
+    ],
+    "instructions": "Choose a topic from the list. Talk about it with a member of the household for three minutes. Sue will time you. Mark each attempt below."
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p019",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

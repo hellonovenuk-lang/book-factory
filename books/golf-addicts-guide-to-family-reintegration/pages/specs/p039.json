@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Attending an occasion",
+  "copy": {
+    "heading": "Attending an occasion",
+    "body": [
+      "Attending means being there from the start to the finish. It does not mean arriving late \"from the club\", with grass on your trousers, in time for the cake. It does not mean leaving early \"to catch the last few holes of the golf\" on your phone, which you then watch in the car park.",
+      "When you attend an occasion please leave your phone in your pocket. The club results will still be there later. Keith's score will still be annoying."
+    ]
+  },
+  "illustration": null,
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p039",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "type": "activity",
+  "title": "Words that do not belong at the dinner table",
+  "copy": {
+    "heading": "Words that do not belong at the dinner table",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "The following words and phrases are for the clubhouse. Please leave them there."
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Said at dinner",
+          "What the family hear"
+        ],
+        "rows": [
+          [
+            "\"It was a tricky pin position.\"",
+            "\"I'm about to talk for twenty minutes.\""
+          ],
+          [
+            "\"I was robbed.\"",
+            "\"I lost.\""
+          ],
+          [
+            "\"Honestly, I was hitting it lovely.\"",
+            "\"I lost badly.\""
+          ],
+          [
+            "\"Keith's a sandbagger.\"",
+            "\"Keith won.\""
+          ],
+          [
+            "\"The greens were a disgrace.\"",
+            "\"I'm going to write to the committee again.\""
+          ],
+          [
+            "\"Just a quick one.\"",
+            "\"See you at teatime.\""
+          ]
+        ]
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 9",
+        "text": "Asked him what he thought of Alfie's swimming badge. He said \"Not bad, not bad,\" then told me about Keith's handicap. He didn't know Alfie had been swimming. He's been going since March."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p020",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

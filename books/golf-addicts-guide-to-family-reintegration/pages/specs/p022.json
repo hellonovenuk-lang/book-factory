@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "title": "Signs you are listening",
+  "copy": {
+    "panel_number": "No. 07",
+    "panel_kind": "Checklist",
+    "heading": "Signs you are listening",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "I looked at the person talking, not at the window to check the weather.",
+          "I asked a follow-up question that did not involve golf.",
+          "I remembered what I was told the next day.",
+          "I did not put my phone face up on the table during the conversation.",
+          "I did not swing anything while they were talking."
+        ]
+      }
+    ],
+    "instructions": "Tick the signs you have shown this week."
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p022",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

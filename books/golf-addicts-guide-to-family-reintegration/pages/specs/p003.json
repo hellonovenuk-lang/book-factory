@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "Conditions of the programme",
+  "copy": {
+    "heading": "Conditions of the programme",
+    "body": [
+      "The Family Reintegration Programme offers household guidance only. It is not golf coaching, and it has no view on your grip. Keep playing golf if golf makes you happy. The Programme simply asks that you also come home.",
+      "Any resemblance to a golfer you know is entirely intentional in spirit and entirely accidental in every way a solicitor would care about.",
+      "No golf club, course, brand or professional player has approved this programme. Several would prefer you stayed exactly where you are."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p003",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

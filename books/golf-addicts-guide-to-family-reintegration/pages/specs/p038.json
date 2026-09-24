@@ -1,0 +1,37 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Five: Family Occasions",
+  "copy": {
+    "eyebrow": "Stage Five",
+    "heading": "Family Occasions",
+    "subheading": "Birthdays, anniversaries, school sports day, and a wedding on medal day.",
+    "body": [
+      "Families have occasions. They are arranged weeks, sometimes months, in advance. Nobody checks them against the fixture list. This stage prepares you to attend them, in full, in person, and in shoes without spikes."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-stage-05-opener",
+    "concept": "A family wedding photograph on church steps, everyone in their best clothes and smiling, Alfie as a page boy and Poppy as a flower girl, and Dave at the end of the row in a suit, cap on, with a golf umbrella in his hand and one eye on the sky.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p038",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

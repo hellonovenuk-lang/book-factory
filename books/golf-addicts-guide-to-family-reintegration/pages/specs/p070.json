@@ -1,0 +1,28 @@
+{
+  "type": "certificate",
+  "title": "Certificate of Reintegration",
+  "copy": {
+    "heading": "Certificate of Reintegration",
+    "body": [
+      "This is to certify that",
+      "______________________",
+      "has successfully completed the Family Reintegration Programme, and is hereby readmitted to the household as a full member, weekends included, subject to the fixture list.",
+      "He has learned to answer a question, to find the kitchen, to read a calendar and to be back by one.",
+      "He is permitted to mention the putt on the 7th once a year, on Boxing Day, for no longer than two minutes."
+    ],
+    "items": [
+      "Signed (Case sponsor)",
+      "Signed (Participant)",
+      "Date"
+    ]
+  },
+  "illustration": null,
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p070",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

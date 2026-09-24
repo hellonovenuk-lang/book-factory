@@ -1,0 +1,33 @@
+{
+  "type": "activity",
+  "title": "Warning signs",
+  "copy": {
+    "heading": "Warning signs",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Relapse rarely comes all at once. It builds up over several days. Families report the following warning signs."
+      },
+      {
+        "type": "prose",
+        "text": [
+          "• You begin checking the forecast more than twice a day.",
+          "• You mention the 7th again, \"just in passing\".",
+          "• You start leaving the car boot open \"to air the clubs\".",
+          "• You say \"I'm not bothered about golf this weekend\" twice, unprompted.",
+          "• You look at the lawn in a certain way.",
+          "• You describe the dog's walk as \"a quick nine\"."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p056",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "type": "activity",
+  "title": "Golf time conversion chart",
+  "copy": {
+    "panel_number": "No. 11",
+    "panel_kind": "Table",
+    "heading": "Golf time conversion chart",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "What you say",
+          "What it means"
+        ],
+        "rows": [
+          [
+            "\"Quick nine.\"",
+            "Five hours."
+          ],
+          [
+            "\"Back by one.\"",
+            "Back by teatime."
+          ],
+          [
+            "\"Just hitting a few balls.\"",
+            "Three hours and a new driver."
+          ],
+          [
+            "\"I'll be back before it gets dark.\"",
+            "You will not."
+          ],
+          [
+            "\"Just one drink after.\"",
+            "Three. Somebody will give you a lift."
+          ],
+          [
+            "\"I'll only be ten minutes, I just need to drop something off at the club.\"",
+            "Out for the afternoon."
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "Keep this chart on the fridge, where the whole family can use it."
+      }
+    ],
+    "instructions": "Use this chart to translate what you say into what the family can expect."
+  },
+  "illustration": null,
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p033",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

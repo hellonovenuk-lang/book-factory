@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "A final word from the Programme",
+  "copy": {
+    "heading": "A final word from the Programme",
+    "body": [
+      "The Programme would like to thank you for taking part. Nobody expected you to give up golf, and nobody wanted you to. Your family applied for your return because they missed you, and the golf was only ever the thing that kept you out until teatime.",
+      "Go and play your Saturday round. Enjoy it. Then come home when you said you would, sit down at the table, and ask somebody else how their day was."
+    ]
+  },
+  "illustration": null,
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p069",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

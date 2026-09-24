@@ -1,0 +1,22 @@
+{
+  "type": "text_illustration",
+  "title": "Notice of issue",
+  "copy": {
+    "heading": "Notice of issue",
+    "body": [
+      "This programme has been issued because the people you live with have applied for your return.",
+      "The application followed a pattern. The pattern may involve Saturday mornings, Sunday mornings, Wednesday afternoons, the putt on the 7th, the state of the greens, the new committee, a golf bag in the downstairs loo and a quick nine that finished in the dark.",
+      "Receipt of this programme does not mean anybody is angry with you. Your first instinct to check whether it fits in your golf bag probably means somebody should be.",
+      "Keep the programme somewhere visible. Do not leave it in the boot of the car, in the side pocket of the bag with the tees and the broken pencils, or in the clubhouse, where it will be read aloud at the bar by a man called Keith."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p002",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

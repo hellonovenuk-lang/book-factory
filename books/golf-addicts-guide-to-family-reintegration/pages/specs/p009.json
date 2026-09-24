@@ -1,0 +1,39 @@
+{
+  "type": "activity",
+  "title": "Reading your score",
+  "copy": {
+    "heading": "Reading your score",
+    "blocks": [
+      {
+        "type": "gauge",
+        "bands": [
+          {
+            "range": "0 to 2",
+            "label": "You may have been sent this book by mistake. Please check you are in the right house."
+          },
+          {
+            "range": "3 to 6",
+            "label": "Moderate. The Programme can help. Sue is cautiously optimistic, which is new for her."
+          },
+          {
+            "range": "7 to 9",
+            "label": "Severe. Your family now refer to the club as \"his other house\", and the dog has stopped getting up when you come in."
+          },
+          {
+            "range": "10",
+            "label": "For fuck's sake, Dave. Report to Stage One immediately, and leave the putter in the car."
+          }
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 1,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p009",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

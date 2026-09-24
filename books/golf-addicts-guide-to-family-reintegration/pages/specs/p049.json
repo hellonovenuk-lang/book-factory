@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "title": "The family holiday packing list",
+  "copy": {
+    "panel_number": "No. 17",
+    "panel_kind": "Checklist",
+    "heading": "The family holiday packing list",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "Clothes for a week, including something smart for a meal out.",
+          "Swimming shorts.",
+          "Suncream, for your whole face, not just the part under the cap.",
+          "Something to read that is not a golf magazine.",
+          "Buckets and spades, armbands, wet wipes, more wet wipes, and the tablet charger.",
+          "A golf club (crossed out by Sue)."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p049",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

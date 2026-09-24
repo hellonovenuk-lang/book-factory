@@ -1,0 +1,41 @@
+{
+  "type": "activity",
+  "title": "Final assessment",
+  "copy": {
+    "panel_number": "No. 23",
+    "panel_kind": "Assessment",
+    "heading": "Final assessment",
+    "blocks": [
+      {
+        "type": "ticks",
+        "items": [
+          "When asked \"How was your day?\" you answered in two sentences and asked a question back.",
+          "You have not mentioned the 7th in two weeks.",
+          "The golf bag is no longer in the downstairs loo.",
+          "You mowed the lawn and there is no flag in it.",
+          "You have attended a family occasion from beginning to end.",
+          "You said \"back by one\" and were back by one.",
+          "You know the date of your wedding anniversary without looking.",
+          "You went on a family holiday that was not chosen for the courses.",
+          "You got through a sunny Saturday in April and were home when you said you would be.",
+          "You have handed the barbecue tongs to someone else without swinging them first."
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 10
+      }
+    ],
+    "instructions": "Award yourself one point for each statement that is true. Sue will check your answers, and has already checked them."
+  },
+  "illustration": null,
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p065",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

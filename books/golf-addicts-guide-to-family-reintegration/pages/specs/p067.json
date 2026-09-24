@@ -1,0 +1,39 @@
+{
+  "type": "activity",
+  "title": "The final exam",
+  "copy": {
+    "heading": "The final exam",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "As part of graduation you are asked to take part in one final exercise, carried out in front of the whole family at Sunday dinner."
+      },
+      {
+        "type": "prose",
+        "text": "Sue will ask you, \"How was your round?\" You will answer it in one sentence. The family will then ask you about the putt on the 7th, on purpose, as a test."
+      },
+      {
+        "type": "prose",
+        "text": "You may begin the story. The family will finish it for you. They know it word for word: six feet, slightly downhill, left to right, read it perfectly, struck it lovely, lipped out. They will say \"lipped out\" all together, as one. Then they will laugh, and you will laugh too, and that will be the last time the putt on the 7th is mentioned in this house."
+      },
+      {
+        "type": "prose",
+        "text": "The Programme expects it will be mentioned again on Boxing Day."
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 60",
+        "text": "Sunday dinner. He started on the 7th and we all joined in and finished it for him. Alfie cried laughing. He doesn't even know what a lip-out is. Dave did too. Then he helped with the washing up and asked me about my week, and listened. I'll give him his certificate. He's still a daft sod."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p067",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

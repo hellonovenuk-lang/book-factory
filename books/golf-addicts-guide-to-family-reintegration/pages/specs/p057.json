@@ -1,0 +1,32 @@
+{
+  "type": "activity",
+  "title": "Early warning signs this week",
+  "copy": {
+    "panel_number": "No. 20",
+    "panel_kind": "Checklist",
+    "heading": "Early warning signs this week",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "Checked the forecast more than twice a day.",
+          "Mentioned the 7th.",
+          "Watched golf on the telly for more than two hours.",
+          "Practised a swing with a household object.",
+          "Bought something golf-related \"that was on offer\".",
+          "Gone quiet during a conversation, and then said a word such as \"birdie\"."
+        ]
+      }
+    ],
+    "instructions": "Tick any sign you have shown. Two or more means Sue will speak to you."
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p057",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

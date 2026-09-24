@@ -1,0 +1,39 @@
+{
+  "type": "activity",
+  "title": "Case study: Claire's wedding",
+  "copy": {
+    "heading": "Case study: Claire's wedding",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Sue's sister Claire got married on the second Saturday in June. The date was set a year in advance. Alfie was a page boy and Poppy was a flower girl. Dave was an usher. He was told the date, and the date was put in the family calendar in red pen and underlined twice."
+      },
+      {
+        "type": "prose",
+        "text": "In February the club announced that the summer medal would also be on the second Saturday in June."
+      },
+      {
+        "type": "prose",
+        "text": "Dave's first words were, \"Can't they move it?\" It is not clear whether he meant the medal or the wedding. He then asked whether the wedding might start later, \"just in case\", and whether the reception was \"near anywhere\". Sue took him into the kitchen and closed the door. The family heard very little, except for one word, which was repeated several times."
+      },
+      {
+        "type": "prose",
+        "text": "Dave attended the wedding. He handed out the orders of service, he stopped Alfie eating the confetti, and at the reception he danced with Poppy standing on his shoes for the whole of the first song. He made one golf reference all day, a joke to the best man about how long it took him to get to the church, and everybody laughed, including Claire. The Programme records this as a success."
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 30",
+        "text": "Claire sent round the wedding photos. He said \"Lovely.\" Then he said \"Is that me with the umbrella?\" and went quiet. I think it got to him. I'm not saying anything."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p042",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

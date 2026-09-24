@@ -1,0 +1,50 @@
+{
+  "type": "activity",
+  "title": "Which comes first?",
+  "copy": {
+    "panel_number": "No. 12",
+    "panel_kind": "Worksheet",
+    "heading": "Which comes first?",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Option A",
+          "Option B"
+        ],
+        "rows": [
+          [
+            "[ ] Your wedding anniversary",
+            "[ ] The midweek medal"
+          ],
+          [
+            "[ ] Your son's first nativity play",
+            "[ ] A fourball with Keith"
+          ],
+          [
+            "[ ] Your daughter's first day at nursery",
+            "[ ] The midweek stableford"
+          ],
+          [
+            "[ ] Sue's fortieth birthday",
+            "[ ] The club championship semi-final"
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If you ticked any box in column B, please see Stage Seven early."
+      }
+    ],
+    "instructions": "For each pair of dates, tick the one that matters more. There is a right answer each time."
+  },
+  "illustration": null,
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p035",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

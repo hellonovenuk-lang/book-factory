@@ -1,0 +1,41 @@
+{
+  "type": "activity",
+  "title": "Occasion readiness",
+  "copy": {
+    "panel_number": "No. 14",
+    "panel_kind": "Assessment",
+    "heading": "Occasion readiness",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "I know the date of my wife's birthday without looking it up.",
+          "I know the date of my wedding anniversary without looking it up.",
+          "I have attended a family event from beginning to end in the last year.",
+          "I have given a present that was not golf equipment.",
+          "I have not checked the golf scores on my phone during a speech.",
+          "I have not described an event as \"a bit of a slow round\"."
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 6
+      },
+      {
+        "type": "prose",
+        "text": "A score of 3 or less means you are not yet ready to attend unsupervised."
+      }
+    ],
+    "instructions": "Tick each statement that is true."
+  },
+  "illustration": null,
+  "chapter": 5,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p041",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

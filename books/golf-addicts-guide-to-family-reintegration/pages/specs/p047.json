@@ -1,0 +1,36 @@
+{
+  "type": "activity",
+  "title": "Why are we going there?",
+  "copy": {
+    "panel_number": "No. 16",
+    "panel_kind": "Quiz",
+    "heading": "Why are we going there?",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "The weather is nice.",
+          "The family have always wanted to go.",
+          "There is a beach and a kids' club.",
+          "It is near a course that \"has had some really good reviews\".",
+          "The villa is \"only twenty minutes from three championship courses\".",
+          "Keith went last year and got a hole in one."
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If you ticked any of the last three, you have not understood the question."
+      }
+    ],
+    "instructions": "Look at the reasons below. Tick the ones that are acceptable reasons for choosing a family holiday."
+  },
+  "illustration": null,
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p047",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

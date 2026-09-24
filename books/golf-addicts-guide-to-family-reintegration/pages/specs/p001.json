@@ -1,0 +1,17 @@
+{
+  "type": "front_matter",
+  "title": "Title page",
+  "copy": {
+    "heading": "The Golf Addict's Guide to Family Reintegration",
+    "subheading": "An official programme for bringing him home from the golf club, and keeping him there for more than a few hours at a time."
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p001",
+  "chapter": null,
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

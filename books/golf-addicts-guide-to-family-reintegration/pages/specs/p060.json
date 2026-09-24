@@ -1,0 +1,35 @@
+{
+  "type": "activity",
+  "title": "Case study: the new driver",
+  "copy": {
+    "heading": "Case study: the new driver",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "In March a new driver arrived at the club. It was bright, it was expensive, and everybody said it went twenty yards further. Dave said he \"wasn't interested\". He said this four times in one evening."
+      },
+      {
+        "type": "prose",
+        "text": "A week later a large parcel was delivered to the house while Dave was at work. Sue signed for it. It was long and thin and had a price on the invoice of £449. When Dave got home he said it was \"a present for Keith\". Keith's birthday is in November."
+      },
+      {
+        "type": "prose",
+        "text": "The driver is now in the garage with the others. Dave says it does go twenty yards further, \"when I catch it right\". He has caught it right once. The Programme records this as a relapse, and Sue records it as the kitchen extension being put back a year."
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 45",
+        "text": "Four hundred and forty-nine pounds. For a stick. He said it was \"an investment\". I said \"In what?\" He's gone very quiet. Good."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p060",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

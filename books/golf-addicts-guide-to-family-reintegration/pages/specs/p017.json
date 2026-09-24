@@ -1,0 +1,28 @@
+{
+  "type": "activity",
+  "title": "Emergency putt card",
+  "copy": {
+    "panel_number": "No. 05",
+    "panel_kind": "Cut-out card",
+    "heading": "Emergency putt card",
+    "blocks": [
+      {
+        "type": "cutout",
+        "heading": "I am about to mention the 7th.",
+        "text": [
+          "Instead, I will say: \"Anyway, how are you?\"",
+          "Keep this card in your wallet, next to the scorecard from 2019 that you also keep in your wallet."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p017",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

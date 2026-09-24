@@ -1,0 +1,35 @@
+{
+  "type": "activity",
+  "title": "A week in Cornwall without clubs",
+  "copy": {
+    "heading": "A week in Cornwall without clubs",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "This year the family went to Cornwall. The clubs were not packed. This was agreed in advance, in writing."
+      },
+      {
+        "type": "prose",
+        "text": "On the first day Dave walked on the beach and said the sand was \"very fine\", which the family understood was a comment on bunkers. On the second day he went to the shop for milk and came back two hours later having \"had a look\" at a course on the cliff. He did not play. He watched a four-ball putt out on the 18th and stood at the fence making small noises. On the third day he hired a putter for the crazy golf and lost to his son, who is six."
+      },
+      {
+        "type": "prose",
+        "text": "By the end of the week Dave had swum in the sea twice, eaten a pasty on the harbour wall, and been in all but one of the family photographs. The Programme records the week as a partial success."
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 38",
+        "text": "Crazy golf. He lost to Alfie on the windmill hole and asked for a rematch. Alfie said no. Best thing I've seen all year."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p050",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

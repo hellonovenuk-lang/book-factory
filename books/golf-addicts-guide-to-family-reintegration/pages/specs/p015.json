@@ -1,0 +1,65 @@
+{
+  "type": "activity",
+  "title": "What was the question?",
+  "copy": {
+    "panel_number": "No. 04",
+    "panel_kind": "Quiz",
+    "heading": "What was the question?",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "a) \"Good, thanks. How was yours?\"",
+          "b) \"Well, I was one over through six, and then the 7th...\""
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "2. \"Did you remember the bread?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a) \"Yes\" or \"No\".",
+          "b) \"I nearly did, but Keith was on the practice green and you know what Keith's like about his takeaway.\""
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "3. \"Mum's not been well.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a) \"Oh no. What's the matter?\"",
+          "b) \"Sorry to hear that. Is she still in the same house? Because that's only ten minutes from the new course.\""
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "4. \"What do you want for your birthday?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a) Something that is not a golf item.",
+          "b) A new rangefinder."
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If you circled any b), please read the method on the previous page aloud to the dog."
+      }
+    ],
+    "instructions": "For each question, circle the answer the family is looking for. 1. \"How was your day?\""
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p015",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

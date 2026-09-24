@@ -1,0 +1,35 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Eight: Graduation",
+  "copy": {
+    "eyebrow": "Stage Eight",
+    "heading": "Graduation",
+    "subheading": "The final assessment, and the Certificate of Reintegration.",
+    "body": []
+  },
+  "illustration": {
+    "asset_id": "art-stage-08-opener",
+    "concept": "Dave in a graduation gown and mortarboard, still wearing his golf cap underneath, shaking hands with Sue at the kitchen table while Alfie and Poppy clap and Biscuit the dog wears a small ribbon.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p063",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

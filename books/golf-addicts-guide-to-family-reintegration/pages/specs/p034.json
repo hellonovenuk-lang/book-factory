@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Reading the family calendar",
+  "copy": {
+    "heading": "Reading the family calendar",
+    "body": [
+      "The house has a calendar. It hangs in the kitchen and has been filled in by Sue since the day you moved in. You may not have seen it, because your own calendar is the fixture list, which you keep in your head and on the back of the clubhouse door.",
+      "The family calendar contains birthdays, anniversaries, appointments, visits, school events and things marked simply \"DAVE: DO NOT BOOK GOLF\". These are not suggestions. The Programme recommends that you look at the family calendar before you look at the fixture list, and not the other way round."
+    ]
+  },
+  "illustration": null,
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p034",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

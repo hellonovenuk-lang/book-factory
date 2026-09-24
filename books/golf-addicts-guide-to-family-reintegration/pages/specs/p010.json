@@ -1,0 +1,23 @@
+{
+  "type": "text_illustration",
+  "title": "Your household: a who's who",
+  "copy": {
+    "heading": "Your household: a who's who",
+    "body": [
+      "During your posting some members of the household have changed. Children have been born. One of them can now ride a bike without stabilisers, and you missed it. The dog is a different dog. Please study the following introductions before tea, so that nobody has to wear a name badge again.",
+      "Sue. Your wife and case sponsor. Five foot four, hair up in a clip, usually holding a cup of tea she made two hours ago and has not had a chance to drink. She does the school run, the swimming run, the party run and a part-time job. Sue knows your handicap to one decimal place against her will.",
+      "Alfie. Your son, six. Can ride a bike, swim a width and recite the offside rule. He calls the golf club \"Daddy's work\". Nobody has corrected him.",
+      "Poppy. Your daughter, four. She calls you Golf Daddy, which you took as a compliment. It was an observation.",
+      "The dog. Answers to Biscuit. Has chewed one of your gloves, which you still mention, and which Sue says was the happiest day of the dog's life."
+    ]
+  },
+  "illustration": null,
+  "chapter": 1,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p010",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

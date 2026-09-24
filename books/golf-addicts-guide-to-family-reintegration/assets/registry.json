@@ -1,8 +1,224 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:22:51Z",
+  "updated_at": "2026-09-24T10:35:19Z",
   "assets": [
+    {
+      "asset_id": "art-stage-01-opener",
+      "kind": "illustration",
+      "title": "Stage One: Arrival",
+      "description": "Dave on the doorstep with his golf bag on his shoulder, cap on, as Sue holds the door open with a toddler on her hip and Alfie peers round her legs from the hallway.",
+      "page_id": "p005",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-02-opener",
+      "kind": "illustration",
+      "title": "Stage Two: Communication",
+      "description": "Dave at the family tea table mid-story, using a knife and fork to show the line of a putt across his plate, while Sue and the two small children stare at him and their fish fingers go cold.",
+      "page_id": "p013",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-03-opener",
+      "kind": "illustration",
+      "title": "Stage Three: The Household",
+      "description": "Dave standing in the garage surrounded by golf bags, trolleys, buckets of balls and a practice net, while Sue stands in the doorway holding a single box marked Christmas decorations that she cannot put anywhere.",
+      "page_id": "p023",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-04-opener",
+      "kind": "illustration",
+      "title": "Stage Four: Time",
+      "description": "Dave walking in through the front door in the dark, bag on his shoulder, cheerfully raising a hand in greeting, while behind him the kitchen clock shows twenty to nine and a plate of dinner sits under cling film.",
+      "page_id": "p031",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-05-opener",
+      "kind": "illustration",
+      "title": "Stage Five: Family Occasions",
+      "description": "A family wedding photograph on church steps, everyone in their best clothes and smiling, Alfie as a page boy and Poppy as a flower girl, and Dave at the end of the row in a suit, cap on, with a golf umbrella in his hand and one eye on the sky.",
+      "page_id": "p038",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-06-opener",
+      "kind": "illustration",
+      "title": "Stage Six: Holidays",
+      "description": "The family on a beach with windbreaks and deckchairs, and Dave at the water's edge in shorts and his cap, practising his swing with a child's spade while a seagull watches.",
+      "page_id": "p045",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-07-opener",
+      "kind": "illustration",
+      "title": "Stage Seven: Relapse Prevention",
+      "description": "Dave at the kitchen window on a bright spring morning, one hand on the curtain, gazing out at a clear blue sky, while his golf bag waits by the back door with a hopeful look about it.",
+      "page_id": "p052",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "art-stage-08-opener",
+      "kind": "illustration",
+      "title": "Stage Eight: Graduation",
+      "description": "Dave in a graduation gown and mortarboard, still wearing his golf cap underneath, shaking hands with Sue at the kitchen table while Alfie and Poppy clap and Biscuit the dog wears a small ribbon.",
+      "page_id": "p063",
+      "characters": [
+        "dave",
+        "sue",
+        "alfie",
+        "poppy",
+        "biscuit"
+      ],
+      "references": [
+        "ref-character-main",
+        "ref-character-support",
+        "ref-page-editorial"
+      ],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    },
     {
       "asset_id": "ref-character-main",
       "kind": "character_reference",

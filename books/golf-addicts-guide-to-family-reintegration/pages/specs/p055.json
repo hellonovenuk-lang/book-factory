@@ -1,0 +1,33 @@
+{
+  "type": "activity",
+  "title": "My triggers",
+  "copy": {
+    "panel_number": "No. 19",
+    "panel_kind": "Worksheet",
+    "heading": "My triggers",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "My trigger",
+          "What I will do instead"
+        ],
+        "rows": []
+      },
+      {
+        "type": "prose",
+        "text": "\"Go to the range instead\" does not count as something to do instead."
+      }
+    ],
+    "instructions": "Write down your top three triggers and one thing you can do instead of going to the club."
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p055",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

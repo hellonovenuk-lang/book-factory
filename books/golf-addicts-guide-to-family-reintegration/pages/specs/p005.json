@@ -1,0 +1,37 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage One: Arrival",
+  "copy": {
+    "eyebrow": "Stage One",
+    "heading": "Arrival",
+    "subheading": "Induction for household members returning from long-term golf.",
+    "body": [
+      "Welcome home. Please leave your clubs at the front door. The front door, Dave. Not the downstairs loo, and not the boot of Sue's car, which she needs on Thursday."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-stage-01-opener",
+    "concept": "Dave on the doorstep with his golf bag on his shoulder, cap on, as Sue holds the door open with a toddler on her hip and Alfie peers round her legs from the hallway.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 1,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p005",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

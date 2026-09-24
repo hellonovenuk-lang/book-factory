@@ -1,0 +1,60 @@
+{
+  "type": "activity",
+  "title": "Golf holiday or family holiday?",
+  "copy": {
+    "panel_number": "No. 18",
+    "panel_kind": "Comparison",
+    "heading": "Golf holiday or family holiday?",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "",
+          "Golf holiday",
+          "Family holiday"
+        ],
+        "rows": [
+          [
+            "Getting up",
+            "6am, for the tee time",
+            "Twenty to six, because Poppy is awake"
+          ],
+          [
+            "Lunch",
+            "A sandwich at the halfway hut",
+            "A long lunch with the family"
+          ],
+          [
+            "Afternoon",
+            "The second round",
+            "The beach, the pool, a walk"
+          ],
+          [
+            "Evening",
+            "Talking about the round in the bar",
+            "Dinner with the family, talking about anything else"
+          ],
+          [
+            "Photographs",
+            "Scenic views of a fairway",
+            "Your family"
+          ],
+          [
+            "What you remember",
+            "Your score on the 14th",
+            "Your son beating you at crazy golf"
+          ]
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p051",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

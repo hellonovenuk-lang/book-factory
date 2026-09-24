@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "The first sunny Saturday in April",
+  "copy": {
+    "heading": "The first sunny Saturday in April",
+    "body": [
+      "Every returning golfer knows this day. The clocks have gone forward. The grass is growing. The forecast is clear and dry, with light winds from the south-west. Your phone buzzes at 7am with a message from Keith containing only the word \"Well?\"",
+      "The Programme's advice is not to pretend this day does not exist. Plan for it. Agree a time with the family in advance. Play nine holes, and nine holes only. Be home when you said you would be home. Then spend the afternoon with your family, doing whatever they want to do, without looking at the sky."
+    ]
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p058",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

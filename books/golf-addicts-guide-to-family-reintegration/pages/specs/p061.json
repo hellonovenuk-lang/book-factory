@@ -1,0 +1,30 @@
+{
+  "type": "activity",
+  "title": "Relapse diary",
+  "copy": {
+    "panel_number": "No. 22",
+    "panel_kind": "Tracker",
+    "heading": "Relapse diary",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Day",
+          "What happened",
+          "How I made it up"
+        ],
+        "rows": []
+      }
+    ],
+    "instructions": "Record any relapse this week, and how you made it up to the family."
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p061",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

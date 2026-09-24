@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Listening",
+  "copy": {
+    "heading": "Listening",
+    "body": [
+      "Listening is the other half of conversation. It involves staying quiet while another person talks, and not using that time to plan your next shot, check the club app, or practise your takeaway with the TV remote.",
+      "A good listener makes noises such as \"Oh really?\" and \"What did she say to that?\" A good listener does not say, \"That's like what happened to me on the 7th.\" It was not like what happened to you on the 7th. Nothing is."
+    ]
+  },
+  "illustration": null,
+  "chapter": 2,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p021",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

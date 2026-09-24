@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Packing",
+  "copy": {
+    "heading": "Packing",
+    "body": [
+      "Returning golfers pack as follows: clubs first, then golf shoes, then golf clothing, then golf balls, then whatever fits in the space left over, which is usually a pair of pants and a toothbrush.",
+      "For the family holiday the Programme recommends the reverse. Pack clothes for the whole week first. Then the suncream. Then something to read. If there is still space, it can stay empty."
+    ]
+  },
+  "illustration": null,
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p048",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

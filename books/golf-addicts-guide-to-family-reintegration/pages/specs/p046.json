@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "How holidays used to be chosen",
+  "copy": {
+    "heading": "How holidays used to be chosen",
+    "body": [
+      "The Programme has examined the last seven family holidays. Five were within a short drive of at least one golf course. Dave says this was \"a coincidence\". The villa in the Algarve was near three courses. The cottage in Scotland was on one. The weekend in Wales was booked because Dave \"fancied the coast\", and the coast turned out to be a links course.",
+      "The remaining two holidays were chosen by Sue. On one of them Dave found a pitch and putt."
+    ]
+  },
+  "illustration": null,
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p046",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "activity",
+  "title": "Your triggers",
+  "copy": {
+    "heading": "Your triggers",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "A trigger is anything that makes you want to go to the golf club when you are supposed to be at home. The Programme has identified the most common ones."
+      },
+      {
+        "type": "prose",
+        "text": [
+          "• A clear forecast for the weekend.",
+          "• A text from Keith that says \"You out Saturday?\"",
+          "• The clocks going forward in spring.",
+          "• Golf on the telly, especially the big tournaments, and anything with Americans shouting.",
+          "• A new driver that \"everyone at the club\" has.",
+          "• The words \"I'm taking the kids to my mum's this weekend, so you're free to do what you like.\""
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 7,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p054",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

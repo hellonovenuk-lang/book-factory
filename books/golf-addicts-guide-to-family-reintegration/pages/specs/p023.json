@@ -1,0 +1,37 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Three: The Household",
+  "copy": {
+    "eyebrow": "Stage Three",
+    "heading": "The Household",
+    "subheading": "The garage, the lawn, the downstairs loo, and where the kitchen is.",
+    "body": [
+      "While you were away the house carried on. Bins were put out, a boiler was replaced, and a new sofa arrived that you first noticed in March. This stage is a guided tour of the home you pay for, including the rooms you have only been in to look for your spare glove."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-stage-03-opener",
+    "concept": "Dave standing in the garage surrounded by golf bags, trolleys, buckets of balls and a practice net, while Sue stands in the doorway holding a single box marked Christmas decorations that she cannot put anywhere.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p023",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

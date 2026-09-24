@@ -1,0 +1,37 @@
+{
+  "type": "chapter_opener",
+  "title": "Stage Six: Holidays",
+  "copy": {
+    "eyebrow": "Stage Six",
+    "heading": "Holidays",
+    "subheading": "Choosing a destination for reasons other than the courses.",
+    "body": [
+      "A holiday is a period of rest taken by the whole family. The Programme has found that returning golfers treat holidays as an away fixture. This stage explains how to choose, book and survive a family holiday where golf is not the reason for going."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-stage-06-opener",
+    "concept": "The family on a beach with windbreaks and deckchairs, and Dave at the water's edge in shorts and his cap, practising his swing with a child's spade while a seagull watches.",
+    "characters": [
+      "dave",
+      "sue",
+      "alfie",
+      "poppy",
+      "biscuit"
+    ],
+    "references": [
+      "ref-character-main",
+      "ref-character-support",
+      "ref-page-editorial"
+    ],
+    "placement": "inline"
+  },
+  "chapter": 6,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p045",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

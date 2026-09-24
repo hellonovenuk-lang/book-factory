@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "title": "The weather forecast",
+  "copy": {
+    "heading": "The weather forecast",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Most people check the weather to know whether to take a coat. You check it to know whether Saturday is on. The Programme has found that you are able to name the wind speed at 8am on Saturday to within two miles per hour, but you did not know it was due to rain at your daughter's fourth birthday party, and fourteen four-year-olds had to have it in the conservatory."
+      },
+      {
+        "type": "prose",
+        "text": "During this stage please check the forecast for family events as well. You will find that it is the same forecast."
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 22",
+        "text": "He said he'd be back by one. He was back by one. I looked at the clock, then at him, then at the clock. He'd forgotten his wallet. Went straight back out."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 4,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p036",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

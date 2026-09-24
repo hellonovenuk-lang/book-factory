@@ -1,0 +1,74 @@
+{
+  "type": "activity",
+  "title": "Swing log",
+  "copy": {
+    "panel_number": "No. 10",
+    "panel_kind": "Tracker",
+    "heading": "Swing log",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Day",
+          "Object swung",
+          "Where",
+          "Anyone hit?"
+        ],
+        "rows": [
+          [
+            "Monday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Tuesday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Wednesday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Thursday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Friday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Saturday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Sunday",
+            "",
+            "",
+            ""
+          ]
+        ]
+      }
+    ],
+    "instructions": "Keep a record of every household swing this week. Sue will add any you miss."
+  },
+  "illustration": null,
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p030",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

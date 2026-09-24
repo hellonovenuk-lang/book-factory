@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "About this programme",
+  "copy": {
+    "heading": "About this programme",
+    "body": [
+      "The Family Reintegration Programme was written for every family that has lost a Saturday to a quick nine, and for every golfer who has come home and said, \"You'll never guess what happened on the 7th.\"",
+      "We guessed. We love you anyway."
+    ]
+  },
+  "illustration": null,
+  "chapter": 8,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p071",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "text_illustration",
+  "title": "Stage Eight: Graduation (introduction)",
+  "chapter": 8,
+  "copy": {
+    "eyebrow": "Stage Eight",
+    "body": [
+      "You have reached the final stage. You have learned to answer a question, find the kitchen, read a calendar and survive a week in Cornwall. It is now time to be assessed. If you pass, you will receive a certificate. If you do not pass, you will go back to Stage One and Sue will make you a cup of tea while you do it, because she is kinder than the Programme."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p064",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

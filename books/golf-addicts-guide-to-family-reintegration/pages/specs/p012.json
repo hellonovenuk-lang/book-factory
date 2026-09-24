@@ -1,0 +1,39 @@
+{
+  "type": "activity",
+  "title": "Arrival kit",
+  "copy": {
+    "panel_number": "No. 03",
+    "panel_kind": "Checklist",
+    "heading": "Arrival kit",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "One front door key. You have one already. It is on the keyring behind the ball marker.",
+          "One map of the house, showing the kitchen, the washing machine and the room where the family sit in the evening.",
+          "One calendar, showing family events in pen and golf in pencil.",
+          "One pair of indoor shoes. They do not have spikes.",
+          "One copy of this programme, which is not to be used to practise putting into a mug."
+        ]
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 3",
+        "text": "He asked where we keep the Calpol. At two in the morning. We've lived here six years."
+      }
+    ],
+    "eyebrow": "Your welcome pack",
+    "body": [
+      "On arrival you will be issued with the following. Tick each item once you have located it."
+    ]
+  },
+  "illustration": null,
+  "chapter": 1,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p012",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "type": "activity",
+  "title": "The lawn",
+  "copy": {
+    "heading": "The lawn",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "The Programme has received a separate complaint about the lawn."
+      },
+      {
+        "type": "prose",
+        "text": "It is understood that over the summer the rear lawn was mown shorter in a circle near the patio, a hole was cut, and a small flag on a pole was inserted. It is further understood that the flag was a present from Keith. Sue describes the garden as \"a pitch and putt with a rotary washing line\", and the children have been told the flag is a no-go area. Poppy has been told off twice for moving it."
+      },
+      {
+        "type": "prose",
+        "text": "The flag is to be removed and returned to Keith. The circle may grow back in its own time. The children may now play anywhere, including on the green."
+      },
+      {
+        "type": "casenote",
+        "label": "Case notes (Sue), Day 16",
+        "text": "He mowed the lawn. The whole lawn. Then he stood at the kitchen window for twenty minutes looking at the stripes like he'd painted the Sistine Chapel. I'll take it."
+      }
+    ]
+  },
+  "illustration": null,
+  "chapter": 3,
+  "schema_version": "1.0",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "page_id": "p028",
+  "source": {
+    "manuscript_version": "v2",
+    "visual_style_version": "v1"
+  }
+}
