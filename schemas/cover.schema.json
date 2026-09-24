@@ -90,7 +90,11 @@
         "ink": {"type": "string"},
         "accent": {"type": "string"},
         "title_font": {"type": "string"},
-        "body_font": {"type": "string"}
+        "body_font": {"type": "string"},
+        "title_size_pt": {"type": "number", "description": "Title size in points, 12 to 72 (default 26)."},
+        "title_colour": {"type": "string", "description": "Title colour (default: ink)."},
+        "title_over_artwork": {"type": "boolean", "description": "Set the title over the top of the front artwork, for art drawn with an empty band there."},
+        "title_top_in": {"type": "number", "description": "With title_over_artwork: how far below the artwork's top edge the title starts, in inches (default 0.35)."}
       }
     }
   },

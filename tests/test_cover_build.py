@@ -142,3 +142,32 @@ def test_cli_cover_build_exits_zero_when_clean(new_book, workspace):
     _set_cover_fields(new_book)
     cover.set_artwork(new_book, cover.TEXT_ONLY, by="Operator")
     assert cli(["cover", "build", "test-book", "--root", str(workspace)]) == 0
+
+
+def test_title_can_be_bigger_coloured_and_set_over_the_artwork(new_book, workspace):
+    import fitz
+
+    _interior(new_book, 80)
+    _set_cover_fields(new_book, design={"title_size_pt": 40, "title_colour": "#2f3e56",
+                                        "title_over_artwork": True})
+    _native_artwork(workspace, new_book)
+    book = Book.load("test-book", workspace)
+    result = cover_render.build(book)
+    assert result["problems"] == []
+    with fitz.open(str(book.paths.resolve(result["pdf"]))) as doc:
+        page = doc[0]
+        spans = [s for b in page.get_text("dict")["blocks"] for l in b.get("lines", [])
+                 for s in l["spans"] if s["text"].strip()]
+        title = max(spans, key=lambda s: s["size"])
+        assert round(title["size"]) == 40, "the title is set at the requested size, as real type"
+        image = page.get_image_info()[0]["bbox"]
+        assert fitz.Rect(image).contains(fitz.Rect(title["bbox"])), "the title sits over the art"
+
+
+def test_title_size_out_of_range_is_refused(new_book, workspace):
+    _interior(new_book, 80)
+    _set_cover_fields(new_book, design={"title_size_pt": 200})
+    cover.set_artwork(new_book, cover.TEXT_ONLY, by="Operator")
+    book = Book.load("test-book", workspace)
+    with pytest.raises(ValidationError, match="title_size_pt"):
+        cover_render.build(book)

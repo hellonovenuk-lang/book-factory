@@ -114,6 +114,16 @@ def build(book, *, submit: bool = False) -> dict:
     background = design.get("background") or DEFAULT_DESIGN["background"]
     ink = design.get("ink") or DEFAULT_DESIGN["ink"]
     accent = design.get("accent") or DEFAULT_DESIGN["accent"]
+    # Optional title styling: size, colour, and setting the title over the top
+    # of the artwork (for art drawn with an empty band there for the title).
+    title_size_pt = float(design.get("title_size_pt") or 26)
+    if not 12 <= title_size_pt <= 72:
+        raise ValidationError(
+            f"cover.json design.title_size_pt must be between 12 and 72, got {title_size_pt}",
+            remedy="Pick a title size in points, e.g. 36.")
+    title_colour = design.get("title_colour") or ink
+    title_over_artwork = bool(design.get("title_over_artwork"))
+    title_top_in = float(design.get("title_top_in") or 0.35)
 
     title_font_family = "DejaVu Sans"
     body_font_family = "DejaVu Sans"
@@ -159,6 +169,9 @@ def build(book, *, submit: bool = False) -> dict:
         "background": background, "ink": ink, "accent": accent,
         "title_font_family": title_font_family, "body_font_family": body_font_family,
         "font_faces": font_faces, "artwork_uri": artwork_uri,
+        "title_size_pt": title_size_pt, "title_colour": title_colour,
+        "title_over_artwork": title_over_artwork and artwork_uri is not None,
+        "title_top_in": title_top_in,
         "artwork_width_in": data["artwork_width_in"], "artwork_height_in": data["artwork_height_in"],
     }
     html = _cover_template_env().get_template("wrap.html.j2").render(**context)

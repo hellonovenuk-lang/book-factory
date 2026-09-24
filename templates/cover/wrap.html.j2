@@ -30,10 +30,19 @@
   .title {
     font-family: "{{ title_font_family }}", "DejaVu Sans", sans-serif;
     font-weight: bold;
-    font-size: 26pt;
-    line-height: 1.15;
+    font-size: {{ title_size_pt }}pt;
+    line-height: 1.12;
+    color: {{ title_colour }};
     margin: 0;
   }
+  /* title set over the empty top band of the artwork */
+  .front-title {
+    left: {{ front_fold_in + margin_in + 0.2 }}in;
+    top: {{ margin_in + title_top_in }}in;
+    width: {{ front_width_in - 0.4 }}in;
+    text-align: center;
+  }
+  .artwork--top { margin-top: 0; }
   .subtitle {
     font-size: 13pt;
     color: {{ accent }};
@@ -91,11 +100,19 @@
 </head>
 <body>
 
+  {% if title_over_artwork %}
+  <div class="box front"><img class="artwork artwork--top" src="{{ artwork_uri }}"></div>
+  <div class="box front-title">
+    <h1 class="title">{{ title }}</h1>
+    {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+  </div>
+  {% else %}
   <div class="box front">
     <h1 class="title">{{ title }}</h1>
     {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
     {% if artwork_uri %}<img class="artwork" src="{{ artwork_uri }}">{% endif %}
   </div>
+  {% endif %}
   <div class="box author">{{ author }}</div>
 
   {% if spine_text %}
