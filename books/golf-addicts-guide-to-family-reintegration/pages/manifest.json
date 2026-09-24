@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:35:19Z",
+  "updated_at": "2026-09-24T10:36:58Z",
   "front_matter_pages": 4,
   "pages": [
     {
@@ -13,10 +13,32 @@
       "type": "front_matter",
       "spec": "pages/specs/p001.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p001/p001-v1.pdf",
+          "sha256": "569d13a1113156371044a2c3c38158685262759d07e9dcb3996d304cbdd0e883",
+          "submitted_at": "2026-09-24T10:35:31Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p001-title-page.pdf",
+        "sha256": "569d13a1113156371044a2c3c38158685262759d07e9dcb3996d304cbdd0e883",
+        "approved_at": "2026-09-24T10:35:31Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p001/p001-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -35,10 +57,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p002.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p002/p002-v1.pdf",
+          "sha256": "96fbbea2c0c6346cbc1d5234c831885d8c62f2fbcc960898d27ca3a418688a07",
+          "submitted_at": "2026-09-24T10:35:31Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p002-notice-of-issue.pdf",
+        "sha256": "96fbbea2c0c6346cbc1d5234c831885d8c62f2fbcc960898d27ca3a418688a07",
+        "approved_at": "2026-09-24T10:35:31Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p002/p002-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -57,10 +101,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p003.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p003/p003-v1.pdf",
+          "sha256": "8154b35feb25ce053a542360d59d89fb091d62685c2624a9b425dd8cd2aae659",
+          "submitted_at": "2026-09-24T10:35:31Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p003-conditions-of-the-programme.pdf",
+        "sha256": "8154b35feb25ce053a542360d59d89fb091d62685c2624a9b425dd8cd2aae659",
+        "approved_at": "2026-09-24T10:35:32Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p003/p003-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -79,10 +145,32 @@
       "type": "contents",
       "spec": "pages/specs/p004.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p004/p004-v1.pdf",
+          "sha256": "7e6f124d07ed186e43bf7191a241bcdbc293378c011634db23f2905e01dbe1c7",
+          "submitted_at": "2026-09-24T10:35:32Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p004-contents.pdf",
+        "sha256": "7e6f124d07ed186e43bf7191a241bcdbc293378c011634db23f2905e01dbe1c7",
+        "approved_at": "2026-09-24T10:35:32Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p004/p004-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -103,10 +191,32 @@
       "required_assets": [
         "art-stage-01-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p005/p005-v1.pdf",
+          "sha256": "fb8776e5ea4c463ea9282b271a5de65d473a869198595a5501166e1d9c460b9f",
+          "submitted_at": "2026-09-24T10:36:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p005-stage-one-arrival.pdf",
+        "sha256": "fb8776e5ea4c463ea9282b271a5de65d473a869198595a5501166e1d9c460b9f",
+        "approved_at": "2026-09-24T10:36:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p005/p005-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -125,10 +235,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p006.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p006/p006-v1.pdf",
+          "sha256": "29204c3b9d7d81482b6bc38783a18428790de7d014b78e21b91a285d3dd59931",
+          "submitted_at": "2026-09-24T10:36:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p006-stage-one-arrival-introduction.pdf",
+        "sha256": "29204c3b9d7d81482b6bc38783a18428790de7d014b78e21b91a285d3dd59931",
+        "approved_at": "2026-09-24T10:36:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p006/p006-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -147,10 +279,32 @@
       "type": "activity",
       "spec": "pages/specs/p007.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p007/p007-v1.pdf",
+          "sha256": "a0c13f7b06949ddac69a9f9fe761c548b23abcc264c4dbf802e43a989dddc507",
+          "submitted_at": "2026-09-24T10:36:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p007-why-you-are-here.pdf",
+        "sha256": "a0c13f7b06949ddac69a9f9fe761c548b23abcc264c4dbf802e43a989dddc507",
+        "approved_at": "2026-09-24T10:36:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p007/p007-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -169,10 +323,32 @@
       "type": "activity",
       "spec": "pages/specs/p008.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p008/p008-v1.pdf",
+          "sha256": "036bf663138cfa2ab29b7ccff20d4be2cc7f67893634b5a613db8b0ec26d9c83",
+          "submitted_at": "2026-09-24T10:36:57Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p008-initial-assessment.pdf",
+        "sha256": "036bf663138cfa2ab29b7ccff20d4be2cc7f67893634b5a613db8b0ec26d9c83",
+        "approved_at": "2026-09-24T10:36:57Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p008/p008-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -191,10 +367,32 @@
       "type": "activity",
       "spec": "pages/specs/p009.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p009/p009-v1.pdf",
+          "sha256": "9808416c07e2f024411590c2529889264096c76b116ecf8cfd0c8513267c64d4",
+          "submitted_at": "2026-09-24T10:36:57Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p009-reading-your-score.pdf",
+        "sha256": "9808416c07e2f024411590c2529889264096c76b116ecf8cfd0c8513267c64d4",
+        "approved_at": "2026-09-24T10:36:57Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p009/p009-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -213,10 +411,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p010.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p010/p010-v1.pdf",
+          "sha256": "883802c18b0c22f66e96f6de87900bbb7956be58426218fc481d10172f33edb9",
+          "submitted_at": "2026-09-24T10:36:57Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p010-your-household-a-who-s-who.pdf",
+        "sha256": "883802c18b0c22f66e96f6de87900bbb7956be58426218fc481d10172f33edb9",
+        "approved_at": "2026-09-24T10:36:58Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p010/p010-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -235,10 +455,32 @@
       "type": "activity",
       "spec": "pages/specs/p011.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p011/p011-v1.pdf",
+          "sha256": "8ca9275544be3a965f62e668b84116d3b2fe442db4046fc070bfb5a88b1364a6",
+          "submitted_at": "2026-09-24T10:36:58Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p011-who-lives-here.pdf",
+        "sha256": "8ca9275544be3a965f62e668b84116d3b2fe442db4046fc070bfb5a88b1364a6",
+        "approved_at": "2026-09-24T10:36:58Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p011/p011-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -257,10 +499,32 @@
       "type": "activity",
       "spec": "pages/specs/p012.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p012/p012-v1.pdf",
+          "sha256": "d3049366f2a57a81c30326a73408576b44349638ffa5b99bbecfa746c56af0e5",
+          "submitted_at": "2026-09-24T10:36:58Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p012-arrival-kit.pdf",
+        "sha256": "d3049366f2a57a81c30326a73408576b44349638ffa5b99bbecfa746c56af0e5",
+        "approved_at": "2026-09-24T10:36:58Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p012/p012-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-p010-render",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "page_render",
+  "stage": "page_production",
+  "summary": "Render page p010 - Your household: a who's who",
+  "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render golf-addicts-guide-to-family-reintegration --page p010 --submit",
+  "page_id": "p010",
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "pages/specs/p010.json"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/drafts/p010/",
+    "submit_command": "bookfactory submit golf-addicts-guide-to-family-reintegration p010 --kind page --file <path>",
+    "expected_format": "pdf"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-24T10:36:57Z",
+  "closed_at": "2026-09-24T10:36:57Z"
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:35:19Z",
+  "updated_at": "2026-09-24T10:36:58Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -21,12 +21,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-01-opener/art-stage-01-opener-v1.png",
+          "sha256": "445cb23a6f52efe2147d00593f845d8eff73ed5a80f335bc263dcfb0a46f26b0",
+          "submitted_at": "2026-09-24T10:35:42Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-01-opener-stage-one-arrival.png",
+        "sha256": "445cb23a6f52efe2147d00593f845d8eff73ed5a80f335bc263dcfb0a46f26b0",
+        "approved_at": "2026-09-24T10:35:47Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-01-opener/art-stage-01-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },

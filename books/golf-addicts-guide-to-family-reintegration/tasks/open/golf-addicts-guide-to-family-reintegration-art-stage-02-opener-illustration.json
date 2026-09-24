@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-art-stage-02-opener-illustration",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "illustration",
+  "stage": "page_production",
+  "summary": "Create illustration 'art-stage-02-opener' for page p013",
+  "instructions": "Dave at the family tea table mid-story, using a knife and fork to show the line of a putt across his plate, while Sue and the two small children stare at him and their fish fingers go cold.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.",
+  "page_id": "p013",
+  "asset_id": "art-stage-02-opener",
+  "scene": "Dave at the family tea table mid-story, using a knife and fork to show the line of a putt across his plate, while Sue and the two small children stare at him and their fish fingers go cold.",
+  "characters": [
+    "dave",
+    "sue",
+    "alfie",
+    "poppy",
+    "biscuit"
+  ],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p013.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1080
+  },
+  "output": {
+    "destination": "assets/drafts/art-stage-02-opener/",
+    "submit_command": "bookfactory submit golf-addicts-guide-to-family-reintegration art-stage-02-opener --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "open",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-24T10:36:58Z",
+  "closed_at": null
+}
