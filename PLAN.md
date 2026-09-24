@@ -11,12 +11,13 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 16 is archived.
-> **Finished:** the Golf Addict's Guide is Release Ready (cover v3, text-only, approved by Kieran; cover preflight passed); its retrospective ideas are in `IDEAS.md`. Branch rule changed 2026-09-24 at Kieran's request: a session started on a generated branch switches to `main` itself and never asks (`AGENTS.md` 1a, `CLAUDE.md`, the session-start hook, `/handover`, `/plan-phase`).
-> **Next action:** pick and plan Phase 17 with `/plan-phase`. Candidates: `produce` slice 4 (pictures through Higgsfield inside the loop), `plan --from-manuscript`, or asking the big creative decisions at intake (all in `IDEAS.md`).
+> **Doing:** no phase open. Phase 17 is done (not yet archived; `/handover` moves it to `docs/PLAN-ARCHIVE.md`).
+> **Finished:** Phase 17: `bookfactory plan <book> --from-manuscript --out <plan.json>` reads the locked manuscript, builds every page (openers, text pages, numbered activity pages from blocks), fit-tests each in both engines, splits overflowing openers and text pages, and writes a plan file only; `plan --from-file` loads it. `/write-book` uses it. Test-driven on a copy of the Golf book: 71 pages, same as the real plan, all fit. Full suite 579 passed, 2 skipped. Earlier today: the branch rule (sessions switch to `main` themselves, never ask).
+> **Next action:** Kieran decides whether to fix the Golf book's two empty worksheet tables (below). Then plan Phase 18 with `/plan-phase` from `IDEAS.md`.
 
 **Unfinished, carried over:**
-- none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
+- Golf Addict's Guide, found by Phase 17: approved pages p055 "My triggers" and p061 "Relapse diary" have fill-in tables with no rows to write in (the old one-off plan script dropped the blank rows). Fixing them needs Kieran's `revise` on each page, new renders, his approval and a new assembly. Kieran's call.
+- none else (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
 
 **Don't try again:**
 - `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
@@ -88,7 +89,7 @@ Phase 15: The guard follows the recorded policy (done 2026-09-24; Kieran asked f
 
 Phase 16: Activity panels, typeset diagrams and sample pages (done, see `docs/PLAN-ARCHIVE.md`)
 
-## Phase 17: Page plan straight from the manuscript (in progress)
+## Phase 17: Page plan straight from the manuscript (done)
 
 Goal: one command reads a locked manuscript and writes the whole page plan
 (openers, text pages, activity pages built from blocks), fit-tests every page
@@ -98,20 +99,20 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 
 | # | Task | Who | Files |
 |---|---|---|---|
-| 17.1 | Parse the manuscript into plan pages: front matter, stage openers, text pages, `No. NN · Kind: Title` activities with their blocks (ticks, checklist, table, score, case note, cut-out, gauge) | builder, tricky (Opus: many block kinds must match the renderer's schema) | `bookfactory/core/manuscript_plan.py`, `tests/test_manuscript_plan.py` |
-| 17.2 | Fit test: render each planned page in both engines; split an overflowing text page at a paragraph break; name an activity page that won't fit | builder, routine (Sonnet) | `bookfactory/render/fit.py`, `tests/test_plan_fit.py` |
-| 17.3 | `bookfactory plan <book> --from-manuscript --out <plan.json>`: writes the plan file and a fit report, changes nothing in the book | builder, routine (Sonnet) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_cli_plan_from_manuscript.py` |
-| 17.4 | Document the manuscript layout the command reads; `/write-book` uses it for the page plan | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
-| 17.5 | Check: full suite, demo build in a throwaway copy | checker, routine (Sonnet) | none |
-| 17.6 | Test-drive on a copy of the Golf book: compare with its real 71-page plan | main | `PLAN.md` |
+| 17.1 ✓ | Parse the manuscript into plan pages: front matter, stage openers, text pages, `No. NN · Kind: Title` activities with their blocks (ticks, checklist, table, score, case note, cut-out, gauge) | builder, tricky (Opus: many block kinds must match the renderer's schema) | `bookfactory/core/manuscript_plan.py`, `tests/test_manuscript_plan.py` |
+| 17.2 ✓ | Fit test: render each planned page in both engines; split an overflowing text page at a paragraph break; name an activity page that won't fit | builder, routine (Sonnet) | `bookfactory/render/fit.py`, `tests/test_plan_fit.py` |
+| 17.3 ✓ | `bookfactory plan <book> --from-manuscript --out <plan.json>`: writes the plan file and a fit report, changes nothing in the book | main (small once 17.1 and 17.2 were in) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_cli_plan_from_manuscript.py` |
+| 17.4 ✓ | Document the manuscript layout the command reads; `/write-book` uses it for the page plan | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
+| 17.5 ✓ | Check: full suite, demo build in a throwaway copy | checker, routine (Sonnet) | none |
+| 17.6 ✓ | Test-drive on a copy of the Golf book: compare with its real 71-page plan | main | `PLAN.md` |
 
 **Test-drive:** 17.6 runs the command on a scratch clone of the Golf Addict's Guide and compares its output with the real plan, page for page.
 
 **Done when:**
-- [ ] One command turns the Golf manuscript into a page plan that matches the real one page for page, with any differences listed and explained.
-- [ ] Every page in that plan fits on its page in both engines, or the command names the ones that don't.
-- [ ] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
-- [ ] Everything is pushed to `main` and checked there.
+- [x] One command turns the Golf manuscript into a page plan that matches the real one page for page, with any differences listed and explained. (71 pages each; same types and order; split pages match word for word. Differences: the three split-off pages are titled "(continued)" not "(introduction)", and "About this programme" is back matter with no chapter, not chapter 8.)
+- [x] Every page in that plan fits on its page in both engines, or the command names the ones that don't. (Golf: 68 fit, 3 openers split, none too long. The test-drive found that a one-paragraph opener could not be split; fixed so an opener can hand its only paragraph on, as Golf's Stage Seven and Eight did; test added.)
+- [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
+- [x] Everything is pushed to `main` and checked there.
 
 ---
 
@@ -146,3 +147,5 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 | Date | Phase | Check | Result |
 |---|---|---|---|
 | 2026-09-24 | 15 | Full suite (junit) | 510 passed, 2 skipped, 0 failed |
+| 2026-09-24 | 17 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, placeholder can't leak | 579 passed, 2 skipped, 0 failed; demo Release Ready; no mismatches |
+| 2026-09-24 | 17 | Test-drive: `plan --from-manuscript` on a scratch copy of the Golf book, compared with its real plan | 71 = 71 pages, all fit (3 openers split), split bodies identical; opener one-paragraph fix and its test added after the checker ran, `tests/test_plan_fit.py` 8 passed |
