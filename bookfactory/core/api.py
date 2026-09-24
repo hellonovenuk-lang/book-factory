@@ -25,8 +25,8 @@ __all__ = [
     "plan_pages", "write_page_spec", "register_asset", "submit_asset", "submit_intake",
     "draft_intake", "confirm_intake", "show_pictures", "set_pictures", "show_policy", "set_policy",
     "approve", "reject", "revise",
-    "lock", "advance", "validate", "render", "qa", "assemble", "review", "preflight",
-    "audit_history", "relock", "produce",
+    "lock", "advance", "validate", "render", "render_reference", "qa", "assemble", "review",
+    "preflight", "audit_history", "relock", "produce",
 ]
 
 
@@ -833,6 +833,58 @@ def render(book_id: str, *, page_id: str | None = None, backend: str | None = No
     book.save()
     task_module.sync_open_task(book)
     return {"book_id": book_id, "rendered": rendered, "skipped": skipped, "failed": failed}
+
+
+def render_reference(book_id: str, asset_id: str, spec: dict, *, dpi: int = 300,
+                     backend: str | None = None, source: str | None = None,
+                     root: str | Path | None = None) -> dict:
+    """Typeset one reference-set sample page and submit it as a new draft of `asset_id`.
+
+    A reference-set sample (a chapter opener, a checklist/diagnostic page, an
+    editorial page, a palette sheet, ...) is needed before a book has a page
+    plan, so it is rendered from an ordinary page spec that never joins the
+    page manifest: it reserves no page id and nothing is written to pages/.
+    `asset_id` must already be registered (`bookfactory asset add`) - this
+    never registers one. The picture budget (AGENTS.md section 5a) does not
+    apply: a reference is never a page picture.
+
+    The rendered page is rasterised to PNG at `dpi` and submitted through the
+    same path `bookfactory submit --kind asset` uses, so every measured check
+    (min_pixels etc.) runs on it exactly as it would on any other draft.
+    """
+    import tempfile
+
+    from bookfactory.render.renderer import render_reference_page
+
+    book = Book.load(book_id, root)
+    if book.registry.find(asset_id) is None:
+        raise ValidationError(
+            f"Asset '{asset_id}' is not registered",
+            remedy=(f"Register it first: `bookfactory asset add {book_id} {asset_id} "
+                    "--kind reference --reference-role <role>`"),
+        )
+
+    with tempfile.TemporaryDirectory(prefix="bookfactory-reference-") as tmp_dir:
+        tmp_path = Path(tmp_dir)
+        page_type = spec.get("type") or "reference"
+        pdf_path = render_reference_page(
+            book, spec, destination=tmp_path / f"{page_type}.pdf", backend=backend)
+        png_path = tmp_path / f"{asset_id}.png"
+        _rasterize_to_png(pdf_path, png_path, dpi=dpi)
+        draft = book.submit(ASSET, asset_id, png_path,
+                            source=source or f"reference-render:{backend or 'default'}")
+
+    task_module.sync_open_task(book)
+    return {"book_id": book_id, "asset_id": asset_id, "page_type": page_type,
+            **draft.to_dict(with_dimensions=True)}
+
+
+def _rasterize_to_png(pdf_path: Path, png_path: Path, *, dpi: int) -> Path:
+    import fitz
+
+    with fitz.open(str(pdf_path)) as doc:
+        doc[0].get_pixmap(dpi=dpi).save(str(png_path))
+    return png_path
 
 
 def qa(book_id: str, *, layers: list[str] | None = None,

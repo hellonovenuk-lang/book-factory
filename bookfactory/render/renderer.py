@@ -236,6 +236,52 @@ def render_page(book, page_id: str, *, destination: Path | str | None = None,
     return destination
 
 
+def render_reference_page(book, spec: dict, *, destination: Path | str | None = None,
+                          backend: str | None = None) -> Path:
+    """Render one reference-set sample page to a one-page PDF.
+
+    Used to typeset a book's reference-set samples (a chapter opener, a
+    checklist/diagnostic page, an editorial page, a palette sheet, ...)
+    before the book has a page plan. The spec is an ordinary page spec,
+    validated exactly as a real page spec is, but it never joins the page
+    manifest: no page id is reserved and nothing is written to pages/. An
+    illustration the spec names must already be an approved asset, placed
+    exactly as it would be on a real page.
+    """
+    from bookfactory import SCHEMA_VERSION
+    from bookfactory.core import schema
+    from bookfactory.core.models import PageRecord
+
+    spec = dict(spec)
+    if not spec.get("type"):
+        raise ValidationError(
+            "A reference sample spec needs a \"type\"",
+            remedy="Add \"type\", e.g. \"chapter_opener\", \"checklist\", "
+                   "\"editorial_illustration\" or \"palette_sheet\".",
+        )
+    spec.setdefault("schema_version", SCHEMA_VERSION)
+    spec.setdefault("book_id", book.state.book_id)
+    spec.setdefault("page_id", "p000")
+    spec.setdefault("title", (spec.get("copy") or {}).get("heading")
+                     or spec["type"].replace("_", " ").title())
+    spec.setdefault("chapter", None)
+    schema.validate("page-spec", spec, context="reference sample spec")
+
+    page = PageRecord(page_id=spec["page_id"], sequence=1, title=spec["title"],
+                      type=spec["type"], chapter=spec.get("chapter"), printed_number=1)
+
+    context = build_context(book, page, spec)
+    html = render_page_template(page.type, context)
+
+    destination = (Path(destination) if destination
+                  else book.paths.renders_dir / f"reference-{page.type}.pdf")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    backends.render_html_to_pdf(html, destination, base_url=book.paths.root, backend=backend)
+    _assert_single_page(destination, page.page_id)
+    _assert_copy_present(destination, page.page_id, spec)
+    return destination
+
+
 def _assert_single_page(pdf_path: Path, page_id: str) -> None:
     from pypdf import PdfReader
 
@@ -276,6 +322,9 @@ def _flatten_copy(copy: dict) -> list[str]:
             if isinstance(column.get("title"), str):
                 strings.append(column["title"])
             strings.extend(v for v in (column.get("items") or []) if isinstance(v, str))
+    # Activity blocks: every string at any depth; "[ ]" in a table cell is a tick box.
+    from bookfactory.qa.content import _block_text
+    strings.extend(text.removeprefix("[ ]").strip() for text in _block_text(copy.get("blocks")))
     return [s for s in strings if len(s.strip()) > 3]
 
 

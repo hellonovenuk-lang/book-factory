@@ -1,0 +1,98 @@
+{% extends "_base.html.j2" %}
+
+{% block extra_css %}
+.palette-sheet__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5in 0.35in;
+  margin-top: 0.6in;
+}
+.palette-swatch__chip {
+  height: 0.9in;
+  border: 1px solid var(--rule);
+}
+.palette-swatch__label {
+  margin-top: 0.1in;
+  font-family: var(--font-accent);
+  font-size: var(--size-caption);
+}
+.palette-swatch__name { display: block; font-weight: 600; }
+.palette-swatch__hex {
+  display: block;
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+}
+.type-hierarchy {
+  margin-top: 0.7in;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.3in;
+}
+.type-hierarchy__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.12in 0;
+}
+.type-hierarchy__sample {
+  font-family: var(--font-display);
+  color: var(--ink);
+}
+.type-hierarchy__meta {
+  font-family: var(--font-mono);
+  font-size: var(--size-caption);
+  color: var(--ink-soft);
+  white-space: nowrap;
+  margin-left: 0.3in;
+}
+{% endblock %}
+
+{% block content %}
+  <h2 class="heading">{{ copy.heading or 'Palette and type' }}</h2>
+  {% if copy.body %}
+  <div class="prose prose--tight" style="margin-top:0.2in">
+    {% for para in body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="palette-sheet__grid">
+    {% for name, hex in tokens.palette.items() %}
+    <div class="palette-swatch">
+      <div class="palette-swatch__chip" style="background:{{ hex }}"></div>
+      <div class="palette-swatch__label">
+        <span class="palette-swatch__name">{{ name }}</span>
+        <span class="palette-swatch__hex">{{ hex }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="type-hierarchy">
+    <div class="type-hierarchy__row">
+      <span class="type-hierarchy__sample" style="font-size:var(--size-chapter-number)">01</span>
+      <span class="type-hierarchy__meta">chapter number - {{ tokens.type_scale_pt.chapter_number }}pt</span>
+    </div>
+    <div class="type-hierarchy__row">
+      <span class="type-hierarchy__sample" style="font-size:var(--size-chapter-title)">Chapter title</span>
+      <span class="type-hierarchy__meta">chapter title - {{ tokens.type_scale_pt.chapter_title }}pt</span>
+    </div>
+    <div class="type-hierarchy__row">
+      <span class="type-hierarchy__sample" style="font-size:var(--size-heading)">Heading</span>
+      <span class="type-hierarchy__meta">heading - {{ tokens.type_scale_pt.heading }}pt</span>
+    </div>
+    <div class="type-hierarchy__row">
+      <span class="type-hierarchy__sample" style="font-size:var(--size-body)">Body copy runs at this size.</span>
+      <span class="type-hierarchy__meta">body - {{ tokens.type_scale_pt.body }}pt</span>
+    </div>
+    <div class="type-hierarchy__row">
+      <span class="type-hierarchy__sample" style="font-size:var(--size-caption)">Caption text</span>
+      <span class="type-hierarchy__meta">caption - {{ tokens.type_scale_pt.caption }}pt</span>
+    </div>
+    <div class="type-hierarchy__row">
+      <span class="type-hierarchy__sample" style="font-size:var(--size-folio)">42</span>
+      <span class="type-hierarchy__meta">folio - {{ tokens.type_scale_pt.folio }}pt</span>
+    </div>
+  </div>
+
+  {% if copy.footnote %}<p class="footnote">{{ copy.footnote }}</p>{% endif %}
+{% endblock %}

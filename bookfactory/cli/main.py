@@ -317,6 +317,21 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument("--submit", action="store_true",
                         help="Also register the render as a draft.")
 
+    reference = sub.add_parser("reference", parents=[common],
+                               help="Typeset reference-set sample pages.")
+    reference_sub = reference.add_subparsers(dest="reference_command", metavar="<subcommand>",
+                                             required=True)
+    reference_render = reference_sub.add_parser(
+        "render", parents=[common],
+        help="Render a sample page spec and submit it as a draft of a registered "
+             "reference asset. Never touches the page plan or the picture budget.")
+    reference_render.add_argument("book")
+    reference_render.add_argument("asset_id")
+    reference_render.add_argument("--from-file", dest="from_file", required=True,
+                                  help="A page spec (same shape as `bookfactory spec`).")
+    reference_render.add_argument("--dpi", type=int, default=300)
+    reference_render.add_argument("--backend", help="weasyprint or chromium.")
+
     qa = sub.add_parser("qa", parents=[common], help="Run quality assurance.")
     qa.add_argument("book")
     qa.add_argument("--layer", action="append", dest="layers",
@@ -1076,6 +1091,28 @@ def cmd_render(args) -> int:
     return 1 if failed else 0
 
 
+def cmd_reference(args) -> int:
+    if args.reference_command == "render":
+        spec = read_json(Path(args.from_file))
+        result = api.render_reference(args.book, args.asset_id, spec, dpi=args.dpi,
+                                       backend=args.backend, root=args.root)
+        if args.json:
+            out.emit_json(result)
+            return 0
+        out.heading("REFERENCE SAMPLE SUBMITTED")
+        out.field("asset", f"{result['asset_id']} ({result['page_type']})")
+        out.field("revision", result["revision"])
+        out.field("path", result["path"])
+        out.field("sha256", result["sha256"][:16] + "...")
+        out.blank()
+        print("  Nothing is approved by silence. When you are happy:")
+        print(f"  bookfactory approve {args.book} {result['asset_id']} "
+              f"--kind {ASSET} --draft {result['revision']}")
+        return 0
+    print(f"Unknown reference subcommand: {args.reference_command}", file=sys.stderr)
+    return 2
+
+
 def cmd_qa(args) -> int:
     report = api.qa(args.book, layers=args.layers, root=args.root)
     if args.json:
@@ -1262,6 +1299,7 @@ COMMANDS = {
     "validate": cmd_validate,
     "relock": cmd_relock,
     "render": cmd_render,
+    "reference": cmd_reference,
     "qa": cmd_qa,
     "assemble": cmd_assemble,
     "review": cmd_review,
