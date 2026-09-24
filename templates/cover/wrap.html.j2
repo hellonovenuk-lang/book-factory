@@ -43,6 +43,26 @@
     text-align: center;
   }
   .artwork--top { margin-top: 0; }
+  /* big-lettering front: stacked title lines under an optional banner */
+  .banner {
+    left: {{ front_fold_in }}in;
+    top: {{ margin_in }}in;
+    width: {{ width_in - front_fold_in }}in;
+    padding: 0.08in 0;
+    text-align: center;
+    font-family: "{{ title_font_family }}", "DejaVu Sans", sans-serif;
+    font-size: 11pt;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .stack { top: {% if stack_top_in is not none %}{{ stack_top_in }}{% else %}{{ margin_in + (0.6 if banner else 0.15) }}{% endif %}in; }
+  .tline {
+    font-family: "{{ title_font_family }}", "DejaVu Sans", sans-serif;
+    line-height: 0.98;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .stack .subtitle { font-size: {{ subtitle_size_pt }}pt; line-height: 1.3; margin-top: 0.3in; padding: 0 0.3in; }
   .subtitle {
     font-size: 13pt;
     color: {{ accent }};
@@ -57,12 +77,15 @@
   }
   .author {
     left: {{ front_fold_in + margin_in }}in;
-    top: {{ height_in - margin_in - 0.3 }}in;
+    top: {{ height_in - margin_in - 0.3 - (author_size_pt - 12) / 72 }}in;
     width: {{ front_width_in }}in;
     text-align: center;
-    font-size: 12pt;
+    font-size: {{ author_size_pt }}pt;
     font-weight: bold;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
+    color: {{ author_colour }};
+    font-family: "{{ title_font_family if title_lines else body_font_family }}", "DejaVu Sans", sans-serif;
+    {% if title_lines %}text-transform: uppercase;{% endif %}
   }
 
   /* -------- spine -------- */
@@ -100,7 +123,14 @@
 </head>
 <body>
 
-  {% if title_over_artwork %}
+  {% if title_lines %}
+  {% if banner %}<div class="box banner" style="background:{{ banner.background }};color:{{ banner.colour }}">{{ banner.text }}</div>{% endif %}
+  <div class="box front stack">
+    {% for line in title_lines %}<div class="tline" style="font-size:{{ line.size_pt }}pt;color:{{ line.colour }}">{{ line.text }}</div>{% endfor %}
+    {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+    {% if artwork_uri %}<img class="artwork" src="{{ artwork_uri }}">{% endif %}
+  </div>
+  {% elif title_over_artwork %}
   <div class="box front"><img class="artwork artwork--top" src="{{ artwork_uri }}"></div>
   <div class="box front-title">
     <h1 class="title">{{ title }}</h1>

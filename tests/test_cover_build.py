@@ -171,3 +171,35 @@ def test_title_size_out_of_range_is_refused(new_book, workspace):
     book = Book.load("test-book", workspace)
     with pytest.raises(ValidationError, match="title_size_pt"):
         cover_render.build(book)
+
+
+def test_big_lettering_front_stacks_the_title_as_real_type(new_book, workspace):
+    import fitz
+
+    _interior(new_book, 80)
+    title = Book.load("test-book", workspace).state.title
+    words = title.split()
+    assert len(words) >= 2
+    lines = [{"text": words[0], "size_pt": 60, "colour": "#f6dc45"},
+             {"text": " ".join(words[1:]), "size_pt": 40}]
+    _set_cover_fields(new_book, subtitle="A field guide", design={
+        "background": "#1f6b3a", "ink": "#fbf8f1", "author_colour": "#f6dc45",
+        "title_lines": lines, "banner": {"text": "The programme", "background": "#ed5a3a",
+                                         "colour": "#fbf8f1"}})
+    cover.set_artwork(new_book, cover.TEXT_ONLY, by="Operator")
+    book = Book.load("test-book", workspace)
+    result = cover_render.build(book)
+    assert result["problems"] == []
+    with fitz.open(str(book.paths.resolve(result["pdf"]))) as doc:
+        sizes = {round(s["size"]) for b in doc[0].get_text("dict")["blocks"]
+                 for l in b.get("lines", []) for s in l["spans"]}
+        assert {60, 40} <= sizes, "each title line is set at its own size"
+
+
+def test_title_lines_must_spell_the_title_exactly(new_book, workspace):
+    _interior(new_book, 80)
+    _set_cover_fields(new_book, design={"title_lines": [{"text": "A Different Book"}]})
+    cover.set_artwork(new_book, cover.TEXT_ONLY, by="Operator")
+    book = Book.load("test-book", workspace)
+    with pytest.raises(ValidationError, match="spell out the book's title"):
+        cover_render.build(book)

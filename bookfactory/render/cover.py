@@ -124,6 +124,30 @@ def build(book, *, submit: bool = False) -> dict:
     title_colour = design.get("title_colour") or ink
     title_over_artwork = bool(design.get("title_over_artwork"))
     title_top_in = float(design.get("title_top_in") or 0.35)
+    # A big-lettering front: the title stacked in lines, each with its own size
+    # and colour, under an optional banner strip. Every word is real type.
+    title_lines = []
+    for line in design.get("title_lines") or []:
+        size = float(line.get("size_pt") or title_size_pt)
+        if not 12 <= size <= 160:
+            raise ValidationError(
+                f"cover.json design.title_lines size_pt must be between 12 and 160, got {size}",
+                remedy="Pick a size in points for each title line.")
+        title_lines.append({"text": line["text"], "size_pt": size,
+                            "colour": line.get("colour") or title_colour})
+    if title_lines:
+        joined = "".join(c for c in " ".join(l["text"] for l in title_lines).casefold()
+                         if c.isalnum())
+        wanted = "".join(c for c in title.casefold() if c.isalnum())
+        if joined != wanted:
+            raise ValidationError(
+                "cover.json design.title_lines must spell out the book's title exactly",
+                remedy=f"Split \"{title}\" across the lines without adding or dropping words.")
+    banner = design.get("banner") or None
+    author_colour = design.get("author_colour") or ink
+    author_size_pt = float(design.get("author_size_pt") or 12)
+    subtitle_size_pt = float(design.get("subtitle_size_pt") or 14)
+    stack_top_in = design.get("stack_top_in")
 
     title_font_family = "DejaVu Sans"
     body_font_family = "DejaVu Sans"
@@ -171,7 +195,9 @@ def build(book, *, submit: bool = False) -> dict:
         "font_faces": font_faces, "artwork_uri": artwork_uri,
         "title_size_pt": title_size_pt, "title_colour": title_colour,
         "title_over_artwork": title_over_artwork and artwork_uri is not None,
-        "title_top_in": title_top_in,
+        "title_top_in": title_top_in, "title_lines": title_lines, "banner": banner,
+        "author_colour": author_colour, "author_size_pt": author_size_pt,
+        "subtitle_size_pt": subtitle_size_pt, "stack_top_in": stack_top_in,
         "artwork_width_in": data["artwork_width_in"], "artwork_height_in": data["artwork_height_in"],
     }
     html = _cover_template_env().get_template("wrap.html.j2").render(**context)
