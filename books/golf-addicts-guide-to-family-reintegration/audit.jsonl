@@ -205,3 +205,7 @@
 {"at": "2026-09-24T11:30:22Z", "event": "cover_draft_submitted", "revision": "v2", "path": "cover/drafts/cover-v2.pdf"}
 {"at": "2026-09-24T12:25:51Z", "event": "cover_artwork_mode_set", "mode": "none", "previous": "native", "by": "kieran", "superseded": ["v2"]}
 {"at": "2026-09-24T12:27:02Z", "event": "cover_draft_submitted", "revision": "v3", "path": "cover/drafts/cover-v3.pdf"}
+{"at": "2026-09-24T14:13:39Z", "event": "cover_visual_approved", "revision": "v3", "by": "kieran", "provisional": false}
+{"at": "2026-09-24T14:13:39Z", "event": "cover_approved", "revision": "v3", "path": "cover/drafts/cover-v3.pdf", "sha256": "44d2af9d20eb5aed95c44f53fcb864d167b198ac3b98ac655a23a2a79e599490", "by": "kieran"}
+{"at": "2026-09-24T14:13:56Z", "event": "stage_advanced", "from": "cover_production", "to": "cover_preflight", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-09-24T14:14:17Z", "event": "stage_advanced", "from": "cover_preflight", "to": "release_ready", "by": "claude"}

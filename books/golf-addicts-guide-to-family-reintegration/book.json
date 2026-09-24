@@ -4,7 +4,7 @@
   "title": "The Golf Addict's Guide to Family Reintegration",
   "subtitle": null,
   "series": null,
-  "stage": "cover_production",
+  "stage": "release_ready",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -83,24 +83,16 @@
     "set_at": "2026-09-23T18:45:01Z",
     "source": "new_book_default"
   },
-  "production_mode": "wait_for_operator",
+  "production_mode": "complete",
   "blocked": null,
-  "next_action": {
-    "task_id": "golf-addicts-guide-to-family-reintegration-cover-approval",
-    "type": "approval",
-    "summary": "Review the full-wrap cover draft",
-    "page_id": null,
-    "asset_id": null,
-    "approval_required": true,
-    "mode": "wait_for_operator"
-  },
+  "next_action": null,
   "last_transition": {
-    "from": "kdp_preflight",
-    "to": "cover_production",
-    "at": "2026-09-24T10:56:22Z",
-    "by": "system",
-    "note": "stage derived from repository state"
+    "from": "cover_preflight",
+    "to": "release_ready",
+    "at": "2026-09-24T14:14:17Z",
+    "by": "claude",
+    "note": null
   },
   "created_at": "2026-09-23T18:45:01Z",
-  "updated_at": "2026-09-24T12:27:02Z"
+  "updated_at": "2026-09-24T14:14:17Z"
 }
