@@ -5,7 +5,7 @@
   "type": "approval",
   "stage": "cover_production",
   "summary": "Review the full-wrap cover draft",
-  "instructions": "Operator visual checkpoint: inspect cover/drafts/cover-v2.pdf. If accepted, bookfactory cover approve golf-addicts-guide-to-family-reintegration --draft v2 --by <operator>. An agent must not approve for the operator (AGENTS.md 9a).",
+  "instructions": "Operator visual checkpoint: inspect cover/drafts/cover-v3.pdf. If accepted, bookfactory cover approve golf-addicts-guide-to-family-reintegration --draft v3 --by <operator>. An agent must not approve for the operator (AGENTS.md 9a).",
   "page_id": null,
   "asset_id": null,
   "scene": null,
@@ -20,6 +20,6 @@
   "remediation": false,
   "retry_count": 0,
   "mode": "wait_for_operator",
-  "created_at": "2026-09-24T11:30:22Z",
+  "created_at": "2026-09-24T12:27:02Z",
   "closed_at": null
 }
