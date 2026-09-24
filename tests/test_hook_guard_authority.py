@@ -52,7 +52,6 @@ ASKS = [
     # every operator-authority command
     "bookfactory approve demo-book p001",
     "bookfactory approve demo-book --all-passing --by kieran",
-    "bookfactory approve demo-book --all-passing --by agent --autonomous",
     "bookfactory lock visual demo-book --by kieran",
     "bookfactory reject demo-book p001 --reason blurry",
     "bookfactory revise demo-book p058 --reason typo",
@@ -189,6 +188,51 @@ ALLOWS = [
     "bookfactory status demo-book | grep approve",
     "python3 scripts/build_demo_book.py",
 ]
+
+
+# `--autonomous` steps an agent may run itself: Book Factory refuses them
+# unless the book's recorded production policy authorizes them (AGENTS.md
+# section 3), so the guard leaves that judgement to Book Factory.
+AUTONOMOUS_ALLOWS = [
+    "bookfactory approve demo-book --all-passing --by agent --autonomous",
+    "bookfactory approve demo-book p001 --autonomous --by claude",
+    "bookfactory lock concept demo-book --by claude --autonomous",
+    "bookfactory lock manuscript demo-book --autonomous",
+    "bookfactory --json lock voice demo-book --autonomous --by=claude",
+    "bookfactory cover approve demo-book --draft v2 --by claude --autonomous",
+    "python3 -m bookfactory.cli.main lock visual demo-book --autonomous --by claude",
+]
+
+# Still the operator's, with or without `--autonomous`.
+AUTONOMOUS_ASKS = [
+    "bookfactory lock concept demo-book --by kieran --autonomous",
+    "bookfactory approve demo-book p001 --autonomous --by Kieran",
+    "bookfactory lock concept demo-book --note --autonomous",
+    "bookfactory lock concept demo-book --by --autonomous",
+    "bookfactory lock concept demo-book $(echo --autonomous)",
+    "bookfactory lock concept demo-book --autonomous --note \"$(whoami)\"",
+    "bookfactory reject demo-book p001 --autonomous --reason blurry",
+    "bookfactory revise demo-book p058 --autonomous --reason typo",
+    "bookfactory policy set demo-book autonomous --by claude --autonomous",
+    "bookfactory pictures set demo-book unlimited --by claude --autonomous",
+    "bookfactory advance demo-book --autonomous",
+    "bookfactory assemble demo-book --autonomous",
+    "bookfactory preflight demo-book --autonomous",
+    "bookfactory cover finalize demo-book --draft v1 --autonomous",
+    "bookfactory cover preflight demo-book --autonomous",
+    "bookfactory lock concept demo-book --autonomous; bookfactory revise demo-book p001",
+]
+
+
+@pytest.mark.parametrize("command", AUTONOMOUS_ALLOWS)
+def test_allows_autonomous_steps_book_factory_checks_itself(command):
+    assert decide(command) == "allow"
+    assert decide(command, mode="auto") == "allow"
+
+
+@pytest.mark.parametrize("command", AUTONOMOUS_ASKS)
+def test_autonomous_never_unlocks_operator_only_commands(command):
+    assert decide(command) == "ask"
 
 
 @pytest.mark.parametrize("command", ASKS)

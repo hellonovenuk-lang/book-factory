@@ -15,7 +15,11 @@ Before Claude runs a Bash command, the hook reads the command and answers:
               `assets/approved/`, any `/approved/` path, or a
               `cover/drafts/*.pdf` file, which is where the approved cover
               lives).
-* nothing   - anything else: the hook has no opinion.
+* nothing   - anything else: the hook has no opinion. That includes
+              `approve`, `lock` and `cover approve` run with
+              `--autonomous` (and not signed with the operator's name):
+              Book Factory itself refuses those unless the book's recorded
+              production policy authorizes them (AGENTS.md section 3).
 
 An **ask** only reaches the operator in the "default" permission mode. In
 auto mode (and bypass or don't-ask modes) Claude Code settles an ask without
@@ -97,6 +101,50 @@ _LOOSE_BF_RE = re.compile(r"bookfactory[^\n]*?\b(approve|lock|reject|revise|adva
 
 def ask_reason(what: str, why: str) -> str:
     return f"This runs `{what}`, which {why}. Kieran must confirm."
+
+
+# Commands an agent may run itself with `--autonomous` (AGENTS.md section 3 and
+# the quick reference). Book Factory refuses `--autonomous` unless the book's
+# recorded production policy authorizes it, refuses what that policy keeps as
+# a checkpoint (the visual lock and the full-wrap cover under
+# visual_checkpoint), and audits every one as granted under the policy. So the
+# guard lets these through and leaves that judgement to Book Factory.
+AUTONOMOUS_OK = {"approve", "lock", "cover approve"}
+# Options whose next word is a value, so a value can never pass for a flag.
+_VALUE_OPTIONS = ("--by", "--note", "--version", "--draft", "--reason", "--root", "--count")
+OPERATOR_NAMES = {"kieran"}
+AUTONOMOUS_AS_OPERATOR = ("signs an `--autonomous` step with the operator's name; an agent "
+                          "signs with its own name (AGENTS.md section 3)")
+
+
+def autonomous_flags(rest: list[str]) -> tuple[bool, str | None]:
+    """Whether `--autonomous` is given as a real flag, and the `--by` value."""
+    autonomous, by = False, None
+    k = 0
+    while k < len(rest):
+        a = rest[k]
+        name = a.split("=", 1)[0]
+        if a == "--autonomous":
+            autonomous = True
+        elif name == "--by":
+            by = a.split("=", 1)[1] if "=" in a else (rest[k + 1] if k + 1 < len(rest) else None)
+        if "=" not in a and name in _VALUE_OPTIONS:
+            k += 2
+            continue
+        k += 1
+    return autonomous, by
+
+
+def autonomous_decision(what: str, rest: list[str], reason: str):
+    """ALLOW an `--autonomous` step, else the ordinary ASK."""
+    autonomous, by = autonomous_flags(rest)
+    if not autonomous:
+        return ASK, reason
+    if SUBST in " ".join(rest) or "$" in " ".join(rest):
+        return ASK, reason
+    if by is not None and by.strip().lower() in OPERATOR_NAMES:
+        return ASK, ask_reason(f"bookfactory {what} --autonomous", AUTONOMOUS_AS_OPERATOR)
+    return ALLOW, ""
 
 
 # -- tokenizer ---------------------------------------------------------------
@@ -557,7 +605,10 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
                      f"(`{sub.replace(SUBST, '$(...)')}`). It might need the operator's "
                      "authority. Kieran must confirm.")
     if sub in OPERATOR_ONLY:
-        return ASK, ask_reason(f"bookfactory {sub}", OPERATOR_ONLY[sub])
+        reason = ask_reason(f"bookfactory {sub}", OPERATOR_ONLY[sub])
+        if sub in AUTONOMOUS_OK:
+            return autonomous_decision(sub, rest, reason)
+        return ASK, reason
     if sub == "advance":
         if any(r.startswith("--f") and "--force".startswith(r.split("=")[0]) for r in rest):
             return ASK, ask_reason("bookfactory advance --force", ADVANCE_FORCE)
@@ -576,7 +627,10 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
         if sub == "pictures" and op == "set":
             return ASK, ask_reason("bookfactory pictures set", PICTURES_SET)
         if sub == "cover" and op in COVER_AUTHORITY:
-            return ASK, ask_reason(f"bookfactory cover {op}", COVER_AUTHORITY[op])
+            reason = ask_reason(f"bookfactory cover {op}", COVER_AUTHORITY[op])
+            if f"cover {op}" in AUTONOMOUS_OK:
+                return autonomous_decision(f"cover {op}", rest, reason)
+            return ASK, reason
     return ALLOW, ""
 
 

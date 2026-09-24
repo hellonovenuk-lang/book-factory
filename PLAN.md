@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 14 is done and archived.
-> **Finished:** Phase 14, `produce` slice 3: `produce` stops with `writing` when the next job is copy, and `/write-book <book>` has Claude write it (no API call) and run `produce` again, stopping at locks, pictures, the cover and anything else needing Kieran. 488 tests passing, 2 skipped.
-> **Next action:** plan Phase 15 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. `produce` slice 4 (pictures in the loop) moves to Phase 16.
+> **Doing:** no phase open. Phase 15 (small, done in one sitting at Kieran's request) is done.
+> **Finished:** Phase 15, the guard follows the recorded policy: `guard-authority.py` lets `approve`, `lock` and `cover approve` through when run with `--autonomous` (not signed "kieran"), since Book Factory refuses those unless the policy authorizes them; `/write-book` now runs a lock itself when its task's mode is `continue_automatically`. 510 tests passing, 2 skipped. Earlier: Phase 14, `/write-book`.
+> **Next action:** plan Phase 16 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. `produce` slice 4 (pictures in the loop) moves to Phase 17.
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
@@ -83,6 +83,8 @@ Phase 13: `produce` approves pages (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 14: Claude writes the copy (done, see `docs/PLAN-ARCHIVE.md`)
 
+Phase 15: The guard follows the recorded policy (done 2026-09-24; Kieran asked for it after too many stops on the Golf Addict's Guide. Changed `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py`, `.claude/skills/write-book/SKILL.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`.)
+
 ---
 
 ## Decisions (from the 2026-09-22 audit)
@@ -114,3 +116,4 @@ Phase 14: Claude writes the copy (done, see `docs/PLAN-ARCHIVE.md`)
 
 | Date | Phase | Check | Result |
 |---|---|---|---|
+| 2026-09-24 | 15 | Full suite (junit) | 510 passed, 2 skipped, 0 failed |

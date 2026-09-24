@@ -66,12 +66,15 @@ When the next task is copy to write, `produce` stops with the code
 with `writing`, write that one task's copy yourself - brief, writing sample,
 voice bible, manuscript, page plan or page specs - on the operator's
 subscription, with no Claude API call, following the "Writing copy" rules
-below; save it where the task says; run `produce` again. It stops and
-reports at any other stop code. It never locks, approves, rejects, revises,
-touches the cover, generates or submits a picture, changes the picture
-budget, changes the production policy, or uses `--force` - even when a
-task's own `submit_command` is one of those, such as the brief's concept
-lock, which stays the operator's.
+below; save it where the task says; run `produce` again. When the next
+task is a lock whose `mode` is `continue_automatically`, it runs that lock
+itself with `--autonomous --by claude` (`AGENTS.md` quick reference): Book
+Factory refuses it unless the recorded production policy authorizes it, and
+refuses the locks the policy keeps as a checkpoint (the visual lock under
+`visual_checkpoint`), so those stop for the operator. It stops and reports
+at any other stop code. It never approves, rejects, revises, touches the
+cover, generates or submits a picture, changes the picture budget, changes
+the production policy, or uses `--force`.
 
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.
