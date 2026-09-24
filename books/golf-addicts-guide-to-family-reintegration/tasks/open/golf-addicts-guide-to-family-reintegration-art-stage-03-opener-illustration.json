@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-art-stage-03-opener-illustration",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "illustration",
+  "stage": "page_production",
+  "summary": "Create illustration 'art-stage-03-opener' for page p023",
+  "instructions": "Dave standing in the garage surrounded by golf bags, trolleys, buckets of balls and a practice net, while Sue stands in the doorway holding a single box marked Christmas decorations that she cannot put anywhere.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.",
+  "page_id": "p023",
+  "asset_id": "art-stage-03-opener",
+  "scene": "Dave standing in the garage surrounded by golf bags, trolleys, buckets of balls and a practice net, while Sue stands in the doorway holding a single box marked Christmas decorations that she cannot put anywhere.",
+  "characters": [
+    "dave",
+    "sue",
+    "alfie",
+    "poppy",
+    "biscuit"
+  ],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p023.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1080
+  },
+  "output": {
+    "destination": "assets/drafts/art-stage-03-opener/",
+    "submit_command": "bookfactory submit golf-addicts-guide-to-family-reintegration art-stage-03-opener --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "open",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-24T10:52:56Z",
+  "closed_at": null
+}

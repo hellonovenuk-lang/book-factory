@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:36:58Z",
+  "updated_at": "2026-09-24T10:52:56Z",
   "front_matter_pages": 4,
   "pages": [
     {
@@ -545,10 +545,32 @@
       "required_assets": [
         "art-stage-02-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p013/p013-v1.pdf",
+          "sha256": "34df5f0364a0419dfaf40471697aadc21496deba768268ec8c9937574063bebc",
+          "submitted_at": "2026-09-24T10:52:52Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p013-stage-two-communication.pdf",
+        "sha256": "34df5f0364a0419dfaf40471697aadc21496deba768268ec8c9937574063bebc",
+        "approved_at": "2026-09-24T10:52:52Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p013/p013-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -567,10 +589,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p014.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p014/p014-v1.pdf",
+          "sha256": "94b86cc43ec41ac0aee93a79dcb43330cd8e9ddadc2f4c31d6e7d633f9346b41",
+          "submitted_at": "2026-09-24T10:52:52Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p014-how-a-question-works.pdf",
+        "sha256": "94b86cc43ec41ac0aee93a79dcb43330cd8e9ddadc2f4c31d6e7d633f9346b41",
+        "approved_at": "2026-09-24T10:52:52Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p014/p014-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -589,10 +633,32 @@
       "type": "activity",
       "spec": "pages/specs/p015.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p015/p015-v1.pdf",
+          "sha256": "edd61c36a2efc6a8ed67d3f57ae98c43d1a040765c794b01fc632115ca8dc582",
+          "submitted_at": "2026-09-24T10:52:53Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p015-what-was-the-question.pdf",
+        "sha256": "edd61c36a2efc6a8ed67d3f57ae98c43d1a040765c794b01fc632115ca8dc582",
+        "approved_at": "2026-09-24T10:52:53Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p015/p015-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -611,10 +677,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p016.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p016/p016-v1.pdf",
+          "sha256": "e350b4e925d60764b8f38f0c889e87b4be0423e3dcc080ee831db7eb60f08244",
+          "submitted_at": "2026-09-24T10:52:53Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p016-the-putt-on-the-7th.pdf",
+        "sha256": "e350b4e925d60764b8f38f0c889e87b4be0423e3dcc080ee831db7eb60f08244",
+        "approved_at": "2026-09-24T10:52:53Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p016/p016-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -633,10 +721,32 @@
       "type": "activity",
       "spec": "pages/specs/p017.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p017/p017-v1.pdf",
+          "sha256": "9d2e4b7b2e92d0194375bf7d93c61603106239a103edc0ba8aa23edf4c310135",
+          "submitted_at": "2026-09-24T10:52:54Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p017-emergency-putt-card.pdf",
+        "sha256": "9d2e4b7b2e92d0194375bf7d93c61603106239a103edc0ba8aa23edf4c310135",
+        "approved_at": "2026-09-24T10:52:54Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p017/p017-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -655,10 +765,32 @@
       "type": "activity",
       "spec": "pages/specs/p018.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p018/p018-v1.pdf",
+          "sha256": "1c6fe8de988d23229660049328043659010c3d4d67d95a72eb1293b78f883150",
+          "submitted_at": "2026-09-24T10:52:54Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p018-topics-of-conversation-other-than-golf.pdf",
+        "sha256": "1c6fe8de988d23229660049328043659010c3d4d67d95a72eb1293b78f883150",
+        "approved_at": "2026-09-24T10:52:54Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p018/p018-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -677,10 +809,32 @@
       "type": "activity",
       "spec": "pages/specs/p019.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p019/p019-v1.pdf",
+          "sha256": "4422997fb7a29b9588f9bf8057acff963fe42ba658f21bfc17b2e15fc941a60a",
+          "submitted_at": "2026-09-24T10:52:54Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p019-three-minutes-without-golf.pdf",
+        "sha256": "4422997fb7a29b9588f9bf8057acff963fe42ba658f21bfc17b2e15fc941a60a",
+        "approved_at": "2026-09-24T10:52:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p019/p019-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -699,10 +853,32 @@
       "type": "activity",
       "spec": "pages/specs/p020.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p020/p020-v1.pdf",
+          "sha256": "4a313f6a4ee06011e9e756fda24b29d695ff2282168bd7864928180a17c3eeab",
+          "submitted_at": "2026-09-24T10:52:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p020-words-that-do-not-belong-at-the-dinner-table.pdf",
+        "sha256": "4a313f6a4ee06011e9e756fda24b29d695ff2282168bd7864928180a17c3eeab",
+        "approved_at": "2026-09-24T10:52:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p020/p020-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -721,10 +897,32 @@
       "type": "text_illustration",
       "spec": "pages/specs/p021.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p021/p021-v1.pdf",
+          "sha256": "47251d66dfd933456ce71f91c8c728f6a39045829b08ea925d7204403747898a",
+          "submitted_at": "2026-09-24T10:52:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p021-listening.pdf",
+        "sha256": "47251d66dfd933456ce71f91c8c728f6a39045829b08ea925d7204403747898a",
+        "approved_at": "2026-09-24T10:52:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p021/p021-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
@@ -743,10 +941,32 @@
       "type": "activity",
       "spec": "pages/specs/p022.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p022/p022-v1.pdf",
+          "sha256": "e89c3396846803c8decfdbd4472b1a8dd709fc5ebe3f857b56e235789596c307",
+          "submitted_at": "2026-09-24T10:52:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p022-signs-you-are-listening.pdf",
+        "sha256": "e89c3396846803c8decfdbd4472b1a8dd709fc5ebe3f857b56e235789596c307",
+        "approved_at": "2026-09-24T10:52:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p022/p022-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
         "content": "pending",
