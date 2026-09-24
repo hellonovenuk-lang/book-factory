@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T09:35:50Z",
+  "updated_at": "2026-09-24T10:12:21Z",
   "assets": [
     {
       "asset_id": "ref-character-main",
@@ -97,6 +97,202 @@
         "authorization": "autonomous_production_policy:visual_checkpoint",
         "width": 2528,
         "height": 1696
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-layout-chapter-opener",
+      "kind": "layout_reference",
+      "title": "Chapter opener example",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "draft_submitted",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": "deterministic_layout",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
+          "sha256": "ab864d6fe834ce532aea7105420e44697d0ed882ff99f1836987b35f8f973867",
+          "submitted_at": "2026-09-24T10:10:38Z",
+          "source": "reference-render:default",
+          "status": "draft",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        },
+        {
+          "revision": "v2",
+          "path": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v2.png",
+          "sha256": "7eeea306b30b6d7061938dcb4c21563d9b444d3ac62940f0d885474f21c434ed",
+          "submitted_at": "2026-09-24T10:11:00Z",
+          "source": "reference-render:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v2",
+        "path": "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+        "sha256": "7eeea306b30b6d7061938dcb4c21563d9b444d3ac62940f0d885474f21c434ed",
+        "approved_at": "2026-09-24T10:12:20Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v2.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-page-diagnostic",
+      "kind": "page_reference",
+      "title": "Activity page example: No. 01 initial assessment",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": "deterministic_layout",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
+          "sha256": "61ec639bcccbd66030dd5c203fd73c09cd09855d659d93bb5eb20927d13cb0b9",
+          "submitted_at": "2026-09-24T10:11:01Z",
+          "source": "reference-render:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-page-diagnostic-activity-page-example-no-01-initial-assessment.png",
+        "sha256": "61ec639bcccbd66030dd5c203fd73c09cd09855d659d93bb5eb20927d13cb0b9",
+        "approved_at": "2026-09-24T10:12:21Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-page-editorial",
+      "kind": "page_reference",
+      "title": "Editorial illustration example: Stage One doorstep scene",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": "generative_style",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
+          "sha256": "445cb23a6f52efe2147d00593f845d8eff73ed5a80f335bc263dcfb0a46f26b0",
+          "submitted_at": "2026-09-24T10:10:22Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png",
+        "sha256": "445cb23a6f52efe2147d00593f845d8eff73ed5a80f335bc263dcfb0a46f26b0",
+        "approved_at": "2026-09-24T10:10:22Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-palette",
+      "kind": "palette_reference",
+      "title": "Palette and type sheet",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "draft_submitted",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": "deterministic_layout",
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-palette/ref-palette-v1.png",
+          "sha256": "5fe5422e7bc2c55bbeceb8ab47a60d03881bda1d2fa2d7c4473e656afd68afe8",
+          "submitted_at": "2026-09-24T10:11:03Z",
+          "source": "reference-render:default",
+          "status": "draft",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        },
+        {
+          "revision": "v2",
+          "path": "assets/drafts/ref-palette/ref-palette-v2.png",
+          "sha256": "7c5f8f8d31dc7c295e3187373e88037c6401ed4c367c741969d82ededb7d7158",
+          "submitted_at": "2026-09-24T10:12:20Z",
+          "source": "reference-render:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v2",
+        "path": "assets/approved/ref-palette-palette-and-type-sheet.png",
+        "sha256": "7c5f8f8d31dc7c295e3187373e88037c6401ed4c367c741969d82ededb7d7158",
+        "approved_at": "2026-09-24T10:12:21Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-palette/ref-palette-v2.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 1800,
+        "height": 2700
       },
       "approval_history": [],
       "notes": null

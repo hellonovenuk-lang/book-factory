@@ -83,16 +83,16 @@
     "set_at": "2026-09-23T18:45:01Z",
     "source": "new_book_default"
   },
-  "production_mode": "continue_automatically",
+  "production_mode": "wait_for_operator",
   "blocked": null,
   "next_action": {
-    "task_id": "golf-addicts-guide-to-family-reintegration-ref-layout-chapter-opener-register",
-    "type": "authoring",
-    "summary": "Register required visual reference 'ref-layout-chapter-opener'",
+    "task_id": "golf-addicts-guide-to-family-reintegration-lock-visual",
+    "type": "operator_decision",
+    "summary": "Approve the reference set and lock the visual style",
     "page_id": null,
-    "asset_id": "ref-layout-chapter-opener",
-    "approval_required": false,
-    "mode": "continue_automatically"
+    "asset_id": null,
+    "approval_required": true,
+    "mode": "wait_for_operator"
   },
   "last_transition": {
     "from": "manuscript_lock",
@@ -102,5 +102,5 @@
     "note": "stage derived from repository state"
   },
   "created_at": "2026-09-23T18:45:01Z",
-  "updated_at": "2026-09-24T09:35:50Z"
+  "updated_at": "2026-09-24T10:12:21Z"
 }
