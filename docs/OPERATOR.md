@@ -240,7 +240,54 @@ words yourself.
 
 Write a JSON file listing every page in order. The recommended way is to
 write each page's spec (the exact final copy, and the brief for its artwork)
-in the same file, in one pass from the locked manuscript:
+in the same file, in one pass from the locked manuscript.
+
+### Building the plan from the manuscript
+
+If the manuscript already follows the conventions below, you do not have to
+write the plan file by hand:
+
+```bash
+bookfactory plan golf-addict --from-manuscript --out plan.json
+```
+
+This reads the locked manuscript (`manuscript/manuscript.md`) and writes a
+plan file of the same shape shown below, plus a fit report, to `plan.json`.
+It changes nothing in the book yet - look at both files first. The report
+says which pages were split (a chapter opener or text page that ran over one
+page is split at a paragraph break into a "(continued)" page), which
+activity pages are too long to split and need shortening by hand, and which
+pages the tool wasn't confident mapping (kept as plain text and listed as a
+warning, never dropped). Fix anything the report flags, then load the
+result the normal way:
+
+```bash
+bookfactory plan golf-addict --from-file plan.json
+```
+
+The picture budget (below) still applies at this step, exactly as it does
+for a hand-written plan file.
+
+Lay the manuscript out like this so the command can read it (the Golf
+Addict's Guide's manuscript is a working example):
+
+- `## Front matter`, with `### Title page`, `### Contents` and any other
+  `###` section becoming a text page.
+- `## Stage N: Name` starts a chapter. Its first section must be
+  `### Chapter opener` - heading line, subheading line, body paragraphs, and
+  an optional `[Picture: ...]` note for the opener artwork.
+- An ordinary `###` section becomes a text page.
+- `### No. NN · Kind: Title` becomes a numbered activity page. Inside it,
+  numbered statements plus a `Score: ____ out of N` line become a tick list
+  and score box, `- [ ]` lines become a checklist, a markdown table becomes a
+  fill-in table, `> **Case notes ...**` becomes a case note, and
+  `[Typeset diagram: ...]` followed by a band list becomes a gauge - see
+  `docs/RENDERING.md` for the full block list.
+- A `[Picture: ...]` note anywhere outside a chapter opener is flagged as a
+  warning, not acted on.
+
+Writing each page's spec by hand in one file, as below, is still there for a
+plan the manuscript conventions don't fit:
 
 ```json
 {
@@ -613,6 +660,8 @@ bookfactory pictures set <book> <chapter_openers|limit|unlimited> [--count N] --
 bookfactory status <book>                      where it stands
 bookfactory next <book>                        what to do next
 bookfactory task <book>                        the current task in full
+bookfactory plan <book> --from-manuscript --out plan.json
+                                                turn the locked manuscript into a page plan file, plus a fit report (writes nothing to the book)
 bookfactory plan <book> --from-file plan.json  plan the pages, with each page's spec (and its artwork) in the same file
 bookfactory spec <book> p004 --from-file s.json write or replace one page's spec
 bookfactory asset add <book> <asset-id>        register a reference or other asset (page artwork registers itself from the spec)

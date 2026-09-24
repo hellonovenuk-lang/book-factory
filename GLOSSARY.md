@@ -55,6 +55,11 @@ in parallel.
 **Fetch.** Downloading the latest changes from GitHub without changing your
 own files yet.
 
+**Fit test.** The check `bookfactory plan --from-manuscript` runs on every
+page it builds: rendering it in both backends to see whether the copy
+actually fits, splitting an overrun chapter opener or text page at a
+paragraph break and naming an overrun activity page instead of splitting it.
+
 **GitHub.** The website that stores the repository online. Work isn't safe
 until it is pushed there.
 
@@ -91,6 +96,11 @@ out work to helpers, checks their work and saves it.
 when". Only one is open at a time.
 
 **Plan archive.** `docs/PLAN-ARCHIVE.md`: where finished phases go, so `PLAN.md` stays short.
+
+**Plan file.** The JSON file `bookfactory plan --from-file` loads, listing
+every page in order with its type and (usually) its spec. `plan
+--from-manuscript` can write one of these for you from the locked
+manuscript, to look at before loading it.
 
 **Plugin.** A downloadable bundle of commands, helpers and hooks made by
 someone else. We don't install any; we write our own.

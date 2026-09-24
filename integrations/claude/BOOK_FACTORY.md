@@ -114,6 +114,23 @@ If you are drafting a brief, manuscript or page copy:
 Write it properly the first time rather than generating something and letting QA
 catch it.
 
+Write the manuscript to the conventions `docs/OPERATOR.md` step 6 describes
+(front matter, `## Stage N: Name` chapters starting with
+`### Chapter opener`, `### No. NN · Kind: Title` activity sections, and so
+on). Then build the page plan from it with the command instead of writing
+every page spec by hand:
+
+```bash
+bookfactory plan <book> --from-manuscript --out <scratch>/plan.json
+```
+
+Read the fit report it writes alongside the plan - it says which pages it
+split to fit, which activity pages are too long and need shortening, and
+which sections it wasn't confident mapping (kept as a warning, never
+dropped). Fix the manuscript or the plan file for anything flagged, then load
+it with `bookfactory plan <book> --from-file <scratch>/plan.json`. This is
+also what `/write-book` does at the page-plan step.
+
 A diagnostic panel, gauge, checklist-with-ticks or cut-out card is a page
 spec detail, not a picture: write it as an `activity` page's `blocks`
 (`docs/RENDERING.md`), and it never touches the picture budget in

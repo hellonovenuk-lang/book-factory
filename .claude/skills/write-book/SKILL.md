@@ -52,9 +52,18 @@ Repeat:
    written. Do not work ahead into the next task.
 4. Save it where `output.destination` says:
    - a Markdown file: write that file.
-   - a page plan: write the plan JSON in the scratchpad, then run
-     `bookfactory plan <book> --from-file <plan.json>`. Stay within the
-     picture budget; if the book needs more pictures, stop and ask.
+   - a page plan: run
+     `bookfactory plan <book> --from-manuscript --out <scratch>/plan.json`
+     to build it from the locked manuscript rather than writing every page
+     by hand. Read the fit report it writes alongside the plan: fix the
+     manuscript or the plan file for any warning (a section it wasn't
+     confident mapping) or `too_long` page (needs splitting or
+     shortening), then run
+     `bookfactory plan <book> --from-file <scratch>/plan.json`. Stay within
+     the picture budget; if the book needs more pictures, stop and ask.
+     If the manuscript doesn't fit the command's conventions
+     (`docs/OPERATOR.md` step 6) for a page, write that one page's entry by
+     hand in the plan JSON instead.
    - a page spec: write the spec JSON in the scratchpad, then run
      `bookfactory spec <book> <page-id> --from-file <spec.json>`. Copy comes
      from the locked manuscript, never invented; never set
