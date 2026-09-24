@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "task_id": "golf-addicts-guide-to-family-reintegration-art-stage-08-opener-illustration",
+  "book_id": "golf-addicts-guide-to-family-reintegration",
+  "type": "illustration",
+  "stage": "page_production",
+  "summary": "Create illustration 'art-stage-08-opener' for page p063",
+  "instructions": "Dave in a graduation gown and mortarboard, still wearing his golf cap underneath, shaking hands with Sue at the kitchen table while Alfie and Poppy clap and Biscuit the dog wears a small ribbon.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.",
+  "page_id": "p063",
+  "asset_id": "art-stage-08-opener",
+  "scene": "Dave in a graduation gown and mortarboard, still wearing his golf cap underneath, shaking hands with Sue at the kitchen table while Alfie and Poppy clap and Biscuit the dog wears a small ribbon.",
+  "characters": [
+    "dave",
+    "sue",
+    "alfie",
+    "poppy",
+    "biscuit"
+  ],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-doorstep-scene.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p063.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1080
+  },
+  "output": {
+    "destination": "assets/drafts/art-stage-08-opener/",
+    "submit_command": "bookfactory submit golf-addicts-guide-to-family-reintegration art-stage-08-opener --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-24T10:56:10Z",
+  "closed_at": "2026-09-24T10:56:11Z"
+}

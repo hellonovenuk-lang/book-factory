@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T10:55:03Z",
+  "updated_at": "2026-09-24T10:56:22Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -233,12 +233,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-05-opener/art-stage-05-opener-v1.png",
+          "sha256": "46cd8c8f4294e99bc91cb956ac208fbff190b5d6da517209661ba1ceeead6cd8",
+          "submitted_at": "2026-09-24T10:55:51Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-05-opener-stage-five-family-occasions.png",
+        "sha256": "46cd8c8f4294e99bc91cb956ac208fbff190b5d6da517209661ba1ceeead6cd8",
+        "approved_at": "2026-09-24T10:55:51Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-05-opener/art-stage-05-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },
@@ -260,12 +286,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-06-opener/art-stage-06-opener-v1.png",
+          "sha256": "54d758cb808d222a1edd7e03d69ac21bdc1a6c97d775b73d91a96e56bfa72892",
+          "submitted_at": "2026-09-24T10:55:57Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-06-opener-stage-six-holidays.png",
+        "sha256": "54d758cb808d222a1edd7e03d69ac21bdc1a6c97d775b73d91a96e56bfa72892",
+        "approved_at": "2026-09-24T10:55:57Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-06-opener/art-stage-06-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },
@@ -287,12 +339,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-07-opener/art-stage-07-opener-v1.png",
+          "sha256": "b2a19322d3da169ee37e492aaf71bdd3b3eb21db11d6777fcee3b759d5ee565a",
+          "submitted_at": "2026-09-24T10:56:03Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-07-opener-stage-seven-relapse-prevention.png",
+        "sha256": "b2a19322d3da169ee37e492aaf71bdd3b3eb21db11d6777fcee3b759d5ee565a",
+        "approved_at": "2026-09-24T10:56:03Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-07-opener/art-stage-07-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },
@@ -314,12 +392,38 @@
         "ref-character-support",
         "ref-page-editorial"
       ],
-      "status": "planned",
+      "status": "approved",
       "revision_open": false,
       "locked": false,
       "reference_role": null,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/art-stage-08-opener/art-stage-08-opener-v1.png",
+          "sha256": "fb0ab039a1ab705e4358009aa26b52df7061b9065bc1baa50c28d6858ed147ad",
+          "submitted_at": "2026-09-24T10:56:11Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/art-stage-08-opener-stage-eight-graduation.png",
+        "sha256": "fb0ab039a1ab705e4358009aa26b52df7061b9065bc1baa50c28d6858ed147ad",
+        "approved_at": "2026-09-24T10:56:11Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/art-stage-08-opener/art-stage-08-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     },
