@@ -224,6 +224,13 @@ as real type over or beneath it.
 If a page spec sets `illustration.embedded_text: true`, treat it as a mistake
 and raise it with the operator.
 
+A diagram does not have to be a generated picture at all. The `activity`
+page type (`docs/RENDERING.md`) builds numbered activity panels - ticks,
+checklists, score boxes, write-in lines, tables, a gauge, a cycle, a
+cut-out card and more - entirely from its `blocks`, every word and label set
+as real type by the renderer. Nothing an `activity` page draws counts
+against the picture budget in section 5a.
+
 ## 5a. Stay within the picture budget
 
 Every book records a picture budget in `book.json` (the `pictures` block):
@@ -392,6 +399,7 @@ as draft v2; awaiting approval".
 | Register artwork you made | `bookfactory submit <book> <asset-id> --kind asset --file <path>` |
 | Register a page render | `bookfactory submit <book> <page-id> --kind page --file <path>` |
 | Render a page from its spec | `bookfactory render <book> --page <page-id> --submit` |
+| Render a typeset sample page for the reference set | `bookfactory reference render <book> <asset-id> --from-file <spec.json> [--dpi 300] [--json]` |
 | Typeset the full-wrap cover | `bookfactory cover build <book> [--submit]` |
 | Check the whole project | `bookfactory validate <book>` |
 | Run quality checks | `bookfactory qa <book> --json` |

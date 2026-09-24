@@ -97,6 +97,16 @@ Plan within it. If a book genuinely needs more pictures than its budget
 allows, say so and ask the operator - never run `bookfactory pictures set`
 yourself; that command, like `policy set`, is the operator's alone.
 
+## Typeset reference samples are not a visual task
+
+Four of the reference-set entries (a chapter opener, a normal page, a
+diagnostic/checklist page, the palette sheet) are typeset layout, not
+artwork: produced with `bookfactory reference render <book> <asset-id>
+--from-file <spec.json>` (shell access required), which renders an ordinary
+page spec, rasterises it to a 300-DPI PNG and submits it as a draft of that
+reference. If you only have file/no-shell access, hand this one to whoever
+does; it is never a Higgsfield illustration task. See `docs/RENDERING.md`.
+
 ## Doing a visual task
 
 A page's illustration asset is registered automatically, from the page spec
@@ -233,7 +243,11 @@ The same discipline applies to words:
 3. Page copy goes in the page spec (`pages/specs/<page-id>.json`), not into
    artwork. Specs are usually written together with the page plan, in one
    file (`bookfactory plan <book> --from-file plan.json`), each entry's
-   `spec` holding that page's copy and illustration brief.
+   `spec` holding that page's copy and illustration brief. A diagnostic
+   panel, gauge, checklist-with-ticks or cut-out card is written as an
+   `activity` page's `blocks` (`docs/RENDERING.md`), typeset by the
+   renderer - never generated as a picture, and never counted against the
+   picture budget above.
 4. Content QA will flag AI constructions the voice bible bans - the
    "it's not X, it's Y" shape, corporate vocabulary, three-part aphorisms used
    as rhythm. Write without them in the first place.

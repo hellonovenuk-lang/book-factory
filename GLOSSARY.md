@@ -6,11 +6,15 @@ here. Alphabetical.
 
 **API (and API key).** A way for one program to use another service directly, e.g. Book Factory asking an image service for a picture. The API key is its password; it is paid per use and kept as a secret setting, never in the repository.
 
+**Activity page.** A page type (`activity`) for numbered activity panels - questionnaires with tick boxes, score boxes, write-in lines, a gauge, a cut-out card and more - built from a list of `blocks`, every word set as real type, never a generated picture.
+
 **Agent team.** An experimental Claude Code mode where several Claude sessions
 work as a team and message each other. We deliberately don't use it.
 
 **AGENTS.md.** The rulebook for every AI working in this repository (Claude,
 ChatGPT, anything else). The most important file for behaviour.
+
+**Block.** One item in an `activity` page's `blocks` list (e.g. a tick list, a score box, a gauge, a cut-out card) - the renderer sets every block as real type, never a picture.
 
 **Branch.** A separate line of changes in a repository. `main` is the real
 one. Web sessions sometimes start on a side branch with a name like
@@ -75,6 +79,8 @@ out work to helpers, checks their work and saves it.
 
 **Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
 
+**Palette sheet.** A page type (`palette_sheet`) that draws a book's colour swatches and type sizes straight from `design-tokens.json`, used for the `ref-palette` reference. Never written by hand.
+
 **Page plan.** The list of every page in a book, in order, with its type and title (`pages/manifest.json`). It can carry each page's spec too, so the whole plan is written in one file.
 
 **Page spec.** One page's exact words, layout and illustration brief (`pages/specs/<page>.json`). The renderer sets the page from it. If it names an artwork (`illustration.asset_id`), that artwork is registered for the page automatically.
@@ -100,6 +106,8 @@ can see them.
 
 **Repository (repo).** The project folder with its full history of changes.
 Book Factory's lives on GitHub.
+
+**Sample page (reference render).** A one-page render of an ordinary page spec, made with `bookfactory reference render` to show a typeset reference (chapter opener, normal page, checklist page, palette sheet) before any real page exists. It is never added to the page plan.
 
 **Series preset.** Starting a new book from an earlier, locked book in the same series (`create --series-from`), so it reuses that book's voice, visual rules, design settings and reference art instead of making them again. The reused art arrives as drafts, still to be approved in the new book.
 

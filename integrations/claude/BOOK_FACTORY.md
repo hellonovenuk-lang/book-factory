@@ -114,6 +114,11 @@ If you are drafting a brief, manuscript or page copy:
 Write it properly the first time rather than generating something and letting QA
 catch it.
 
+A diagnostic panel, gauge, checklist-with-ticks or cut-out card is a page
+spec detail, not a picture: write it as an `activity` page's `blocks`
+(`docs/RENDERING.md`), and it never touches the picture budget in
+`AGENTS.md` section 5a.
+
 ## Images
 
 Every book has a recorded picture budget (`AGENTS.md` section 5a); read it
@@ -169,6 +174,21 @@ over instead:
 
 Then stop. Do not substitute a placeholder, do not describe the picture in the
 page spec as if it existed, and do not advance past it.
+
+### Typeset reference samples
+
+The visual-lock reference set includes typeset examples - a chapter opener,
+a normal page, a diagnostic/checklist page, the palette sheet - that don't
+need a real page to exist first. Render one from an ordinary page spec and
+submit it as a new draft of the already-registered reference asset with:
+
+```bash
+bookfactory reference render <book> <asset-id> --from-file <spec.json> [--dpi 300] [--json]
+```
+
+This is a render, not a generation - no Higgsfield credits, no image model.
+See `docs/RENDERING.md` for the full mechanics and `docs/OPERATOR.md` for
+when to use it.
 
 ## Reporting back
 

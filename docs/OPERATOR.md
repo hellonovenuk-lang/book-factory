@@ -223,6 +223,19 @@ bookfactory lock visual golf-addict
 **Now, and not before, page production is allowed.** Everything drawn from here
 on points at these exact files.
 
+Four of the six reference examples above (the chapter opener, the normal
+page, the diagnostic/checklist page, and the palette sheet) don't need any
+real page written first - they can be produced straight away as typeset
+"sample" pages, with `bookfactory reference render`. This renders a page the
+normal way and turns it into a picture at print quality, then submits that
+picture as a draft of the reference, ready for you to approve exactly like
+any other reference. It is not a generated picture: it is the same real type
+and layout the finished book will use, just proved early so the rest of the
+book has something locked to match. The palette reference in particular
+uses a page type (`palette_sheet`, below) that draws your book's colours
+and type sizes straight from its design settings, so you never write its
+words yourself.
+
 ## 6. Plan the pages
 
 Write a JSON file listing every page in order. The recommended way is to
@@ -266,7 +279,17 @@ anything that is not a page's own illustration.
 
 Page types available: `chapter_opener`, `editorial_illustration`,
 `text_illustration`, `checklist`, `diagnostic_test`, `comparison`, `diagram`,
-`quote`, `certificate`, `closing`, `front_matter`, `contents`.
+`quote`, `certificate`, `closing`, `front_matter`, `contents`, `activity`.
+
+`activity` is for numbered activity panels - a questionnaire with tick
+boxes, a score box, write-in lines, a table, a gauge, a cycle diagram, a
+cut-out card, and so on. Every word and label in one, including a diagram's
+labels, is real type set by the renderer from the page's own list of
+"blocks" - none of it is a generated picture, so it never counts against
+your picture budget below. `palette_sheet` is not a page of the book: it
+is only for the "palette and type rules" sample made with `bookfactory
+reference render`. See `docs/RENDERING.md` for both, in
+full, with an example.
 
 You can also add pages one at a time, without a spec, and write the spec
 later:
