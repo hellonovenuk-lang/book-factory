@@ -39,13 +39,32 @@ REQUIRED_COPY = {
     "closing": ["heading"],
     "front_matter": [],
     "contents": ["items"],
+    "activity": ["blocks"],
 }
+
+#: Block keys that are structure, not copy, so QA does not read them as words.
+_BLOCK_STRUCTURE_KEYS = ("type", "widths", "start", "out_of", "count")
+
+
+def _block_text(value) -> list[str]:
+    """Every string of copy inside activity blocks, however deeply nested
+    (tick items, table rows, gauge bands, cycle steps)."""
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, list):
+        return [text for item in value for text in _block_text(item)]
+    if isinstance(value, dict):
+        return [text for key, item in value.items()
+                if key not in _BLOCK_STRUCTURE_KEYS for text in _block_text(item)]
+    return []
 
 
 def _copy_text(copy: dict) -> str:
     chunks = []
-    for value in copy.values():
-        if isinstance(value, str):
+    for key, value in copy.items():
+        if key == "blocks":
+            chunks.extend(_block_text(value))
+        elif isinstance(value, str):
             chunks.append(value)
         elif isinstance(value, list):
             for item in value:

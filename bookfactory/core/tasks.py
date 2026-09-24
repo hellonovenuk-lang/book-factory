@@ -391,7 +391,7 @@ def _page_plan_task(book) -> Task | None:
             f"Run: {_cmd(book, 'plan', '<book>', '--from-file <plan.json>')}\n"
             "or add pages one at a time with `bookfactory plan <book> --add`.\n\n"
             "Page types: chapter_opener, editorial_illustration, text_illustration, checklist, "
-            "diagnostic_test, comparison, diagram, quote, certificate, closing, front_matter, "
+            "diagnostic_test, activity (numbered panels and typeset diagrams built from blocks), comparison, diagram, quote, certificate, closing, front_matter, "
             "contents."
         ),
         required_inputs=["manuscript/manuscript.md", "manuscript/outline.md",

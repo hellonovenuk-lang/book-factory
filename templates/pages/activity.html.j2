@@ -1,0 +1,28 @@
+{% extends "_base.html.j2" %}
+{% import "_blocks.html.j2" as blocks %}
+
+{#- An activity page: optional intro, then one numbered panel built from
+    typeset blocks (tick boxes, score boxes, write-in lines, tables, case
+    notes, gauges, cycles, cut-out cards, signature lines). -#}
+
+{% block content %}
+  {% if copy.get('eyebrow') %}<p class="eyebrow">{{ copy['eyebrow'] }}</p>{% endif %}
+
+  {% if body_paragraphs %}
+  <div class="prose prose--tight activity-intro">
+    {% for para in body_paragraphs %}<p>{{ para }}</p>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% set tab = [copy.get('panel_number'), copy.get('panel_kind')] | select | join(' · ') %}
+  <div class="activity{% if tab %} activity--tabbed{% endif %}">
+    {% if tab %}<div class="activity__tab">{{ tab }}</div>{% endif %}
+    <h2 class="activity__title">{{ copy.get('heading') or page.title }}</h2>
+    {% if copy.get('subheading') %}<p class="activity__subheading">{{ copy['subheading'] }}</p>{% endif %}
+    {% if copy.get('instructions') %}<p class="activity__instructions">{{ copy['instructions'] }}</p>{% endif %}
+
+    {{ blocks.render_blocks(copy.get('blocks') or []) }}
+
+    {% if copy.get('footnote') %}<p class="activity__note">{{ copy['footnote'] }}</p>{% endif %}
+  </div>
+{% endblock %}

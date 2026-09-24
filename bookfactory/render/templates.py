@@ -52,7 +52,13 @@ def page_env() -> Environment:
         autoescape=select_autoescape(["html", "xml", "j2"], default_for_string=True),
     )
     env.filters["paragraphs"] = _paragraphs
+    env.globals["fail"] = _fail
     return env
+
+
+def _fail(message: str):
+    """Raise from inside a template (Jinja has no raise tag)."""
+    raise RenderError(message, remedy="Fix the block's \"type\" in the page spec.")
 
 
 def _paragraphs(value) -> list[str]:

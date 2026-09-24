@@ -1,0 +1,169 @@
+{#- Typeset blocks: activity panels, write-in furniture and typeset diagrams.
+
+    One macro per block type, so any page template can reuse them:
+
+        {% import "_blocks.html.j2" as blocks %}
+        {{ blocks.render_blocks(copy.get('blocks') or []) }}
+
+    Every word comes from the page spec and is set as real type. Diagrams
+    (gauge, cycle) are drawn with CSS boxes and rules, never with an image.
+    Block fields are read with ['key'] rather than .key, because a dict's own
+    methods (items, count, values) would shadow a key of the same name.
+-#}
+
+{%- set KNOWN_BLOCKS = ["prose", "ticks", "checklist", "score", "lines", "table",
+                        "casenote", "gauge", "cycle", "cutout", "signature"] -%}
+
+{% macro box() -%}<span class="bx-box" aria-hidden="true"></span>{%- endmacro %}
+
+{% macro prose(block) -%}
+<div class="blk blk-prose">
+  {% for para in block['text'] | paragraphs %}<p>{{ para }}</p>{% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro ticks(block) -%}
+<table class="blk blk-ticks">
+  {% set start = block.get('start') or 1 %}
+  {% for item in block['items'] %}
+  <tr><td class="blk-ticks__n">{{ start + loop.index0 }}</td><td class="blk-ticks__t">{{ item }}</td><td class="blk-ticks__bx">{{ box() }}</td></tr>
+  {% endfor %}
+</table>
+{%- endmacro %}
+
+{% macro checklist(block) -%}
+<table class="blk blk-check">
+  {% for item in block['items'] %}
+  <tr><td class="blk-check__bx">{{ box() }}</td><td class="blk-check__t">{{ item }}</td></tr>
+  {% endfor %}
+</table>
+{%- endmacro %}
+
+{% macro score(block) -%}
+<div class="blk blk-score">
+  <span class="blk-score__label">{{ block.get('label') or 'Score' }}</span><span class="blk-score__box"></span>{% if block.get('out_of') %}<span class="blk-score__outof">/ {{ block['out_of'] }}</span>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro lines(block) -%}
+<div class="blk blk-lines">
+  {% if block.get('label') %}<div class="blk-lines__label">{{ block['label'] }}</div>{% endif %}
+  {% for _ in range(block['count']) %}<div class="blk-lines__rule"></div>{% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro table_cell(cell) -%}
+{%- set text = cell | string -%}
+{%- if text.startswith('[ ]') -%}
+<td class="blk-table__tick">{{ box() }}{% if text[3:].strip() %} <span>{{ text[3:].strip() }}</span>{% endif %}</td>
+{%- elif not text.strip() -%}
+<td class="blk-table__blank"></td>
+{%- else -%}
+<td>{{ text }}</td>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro table(block) -%}
+<table class="blk blk-table">
+  {% if block.get('widths') %}
+  <colgroup>{% for width in block['widths'] %}<col style="width: {{ width }}">{% endfor %}</colgroup>
+  {% endif %}
+  {% if block.get('headers') %}
+  <thead><tr>{% for header in block['headers'] %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+  {% endif %}
+  <tbody>
+    {% for row in block['rows'] %}
+    <tr>{% for cell in row %}{{ table_cell(cell) }}{% endfor %}</tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%- endmacro %}
+
+{% macro casenote(block) -%}
+<aside class="blk blk-casenote">
+  <div class="blk-casenote__label">{{ block['label'] }}</div>
+  {% for para in block['text'] | paragraphs %}<p>{{ para }}</p>{% endfor %}
+</aside>
+{%- endmacro %}
+
+{% macro gauge(block) -%}
+{#- Equal segments, graded from light to dark grey. The shade is a computed
+    number, never copy, so it is safe inside the style attribute. -#}
+{%- set bands = block['bands'] -%}
+{%- set steps = (bands | length) - 1 if (bands | length) > 1 else 1 -%}
+<table class="blk blk-gauge">
+  <tr class="blk-gauge__bar">
+    {% for band in bands %}
+    {% set shade = (236 - (loop.index0 * 176 / steps)) | round | int %}
+    <td style="background-color: rgb({{ shade }}, {{ shade }}, {{ shade }})"></td>
+    {% endfor %}
+  </tr>
+  <tr class="blk-gauge__range">
+    {% for band in bands %}<td>{{ band['range'] }}</td>{% endfor %}
+  </tr>
+  <tr class="blk-gauge__label">
+    {% for band in bands %}<td>{{ band['label'] }}</td>{% endfor %}
+  </tr>
+</table>
+{%- endmacro %}
+
+{% macro cycle(block) -%}
+{#- A looped column: numbered boxes joined by down arrows, with a return
+    bracket down the right-hand side whose arrowhead points back into step 1. -#}
+<div class="blk blk-cycle">
+  <div class="blk-cycle__return" aria-hidden="true"><span class="blk-cycle__head"></span></div>
+  {% for step in block['steps'] %}
+  <div class="blk-cycle__step"><span class="blk-cycle__n">{{ loop.index }}</span><span class="blk-cycle__t">{{ step }}</span></div>
+  {% if not loop.last %}<div class="blk-cycle__arrow" aria-hidden="true"><span></span></div>{% endif %}
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro cutout(block) -%}
+<div class="blk blk-cutout">
+  {% if block.get('heading') %}<div class="blk-cutout__heading">{{ block['heading'] }}</div>{% endif %}
+  {% for para in block['text'] | paragraphs %}<p>{{ para }}</p>{% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro signature(block) -%}
+<table class="blk blk-signature">
+  <tr>
+    {% for field in block['fields'] %}
+    <td><div class="blk-signature__line"></div><div class="blk-signature__label">{{ field }}</div></td>
+    {% endfor %}
+  </tr>
+</table>
+{%- endmacro %}
+
+{% macro unknown(block) -%}
+{#- There is no raise tag in Jinja. A `fail` helper in the template
+    environment turns this into a RenderError; without one, the strict
+    undefined lookup below still stops the render with a message naming the
+    block type. Unknown blocks are never silently skipped. -#}
+{%- set message = "Unknown activity block type '" ~ (block.get('type') if block is mapping else block) ~ "'. Known types: " ~ (KNOWN_BLOCKS | join(', ')) -%}
+{%- if fail is defined -%}{{ fail(message) }}{%- else -%}{{ {}[message] }}{%- endif -%}
+{%- endmacro %}
+
+{% macro render_block(block) -%}
+{%- set kind = block.get('type') if block is mapping else None -%}
+{%- if kind == 'prose' -%}{{ prose(block) }}
+{%- elif kind == 'ticks' -%}{{ ticks(block) }}
+{%- elif kind == 'checklist' -%}{{ checklist(block) }}
+{%- elif kind == 'score' -%}{{ score(block) }}
+{%- elif kind == 'lines' -%}{{ lines(block) }}
+{%- elif kind == 'table' -%}{{ table(block) }}
+{%- elif kind == 'casenote' -%}{{ casenote(block) }}
+{%- elif kind == 'gauge' -%}{{ gauge(block) }}
+{%- elif kind == 'cycle' -%}{{ cycle(block) }}
+{%- elif kind == 'cutout' -%}{{ cutout(block) }}
+{%- elif kind == 'signature' -%}{{ signature(block) }}
+{%- else -%}{{ unknown(block) }}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro render_blocks(blocks) -%}
+{% for block in blocks %}
+{{ render_block(block) }}
+{% endfor %}
+{%- endmacro %}
