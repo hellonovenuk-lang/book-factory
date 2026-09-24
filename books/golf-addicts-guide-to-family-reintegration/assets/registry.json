@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T09:30:18Z",
+  "updated_at": "2026-09-24T09:35:50Z",
   "assets": [
     {
       "asset_id": "ref-character-main",
@@ -34,14 +34,70 @@
           "sha256": "023d00b433273dba1c422e9bcf114e28aa363ef93180f1b66436ecca4b016a5b",
           "submitted_at": "2026-09-24T09:30:18Z",
           "source": null,
-          "status": "draft",
+          "status": "approved",
           "note": null,
           "constraint_failures": [],
           "width": 2528,
           "height": 1696
         }
       ],
-      "approved": null,
+      "approved": {
+        "revision": "v2",
+        "path": "assets/approved/ref-character-main-main-character-reference.png",
+        "sha256": "023d00b433273dba1c422e9bcf114e28aa363ef93180f1b66436ecca4b016a5b",
+        "approved_at": "2026-09-24T09:33:44Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-character-main/ref-character-main-v2.png",
+        "note": "Kieran reviewed it in chat: Dave's good",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-character-support",
+      "kind": "character_reference",
+      "title": "Supporting characters: Sue, Alfie, Poppy and Biscuit",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-character-support/ref-character-support-v1.png",
+          "sha256": "b56cf2000cf72afbc54f96c51da400ab295dcbe697f3a396804a1764829fd044",
+          "submitted_at": "2026-09-24T09:35:29Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-character-support-supporting-characters-sue-alfie-poppy-and-biscuit.png",
+        "sha256": "b56cf2000cf72afbc54f96c51da400ab295dcbe697f3a396804a1764829fd044",
+        "approved_at": "2026-09-24T09:35:50Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-character-support/ref-character-support-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
       "approval_history": [],
       "notes": null
     }

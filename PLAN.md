@@ -13,7 +13,7 @@ here.
 
 > **Doing:** no phase open. Phase 15 (small, done in one sitting at Kieran's request) is done.
 > **Finished:** Phase 15, the guard follows the recorded policy: `guard-authority.py` lets `approve`, `lock` and `cover approve` through when run with `--autonomous` (not signed "kieran"), since Book Factory refuses those unless the policy authorizes them; `/write-book` now runs a lock itself when its task's mode is `continue_automatically`. 510 tests passing, 2 skipped. Earlier: Phase 14, `/write-book`.
-> **Next action:** plan Phase 16 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. `produce` slice 4 (pictures in the loop) moves to Phase 17.
+> **Next action:** plan Phase 16 with `/plan-phase`: bring the Runner's Guide v4 typeset elements (numbered activity panels with tick boxes, score boxes, write-in lines and fill-in tables; typeset diagrams such as gauges, cycles and trackers; dashed cut-out cards) into the standard renderer, so the Golf Addict's Guide gets them before its pages are made (Kieran, 2026-09-23). Reference: `books/runners-guide-to-normal-conversation/interior/build_interior.py` and its `README.md`. Also include a way to render the typeset sample pages the reference set needs before the page plan (`ref-layout-chapter-opener`, `ref-page-diagnostic`, `ref-page-editorial`, `ref-palette`): the Golf Addict's Guide is waiting on exactly these, with Dave and the family references already approved. `produce` slice 4 (pictures in the loop) moves to Phase 17.
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
@@ -29,6 +29,7 @@ here.
 - Editing plan files with a Python or shell script whose text mentions approve/assemble: the approval guard blocks it (known false alarm, in `IDEAS.md`). Use the Edit tool, or a script that doesn't name those words.
 - Asking a checker to set up a live render on the demo copy with `revise`: the guard blocks it, correctly. Prove the render path with tests instead.
 - Running `bookfactory lock --help` to check its arguments: the guard blocks any command naming lock/approve, even `--help`. Read the argparse definitions in `bookfactory/cli/main.py` instead.
+- An `--autonomous` step written with a shell variable (`bookfactory approve $B ...`): the guard can't read `$B`, so it blocks. Write the book id out in full.
 - Test-driving a book skill against the real checkout: it writes a new book into `books/`. Clone to the scratchpad and set `PYTHONPATH` and `BOOKFACTORY_ROOT` to the clone.
 
 ---
