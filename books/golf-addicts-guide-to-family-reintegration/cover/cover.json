@@ -6,8 +6,8 @@
   "direction": "Bold but muted full-colour gift paperback, white paper, matte. The front shows Dave at the family Sunday roast, mid-swing with a French stick, while Sue, Alfie and Poppy stare at him and Biscuit eyes the roast. Fine ink line with flat muted colour: fairway green, sand, cream, soft navy, small brick-red accents. Open space at the top for the typeset title. The title must read at Amazon thumbnail size.",
   "author": "Kieran Smith",
   "back_copy": "Your family has applied for your return.\n\nFor years you have been on a long tour of duty at the golf club. You have missed birthdays, bath times and most of Sunday. You have described the putt on the 7th roughly four hundred times, including once during a minute's silence.\n\nThis is the official Family Reintegration Programme: eight stages, twenty-four activities, a relapse-prevention plan for the first sunny Saturday in April and a certificate at the end, if you earn it.\n\nFor every golfer who pops out for a quick nine and comes back in the dark, and for everyone waiting at home with his tea under cling film.",
-  "artwork_width_in": 4.35,
-  "artwork_height_in": 6.48,
+  "artwork_width_in": 5.125,
+  "artwork_height_in": 7.64,
   "drafts": [
     {
       "revision": "v1",
@@ -15,8 +15,27 @@
       "sha256": "e0873388c8b616338d0c6c0cd7a89398650b83c9a1997ad2a10a942c0be4210c",
       "artwork": "native",
       "artwork_sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac",
-      "status": "draft",
+      "status": "superseded",
       "submitted_at": "2026-09-24T11:02:27Z",
+      "dimensions": {
+        "page_count": 71,
+        "paper": "white",
+        "spine_in": 0.159892,
+        "width_in": 12.409892,
+        "height_in": 9.25,
+        "trim_width_in": 6.0,
+        "trim_height_in": 9.0,
+        "bleed_in": 0.125
+      }
+    },
+    {
+      "revision": "v2",
+      "path": "cover/drafts/cover-v2.pdf",
+      "sha256": "d4654e214884277946987dd9a1b6cf86d864758de90d34d96994cf5a5bf93f38",
+      "artwork": "native",
+      "artwork_sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac",
+      "status": "draft",
+      "submitted_at": "2026-09-24T11:30:22Z",
       "dimensions": {
         "page_count": 71,
         "paper": "white",
@@ -30,5 +49,13 @@
     }
   ],
   "approved": null,
-  "preflight": null
+  "preflight": null,
+  "design": {
+    "title_font": "style/fonts/ArchivoBlack-Regular.ttf",
+    "body_font": "style/fonts/Archivo-Regular.ttf",
+    "title_size_pt": 32.0,
+    "title_colour": "#2f3e56",
+    "title_over_artwork": true,
+    "title_top_in": 0.25
+  }
 }

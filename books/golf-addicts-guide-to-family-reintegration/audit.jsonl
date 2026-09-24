@@ -202,3 +202,4 @@
 {"at": "2026-09-24T10:56:22Z", "event": "stage_advanced", "from": "kdp_preflight", "to": "cover_production", "by": "system", "note": "stage derived from repository state"}
 {"at": "2026-09-24T11:01:29Z", "event": "draft_submitted", "kind": "asset", "id": "cover-front-artwork", "revision": "v1", "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v1.png", "sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac"}
 {"at": "2026-09-24T11:02:27Z", "event": "cover_draft_submitted", "revision": "v1", "path": "cover/drafts/cover-v1.pdf"}
+{"at": "2026-09-24T11:30:22Z", "event": "cover_draft_submitted", "revision": "v2", "path": "cover/drafts/cover-v2.pdf"}
