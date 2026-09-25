@@ -12,7 +12,20 @@
           "My trigger",
           "What I will do instead"
         ],
-        "rows": []
+        "rows": [
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
       },
       {
         "type": "prose",

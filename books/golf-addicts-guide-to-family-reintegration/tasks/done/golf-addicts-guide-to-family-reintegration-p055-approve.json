@@ -3,9 +3,9 @@
   "task_id": "golf-addicts-guide-to-family-reintegration-p055-approve",
   "book_id": "golf-addicts-guide-to-family-reintegration",
   "type": "approval",
-  "stage": "page_production",
+  "stage": "release_ready",
   "summary": "Approve page p055 - My triggers",
-  "instructions": "Draft v1 of p055 is waiting for an explicit decision.\nFile: pages/drafts/p055/p055-v1.pdf\n\nNothing is approved by silence. Approve or reject explicitly:\n  bookfactory approve golf-addicts-guide-to-family-reintegration p055 --kind page --draft v1\n  bookfactory reject golf-addicts-guide-to-family-reintegration p055 --kind page --draft v1 --reason \"...\"",
+  "instructions": "Draft v2 of p055 is waiting for an explicit decision.\nFile: pages/drafts/p055/p055-v2.pdf\n\nNothing is approved by silence. Approve or reject explicitly:\n  bookfactory approve golf-addicts-guide-to-family-reintegration p055 --kind page --draft v2\n  bookfactory reject golf-addicts-guide-to-family-reintegration p055 --kind page --draft v2 --reason \"...\"",
   "page_id": "p055",
   "asset_id": null,
   "scene": null,
@@ -20,6 +20,6 @@
   "remediation": false,
   "retry_count": 0,
   "mode": "continue_automatically",
-  "created_at": "2026-09-24T10:56:07Z",
-  "closed_at": "2026-09-24T10:56:07Z"
+  "created_at": "2026-09-25T08:21:07Z",
+  "closed_at": "2026-09-25T08:21:25Z"
 }

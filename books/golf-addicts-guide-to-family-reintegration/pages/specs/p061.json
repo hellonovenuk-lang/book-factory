@@ -13,7 +13,23 @@
           "What happened",
           "How I made it up"
         ],
-        "rows": []
+        "rows": [
+          [
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            ""
+          ]
+        ]
       }
     ],
     "instructions": "Record any relapse this week, and how you made it up to the family."

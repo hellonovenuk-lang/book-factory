@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-24T14:14:17Z",
+  "updated_at": "2026-09-25T08:21:35Z",
   "front_matter_pages": 4,
   "pages": [
     {
@@ -2415,21 +2415,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p055/p055-v2.pdf",
+          "sha256": "893937161b7e2dbe82dd463b5e487a3156615cd9750beec760c8051cef289b8e",
+          "submitted_at": "2026-09-25T08:21:05Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p055-my-triggers.pdf",
-        "sha256": "bbf96ede1d5fb4dc45a0997dec7dceaaa45e57c02b9977b9e50a83202fb3116d",
-        "approved_at": "2026-09-24T10:56:07Z",
+        "sha256": "893937161b7e2dbe82dd463b5e487a3156615cd9750beec760c8051cef289b8e",
+        "approved_at": "2026-09-25T08:21:25Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p055/p055-v1.pdf",
+        "source_draft": "pages/drafts/p055/p055-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p055-v1.pdf",
+          "sha256": "bbf96ede1d5fb4dc45a0997dec7dceaaa45e57c02b9977b9e50a83202fb3116d",
+          "approved_at": "2026-09-24T10:56:07Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p055/p055-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-25T08:21:25Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
@@ -2679,21 +2702,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p061/p061-v2.pdf",
+          "sha256": "3642453c7aef5d3f30c5119c013e3a488224253daaf3c466303ee953f40c701e",
+          "submitted_at": "2026-09-25T08:21:07Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p061-relapse-diary.pdf",
-        "sha256": "931b550ce3287296d6a966436ad44e22a02cc7ccbe2369fffa0c312e4c27169e",
-        "approved_at": "2026-09-24T10:56:10Z",
+        "sha256": "3642453c7aef5d3f30c5119c013e3a488224253daaf3c466303ee953f40c701e",
+        "approved_at": "2026-09-25T08:21:26Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p061/p061-v1.pdf",
+        "source_draft": "pages/drafts/p061/p061-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p061-v1.pdf",
+          "sha256": "931b550ce3287296d6a966436ad44e22a02cc7ccbe2369fffa0c312e4c27169e",
+          "approved_at": "2026-09-24T10:56:10Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p061/p061-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-25T08:21:26Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
