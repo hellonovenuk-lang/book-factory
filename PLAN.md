@@ -13,11 +13,10 @@ here.
 
 > **Doing:** no phase open. Phase 17 is done (not yet archived; `/handover` moves it to `docs/PLAN-ARCHIVE.md`).
 > **Finished:** Phase 17: `bookfactory plan <book> --from-manuscript --out <plan.json>` reads the locked manuscript, builds every page (openers, text pages, numbered activity pages from blocks), fit-tests each in both engines, splits overflowing openers and text pages, and writes a plan file only; `plan --from-file` loads it. `/write-book` uses it. Test-driven on a copy of the Golf book: 71 pages, same as the real plan, all fit. Full suite 579 passed, 2 skipped. Earlier today: the branch rule (sessions switch to `main` themselves, never ask).
-> **Next action:** Kieran decides whether to fix the Golf book's two empty worksheet tables (below). Then plan Phase 18 with `/plan-phase` from `IDEAS.md`.
+> **Next action:** plan Phase 18 with `/plan-phase` from `IDEAS.md`. (Done 2026-09-25: the Golf book's empty worksheet tables on p055 and p061, found by Phase 17, are fixed at Kieran's request; both pages are v2 and the interior was rebuilt; still Release Ready and not yet uploaded.)
 
 **Unfinished, carried over:**
-- Golf Addict's Guide, found by Phase 17: approved pages p055 "My triggers" and p061 "Relapse diary" have fill-in tables with no rows to write in (the old one-off plan script dropped the blank rows). Fixing them needs Kieran's `revise` on each page, new renders, his approval and a new assembly. Kieran's call.
-- none else (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
+- none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
 
 **Don't try again:**
 - `git rev-parse --short HEAD origin/main` fails ("Needed a single revision"): run `git rev-parse --short` once per ref.
