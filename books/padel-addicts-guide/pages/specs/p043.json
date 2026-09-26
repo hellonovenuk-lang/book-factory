@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The Monday stand-up",
+  "chapter": 5,
+  "copy": {
+    "heading": "The Monday stand-up",
+    "body": [
+      "The Monday stand-up is a fifteen-minute meeting in which each member of the team says what they did last week, what they are doing this week and anything that might get in the way. It was not designed as a platform for a quick padel stat, but since you joined the team it has become one.",
+      "Recent stats include the number of padel courts in Spain, the number of padel courts in the UK, the number of padel courts in a new development in Leeds, and the number of padel courts you think the firm should build on the roof. The team would like it recorded that the roof is a listed building, and that the firm does not own it.",
+      "Starting this week, please give your update in the same order as everyone else: last week, this week, anything in the way. Padel is not in the way. Padel is where you go afterwards."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p043",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "type": "activity",
+  "title": "Your daily padel budget",
+  "chapter": 3,
+  "copy": {
+    "panel_number": "No. 09",
+    "panel_kind": "Table",
+    "heading": "Your daily padel budget",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Setting",
+          "Mentions allowed per day",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "At home, children awake",
+            "1",
+            "Mia is listening, and she is keeping count"
+          ],
+          [
+            "At home, children asleep",
+            "2",
+            "Only if Lauren asks first"
+          ],
+          [
+            "At work",
+            "1",
+            "Not in the stand-up, and not with clients"
+          ],
+          [
+            "At a family event",
+            "0",
+            "This includes christenings, birthdays and funerals"
+          ],
+          [
+            "With the padel group",
+            "Unlimited",
+            "This is what they are for"
+          ],
+          [
+            "With anyone who has just said \"I don't really do sport\"",
+            "0",
+            "They mean it"
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "Keep this table in your wallet, next to your club membership card and your spare club membership card."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p028",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "type": "activity",
+  "title": "Stakeholder map",
+  "chapter": 1,
+  "copy": {
+    "panel_number": "No. 02",
+    "panel_kind": "Worksheet",
+    "heading": "Stakeholder map",
+    "instructions": "Fill in the table without looking at your phone, the fridge or the family calendar.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Stakeholder",
+          "Something they care about that isn't padel",
+          "When you last asked them about it"
+        ],
+        "rows": [
+          [
+            "Lauren",
+            "",
+            ""
+          ],
+          [
+            "Mia",
+            "",
+            ""
+          ],
+          [
+            "Alfie",
+            "",
+            ""
+          ],
+          [
+            "Priya",
+            "",
+            ""
+          ],
+          [
+            "Your mum",
+            "",
+            ""
+          ],
+          [
+            "Your best mate from before padel",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If you wrote \"padel\" in the middle column for anyone, including Alfie, go back and try again."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p011",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

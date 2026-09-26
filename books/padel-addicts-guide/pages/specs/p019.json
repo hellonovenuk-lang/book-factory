@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "The smartwatch",
+  "chapter": 2,
+  "copy": {
+    "heading": "The smartwatch",
+    "body": [
+      "Your smartwatch has more data about Tuesday night's doubles than your GP has about you. It knows your heart rate on the second set, how many steps you took chasing a lob and how many calories you burned losing to a man called Rob. You look at it roughly every ninety seconds.",
+      "The watch is allowed to stay. It tells the time, which is useful, since you are often late home. The graphs, however, are for you. Other people have not asked to see them, and Lauren would like it recorded that she has now seen the heart-rate chart from last Tuesday's final set eleven times, including once while in labour with Alfie. That was a different Tuesday, and a different chart, but she remembers it vividly."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p019",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

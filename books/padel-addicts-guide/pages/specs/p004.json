@@ -1,0 +1,27 @@
+{
+  "type": "contents",
+  "title": "Contents",
+  "chapter": null,
+  "copy": {
+    "heading": "Contents",
+    "items": [
+      "Phase One: Scoping",
+      "Phase Two: Current State",
+      "Phase Three: Talking About Anything Else",
+      "Phase Four: The Home Front",
+      "Phase Five: The Office",
+      "Phase Six: Recruitment Ban",
+      "Phase Seven: Holidays and Occasions",
+      "Phase Eight: Relapse Risk",
+      "Phase Nine: Sign-off"
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p004",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

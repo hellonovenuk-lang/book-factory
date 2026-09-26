@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The 6am group chat",
+  "chapter": 4,
+  "copy": {
+    "heading": "The 6am group chat",
+    "body": [
+      "Tuesday Padel (Men's) is a group of nineteen men who arrange games of padel and talk about games of padel they have just played. The chat averages 340 messages a day. It is busiest between 5.50am and 7am, which the engagement understands is when a small child also needs someone.",
+      "Messages you have sent in the last month include a photograph of your new grip, a video of a lob taken on a phone that was also recording Mia's first ballet show, and the sentence \"anyone for 7am, wife's got the kids\", sent while your wife was asleep and did not, as yet, have the kids.",
+      "The group chat is welcome to continue. It is simply asked to wait until after breakfast."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p035",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

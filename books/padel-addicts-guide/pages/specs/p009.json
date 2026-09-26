@@ -1,0 +1,39 @@
+{
+  "type": "activity",
+  "title": "Reading your score",
+  "chapter": 1,
+  "copy": {
+    "heading": "Reading your score",
+    "blocks": [
+      {
+        "type": "gauge",
+        "bands": [
+          {
+            "range": "0 to 2",
+            "label": "There may have been a mix-up at the printers. Please return this book to the person who gave it to you and apologise for their assumption."
+          },
+          {
+            "range": "3 to 6",
+            "label": "Moderate. The programme can help. Lauren describes herself as quietly hopeful, and asked us not to tell you."
+          },
+          {
+            "range": "7 to 9",
+            "label": "Severe. Mia has started calling your car \"the padel car\". Priya has started calling you \"the padel one\" in partner meetings."
+          },
+          {
+            "range": "10",
+            "label": "Bloody hell, Josh. Report to Phase Two, and leave the racket in the boot."
+          }
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p009",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

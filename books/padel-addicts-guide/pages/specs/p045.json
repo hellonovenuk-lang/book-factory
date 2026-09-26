@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The team social",
+  "chapter": 5,
+  "copy": {
+    "heading": "The team social",
+    "body": [
+      "Every quarter, the team votes on a social. The options usually include bowling, a curry, crazy golf and an escape room. For the last three quarters, there has also been padel, added by you.",
+      "Padel has lost each time. In the first quarter it got two votes (yours and one from the new graduate, who thought it was a kind of pasta). In the second quarter it got one vote. In the third quarter you campaigned, sent a slide deck and offered to lend everyone a racket, and it got one vote, which the engagement understands was also yours. The team went bowling. You were very good at bowling, and you told everyone the lane reminded you of the glass.",
+      "For the next quarter, please vote for the curry."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p045",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

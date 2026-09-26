@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The four-minute rule",
+  "chapter": 1,
+  "copy": {
+    "heading": "The four-minute rule",
+    "body": [
+      "The engagement has measured the time it takes any conversation you are in to reach padel. The average is three minutes and fifty-one seconds. This is known as the four-minute rule.",
+      "The route varies. A chat about the weather goes through \"good padel weather\". A chat about the nursery fees goes through \"that's two memberships\". A chat about a friend's new baby goes through \"never too early to get them on court\". Your record is eleven seconds, set at a funeral, when the vicar mentioned that the deceased had been \"a keen sportsman\".",
+      "For the next week, please record every conversation that reaches padel, and how long it took. Lauren has offered to hold the stopwatch."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p012",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

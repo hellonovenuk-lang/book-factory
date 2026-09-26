@@ -1,0 +1,78 @@
+{
+  "type": "activity",
+  "title": "Four-minute log",
+  "chapter": 1,
+  "copy": {
+    "panel_number": "No. 03",
+    "panel_kind": "Tracker",
+    "heading": "Four-minute log",
+    "instructions": "Record each conversation that reached padel this week, and how long it took to get there.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Day",
+          "Conversation started about",
+          "Minutes to padel",
+          "Who mentioned it first?"
+        ],
+        "rows": [
+          [
+            "Monday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Tuesday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Wednesday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Thursday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Friday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Saturday",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Sunday",
+            "",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If the last column says \"me\" all the way down, please continue to Phase Two."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p013",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

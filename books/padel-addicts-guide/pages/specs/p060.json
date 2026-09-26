@@ -1,0 +1,60 @@
+{
+  "type": "activity",
+  "title": "What to wear",
+  "chapter": 7,
+  "copy": {
+    "panel_number": "No. 20",
+    "panel_kind": "Comparison",
+    "heading": "What to wear",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Occasion",
+          "What you wore",
+          "What to wear"
+        ],
+        "rows": [
+          [
+            "A christening",
+            "A padel quarter-zip",
+            "A shirt"
+          ],
+          [
+            "A toddler's birthday party",
+            "Padel shorts and the cap",
+            "Jeans and a jumper"
+          ],
+          [
+            "A client lunch",
+            "\"The smart quarter-zip\"",
+            "A jacket"
+          ],
+          [
+            "A family photograph",
+            "The cap",
+            "No cap"
+          ],
+          [
+            "A wedding",
+            "Court shoes, \"for comfort\"",
+            "Proper shoes"
+          ],
+          [
+            "Christmas Day",
+            "The new club polo, still with the tag",
+            "Whatever jumper your mum bought you"
+          ]
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p060",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

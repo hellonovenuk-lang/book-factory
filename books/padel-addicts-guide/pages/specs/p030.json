@@ -1,0 +1,28 @@
+{
+  "type": "activity",
+  "title": "Emergency bandeja card",
+  "chapter": 3,
+  "copy": {
+    "panel_number": "No. 10",
+    "panel_kind": "Cut-out card",
+    "heading": "Emergency bandeja card",
+    "blocks": [
+      {
+        "type": "cutout",
+        "heading": "I am about to explain a shot.",
+        "text": [
+          "Instead, I will say: \"Anyway, how was your day?\"",
+          "Keep this card in your wallet, next to the other card you keep for emergencies, which is a padel club membership card."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p030",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

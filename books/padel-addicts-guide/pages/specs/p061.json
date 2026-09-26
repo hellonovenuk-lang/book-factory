@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Presents",
+  "chapter": 7,
+  "copy": {
+    "heading": "Presents",
+    "body": [
+      "Everybody in the family received a padel-related present from you last Christmas. Lauren received a padel racket in a style \"perfect for beginners\". Your mum received a padel water bottle. Your dad received a book called *Padel for the Over Sixties*. Mia received a small foam racket, and Alfie received a romper with a padel ball on it that said \"Future Champion\".",
+      "Lauren has kept her racket in its cover in the loft. Your dad has used his book to level the garden table. This year, please buy each person something they have mentioned wanting, which is a different thing from something you would like them to want."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p061",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

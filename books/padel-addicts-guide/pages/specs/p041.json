@@ -1,0 +1,23 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Five: The Office",
+  "chapter": 5,
+  "copy": {
+    "eyebrow": "Phase Five",
+    "heading": "The Office",
+    "subheading": "Stand-ups, team socials, LinkedIn and a senior partner who plays tennis.",
+    "body": []
+  },
+  "illustration": {
+    "asset_id": "art-phase-05-opener",
+    "concept": "Josh standing at the front of a small office meeting in a padel quarter-zip, gesturing at a screen with a racket like a pointer, while his colleagues sit round the table with laptops open, and Priya, arms folded, holds a tennis racket case under her chair.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p041",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

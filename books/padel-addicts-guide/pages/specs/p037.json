@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The car boot",
+  "chapter": 4,
+  "copy": {
+    "heading": "The car boot",
+    "body": [
+      "The boot of the family car is a shared space. It should hold the buggy, the nappy bag, the big shop and, on Sundays, the scooter. At present it holds your racket bag.",
+      "The racket bag contains two rackets, a spare racket, three tubes of balls, a grip, an overgrip, a towel, a second towel \"for the second set\", a protein bar from February and a pair of court shoes that should not be in an enclosed space. It is there \"just in case a court comes up\". Last month, a court came up twice. The buggy was needed nine times.",
+      "Lauren would like the buggy back in the boot. The racket bag can go on the back seat, between the car seats, where it can be closely watched by Mia."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p037",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

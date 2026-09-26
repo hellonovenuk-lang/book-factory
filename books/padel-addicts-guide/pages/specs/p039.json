@@ -1,0 +1,35 @@
+{
+  "type": "activity",
+  "title": "What Mia thinks Daddy does",
+  "chapter": 4,
+  "copy": {
+    "heading": "What Mia thinks Daddy does",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "At nursery last month, Mia's key worker asked the children what their mummies and daddies do at work. The answers included \"doctor\", \"builds houses\" and \"works on the computer at the kitchen table in her pyjamas\". Mia said, \"Daddy plays padel.\""
+      },
+      {
+        "type": "prose",
+        "text": "When asked what else he does, she said, \"Talks about padel.\""
+      },
+      {
+        "type": "prose",
+        "text": "The key worker wrote this down and put it on the wall under the heading \"Our Families\". It was there for four weeks. It was seen by thirty-one parents, a visiting inspector and Priya, whose niece goes to the same nursery."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Home), week five",
+        "text": "Mia was told off today for saying \"padel\" when she dropped her yoghurt. She says it's what Mummy says when Daddy is late. She's not wrong."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p039",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

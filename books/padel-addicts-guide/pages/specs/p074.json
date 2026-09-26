@@ -1,0 +1,22 @@
+{
+  "type": "text_illustration",
+  "title": "The dinner party",
+  "chapter": 9,
+  "copy": {
+    "heading": "The dinner party",
+    "body": [
+      "As part of sign-off, Lauren has arranged a dinner party. The guests are four friends from before padel, two of Lauren's friends from work and her parents. The test is simple. You must get through the whole evening without starting a conversation about padel.",
+      "The engagement can report that you did. You asked Lauren's friends about their jobs and remembered one of their names. You talked to Graham about his garden, and about his hip without offering a racket. You laughed at a story about a school trip that had no padel in it at all. At 10.40pm, over coffee, Graham turned to you and asked, \"So how's the padel going?\"",
+      "You said, \"Fine, thanks. How's the garden?\"",
+      "Lauren says it was the most romantic thing you have ever done."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p074",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

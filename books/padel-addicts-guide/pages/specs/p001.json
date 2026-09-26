@@ -1,0 +1,17 @@
+{
+  "type": "front_matter",
+  "title": "Title page",
+  "chapter": null,
+  "copy": {
+    "heading": "The Padel Addict's Guide to Talking About Anything Else",
+    "subheading": "A formal engagement to bring his padel talk back to a level that the people who live and work with him can survive."
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p001",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

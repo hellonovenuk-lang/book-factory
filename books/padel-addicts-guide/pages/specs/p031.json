@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "title": "Listening",
+  "chapter": 3,
+  "copy": {
+    "heading": "Listening",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Listening is what happens when somebody else is talking and you are not waiting to talk about padel. Early participants found it strange. Several reported hearing things for the first time, such as their wife's colleagues' names, and the fact that Mia has a best friend called Ava, whose mum has invited you round twice."
+      },
+      {
+        "type": "prose",
+        "text": "It helps to know the signs. When you are listening, your eyes are on the person, your phone is face down and your hand is not quietly practising a backhand under the table."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Home), week three",
+        "text": "He asked about my day and then said \"and what happened then?\" I nearly dropped Alfie. It lasted about six minutes. Then Rob sent a video."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p031",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

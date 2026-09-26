@@ -1,0 +1,33 @@
+{
+  "type": "activity",
+  "title": "Warning signs this week",
+  "chapter": 8,
+  "copy": {
+    "panel_number": "No. 23",
+    "panel_kind": "Checklist",
+    "heading": "Warning signs this week",
+    "instructions": "Tick any warning sign you noticed this week. Lauren will tick any you missed.",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "Checked the court booking app during tea.",
+          "Watched a padel highlight in the bathroom.",
+          "Mentioned padel to someone you had just met.",
+          "Used the phrase \"fastest-growing\" in any context at all.",
+          "Put the racket bag back in the boot \"just for Thursday\".",
+          "Explained the scoring to Mia, again.",
+          "Said \"not to go on about padel, but\"."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p067",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

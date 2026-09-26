@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "title": "Priya and tennis",
+  "chapter": 5,
+  "copy": {
+    "heading": "Priya and tennis",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Priya has played tennis since she was nine. She played for her county as a teenager, and she still plays twice a week at a club with grass courts and a waiting list. She has heard you describe tennis as \"basically padel without the walls\" on six occasions. On the sixth, she was holding a tennis racket."
+      },
+      {
+        "type": "prose",
+        "text": "She has asked the engagement to pass on a message. She would be delighted to play you at tennis whenever you like, on any surface, and she will bring the balls. The engagement has noted that you have not yet replied."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Work), week six",
+        "text": "Stand-up on Monday. No padel stat. Took him four minutes to work round to it at the coffee machine, but the coffee machine is outside my scope. Progress."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p049",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

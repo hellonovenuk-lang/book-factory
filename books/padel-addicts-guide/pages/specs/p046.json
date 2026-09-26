@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "LinkedIn",
+  "chapter": 5,
+  "copy": {
+    "heading": "LinkedIn",
+    "body": [
+      "Your LinkedIn profile lists your job, your firm, your degree and, under interests, \"padel (competitive)\". Your last nine posts have been about padel. One was about \"what padel taught me about client relationships\". Another was about \"what padel taught me about resilience\". A third was a photograph of you holding a trophy from a Tuesday night social league, with the caption \"Humbled\".",
+      "Your firm's marketing team has asked whether you could post about work occasionally, as your profile is the second result when clients search for the firm."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p046",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

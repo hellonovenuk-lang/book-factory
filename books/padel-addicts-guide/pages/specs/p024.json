@@ -1,0 +1,78 @@
+{
+  "type": "activity",
+  "title": "What was the question?",
+  "chapter": 3,
+  "copy": {
+    "panel_number": "No. 07",
+    "panel_kind": "Quiz",
+    "heading": "What was the question?",
+    "instructions": "For each question, circle the answer that answers it.",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "1. Lauren: \"What time will you be home?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. \"Depends if the second court comes free.\"",
+          "b. \"Half six.\"",
+          "c. \"Did you know it's the fastest-growing sport in the world?\""
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "2. Your mum: \"How's work?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. \"Busy. We've got a big client in.\"",
+          "b. \"Priya still won't try padel.\"",
+          "c. \"We're doing padel for the Christmas do, if I win the vote.\""
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "3. Mia: \"Daddy, can we go to the park?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. \"After my court.\"",
+          "b. \"Yes.\"",
+          "c. \"The park near the club has a lovely view of the courts.\""
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "4. Priya: \"Have you finished the deck for Thursday?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. \"Nearly.\"",
+          "b. \"I'll do it after padel.\"",
+          "c. \"Which Thursday? I've got padel on Thursday.\""
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 4
+      },
+      {
+        "type": "prose",
+        "text": "The answers are b, a, b and a. If you circled c for question 3, Mia has asked us to tell you she is not cross, just disappointed."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p024",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

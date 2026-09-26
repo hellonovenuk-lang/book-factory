@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "About this engagement",
+  "chapter": null,
+  "copy": {
+    "heading": "About this engagement",
+    "body": [
+      "This engagement was written for every family and every office that has lost a conversation to padel, and for every padel player who has walked into a room and said, \"Have you ever tried padel?\"",
+      "We haven't. We love you anyway."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p080",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

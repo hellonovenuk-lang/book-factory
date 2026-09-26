@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The people you have tried to recruit",
+  "chapter": 6,
+  "copy": {
+    "heading": "The people you have tried to recruit",
+    "body": [
+      "The engagement has compiled a list of everyone you have invited to \"come and have a go\" in the last eighteen months. It runs to forty-three names.",
+      "It includes your dad, twice; Lauren's dad, four times; Priya, once, which she has not forgotten; the Hendersons next door; the man who fixed the boiler; the new graduate, on his first morning; a car salesman; a paramedic, while he was working; and the other parents at Mia's swimming lesson, who now sit on the other side of the pool.",
+      "Of the forty-three, six came along. Two enjoyed it. One of those two now beats you, and you have stopped inviting him."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p051",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

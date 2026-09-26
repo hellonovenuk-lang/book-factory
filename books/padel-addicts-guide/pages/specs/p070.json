@@ -1,0 +1,31 @@
+{
+  "type": "activity",
+  "title": "Muting the group chat",
+  "chapter": 8,
+  "copy": {
+    "heading": "Muting the group chat",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "The engagement recommends muting Tuesday Padel (Men's) from 6pm on Friday until 8am on Monday for one weekend. You will still be a member. You can read every message on Monday morning. The nineteen men, including the four Toms, will be fine."
+      },
+      {
+        "type": "prose",
+        "text": "Previous participants have described the first weekend as \"very quiet\" and \"weird\". One said it was \"the best weekend I've had with my kids since they were born\", and then unmuted the chat on Sunday night to tell the group about it."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Home), week ten",
+        "text": "He muted the chat. He actually muted it. We went to the beach and he built a sandcastle with Mia and didn't once say it looked like a court. Alfie said his first word on the way home. It was \"car\". I'll take it."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p070",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

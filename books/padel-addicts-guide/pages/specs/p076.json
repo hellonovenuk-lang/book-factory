@@ -1,0 +1,28 @@
+{
+  "type": "activity",
+  "title": "Stakeholder sign-off",
+  "chapter": 9,
+  "copy": {
+    "heading": "Stakeholder sign-off",
+    "blocks": [
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Work), final",
+        "text": "He got through the stand-up, the social vote and a client lunch without a padel stat. Then he lost to me at tennis with good grace. I'll sign. I still won't play padel. I might play padel."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Home), final",
+        "text": "Sunday lunch at Mum and Dad's. Mia put down her fork and said, \"Did you know padel is the fastest-growing sport in the world?\" The whole table looked at Josh. He said, \"Yes, love, and it's really annoying when people keep saying it.\" Then he did the washing up. I'll sign. He's still a daft sod."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p076",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "The new court",
+  "chapter": 8,
+  "copy": {
+    "heading": "The new court",
+    "body": [
+      "At some point during this engagement the club will announce a new court. It will be covered, or it will have better glass, or it will have lights that mean you can play until eleven at night. You will receive the news on the group chat at 5.50am, with a photograph.",
+      "The engagement asks you not to respond straight away. Put the phone down. Get Alfie up. Have breakfast. Tell Lauren, calmly and once, and then ask her what she has on today. The court will still be there after breakfast. So will Alfie, but he will have been fed."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p068",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

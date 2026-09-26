@@ -1,0 +1,38 @@
+{
+  "type": "activity",
+  "title": "People you will not invite this month",
+  "chapter": 6,
+  "copy": {
+    "panel_number": "No. 18",
+    "panel_kind": "Checklist",
+    "heading": "People you will not invite this month",
+    "instructions": "Tick each person as you complete a full month without inviting them to padel.",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "Your dad",
+          "Graham",
+          "Priya",
+          "The Hendersons next door",
+          "Any tradesperson who is working in your house",
+          "The new graduate, now the new graduate's replacement",
+          "Any parent at swimming, ballet, nursery or a children's party",
+          "Anyone in a hospital, a hospital car park or a hospital gown"
+        ]
+      }
+    ],
+    "eyebrow": "The boiler man",
+    "body": [
+      "In November the boiler broke. A heating engineer called Gary came round on a Saturday morning, and in the ninety minutes he spent in your airing cupboard you told him about padel, the club, the fastest-growing sport in the world and the fact that \"a man with your forearms would be brilliant at it\". Gary is fifty-eight and has a bad shoulder. He left without charging for the second visit, and has since moved your address to another engineer's list."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p054",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "text_illustration",
+  "title": "Words that belong on the court",
+  "chapter": 3,
+  "copy": {
+    "heading": "Words that belong on the court",
+    "body": [
+      "Some words are fine at the club and strange everywhere else. The engagement has collected the ones your stakeholders hear most often and asks you to leave them on the court, where they make sense.",
+      "Bandeja. A shot. Not a way to describe how Mia read the room at nursery.",
+      "Vibora. Another shot. Not something to shout while carrying the bins out.",
+      "Off the glass. A way of playing the ball. Not a way of describing the conservatory.",
+      "Por tres. A shot that leaves the court altogether. Not a helpful way to describe Alfie throwing his dinner.",
+      "Golden point. A way to settle a game at deuce. Not a way to settle whose turn it is to do bath time."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p029",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

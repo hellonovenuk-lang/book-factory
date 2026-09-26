@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The fastest-growing sport in the world",
+  "chapter": 2,
+  "copy": {
+    "heading": "The fastest-growing sport in the world",
+    "body": [
+      "Padel may well be the fastest-growing sport in the world. The engagement has no reason to doubt it. The problem is how often you tell people.",
+      "Over the scoping period you said it 212 times. You said it to the midwife, the vicar, a man selling you a car, two members of the local council and Mia's swimming teacher, who is an Olympian. You said it on a first date with Lauren's sister's new boyfriend, who was not on a date with you. You once said it in your sleep, and Lauren wrote it down.",
+      "Nobody disputes the figure. They would only like to hear about something else that is growing. The children, for example, are also growing, and quite fast."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p017",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "type": "activity",
+  "title": "Why are we going there?",
+  "chapter": 7,
+  "copy": {
+    "panel_number": "No. 19",
+    "panel_kind": "Quiz",
+    "heading": "Why are we going there?",
+    "instructions": "For each holiday, circle the real reason you suggested it.",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "1. \"A lovely family resort in Spain, great kids' club.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. The kids' club",
+          "b. The beach",
+          "c. Six padel courts and a nightly league"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "2. \"Let's do a city break in Madrid.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. The art galleries",
+          "b. The food",
+          "c. A padel tournament the same weekend"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "3. \"How about a weekend at your mum and dad's?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. You miss them",
+          "b. Lauren misses them",
+          "c. There's a new club twenty minutes from their house"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "4. \"What about a cottage in Cornwall?\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. The beaches",
+          "b. The cream teas",
+          "c. You have just found a court in Truro"
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 4
+      },
+      {
+        "type": "prose",
+        "text": "If you circled c for every one, please hand the booking over to Lauren."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p058",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

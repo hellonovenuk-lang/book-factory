@@ -1,0 +1,70 @@
+{
+  "type": "activity",
+  "title": "Group chat audit",
+  "chapter": 4,
+  "copy": {
+    "panel_number": "No. 12",
+    "panel_kind": "Tracker",
+    "heading": "Group chat audit",
+    "instructions": "For one week, record the time of your first reply to the group chat each day, and what you were meant to be doing at that moment.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Day",
+          "Time of first reply",
+          "What you were meant to be doing"
+        ],
+        "rows": [
+          [
+            "Monday",
+            "",
+            ""
+          ],
+          [
+            "Tuesday",
+            "",
+            ""
+          ],
+          [
+            "Wednesday",
+            "",
+            ""
+          ],
+          [
+            "Thursday",
+            "",
+            ""
+          ],
+          [
+            "Friday",
+            "",
+            ""
+          ],
+          [
+            "Saturday",
+            "",
+            ""
+          ],
+          [
+            "Sunday",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If more than three answers in the last column are \"nappy\", please set the chat to mute before 8am."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p036",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

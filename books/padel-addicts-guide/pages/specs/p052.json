@@ -1,0 +1,62 @@
+{
+  "type": "activity",
+  "title": "Recruitment register",
+  "chapter": 6,
+  "copy": {
+    "panel_number": "No. 17",
+    "panel_kind": "Worksheet",
+    "heading": "Recruitment register",
+    "instructions": "Record everyone you invited to padel this month, and why they said no. If you ran out of room, you are not ready for Phase Seven.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Name",
+          "How you know them",
+          "Where you asked",
+          "Their reason for saying no"
+        ],
+        "rows": [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p052",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

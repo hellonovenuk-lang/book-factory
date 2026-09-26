@@ -1,0 +1,33 @@
+{
+  "type": "activity",
+  "title": "Signs you are listening",
+  "chapter": 3,
+  "copy": {
+    "panel_number": "No. 11",
+    "panel_kind": "Checklist",
+    "heading": "Signs you are listening",
+    "instructions": "Tick each sign you showed at least once this week. Lauren will confirm.",
+    "blocks": [
+      {
+        "type": "checklist",
+        "items": [
+          "You asked a question and waited for the whole answer.",
+          "You remembered something someone told you yesterday.",
+          "Your phone was face down, and it stayed face down when the group chat went off.",
+          "You did not glance at your watch to check your resting heart rate.",
+          "You said \"that sounds hard\" without adding \"a bit like my knee\".",
+          "You learned something new about Lauren's work, such as the name of her boss.",
+          "Your hand did not practise a backhand under the table."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p032",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

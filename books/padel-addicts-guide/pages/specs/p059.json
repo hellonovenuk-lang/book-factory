@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "What to wear",
+  "chapter": 7,
+  "copy": {
+    "heading": "What to wear",
+    "body": [
+      "The engagement has received a number of reports about what you wear to occasions. They include a padel quarter-zip at a christening, court shoes at a wedding, a padel cap in a family photograph at your grandmother's ninetieth, and a pair of padel shorts at a children's party in February.",
+      "Padel kit is for padel. Other occasions have their own clothes, which you already own. They are in the wardrobe, behind the padel kit."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p059",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

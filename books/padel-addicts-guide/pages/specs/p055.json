@@ -1,0 +1,23 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Seven: Holidays and Occasions",
+  "chapter": 7,
+  "copy": {
+    "eyebrow": "Phase Seven",
+    "heading": "Holidays and Occasions",
+    "subheading": "Birthdays, Christmas, weddings and a family holiday that is a family holiday.",
+    "body": []
+  },
+  "illustration": {
+    "asset_id": "art-phase-07-opener",
+    "concept": "Josh at a sunny Spanish resort pool in sunglasses and his padel cap, looking longingly past the pool at a row of padel courts behind a fence, while Lauren sits on a sunbed with a sunhat, a book and Alfie, and Mia in armbands tugs on Josh's arm to get him into the water.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p055",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

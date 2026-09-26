@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "The client lunch",
+  "chapter": 5,
+  "copy": {
+    "heading": "The client lunch",
+    "body": [
+      "In March you took a client to lunch to talk about extending their contract. It was an important lunch, and Priya asked you to wear a jacket. You wore a quarter-zip with a small racket on the chest, which you called \"the smart one\".",
+      "The client mentioned that her son had started playing tennis. The lunch then lasted three hours and ten minutes. During it you explained the walls, the scoring, the serve and the difference between a bandeja and a vibora, using the salt, the pepper and the client's own dessert spoon. The contract was extended. The client has since joined a padel club and emails you her results, and Priya has asked that you never be seated next to a client with children again."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p048",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

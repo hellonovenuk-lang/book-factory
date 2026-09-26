@@ -1,0 +1,78 @@
+{
+  "type": "activity",
+  "title": "Who asked?",
+  "chapter": 2,
+  "copy": {
+    "panel_number": "No. 06",
+    "panel_kind": "Quiz",
+    "heading": "Who asked?",
+    "instructions": "For each moment below, tick who asked to see your smartwatch graphs.",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "1. Sunday lunch at your mum's, while the roast was being carved."
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Your mum",
+          "b. Your dad",
+          "c. Nobody"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "2. A client pitch, during the slide about your firm's values."
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. The client",
+          "b. Priya",
+          "c. Nobody"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "3. The labour ward."
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. The midwife",
+          "b. Lauren",
+          "c. Nobody"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "4. Mia's nativity, during \"Away in a Manger\"."
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Mia",
+          "b. The headteacher",
+          "c. Nobody"
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 4
+      },
+      {
+        "type": "prose",
+        "text": "The answer to every question is c. Give yourself a point each time you knew that before you read this sentence."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p020",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

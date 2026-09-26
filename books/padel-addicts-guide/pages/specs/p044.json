@@ -1,0 +1,85 @@
+{
+  "type": "activity",
+  "title": "Is this a padel stat?",
+  "chapter": 5,
+  "copy": {
+    "panel_number": "No. 15",
+    "panel_kind": "Quiz",
+    "heading": "Is this a padel stat?",
+    "instructions": "For each thing you might say at the Monday stand-up, tick whether it is a padel stat. If it is, please keep it for the group chat.",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "1. \"We delivered the first draft on Friday.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Padel stat",
+          "b. Not a padel stat"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "2. \"There are now more padel courts in Spain than petrol stations.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Padel stat",
+          "b. Not a padel stat"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "3. \"The client wants a call on Wednesday.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Padel stat",
+          "b. Not a padel stat"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "4. \"My win rate on a Tuesday is up 12% since I changed grip.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Padel stat",
+          "b. Not a padel stat"
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "5. \"Just a quick one before we start.\""
+      },
+      {
+        "type": "checklist",
+        "items": [
+          "a. Padel stat",
+          "b. Not a padel stat"
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 5
+      },
+      {
+        "type": "prose",
+        "text": "The answers are b, a, b, a and a. Number 5 is always a padel stat. Everyone in the room knows it, including you."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p044",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Four: The Home Front",
+  "chapter": 4,
+  "copy": {
+    "eyebrow": "Phase Four",
+    "heading": "The Home Front",
+    "subheading": "The house, the children, the car and the group chat.",
+    "body": [
+      "This phase looks at padel's effect on family life. We will cover bath time, the group chat, the car boot and what your children now believe you do for a living. Lauren has contributed most of the material, and asked for a credit on the cover."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-phase-04-opener",
+    "concept": "Josh kneeling by a bath full of bubbles and plastic toys, holding a racket instead of a towel and demonstrating a swing to Mia and Alfie, who sit in the water looking unimpressed, while Lauren leans in the bathroom doorway with a towel over her shoulder.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p033",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "type": "activity",
+  "title": "Your post, and what everyone read",
+  "chapter": 5,
+  "copy": {
+    "panel_number": "No. 16",
+    "panel_kind": "Comparison",
+    "heading": "Your post, and what everyone read",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "",
+          "What you wrote",
+          "What everyone read"
+        ],
+        "rows": [
+          [
+            "The opening line",
+            "\"Three things padel taught me about leading a team\"",
+            "\"Josh has played padel again\""
+          ],
+          [
+            "The photo",
+            "You mid-smash, taken by Rob",
+            "Rob's thumb"
+          ],
+          [
+            "The lesson",
+            "\"Trust your partner at the net\"",
+            "Nothing, they stopped at the photo"
+          ],
+          [
+            "The hashtags",
+            "Eleven, all about padel",
+            "Eleven more reasons to scroll"
+          ],
+          [
+            "The reaction",
+            "Four likes, three from the padel group",
+            "Priya, who clicked \"Insightful\" out of spite"
+          ]
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p047",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Nine: Sign-off",
+  "chapter": 9,
+  "copy": {
+    "eyebrow": "Phase Nine",
+    "heading": "Sign-off",
+    "subheading": "Final review, stakeholder feedback and a certificate.",
+    "body": [
+      "Every engagement ends with a sign-off. Your stakeholders will review your progress, you will take one final assessment, and there will be a dinner party, a tennis match and a certificate, in that order. Please do not bring the certificate to padel."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-phase-09-opener",
+    "concept": "Josh in a smart shirt with no cap, standing proudly with a framed certificate in the family kitchen, while Lauren holds Alfie and Mia claps, and his racket bag sits by the back door, zipped up and out of the way.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p071",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

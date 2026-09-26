@@ -1,0 +1,41 @@
+{
+  "type": "activity",
+  "title": "Final review",
+  "chapter": 9,
+  "copy": {
+    "panel_number": "No. 25",
+    "panel_kind": "Assessment",
+    "heading": "Final review",
+    "instructions": "Award yourself one point for each statement that is true. Lauren will check your answers, and Priya has already checked hers.",
+    "blocks": [
+      {
+        "type": "ticks",
+        "items": [
+          "When Lauren asked \"How was your day?\" you answered with your day.",
+          "You have said \"the fastest-growing sport in the world\" less than once a week for a month.",
+          "The buggy is back in the boot.",
+          "You did bath time three nights a week for a month.",
+          "You gave your stand-up update without a padel stat.",
+          "You voted for the curry.",
+          "You have not invited anyone new to padel in a month, including Graham.",
+          "You went to a family occasion in clothes that were not padel clothes.",
+          "You muted the group chat for a whole weekend.",
+          "You read this whole book without explaining a shot to anybody."
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 10
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p072",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "type": "activity",
+  "title": "Current-state assessment",
+  "chapter": 1,
+  "copy": {
+    "panel_number": "No. 01",
+    "panel_kind": "Assessment",
+    "heading": "Current-state assessment",
+    "instructions": "Award yourself one point for each statement that is true. Lauren will check your answers, and Priya has asked for a copy.",
+    "blocks": [
+      {
+        "type": "ticks",
+        "items": [
+          "You have told someone that padel is the fastest-growing sport in the world, and they had not asked what the fastest-growing sport in the world was.",
+          "You answered the 6am group chat before you answered the baby.",
+          "The racket bag is in the car boot, and the buggy is not.",
+          "You moved Mia's swimming lesson so you could keep your Saturday 9am court.",
+          "You have worn a padel quarter-zip to a client lunch and described it as \"smart casual\".",
+          "You have tried to get your father-in-law into padel. He is seventy-one and has a new hip.",
+          "You have proposed padel as the team social three quarters running, and lost the vote to bowling each time.",
+          "You have shown someone your smartwatch graphs from Tuesday night's doubles, and they were not your doubles partner.",
+          "You have described tennis as \"basically padel without the walls\" to a person holding a tennis racket.",
+          "You are reading this list and working out how to explain that number 9 is technically true."
+        ]
+      },
+      {
+        "type": "score",
+        "label": "Score",
+        "out_of": 10
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p008",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "type": "activity",
+  "title": "Fastest-growing tally",
+  "chapter": 2,
+  "copy": {
+    "panel_number": "No. 05",
+    "panel_kind": "Tracker",
+    "heading": "Fastest-growing tally",
+    "instructions": "Put one mark in the box each time you say \"the fastest-growing sport in the world\", or any sentence that means the same thing. Lauren and Priya will add any marks you forget.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Week",
+          "Tally",
+          "Who you said it to"
+        ],
+        "rows": [
+          [
+            "Week one",
+            "",
+            ""
+          ],
+          [
+            "Week two",
+            "",
+            ""
+          ],
+          [
+            "Week three",
+            "",
+            ""
+          ],
+          [
+            "Week four",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "The target by the end of the engagement is fewer than one a week. The current figure is about three a day."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p018",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

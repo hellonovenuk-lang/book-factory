@@ -1,0 +1,66 @@
+{
+  "type": "activity",
+  "title": "Three minutes without padel",
+  "chapter": 3,
+  "copy": {
+    "panel_number": "No. 08",
+    "panel_kind": "Worksheet",
+    "heading": "Three minutes without padel",
+    "instructions": "Pick one topic from the list and talk about it with Lauren for three minutes without mentioning padel. Lauren will hold the stopwatch. Record your best attempts below.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Attempt",
+          "Topic",
+          "How long you lasted",
+          "How padel got in"
+        ],
+        "rows": [
+          [
+            "1",
+            "",
+            "",
+            ""
+          ],
+          [
+            "2",
+            "",
+            "",
+            ""
+          ],
+          [
+            "3",
+            "",
+            "",
+            ""
+          ],
+          [
+            "4",
+            "",
+            "",
+            ""
+          ],
+          [
+            "5",
+            "",
+            "",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "A successful attempt is three minutes with nothing in the last column. The current household record is one minute and forty seconds, on the subject of the bins."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p026",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

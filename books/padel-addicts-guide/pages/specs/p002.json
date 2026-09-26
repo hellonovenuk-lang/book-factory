@@ -1,0 +1,22 @@
+{
+  "type": "text_illustration",
+  "title": "Notice of engagement",
+  "chapter": null,
+  "copy": {
+    "heading": "Notice of engagement",
+    "body": [
+      "This engagement has been commissioned because two of your stakeholders have asked for it. They are Home and Work. It is the first project they have ever agreed on without a meeting.",
+      "The request followed a pattern. The pattern may involve a group chat at 6am, a racket bag in the car boot, a quick padel stat at the Monday stand-up, a quarter-zip at a christening, a \"family\" holiday to a resort with six courts, and the phrase \"the fastest-growing sport in the world\", said to a midwife.",
+      "Receiving this pack does not mean anybody is cross with you. Your first instinct to check whether it fits in the side pocket of your racket bag probably means somebody should be.",
+      "Keep the pack somewhere visible. Do not leave it in the car boot with the spare grips, in the changing room at the club, or on your desk at work, where Priya will find it and have it laminated."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p002",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

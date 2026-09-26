@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The family holiday",
+  "chapter": 7,
+  "copy": {
+    "heading": "The family holiday",
+    "body": [
+      "Last summer the family went to Spain. You booked it. You described it to Lauren as \"a lovely family resort, great kids' club, right by the beach\". All of this was true.",
+      "The resort also had six padel courts, a padel academy and a nightly social league. The kids' club was \"right next to the courts\", which you said as though it were a coincidence. The beach was twenty minutes away by minibus. You went twice, once to find your sunglasses.",
+      "The family would like this year's holiday to be chosen for reasons that are not padel. The engagement has suggested Cornwall, which has beaches, cream teas and, to the best of our knowledge, no padel within walking distance of the cottage. Please don't check."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p057",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

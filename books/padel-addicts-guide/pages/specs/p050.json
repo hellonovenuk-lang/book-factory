@@ -1,0 +1,25 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Six: Recruitment Ban",
+  "chapter": 6,
+  "copy": {
+    "eyebrow": "Phase Six",
+    "heading": "Recruitment Ban",
+    "subheading": "Leave them alone, Josh. They're fine as they are.",
+    "body": [
+      "Since taking up padel you have tried to recruit your father, your father-in-law, your boss, two neighbours, the boiler man, the new graduate and a man who was only trying to sell you a car. Some of them have given it a go. Most of them are now avoiding you. This phase introduces a temporary recruitment ban and helps you through it."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-phase-06-opener",
+    "concept": "Josh leaning over a garden fence holding out a spare racket to his older neighbour, who is backing away with a watering can, while in the background a man in a boiler-repair van pretends to be on the phone and Graham, older and holding a walking stick, peers through a front window.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p050",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

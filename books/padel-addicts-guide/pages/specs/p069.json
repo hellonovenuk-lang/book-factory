@@ -1,0 +1,39 @@
+{
+  "type": "activity",
+  "title": "My new court plan",
+  "chapter": 8,
+  "copy": {
+    "panel_number": "No. 24",
+    "panel_kind": "Worksheet",
+    "heading": "My new court plan",
+    "instructions": "Plan now what you will do on the morning the new court is announced.",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "When the news comes in, I will:"
+      },
+      {
+        "type": "lines",
+        "count": 3
+      },
+      {
+        "type": "lines",
+        "count": 1,
+        "label": "The first person I will tell is"
+      },
+      {
+        "type": "lines",
+        "count": 1,
+        "label": "The first thing I will ask them about instead is"
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p069",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

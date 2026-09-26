@@ -1,0 +1,25 @@
+{
+  "type": "text_illustration",
+  "title": "Your stakeholders",
+  "chapter": 1,
+  "copy": {
+    "heading": "Your stakeholders",
+    "body": [
+      "A stakeholder is anyone who has to listen to you. You have more of them than you think, and most of them have heard about the new carbon racket. Please study the following introductions, so that you can greet each of them with something other than a court booking.",
+      "Lauren. Your wife, and stakeholder one. Works four days a week, runs the house on the fifth and does most of bedtime on the other two. She can now name every shot in padel against her will, and she has asked for that to be recorded as a workplace injury.",
+      "Mia. Your daughter, four. Believes \"padel\" is a swear word because of the way Mummy says it. Has been told off at nursery for using it.",
+      "Alfie. Your son, one. Has not yet said his first word. The household is praying it is \"Mummy\" and fears it will be \"bandeja\".",
+      "Priya. Your boss, a senior partner, and stakeholder two. Plays tennis twice a week and has done since she was nine. Once described padel, in your hearing, as \"tennis for people who need a wall to lean on\". You have not recovered.",
+      "The group chat. Nineteen men called Tuesday Padel (Men's), including four called Tom. Active from 5.50am. It is a stakeholder because it is where your attention goes, and because it once replied to a photo of your newborn son with \"who's he playing with Saturday\".",
+      "Graham. Your father-in-law, seventy-one. You have tried to recruit him on four occasions, one of them in the hospital car park after his hip operation."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p010",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

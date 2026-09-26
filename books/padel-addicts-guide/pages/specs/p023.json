@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "How a question works",
+  "chapter": 3,
+  "copy": {
+    "heading": "How a question works",
+    "body": [
+      "A question is something one person asks another because they would like to know the answer. It has a subject. The subject is usually the thing mentioned in the question.",
+      "For example, if Lauren asks, \"How was your day?\" she would like to hear about your day. She does not need to hear about Thursday's court, which has not happened yet, or about Rob's new racket, which is not yours. If your mum asks, \"How are the kids?\" the answer is about the kids, and it does not end with \"Mia's got great hand-eye, you know. Great padel hands.\"",
+      "The engagement suggests a simple method. Listen to the question. Find the subject. Answer about the subject. Stop. Then, if you would like to be really impressive, ask a question back."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p023",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

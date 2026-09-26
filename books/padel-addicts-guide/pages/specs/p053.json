@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "Case study: Graham's hip",
+  "chapter": 6,
+  "copy": {
+    "heading": "Case study: Graham's hip",
+    "body": [
+      "Graham is Lauren's dad. He is seventy-one, a retired geography teacher and a keen gardener, and in January he had his hip replaced.",
+      "You first suggested padel to Graham at Lauren's birthday lunch, where you said it was \"very low impact, honestly, loads of older players\". You suggested it again at Christmas. You suggested it a third time in the hospital car park, the day before his operation, as a way of \"getting the new hip moving\". The fourth time, you brought a racket to his recovery visit and left it by his bed \"for when he's ready\".",
+      "Graham has asked the engagement to confirm, formally, that he is not ready, and will not be ready, and would like his racket to be collected. The nurses had to move it three times."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p053",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

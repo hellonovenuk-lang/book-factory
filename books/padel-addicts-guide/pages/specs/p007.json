@@ -1,0 +1,40 @@
+{
+  "type": "activity",
+  "title": "Why you are here",
+  "chapter": 1,
+  "copy": {
+    "heading": "Why you are here",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "This engagement was commissioned jointly by your two main stakeholders, Home and Work. It is the first thing they have ever agreed on without a meeting. Home is represented by Lauren, your wife. Work is represented by Priya, a senior partner at your firm, who plays tennis and would like that noted."
+      },
+      {
+        "type": "prose",
+        "text": "The brief is short. Over the last eighteen months you have mentioned padel in 94% of conversations lasting longer than four minutes. The other 6% were phone calls with the bank, and in two of those you asked the adviser whether she played. You have said \"the fastest-growing sport in the world\" 212 times, once to a midwife. Nobody is asking you to stop playing. Home and Work would simply like to know what else you think about, and they have paid for this engagement to find out."
+      },
+      {
+        "type": "prose",
+        "text": "The programme runs in nine phases, from Scoping to Sign-off. Each has exercises, a short assessment and feedback from your stakeholders. You will be tempted to treat the assessments like a padel ranking and try to top them. Please don't. The only good score in this book is a low one."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Home), week one",
+        "text": "Asked him how the nursery settling-in session went. He said Mia \"read the room really well, like a good bandeja\". Then he explained the bandeja. Alfie was eating a crayon at the time and Josh did not notice, because he was drawing the court on a napkin to show me the angles."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Work), week one",
+        "text": "Monday stand-up. Josh opened with a quick padel stat before the client update. The client update was about a client who was not happy with us. The padel stat was about a club in Leeds."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p007",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

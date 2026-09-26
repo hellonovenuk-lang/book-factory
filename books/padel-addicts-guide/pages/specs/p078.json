@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "A final word from the engagement",
+  "chapter": 9,
+  "copy": {
+    "heading": "A final word from the engagement",
+    "body": [
+      "Thank you for taking part. Nobody expected you to give up padel, and nobody wanted you to. Your stakeholders commissioned this engagement because they like you and missed talking to you, and padel was only ever the thing you talked about instead.",
+      "Go and play your Thursday game. Enjoy it. Then come home, put the buggy in the boot, and ask somebody else how their day was."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p078",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "activity",
+  "title": "Commitments",
+  "chapter": 9,
+  "copy": {
+    "panel_number": "No. 26",
+    "panel_kind": "Worksheet",
+    "heading": "Commitments",
+    "instructions": "Write three commitments to your stakeholders, to keep after the engagement ends. Lauren will put this page on the fridge, and Priya will pin a copy in the office kitchen.",
+    "blocks": [
+      {
+        "type": "lines",
+        "count": 3
+      },
+      {
+        "type": "signature",
+        "fields": [
+          "Signed",
+          "Date"
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p077",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

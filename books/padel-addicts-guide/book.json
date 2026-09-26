@@ -4,7 +4,7 @@
   "title": "The Padel Addict's Guide to Talking About Anything Else",
   "subtitle": null,
   "series": null,
-  "stage": "visual_development",
+  "stage": "page_production",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -26,19 +26,19 @@
     "path": "manuscript/versions/manuscript-v1.md"
   },
   "style": {
-    "visual_version": "v0",
-    "visual_locked": false,
-    "visual_locked_at": null,
-    "visual_sha256": null,
+    "visual_version": "v1",
+    "visual_locked": true,
+    "visual_locked_at": "2026-09-26T15:57:25Z",
+    "visual_sha256": "5a446d5dc0c59662e0dae1bad685f19f10a91f10da3664e7f6dc5dba07670d20",
     "voice_version": "v1",
     "voice_locked": true,
     "voice_locked_at": "2026-09-26T11:25:13Z",
     "voice_sha256": "d5697e0c79d32bc456dd07a4211afb625ce1382751f1e6cfa2e705b8abe70cb0"
   },
   "page_plan": {
-    "planned": false,
-    "page_count": 0,
-    "planned_at": null
+    "planned": true,
+    "page_count": 80,
+    "planned_at": "2026-09-26T15:58:33Z"
   },
   "intake": {
     "required": true,
@@ -84,24 +84,24 @@
     "set_at": "2026-09-26T10:54:54Z",
     "source": "new_book_default"
   },
-  "production_mode": "wait_for_operator",
+  "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
-    "task_id": "padel-addicts-guide-lock-visual",
-    "type": "operator_decision",
-    "summary": "Approve the reference set and lock the visual style",
-    "page_id": null,
-    "asset_id": null,
+    "task_id": "padel-addicts-guide-art-phase-02-opener-illustration",
+    "type": "illustration",
+    "summary": "Create illustration 'art-phase-02-opener' for page p014",
+    "page_id": "p014",
+    "asset_id": "art-phase-02-opener",
     "approval_required": true,
-    "mode": "wait_for_operator"
+    "mode": "continue_automatically"
   },
   "last_transition": {
-    "from": "manuscript_lock",
-    "to": "visual_development",
-    "at": "2026-09-26T11:36:18Z",
+    "from": "page_planning",
+    "to": "page_production",
+    "at": "2026-09-26T15:58:39Z",
     "by": "system",
     "note": "stage derived from repository state"
   },
   "created_at": "2026-09-26T10:54:54Z",
-  "updated_at": "2026-09-26T15:02:00Z"
+  "updated_at": "2026-09-26T15:59:57Z"
 }

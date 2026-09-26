@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "The tennis match",
+  "chapter": 9,
+  "copy": {
+    "heading": "The tennis match",
+    "body": [
+      "Priya's offer was accepted. The match took place on a Saturday morning at her club, on grass, in front of two partners from the firm, Lauren, Mia and Alfie, and the new graduate, who sold tickets.",
+      "It was 6-0, 6-1. The engagement will not say who won. Priya has asked us to say that the one game was \"a gift\". You have asked us to say that grass is \"a very different surface\" and that you were \"adjusting to the lack of walls\".",
+      "Afterwards, you shook her hand and said it was a brilliant game. Then you asked her about tennis, and listened to the answer. Priya has since said that she might, once, try padel, and you have been very good about not mentioning it."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p075",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

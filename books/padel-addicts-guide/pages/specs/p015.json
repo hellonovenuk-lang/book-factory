@@ -1,0 +1,27 @@
+{
+  "type": "text_illustration",
+  "title": "A day in the life of Josh",
+  "chapter": 2,
+  "copy": {
+    "heading": "A day in the life of Josh",
+    "body": [
+      "The following timeline was recorded over one ordinary Tuesday, with Lauren's help and Josh's full cooperation, until he found out what it was for.",
+      "5.50am. The group chat wakes up. Somebody has a court at 7am and is one short. Josh reads all forty-one messages in bed.",
+      "6.10am. Alfie wakes up. Josh says, \"Can you get him? I'm just sorting something.\" He is sorting Thursday.",
+      "7.30am. Breakfast. Mia asks why the sky is blue. Josh says it is to do with light, \"a bit like the way the ball comes off the back glass\", and demonstrates with a satsuma.",
+      "8.15am. Nursery drop-off. Josh tells another dad that padel is the fastest-growing sport in the world. The other dad had asked where to park.",
+      "9.30am. Monday stand-up, held on a Tuesday because of a bank holiday. Josh opens with a quick padel stat.",
+      "1pm. Lunch with a client. Josh is wearing a quarter-zip.",
+      "6.30pm. Bath time. Josh is in the car park at the club, \"just grabbing a hit\".",
+      "9.45pm. Josh gets home and asks how bath time went. Then he tells Lauren how his hit went, with the graphs."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p015",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

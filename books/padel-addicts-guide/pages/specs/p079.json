@@ -1,0 +1,29 @@
+{
+  "type": "certificate",
+  "title": "Certificate of Completion",
+  "chapter": 9,
+  "copy": {
+    "heading": "Certificate of Completion",
+    "body": [
+      "This is to certify that",
+      "______________________",
+      "has successfully completed the engagement set out in The Padel Addict's Guide to Talking About Anything Else, and has shown that he can talk about anything else, for at least four minutes at a time.",
+      "He has learned to answer the question asked, to leave the group chat until after breakfast, to keep the buggy in the boot and to vote for the curry.",
+      "He is permitted to say \"the fastest-growing sport in the world\" once a year, on his birthday, to a consenting adult."
+    ],
+    "items": [
+      "Signed (Home)",
+      "Signed (Work)",
+      "Signed (Participant)",
+      "Date"
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p079",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

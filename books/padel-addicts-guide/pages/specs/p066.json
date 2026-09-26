@@ -1,0 +1,21 @@
+{
+  "type": "text_illustration",
+  "title": "Warning signs",
+  "chapter": 8,
+  "copy": {
+    "heading": "Warning signs",
+    "body": [
+      "Relapse rarely comes out of nowhere. It builds up. Your stakeholders have learned to spot the warning signs before you do.",
+      "The signs include checking the court booking app during tea, humming while you regrip a racket, mentioning a \"fun padel fact\" to the nursery staff, suddenly needing to \"pop to the car\", and starting a sentence with \"Not to go on about padel, but\". Lauren says the last one is the most reliable, and that it has a 100% record.",
+      "If you notice two or more of these in one day, put the phone in a drawer and ask someone a question about themselves."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p066",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Phase One: Scoping (continued)",
+  "chapter": 1,
+  "copy": {
+    "eyebrow": "Phase One",
+    "body": [
+      "Before any change can happen, the engagement needs to understand the current state. In this phase we will interview your stakeholders, map every place padel has turned up where it wasn't invited, and ask you to rate yourself honestly. The self-rating tends to come out lower than everyone else's, so we will ask Lauren too.",
+      "Please take the cap off for the stakeholder interviews. It is a padel cap, Josh. Everyone can see that it's a padel cap."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p006",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

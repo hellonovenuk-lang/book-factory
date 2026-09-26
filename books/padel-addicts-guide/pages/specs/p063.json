@@ -1,0 +1,66 @@
+{
+  "type": "activity",
+  "title": "Family dates",
+  "chapter": 7,
+  "copy": {
+    "panel_number": "No. 21",
+    "panel_kind": "Worksheet",
+    "heading": "Family dates",
+    "instructions": "Fill in the dates below before booking any padel for the rest of the year.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Occasion",
+          "Date"
+        ],
+        "rows": [
+          [
+            "Lauren's birthday",
+            ""
+          ],
+          [
+            "Your wedding anniversary",
+            ""
+          ],
+          [
+            "Mia's birthday",
+            ""
+          ],
+          [
+            "Alfie's birthday",
+            ""
+          ],
+          [
+            "Your mum's birthday",
+            ""
+          ],
+          [
+            "Mia's nativity",
+            ""
+          ],
+          [
+            "Any family wedding this year",
+            ""
+          ],
+          [
+            "The club tournament",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "prose",
+        "text": "If you filled in the last line first, please go back and start at the top."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p063",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

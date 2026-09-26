@@ -1,7 +1,2072 @@
 {
   "schema_version": "1.0",
   "book_id": "padel-addicts-guide",
-  "updated_at": "2026-09-26T15:02:00Z",
+  "updated_at": "2026-09-26T15:59:57Z",
   "front_matter_pages": 0,
-  "pages": []
+  "pages": [
+    {
+      "page_id": "p001",
+      "sequence": 1,
+      "printed_number": 1,
+      "chapter": null,
+      "title": "Title page",
+      "type": "front_matter",
+      "spec": "pages/specs/p001.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p001/p001-v1.pdf",
+          "sha256": "5172ef513aaff79a187f1a06407f03ec51bb76b76a4dca5b850090776ae35d87",
+          "submitted_at": "2026-09-26T15:58:39Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p001-title-page.pdf",
+        "sha256": "5172ef513aaff79a187f1a06407f03ec51bb76b76a4dca5b850090776ae35d87",
+        "approved_at": "2026-09-26T15:58:39Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p001/p001-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p002",
+      "sequence": 2,
+      "printed_number": 2,
+      "chapter": null,
+      "title": "Notice of engagement",
+      "type": "text_illustration",
+      "spec": "pages/specs/p002.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p002/p002-v1.pdf",
+          "sha256": "745869bff92836c2ac61bbc332753b6e979130a94ecd49894c0d670bec3acb9f",
+          "submitted_at": "2026-09-26T15:58:39Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p002-notice-of-engagement.pdf",
+        "sha256": "745869bff92836c2ac61bbc332753b6e979130a94ecd49894c0d670bec3acb9f",
+        "approved_at": "2026-09-26T15:58:39Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p002/p002-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p003",
+      "sequence": 3,
+      "printed_number": 3,
+      "chapter": null,
+      "title": "Terms of engagement",
+      "type": "text_illustration",
+      "spec": "pages/specs/p003.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p003/p003-v1.pdf",
+          "sha256": "554557d4a08b739a335a4debcbe4add1a5185625926debcc00cf6b25dff4c6e7",
+          "submitted_at": "2026-09-26T15:58:40Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p003-terms-of-engagement.pdf",
+        "sha256": "554557d4a08b739a335a4debcbe4add1a5185625926debcc00cf6b25dff4c6e7",
+        "approved_at": "2026-09-26T15:58:40Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p003/p003-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p004",
+      "sequence": 4,
+      "printed_number": 4,
+      "chapter": null,
+      "title": "Contents",
+      "type": "contents",
+      "spec": "pages/specs/p004.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p004/p004-v1.pdf",
+          "sha256": "78d28e1572a864f55e42912bee07b3456ce4af1e89ba53d11bd0e49123b9f910",
+          "submitted_at": "2026-09-26T15:58:40Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p004-contents.pdf",
+        "sha256": "78d28e1572a864f55e42912bee07b3456ce4af1e89ba53d11bd0e49123b9f910",
+        "approved_at": "2026-09-26T15:58:40Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p004/p004-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p005",
+      "sequence": 5,
+      "printed_number": 5,
+      "chapter": 1,
+      "title": "Phase One: Scoping",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p005.json",
+      "required_assets": [
+        "art-phase-01-opener"
+      ],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p005/p005-v1.pdf",
+          "sha256": "0427c9d39f035c5752f19a849fe2f9e0886d42086b93f3d3184ba68e85e9296f",
+          "submitted_at": "2026-09-26T15:59:54Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p005-phase-one-scoping.pdf",
+        "sha256": "0427c9d39f035c5752f19a849fe2f9e0886d42086b93f3d3184ba68e85e9296f",
+        "approved_at": "2026-09-26T15:59:54Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p005/p005-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p006",
+      "sequence": 6,
+      "printed_number": 6,
+      "chapter": 1,
+      "title": "Phase One: Scoping (continued)",
+      "type": "text_illustration",
+      "spec": "pages/specs/p006.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p006/p006-v1.pdf",
+          "sha256": "38fcbe623b61a0b1a11219cfa30ec8a5151b668f6042cc32d47f6aacb39571f8",
+          "submitted_at": "2026-09-26T15:59:54Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p006-phase-one-scoping-continued.pdf",
+        "sha256": "38fcbe623b61a0b1a11219cfa30ec8a5151b668f6042cc32d47f6aacb39571f8",
+        "approved_at": "2026-09-26T15:59:54Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p006/p006-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p007",
+      "sequence": 7,
+      "printed_number": 7,
+      "chapter": 1,
+      "title": "Why you are here",
+      "type": "activity",
+      "spec": "pages/specs/p007.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p007/p007-v1.pdf",
+          "sha256": "6d5fd91e48d3378d99cb39d7511f806d364d97ebdd094f72edcb427bc8b410b7",
+          "submitted_at": "2026-09-26T15:59:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p007-why-you-are-here.pdf",
+        "sha256": "6d5fd91e48d3378d99cb39d7511f806d364d97ebdd094f72edcb427bc8b410b7",
+        "approved_at": "2026-09-26T15:59:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p007/p007-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p008",
+      "sequence": 8,
+      "printed_number": 8,
+      "chapter": 1,
+      "title": "Current-state assessment",
+      "type": "activity",
+      "spec": "pages/specs/p008.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p008/p008-v1.pdf",
+          "sha256": "83862b702081970c4b917a9f69f0846b53b616cf345c650ec6d377844ee9ee7f",
+          "submitted_at": "2026-09-26T15:59:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p008-current-state-assessment.pdf",
+        "sha256": "83862b702081970c4b917a9f69f0846b53b616cf345c650ec6d377844ee9ee7f",
+        "approved_at": "2026-09-26T15:59:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p008/p008-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p009",
+      "sequence": 9,
+      "printed_number": 9,
+      "chapter": 1,
+      "title": "Reading your score",
+      "type": "activity",
+      "spec": "pages/specs/p009.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p009/p009-v1.pdf",
+          "sha256": "a798d6040519b78be99b4a29e587b4abde91df79d6474b5390bf43d48121be06",
+          "submitted_at": "2026-09-26T15:59:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p009-reading-your-score.pdf",
+        "sha256": "a798d6040519b78be99b4a29e587b4abde91df79d6474b5390bf43d48121be06",
+        "approved_at": "2026-09-26T15:59:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p009/p009-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p010",
+      "sequence": 10,
+      "printed_number": 10,
+      "chapter": 1,
+      "title": "Your stakeholders",
+      "type": "text_illustration",
+      "spec": "pages/specs/p010.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p010/p010-v1.pdf",
+          "sha256": "c1610ce5464384baf0fe8935287e43fd4c4be564a6a03b97add0423a8767f0af",
+          "submitted_at": "2026-09-26T15:59:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p010-your-stakeholders.pdf",
+        "sha256": "c1610ce5464384baf0fe8935287e43fd4c4be564a6a03b97add0423a8767f0af",
+        "approved_at": "2026-09-26T15:59:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p010/p010-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p011",
+      "sequence": 11,
+      "printed_number": 11,
+      "chapter": 1,
+      "title": "Stakeholder map",
+      "type": "activity",
+      "spec": "pages/specs/p011.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p011/p011-v1.pdf",
+          "sha256": "b6d089ccae219e67d42f3f4d3dc98c01585961631fdbb6ab1c5bbd791cc33df4",
+          "submitted_at": "2026-09-26T15:59:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p011-stakeholder-map.pdf",
+        "sha256": "b6d089ccae219e67d42f3f4d3dc98c01585961631fdbb6ab1c5bbd791cc33df4",
+        "approved_at": "2026-09-26T15:59:57Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p011/p011-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p012",
+      "sequence": 12,
+      "printed_number": 12,
+      "chapter": 1,
+      "title": "The four-minute rule",
+      "type": "text_illustration",
+      "spec": "pages/specs/p012.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p012/p012-v1.pdf",
+          "sha256": "3e9a6829878c787b5d9eb2a342f75edac13c7c3ab9702505a361527ddaf7973f",
+          "submitted_at": "2026-09-26T15:59:57Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p012-the-four-minute-rule.pdf",
+        "sha256": "3e9a6829878c787b5d9eb2a342f75edac13c7c3ab9702505a361527ddaf7973f",
+        "approved_at": "2026-09-26T15:59:57Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p012/p012-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p013",
+      "sequence": 13,
+      "printed_number": 13,
+      "chapter": 1,
+      "title": "Four-minute log",
+      "type": "activity",
+      "spec": "pages/specs/p013.json",
+      "required_assets": [],
+      "status": "approved",
+      "revision_open": false,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p013/p013-v1.pdf",
+          "sha256": "4686d5883c5fc38f22a7af95297808cd40f2179dd04d0d813adaafd1655a60fb",
+          "submitted_at": "2026-09-26T15:59:57Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p013-four-minute-log.pdf",
+        "sha256": "4686d5883c5fc38f22a7af95297808cd40f2179dd04d0d813adaafd1655a60fb",
+        "approved_at": "2026-09-26T15:59:57Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p013/p013-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p014",
+      "sequence": 14,
+      "printed_number": 14,
+      "chapter": 2,
+      "title": "Phase Two: Current State",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p014.json",
+      "required_assets": [
+        "art-phase-02-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p015",
+      "sequence": 15,
+      "printed_number": 15,
+      "chapter": 2,
+      "title": "A day in the life of Josh",
+      "type": "text_illustration",
+      "spec": "pages/specs/p015.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p016",
+      "sequence": 16,
+      "printed_number": 16,
+      "chapter": 2,
+      "title": "What padel has replaced",
+      "type": "activity",
+      "spec": "pages/specs/p016.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p017",
+      "sequence": 17,
+      "printed_number": 17,
+      "chapter": 2,
+      "title": "The fastest-growing sport in the world",
+      "type": "text_illustration",
+      "spec": "pages/specs/p017.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p018",
+      "sequence": 18,
+      "printed_number": 18,
+      "chapter": 2,
+      "title": "Fastest-growing tally",
+      "type": "activity",
+      "spec": "pages/specs/p018.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p019",
+      "sequence": 19,
+      "printed_number": 19,
+      "chapter": 2,
+      "title": "The smartwatch",
+      "type": "text_illustration",
+      "spec": "pages/specs/p019.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p020",
+      "sequence": 20,
+      "printed_number": 20,
+      "chapter": 2,
+      "title": "Who asked?",
+      "type": "activity",
+      "spec": "pages/specs/p020.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p021",
+      "sequence": 21,
+      "printed_number": 21,
+      "chapter": 3,
+      "title": "Phase Three: Talking About Anything Else",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p021.json",
+      "required_assets": [
+        "art-phase-03-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p022",
+      "sequence": 22,
+      "printed_number": 22,
+      "chapter": 3,
+      "title": "Phase Three: Talking About Anything Else (continued)",
+      "type": "text_illustration",
+      "spec": "pages/specs/p022.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p023",
+      "sequence": 23,
+      "printed_number": 23,
+      "chapter": 3,
+      "title": "How a question works",
+      "type": "text_illustration",
+      "spec": "pages/specs/p023.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p024",
+      "sequence": 24,
+      "printed_number": 24,
+      "chapter": 3,
+      "title": "What was the question?",
+      "type": "activity",
+      "spec": "pages/specs/p024.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p025",
+      "sequence": 25,
+      "printed_number": 25,
+      "chapter": 3,
+      "title": "Topics of conversation other than padel",
+      "type": "activity",
+      "spec": "pages/specs/p025.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p026",
+      "sequence": 26,
+      "printed_number": 26,
+      "chapter": 3,
+      "title": "Three minutes without padel",
+      "type": "activity",
+      "spec": "pages/specs/p026.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p027",
+      "sequence": 27,
+      "printed_number": 27,
+      "chapter": 3,
+      "title": "Your padel budget",
+      "type": "text_illustration",
+      "spec": "pages/specs/p027.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p028",
+      "sequence": 28,
+      "printed_number": 28,
+      "chapter": 3,
+      "title": "Your daily padel budget",
+      "type": "activity",
+      "spec": "pages/specs/p028.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p029",
+      "sequence": 29,
+      "printed_number": 29,
+      "chapter": 3,
+      "title": "Words that belong on the court",
+      "type": "text_illustration",
+      "spec": "pages/specs/p029.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p030",
+      "sequence": 30,
+      "printed_number": 30,
+      "chapter": 3,
+      "title": "Emergency bandeja card",
+      "type": "activity",
+      "spec": "pages/specs/p030.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p031",
+      "sequence": 31,
+      "printed_number": 31,
+      "chapter": 3,
+      "title": "Listening",
+      "type": "activity",
+      "spec": "pages/specs/p031.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p032",
+      "sequence": 32,
+      "printed_number": 32,
+      "chapter": 3,
+      "title": "Signs you are listening",
+      "type": "activity",
+      "spec": "pages/specs/p032.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p033",
+      "sequence": 33,
+      "printed_number": 33,
+      "chapter": 4,
+      "title": "Phase Four: The Home Front",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p033.json",
+      "required_assets": [
+        "art-phase-04-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p034",
+      "sequence": 34,
+      "printed_number": 34,
+      "chapter": 4,
+      "title": "Bath time",
+      "type": "text_illustration",
+      "spec": "pages/specs/p034.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p035",
+      "sequence": 35,
+      "printed_number": 35,
+      "chapter": 4,
+      "title": "The 6am group chat",
+      "type": "text_illustration",
+      "spec": "pages/specs/p035.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p036",
+      "sequence": 36,
+      "printed_number": 36,
+      "chapter": 4,
+      "title": "Group chat audit",
+      "type": "activity",
+      "spec": "pages/specs/p036.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p037",
+      "sequence": 37,
+      "printed_number": 37,
+      "chapter": 4,
+      "title": "The car boot",
+      "type": "text_illustration",
+      "spec": "pages/specs/p037.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p038",
+      "sequence": 38,
+      "printed_number": 38,
+      "chapter": 4,
+      "title": "Boot inventory",
+      "type": "activity",
+      "spec": "pages/specs/p038.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p039",
+      "sequence": 39,
+      "printed_number": 39,
+      "chapter": 4,
+      "title": "What Mia thinks Daddy does",
+      "type": "activity",
+      "spec": "pages/specs/p039.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p040",
+      "sequence": 40,
+      "printed_number": 40,
+      "chapter": 4,
+      "title": "A weekend without a court",
+      "type": "activity",
+      "spec": "pages/specs/p040.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p041",
+      "sequence": 41,
+      "printed_number": 41,
+      "chapter": 5,
+      "title": "Phase Five: The Office",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p041.json",
+      "required_assets": [
+        "art-phase-05-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p042",
+      "sequence": 42,
+      "printed_number": 42,
+      "chapter": 5,
+      "title": "Phase Five: The Office (continued)",
+      "type": "text_illustration",
+      "spec": "pages/specs/p042.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p043",
+      "sequence": 43,
+      "printed_number": 43,
+      "chapter": 5,
+      "title": "The Monday stand-up",
+      "type": "text_illustration",
+      "spec": "pages/specs/p043.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p044",
+      "sequence": 44,
+      "printed_number": 44,
+      "chapter": 5,
+      "title": "Is this a padel stat?",
+      "type": "activity",
+      "spec": "pages/specs/p044.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p045",
+      "sequence": 45,
+      "printed_number": 45,
+      "chapter": 5,
+      "title": "The team social",
+      "type": "text_illustration",
+      "spec": "pages/specs/p045.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p046",
+      "sequence": 46,
+      "printed_number": 46,
+      "chapter": 5,
+      "title": "LinkedIn",
+      "type": "text_illustration",
+      "spec": "pages/specs/p046.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p047",
+      "sequence": 47,
+      "printed_number": 47,
+      "chapter": 5,
+      "title": "Your post, and what everyone read",
+      "type": "activity",
+      "spec": "pages/specs/p047.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p048",
+      "sequence": 48,
+      "printed_number": 48,
+      "chapter": 5,
+      "title": "The client lunch",
+      "type": "text_illustration",
+      "spec": "pages/specs/p048.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p049",
+      "sequence": 49,
+      "printed_number": 49,
+      "chapter": 5,
+      "title": "Priya and tennis",
+      "type": "activity",
+      "spec": "pages/specs/p049.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p050",
+      "sequence": 50,
+      "printed_number": 50,
+      "chapter": 6,
+      "title": "Phase Six: Recruitment Ban",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p050.json",
+      "required_assets": [
+        "art-phase-06-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p051",
+      "sequence": 51,
+      "printed_number": 51,
+      "chapter": 6,
+      "title": "The people you have tried to recruit",
+      "type": "text_illustration",
+      "spec": "pages/specs/p051.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p052",
+      "sequence": 52,
+      "printed_number": 52,
+      "chapter": 6,
+      "title": "Recruitment register",
+      "type": "activity",
+      "spec": "pages/specs/p052.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p053",
+      "sequence": 53,
+      "printed_number": 53,
+      "chapter": 6,
+      "title": "Case study: Graham's hip",
+      "type": "text_illustration",
+      "spec": "pages/specs/p053.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p054",
+      "sequence": 54,
+      "printed_number": 54,
+      "chapter": 6,
+      "title": "People you will not invite this month",
+      "type": "activity",
+      "spec": "pages/specs/p054.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p055",
+      "sequence": 55,
+      "printed_number": 55,
+      "chapter": 7,
+      "title": "Phase Seven: Holidays and Occasions",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p055.json",
+      "required_assets": [
+        "art-phase-07-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p056",
+      "sequence": 56,
+      "printed_number": 56,
+      "chapter": 7,
+      "title": "Phase Seven: Holidays and Occasions (continued)",
+      "type": "text_illustration",
+      "spec": "pages/specs/p056.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p057",
+      "sequence": 57,
+      "printed_number": 57,
+      "chapter": 7,
+      "title": "The family holiday",
+      "type": "text_illustration",
+      "spec": "pages/specs/p057.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p058",
+      "sequence": 58,
+      "printed_number": 58,
+      "chapter": 7,
+      "title": "Why are we going there?",
+      "type": "activity",
+      "spec": "pages/specs/p058.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p059",
+      "sequence": 59,
+      "printed_number": 59,
+      "chapter": 7,
+      "title": "What to wear",
+      "type": "text_illustration",
+      "spec": "pages/specs/p059.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p060",
+      "sequence": 60,
+      "printed_number": 60,
+      "chapter": 7,
+      "title": "What to wear",
+      "type": "activity",
+      "spec": "pages/specs/p060.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p061",
+      "sequence": 61,
+      "printed_number": 61,
+      "chapter": 7,
+      "title": "Presents",
+      "type": "text_illustration",
+      "spec": "pages/specs/p061.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p062",
+      "sequence": 62,
+      "printed_number": 62,
+      "chapter": 7,
+      "title": "Case study: Tom's wedding",
+      "type": "activity",
+      "spec": "pages/specs/p062.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p063",
+      "sequence": 63,
+      "printed_number": 63,
+      "chapter": 7,
+      "title": "Family dates",
+      "type": "activity",
+      "spec": "pages/specs/p063.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p064",
+      "sequence": 64,
+      "printed_number": 64,
+      "chapter": 8,
+      "title": "Phase Eight: Relapse Risk",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p064.json",
+      "required_assets": [
+        "art-phase-08-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p065",
+      "sequence": 65,
+      "printed_number": 65,
+      "chapter": 8,
+      "title": "Your risk register",
+      "type": "activity",
+      "spec": "pages/specs/p065.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p066",
+      "sequence": 66,
+      "printed_number": 66,
+      "chapter": 8,
+      "title": "Warning signs",
+      "type": "text_illustration",
+      "spec": "pages/specs/p066.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p067",
+      "sequence": 67,
+      "printed_number": 67,
+      "chapter": 8,
+      "title": "Warning signs this week",
+      "type": "activity",
+      "spec": "pages/specs/p067.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p068",
+      "sequence": 68,
+      "printed_number": 68,
+      "chapter": 8,
+      "title": "The new court",
+      "type": "text_illustration",
+      "spec": "pages/specs/p068.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p069",
+      "sequence": 69,
+      "printed_number": 69,
+      "chapter": 8,
+      "title": "My new court plan",
+      "type": "activity",
+      "spec": "pages/specs/p069.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p070",
+      "sequence": 70,
+      "printed_number": 70,
+      "chapter": 8,
+      "title": "Muting the group chat",
+      "type": "activity",
+      "spec": "pages/specs/p070.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p071",
+      "sequence": 71,
+      "printed_number": 71,
+      "chapter": 9,
+      "title": "Phase Nine: Sign-off",
+      "type": "chapter_opener",
+      "spec": "pages/specs/p071.json",
+      "required_assets": [
+        "art-phase-09-opener"
+      ],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p072",
+      "sequence": 72,
+      "printed_number": 72,
+      "chapter": 9,
+      "title": "Final review",
+      "type": "activity",
+      "spec": "pages/specs/p072.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p073",
+      "sequence": 73,
+      "printed_number": 73,
+      "chapter": 9,
+      "title": "Reading your final score",
+      "type": "activity",
+      "spec": "pages/specs/p073.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p074",
+      "sequence": 74,
+      "printed_number": 74,
+      "chapter": 9,
+      "title": "The dinner party",
+      "type": "text_illustration",
+      "spec": "pages/specs/p074.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p075",
+      "sequence": 75,
+      "printed_number": 75,
+      "chapter": 9,
+      "title": "The tennis match",
+      "type": "text_illustration",
+      "spec": "pages/specs/p075.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p076",
+      "sequence": 76,
+      "printed_number": 76,
+      "chapter": 9,
+      "title": "Stakeholder sign-off",
+      "type": "activity",
+      "spec": "pages/specs/p076.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p077",
+      "sequence": 77,
+      "printed_number": 77,
+      "chapter": 9,
+      "title": "Commitments",
+      "type": "activity",
+      "spec": "pages/specs/p077.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p078",
+      "sequence": 78,
+      "printed_number": 78,
+      "chapter": 9,
+      "title": "A final word from the engagement",
+      "type": "text_illustration",
+      "spec": "pages/specs/p078.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p079",
+      "sequence": 79,
+      "printed_number": 79,
+      "chapter": 9,
+      "title": "Certificate of Completion",
+      "type": "certificate",
+      "spec": "pages/specs/p079.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    },
+    {
+      "page_id": "p080",
+      "sequence": 80,
+      "printed_number": 80,
+      "chapter": null,
+      "title": "About this engagement",
+      "type": "text_illustration",
+      "spec": "pages/specs/p080.json",
+      "required_assets": [],
+      "status": "spec_ready",
+      "revision_open": false,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "qa": {
+        "content": "pending",
+        "visual": "pending",
+        "technical": "pending"
+      },
+      "depends_on": [],
+      "notes": null
+    }
+  ]
 }

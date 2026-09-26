@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-page-plan",
+  "book_id": "padel-addicts-guide",
+  "type": "authoring",
+  "stage": "visual_lock",
+  "summary": "Create the page plan",
+  "instructions": "Turn the locked manuscript into a page manifest: every page that will exist, in order, with a type and a title.\n\nWrite the whole plan in one pass, with each page's spec inside its entry: {\"title\": ..., \"type\": ..., \"chapter\": ..., \"spec\": {...}}. A spec holds the exact final copy from the locked manuscript plus the illustration brief (schemas/page-spec.schema.json). Artwork a spec names in illustration.asset_id is registered for its page automatically. Every spec is checked before anything is written; if one is wrong, nothing is planned and the problems are listed.\n\nPicture budget: chapter_openers - a picture only on chapter_opener pages. The cover is separate and never counted. Fill the other pages with typeset text, checklists, tests, comparisons and quotes (\"illustration\": null). Never raise the budget yourself; if the book needs more pictures, ask the operator (bookfactory pictures set).\n\nRun: bookfactory plan padel-addicts-guide --from-file <plan.json>\nor add pages one at a time with `bookfactory plan <book> --add`.\n\nPage types: chapter_opener, editorial_illustration, text_illustration, checklist, diagnostic_test, activity (numbered panels and typeset diagrams built from blocks), comparison, diagram, quote, certificate, closing, front_matter, contents.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "manuscript/manuscript.md",
+    "manuscript/outline.md",
+    "style/visual-bible.md"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/manifest.json"
+  },
+  "approval_required": false,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T15:57:26Z",
+  "closed_at": "2026-09-26T15:58:33Z"
+}

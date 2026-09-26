@@ -1,0 +1,36 @@
+{
+  "type": "activity",
+  "title": "Topics of conversation other than padel",
+  "chapter": 3,
+  "copy": {
+    "heading": "Topics of conversation other than padel",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Your stakeholders have prepared a list of safe topics. Each one has been tested on real people who do not play padel, and none of them leads back to padel unless you make it."
+      },
+      {
+        "type": "prose",
+        "text": [
+          "• The children. Specifically what they did today, not what sport they might be good at.",
+          "• Lauren's work. She has a job. It has people in it. Some of them are ridiculous.",
+          "• Your own work, minus any padel stat.",
+          "• Something on the telly, other than sport.",
+          "• The weather, as weather, and not as padel weather.",
+          "• The news. Any part of it that isn't about a new club opening.",
+          "• A book, a film or a podcast that is not about padel, or about \"mindset\".",
+          "• Where to go for tea on Friday.",
+          "• Whether it's the green bin or the black bin this week. It's the green bin."
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p025",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

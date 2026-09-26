@@ -1,0 +1,25 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Eight: Relapse Risk",
+  "chapter": 8,
+  "copy": {
+    "eyebrow": "Phase Eight",
+    "heading": "Relapse Risk",
+    "subheading": "Every engagement has risks. This one has a club opening a fourth court.",
+    "body": [
+      "By now your padel talk is down, your stakeholders are cautiously pleased and Mia has only said \"padel\" twice this week, both in context. This phase is about keeping it that way. We will look at the risk register, the warning signs, the new court and the group chat's mute button."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-phase-08-opener",
+    "concept": "Josh at the family breakfast table, frozen with a spoonful of cereal halfway to his mouth, staring at his phone, which shows a photo of a brand-new padel court, while Lauren watches him over her coffee and Mia and Alfie watch Lauren.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p064",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "type": "activity",
+  "title": "Case study: Tom's wedding",
+  "chapter": 7,
+  "copy": {
+    "heading": "Case study: Tom's wedding",
+    "blocks": [
+      {
+        "type": "prose",
+        "text": "Your cousin Tom got married in June, on the same Saturday as the club's summer tournament."
+      },
+      {
+        "type": "prose",
+        "text": "You attended the ceremony. You attended the drinks. At 3.15pm you left the reception \"to get something from the car\" and drove to the club, where you played two group matches in your wedding suit trousers and a borrowed pair of court shoes. You returned at 6.40pm, during the speeches, with a medal round your neck and a grazed knee. The best man stopped mid-sentence. Tom's new wife has not spoken to you since."
+      },
+      {
+        "type": "prose",
+        "text": "The engagement has two recommendations. First, please check the family calendar before entering any tournament. Second, if you must go to the car during a wedding, please return before the speeches, and without a medal."
+      },
+      {
+        "type": "casenote",
+        "label": "Stakeholder feedback (Home), week eight",
+        "text": "Anniversary dinner. He didn't mention padel once in the restaurant. Then on the way home he said \"that was lovely, we should do it again\" and I thought he meant dinner. He meant the restaurant's view of the new club."
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p062",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Three: Talking About Anything Else",
+  "chapter": 3,
+  "copy": {
+    "eyebrow": "Phase Three",
+    "heading": "Talking About Anything Else",
+    "subheading": "The core module. Conversation, as practised by people who do not play padel.",
+    "body": []
+  },
+  "illustration": {
+    "asset_id": "art-phase-03-opener",
+    "concept": "Josh at a dinner party, mouth open mid-sentence, holding a wine glass in one hand and miming a racket shot with the other, while the guests around the table stare at their plates and Lauren quietly moves the bread basket out of his swing.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p021",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

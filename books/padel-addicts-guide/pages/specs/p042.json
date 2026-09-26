@@ -1,0 +1,19 @@
+{
+  "type": "text_illustration",
+  "title": "Phase Five: The Office (continued)",
+  "chapter": 5,
+  "copy": {
+    "eyebrow": "Phase Five",
+    "body": [
+      "Your second stakeholder is Work. Work would like you to keep being good at your job, which you are, and to stop telling the team about padel before 10am, which you do. In this phase we will look at the Monday stand-up, the team social, your LinkedIn activity and a client lunch that went on longer than it should have."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p042",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

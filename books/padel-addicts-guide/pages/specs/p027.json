@@ -1,0 +1,20 @@
+{
+  "type": "text_illustration",
+  "title": "Your padel budget",
+  "chapter": 3,
+  "copy": {
+    "heading": "Your padel budget",
+    "body": [
+      "The engagement does not ask you to stop talking about padel altogether. That would be unrealistic, and Lauren says it would also be eerie. Instead, you will be given a daily padel budget: a fixed number of mentions to spend as you see fit.",
+      "Spend it wisely. A mention used on the group chat is still a mention. A mention used on the midwife is a waste. Unspent mentions cannot be carried over to the weekend."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p027",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

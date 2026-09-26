@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-p009-render",
+  "book_id": "padel-addicts-guide",
+  "type": "page_render",
+  "stage": "page_production",
+  "summary": "Render page p009 - Reading your score",
+  "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render padel-addicts-guide --page p009 --submit",
+  "page_id": "p009",
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "pages/specs/p009.json"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "pages/drafts/p009/",
+    "submit_command": "bookfactory submit padel-addicts-guide p009 --kind page --file <path>",
+    "expected_format": "pdf"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T15:59:55Z",
+  "closed_at": "2026-09-26T15:59:56Z"
+}

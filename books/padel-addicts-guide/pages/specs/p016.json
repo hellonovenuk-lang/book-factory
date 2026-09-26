@@ -1,0 +1,58 @@
+{
+  "type": "activity",
+  "title": "What padel has replaced",
+  "chapter": 2,
+  "copy": {
+    "panel_number": "No. 04",
+    "panel_kind": "Table",
+    "heading": "What padel has replaced",
+    "instructions": "Everything below used to be part of your life. Please tick any you would like back.",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Before padel",
+          "Since padel"
+        ],
+        "rows": [
+          [
+            "Five-a-side on a Thursday",
+            "Padel on a Thursday"
+          ],
+          [
+            "The pub quiz with your mates",
+            "Padel, then a drink with the padel mates"
+          ],
+          [
+            "Box sets with Lauren",
+            "Padel highlights, with commentary from you"
+          ],
+          [
+            "Reading a book on holiday",
+            "Reading the resort's court timetable"
+          ],
+          [
+            "Saturday morning at the park with Mia",
+            "Saturday 9am court, park \"after, if there's time\""
+          ],
+          [
+            "Talking about your job",
+            "Talking about padel at your job"
+          ],
+          [
+            "Your old personality",
+            "Padel"
+          ]
+        ]
+      }
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p016",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

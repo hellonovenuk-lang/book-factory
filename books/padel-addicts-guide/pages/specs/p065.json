@@ -1,0 +1,71 @@
+{
+  "type": "activity",
+  "title": "Your risk register",
+  "chapter": 8,
+  "copy": {
+    "panel_number": "No. 22",
+    "panel_kind": "Table",
+    "heading": "Your risk register",
+    "blocks": [
+      {
+        "type": "table",
+        "headers": [
+          "Risk",
+          "Likelihood",
+          "Impact",
+          "What to do"
+        ],
+        "rows": [
+          [
+            "The club opens a fourth court",
+            "Almost certain",
+            "Severe",
+            "Wait a week before booking it"
+          ],
+          [
+            "Rob buys a new racket",
+            "Likely",
+            "Moderate",
+            "Say \"nice\" and change the subject"
+          ],
+          [
+            "A new padel club opens near the office",
+            "Possible",
+            "Severe",
+            "Do not tell the team"
+          ],
+          [
+            "Someone at a party says they \"might try padel\"",
+            "Likely",
+            "Severe",
+            "Give them the club's website and walk away"
+          ],
+          [
+            "A sunny Saturday with no plans",
+            "Almost certain",
+            "Moderate",
+            "Make plans with the family first"
+          ],
+          [
+            "Priya brings her tennis racket to work",
+            "Likely",
+            "Personal",
+            "Leave it"
+          ]
+        ]
+      }
+    ],
+    "eyebrow": "The risk register",
+    "body": [
+      "A risk register lists what might go wrong, how likely it is and how bad it would be. You have written several for clients. This one is for you."
+    ]
+  },
+  "illustration": null,
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p065",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

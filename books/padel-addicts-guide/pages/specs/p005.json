@@ -1,0 +1,23 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase One: Scoping",
+  "chapter": 1,
+  "copy": {
+    "eyebrow": "Phase One",
+    "heading": "Scoping",
+    "subheading": "Establishing the size of the problem, and who has been living with it.",
+    "body": []
+  },
+  "illustration": {
+    "asset_id": "art-phase-01-opener",
+    "concept": "Josh at the head of a kitchen table set up like a meeting room, cap on, smartwatch on his wrist, his racket bag on the chair beside him, while Lauren sits opposite with Alfie on her lap and a notepad, and Mia draws on the back of a printed agenda.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p005",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}

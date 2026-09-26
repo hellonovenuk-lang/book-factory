@@ -1,0 +1,25 @@
+{
+  "type": "chapter_opener",
+  "title": "Phase Two: Current State",
+  "chapter": 2,
+  "copy": {
+    "eyebrow": "Phase Two",
+    "heading": "Current State",
+    "subheading": "A detailed picture of how things stand, measured from 5.50am.",
+    "body": [
+      "In this phase the engagement shadows you for a typical day, lists everything padel has quietly replaced, and counts how many times you use a particular sentence. None of it is a criticism. It is data, and you like data. You have a watch for it."
+    ]
+  },
+  "illustration": {
+    "asset_id": "art-phase-02-opener",
+    "concept": "Josh in pyjama bottoms and a padel quarter-zip in a dark kitchen at dawn, lit by his phone, thumbing the group chat with a grin, while a baby monitor on the counter shows Alfie standing up in his cot and wailing.",
+    "placement": "inline"
+  },
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "page_id": "p014",
+  "source": {
+    "manuscript_version": "v1",
+    "visual_style_version": "v1"
+  }
+}
