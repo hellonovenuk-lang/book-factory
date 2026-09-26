@@ -11,7 +11,7 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phases 17, 18 and 19 are done (not yet archived; `/handover` moves them to `docs/PLAN-ARCHIVE.md`).
+> **Doing:** Phase 20 (a smoother `/write-book`), fanned out 2026-09-26. Phases 17, 18 and 19 are done (not yet archived; `/handover` moves them to `docs/PLAN-ARCHIVE.md`).
 > **Finished:** Phase 19: `produce` stops with `picture` at a page picture; `/write-book` draws it through Higgsfield, checks it, submits it and approves it with `--autonomous` only when the task's mode allows (never cover artwork or the full-wrap cover); the guard lets `advance --to release_ready`, `cover finalize` and `cover preflight` through when the book's next task asks for exactly that in continue_automatically, and an older hole (`cover --root X finalize`) is closed. 671 tests pass. The first live picture inside the loop is on the next real book (it spends Higgsfield credits). Phase 18: intake now also asks the exact title, the main character's age/family/look, colour or black-and-white printing and the cover style (big lettering, picture, or let Book Factory decide); confirming sets the book's title, `format.colour` and a text-only cover for big lettering, each audited; the brief, visual and cover tasks list them as "fixed at intake". Test-driven on a new book in a scratch copy. Helpers are no longer capped at 3 (Kieran); the checker may never stash or reset the real checkout. Earlier: Phase 17 (`plan --from-manuscript`), and the Golf book's p055/p061 table fix (still Release Ready, not yet uploaded).
 > **Also finished (2026-09-26):** the first real `/write-book` run: *The Padel Addict's Guide to Talking About Anything Else* (`padel-addicts-guide`) went from idea to Release Ready in one session (80 pages, 9 opener pictures drawn and approved in the loop, 26 Higgsfield credits, big-lettering cover approved by Kieran; not yet uploaded). It found three gaps, now in `IDEAS.md`: references don't get the `picture` stop, the fit test misses text running into the bottom margin, and a revision doesn't mark the assembled interior stale.
 > **Next action:** start the next real book with `/write-book` (first live run of pictures in the loop), or plan Phase 20 from `IDEAS.md`.
@@ -88,6 +88,34 @@ Phase 14: Claude writes the copy (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 15: The guard follows the recorded policy (done 2026-09-24; Kieran asked for it after too many stops on the Golf Addict's Guide. Changed `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py`, `.claude/skills/write-book/SKILL.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`.)
 
 Phase 16: Activity panels, typeset diagrams and sample pages (done, see `docs/PLAN-ARCHIVE.md`)
+
+## Phase 20: A smoother `/write-book` (open)
+
+Goal: fix what made the first real `/write-book` run (the padel book) clunky.
+Kieran's own typed go-ahead lets his decisions run in auto mode, so he never
+switches modes; `/write-book` asks once how often to check in, handles the
+reference set and the cover itself, and Book Factory catches the two faults
+that slipped through (text running over the page number, an out-of-date
+interior after a revision). Kieran asked for all of it 2026-09-26 ("Make all
+changes, /fan-out responsibilities").
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 20.1 | Go-ahead slip: a UserPromptSubmit hook records Kieran's typed words; the guard allows exactly the matching operator command signed `--by kieran` in any mode, for that turn only; Claude can never write the slip. Also fix two false alarms (a shell loop variable, a working folder inside `approved/`) | builder, tricky (Opus: a safety hook, must never let Claude grant itself authority) | `.claude/hooks/record-go-ahead.py`, `.claude/hooks/guard-authority.py`, `.claude/settings.json`, `.gitignore`, `tests/test_hook_go_ahead.py`, `tests/test_hook_guard_authority.py` |
+| 20.2 | `produce` gives `picture` for drawn visual references too (not typeset samples, not the cover); book ids drop apostrophes and a leading "the" | builder, routine (Sonnet) | `bookfactory/core/produce.py`, `bookfactory/core/ids.py`, `tests/test_produce_picture.py`, `tests/test_ids_slug.py` |
+| 20.3 | A revised page makes the assembled interior and its preflight stale: `status` says so and `next` asks for assembly again | builder, routine (Sonnet) | `bookfactory/core/book.py`, `bookfactory/core/gates.py`, `bookfactory/core/tasks.py`, `bookfactory/core/cover.py`, `tests/test_stale_interior.py` |
+| 20.4 | The fit test and QA flag body text that runs into the bottom margin or over the page number | builder, routine (Sonnet) | `bookfactory/render/fit.py`, `bookfactory/qa/technical.py`, `tests/test_plan_fit.py`, `tests/test_qa_bottom_margin.py` |
+| 20.5 | Cover fonts ship with Book Factory (no copying from Golf) and a big-lettering cover starts with a ready design block | builder, routine (Sonnet) | `bookfactory/render/cover.py`, `bookfactory/render/assets/fonts/*`, `bookfactory/core/api.py`, `tests/test_cover_design_defaults.py` |
+| 20.6 | `/write-book` and the guides: one check-in choice at the start, the reference set end to end, the cover step, the go-ahead slip, no shell variables | docs keeper, routine (Sonnet), after 20.1 to 20.5 | `.claude/skills/write-book/SKILL.md`, `AGENTS.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`, `docs/OPERATOR.md`, `GLOSSARY.md` |
+| 20.7 | Check: full suite, demo build in a throwaway copy, docs vs code, guard safety review; then test-drive in a scratch copy of the padel book | checker (Sonnet), then main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** 20.7, in a scratch copy of the padel book: the go-ahead slip lets a typed "lock the look" through and nothing else; reopening a page marks the interior stale; the old padel openers are flagged by the margin check.
+
+**Done when:**
+- [ ] In auto mode, typing "approve cover v1" (or "lock the look", "revise p014") lets exactly that command through, signed with Kieran's name, without switching modes; nothing Claude writes can do the same.
+- [ ] `/write-book` asks once how often to check in, then draws and shows the six reference pictures together, and writes the cover for Kieran to approve.
+- [ ] Text running over a page number, and an out-of-date interior after a revision, are both caught automatically.
+- [ ] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
 
 ## Phase 17: Page plan straight from the manuscript (done)
 
