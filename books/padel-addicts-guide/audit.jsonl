@@ -4,3 +4,5 @@
 {"at": "2026-09-26T10:55:03Z", "event": "intake_drafted", "drafted_by": "claude"}
 {"at": "2026-09-26T10:55:07Z", "event": "cover_artwork_mode_set", "mode": "none", "previous": "native", "by": "kieran", "reason": "cover style 'big_lettering' chosen at intake", "superseded": []}
 {"at": "2026-09-26T10:55:07Z", "event": "intake_submitted", "production_policy": "visual_checkpoint", "operator_authorized": true, "drafted_by": "claude", "confirmed_by": "kieran", "changed_on_confirm": []}
+{"at": "2026-09-26T11:00:11Z", "event": "stage_advanced", "from": "book_brief", "to": "concept_lock", "by": "claude", "note": "Kieran approved in chat 2026-09-26: looks good, lock it"}
+{"at": "2026-09-26T11:00:11Z", "event": "concept_locked", "sha256": "f57cdaf28855eba35c174b14db3be8c3803d8154f08531122173d1030e0e4073", "by": "claude", "note": "Kieran approved in chat 2026-09-26: looks good, lock it", "authorization": "autonomous_production_policy:visual_checkpoint"}
