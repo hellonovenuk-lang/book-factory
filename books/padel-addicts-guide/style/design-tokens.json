@@ -33,9 +33,9 @@
     "ink": "#1c1a17",
     "ink_soft": "#4a453e",
     "paper": "#fbf8f1",
-    "accent": "#8c3b2e",
-    "accent_soft": "#e6d7c3",
-    "rule": "#c9bda8"
+    "accent": "#5f5a53",
+    "accent_soft": "#e4e1dc",
+    "rule": "#c4c0ba"
   },
   "rules": {
     "chapter_opener_starts_recto": true,

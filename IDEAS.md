@@ -29,3 +29,4 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 - 2026-09-24: Ask the big creative decisions at intake: main character's age and family, cover style (big lettering or picture), colour or black and white, exact title; changing Dave's age and the cover style late cost rework and credits (Golf Addict's Guide retrospective). *Done in Phase 18.*
 - 2026-09-24: A "big-lettering gift book" cover preset (colours, fonts, banner) so a new book's cover starts from what sells, not the plain default (Golf Addict's Guide retrospective)
 - 2026-09-24: Higgsfield returned nano_banana_2 when nano_banana_pro was requested, every time; check what we're paying for (Golf Addict's Guide retrospective)
+- 2026-09-26: `/write-book` says `produce` stops with `picture` for character and layout references too, but `produce` only does it for a page illustration (references give `not_mechanical`); make the two agree (padel book, first live run)

@@ -1,6 +1,24 @@
 {
   "schema_version": "1.0",
   "book_id": "padel-addicts-guide",
-  "updated_at": "2026-09-26T11:25:13Z",
-  "assets": []
+  "updated_at": "2026-09-26T11:36:18Z",
+  "assets": [
+    {
+      "asset_id": "ref-character-main",
+      "kind": "character_reference",
+      "title": "Main character reference",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "planned",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [],
+      "approved": null,
+      "approval_history": [],
+      "notes": null
+    }
+  ]
 }

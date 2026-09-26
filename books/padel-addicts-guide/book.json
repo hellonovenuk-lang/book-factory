@@ -4,7 +4,7 @@
   "title": "The Padel Addict's Guide to Talking About Anything Else",
   "subtitle": null,
   "series": null,
-  "stage": "voice_lock",
+  "stage": "visual_development",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -19,11 +19,11 @@
     "sha256": "f57cdaf28855eba35c174b14db3be8c3803d8154f08531122173d1030e0e4073"
   },
   "manuscript": {
-    "version": "v0",
-    "locked": false,
-    "locked_at": null,
-    "sha256": null,
-    "path": null
+    "version": "v1",
+    "locked": true,
+    "locked_at": "2026-09-26T11:35:08Z",
+    "sha256": "d4f8b9cc29cd53916798e24bda0fbfed57eba2103212129e3db413bb1e4be971",
+    "path": "manuscript/versions/manuscript-v1.md"
   },
   "style": {
     "visual_version": "v0",
@@ -87,21 +87,21 @@
   "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
-    "task_id": "padel-addicts-guide-manuscript",
-    "type": "authoring",
-    "summary": "Write the manuscript",
+    "task_id": "padel-addicts-guide-ref-character-main-generate",
+    "type": "character_reference",
+    "summary": "Create visual reference: Main character reference",
     "page_id": null,
-    "asset_id": null,
+    "asset_id": "ref-character-main",
     "approval_required": true,
     "mode": "continue_automatically"
   },
   "last_transition": {
-    "from": "concept_lock",
-    "to": "voice_lock",
-    "at": "2026-09-26T11:25:13Z",
-    "by": "claude",
-    "note": "Kieran approved in chat 2026-09-26: lock"
+    "from": "manuscript_lock",
+    "to": "visual_development",
+    "at": "2026-09-26T11:36:18Z",
+    "by": "system",
+    "note": "stage derived from repository state"
   },
   "created_at": "2026-09-26T10:54:54Z",
-  "updated_at": "2026-09-26T11:25:13Z"
+  "updated_at": "2026-09-26T11:36:18Z"
 }
