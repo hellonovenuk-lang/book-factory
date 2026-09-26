@@ -113,6 +113,36 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 - [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
 - [x] Everything is pushed to `main` and checked there.
 
+## Phase 19: Pictures in the loop, and the last steps on their own (in progress)
+
+Goal: `/write-book` carries a book through its pictures and its final release
+steps without stopping, whenever the recorded production policy allows. Part A:
+`produce` stops with a new `picture` code at a page picture it can't draw;
+`/write-book` then draws it through Higgsfield (the routine in
+`integrations/claude/BOOK_FACTORY.md`), checks it against the references,
+submits it, and approves a page picture with `--autonomous` only when the task's
+mode is continue_automatically; cover artwork and the full-wrap cover stay
+Kieran's. Part B: the guard lets `advance --to release_ready`, `cover finalize`
+and `cover preflight` through when the book's next task asks for exactly that
+command and its mode is continue_automatically. Kieran asked for both
+2026-09-26 ("Start both").
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 19.1 | `produce` stops with `picture` at a page-picture task in continue_automatically (not cover artwork) | builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce_picture.py` |
+| 19.2 | Guard: allow `advance --to release_ready`, `cover finalize`, `cover preflight` when the next task names that command in continue_automatically; ask otherwise | builder, tricky (Opus: a safety hook, must never widen past the policy) | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` |
+| 19.3 | `/write-book`: the picture loop (budget, Higgsfield, own check, submit, `--autonomous` page-picture approval, credits report) and the release steps | docs keeper, routine (Sonnet) | `.claude/skills/write-book/SKILL.md` |
+| 19.4 | Rules and guides for both parts | docs keeper, routine (Sonnet) | `AGENTS.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`, `docs/OPERATOR.md`, `GLOSSARY.md` |
+| 19.5 | Check: full suite, demo build in a throwaway copy, docs vs code, guard decisions | checker, routine (Sonnet) | none |
+| 19.6 | Test-drive in a scratch copy: `produce` stops with `picture`; the guard allows the three end steps only when the task asks | main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** 19.6, in a scratch copy. The first live Higgsfield picture inside the loop is on the next real book (it spends Kieran's credits).
+
+**Done when:**
+- [ ] `produce` says "picture" when the next job is a page picture, and `/write-book` knows how to draw, check, submit and (only when the policy allows) approve it, never the cover.
+- [ ] In auto mode, a book whose policy allows it goes through `cover finalize`, `cover preflight` and release ready without stopping; anything else still asks.
+- [ ] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+
 ## Phase 18: Big decisions at intake (done)
 
 Goal: starting a book also asks the exact title, the main character's age,
