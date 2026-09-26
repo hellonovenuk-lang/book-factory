@@ -215,3 +215,4 @@
 {"at": "2026-09-26T16:05:15Z", "event": "preflight_run", "status": "pass", "failures": 0, "warnings": 0, "profile": "kdp-default"}
 {"at": "2026-09-26T16:05:15Z", "event": "stage_advanced", "from": "assembly", "to": "kdp_preflight", "by": "system", "note": "stage derived from repository state"}
 {"at": "2026-09-26T16:05:15Z", "event": "stage_advanced", "from": "kdp_preflight", "to": "cover_production", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-09-26T16:06:34Z", "event": "cover_draft_submitted", "revision": "v1", "path": "cover/drafts/cover-v1.pdf"}

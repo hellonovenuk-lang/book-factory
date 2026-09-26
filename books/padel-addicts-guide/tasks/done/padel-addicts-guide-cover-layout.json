@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-cover-layout",
+  "book_id": "padel-addicts-guide",
+  "type": "authoring",
+  "stage": "cover_production",
+  "summary": "Typeset and visually inspect the full-wrap cover",
+  "instructions": "Run bookfactory cover build padel-addicts-guide. Inspect output/cover-build/cover-wrap.png (full wrap) and cover-thumb.png (Amazon-size front thumbnail). If anything needs changing, edit cover/cover.json - not the PDF - and build again. Once it looks right, run bookfactory cover build padel-addicts-guide --submit to register it as a versioned draft; it only submits if the cover checks pass.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {
+    "destination": "cover/drafts/",
+    "expected_format": "pdf",
+    "submit_command": "bookfactory cover build padel-addicts-guide --submit"
+  },
+  "approval_required": false,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T16:06:25Z",
+  "closed_at": "2026-09-26T16:06:34Z"
+}

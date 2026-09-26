@@ -3,12 +3,71 @@
   "paper": "white",
   "finish": "matte",
   "artwork": "none",
-  "direction": "",
-  "author": "",
-  "back_copy": "",
+  "direction": "Big lettering, decided at intake: a text-only full-colour gift paperback, white paper, matte, no artwork. Bold stacked title on a deep court-blue field, with padel-ball yellow and coral accents, in the same big-lettering family as the Golf Addict's Guide. The title must read at Amazon thumbnail size.",
+  "author": "Kieran Smith",
+  "subtitle": "A formal engagement for the man who has made padel his whole personality",
+  "back_copy": "Your stakeholders have commissioned an engagement.\n\nEighteen months ago you took up padel. Since then you have mentioned it in 94% of conversations lasting longer than four minutes. You have told a midwife it is the fastest-growing sport in the world. The racket bag is in the boot, and the buggy is not.\n\nThis is the programme pack: nine phases, twenty-six activities, stakeholder feedback from home and work, a daily padel budget, a relapse risk register and a certificate at the end, if you earn it.\n\nFor every padel convert who answers the 6am group chat before the baby, and for everyone who has to listen to him.",
   "artwork_width_in": 3.4,
   "artwork_height_in": 5.1,
-  "drafts": [],
+  "design": {
+    "background": "#1f3a66",
+    "ink": "#fbf8f1",
+    "accent": "#fbf8f1",
+    "author_colour": "#e8f04a",
+    "title_font": "style/fonts/Anton-Regular.ttf",
+    "body_font": "style/fonts/Archivo-Regular.ttf",
+    "banner": {
+      "text": "A formal engagement in nine phases",
+      "background": "#f0643c",
+      "colour": "#fbf8f1"
+    },
+    "title_lines": [
+      {
+        "text": "The Padel",
+        "size_pt": 94.0,
+        "colour": "#e8f04a"
+      },
+      {
+        "text": "Addict's",
+        "size_pt": 110.0,
+        "colour": "#e8f04a"
+      },
+      {
+        "text": "Guide to Talking",
+        "size_pt": 56.0,
+        "colour": "#fbf8f1"
+      },
+      {
+        "text": "About Anything Else",
+        "size_pt": 44.0,
+        "colour": "#f0643c"
+      }
+    ],
+    "stack_top_in": 1.45,
+    "author_size_pt": 22,
+    "subtitle_size_pt": 16
+  },
+  "drafts": [
+    {
+      "revision": "v1",
+      "path": "cover/drafts/cover-v1.pdf",
+      "sha256": "cef0f47e0cb00a85eaf51afe3c442d4011872b611a276b73e7e7ae349e7db2d2",
+      "artwork": "none",
+      "artwork_sha256": null,
+      "status": "draft",
+      "submitted_at": "2026-09-26T16:06:33Z",
+      "dimensions": {
+        "page_count": 80,
+        "paper": "white",
+        "spine_in": 0.18016,
+        "width_in": 12.43016,
+        "height_in": 9.25,
+        "trim_width_in": 6.0,
+        "trim_height_in": 9.0,
+        "bleed_in": 0.125
+      }
+    }
+  ],
   "approved": null,
   "preflight": null
 }
