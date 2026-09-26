@@ -86,7 +86,7 @@ in `cover/cover.json`.
 
 ### priya - Priya, Josh's boss (stakeholder: Work)
 
-- **Look:** Late forties, British Indian, tall, upright and composed, with sharp intelligent eyes and a dry, unimpressed half-smile. Glossy dark shoulder-length hair with a few strands of grey. A tailored dark blazer over a plain top, smart trousers, simple earrings. When a tennis racket appears with her it is a strung tennis racket in a plain case.
+- **Look:** Late forties, British Indian, tall, upright and composed, with sharp intelligent eyes and a dry, unimpressed half-smile. Glossy dark shoulder-length hair with a few strands of grey. A tailored dark blazer over a plain top, smart trousers, simple earrings. When a tennis racket appears with her it is a plain strung tennis racket, in her hand or in a plain case.
 - **Never:** Flustered, cartoonish, dressed casually in the office, holding a padel racket, any logo.
 
 ### graham - Graham, Lauren's dad (optional; only where a spec names him)

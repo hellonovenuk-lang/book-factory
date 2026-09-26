@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-ref-character-support-generate",
+  "book_id": "padel-addicts-guide",
+  "type": "character_reference",
+  "stage": "visual_development",
+  "summary": "Create visual reference: Supporting character reference",
+  "instructions": "The recurring partner/friend/pet. Delete this entry if the book has none.\n\nRead style/visual-bible.md first and follow it exactly.\nNo text of any kind inside the artwork - typography is set by the deterministic renderer, never generated.\nSave the result as a draft, then submit it.\n\nFixed at intake - do not change without the operator:\n- Title: exactly \"The Padel Addict's Guide to Talking About Anything Else\"\n- Main character: Josh, 31, a management consultant, married to Lauren, two children under five (Mia, 4, and Alfie, 1). Fixed look: short beard, a smartwatch he never takes off, and a padel brand cap or quarter-zip whether he is at the office or a toddler's birthday party.\n- Print colour: black and white\n- Cover style: big lettering (a text-only cover, bold type, no picture)",
+  "page_id": null,
+  "asset_id": "ref-character-support",
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "style/visual-bible.md",
+    "style/design-tokens.json"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1530
+  },
+  "output": {
+    "destination": "assets/drafts/ref-character-support/",
+    "submit_command": "bookfactory submit padel-addicts-guide ref-character-support --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T12:07:48Z",
+  "closed_at": "2026-09-26T12:09:56Z"
+}
