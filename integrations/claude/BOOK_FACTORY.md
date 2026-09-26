@@ -54,11 +54,12 @@ approval (`autonomous` or `visual_checkpoint`); it approves that one page the
 same way `approve --autonomous --by produce` would, so the audit log shows it
 was granted under the recorded policy. On a `checkpointed` book that same
 task is `wait_for_operator`, so `produce` stops there instead. It stops, and
-says why, at anything else: writing, a picture (asset) approval, a lock, an
-operator decision, remediation, or a blocked or finished book. It never
-approves an asset, never touches the cover, and never locks or advances on
-its own. Report where it stopped and why, the same as you would for any
-other task - and if it approved pages along the way, say which ones.
+says why, at anything else: writing, a picture to draw, a picture (asset)
+approval, a lock, an operator decision, remediation, or a blocked or
+finished book. `produce` itself never draws, submits or approves a picture,
+never touches the cover, and never locks or advances on its own. Report
+where it stopped and why, the same as you would for any other task - and if
+it approved pages along the way, say which ones.
 
 When the next task is copy to write, `produce` stops with the code
 `writing` instead of running it. The skill `/write-book <book>`
@@ -66,15 +67,29 @@ When the next task is copy to write, `produce` stops with the code
 with `writing`, write that one task's copy yourself - brief, writing sample,
 voice bible, manuscript, page plan or page specs - on the operator's
 subscription, with no Claude API call, following the "Writing copy" rules
-below; save it where the task says; run `produce` again. When the next
-task is a lock whose `mode` is `continue_automatically`, it runs that lock
-itself with `--autonomous --by claude` (`AGENTS.md` quick reference): Book
-Factory refuses it unless the recorded production policy authorizes it, and
-refuses the locks the policy keeps as a checkpoint (the visual lock under
-`visual_checkpoint`), so those stop for the operator. It stops and reports
-at any other stop code. It never approves, rejects, revises, touches the
-cover, generates or submits a picture, changes the picture budget, changes
-the production policy, or uses `--force`.
+below; save it where the task says; run `produce` again. When it stops with
+`picture` (a page illustration in `continue_automatically`; the cover never
+gives this code), and the Higgsfield connector is available, it draws that
+one picture following the "Images" routine below, checks it against the
+references itself, redrawing up to 3 times if it breaks the visual bible,
+then submits it; only if that picture's own approval task is next and its
+`mode` is `continue_automatically` does it also approve, with `bookfactory
+approve <book> <asset-id> --kind asset --draft <vN> --autonomous --by
+claude`, audited as granted under the recorded policy. It reports the
+credits used. This never applies to cover artwork or the full-wrap cover.
+When the next task is a lock whose `mode` is `continue_automatically`, it
+runs that lock itself with `--autonomous --by claude` (`AGENTS.md` quick
+reference): Book Factory refuses it unless the recorded production policy
+authorizes it, and refuses the locks the policy keeps as a checkpoint (the
+visual lock under `visual_checkpoint`), so those stop for the operator. Once
+the interior is otherwise finished, it likewise runs `bookfactory advance
+<book> --to release_ready`, `bookfactory cover finalize` and `bookfactory
+cover preflight` on their own, but only when the current task asks for
+exactly that command and its `mode` is `continue_automatically` - otherwise
+it stops and reports, same as any other command needing authority. It stops
+and reports at any other stop code. It never approves, rejects, revises,
+changes the picture budget, changes the production policy, touches cover
+artwork or the full-wrap cover's approval, or uses `--force`.
 
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.

@@ -92,11 +92,12 @@ book gives that task `wait_for_operator` instead, so `produce` stops there
 like it stops at anything else needing a person.
 
 It stops, and says why, at the first task of any other kind: writing, a
-picture (asset) approval, a lock, an operator decision, remediation, a
-blocked book, or a finished one - as well as at its step limit (default 50)
-or if a step leaves the same task next (no progress, so running it again
-would not help). It never approves an asset, never locks, never touches the
-cover, never advances, and never uses `--force` or `--all-passing`.
+picture to draw, a picture (asset) approval, a lock, an operator decision,
+remediation, a blocked book, or a finished one - as well as at its step
+limit (default 50) or if a step leaves the same task next (no progress, so
+running it again would not help). It never draws, submits or approves a
+picture, never locks, never touches the cover, never advances, and never
+uses `--force` or `--all-passing`.
 `--dry-run` changes nothing: it reports only the first step it would take
 (including which page it would approve), or why it would stop.
 
@@ -111,6 +112,14 @@ on. Writing never includes running a lock, even when the task's
 `submit_command` is one: that command stays the operator's, exactly as
 section 3 and 8 already require. Cover writing tasks and lock steps keep
 their existing stop behaviour.
+
+When the next task is a page illustration in `continue_automatically` (an
+asset task, not cover artwork - the cover never gives this code), `produce`
+stops with its own code, `picture`. It never draws, submits or approves a
+picture itself. An agent able to generate images may then draw that one
+task's picture, following sections 5, 5a and 6, submit it, and run `produce`
+again to carry on. Cover artwork keeps `produce`'s existing stop behaviour
+(`not_mechanical`): `produce` never touches the cover.
 
 This does not replace rule 2: it takes the same tasks `next` would, in the
 same order, one at a time, through the same commands - it is just a shorthand
@@ -142,6 +151,17 @@ checkpoint (the visual lock and the full-wrap cover under
 See `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md` for the full contract.
 This does not relax the rule for a `checkpointed` book, and it never means
 "the operator probably would have said yes".
+
+This exception covers a page picture the agent has drawn itself and checked
+against the references (section 6) - approved the same way, with
+`bookfactory approve <book> <asset-id> --kind asset --autonomous`. It never
+covers cover artwork or the full-wrap cover, whatever the policy: those keep
+their own approval steps in section 9a. `bookfactory advance --to
+release_ready`, `bookfactory cover finalize` and `bookfactory cover
+preflight` may likewise be run without asking the operator each time only
+when the current task from `bookfactory next` asks for exactly that command
+and its `mode` is `continue_automatically` - the quick reference's general
+rule for commands that need authority, applied to these three by name.
 
 ## 3a. Read `mode`, do not guess it
 

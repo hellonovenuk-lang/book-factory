@@ -469,6 +469,22 @@ copy for you (in that session, no extra cost beyond your subscription) and
 keep calling `produce` to carry on, stopping again the moment it needs you.
 You still read and lock the concept, the voice and the manuscript yourself.
 
+If instead the next thing is a page picture ready to draw, `produce` stops
+and says `picture` (the cover never gives this code - it is never part of
+`produce`'s loop). `/write-book` draws that one picture through Claude's
+Higgsfield connector, checks it against your references itself - redrawing
+up to three times if it breaks the visual bible - submits it, and tells you
+the Higgsfield credits it used. Only when that picture's own approval is
+next and your recorded policy already allows it does `/write-book` also
+approve it, the same autonomous approval `produce` makes for a page, audited
+the same way; on a `checkpointed` book it stops and waits for you instead.
+Once the interior is otherwise finished, `/write-book` can also run
+`bookfactory advance --to release_ready`, `bookfactory cover finalize` and
+`bookfactory cover preflight` by itself, but only at the moment `next`
+itself asks for exactly that step under your recorded policy - it still
+stops and asks you for the cover's own approval (`cover approve`), which
+stays yours under every policy except `autonomous`, as above.
+
 ## 8. Look at the whole book
 
 ```bash
