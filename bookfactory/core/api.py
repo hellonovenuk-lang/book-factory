@@ -385,6 +385,8 @@ def _complete_intake(book, answers: dict, *, root, drafted_by: str | None = None
     policy = production.policy_from_choice(answers["production_policy"],
                                            source="intake_questionnaire")
     book.state.production_policy = policy
+    who = confirmed_by if confirmed_by else "operator (intake questionnaire)"
+    _apply_intake_answers(book, answers, by=who)
     record = {"answers": book.state.intake.answers,
               "completed_at": book.state.intake.completed_at}
     if drafted_by:
@@ -401,6 +403,36 @@ def _complete_intake(book, answers: dict, *, root, drafted_by: str | None = None
     book.save()
     task_module.sync_open_task(book)
     return status(book.state.book_id, root=root)
+
+
+def _apply_intake_answers(book, answers: dict, *, by: str) -> None:
+    """Apply the operator's intake answers that set up the book itself.
+
+    These are the operator's own decisions, recorded here as such (not as an
+    agent's), each audited. Answers predating these keys are left alone, so
+    older intake submissions still complete exactly as before.
+    """
+    from bookfactory.core import cover as cover_module
+
+    if "title" in answers:
+        title = answers["title"].strip()
+        if title and title != book.state.title:
+            previous = book.state.title
+            book.state.title = title
+            book.log("intake_title_set", previous_title=previous, title=title)
+
+    if "print_colour" in answers:
+        colour = answers["print_colour"] == "colour"
+        if colour != book.state.format.colour:
+            previous = book.state.format.colour
+            book.state.format.colour = colour
+            book.log("intake_print_colour_set", previous_colour=previous, colour=colour)
+
+    cover_style = answers.get("cover_style")
+    if cover_style == "big_lettering" and cover_module.required(book):
+        cover_module.set_artwork(
+            book, cover_module.TEXT_ONLY, by=by,
+            reason="cover style 'big_lettering' chosen at intake")
 
 
 def _require_open_intake(book) -> None:
