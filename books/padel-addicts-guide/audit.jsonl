@@ -11,3 +11,4 @@
 {"at": "2026-09-26T11:35:08Z", "event": "stage_advanced", "from": "voice_lock", "to": "manuscript_lock", "by": "claude", "note": "Kieran approved in chat 2026-09-26: lock"}
 {"at": "2026-09-26T11:35:08Z", "event": "manuscript_locked", "version": "v1", "sha256": "d4f8b9cc29cd53916798e24bda0fbfed57eba2103212129e3db413bb1e4be971", "by": "claude", "note": "Kieran approved in chat 2026-09-26: lock", "authorization": "autonomous_production_policy:visual_checkpoint"}
 {"at": "2026-09-26T11:36:18Z", "event": "stage_advanced", "from": "manuscript_lock", "to": "visual_development", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-09-26T12:04:31Z", "event": "draft_submitted", "kind": "asset", "id": "ref-character-main", "revision": "v1", "path": "assets/drafts/ref-character-main/ref-character-main-v1.png", "sha256": "e56db71b8abdd1639b9a2782229e490c6dfa70ec3c8fed01ad172f086920b302"}
