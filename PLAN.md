@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phases 17 and 18 are done (not yet archived; `/handover` moves them to `docs/PLAN-ARCHIVE.md`).
-> **Finished:** Phase 18: intake now also asks the exact title, the main character's age/family/look, colour or black-and-white printing and the cover style (big lettering, picture, or let Book Factory decide); confirming sets the book's title, `format.colour` and a text-only cover for big lettering, each audited; the brief, visual and cover tasks list them as "fixed at intake". Test-driven on a new book in a scratch copy. Helpers are no longer capped at 3 (Kieran); the checker may never stash or reset the real checkout. Earlier: Phase 17 (`plan --from-manuscript`), and the Golf book's p055/p061 table fix (still Release Ready, not yet uploaded).
-> **Next action:** plan Phase 19 with `/plan-phase` from `IDEAS.md`. Strong candidates: pictures through Higgsfield inside `produce`, or letting the last release steps run on their own under the recorded policy.
+> **Doing:** no phase open. Phases 17, 18 and 19 are done (not yet archived; `/handover` moves them to `docs/PLAN-ARCHIVE.md`).
+> **Finished:** Phase 19: `produce` stops with `picture` at a page picture; `/write-book` draws it through Higgsfield, checks it, submits it and approves it with `--autonomous` only when the task's mode allows (never cover artwork or the full-wrap cover); the guard lets `advance --to release_ready`, `cover finalize` and `cover preflight` through when the book's next task asks for exactly that in continue_automatically, and an older hole (`cover --root X finalize`) is closed. 671 tests pass. The first live picture inside the loop is on the next real book (it spends Higgsfield credits). Phase 18: intake now also asks the exact title, the main character's age/family/look, colour or black-and-white printing and the cover style (big lettering, picture, or let Book Factory decide); confirming sets the book's title, `format.colour` and a text-only cover for big lettering, each audited; the brief, visual and cover tasks list them as "fixed at intake". Test-driven on a new book in a scratch copy. Helpers are no longer capped at 3 (Kieran); the checker may never stash or reset the real checkout. Earlier: Phase 17 (`plan --from-manuscript`), and the Golf book's p055/p061 table fix (still Release Ready, not yet uploaded).
+> **Next action:** start the next real book with `/write-book` (first live run of pictures in the loop), or plan Phase 20 from `IDEAS.md`.
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
@@ -113,7 +113,7 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 - [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
 - [x] Everything is pushed to `main` and checked there.
 
-## Phase 19: Pictures in the loop, and the last steps on their own (in progress)
+## Phase 19: Pictures in the loop, and the last steps on their own (done)
 
 Goal: `/write-book` carries a book through its pictures and its final release
 steps without stopping, whenever the recorded production policy allows. Part A:
@@ -129,19 +129,19 @@ command and its mode is continue_automatically. Kieran asked for both
 
 | # | Task | Who | Files |
 |---|---|---|---|
-| 19.1 | `produce` stops with `picture` at a page-picture task in continue_automatically (not cover artwork) | builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce_picture.py` |
-| 19.2 | Guard: allow `advance --to release_ready`, `cover finalize`, `cover preflight` when the next task names that command in continue_automatically; ask otherwise | builder, tricky (Opus: a safety hook, must never widen past the policy) | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` |
-| 19.3 | `/write-book`: the picture loop (budget, Higgsfield, own check, submit, `--autonomous` page-picture approval, credits report) and the release steps | docs keeper, routine (Sonnet) | `.claude/skills/write-book/SKILL.md` |
-| 19.4 | Rules and guides for both parts | docs keeper, routine (Sonnet) | `AGENTS.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`, `docs/OPERATOR.md`, `GLOSSARY.md` |
-| 19.5 | Check: full suite, demo build in a throwaway copy, docs vs code, guard decisions | checker, routine (Sonnet) | none |
-| 19.6 | Test-drive in a scratch copy: `produce` stops with `picture`; the guard allows the three end steps only when the task asks | main | `PLAN.md`, `IDEAS.md` |
+| 19.1 ✓ | `produce` stops with `picture` at a page-picture task in continue_automatically (not cover artwork) | builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce_picture.py` |
+| 19.2 ✓ | Guard: allow `advance --to release_ready`, `cover finalize`, `cover preflight` when the next task names that command in continue_automatically; ask otherwise | builder, tricky (Opus: a safety hook, must never widen past the policy) | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` |
+| 19.3 ✓ | `/write-book`: the picture loop (budget, Higgsfield, own check, submit, `--autonomous` page-picture approval, credits report) and the release steps | docs keeper, routine (Sonnet) | `.claude/skills/write-book/SKILL.md` |
+| 19.4 ✓ | Rules and guides for both parts | docs keeper, routine (Sonnet) | `AGENTS.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`, `docs/OPERATOR.md`, `GLOSSARY.md` |
+| 19.5 ✓ | Check: full suite, demo build in a throwaway copy, docs vs code, guard decisions | checker, routine (Sonnet) | none |
+| 19.6 ✓ | Test-drive in a scratch copy: `produce` stops with `picture`; the guard allows the three end steps only when the task asks | main | `PLAN.md`, `IDEAS.md` |
 
 **Test-drive:** 19.6, in a scratch copy. The first live Higgsfield picture inside the loop is on the next real book (it spends Kieran's credits).
 
 **Done when:**
-- [ ] `produce` says "picture" when the next job is a page picture, and `/write-book` knows how to draw, check, submit and (only when the policy allows) approve it, never the cover.
-- [ ] In auto mode, a book whose policy allows it goes through `cover finalize`, `cover preflight` and release ready without stopping; anything else still asks.
-- [ ] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+- [x] `produce` says "picture" when the next job is a page picture, and `/write-book` knows how to draw, check, submit and (only when the policy allows) approve it, never the cover.
+- [x] In auto mode, a book whose policy allows it goes through `cover finalize`, `cover preflight` and release ready without stopping; anything else still asks.
+- [x] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
 
 ## Phase 18: Big decisions at intake (done)
 
@@ -208,3 +208,5 @@ with Kieran 2026-09-26; he asked for every task at once.
 | 2026-09-24 | 17 | Test-drive: `plan --from-manuscript` on a scratch copy of the Golf book, compared with its real plan | 71 = 71 pages, all fit (3 openers split), split bodies identical; opener one-paragraph fix and its test added after the checker ran, `tests/test_plan_fit.py` 8 passed |
 | 2026-09-26 | 18 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, old books unaffected | 603 tests: 600 passed, 2 skipped, 1 failed (a Phase 17 Golf test made stale by the p055/p061 fix, not Phase 18; fixed, rerun passes); demo Release Ready; question order in AUTONOMOUS_PRODUCTION.md was wrong, fixed; Golf status/validate/task clean |
 | 2026-09-26 | 18 | Test-drive: book from an idea in a scratch copy, intake drafted with the four new questions unclear, confirmed with --set | title set exactly, black and white, cover artwork none by kieran, three audit entries; the brief task lists all four as fixed at intake |
+| 2026-09-26 | 19 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, guard safety review | 671 passed, 2 skipped, 0 failed; demo Release Ready; no mismatches; no new way past the guard |
+| 2026-09-26 | 19 | Test-drive: guard decisions on a scratch copy of the finished Golf book; the picture stop via tests (reopening a Golf picture needs Kieran, correctly blocked) | cover preflight / advance / `cover --root X finalize` all ask (not the next task); `status` allowed; `produce` gives `picture` in tests |
