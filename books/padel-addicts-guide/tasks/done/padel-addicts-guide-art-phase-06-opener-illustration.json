@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-art-phase-06-opener-illustration",
+  "book_id": "padel-addicts-guide",
+  "type": "illustration",
+  "stage": "page_production",
+  "summary": "Create illustration 'art-phase-06-opener' for page p050",
+  "instructions": "Josh leaning over a garden fence holding out a spare racket to his older neighbour, who is backing away with a watering can, while in the background a man in a boiler-repair van pretends to be on the phone and Graham, older and holding a walking stick, peers through a front window.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.",
+  "page_id": "p050",
+  "asset_id": "art-phase-06-opener",
+  "scene": "Josh leaning over a garden fence holding out a spare racket to his older neighbour, who is backing away with a watering can, while in the background a man in a boiler-repair van pretends to be on the phone and Graham, older and holding a walking stick, peers through a front window.",
+  "characters": [],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-character-reference.png",
+    "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-phase-one-kitchen-table-scene.png",
+    "assets/approved/ref-page-diagnostic-activity-page-example-no-01-current-state-assessment.png",
+    "assets/approved/ref-palette-palette-and-type-sheet.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p050.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1080
+  },
+  "output": {
+    "destination": "assets/drafts/art-phase-06-opener/",
+    "submit_command": "bookfactory submit padel-addicts-guide art-phase-06-opener --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T16:04:17Z",
+  "closed_at": "2026-09-26T16:04:21Z"
+}

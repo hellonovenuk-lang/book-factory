@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-art-phase-05-opener-illustration",
+  "book_id": "padel-addicts-guide",
+  "type": "illustration",
+  "stage": "page_production",
+  "summary": "Create illustration 'art-phase-05-opener' for page p041",
+  "instructions": "Josh standing at the front of a small office meeting in a padel quarter-zip, gesturing at a screen with a racket like a pointer, while his colleagues sit round the table with laptops open, and Priya, arms folded, holds a tennis racket case under her chair.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.",
+  "page_id": "p041",
+  "asset_id": "art-phase-05-opener",
+  "scene": "Josh standing at the front of a small office meeting in a padel quarter-zip, gesturing at a screen with a racket like a pointer, while his colleagues sit round the table with laptops open, and Priya, arms folded, holds a tennis racket case under her chair.",
+  "characters": [],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-character-reference.png",
+    "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-phase-one-kitchen-table-scene.png",
+    "assets/approved/ref-page-diagnostic-activity-page-example-no-01-current-state-assessment.png",
+    "assets/approved/ref-palette-palette-and-type-sheet.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p041.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1080
+  },
+  "output": {
+    "destination": "assets/drafts/art-phase-05-opener/",
+    "submit_command": "bookfactory submit padel-addicts-guide art-phase-05-opener --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T16:03:34Z",
+  "closed_at": "2026-09-26T16:03:39Z"
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "run_at": "2026-09-26T16:05:12Z",
+  "layers": [
+    {
+      "layer": "content",
+      "status": "warn",
+      "findings": [
+        {
+          "level": "warning",
+          "code": "content.duplicate_heading",
+          "message": "p060 repeats the heading of p059: 'What to wear'",
+          "page_id": "p060",
+          "asset_id": null,
+          "remedy": "Two pages with the same heading is usually a duplicated concept.",
+          "needs_human": false
+        },
+        {
+          "level": "warning",
+          "code": "content.duplicate_title",
+          "message": "p060 has the same title as p059: 'What to wear'",
+          "page_id": "p060",
+          "asset_id": null,
+          "remedy": null,
+          "needs_human": false
+        },
+        {
+          "level": "info",
+          "code": "content.human_review",
+          "message": "Humour, pacing and whether each page earns its place cannot be machine-checked. Read the review PDF before approving the book.",
+          "page_id": null,
+          "asset_id": null,
+          "remedy": "Run `bookfactory review <book>` and read output/review/.",
+          "needs_human": true
+        }
+      ]
+    },
+    {
+      "layer": "visual",
+      "status": "warn",
+      "findings": [
+        {
+          "level": "warning",
+          "code": "visual.duplicate_artwork",
+          "message": "'ref-page-editorial' is byte-identical to 'art-phase-01-opener'",
+          "page_id": null,
+          "asset_id": "ref-page-editorial",
+          "remedy": "The same picture used twice is usually an accident.",
+          "needs_human": false
+        },
+        {
+          "level": "info",
+          "code": "visual.human_review",
+          "message": "Character drift, style drift, composition and visual repetition cannot be machine-checked. Compare the contact sheet against the locked references.",
+          "page_id": null,
+          "asset_id": null,
+          "remedy": "Run `bookfactory review <book>` and compare with style/references/.",
+          "needs_human": true
+        }
+      ]
+    },
+    {
+      "layer": "technical",
+      "status": "pass",
+      "findings": []
+    },
+    {
+      "layer": "assembly",
+      "status": "pass",
+      "findings": []
+    }
+  ],
+  "summary": {
+    "status": "warn",
+    "errors": 0,
+    "warnings": 3,
+    "human_review_required": [
+      "Character drift, style drift, composition and visual repetition cannot be machine-checked. Compare the contact sheet against the locked references.",
+      "Humour, pacing and whether each page earns its place cannot be machine-checked. Read the review PDF before approving the book."
+    ]
+  }
+}

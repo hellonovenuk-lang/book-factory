@@ -4,7 +4,7 @@
   "title": "The Padel Addict's Guide to Talking About Anything Else",
   "subtitle": null,
   "series": null,
-  "stage": "page_production",
+  "stage": "cover_production",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -87,21 +87,21 @@
   "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
-    "task_id": "padel-addicts-guide-art-phase-02-opener-illustration",
-    "type": "illustration",
-    "summary": "Create illustration 'art-phase-02-opener' for page p014",
-    "page_id": "p014",
-    "asset_id": "art-phase-02-opener",
-    "approval_required": true,
+    "task_id": "padel-addicts-guide-cover-direction",
+    "type": "authoring",
+    "summary": "Record the cover direction, paper, finish, author and back copy",
+    "page_id": null,
+    "asset_id": null,
+    "approval_required": false,
     "mode": "continue_automatically"
   },
   "last_transition": {
-    "from": "page_planning",
-    "to": "page_production",
-    "at": "2026-09-26T15:58:39Z",
+    "from": "kdp_preflight",
+    "to": "cover_production",
+    "at": "2026-09-26T16:05:15Z",
     "by": "system",
     "note": "stage derived from repository state"
   },
   "created_at": "2026-09-26T10:54:54Z",
-  "updated_at": "2026-09-26T15:59:57Z"
+  "updated_at": "2026-09-26T16:05:15Z"
 }

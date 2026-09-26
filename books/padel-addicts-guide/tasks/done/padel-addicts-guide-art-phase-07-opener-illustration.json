@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-art-phase-07-opener-illustration",
+  "book_id": "padel-addicts-guide",
+  "type": "illustration",
+  "stage": "page_production",
+  "summary": "Create illustration 'art-phase-07-opener' for page p055",
+  "instructions": "Josh at a sunny Spanish resort pool in sunglasses and his padel cap, looking longingly past the pool at a row of padel courts behind a fence, while Lauren sits on a sunbed with a sunhat, a book and Alfie, and Mia in armbands tugs on Josh's arm to get him into the water.\n\nMatch the locked references exactly - same character, same line style, same palette, same edge treatment. If you cannot match them, stop and say so rather than producing something near enough.\nNo text, numbers, labels or signatures inside the artwork.",
+  "page_id": "p055",
+  "asset_id": "art-phase-07-opener",
+  "scene": "Josh at a sunny Spanish resort pool in sunglasses and his padel cap, looking longingly past the pool at a row of padel courts behind a fence, while Lauren sits on a sunbed with a sunhat, a book and Alfie, and Mia in armbands tugs on Josh's arm to get him into the water.",
+  "characters": [],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-character-reference.png",
+    "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-phase-one-kitchen-table-scene.png",
+    "assets/approved/ref-page-diagnostic-activity-page-example-no-01-current-state-assessment.png",
+    "assets/approved/ref-palette-palette-and-type-sheet.png"
+  ],
+  "required_inputs": [
+    "pages/specs/p055.json",
+    "style/visual-bible.md"
+  ],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": false,
+    "readable_image": true,
+    "min_pixels": 1080
+  },
+  "output": {
+    "destination": "assets/drafts/art-phase-07-opener/",
+    "submit_command": "bookfactory submit padel-addicts-guide art-phase-07-opener --kind asset --file <path>",
+    "expected_format": "png"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-26T16:04:28Z",
+  "closed_at": "2026-09-26T16:04:32Z"
+}

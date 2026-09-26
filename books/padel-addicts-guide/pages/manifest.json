@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "padel-addicts-guide",
-  "updated_at": "2026-09-26T15:59:57Z",
+  "updated_at": "2026-09-26T16:05:15Z",
   "front_matter_pages": 0,
   "pages": [
     {
@@ -41,9 +41,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -85,9 +85,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -129,9 +129,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -173,9 +173,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -219,9 +219,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -263,9 +263,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -307,9 +307,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -351,9 +351,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -395,9 +395,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -439,9 +439,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -483,9 +483,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -527,9 +527,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -571,9 +571,9 @@
       },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -589,15 +589,37 @@
       "required_assets": [
         "art-phase-02-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p014/p014-v1.pdf",
+          "sha256": "97eb699ff5c2330af8d457605bb385f1486524e977a50f3b9bd6ec88b58bbe59",
+          "submitted_at": "2026-09-26T16:03:03Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p014-phase-two-current-state.pdf",
+        "sha256": "97eb699ff5c2330af8d457605bb385f1486524e977a50f3b9bd6ec88b58bbe59",
+        "approved_at": "2026-09-26T16:03:03Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p014/p014-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -611,15 +633,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p015.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p015/p015-v1.pdf",
+          "sha256": "76859c0ea2a8ef78d3d25e73756e38ce6de7eb45b4a2a9f8e808269692b8ea2e",
+          "submitted_at": "2026-09-26T16:03:03Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p015-a-day-in-the-life-of-josh.pdf",
+        "sha256": "76859c0ea2a8ef78d3d25e73756e38ce6de7eb45b4a2a9f8e808269692b8ea2e",
+        "approved_at": "2026-09-26T16:03:04Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p015/p015-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -633,15 +677,37 @@
       "type": "activity",
       "spec": "pages/specs/p016.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p016/p016-v1.pdf",
+          "sha256": "f145ca13e1a2fe9bce0a7f3b90aa5e039e50933b8443c97c146cbb95ddbc0340",
+          "submitted_at": "2026-09-26T16:03:04Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p016-what-padel-has-replaced.pdf",
+        "sha256": "f145ca13e1a2fe9bce0a7f3b90aa5e039e50933b8443c97c146cbb95ddbc0340",
+        "approved_at": "2026-09-26T16:03:04Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p016/p016-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -655,15 +721,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p017.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p017/p017-v1.pdf",
+          "sha256": "043c123df3c1e6d4f46f4446dc09355710384fab36736a015dd9bee814f33d4e",
+          "submitted_at": "2026-09-26T16:03:04Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p017-the-fastest-growing-sport-in-the-world.pdf",
+        "sha256": "043c123df3c1e6d4f46f4446dc09355710384fab36736a015dd9bee814f33d4e",
+        "approved_at": "2026-09-26T16:03:04Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p017/p017-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -677,15 +765,37 @@
       "type": "activity",
       "spec": "pages/specs/p018.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p018/p018-v1.pdf",
+          "sha256": "74ab4895706b771ea1cde58768d8ec7e132908f3c54519fce1f234f8984dbed7",
+          "submitted_at": "2026-09-26T16:03:05Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p018-fastest-growing-tally.pdf",
+        "sha256": "74ab4895706b771ea1cde58768d8ec7e132908f3c54519fce1f234f8984dbed7",
+        "approved_at": "2026-09-26T16:03:05Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p018/p018-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -699,15 +809,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p019.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p019/p019-v1.pdf",
+          "sha256": "08f68f198acfc09d84b3fa643ea02dbd85c9acc44fd76ae4d9dadcbd884619b8",
+          "submitted_at": "2026-09-26T16:03:05Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p019-the-smartwatch.pdf",
+        "sha256": "08f68f198acfc09d84b3fa643ea02dbd85c9acc44fd76ae4d9dadcbd884619b8",
+        "approved_at": "2026-09-26T16:03:05Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p019/p019-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -721,15 +853,37 @@
       "type": "activity",
       "spec": "pages/specs/p020.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p020/p020-v1.pdf",
+          "sha256": "19dddc8d16c3973714b43dd40c3c75065ac7355d0fd146d169fd58406f2bdb07",
+          "submitted_at": "2026-09-26T16:03:05Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p020-who-asked.pdf",
+        "sha256": "19dddc8d16c3973714b43dd40c3c75065ac7355d0fd146d169fd58406f2bdb07",
+        "approved_at": "2026-09-26T16:03:06Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p020/p020-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -745,15 +899,37 @@
       "required_assets": [
         "art-phase-03-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p021/p021-v1.pdf",
+          "sha256": "0a8653919b8eb8e77ff54a1855ffa866a58ce79e87e002e0d69df7c13742adbd",
+          "submitted_at": "2026-09-26T16:03:16Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p021-phase-three-talking-about-anything-else.pdf",
+        "sha256": "0a8653919b8eb8e77ff54a1855ffa866a58ce79e87e002e0d69df7c13742adbd",
+        "approved_at": "2026-09-26T16:03:16Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p021/p021-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -767,15 +943,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p022.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p022/p022-v1.pdf",
+          "sha256": "04a86a9070335c9015d872431804ff325faa1c8d4ece08910ca3d8e38074111e",
+          "submitted_at": "2026-09-26T16:03:16Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p022-phase-three-talking-about-anything-else-continued.pdf",
+        "sha256": "04a86a9070335c9015d872431804ff325faa1c8d4ece08910ca3d8e38074111e",
+        "approved_at": "2026-09-26T16:03:16Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p022/p022-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -789,15 +987,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p023.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p023/p023-v1.pdf",
+          "sha256": "226251457a1c498788411360e2be011960ae85da69c6c4ee0269c05a9403f776",
+          "submitted_at": "2026-09-26T16:03:16Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p023-how-a-question-works.pdf",
+        "sha256": "226251457a1c498788411360e2be011960ae85da69c6c4ee0269c05a9403f776",
+        "approved_at": "2026-09-26T16:03:17Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p023/p023-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -811,15 +1031,37 @@
       "type": "activity",
       "spec": "pages/specs/p024.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p024/p024-v1.pdf",
+          "sha256": "b4445ab85c75662260e58e15045d92d883b2d33ed622dc9acb7f86dcc58e8686",
+          "submitted_at": "2026-09-26T16:03:17Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p024-what-was-the-question.pdf",
+        "sha256": "b4445ab85c75662260e58e15045d92d883b2d33ed622dc9acb7f86dcc58e8686",
+        "approved_at": "2026-09-26T16:03:17Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p024/p024-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -833,15 +1075,37 @@
       "type": "activity",
       "spec": "pages/specs/p025.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p025/p025-v1.pdf",
+          "sha256": "78b9e61a6834f20262e7ed3f5f2d2c841166b68ba7e6d6f974af81983758acb0",
+          "submitted_at": "2026-09-26T16:03:17Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p025-topics-of-conversation-other-than-padel.pdf",
+        "sha256": "78b9e61a6834f20262e7ed3f5f2d2c841166b68ba7e6d6f974af81983758acb0",
+        "approved_at": "2026-09-26T16:03:18Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p025/p025-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -855,15 +1119,37 @@
       "type": "activity",
       "spec": "pages/specs/p026.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p026/p026-v1.pdf",
+          "sha256": "ff446efcc86713d787787385b9bca5c28f48e5f6ecb176ec7b955dd9e5d6a34e",
+          "submitted_at": "2026-09-26T16:03:18Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p026-three-minutes-without-padel.pdf",
+        "sha256": "ff446efcc86713d787787385b9bca5c28f48e5f6ecb176ec7b955dd9e5d6a34e",
+        "approved_at": "2026-09-26T16:03:18Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p026/p026-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -877,15 +1163,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p027.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p027/p027-v1.pdf",
+          "sha256": "898d8c1f1f0c63461c223e224060f63e55f0ad1154dce39b6240ae69c4489c85",
+          "submitted_at": "2026-09-26T16:03:18Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p027-your-padel-budget.pdf",
+        "sha256": "898d8c1f1f0c63461c223e224060f63e55f0ad1154dce39b6240ae69c4489c85",
+        "approved_at": "2026-09-26T16:03:18Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p027/p027-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -899,15 +1207,37 @@
       "type": "activity",
       "spec": "pages/specs/p028.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p028/p028-v1.pdf",
+          "sha256": "f1dc7ce479f7bbb06780e27d9000c9617209636fac8f75f48e8cb86247661524",
+          "submitted_at": "2026-09-26T16:03:19Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p028-your-daily-padel-budget.pdf",
+        "sha256": "f1dc7ce479f7bbb06780e27d9000c9617209636fac8f75f48e8cb86247661524",
+        "approved_at": "2026-09-26T16:03:19Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p028/p028-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -921,15 +1251,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p029.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p029/p029-v1.pdf",
+          "sha256": "d16e1ce8f5aa88ed89ffa8fd414257d629013cfcdc7b32c7285b275d0cde7036",
+          "submitted_at": "2026-09-26T16:03:19Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p029-words-that-belong-on-the-court.pdf",
+        "sha256": "d16e1ce8f5aa88ed89ffa8fd414257d629013cfcdc7b32c7285b275d0cde7036",
+        "approved_at": "2026-09-26T16:03:19Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p029/p029-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -943,15 +1295,37 @@
       "type": "activity",
       "spec": "pages/specs/p030.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p030/p030-v1.pdf",
+          "sha256": "928ca9a4bd329fdf537231207a38b9a17b451d9515ac3b5ad0e1716cac0450a1",
+          "submitted_at": "2026-09-26T16:03:20Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p030-emergency-bandeja-card.pdf",
+        "sha256": "928ca9a4bd329fdf537231207a38b9a17b451d9515ac3b5ad0e1716cac0450a1",
+        "approved_at": "2026-09-26T16:03:20Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p030/p030-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -965,15 +1339,37 @@
       "type": "activity",
       "spec": "pages/specs/p031.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p031/p031-v1.pdf",
+          "sha256": "4869c5c796fa0f0e5fa1c0b9e1b860547b61145b4f4573cf20818b775e84de51",
+          "submitted_at": "2026-09-26T16:03:20Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p031-listening.pdf",
+        "sha256": "4869c5c796fa0f0e5fa1c0b9e1b860547b61145b4f4573cf20818b775e84de51",
+        "approved_at": "2026-09-26T16:03:20Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p031/p031-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -987,15 +1383,37 @@
       "type": "activity",
       "spec": "pages/specs/p032.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p032/p032-v1.pdf",
+          "sha256": "462fd8ffe9a425c961df1f34a55992ee504b19d35f9c05d5f34891ae2f8c5c4a",
+          "submitted_at": "2026-09-26T16:03:20Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p032-signs-you-are-listening.pdf",
+        "sha256": "462fd8ffe9a425c961df1f34a55992ee504b19d35f9c05d5f34891ae2f8c5c4a",
+        "approved_at": "2026-09-26T16:03:21Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p032/p032-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1011,15 +1429,37 @@
       "required_assets": [
         "art-phase-04-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p033/p033-v1.pdf",
+          "sha256": "e25bcba2eaa9654c4e0f709a668638fe05b2ce2d546ed1af548cc16f1277cc66",
+          "submitted_at": "2026-09-26T16:03:31Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p033-phase-four-the-home-front.pdf",
+        "sha256": "e25bcba2eaa9654c4e0f709a668638fe05b2ce2d546ed1af548cc16f1277cc66",
+        "approved_at": "2026-09-26T16:03:32Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p033/p033-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1033,15 +1473,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p034.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p034/p034-v1.pdf",
+          "sha256": "335e4bb3d271603a7ffd048cf366d8aa66debb2814ca1fbc7a9fee9b46d0ff10",
+          "submitted_at": "2026-09-26T16:03:32Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p034-bath-time.pdf",
+        "sha256": "335e4bb3d271603a7ffd048cf366d8aa66debb2814ca1fbc7a9fee9b46d0ff10",
+        "approved_at": "2026-09-26T16:03:32Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p034/p034-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1055,15 +1517,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p035.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p035/p035-v1.pdf",
+          "sha256": "338e2e6e86ed3640a7000d86dd32db99cc8b64e5cb8ddd9f05d3958ada88661a",
+          "submitted_at": "2026-09-26T16:03:32Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p035-the-6am-group-chat.pdf",
+        "sha256": "338e2e6e86ed3640a7000d86dd32db99cc8b64e5cb8ddd9f05d3958ada88661a",
+        "approved_at": "2026-09-26T16:03:32Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p035/p035-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1077,15 +1561,37 @@
       "type": "activity",
       "spec": "pages/specs/p036.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p036/p036-v1.pdf",
+          "sha256": "4c87bf92d783778926047c7aca7ff7dd8403ddc039a647acf21696426e163715",
+          "submitted_at": "2026-09-26T16:03:33Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p036-group-chat-audit.pdf",
+        "sha256": "4c87bf92d783778926047c7aca7ff7dd8403ddc039a647acf21696426e163715",
+        "approved_at": "2026-09-26T16:03:33Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p036/p036-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1099,15 +1605,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p037.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p037/p037-v1.pdf",
+          "sha256": "3413ee651a8460b438dc603371b68d22de8f5ec51765e2c7587e821af5f0c423",
+          "submitted_at": "2026-09-26T16:03:33Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p037-the-car-boot.pdf",
+        "sha256": "3413ee651a8460b438dc603371b68d22de8f5ec51765e2c7587e821af5f0c423",
+        "approved_at": "2026-09-26T16:03:33Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p037/p037-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1121,15 +1649,37 @@
       "type": "activity",
       "spec": "pages/specs/p038.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p038/p038-v1.pdf",
+          "sha256": "1c3e5e5ba82229c62bdb7b44b3c125fabe257e1e8eb3e6a9878e4738bc537ba1",
+          "submitted_at": "2026-09-26T16:03:33Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p038-boot-inventory.pdf",
+        "sha256": "1c3e5e5ba82229c62bdb7b44b3c125fabe257e1e8eb3e6a9878e4738bc537ba1",
+        "approved_at": "2026-09-26T16:03:33Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p038/p038-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1143,15 +1693,37 @@
       "type": "activity",
       "spec": "pages/specs/p039.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p039/p039-v1.pdf",
+          "sha256": "8a969c974a5d990dbc557f6c8fd59b5ccad986bcd01a6bc1d97b72a99e206c89",
+          "submitted_at": "2026-09-26T16:03:34Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p039-what-mia-thinks-daddy-does.pdf",
+        "sha256": "8a969c974a5d990dbc557f6c8fd59b5ccad986bcd01a6bc1d97b72a99e206c89",
+        "approved_at": "2026-09-26T16:03:34Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p039/p039-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1165,15 +1737,37 @@
       "type": "activity",
       "spec": "pages/specs/p040.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p040/p040-v1.pdf",
+          "sha256": "9302feb3f8930843c8e03683edc012dd2f1693f94319539ebf6a02f7e22c237a",
+          "submitted_at": "2026-09-26T16:03:34Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p040-a-weekend-without-a-court.pdf",
+        "sha256": "9302feb3f8930843c8e03683edc012dd2f1693f94319539ebf6a02f7e22c237a",
+        "approved_at": "2026-09-26T16:03:34Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p040/p040-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1189,15 +1783,37 @@
       "required_assets": [
         "art-phase-05-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p041/p041-v1.pdf",
+          "sha256": "bff2af1d639fea9fff2321336d5f36de2bd1022e6c1cd5c2d5d53e9f27e1e339",
+          "submitted_at": "2026-09-26T16:04:13Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p041-phase-five-the-office.pdf",
+        "sha256": "bff2af1d639fea9fff2321336d5f36de2bd1022e6c1cd5c2d5d53e9f27e1e339",
+        "approved_at": "2026-09-26T16:04:13Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p041/p041-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1211,15 +1827,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p042.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p042/p042-v1.pdf",
+          "sha256": "7fa499d2a911b3f1285bdb131522fdf334ffbad7c9935c33948acee8b0f1a58b",
+          "submitted_at": "2026-09-26T16:04:13Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p042-phase-five-the-office-continued.pdf",
+        "sha256": "7fa499d2a911b3f1285bdb131522fdf334ffbad7c9935c33948acee8b0f1a58b",
+        "approved_at": "2026-09-26T16:04:14Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p042/p042-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1233,15 +1871,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p043.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p043/p043-v1.pdf",
+          "sha256": "f3931b49c566db851cd9d473224ff52082b575e5ca2b2892722334b2663219f6",
+          "submitted_at": "2026-09-26T16:04:14Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p043-the-monday-stand-up.pdf",
+        "sha256": "f3931b49c566db851cd9d473224ff52082b575e5ca2b2892722334b2663219f6",
+        "approved_at": "2026-09-26T16:04:14Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p043/p043-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1255,15 +1915,37 @@
       "type": "activity",
       "spec": "pages/specs/p044.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p044/p044-v1.pdf",
+          "sha256": "feeea44764b6d4fc885708bc1c59366971d788b4ecd5342f9487dc05550c73cf",
+          "submitted_at": "2026-09-26T16:04:14Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p044-is-this-a-padel-stat.pdf",
+        "sha256": "feeea44764b6d4fc885708bc1c59366971d788b4ecd5342f9487dc05550c73cf",
+        "approved_at": "2026-09-26T16:04:15Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p044/p044-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1277,15 +1959,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p045.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p045/p045-v1.pdf",
+          "sha256": "82ca9b953311273b318c60d5edeb8163da2a26dc562ef28f991df22d46b5f0e7",
+          "submitted_at": "2026-09-26T16:04:15Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p045-the-team-social.pdf",
+        "sha256": "82ca9b953311273b318c60d5edeb8163da2a26dc562ef28f991df22d46b5f0e7",
+        "approved_at": "2026-09-26T16:04:15Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p045/p045-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1299,15 +2003,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p046.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p046/p046-v1.pdf",
+          "sha256": "04c93afb2c6e16e291b245f82400cf0b1a0dc5c55eaa0fc4aa7f8353b5d17194",
+          "submitted_at": "2026-09-26T16:04:15Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p046-linkedin.pdf",
+        "sha256": "04c93afb2c6e16e291b245f82400cf0b1a0dc5c55eaa0fc4aa7f8353b5d17194",
+        "approved_at": "2026-09-26T16:04:15Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p046/p046-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1321,15 +2047,37 @@
       "type": "activity",
       "spec": "pages/specs/p047.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p047/p047-v1.pdf",
+          "sha256": "b6b2b94cf9307993ef2adb46431fed6ec226760f4dd43b142a91fad7161d1a32",
+          "submitted_at": "2026-09-26T16:04:15Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p047-your-post-and-what-everyone-read.pdf",
+        "sha256": "b6b2b94cf9307993ef2adb46431fed6ec226760f4dd43b142a91fad7161d1a32",
+        "approved_at": "2026-09-26T16:04:16Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p047/p047-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1343,15 +2091,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p048.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p048/p048-v1.pdf",
+          "sha256": "b33e4d79217d4ebcdbce0495daf2776dbe7639b2f808e04fab6f5984f942ad56",
+          "submitted_at": "2026-09-26T16:04:16Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p048-the-client-lunch.pdf",
+        "sha256": "b33e4d79217d4ebcdbce0495daf2776dbe7639b2f808e04fab6f5984f942ad56",
+        "approved_at": "2026-09-26T16:04:16Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p048/p048-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1365,15 +2135,37 @@
       "type": "activity",
       "spec": "pages/specs/p049.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p049/p049-v1.pdf",
+          "sha256": "475fe403b257586f22272b54014a1e7ca00eafaef5ebf0b55a0609baede9c551",
+          "submitted_at": "2026-09-26T16:04:16Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p049-priya-and-tennis.pdf",
+        "sha256": "475fe403b257586f22272b54014a1e7ca00eafaef5ebf0b55a0609baede9c551",
+        "approved_at": "2026-09-26T16:04:17Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p049/p049-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1389,15 +2181,37 @@
       "required_assets": [
         "art-phase-06-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p050/p050-v1.pdf",
+          "sha256": "6116d6122e44b19d587d09c7f8904f782f71a714b81c99285caed17344b76ede",
+          "submitted_at": "2026-09-26T16:04:26Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p050-phase-six-recruitment-ban.pdf",
+        "sha256": "6116d6122e44b19d587d09c7f8904f782f71a714b81c99285caed17344b76ede",
+        "approved_at": "2026-09-26T16:04:27Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p050/p050-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1411,15 +2225,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p051.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p051/p051-v1.pdf",
+          "sha256": "94626a5db15ee25b5db46f476a512a160850ffa05b26744f56f82b4f16816295",
+          "submitted_at": "2026-09-26T16:04:27Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p051-the-people-you-have-tried-to-recruit.pdf",
+        "sha256": "94626a5db15ee25b5db46f476a512a160850ffa05b26744f56f82b4f16816295",
+        "approved_at": "2026-09-26T16:04:27Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p051/p051-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1433,15 +2269,37 @@
       "type": "activity",
       "spec": "pages/specs/p052.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p052/p052-v1.pdf",
+          "sha256": "73683d6fd68aafa4a3186ccac03bb5efa27864f72905f7b59b1c81af25f3372d",
+          "submitted_at": "2026-09-26T16:04:27Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p052-recruitment-register.pdf",
+        "sha256": "73683d6fd68aafa4a3186ccac03bb5efa27864f72905f7b59b1c81af25f3372d",
+        "approved_at": "2026-09-26T16:04:27Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p052/p052-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1455,15 +2313,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p053.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p053/p053-v1.pdf",
+          "sha256": "1a42d2133429ff9f50db4bdc205f980be47609645841593c6ee4b3f3aee57e2d",
+          "submitted_at": "2026-09-26T16:04:28Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p053-case-study-graham-s-hip.pdf",
+        "sha256": "1a42d2133429ff9f50db4bdc205f980be47609645841593c6ee4b3f3aee57e2d",
+        "approved_at": "2026-09-26T16:04:28Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p053/p053-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1477,15 +2357,37 @@
       "type": "activity",
       "spec": "pages/specs/p054.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p054/p054-v1.pdf",
+          "sha256": "32cca5538a6c6d773fa38158701008fa2c6c204d15d6c9d4e468096de040e939",
+          "submitted_at": "2026-09-26T16:04:28Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p054-people-you-will-not-invite-this-month.pdf",
+        "sha256": "32cca5538a6c6d773fa38158701008fa2c6c204d15d6c9d4e468096de040e939",
+        "approved_at": "2026-09-26T16:04:28Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p054/p054-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1501,15 +2403,37 @@
       "required_assets": [
         "art-phase-07-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p055/p055-v1.pdf",
+          "sha256": "87978b197d5bbbd9ec2e0019b999eca483afd12058ef7dcfa5b7023b8a43b06b",
+          "submitted_at": "2026-09-26T16:04:38Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p055-phase-seven-holidays-and-occasions.pdf",
+        "sha256": "87978b197d5bbbd9ec2e0019b999eca483afd12058ef7dcfa5b7023b8a43b06b",
+        "approved_at": "2026-09-26T16:04:38Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p055/p055-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1523,15 +2447,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p056.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p056/p056-v1.pdf",
+          "sha256": "0de239bd62f7c515a7b9215a6f6640d743badbdfe93a12a9636e57f5c2fd1ed4",
+          "submitted_at": "2026-09-26T16:04:39Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p056-phase-seven-holidays-and-occasions-continued.pdf",
+        "sha256": "0de239bd62f7c515a7b9215a6f6640d743badbdfe93a12a9636e57f5c2fd1ed4",
+        "approved_at": "2026-09-26T16:04:39Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p056/p056-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1545,15 +2491,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p057.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p057/p057-v1.pdf",
+          "sha256": "457c8d9bbffa59d4a15b9733bdb8d364ff5d253ebfef6c6c0ec2a80d8b95804e",
+          "submitted_at": "2026-09-26T16:04:39Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p057-the-family-holiday.pdf",
+        "sha256": "457c8d9bbffa59d4a15b9733bdb8d364ff5d253ebfef6c6c0ec2a80d8b95804e",
+        "approved_at": "2026-09-26T16:04:39Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p057/p057-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1567,15 +2535,37 @@
       "type": "activity",
       "spec": "pages/specs/p058.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p058/p058-v1.pdf",
+          "sha256": "fd4b9fd2f573767fb8c94334fdf2b2b58669c4439ba5ff8f115529c35b92f7d2",
+          "submitted_at": "2026-09-26T16:04:40Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p058-why-are-we-going-there.pdf",
+        "sha256": "fd4b9fd2f573767fb8c94334fdf2b2b58669c4439ba5ff8f115529c35b92f7d2",
+        "approved_at": "2026-09-26T16:04:40Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p058/p058-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1589,15 +2579,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p059.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p059/p059-v1.pdf",
+          "sha256": "a71334f6b92722677f75b2196c9fece41305c5ed42a55c8065eb6cba1c27b4c3",
+          "submitted_at": "2026-09-26T16:04:40Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p059-what-to-wear.pdf",
+        "sha256": "a71334f6b92722677f75b2196c9fece41305c5ed42a55c8065eb6cba1c27b4c3",
+        "approved_at": "2026-09-26T16:04:40Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p059/p059-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1611,15 +2623,37 @@
       "type": "activity",
       "spec": "pages/specs/p060.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p060/p060-v1.pdf",
+          "sha256": "ddbd7e7b07949060a921ebfd5908cf0482a425b1fea45bdb303ecf75be691f9a",
+          "submitted_at": "2026-09-26T16:04:40Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p060-what-to-wear.pdf",
+        "sha256": "ddbd7e7b07949060a921ebfd5908cf0482a425b1fea45bdb303ecf75be691f9a",
+        "approved_at": "2026-09-26T16:04:41Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p060/p060-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "warn",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1633,15 +2667,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p061.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p061/p061-v1.pdf",
+          "sha256": "b0b7bfd44ce389bc6892cb022c9644e5da64792f6331c75137910f37c4b2f106",
+          "submitted_at": "2026-09-26T16:04:41Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p061-presents.pdf",
+        "sha256": "b0b7bfd44ce389bc6892cb022c9644e5da64792f6331c75137910f37c4b2f106",
+        "approved_at": "2026-09-26T16:04:41Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p061/p061-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1655,15 +2711,37 @@
       "type": "activity",
       "spec": "pages/specs/p062.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p062/p062-v1.pdf",
+          "sha256": "9942b236ddc38eddcdc05e389308b9734b9779604f08a3921351381cd8ee38ea",
+          "submitted_at": "2026-09-26T16:04:41Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p062-case-study-tom-s-wedding.pdf",
+        "sha256": "9942b236ddc38eddcdc05e389308b9734b9779604f08a3921351381cd8ee38ea",
+        "approved_at": "2026-09-26T16:04:42Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p062/p062-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1677,15 +2755,37 @@
       "type": "activity",
       "spec": "pages/specs/p063.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p063/p063-v1.pdf",
+          "sha256": "75af1e27e40b7da7f9bf4ca428561318ed8ba13d6696d433ed7e90266c7c8f7f",
+          "submitted_at": "2026-09-26T16:04:42Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p063-family-dates.pdf",
+        "sha256": "75af1e27e40b7da7f9bf4ca428561318ed8ba13d6696d433ed7e90266c7c8f7f",
+        "approved_at": "2026-09-26T16:04:42Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p063/p063-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1701,15 +2801,37 @@
       "required_assets": [
         "art-phase-08-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p064/p064-v1.pdf",
+          "sha256": "62f0ed0ca1713940b41e51c289a84e0a4b6f3064f1bdc341526ec2daecf6f905",
+          "submitted_at": "2026-09-26T16:04:53Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p064-phase-eight-relapse-risk.pdf",
+        "sha256": "62f0ed0ca1713940b41e51c289a84e0a4b6f3064f1bdc341526ec2daecf6f905",
+        "approved_at": "2026-09-26T16:04:53Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p064/p064-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1723,15 +2845,37 @@
       "type": "activity",
       "spec": "pages/specs/p065.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p065/p065-v1.pdf",
+          "sha256": "2d04ca93a5df756a9a786fbf5e4efbc6a69f03962bbb599ed682aac831d25cba",
+          "submitted_at": "2026-09-26T16:04:53Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p065-your-risk-register.pdf",
+        "sha256": "2d04ca93a5df756a9a786fbf5e4efbc6a69f03962bbb599ed682aac831d25cba",
+        "approved_at": "2026-09-26T16:04:54Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p065/p065-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1745,15 +2889,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p066.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p066/p066-v1.pdf",
+          "sha256": "9adeda6916234553e381c628a1220e150956d08fed382495f977a0646bcc0dbd",
+          "submitted_at": "2026-09-26T16:04:54Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p066-warning-signs.pdf",
+        "sha256": "9adeda6916234553e381c628a1220e150956d08fed382495f977a0646bcc0dbd",
+        "approved_at": "2026-09-26T16:04:54Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p066/p066-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1767,15 +2933,37 @@
       "type": "activity",
       "spec": "pages/specs/p067.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p067/p067-v1.pdf",
+          "sha256": "3d5dbf58a1eebbe901d4cc088314842d39a0e57f9a60645383c01c87be1c9ff9",
+          "submitted_at": "2026-09-26T16:04:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p067-warning-signs-this-week.pdf",
+        "sha256": "3d5dbf58a1eebbe901d4cc088314842d39a0e57f9a60645383c01c87be1c9ff9",
+        "approved_at": "2026-09-26T16:04:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p067/p067-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1789,15 +2977,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p068.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p068/p068-v1.pdf",
+          "sha256": "3ae65c55307bde84ed72a5ebf863f85d2ded7a93b302189a0c5e661d63fff06a",
+          "submitted_at": "2026-09-26T16:04:55Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p068-the-new-court.pdf",
+        "sha256": "3ae65c55307bde84ed72a5ebf863f85d2ded7a93b302189a0c5e661d63fff06a",
+        "approved_at": "2026-09-26T16:04:55Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p068/p068-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1811,15 +3021,37 @@
       "type": "activity",
       "spec": "pages/specs/p069.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p069/p069-v1.pdf",
+          "sha256": "b2125c9e62702de036d7105fcf09a2289c38e2fde962d620bd709be6d93a3c8e",
+          "submitted_at": "2026-09-26T16:04:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p069-my-new-court-plan.pdf",
+        "sha256": "b2125c9e62702de036d7105fcf09a2289c38e2fde962d620bd709be6d93a3c8e",
+        "approved_at": "2026-09-26T16:04:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p069/p069-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1833,15 +3065,37 @@
       "type": "activity",
       "spec": "pages/specs/p070.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p070/p070-v1.pdf",
+          "sha256": "a202605bd91c5927a536036f4945dd061a426124935c06d91224825c92fd8215",
+          "submitted_at": "2026-09-26T16:04:56Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p070-muting-the-group-chat.pdf",
+        "sha256": "a202605bd91c5927a536036f4945dd061a426124935c06d91224825c92fd8215",
+        "approved_at": "2026-09-26T16:04:56Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p070/p070-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1857,15 +3111,37 @@
       "required_assets": [
         "art-phase-09-opener"
       ],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p071/p071-v1.pdf",
+          "sha256": "662d9ee8397692d2472801b53f31424d937ce01d325f2cf716b928fea9dd59cd",
+          "submitted_at": "2026-09-26T16:05:07Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p071-phase-nine-sign-off.pdf",
+        "sha256": "662d9ee8397692d2472801b53f31424d937ce01d325f2cf716b928fea9dd59cd",
+        "approved_at": "2026-09-26T16:05:07Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p071/p071-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1879,15 +3155,37 @@
       "type": "activity",
       "spec": "pages/specs/p072.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p072/p072-v1.pdf",
+          "sha256": "07c367f8c285b18219efd658f30469c36c29f962699bd5c811eca9a7341181d8",
+          "submitted_at": "2026-09-26T16:05:07Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p072-final-review.pdf",
+        "sha256": "07c367f8c285b18219efd658f30469c36c29f962699bd5c811eca9a7341181d8",
+        "approved_at": "2026-09-26T16:05:07Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p072/p072-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1901,15 +3199,37 @@
       "type": "activity",
       "spec": "pages/specs/p073.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p073/p073-v1.pdf",
+          "sha256": "c750b21dc1795c668277bdb29b92a56d736afb93faf78d390e4d57a53ff5051f",
+          "submitted_at": "2026-09-26T16:05:08Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p073-reading-your-final-score.pdf",
+        "sha256": "c750b21dc1795c668277bdb29b92a56d736afb93faf78d390e4d57a53ff5051f",
+        "approved_at": "2026-09-26T16:05:08Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p073/p073-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1923,15 +3243,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p074.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p074/p074-v1.pdf",
+          "sha256": "6aaee453d233fe2ea99917ec2956035b8214767f405ae767b9ef37467b5f8e07",
+          "submitted_at": "2026-09-26T16:05:08Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p074-the-dinner-party.pdf",
+        "sha256": "6aaee453d233fe2ea99917ec2956035b8214767f405ae767b9ef37467b5f8e07",
+        "approved_at": "2026-09-26T16:05:08Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p074/p074-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1945,15 +3287,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p075.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p075/p075-v1.pdf",
+          "sha256": "dc2f8e0cadd17a1899e1d1d3962e6c6fbbaa90b8a9b638e7dbe3fd52ea5522d0",
+          "submitted_at": "2026-09-26T16:05:09Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p075-the-tennis-match.pdf",
+        "sha256": "dc2f8e0cadd17a1899e1d1d3962e6c6fbbaa90b8a9b638e7dbe3fd52ea5522d0",
+        "approved_at": "2026-09-26T16:05:09Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p075/p075-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1967,15 +3331,37 @@
       "type": "activity",
       "spec": "pages/specs/p076.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p076/p076-v1.pdf",
+          "sha256": "f5f6469423eaeafc43df16fa1bcdea7e57dbcb8362e8c1ea8b599d0c48936702",
+          "submitted_at": "2026-09-26T16:05:09Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p076-stakeholder-sign-off.pdf",
+        "sha256": "f5f6469423eaeafc43df16fa1bcdea7e57dbcb8362e8c1ea8b599d0c48936702",
+        "approved_at": "2026-09-26T16:05:09Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p076/p076-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -1989,15 +3375,37 @@
       "type": "activity",
       "spec": "pages/specs/p077.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p077/p077-v1.pdf",
+          "sha256": "4d0595a1c5936bcce25e4bb892f3656a9c5e0c6083c527d2dbf7a87a00d141f8",
+          "submitted_at": "2026-09-26T16:05:10Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p077-commitments.pdf",
+        "sha256": "4d0595a1c5936bcce25e4bb892f3656a9c5e0c6083c527d2dbf7a87a00d141f8",
+        "approved_at": "2026-09-26T16:05:10Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p077/p077-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -2011,15 +3419,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p078.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p078/p078-v1.pdf",
+          "sha256": "d065a006bdf5e66de0b7e3cdc218e5e2a21a3fcdc299809917b239f09cc94203",
+          "submitted_at": "2026-09-26T16:05:10Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p078-a-final-word-from-the-engagement.pdf",
+        "sha256": "d065a006bdf5e66de0b7e3cdc218e5e2a21a3fcdc299809917b239f09cc94203",
+        "approved_at": "2026-09-26T16:05:10Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p078/p078-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -2033,15 +3463,37 @@
       "type": "certificate",
       "spec": "pages/specs/p079.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p079/p079-v1.pdf",
+          "sha256": "427eb620425cb23af8183768972a802da2e169a49c175d35988b3bb815f18c92",
+          "submitted_at": "2026-09-26T16:05:11Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p079-certificate-of-completion.pdf",
+        "sha256": "427eb620425cb23af8183768972a802da2e169a49c175d35988b3bb815f18c92",
+        "approved_at": "2026-09-26T16:05:11Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p079/p079-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
@@ -2055,15 +3507,37 @@
       "type": "text_illustration",
       "spec": "pages/specs/p080.json",
       "required_assets": [],
-      "status": "spec_ready",
+      "status": "approved",
       "revision_open": false,
-      "drafts": [],
-      "approved": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "pages/drafts/p080/p080-v1.pdf",
+          "sha256": "9f54d6ed610df168edec86c44a1c240fa1eb77dc6d504450f8c3a4b22a4dbba7",
+          "submitted_at": "2026-09-26T16:05:11Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "pages/approved/p080-about-this-engagement.pdf",
+        "sha256": "9f54d6ed610df168edec86c44a1c240fa1eb77dc6d504450f8c3a4b22a4dbba7",
+        "approved_at": "2026-09-26T16:05:11Z",
+        "approved_by": "produce",
+        "source_draft": "pages/drafts/p080/p080-v1.pdf",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint"
+      },
       "approval_history": [],
       "qa": {
-        "content": "pending",
-        "visual": "pending",
-        "technical": "pending"
+        "content": "pass",
+        "visual": "pass",
+        "technical": "pass"
       },
       "depends_on": [],
       "notes": null
