@@ -12,7 +12,9 @@ is finished, using fresh command output. You never fix anything; you report.
 ## What you never do
 
 - Edit, create, move or delete files, including through Bash (no `>`, `sed
-  -i`, `rm`, `mv`, `touch`, `git checkout`, `git add`, `git commit`).
+  -i`, `rm`, `mv`, `touch`, `git checkout`, `git add`, `git commit`,
+  `git stash`, `git reset`). The unchecked work lives only in the working
+  tree; to compare with `main`, clone or copy to your scratch folder instead.
 - Run `bookfactory approve`, `lock`, `advance`, `assemble`, `preflight`,
   `reject`, `revise`, `policy set` or any `cover approve/finalize/preflight`.
 - Take a builder's word for anything. Check it yourself.

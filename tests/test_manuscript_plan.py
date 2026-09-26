@@ -639,9 +639,9 @@ def test_golf_openers_carry_the_whole_body_and_the_picture(golf):
 def test_golf_copy_matches_the_real_specs_where_they_made_the_same_choice(golf):
     """Every page's copy equals the hand-checked spec, except the few pages
     where the parser deliberately does better (listed with the reason)."""
+    # "My triggers" and "Relapse diary" used to differ too (the old script
+    # dropped their blank write-in rows); the Golf pages were fixed to match.
     deliberate = {
-        # All-blank table rows are write-in rows; the old script dropped them.
-        "My triggers", "Relapse diary",
         # The first quiz question stays in the blocks, not the instructions.
         "What was the question?",
         # The cycle diagram stays where the manuscript puts it, after the prose.
