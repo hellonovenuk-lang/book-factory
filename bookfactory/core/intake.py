@@ -19,12 +19,15 @@ COLOUR_DIRECTIONS = ("muted", "colourful", "specified_palette", "let_book_factor
 MAIN_CHARACTER_SOURCES = ("user_description", "book_factory_invents")
 LENGTH_CHOICES = ("60", "80", "100", "system_decides")
 PRODUCTION_POLICIES = ("autonomous", "visual_checkpoint", "checkpointed")
+PRINT_COLOURS = ("colour", "black_and_white")
+COVER_STYLES = ("big_lettering", "picture", "let_book_factory_decide")
 
 #: The compact questionnaire. One entry per user-facing question. Order
 #: matches the product spec, and it is deliberately short - this is meant to
 #: read as one natural exchange, not a forty-question creative brief.
 QUESTIONNAIRE = [
     {"key": "idea", "prompt": "In one or two sentences, what is the book?"},
+    {"key": "title", "prompt": "What is the exact title, as it should appear on the cover?"},
     {"key": "buyer", "prompt": "Who will buy it?"},
     {"key": "recipient", "prompt": "Who is it for - the recipient or target reader?"},
     {"key": "recognition_trigger",
@@ -38,9 +41,20 @@ QUESTIONNAIRE = [
     {"key": "colour_direction",
      "prompt": "Colour direction: muted, colourful, a specified palette, or let Book Factory decide?",
      "choices": COLOUR_DIRECTIONS},
+    {"key": "print_colour", "prompt": "Print colour: colour, or black and white?",
+     "choices": PRINT_COLOURS},
+    {"key": "cover_style",
+     "prompt": ("Cover style: big lettering (a text-only cover with bold type and no picture), "
+                "a picture cover, or let Book Factory decide?"),
+     "choices": COVER_STYLES},
     {"key": "main_character",
      "prompt": "Main character: will you describe them, or should Book Factory invent one?",
      "choices": MAIN_CHARACTER_SOURCES},
+    {"key": "main_character_details",
+     "prompt": ("The main character's age, who they live with (family), and one or two fixed "
+                "look details, e.g. \"Dave, 45, married to Sue, two kids under seven, a flat "
+                "cap\". If Book Factory is inventing the character, give the age and family here "
+                "anyway.")},
     {"key": "length", "prompt": "Approximate length: 60, 80, 100 pages, or let the system decide?",
      "choices": LENGTH_CHOICES},
     {"key": "must_include", "prompt": "Anything that must be included? (or \"none\")"},
@@ -53,8 +67,8 @@ QUESTIONNAIRE = [
 ]
 
 #: Keys that must be present and non-empty free text.
-_REQUIRED_TEXT_KEYS = ("idea", "buyer", "recipient", "recognition_trigger",
-                       "must_include", "must_avoid")
+_REQUIRED_TEXT_KEYS = ("idea", "title", "buyer", "recipient", "recognition_trigger",
+                       "main_character_details", "must_include", "must_avoid")
 
 #: Optional free-text answers a "custom"/"specified_palette"/"user_description"
 #: choice implies should also be present. Not enforced - a missing detail here
@@ -65,6 +79,8 @@ _CHOICE_KEYS = {
     "colour_direction": COLOUR_DIRECTIONS,
     "main_character": MAIN_CHARACTER_SOURCES,
     "length": LENGTH_CHOICES,
+    "print_colour": PRINT_COLOURS,
+    "cover_style": COVER_STYLES,
     "production_policy": PRODUCTION_POLICIES,
 }
 
@@ -124,5 +140,6 @@ def validate_draft(answers: dict, unclear: list[str]) -> list[str]:
 __all__ = [
     "QUESTIONNAIRE", "HUMOUR_LEVELS", "VISUAL_FEELS", "COLOUR_DIRECTIONS",
     "MAIN_CHARACTER_SOURCES", "LENGTH_CHOICES", "PRODUCTION_POLICIES",
+    "PRINT_COLOURS", "COVER_STYLES",
     "questionnaire_text", "validate_answers", "validate_draft",
 ]

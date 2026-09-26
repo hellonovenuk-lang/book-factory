@@ -13,6 +13,7 @@ from bookfactory.core.tasks import next_task
 
 GOOD_ANSWERS = {
     "idea": "A fake rehabilitation manual for men addicted to golf.",
+    "title": "The Golf Addict's Guide to Recovery",
     "buyer": "His wife.",
     "recipient": "Dave, aged 52.",
     "recognition_trigger": "He irons his golf trousers before he irons his shirts.",
@@ -20,9 +21,12 @@ GOOD_ANSWERS = {
     "visual_feel": "classic_editorial_caricature",
     "colour_direction": "muted",
     "main_character": "user_description",
+    "main_character_details": "Dave, 52, married to Sue, two grown-up kids, a flat cap.",
     "length": "80",
     "must_include": "the electric trolley",
     "must_avoid": "anything about his golf handicap",
+    "print_colour": "colour",
+    "cover_style": "picture",
     "production_policy": "autonomous",
 }
 

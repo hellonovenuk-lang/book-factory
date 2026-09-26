@@ -22,15 +22,19 @@ IDEA = "A fake rehabilitation manual for men addicted to golf."
 #: is left unclear, and the production policy is never drafted.
 DRAFT = {
     "idea": IDEA,
+    "title": "The Golf Addict's Guide to Recovery",
     "buyer": "His partner.",
     "recipient": "The golf addict himself.",
     "recognition_trigger": "He irons his golf trousers before his work shirts.",
     "humour_level": "medium",
     "visual_feel": "classic_editorial_caricature",
     "main_character": "book_factory_invents",
+    "main_character_details": "Dave, 45, married to Sue, two kids under seven, a flat cap.",
     "length": "80",
     "must_include": "none",
     "must_avoid": "none",
+    "print_colour": "colour",
+    "cover_style": "let_book_factory_decide",
 }
 
 
