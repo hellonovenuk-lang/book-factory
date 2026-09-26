@@ -396,7 +396,8 @@ def test_stops_at_a_picture(produced_book, workspace):
     api.revise(BOOK, "fig-scope", kind=ASSET, reason="Composition too tight", root=workspace)
     result = produce.run(BOOK, root=workspace)
     assert result["steps"] == []
-    assert result["stopped_because"] == "not_mechanical"
+    # Phase 19: a page picture has its own stop code, so /write-book can draw it.
+    assert result["stopped_because"] == "picture"
     assert result["next_task"]["type"] == "illustration"
     assert "a picture" in result["message"]
 

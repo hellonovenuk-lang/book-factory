@@ -39,6 +39,17 @@ writes that copy. The cover's own authoring steps and registering an existing
 asset keep the ordinary `not_mechanical` code: they are not prose for an
 agent to draft.
 
+Likewise, when the next task is a page's own illustration (an `illustration`
+task naming the page and the asset to draw, not the cover artwork) and its
+`mode` is `continue_automatically`, `produce` stops with the distinct code
+`picture` instead of `not_mechanical`, naming the asset. Pictures are drawn
+by Claude Code through the Higgsfield connector - a chat tool, unreachable
+from here - so `/write-book` draws it, checks it against the visual bible
+and submits it, then runs `produce` again. `produce` never draws or submits
+a picture itself. The cover artwork step keeps the ordinary `not_mechanical`
+code, as does a picture's own approval task (still the operator's, or an
+autonomous policy's, decision - never produce's).
+
 Two guards keep it from looping: a step limit, and a no-progress stop when a
 step leaves the same task next (for example a preflight that keeps failing).
 A dry run only reads: it reports the first step it would take, or why it
@@ -66,13 +77,14 @@ REMEDIATE = production.REMEDIATE
 BLOCKED = production.BLOCKED
 NOT_MECHANICAL = "not_mechanical"
 WRITING = "writing"
+PICTURE = "picture"
 MAX_STEPS = "max_steps"
 NO_PROGRESS = "no_progress"
 ERROR = "error"
 DRY_RUN = "dry_run"
 
 STOP_REASONS = (COMPLETE, WAIT_FOR_OPERATOR, REMEDIATE, BLOCKED, NOT_MECHANICAL, WRITING,
-                MAX_STEPS, NO_PROGRESS, ERROR, DRY_RUN)
+                PICTURE, MAX_STEPS, NO_PROGRESS, ERROR, DRY_RUN)
 
 DEFAULT_MAX_STEPS = 50
 
@@ -162,6 +174,12 @@ def _is_cover_task(book_id: str, task: dict) -> bool:
     return task_id.startswith(f"{book_id}-cover-")
 
 
+def _is_page_picture_task(book_id: str, task: dict) -> bool:
+    """Is this a page's own illustration - not a cover, not a visual reference?"""
+    return (task.get("type") == "illustration" and bool(task.get("page_id"))
+            and bool(task.get("asset_id")) and not _is_cover_task(book_id, task))
+
+
 def _is_asset_register_task(task: dict) -> bool:
     task_id = task.get("task_id") or ""
     return bool(task.get("asset_id")) and task_id.endswith("-register")
@@ -204,6 +222,10 @@ def _stop_for(book_id: str, task: dict | None, root=None) -> tuple[str, str] | N
                 and not _is_asset_register_task(task)):
             return WRITING, (f"Stopped: the next task, {_describe(task)}, needs copy written, "
                              "which produce does not do; Claude Code's /write-book can write it.")
+        if _is_page_picture_task(book_id, task):
+            return PICTURE, (f"Stopped: the next task, {_describe(task)}, needs a picture "
+                             "drawn, which produce does not do; Claude Code's /write-book can "
+                             f"draw it through Higgsfield. Asset: {task.get('asset_id')}.")
         needs = _NEEDS.get(kind)
         if needs is None and kind in MECHANICAL_TYPES:
             needs = "a cover step"
@@ -311,4 +333,4 @@ def run(book_id: str, *, root: str | Path | None = None, max_steps: int = DEFAUL
         last_run = task["task_id"]
 
 
-__all__ = ["run", "MECHANICAL_TYPES", "STOP_REASONS", "WRITING", "DEFAULT_MAX_STEPS"]
+__all__ = ["run", "MECHANICAL_TYPES", "STOP_REASONS", "WRITING", "PICTURE", "DEFAULT_MAX_STEPS"]
