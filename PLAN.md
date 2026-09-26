@@ -11,9 +11,9 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phase 17 is done (not yet archived; `/handover` moves it to `docs/PLAN-ARCHIVE.md`).
-> **Finished:** Phase 17: `bookfactory plan <book> --from-manuscript --out <plan.json>` reads the locked manuscript, builds every page (openers, text pages, numbered activity pages from blocks), fit-tests each in both engines, splits overflowing openers and text pages, and writes a plan file only; `plan --from-file` loads it. `/write-book` uses it. Test-driven on a copy of the Golf book: 71 pages, same as the real plan, all fit. Full suite 579 passed, 2 skipped. Earlier today: the branch rule (sessions switch to `main` themselves, never ask).
-> **Next action:** plan Phase 18 with `/plan-phase` from `IDEAS.md`. (Done 2026-09-25: the Golf book's empty worksheet tables on p055 and p061, found by Phase 17, are fixed at Kieran's request; both pages are v2 and the interior was rebuilt; still Release Ready and not yet uploaded.)
+> **Doing:** no phase open. Phases 17 and 18 are done (not yet archived; `/handover` moves them to `docs/PLAN-ARCHIVE.md`).
+> **Finished:** Phase 18: intake now also asks the exact title, the main character's age/family/look, colour or black-and-white printing and the cover style (big lettering, picture, or let Book Factory decide); confirming sets the book's title, `format.colour` and a text-only cover for big lettering, each audited; the brief, visual and cover tasks list them as "fixed at intake". Test-driven on a new book in a scratch copy. Helpers are no longer capped at 3 (Kieran); the checker may never stash or reset the real checkout. Earlier: Phase 17 (`plan --from-manuscript`), and the Golf book's p055/p061 table fix (still Release Ready, not yet uploaded).
+> **Next action:** plan Phase 19 with `/plan-phase` from `IDEAS.md`. Strong candidates: pictures through Higgsfield inside `produce`, or letting the last release steps run on their own under the recorded policy.
 
 **Unfinished, carried over:**
 - none (the first live runs of `approve --all-passing`, of `produce` page approvals and of `/write-book` are Kieran's, on a real book; helpers are rightly blocked from the first two)
@@ -113,7 +113,7 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 - [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
 - [x] Everything is pushed to `main` and checked there.
 
-## Phase 18: Big decisions at intake (in progress)
+## Phase 18: Big decisions at intake (done)
 
 Goal: starting a book also asks the exact title, the main character's age,
 family and look, colour or black-and-white printing, and the cover style (big
@@ -125,20 +125,20 @@ with Kieran 2026-09-26; he asked for every task at once.
 
 | # | Task | Who | Files |
 |---|---|---|---|
-| 18.1 | Four new questions (`title`, `main_character_details`, `print_colour`, `cover_style`) with validation and drafting | builder, routine (Sonnet) | `bookfactory/core/intake.py`, `tests/test_intake_draft.py`, `tests/test_autonomous.py`, `tests/test_intake_questions.py` |
-| 18.2 | Confirming intake applies them: title, `format.colour`, text-only cover for `big_lettering`, each audited | builder, routine (Sonnet) | `bookfactory/core/api.py`, `tests/test_intake_apply.py` |
-| 18.3 | Writing tasks (brief, character and visual references, visual bible, cover) list the decisions as fixed at intake | builder, routine (Sonnet) | `bookfactory/core/tasks.py`, `tests/test_tasks_intake_decisions.py` |
-| 18.4 | Guides and `/write-book` | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
-| 18.5 | Check: full suite, demo build in a throwaway copy, docs vs code | checker, routine (Sonnet) | none |
-| 18.6 | Test-drive: a test book in a scratch copy, intake drafted and confirmed; title, printing and cover set with no hand edits | main | `PLAN.md`, `IDEAS.md` |
+| 18.1 ✓ | Four new questions (`title`, `main_character_details`, `print_colour`, `cover_style`) with validation and drafting | builder, routine (Sonnet) | `bookfactory/core/intake.py`, `tests/test_intake_draft.py`, `tests/test_autonomous.py`, `tests/test_intake_questions.py` |
+| 18.2 ✓ | Confirming intake applies them: title, `format.colour`, text-only cover for `big_lettering`, each audited | builder, routine (Sonnet) | `bookfactory/core/api.py`, `tests/test_intake_apply.py` |
+| 18.3 ✓ | Writing tasks (brief, character and visual references, visual bible, cover) list the decisions as fixed at intake | builder, routine (Sonnet) | `bookfactory/core/tasks.py`, `tests/test_tasks_intake_decisions.py` |
+| 18.4 ✓ | Guides and `/write-book` | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
+| 18.5 ✓ | Check: full suite, demo build in a throwaway copy, docs vs code | checker, routine (Sonnet) | none |
+| 18.6 ✓ | Test-drive: a test book in a scratch copy, intake drafted and confirmed; title, printing and cover set with no hand edits | main | `PLAN.md`, `IDEAS.md` |
 
 **Test-drive:** 18.6 starts a book from an idea in a scratch copy, drafts intake with the new questions marked unclear, confirms them, then reads `book.json`, `cover/cover.json`, the audit log and the brief task.
 
 **Done when:**
-- [ ] Starting a new book asks the four new questions along with the others.
-- [ ] After confirming, the book already has the right title, colour or black-and-white printing and cover type, all in the audit log, with no hand edits.
-- [ ] The writing steps show those decisions, so the brief, character and cover follow them.
-- [ ] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+- [x] Starting a new book asks the four new questions along with the others.
+- [x] After confirming, the book already has the right title, colour or black-and-white printing and cover type, all in the audit log, with no hand edits.
+- [x] The writing steps show those decisions, so the brief, character and cover follow them.
+- [x] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
 
 ---
 
@@ -176,3 +176,5 @@ with Kieran 2026-09-26; he asked for every task at once.
 | 2026-09-24 | 15 | Full suite (junit) | 510 passed, 2 skipped, 0 failed |
 | 2026-09-24 | 17 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, placeholder can't leak | 579 passed, 2 skipped, 0 failed; demo Release Ready; no mismatches |
 | 2026-09-24 | 17 | Test-drive: `plan --from-manuscript` on a scratch copy of the Golf book, compared with its real plan | 71 = 71 pages, all fit (3 openers split), split bodies identical; opener one-paragraph fix and its test added after the checker ran, `tests/test_plan_fit.py` 8 passed |
+| 2026-09-26 | 18 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, old books unaffected | 603 tests: 600 passed, 2 skipped, 1 failed (a Phase 17 Golf test made stale by the p055/p061 fix, not Phase 18; fixed, rerun passes); demo Release Ready; question order in AUTONOMOUS_PRODUCTION.md was wrong, fixed; Golf status/validate/task clean |
+| 2026-09-26 | 18 | Test-drive: book from an idea in a scratch copy, intake drafted with the four new questions unclear, confirmed with --set | title set exactly, black and white, cover artwork none by kieran, three audit entries; the brief task lists all four as fixed at intake |
