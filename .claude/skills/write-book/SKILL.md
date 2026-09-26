@@ -1,6 +1,6 @@
 ---
 name: write-book
-description: Drive one book forward by alternating `bookfactory produce` with Claude writing the copy itself (brief, writing sample, voice bible, visual bible, manuscript, page plan, page specs). Runs produce; when it stops with `writing`, writes that one task's copy to the voice rules, saves it where the task says, and runs produce again. Runs a lock itself with `--autonomous` only when the task's mode is continue_automatically (the recorded policy authorizes it). Stops and reports at anything else - pictures, the cover, operator decisions, any lock the policy keeps for the operator. Never approves or forces. No Claude API call.
+description: Drive one book forward by alternating `bookfactory produce` with Claude writing the copy itself (brief, writing sample, voice bible, visual bible, manuscript, page plan, page specs), drawing its page pictures through Higgsfield, and running its final release steps - each only as far as the recorded production policy allows. Runs produce; when it stops with `writing`, writes that one task's copy to the voice rules, saves it where the task says, and runs produce again. When it stops with `picture`, generates and submits that page picture following the Images routine, and may approve it itself under `--autonomous` if the policy allows and the skill has checked it. Runs a lock, `cover finalize`, `cover preflight` or the release-ready step itself with `--autonomous` only when the task's mode is continue_automatically (the recorded policy authorizes it). Stops and reports at anything else - the cover's own artwork and approval, operator decisions, any lock or step the policy keeps for the operator. Never approves or forces the cover. No Claude API call.
 disable-model-invocation: true
 argument-hint: "<book-id>"
 ---
@@ -12,7 +12,8 @@ Book: $ARGUMENTS. If that is empty, run `bookfactory list` and ask which book.
 This is **operating a book** (`integrations/claude/BOOK_FACTORY.md`, "Two
 different jobs"), so every rule in `AGENTS.md` applies exactly. The copy is
 written by you, in this session, on the operator's subscription: there is no
-Claude API call.
+Claude API call. Pictures use the operator's Higgsfield credits (say how many
+were spent, per `integrations/claude/BOOK_FACTORY.md` "Images").
 
 ## 1. Read the repository
 
@@ -32,9 +33,17 @@ Repeat:
    itself (renders, page approvals under the recorded policy, QA, assembly,
    preflight) and stops with a `stopped_because` code.
 2. If `stopped_because` is **`writing`**: do section 3, then go back to 1.
-3. If the `next_task` is a lock whose `mode` is **`continue_automatically`**:
+3. If `stopped_because` is **`picture`**: do section 3b, then go back to 1.
+4. If the `next_task` is a lock whose `mode` is **`continue_automatically`**:
    do section 3a, then go back to 1.
-4. Anything else: stop the loop and go to section 5.
+5. If the `next_task` is that same picture's own approval, its `mode` is
+   **`continue_automatically`**, and the skill itself drew and checked that
+   picture: do section 3c, then go back to 1.
+6. If the `next_task`'s `submit_command` is `bookfactory cover finalize`,
+   `bookfactory cover preflight` or `bookfactory advance ... --to
+   release_ready`, and its `mode` is **`continue_automatically`**: do
+   section 3d, then go back to 1.
+7. Anything else: stop the loop and go to section 5.
 
 ## 3. Write one task's copy
 
@@ -104,15 +113,96 @@ audits it as granted under the policy.
 3. If Book Factory refuses it, stop and report the refusal: that lock is the
    operator's. Never retry without `--autonomous`, and never work round it.
 
+## 3b. Draw a picture
+
+`produce` stops with `picture` only for a page picture (an illustration,
+character reference or layout reference) whose task's `mode` is
+`continue_automatically`; it never gives this code for cover artwork, which
+always stays the operator's (section 4).
+
+1. `bookfactory pictures show <book>`. If drawing this picture would break
+   the recorded budget, stop and report - `produce` should not have offered
+   it, so say so plainly.
+2. Check the Higgsfield connector's `balance` first. If Higgsfield is not
+   connected in this session, or credits are too low for the picture,
+   stop and report exactly as `integrations/claude/BOOK_FACTORY.md`,
+   "Images" says to when handing a task to ChatGPT instead - do not
+   substitute a placeholder.
+3. Follow the Images routine in `integrations/claude/BOOK_FACTORY.md` step
+   by step: read the task and the visual bible, upload the references,
+   `generate_image` with the style words, each character's fixed features,
+   the "Never" items, the reference's sparseness and "no text, letters,
+   numbers, logos or signatures" spelled out in the prompt, `jobs_wait`,
+   download the result.
+4. Look at the picture yourself against the references before doing
+   anything else with it. If it breaks the visual bible - a wrong face, a
+   logo, embedded text or pseudo-lettering, colour in a black-and-white
+   book, a cluttered background - generate a new draft instead of
+   submitting it. Try at most 3 times; if none pass, stop and report which
+   drafts failed and why, rather than submitting a bad one.
+5. Submit the one that matches with the task's `output.submit_command`.
+   Note the draft path and how many Higgsfield credits it cost, for the
+   final report.
+6. Go back to the loop (step 1 of section 2).
+
+## 3c. Approve a picture the skill itself checked
+
+`produce` never approves a picture (it stops instead, saying approving a
+picture stays with the operator). But when the very next task is the
+approval of a page picture the skill drew and checked in section 3b two
+steps ago, and that task's `mode` is `continue_automatically`, the skill may
+approve it itself - never for `cover-front-artwork` or any other cover task,
+which stay the operator's under every policy (section 4).
+
+1. `bookfactory task <book> --json`. Check its `task_id` is that picture's
+   own approval task, its `mode` is `continue_automatically`, and its
+   `asset_id` is the one just drawn - not a cover asset.
+2. Run `bookfactory approve <book-id-written-in-full> <asset-id> --kind
+   asset --draft <vN> --autonomous --by claude`, using the draft revision
+   just submitted. Never sign it with the operator's name.
+3. If Book Factory refuses it, stop and report the refusal.
+4. Go back to the loop (step 1 of section 2).
+
+## 3d. Run a release step the recorded policy authorizes
+
+Exactly like a lock (section 3a): an agent may run `cover finalize`, `cover
+preflight` or `advance <book> --to release_ready` itself when it is the
+current task from `bookfactory next`, that task's `mode` is
+`continue_automatically`, and its `submit_command` is exactly one of those
+commands. The full-wrap cover's own approval is never one of these - it stays
+an explicit operator decision under every policy (`AGENTS.md` section 9a),
+so this never covers `cover approve`.
+
+1. `bookfactory task <book> --json`. Check its `task_id` matches the
+   `next_task`, its `mode` is `continue_automatically`, and its
+   `submit_command` is the release step in question.
+2. Run exactly that command, with the book id written out in full and, for a
+   lock or an approval-adjacent step, `--autonomous --by claude` added where
+   the command supports it. Never invent flags such as `--force`.
+3. If the guard or Book Factory refuses it, stop and report the refusal
+   exactly - that step is the operator's. Never retry another way.
+4. Go back to the loop (step 1 of section 2).
+
 ## 4. Never
 
-- Never run `approve`, `reject`, `revise`, `advance`, `assemble`,
-  `preflight`, `policy set`, `pictures set` or any `cover` command yourself,
-  and never `--force`. Never run `lock` except as section 3a says.
-  `produce` makes the only approvals, under the recorded policy.
+- Never run `approve`, `reject`, `revise`, `assemble`, `preflight`,
+  `policy set`, `pictures set` or any `cover` command yourself, except
+  exactly `bookfactory approve ... --kind asset` for one page picture the
+  skill itself drew and checked (section 3c), and exactly `cover finalize`
+  or `cover preflight` when section 3d's conditions hold. Never `--force`.
+  Never run `lock` or `advance` except as section 3a or 3d says. `produce`
+  makes the only page approvals; the skill makes the only picture
+  approvals, both under the recorded policy.
+- Never generate, submit or approve cover artwork
+  (`cover-front-artwork`), and never approve or finalize the full-wrap
+  cover other than the `cover finalize` step in 3d - `cover approve` stays
+  the operator's under every policy.
 - Never write into `approved/` folders or an approved cover.
-- Never generate or submit a picture here (that is its own routine,
-  `integrations/claude/BOOK_FACTORY.md`, "Images").
+- Never generate or submit a picture other than through section 3b, and
+  never approve one other than through section 3c.
+- Never use a free-trial "unlimited" Higgsfield allowance unless the
+  operator says so.
+- Never change the picture budget or the production policy.
 - Never write cover copy (cover tasks do not stop with `writing`).
 
 ## 5. Report
@@ -122,9 +212,14 @@ In repository terms (`AGENTS.md` section 10), short and plain:
 - each file you wrote or command you ran to save copy (e.g. "wrote
   `brief/brief.md`", "`spec` p012 from file");
 - what `produce` did along the way (renders, pages it approved);
-- each lock you ran under section 3a, as recorded under the policy;
+- each picture you drew (asset id, draft path, which attempt passed), how
+  many Higgsfield credits were used, and which pictures were approved under
+  the recorded policy (section 3c);
+- each lock or release step you ran under section 3a or 3d, as recorded
+  under the policy;
 - where it stopped, its `stopped_because` and `message`, and what the
   operator now needs to decide (e.g. "read the brief and lock the concept:
-  `bookfactory lock concept <book>`").
+  `bookfactory lock concept <book>`", or "review and approve the full-wrap
+  cover: `bookfactory cover approve <book> --draft v2`").
 
 End with **"Your next step:"** and the one action for the operator.
