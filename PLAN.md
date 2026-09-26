@@ -113,6 +113,33 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 - [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
 - [x] Everything is pushed to `main` and checked there.
 
+## Phase 18: Big decisions at intake (in progress)
+
+Goal: starting a book also asks the exact title, the main character's age,
+family and look, colour or black-and-white printing, and the cover style (big
+lettering, picture, or let Book Factory decide); confirming intake sets the
+book up from those answers, audited, and the writing tasks show them as fixed.
+From the Golf Addict's Guide retrospective (late changes to Dave's age, the
+cover style and black and white cost rework and credits). Planned and agreed
+with Kieran 2026-09-26; he asked for every task at once.
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 18.1 | Four new questions (`title`, `main_character_details`, `print_colour`, `cover_style`) with validation and drafting | builder, routine (Sonnet) | `bookfactory/core/intake.py`, `tests/test_intake_draft.py`, `tests/test_autonomous.py`, `tests/test_intake_questions.py` |
+| 18.2 | Confirming intake applies them: title, `format.colour`, text-only cover for `big_lettering`, each audited | builder, routine (Sonnet) | `bookfactory/core/api.py`, `tests/test_intake_apply.py` |
+| 18.3 | Writing tasks (brief, character and visual references, visual bible, cover) list the decisions as fixed at intake | builder, routine (Sonnet) | `bookfactory/core/tasks.py`, `tests/test_tasks_intake_decisions.py` |
+| 18.4 | Guides and `/write-book` | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
+| 18.5 | Check: full suite, demo build in a throwaway copy, docs vs code | checker, routine (Sonnet) | none |
+| 18.6 | Test-drive: a test book in a scratch copy, intake drafted and confirmed; title, printing and cover set with no hand edits | main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** 18.6 starts a book from an idea in a scratch copy, drafts intake with the new questions marked unclear, confirms them, then reads `book.json`, `cover/cover.json`, the audit log and the brief task.
+
+**Done when:**
+- [ ] Starting a new book asks the four new questions along with the others.
+- [ ] After confirming, the book already has the right title, colour or black-and-white printing and cover type, all in the audit log, with no hand edits.
+- [ ] The writing steps show those decisions, so the brief, character and cover follow them.
+- [ ] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+
 ---
 
 
@@ -137,8 +164,9 @@ book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
 - **Everything lives in the repository**, not in `~/.claude/`, because web
   sessions start in a fresh container each time.
 - **Helpers cost usage.** Each one is a separate Claude worker that reads the
-  rules before starting. Fan out only when it saves real time, keep it to 3 at
-  once, and use the cheaper model for routine jobs (task 2.7, added
+  rules before starting. Fan out only when it saves real time, run every
+  task whose files don't overlap at once (Kieran lifted the old limit of 3 on
+  2026-09-26: "do as much as possible"), and use the cheaper model for routine jobs (task 2.7, added
   2026-09-22 at the operator's request).
 
 ## Verification log

@@ -21,7 +21,7 @@ time (`integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`).
    sitting, a plain-words "Done when". Every task lists the exact files it
    touches, and no file is in two tasks.
 2. **Hand out** (`/fan-out`). Small jobs are done by the main session. Bigger
-   ones go to helpers, at most 3 at once, after you've seen the preview and
+   ones go to helpers, all at once when their files do not overlap, after you've seen the preview and
    said OK.
 3. **Check** (the checker helper, then `/verify-phase` for the whole phase). Every finished task is checked with fresh
    command output before it's saved. The checker can't edit anything, so it

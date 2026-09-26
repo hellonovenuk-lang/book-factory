@@ -1,6 +1,6 @@
 ---
 name: fan-out
-description: Hand the open phase's helper tasks to helpers (at most 3 at once), each with a standard brief and a file list that doesn't overlap, after showing the operator a one-line preview and getting their OK. Then check each result with the checker and commit each checked task by name. Use only for work on Book Factory itself, never for producing a book.
+description: Hand the open phase's helper tasks to helpers (every task whose files do not overlap, all at once), each with a standard brief and a file list that doesn't overlap, after showing the operator a one-line preview and getting their OK. Then check each result with the checker and commit each checked task by name. Use only for work on Book Factory itself, never for producing a book.
 disable-model-invocation: true
 argument-hint: "[task numbers, e.g. 2.3 2.4, or empty for all helper tasks]"
 allowed-tools: Read Grep Glob Agent Bash(git status *) Bash(git diff *) Bash(git fetch *) Bash(git log *) Bash(git branch *)
@@ -30,7 +30,7 @@ code, templates, schemas and docs.
 
 ## 2. Usage rules
 
-- **At most 3 helpers at once.** More tasks means more rounds.
+- **As many helpers at once as the phase has non-overlapping tasks** (Kieran, 2026-09-26: "do as much as possible"). Only tasks that depend on another task's result wait for a later round.
 - **Model:** helpers run on **Sonnet** by default. Use **Opus** only when the
   plan marks the task **tricky** and gives a reason.
 - **Turn limit:** every helper has one (`maxTurns` in its file under

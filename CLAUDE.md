@@ -21,7 +21,7 @@ For work on Book Factory itself (full guide: `integrations/claude/WORKFLOW.md`):
 
 - `continue`: read "Start here" in `PLAN.md` and propose the next action.
 - `/plan-phase <idea>`: plan one small phase (tasks, files, "Done when").
-- `/fan-out`: hand the phase's tasks to helpers (at most 3, Sonnet by
+- `/fan-out`: hand the phase's tasks to helpers (all at once, Sonnet by
   default), after a one-line preview and the operator's OK.
 - `/handover`: update `PLAN.md`, save to GitHub `main`, check it arrived.
 
