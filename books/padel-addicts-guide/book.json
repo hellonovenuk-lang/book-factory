@@ -84,16 +84,16 @@
     "set_at": "2026-09-26T10:54:54Z",
     "source": "new_book_default"
   },
-  "production_mode": "continue_automatically",
+  "production_mode": "wait_for_operator",
   "blocked": null,
   "next_action": {
-    "task_id": "padel-addicts-guide-ref-layout-chapter-opener-approve",
-    "type": "approval",
-    "summary": "Review reference artwork 'ref-layout-chapter-opener'",
+    "task_id": "padel-addicts-guide-lock-visual",
+    "type": "operator_decision",
+    "summary": "Approve the reference set and lock the visual style",
     "page_id": null,
-    "asset_id": "ref-layout-chapter-opener",
+    "asset_id": null,
     "approval_required": true,
-    "mode": "continue_automatically"
+    "mode": "wait_for_operator"
   },
   "last_transition": {
     "from": "manuscript_lock",
@@ -103,5 +103,5 @@
     "note": "stage derived from repository state"
   },
   "created_at": "2026-09-26T10:54:54Z",
-  "updated_at": "2026-09-26T14:46:05Z"
+  "updated_at": "2026-09-26T15:02:00Z"
 }
