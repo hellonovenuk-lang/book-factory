@@ -163,6 +163,7 @@ def _brief_task(book) -> Task | None:
                 "The recognition triggers matter most - they are what the buyer is paying for.\n"
                 "Also fill brief/concept.md and brief/audience.md.\n\n"
                 "Blocking: " + "; ".join(gate.reasons)
+                + _intake_decisions_text(book)
             ),
             required_inputs=["brief/brief.md"],
             output={"destination": "brief/",
@@ -290,6 +291,7 @@ def _visual_reference_task(book) -> Task | None:
                 "appearance, line style, medium, palette and edge treatment.\n"
                 "A fresh agent with no chat history must be able to draw on-style from this file "
                 "alone. Vague entries here are what caused the drift last time."
+                + _intake_decisions_text(book)
             ),
             required_inputs=["brief/brief.md", "style/design-tokens.json"],
             output={"destination": "style/visual-bible.md", "expected_format": "markdown"},
@@ -329,6 +331,7 @@ def _visual_reference_task(book) -> Task | None:
                 "No text of any kind inside the artwork - typography is set by the "
                 "deterministic renderer, never generated.\n"
                 "Save the result as a draft, then submit it."
+                + _intake_decisions_text(book)
             ).strip(),
             asset_id=asset_id,
             characters=asset.characters,
@@ -357,6 +360,46 @@ def _visual_reference_task(book) -> Task | None:
         approval_required=True,
         gate="visual_lock",
     )
+
+
+def _intake_decisions_text(book) -> str:
+    """Plain-English lines for the big decisions the operator fixed at intake.
+
+    Only decisions intake actually recorded are listed - an old book with no
+    completed intake (or one whose answers don't include these keys) gets
+    nothing, so it is unaffected.
+    """
+    if not book.state.intake.completed:
+        return ""
+    answers = book.state.intake.answers or {}
+    lines = []
+    title = answers.get("title")
+    if title and str(title).strip():
+        lines.append(f"- Title: exactly \"{title}\"")
+    details = answers.get("main_character_details")
+    if details and str(details).strip():
+        lines.append(f"- Main character: {details}")
+    print_colour = answers.get("print_colour")
+    if print_colour:
+        lines.append("- Print colour: " +
+                     ("black and white" if print_colour == "black_and_white" else "colour"))
+    cover_style = answers.get("cover_style")
+    if cover_style:
+        if cover_style == "big_lettering":
+            text = "big lettering (a text-only cover, bold type, no picture)"
+        elif cover_style == "picture":
+            text = "a picture cover"
+        else:
+            text = "let Book Factory decide"
+        lines.append(f"- Cover style: {text}")
+    for key, label in (("must_include", "Must include"), ("must_avoid", "Must avoid")):
+        value = answers.get(key)
+        if value and str(value).strip().lower() != "none":
+            lines.append(f"- {label}: {value}")
+    if not lines:
+        return ""
+    return ("\n\nFixed at intake - do not change without the operator:\n"
+            + "\n".join(lines))
 
 
 def _picture_budget_text(book) -> str:
@@ -681,11 +724,12 @@ def _cover_task(book) -> Task | None:
     if not data.get("direction") or not data.get("author") or not data.get("back_copy"):
         return _task(book, "cover-direction", type="authoring",
                      summary="Record the cover direction, paper, finish, author and back copy",
-                     instructions="Fill cover/cover.json from intake and the locked visual bible. "
+                     instructions=("Fill cover/cover.json from intake and the locked visual bible. "
                                   "Confirm paper and finish before calculating the spine. "
                                   "A text-only cover is the operator's choice, recorded with "
                                   f"bookfactory cover artwork {book.state.book_id} --mode none "
-                                  "--by <operator>.")
+                                  "--by <operator>."
+                                  + _intake_decisions_text(book)))
     #: A text-only cover the operator recorded has no artwork to register or draw.
     native = cover.artwork_mode(data) == cover.NATIVE
     if native and asset is None:
@@ -695,8 +739,9 @@ def _cover_task(book) -> Task | None:
     if native and not asset.is_approved and not asset.reviewable_draft():
         return _task(book, "cover-artwork", type="illustration",
                      summary="Produce native text-free cover artwork",
-                     instructions="Match locked character and editorial references. No lettering, "
-                                  "logos or recreated app interfaces. Never upscale native pixels.",
+                     instructions=("Match locked character and editorial references. No lettering, "
+                                  "logos or recreated app interfaces. Never upscale native pixels."
+                                  + _intake_decisions_text(book)),
                      asset_id=cover.ART_ID, references=refs,
                      constraints=book.asset_constraints(asset),
                      output={"destination": f"assets/drafts/{cover.ART_ID}/",
