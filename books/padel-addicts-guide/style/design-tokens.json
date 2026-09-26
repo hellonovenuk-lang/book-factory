@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "trim": "6x9",
+  "bleed_in": 0.0,
+  "margins_in": {
+    "top": 0.75,
+    "outer": 0.625,
+    "bottom": 0.75,
+    "inner": 0.875
+  },
+  "fonts": {
+    "display": "\"Bitstream Charter\", \"Charter\", \"DejaVu Serif\", Georgia, serif",
+    "body": "\"Bitstream Charter\", \"Charter\", \"DejaVu Serif\", Georgia, serif",
+    "accent": "\"DejaVu Sans\", \"Liberation Sans\", Helvetica, Arial, sans-serif",
+    "mono": "\"DejaVu Sans Mono\", \"Liberation Mono\", monospace"
+  },
+  "type_scale_pt": {
+    "chapter_number": 64,
+    "chapter_title": 30,
+    "heading": 17,
+    "subheading": 12,
+    "body": 10.5,
+    "caption": 8.5,
+    "folio": 8.5,
+    "running_head": 7.5
+  },
+  "leading": {
+    "body": 1.44,
+    "heading": 1.15,
+    "caption": 1.35
+  },
+  "palette": {
+    "ink": "#1c1a17",
+    "ink_soft": "#4a453e",
+    "paper": "#fbf8f1",
+    "accent": "#8c3b2e",
+    "accent_soft": "#e6d7c3",
+    "rule": "#c9bda8"
+  },
+  "rules": {
+    "chapter_opener_starts_recto": true,
+    "running_head_on_chapter_openers": false,
+    "folio_on_full_bleed_pages": false
+  }
+}

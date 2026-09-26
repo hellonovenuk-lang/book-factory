@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "book_id": "padel-addicts-guide",
+  "title": "The Padel Addict's Guide to Talking About Anything Else",
+  "subtitle": null,
+  "series": null,
+  "stage": "book_brief",
+  "format": {
+    "trim": "6x9",
+    "colour": false,
+    "bleed": false,
+    "dpi": 300,
+    "kdp_profile": "kdp-default",
+    "target_page_count": 80
+  },
+  "concept": {
+    "locked": false,
+    "locked_at": null,
+    "sha256": null
+  },
+  "manuscript": {
+    "version": "v0",
+    "locked": false,
+    "locked_at": null,
+    "sha256": null,
+    "path": null
+  },
+  "style": {
+    "visual_version": "v0",
+    "visual_locked": false,
+    "visual_locked_at": null,
+    "visual_sha256": null,
+    "voice_version": "v0",
+    "voice_locked": false,
+    "voice_locked_at": null,
+    "voice_sha256": null
+  },
+  "page_plan": {
+    "planned": false,
+    "page_count": 0,
+    "planned_at": null
+  },
+  "intake": {
+    "required": true,
+    "completed": true,
+    "completed_at": "2026-09-26T10:55:07Z",
+    "answers": {
+      "idea": "A mock self-help manual for a padel convert who has made the sport his whole personality, teaching him to talk about anything else, at home and at work. The humour is off court: what his padel obsession does to everyone in his life.",
+      "title": "The Padel Addict's Guide to Talking About Anything Else",
+      "buyer": "A wife or girlfriend, colleague, friend or sibling of a padel addict, buying it as a birthday, Christmas or Father's Day gift or a Secret Santa.",
+      "recipient": "A padel-obsessed professional in his late twenties or early thirties who took up the sport recently and now talks about nothing else.",
+      "recognition_trigger": "Steering every conversation back to padel and saying it is 'the fastest-growing sport in the world'; the padel WhatsApp group pinging at 6am; planning family weekends around court bookings; trying to recruit his dad, his boss and the neighbours; wearing padel kit to a toddler's birthday party; the racket bag in the car boot next to the car seats; 'quick padel stat' in work stand-ups and pushing padel as the team social; a 'padel holiday' to Spain sold as a family trip; calling tennis 'basically padel without the walls'.",
+      "humour_level": "medium",
+      "visual_feel": "classic_editorial_caricature",
+      "colour_direction": "muted",
+      "print_colour": "black_and_white",
+      "cover_style": "big_lettering",
+      "main_character": "user_description",
+      "main_character_details": "Josh, 31, a management consultant, married to Lauren, two children under five (Mia, 4, and Alfie, 1). Fixed look: short beard, a smartwatch he never takes off, and a padel brand cap or quarter-zip whether he is at the office or a toddler's birthday party.",
+      "length": "80",
+      "must_include": "none",
+      "must_avoid": "none",
+      "production_policy": "visual_checkpoint"
+    },
+    "draft": null,
+    "drafted_by": "claude",
+    "confirmed_by": "kieran",
+    "changed_on_confirm": []
+  },
+  "production_policy": {
+    "mode": "visual_checkpoint",
+    "operator_authorized": true,
+    "visual_checkpoint": true,
+    "major_gate_checkpoints": false,
+    "stop_on_soft_qa_failure": false,
+    "stop_on_hard_failure": true,
+    "authorized_at": "2026-09-26T10:55:07Z",
+    "source": "intake_questionnaire"
+  },
+  "pictures": {
+    "budget": "chapter_openers",
+    "count": null,
+    "set_by": null,
+    "set_at": "2026-09-26T10:54:54Z",
+    "source": "new_book_default"
+  },
+  "production_mode": "continue_automatically",
+  "blocked": null,
+  "next_action": {
+    "task_id": "padel-addicts-guide-brief",
+    "type": "authoring",
+    "summary": "Complete the book brief",
+    "page_id": null,
+    "asset_id": null,
+    "approval_required": true,
+    "mode": "continue_automatically"
+  },
+  "last_transition": {
+    "from": "idea",
+    "to": "book_brief",
+    "at": "2026-09-26T10:54:54Z",
+    "by": "system",
+    "note": "stage derived from repository state"
+  },
+  "created_at": "2026-09-26T10:54:54Z",
+  "updated_at": "2026-09-26T10:55:07Z"
+}

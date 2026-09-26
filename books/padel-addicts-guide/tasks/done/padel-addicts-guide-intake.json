@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-intake",
+  "book_id": "padel-addicts-guide",
+  "type": "intake",
+  "stage": "book_brief",
+  "summary": "Show the operator the drafted intake answers and wait for their reply",
+  "instructions": "claude drafted these answers from the idea (brief/intake-draft.json):\n  idea: A mock self-help manual for a padel convert who has made the sport his whole personality, teaching him to talk about anything else, at home and at work. The humour is off court: what his padel obsession does to everyone in his life.\n  title: The Padel Addict's Guide to Talking About Anything Else\n  buyer: A wife or girlfriend, colleague, friend or sibling of a padel addict, buying it as a birthday, Christmas or Father's Day gift or a Secret Santa.\n  recipient: A padel-obsessed professional in his late twenties or early thirties who took up the sport recently and now talks about nothing else.\n  recognition_trigger: Steering every conversation back to padel and saying it is 'the fastest-growing sport in the world'; the padel WhatsApp group pinging at 6am; planning family weekends around court bookings; trying to recruit his dad, his boss and the neighbours; wearing padel kit to a toddler's birthday party; the racket bag in the car boot next to the car seats; 'quick padel stat' in work stand-ups and pushing padel as the team social; a 'padel holiday' to Spain sold as a family trip; calling tennis 'basically padel without the walls'.\n  humour_level: medium\n  visual_feel: classic_editorial_caricature\n  colour_direction: muted\n  print_colour: black_and_white\n  cover_style: big_lettering\n  main_character: user_description\n  main_character_details: Josh, 31, a management consultant, married to Lauren, two children under five (Mia, 4, and Alfie, 1). Fixed look: short beard, a smartwatch he never takes off, and a padel brand cap or quarter-zip whether he is at the office or a toddler's birthday party.\n  length: 80\n  must_include: none\n  must_avoid: none\n\nCould not tell from the idea: none\n\nShow the operator this summary once, ask the unclear questions, and ask them to choose the production policy (autonomous, visual_checkpoint or checkpointed; visual_checkpoint is recommended). Never choose it for them. Nothing is complete until they reply. Then record their reply:\n\n  bookfactory intake padel-addicts-guide --confirm --by <operator> --policy <their choice> [--set key=value ...]\n\n--set carries their corrections and their answers to the unclear questions. A new draft may replace this one if the idea changes.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [],
+  "constraints": {},
+  "output": {
+    "destination": "brief/intake.json",
+    "expected_format": "json"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": "intake",
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "wait_for_operator",
+  "created_at": "2026-09-26T10:55:03Z",
+  "closed_at": "2026-09-26T10:55:07Z"
+}

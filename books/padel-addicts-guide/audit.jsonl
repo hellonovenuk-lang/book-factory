@@ -1,0 +1,6 @@
+{"at": "2026-09-26T10:54:54Z", "event": "cover_required", "paper": "white", "finish": "matte", "artwork": "native"}
+{"at": "2026-09-26T10:54:54Z", "event": "stage_advanced", "from": "idea", "to": "book_brief", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-09-26T10:54:54Z", "event": "book_created", "book_id": "padel-addicts-guide", "title": "The Padel Addict's Guide to Talking About Anything Else", "trim": "6x9", "colour": false}
+{"at": "2026-09-26T10:55:03Z", "event": "intake_drafted", "drafted_by": "claude"}
+{"at": "2026-09-26T10:55:07Z", "event": "cover_artwork_mode_set", "mode": "none", "previous": "native", "by": "kieran", "reason": "cover style 'big_lettering' chosen at intake", "superseded": []}
+{"at": "2026-09-26T10:55:07Z", "event": "intake_submitted", "production_policy": "visual_checkpoint", "operator_authorized": true, "drafted_by": "claude", "confirmed_by": "kieran", "changed_on_confirm": []}
