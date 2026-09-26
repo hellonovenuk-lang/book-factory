@@ -4,7 +4,7 @@
   "title": "The Padel Addict's Guide to Talking About Anything Else",
   "subtitle": null,
   "series": null,
-  "stage": "concept_lock",
+  "stage": "voice_lock",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -30,10 +30,10 @@
     "visual_locked": false,
     "visual_locked_at": null,
     "visual_sha256": null,
-    "voice_version": "v0",
-    "voice_locked": false,
-    "voice_locked_at": null,
-    "voice_sha256": null
+    "voice_version": "v1",
+    "voice_locked": true,
+    "voice_locked_at": "2026-09-26T11:25:13Z",
+    "voice_sha256": "d5697e0c79d32bc456dd07a4211afb625ce1382751f1e6cfa2e705b8abe70cb0"
   },
   "page_plan": {
     "planned": false,
@@ -87,21 +87,21 @@
   "production_mode": "continue_automatically",
   "blocked": null,
   "next_action": {
-    "task_id": "padel-addicts-guide-writing-sample",
+    "task_id": "padel-addicts-guide-manuscript",
     "type": "authoring",
-    "summary": "Write the calibration writing sample",
+    "summary": "Write the manuscript",
     "page_id": null,
     "asset_id": null,
     "approval_required": true,
     "mode": "continue_automatically"
   },
   "last_transition": {
-    "from": "book_brief",
-    "to": "concept_lock",
-    "at": "2026-09-26T11:00:11Z",
+    "from": "concept_lock",
+    "to": "voice_lock",
+    "at": "2026-09-26T11:25:13Z",
     "by": "claude",
-    "note": "Kieran approved in chat 2026-09-26: looks good, lock it"
+    "note": "Kieran approved in chat 2026-09-26: lock"
   },
   "created_at": "2026-09-26T10:54:54Z",
-  "updated_at": "2026-09-26T11:00:12Z"
+  "updated_at": "2026-09-26T11:25:13Z"
 }
