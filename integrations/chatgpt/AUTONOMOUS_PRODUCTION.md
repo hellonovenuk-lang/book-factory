@@ -56,19 +56,30 @@ improvise the answers yourself.
 
 ## 3. Intake - draft it from the idea, the operator confirms once
 
-The recommended routine is draft-then-confirm, not a twelve-question form.
+The recommended routine is draft-then-confirm, not a sixteen-question form.
 The user already gave you the idea; use it to answer what you reasonably can,
 and only ask them to react to a summary.
 
-1. **Draft your best-guess answers** for as many of the twelve questions as
+1. **Draft your best-guess answers** for as many of the sixteen questions as
    the idea supports (the full list is below, and `bookfactory questionnaire
    --json` returns it machine-readably). Every answer you do give must be
    valid - a choice question (`humour_level`, `visual_feel`,
-   `colour_direction`, `main_character`, `length`) needs one of its listed
-   choices, not free text. Anything you cannot reasonably infer, leave out of
-   `answers` and list its key in `unclear` instead of guessing. Never include
-   `production_policy` in the draft - that question is always the operator's,
-   never the agent's, to answer.
+   `colour_direction`, `main_character`, `length`, `print_colour`,
+   `cover_style`) needs one of its listed choices, not free text. Anything
+   you cannot reasonably infer, leave out of `answers` and list its key in
+   `unclear` instead of guessing. Never include `production_policy` in the
+   draft - that question is always the operator's, never the agent's, to
+   answer.
+
+   Four of the questions are big decisions that cost real rework and credits
+   to change later (a lesson from the Golf Addict's Guide): `title` (the
+   exact cover title), `main_character_details` (age, family, one or two
+   fixed look details - give this even when Book Factory is inventing the
+   character), `print_colour` (colour or black and white) and `cover_style`
+   (big lettering - a text-only cover with bold type and no picture -, a
+   picture cover, or let Book Factory decide). Draft these like any other
+   question, or list them as unclear; never skip showing them in the
+   summary.
 
    Example `answers.json`:
 
@@ -76,15 +87,19 @@ and only ask them to react to a summary.
    {
      "answers": {
        "idea": "A fake rehabilitation manual for men addicted to golf.",
+       "title": "The Golf Addict's Guide to Family Reintegration",
        "buyer": "Partners and friends buying a joke gift.",
        "recipient": "A man who golfs most weekends and won't admit it's a problem.",
        "recognition_trigger": "The excuses for 'just nine holes' turning into a full day.",
        "humour_level": "medium",
        "visual_feel": "classic_editorial_caricature",
        "main_character": "book_factory_invents",
+       "main_character_details": "Late 40s, married with two teenage kids, a battered golf umbrella he carries everywhere.",
        "length": "80",
        "must_include": "none",
-       "must_avoid": "none"
+       "must_avoid": "none",
+       "print_colour": "colour",
+       "cover_style": "picture"
      },
      "unclear": ["colour_direction"]
    }
@@ -100,7 +115,10 @@ and only ask them to react to a summary.
 2. **Show the operator one summary**, not a repeat of the form: every
    drafted answer, the unclear questions, and the production policy question
    (FULL AUTONOMOUS / VISUAL CHECKPOINT / CHECKPOINTED - recommend
-   `visual_checkpoint` if asked). Wait for one reply.
+   `visual_checkpoint` if asked). Always name the four big decisions in that
+   summary by name (title, main character details, print colour, cover
+   style), whether drafted or unclear - they are exactly the ones that are
+   expensive to get wrong. Wait for one reply.
 
 3. **Record only the operator's own reply.** Merge any corrections they gave
    and the policy they chose:
@@ -112,10 +130,22 @@ and only ask them to react to a summary.
    Use `--by` with the operator's own name, never yours, and `--policy` with
    the policy they actually said, never inferred from silence. This is what
    writes `brief/intake.json`, sets `book.json`'s `intake.completed`, and
-   records that the answers were drafted by you and confirmed by the
-   operator, including anything they changed. **A fresh session must never
-   need to ask again** - check `book.json`'s `intake` block first, and if
-   `completed` is true, do not ask.
+   applies the operator's big decisions to the book itself, each recorded in
+   the audit log: `title` sets the book's cover title (the book's internal
+   id never changes), `print_colour` sets `format.colour`, and `cover_style`
+   of `big_lettering` records a text-only cover - the same effect as
+   `bookfactory cover artwork --mode none`, with `by` set to the confirming
+   operator. `picture` and `let_book_factory_decide` leave the cover as it
+   is. It also records that the answers were drafted by you and confirmed by
+   the operator, including anything they changed. **A fresh session must
+   never need to ask again** - check `book.json`'s `intake` block first, and
+   if `completed` is true, do not ask.
+
+   Writing tasks that follow (the brief, the visual bible, visual
+   references, cover direction and cover artwork) list these four answers
+   in their instructions as "fixed at intake - do not change without the
+   operator". Treat them as fixed; if one turns out to be wrong, that is the
+   operator's call, not yours to quietly correct.
 
 Never start the book with `bookfactory create --policy ...` to skip this: the
 policy is the operator's choice, made through their own confirmed reply, not
@@ -127,23 +157,29 @@ own answers directly with `bookfactory intake golf-addict --from-file
 answers.json` (or individual `--set key=value` pairs) - the same command as
 before, still never answering `production_policy` yourself.
 
-The twelve questions, for reference:
+The sixteen questions, for reference:
 
 1. What is the book, in one or two sentences?
-2. Who will buy it?
-3. Who is it for?
-4. What should make them think "that's literally him/her"?
-5. Humour level: mild, medium, fairly savage, or custom?
-6. Visual feel: classic editorial caricature, old children's-book
+2. What is the exact title, as it should appear on the cover?
+3. Who will buy it?
+4. Who is it for?
+5. What should make them think "that's literally him/her"?
+6. Humour level: mild, medium, fairly savage, or custom?
+7. Visual feel: classic editorial caricature, old children's-book
    illustration, modern flat editorial, comic/cartoon, let Book Factory
    decide, or custom?
-7. Colour direction: muted, colourful, a specified palette, or let Book
+8. Colour direction: muted, colourful, a specified palette, or let Book
    Factory decide?
-8. Main character: will you describe them, or should Book Factory invent one?
-9. Approximate length: 60, 80, 100 pages, or let the system decide?
-10. Anything that must be included?
-11. Anything that must be avoided?
-12. Production policy: FULL AUTONOMOUS (keep going unless genuinely blocked),
+9. Print colour: colour, or black and white?
+10. Cover style: big lettering (a text-only cover with bold type and no
+    picture), a picture cover, or let Book Factory decide?
+11. Main character: will you describe them, or should Book Factory invent one?
+12. The main character's age, family, and one or two fixed look details -
+    given even when Book Factory is inventing the character.
+13. Approximate length: 60, 80, 100 pages, or let the system decide?
+14. Anything that must be included?
+15. Anything that must be avoided?
+16. Production policy: FULL AUTONOMOUS (keep going unless genuinely blocked),
     VISUAL CHECKPOINT (show the visual set before mass production), or
     CHECKPOINTED (ask at every major creative gate)? Never answered by the
     agent, drafted or otherwise.

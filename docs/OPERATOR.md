@@ -18,21 +18,27 @@ something like:
 > judgement.
 
 ChatGPT will create the project and use your idea to draft its own best-guess
-answers to the setup questionnaire (twelve questions, covering the idea, the
+answers to the setup questionnaire (sixteen questions, covering the idea, the
 buyer, the humour level, the visual feel, and how hands-off you want it to
 be). You will not see the form itself - you will see one short summary: what
 it guessed, which questions it could not guess (marked "unclear"), and one
 question it never guesses for you: which of FULL AUTONOMOUS, VISUAL
-CHECKPOINT or CHECKPOINTED you want. Reply once, correcting anything that is
-wrong and answering the unclear questions and the policy question - "looks
-right, visual checkpoint" is a fine reply if the draft is good. ChatGPT then
-records your reply and drives the entire pipeline - brief, manuscript, visual
-development, illustrations, rendering, QA, assembly and KDP preflight -
-stopping only where the repository or your own answers say it must. If your
-idea is too thin for ChatGPT to draft from, it will ask the full
-questionnaire instead. If the session ends partway through, open a new one
-and say "Continue Book Factory project \<book-id\>" - it resumes from exactly
-where the repository left off.
+CHECKPOINT or CHECKPOINTED you want. Four of the questions are big decisions
+that are expensive to change later, so the summary always shows them by
+name, drafted or unclear: the exact title, the main character's fixed
+details (age, family, one or two fixed look details), print colour, and
+cover style. Reply once, correcting anything that is wrong and answering the
+unclear questions and the policy question - "looks right, visual checkpoint"
+is a fine reply if the draft is good. Confirming your reply sets the book's
+title, its print colour, and - if you chose "big lettering" - a text-only
+cover, straight away; it never changes any of these again without asking
+you. ChatGPT then records your reply and drives the entire pipeline - brief,
+manuscript, visual development, illustrations, rendering, QA, assembly and
+KDP preflight - stopping only where the repository or your own answers say
+it must. If your idea is too thin for ChatGPT to draft from, it will ask the
+full questionnaire instead. If the session ends partway through, open a new
+one and say "Continue Book Factory project \<book-id\>" - it resumes from
+exactly where the repository left off.
 
 Claude Code is not part of this loop. It is the tool used to build and
 maintain Book Factory itself; you do not need it to make a book.

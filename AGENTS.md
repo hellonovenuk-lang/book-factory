@@ -172,12 +172,15 @@ retyping what they already said: `bookfactory intake <book> --draft --by
 (`book.json`'s `intake.draft`, `brief/intake-draft.json`), listing any
 question it could not answer under `"unclear"`. A draft never completes
 intake - `next` still returns the intake task - and it must never include
-`production_policy`: the agent drafts answers, never the policy. Show the
-operator one summary (the drafted answers, the unclear questions, and the
-policy question) and wait for their reply. Only the operator's own reply is
-recorded, with `bookfactory intake <book> --confirm --by <operator> --policy
-<policy they chose> [--set key=value ...]`, which merges their corrections
-and completes intake, on record as agent-drafted and operator-confirmed.
+`production_policy`: the agent drafts answers, never the policy. Four of the
+questions are big decisions that are costly to change later - the exact
+title, the main character's fixed details, print colour and cover style - so
+the operator's one summary must always show these four by name, whether
+drafted or listed as unclear, alongside the policy question. Only the
+operator's own reply is recorded, with `bookfactory intake <book> --confirm
+--by <operator> --policy <policy they chose> [--set key=value ...]`, which
+merges their corrections, applies these decisions to the book, and completes
+intake, on record as agent-drafted and operator-confirmed.
 
 `create --series-from <book>` still requires `--policy`, chosen the same way.
 It copies the source book's locked voice and visual style and its approved

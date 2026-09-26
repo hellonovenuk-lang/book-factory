@@ -41,10 +41,19 @@ Repeat:
 1. `bookfactory task <book> --json`. Check its `task_id` matches the
    `next_task` produce stopped on. If not, stop and report.
 2. Read every file in its `required_inputs`, plus `style/voice-bible.md` and
-   `manuscript/writing-sample.md` when they exist and are filled in. Follow
-   the "Writing copy" rules in `integrations/claude/BOOK_FACTORY.md` (voice
-   bible binding, banned phrases, the constructions content QA flags). Write
-   it properly the first time.
+   `manuscript/writing-sample.md` when they exist and are filled in. Before
+   writing the brief, the main character, or any visual copy (visual bible,
+   visual references, cover direction, cover artwork), also read
+   `brief/intake.json` if it exists. Treat its `title`,
+   `main_character_details`, `print_colour` and `cover_style` answers as
+   fixed - the task's own `instructions` repeat them as "fixed at intake -
+   do not change without the operator" when they apply. Write to them
+   exactly; never invent a different title, character detail, print colour
+   or cover style, and never change one yourself even if it seems wrong -
+   stop and ask the operator instead. Follow the "Writing copy" rules in
+   `integrations/claude/BOOK_FACTORY.md` (voice bible binding, banned
+   phrases, the constructions content QA flags). Write it properly the
+   first time.
 3. Write exactly what the task's `instructions` ask for, no more. Replace
    every TODO. The placeholder check is literal: the words "TODO" or "TBD"
    anywhere in the file block the gate, including the template's own

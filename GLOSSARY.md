@@ -14,6 +14,8 @@ work as a team and message each other. We deliberately don't use it.
 **AGENTS.md.** The rulebook for every AI working in this repository (Claude,
 ChatGPT, anything else). The most important file for behaviour.
 
+**Big lettering cover.** A cover style choice at intake (`cover_style: big_lettering`): a text-only cover, bold type and no picture, recorded the same way as `cover artwork --mode none`.
+
 **Block.** One item in an `activity` page's `blocks` list (e.g. a tick list, a score box, a gauge, a cut-out card) - the renderer sets every block as real type, never a picture.
 
 **Branch.** A separate line of changes in a repository. `main` is the real
@@ -73,7 +75,7 @@ to do one job. It gets its own instructions and reports back when done.
 
 **Import.** A line like `@AGENTS.md` inside `CLAUDE.md` that pulls a whole other file in automatically. A plain link only points at the file; an import actually loads it.
 
-**Intake.** The 12 starting questions for a new book (who it's for, humour, look, length...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
+**Intake.** The 16 starting questions for a new book (who it's for, humour, look, length, exact title, main character details, print colour, cover style...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
 
 **Loop.** A program repeating the same steps ("read the next task, do it") until something tells it to stop. `bookfactory produce` is one.
 
