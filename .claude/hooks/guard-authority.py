@@ -19,7 +19,11 @@ Before Claude runs a Bash command, the hook reads the command and answers:
               `approve`, `lock` and `cover approve` run with
               `--autonomous` (and not signed with the operator's name):
               Book Factory itself refuses those unless the book's recorded
-              production policy authorizes them (AGENTS.md section 3).
+              production policy authorizes them (AGENTS.md section 3). It
+              also includes the last release steps (`advance <book> --to
+              release_ready`, `cover finalize`, `cover preflight`) when the
+              book's own next task asks for exactly that step with mode
+              `continue_automatically` (see `release_step_decision`).
 
 An **ask** only reaches the operator in the "default" permission mode. In
 auto mode (and bypass or don't-ask modes) Claude Code settles an ask without
@@ -42,8 +46,11 @@ false alarm (asking) over a miss.
 from __future__ import annotations
 
 import json
+import os
 import re
+import subprocess
 import sys
+from pathlib import Path
 
 ALLOW, ASK, DENY = "allow", "ask", "deny"
 _RANK = {ALLOW: 0, ASK: 1, DENY: 2}
@@ -145,6 +152,192 @@ def autonomous_decision(what: str, rest: list[str], reason: str):
     if by is not None and by.strip().lower() in OPERATOR_NAMES:
         return ASK, ask_reason(f"bookfactory {what} --autonomous", AUTONOMOUS_AS_OPERATOR)
     return ALLOW, ""
+
+
+# -- the last release steps, when the book's own next task asks for them ------
+#
+# Rule (Phase 19, task 19.2): `bookfactory advance <book> --to release_ready`,
+# `bookfactory cover finalize <book> [--draft vN]` and
+# `bookfactory cover preflight <book>` are let through only when ALL hold:
+#   * the command is plain enough to read: `bookfactory` is the program itself
+#     (optionally after plain VAR=value words), nothing in it is a variable,
+#     substitution or glob, no `cd`/`pushd`/`popd` anywhere in the command
+#     line, only the options listed below, and no `--force`;
+#   * the book id is a literal word;
+#   * the book's current next task, read read-only (`api.next_task`, the same
+#     derivation as `bookfactory next <book> --json`, in a subprocess with a
+#     short timeout, at the same root the command would use: `--root`, else
+#     BOOKFACTORY_ROOT, else the root found from the session's cwd), is the
+#     matching task - by its id, its type and its instructions naming that
+#     exact command - and its `mode` is `continue_automatically`.
+# Otherwise the ordinary ASK stands. Any failure (error, timeout, unreadable
+# output, unknown book) means ASK, never ALLOW.
+#
+# Why this is safe: these commands have no `--autonomous` flag, but a task's
+# `mode` already encodes the book's recorded production policy (AGENTS.md
+# section 3a; bookfactory/core/production.py compute_mode). The guard adds no
+# judgement of its own: it only lets through the one step Book Factory itself
+# says continues automatically. A checkpointed book gives the release task
+# `wait_for_operator`, so it still asks.
+
+RELEASE_LOOKUP_TIMEOUT = 10  # seconds; loading one book takes well under one
+_PROJECT_DIR = Path(__file__).resolve().parents[2]
+_BOOK_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
+_DRAFT_RE = re.compile(r"^v[0-9]+$")
+_CWD_CHANGE_RE = re.compile(r"\b(cd|pushd|popd)\b")
+_NEXT_TASK_CODE = (
+    "import json, sys\n"
+    "from bookfactory.core import api\n"
+    "root = sys.argv[2] or None\n"
+    "print(json.dumps(api.next_task(sys.argv[1], root=root, persist=False)))\n"
+)
+
+
+def _plain(word: str) -> bool:
+    """A literal word: no substitution, variable or glob."""
+    return SUBST not in word and "$" not in word and not any(ch in word for ch in "*?[`")
+
+
+def _parse_options(words: list[str], value_opts: set[str], flag_opts: set[str]):
+    """Split `words` into ({option: [values]}, positionals), or None if unreadable.
+
+    Only exact, full option names are accepted (no argparse abbreviations), so
+    nothing can pass for something it is not.
+    """
+    opts: dict[str, list[str]] = {}
+    positional: list[str] = []
+    k = 0
+    while k < len(words):
+        w = words[k]
+        if not _plain(w):
+            return None
+        if w.startswith("-"):
+            name, eq, value = w.partition("=")
+            if name in flag_opts and not eq:
+                opts.setdefault(name, []).append("")
+                k += 1
+                continue
+            if name in value_opts:
+                if not eq:
+                    if k + 1 >= len(words) or not _plain(words[k + 1]):
+                        return None
+                    value = words[k + 1]
+                    k += 1
+                opts.setdefault(name, []).append(value)
+                k += 1
+                continue
+            return None  # --force, an abbreviation, anything unknown
+        positional.append(w)
+        k += 1
+    return opts, positional
+
+
+def release_step(sub: str, global_words: list[str], rest: list[str]):
+    """Parse one release step: (what, book, root, draft) or None if not plain."""
+    parsed_global = _parse_options(global_words, {"--root"}, {"--json"})
+    if parsed_global is None:
+        return None
+    g_opts, g_pos = parsed_global
+    if g_pos:
+        return None
+    if sub == "advance":
+        parsed = _parse_options(rest, {"--root", "--to", "--by", "--note"}, {"--json"})
+        if parsed is None:
+            return None
+        opts, pos = parsed
+        if opts.get("--to") != ["release_ready"]:
+            return None
+        by = opts.get("--by", [None])[-1]
+        if len(opts.get("--by", [])) > 1 or (by is not None and by.strip().lower() in OPERATOR_NAMES):
+            return None
+        what = "advance"
+    else:
+        # rest is everything after `cover`: options, the operation, then its args
+        parsed = _parse_options(rest, {"--root", "--draft"}, {"--json"})
+        if parsed is None:
+            return None
+        opts, pos = parsed
+        if not pos or pos[0] not in ("finalize", "preflight"):
+            return None
+        what = f"cover {pos[0]}"
+        pos = pos[1:]
+        if what == "cover preflight" and "--draft" in opts:
+            return None
+    if len(pos) != 1 or not _BOOK_ID_RE.match(pos[0]) or ".." in pos[0]:
+        return None
+    drafts = opts.get("--draft", [])
+    if len(drafts) > 1 or (drafts and not _DRAFT_RE.match(drafts[0])):
+        return None
+    roots = set(g_opts.get("--root", []) + opts.get("--root", []))
+    if len(roots) > 1 or "" in roots:
+        return None
+    return what, pos[0], (roots.pop() if roots else None), (drafts[0] if drafts else None)
+
+
+def lookup_next_task(book: str, root: str | None, context: dict):
+    """The book's next task as `bookfactory next --json` gives it, or None on any failure."""
+    try:
+        env = dict(os.environ)
+        env["PYTHONPATH"] = os.pathsep.join(
+            p for p in (str(_PROJECT_DIR), env.get("PYTHONPATH", "")) if p)
+        if context.get("bookfactory_root") is not None:
+            env["BOOKFACTORY_ROOT"] = context["bookfactory_root"]
+        cwd = context.get("cwd")
+        if cwd is not None and not os.path.isdir(cwd):
+            return None
+        proc = subprocess.run([sys.executable, "-c", _NEXT_TASK_CODE, book, root or ""],
+                              capture_output=True, text=True, cwd=cwd, env=env,
+                              stdin=subprocess.DEVNULL, timeout=RELEASE_LOOKUP_TIMEOUT)
+        if proc.returncode != 0:
+            return None
+        task = json.loads(proc.stdout)
+        return task if isinstance(task, dict) else None
+    except Exception:
+        return None
+
+
+def task_asks_for(task: dict, what: str, book: str, draft: str | None) -> bool:
+    """Whether `task` is exactly the release step `what`, in continue_automatically."""
+    if task.get("mode") != "continue_automatically" or task.get("book_id") != book:
+        return False
+    instructions = task.get("instructions")
+    if not isinstance(instructions, str):
+        return False
+    if what == "advance":
+        return (task.get("task_id") == f"{book}-release"
+                and task.get("type") == "operator_decision"
+                and task.get("gate") == "release_ready"
+                and f"bookfactory advance {book} --to release_ready" in instructions)
+    if what == "cover finalize":
+        match = re.search(rf"bookfactory cover finalize {re.escape(book)} --draft (v[0-9]+)\b",
+                          instructions)
+        return (task.get("task_id") == f"{book}-cover-finalize"
+                and task.get("type") == "assembly"
+                and match is not None
+                and (draft is None or draft == match.group(1)))
+    if what == "cover preflight":
+        return (task.get("task_id") == f"{book}-cover-preflight"
+                and task.get("type") == "preflight"
+                and f"bookfactory cover preflight {book}" in instructions)
+    return False
+
+
+def release_step_decision(sub: str, global_words: list[str], rest: list[str],
+                          context: dict | None) -> bool:
+    """True only when the release step may run without asking (rule above)."""
+    try:
+        if context is None:
+            return False
+        step = release_step("advance" if sub == "advance" else "cover", global_words, rest)
+        if step is None:
+            return False
+        what, book, root, draft = step
+        if what != sub:
+            return False
+        task = lookup_next_task(book, root, context)
+        return task is not None and task_asks_for(task, what, book, draft)
+    except Exception:
+        return False
 
 
 # -- tokenizer ---------------------------------------------------------------
@@ -400,6 +593,7 @@ class Simple:
         self.redirs: list[tuple[str, str]] = []
         self.stdin_text: str | None = None
         self.piped_in = False
+        self.run_by_other = False  # run by find -exec / xargs, not by the shell
 
 
 def split_simple(toks: list[Tok], heredocs: list[tuple[int, str]]) -> list[Simple]:
@@ -581,8 +775,13 @@ def strip_wrappers(words: list[str]) -> list[str]:
     return w
 
 
-def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
-    """Decision for the arguments that follow the bookfactory program."""
+def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory",
+                             context: dict | None = None):
+    """Decision for the arguments that follow the bookfactory program.
+
+    `context` is given only when `bookfactory` is plainly the program being run
+    (see `Analyzer.release_context`); without it the release steps always ask.
+    """
     k = 0
     while k < len(args):
         a = args[k]
@@ -612,11 +811,31 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
     if sub == "advance":
         if any(r.startswith("--f") and "--force".startswith(r.split("=")[0]) for r in rest):
             return ASK, ask_reason("bookfactory advance --force", ADVANCE_FORCE)
+        if release_step_decision("advance", args[:k], rest, context):
+            return ALLOW, ""
         return ASK, ask_reason("bookfactory advance", NEEDS_AUTHORITY["advance"])
     if sub in NEEDS_AUTHORITY:
         return ASK, ask_reason(f"bookfactory {sub}", NEEDS_AUTHORITY[sub])
     if sub in ("policy", "cover", "pictures"):
-        op = next((r for r in rest if not r.startswith("-")), None)
+        # The operation is the first word that is neither an option nor an
+        # option's value: `cover --root X finalize` must read `finalize`, not
+        # `X`. An option before the operation that the guard can't place asks.
+        op = None
+        k = 0
+        while k < len(rest):
+            r = rest[k]
+            if not r.startswith("-"):
+                op = r
+                break
+            if r in ("--root", "--r", "--ro", "--roo"):
+                k += 2
+                continue
+            if r == "--json" or r.split("=", 1)[0] in ("--root", "--r", "--ro", "--roo"):
+                k += 1
+                continue
+            return ASK, (f"This runs `bookfactory {sub}` with an option (`{r}`) before its "
+                         "subcommand that the guard can't place. It might need the "
+                         "operator's authority. Kieran must confirm.")
         if op is None:
             return ALLOW, ""
         if SUBST in op or "$" in op:
@@ -630,6 +849,9 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory"):
             reason = ask_reason(f"bookfactory cover {op}", COVER_AUTHORITY[op])
             if f"cover {op}" in AUTONOMOUS_OK:
                 return autonomous_decision(f"cover {op}", rest, reason)
+            if op in ("finalize", "preflight") and release_step_decision(
+                    f"cover {op}", args[:k], rest, context):
+                return ALLOW, ""
             return ASK, reason
     return ALLOW, ""
 
@@ -639,7 +861,30 @@ class Analyzer:
         self.raw = raw
         self.decision = ALLOW
         self.reason = ""
+        self.cwd = cwd
         self.cwd_protected = bool(cwd and is_protected(cwd.rstrip("/") + "/"))
+
+    def release_context(self, cmd: Simple, words: list[str]) -> dict | None:
+        """Where a plainly-run `bookfactory` would find its books, or None.
+
+        None (so the release steps ask) unless everything before the program
+        is a literal VAR=value assignment - no wrapper such as sudo, env, xargs
+        - and nothing anywhere in the command changes directory. A literal
+        BOOKFACTORY_ROOT assignment is honoured, as the program would honour it.
+        """
+        if cmd.run_by_other or _CWD_CHANGE_RE.search(self.raw):
+            return None
+        prefix = cmd.words[:len(cmd.words) - len(words)]
+        context: dict = {"cwd": self.cwd, "bookfactory_root": None}
+        for w in prefix:
+            if not _ASSIGN_RE.match(w) or not _plain(w):
+                return None
+            name, _, value = w.partition("=")
+            if name == "BOOKFACTORY_ROOT":
+                context["bookfactory_root"] = value
+            elif name.rstrip("+") == "BOOKFACTORY_ROOT" or name == "PWD":
+                return None
+        return context
 
     def note(self, decision: str, reason: str) -> None:
         if _RANK[decision] > _RANK[self.decision]:
@@ -675,7 +920,7 @@ class Analyzer:
 
         # -- authority --------------------------------------------------
         if is_bookfactory_word(prog):
-            self.note(*analyze_bookfactory_args(args))
+            self.note(*analyze_bookfactory_args(args, context=self.release_context(cmd, words)))
         elif PY_RE.match(head):
             self.python(args, cmd)
         elif head in SHELLS:
@@ -708,6 +953,7 @@ class Analyzer:
                     while end < len(words) and words[end] not in (";", "+"):
                         end += 1
                     inner = Simple()
+                    inner.run_by_other = True
                     inner.words = words[k + 1:end]
                     self.simple(inner, depth + 1)
         if head == "xargs":
@@ -718,6 +964,7 @@ class Analyzer:
                 k += 1
             if k < len(words):
                 inner = Simple()
+                inner.run_by_other = True
                 inner.words = words[k:]
                 self.simple(inner, depth + 1)
 
