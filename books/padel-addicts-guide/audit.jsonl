@@ -231,3 +231,9 @@
 {"at": "2026-09-26T16:15:16Z", "event": "approved", "kind": "page", "id": "p064", "revision": "v2", "path": "pages/approved/p064-phase-eight-relapse-risk.pdf", "sha256": "ccaceb1019f78da305c96b506d408ccc0e24fce9c5d9855a3cb6148792a3107e", "by": "produce", "authorization": "autonomous_production_policy:visual_checkpoint"}
 {"at": "2026-09-26T16:15:18Z", "event": "draft_submitted", "kind": "page", "id": "p071", "revision": "v2", "path": "pages/drafts/p071/p071-v2.pdf", "sha256": "6d7803fb3c9dd96e4e473341bb73fcfdccc4687a46088eeabf270abe037c25b6", "source": "renderer:default"}
 {"at": "2026-09-26T16:15:18Z", "event": "approved", "kind": "page", "id": "p071", "revision": "v2", "path": "pages/approved/p071-phase-nine-sign-off.pdf", "sha256": "6d7803fb3c9dd96e4e473341bb73fcfdccc4687a46088eeabf270abe037c25b6", "by": "produce", "authorization": "autonomous_production_policy:visual_checkpoint"}
+{"at": "2026-09-26T16:32:03Z", "event": "assembled", "label": "interior", "output": "output/interior.pdf", "page_count": 80, "sha256": "48174bf35792afd130f814dc12ea850fad94727fa3dafd5676d566d2018e7fcf"}
+{"at": "2026-09-26T18:19:01Z", "event": "preflight_run", "status": "pass", "failures": 0, "warnings": 0, "profile": "kdp-default"}
+{"at": "2026-09-26T18:19:28Z", "event": "cover_visual_approved", "revision": "v1", "by": "kieran", "provisional": false}
+{"at": "2026-09-26T18:19:28Z", "event": "cover_approved", "revision": "v1", "path": "cover/drafts/cover-v1.pdf", "sha256": "cef0f47e0cb00a85eaf51afe3c442d4011872b611a276b73e7e7ae349e7db2d2", "by": "kieran"}
+{"at": "2026-09-26T18:19:34Z", "event": "stage_advanced", "from": "cover_production", "to": "cover_preflight", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-09-26T18:19:39Z", "event": "stage_advanced", "from": "cover_preflight", "to": "release_ready"}
