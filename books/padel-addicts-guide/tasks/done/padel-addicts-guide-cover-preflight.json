@@ -3,7 +3,7 @@
   "task_id": "padel-addicts-guide-cover-preflight",
   "book_id": "padel-addicts-guide",
   "type": "preflight",
-  "stage": "cover_production",
+  "stage": "release_ready",
   "summary": "Preflight the approved KDP full-wrap cover",
   "instructions": "Run bookfactory cover preflight padel-addicts-guide.",
   "page_id": null,
@@ -20,6 +20,6 @@
   "remediation": false,
   "retry_count": 0,
   "mode": "continue_automatically",
-  "created_at": "2026-09-26T18:19:28Z",
-  "closed_at": "2026-09-26T18:19:35Z"
+  "created_at": "2026-09-27T20:33:43Z",
+  "closed_at": "2026-09-27T20:34:01Z"
 }

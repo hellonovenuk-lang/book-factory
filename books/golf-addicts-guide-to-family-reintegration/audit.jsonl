@@ -243,3 +243,6 @@
 {"at": "2026-09-27T20:24:24Z", "event": "draft_submitted", "kind": "asset", "id": "cover-front-artwork", "revision": "v2", "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v2.png", "sha256": "7033c590357ab23121eeeef022aaabfcd53969a295595f1f4a7958ca6747c111"}
 {"at": "2026-09-27T20:24:24Z", "event": "constraints_failed", "kind": "asset", "id": "cover-front-artwork", "revision": "v2", "failed": ["min_height_pixels"]}
 {"at": "2026-09-27T20:25:58Z", "event": "cover_draft_submitted", "revision": "v4", "path": "cover/drafts/cover-v4.pdf"}
+{"at": "2026-09-27T20:33:35Z", "event": "approved", "kind": "asset", "id": "cover-front-artwork", "revision": "v1", "path": "assets/approved/cover-front-artwork-front-cover-dave-swings-a-french-stick-at-the-sunday-roast.png", "sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac", "by": "kieran", "note": "Explicit operator cover approval v4"}
+{"at": "2026-09-27T20:33:35Z", "event": "cover_visual_approved", "revision": "v4", "by": "kieran", "provisional": false}
+{"at": "2026-09-27T20:33:37Z", "event": "cover_approved", "revision": "v4", "path": "cover/drafts/cover-v4.pdf", "sha256": "c2311d8bf0a2bfaf042922d9692c9702b1e81989db05f4ba4b9228fb803e7c13", "by": "kieran", "previous": "v3"}

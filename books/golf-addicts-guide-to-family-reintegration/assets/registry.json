@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-27T20:25:58Z",
+  "updated_at": "2026-09-27T20:33:59Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -456,7 +456,7 @@
           "sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac",
           "submitted_at": "2026-09-24T11:01:29Z",
           "source": null,
-          "status": "draft",
+          "status": "approved",
           "note": null,
           "constraint_failures": [],
           "width": 1696,
@@ -483,7 +483,20 @@
           "height": 1908
         }
       ],
-      "approved": null,
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/cover-front-artwork-front-cover-dave-swings-a-french-stick-at-the-sunday-roast.png",
+        "sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac",
+        "approved_at": "2026-09-27T20:33:35Z",
+        "approved_by": "kieran",
+        "source_draft": "assets/drafts/cover-front-artwork/cover-front-artwork-v1.png",
+        "note": "Explicit operator cover approval v4",
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": null,
+        "width": 1696,
+        "height": 2528
+      },
       "approval_history": [],
       "notes": null
     },

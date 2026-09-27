@@ -72,7 +72,7 @@
       "sha256": "6722704ee3d8c8e6bb50b57b99f28a247130618439aa7d58a6b21a9154599de4",
       "artwork": "native",
       "artwork_sha256": "f1d1d583068cc54b009499c166edc561e26921277d6abd79ada083e3e74b0c2e",
-      "status": "draft",
+      "status": "approved",
       "submitted_at": "2026-09-27T20:31:06Z",
       "dimensions": {
         "page_count": 80,
@@ -83,15 +83,25 @@
         "trim_width_in": 6.0,
         "trim_height_in": 9.0,
         "bleed_in": 0.125
+      },
+      "review_approval": {
+        "at": "2026-09-27T20:33:42Z",
+        "by": "kieran"
       }
     }
   ],
   "approved": {
-    "revision": "v1",
-    "path": "cover/drafts/cover-v1.pdf",
-    "sha256": "cef0f47e0cb00a85eaf51afe3c442d4011872b611a276b73e7e7ae349e7db2d2",
-    "at": "2026-09-26T18:19:28Z",
+    "revision": "v2",
+    "path": "cover/drafts/cover-v2.pdf",
+    "sha256": "6722704ee3d8c8e6bb50b57b99f28a247130618439aa7d58a6b21a9154599de4",
+    "at": "2026-09-27T20:33:43Z",
     "by": "kieran"
   },
-  "preflight": null
+  "preflight": {
+    "status": "pass",
+    "errors": [],
+    "cover_sha256": "6722704ee3d8c8e6bb50b57b99f28a247130618439aa7d58a6b21a9154599de4",
+    "page_count": 80,
+    "run_at": "2026-09-27T20:34:01Z"
+  }
 }
