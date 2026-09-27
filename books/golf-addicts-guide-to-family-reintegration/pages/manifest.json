@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-25T08:21:35Z",
+  "updated_at": "2026-09-27T11:38:43Z",
   "front_matter_pages": 4,
   "pages": [
     {
@@ -203,21 +203,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p005/p005-v2.pdf",
+          "sha256": "75043a4769c06634746de4e6cea93a7607d3ecdb88a2ef3ccccd5207b4e30074",
+          "submitted_at": "2026-09-27T11:38:33Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p005-stage-one-arrival.pdf",
-        "sha256": "fb8776e5ea4c463ea9282b271a5de65d473a869198595a5501166e1d9c460b9f",
-        "approved_at": "2026-09-24T10:36:55Z",
+        "sha256": "75043a4769c06634746de4e6cea93a7607d3ecdb88a2ef3ccccd5207b4e30074",
+        "approved_at": "2026-09-27T11:38:33Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p005/p005-v1.pdf",
+        "source_draft": "pages/drafts/p005/p005-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p005-v1.pdf",
+          "sha256": "fb8776e5ea4c463ea9282b271a5de65d473a869198595a5501166e1d9c460b9f",
+          "approved_at": "2026-09-24T10:36:55Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p005/p005-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-27T11:38:33Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
@@ -557,21 +580,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p013/p013-v2.pdf",
+          "sha256": "8fc945d22e2402444aea7bf0876f7aca8e005e22aeacb9918ef41366aaa80bc6",
+          "submitted_at": "2026-09-27T11:38:34Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p013-stage-two-communication.pdf",
-        "sha256": "34df5f0364a0419dfaf40471697aadc21496deba768268ec8c9937574063bebc",
-        "approved_at": "2026-09-24T10:52:52Z",
+        "sha256": "8fc945d22e2402444aea7bf0876f7aca8e005e22aeacb9918ef41366aaa80bc6",
+        "approved_at": "2026-09-27T11:38:35Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p013/p013-v1.pdf",
+        "source_draft": "pages/drafts/p013/p013-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p013-v1.pdf",
+          "sha256": "34df5f0364a0419dfaf40471697aadc21496deba768268ec8c9937574063bebc",
+          "approved_at": "2026-09-24T10:52:52Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p013/p013-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-27T11:38:35Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
@@ -999,21 +1045,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p023/p023-v2.pdf",
+          "sha256": "f193f57d6de355fd32590de9d41055dc66cb8003bd0a39179b53fd452e2ddd7e",
+          "submitted_at": "2026-09-27T11:38:36Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p023-stage-three-the-household.pdf",
-        "sha256": "e9d719b679ba1cc95db11a1abca0bb280af69f8ea330b85f51b66526cd894bd4",
-        "approved_at": "2026-09-24T10:54:54Z",
+        "sha256": "f193f57d6de355fd32590de9d41055dc66cb8003bd0a39179b53fd452e2ddd7e",
+        "approved_at": "2026-09-27T11:38:36Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p023/p023-v1.pdf",
+        "source_draft": "pages/drafts/p023/p023-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p023-v1.pdf",
+          "sha256": "e9d719b679ba1cc95db11a1abca0bb280af69f8ea330b85f51b66526cd894bd4",
+          "approved_at": "2026-09-24T10:54:54Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p023/p023-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-27T11:38:36Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
@@ -1353,21 +1422,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p031/p031-v2.pdf",
+          "sha256": "6f72d94fe5ef1cb596e2f282474ad59cbe3d8b937978acb5587fb2884ec70e49",
+          "submitted_at": "2026-09-27T11:38:37Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p031-stage-four-time.pdf",
-        "sha256": "6cdeb0886004f31d0133c3098033d22384547c17d4355e060ee1cc5f79b00625",
-        "approved_at": "2026-09-24T10:55:00Z",
+        "sha256": "6f72d94fe5ef1cb596e2f282474ad59cbe3d8b937978acb5587fb2884ec70e49",
+        "approved_at": "2026-09-27T11:38:37Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p031/p031-v1.pdf",
+        "source_draft": "pages/drafts/p031/p031-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p031-v1.pdf",
+          "sha256": "6cdeb0886004f31d0133c3098033d22384547c17d4355e060ee1cc5f79b00625",
+          "approved_at": "2026-09-24T10:55:00Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p031/p031-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-27T11:38:37Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
@@ -1663,21 +1755,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p038/p038-v2.pdf",
+          "sha256": "cd4d8ac5b1de0984d6bad39ad7347414b3b05a0e125d9f0f0f5b5396d3a75bfc",
+          "submitted_at": "2026-09-27T11:38:39Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p038-stage-five-family-occasions.pdf",
-        "sha256": "eda6d51082949b9f1e3ceb590aa14ad495ba697a92a0cea0df48abf38927823d",
-        "approved_at": "2026-09-24T10:55:53Z",
+        "sha256": "cd4d8ac5b1de0984d6bad39ad7347414b3b05a0e125d9f0f0f5b5396d3a75bfc",
+        "approved_at": "2026-09-27T11:38:39Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p038/p038-v1.pdf",
+        "source_draft": "pages/drafts/p038/p038-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p038-v1.pdf",
+          "sha256": "eda6d51082949b9f1e3ceb590aa14ad495ba697a92a0cea0df48abf38927823d",
+          "approved_at": "2026-09-24T10:55:53Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p038/p038-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-27T11:38:39Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",
@@ -1973,21 +2088,44 @@
           "status": "approved",
           "note": null,
           "constraint_failures": []
+        },
+        {
+          "revision": "v2",
+          "path": "pages/drafts/p045/p045-v2.pdf",
+          "sha256": "86590b2e2eb7a5c63a5ca3b636f58b627863b13af671405d71669f2656da2889",
+          "submitted_at": "2026-09-27T11:38:40Z",
+          "source": "renderer:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": []
         }
       ],
       "approved": {
-        "revision": "v1",
+        "revision": "v2",
         "path": "pages/approved/p045-stage-six-holidays.pdf",
-        "sha256": "9abc4ff8409d480e23e74dd68579291c35f191e3089a9c5ff2e4b508533dbf61",
-        "approved_at": "2026-09-24T10:55:59Z",
+        "sha256": "86590b2e2eb7a5c63a5ca3b636f58b627863b13af671405d71669f2656da2889",
+        "approved_at": "2026-09-27T11:38:40Z",
         "approved_by": "produce",
-        "source_draft": "pages/drafts/p045/p045-v1.pdf",
+        "source_draft": "pages/drafts/p045/p045-v2.pdf",
         "note": null,
         "superseded_at": null,
         "superseded_reason": null,
         "authorization": "autonomous_production_policy:visual_checkpoint"
       },
-      "approval_history": [],
+      "approval_history": [
+        {
+          "revision": "v1",
+          "path": "pages/approved/_history/p045-v1.pdf",
+          "sha256": "9abc4ff8409d480e23e74dd68579291c35f191e3089a9c5ff2e4b508533dbf61",
+          "approved_at": "2026-09-24T10:55:59Z",
+          "approved_by": "produce",
+          "source_draft": "pages/drafts/p045/p045-v1.pdf",
+          "note": null,
+          "superseded_at": "2026-09-27T11:38:40Z",
+          "superseded_reason": "superseded by v2",
+          "authorization": "autonomous_production_policy:visual_checkpoint"
+        }
+      ],
       "qa": {
         "content": "pass",
         "visual": "pass",

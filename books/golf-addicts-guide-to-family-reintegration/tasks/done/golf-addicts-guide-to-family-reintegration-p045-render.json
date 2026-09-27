@@ -3,7 +3,7 @@
   "task_id": "golf-addicts-guide-to-family-reintegration-p045-render",
   "book_id": "golf-addicts-guide-to-family-reintegration",
   "type": "page_render",
-  "stage": "page_production",
+  "stage": "release_ready",
   "summary": "Render page p045 - Stage Six: Holidays",
   "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render golf-addicts-guide-to-family-reintegration --page p045 --submit",
   "page_id": "p045",
@@ -27,6 +27,6 @@
   "remediation": false,
   "retry_count": 0,
   "mode": "continue_automatically",
-  "created_at": "2026-09-24T10:55:57Z",
-  "closed_at": "2026-09-24T10:55:59Z"
+  "created_at": "2026-09-27T11:38:39Z",
+  "closed_at": "2026-09-27T11:38:40Z"
 }

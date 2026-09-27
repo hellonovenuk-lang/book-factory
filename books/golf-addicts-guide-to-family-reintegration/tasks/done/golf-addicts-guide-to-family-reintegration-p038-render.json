@@ -3,7 +3,7 @@
   "task_id": "golf-addicts-guide-to-family-reintegration-p038-render",
   "book_id": "golf-addicts-guide-to-family-reintegration",
   "type": "page_render",
-  "stage": "page_production",
+  "stage": "release_ready",
   "summary": "Render page p038 - Stage Five: Family Occasions",
   "instructions": "Render the page deterministically from its spec and its approved artwork. No generative step is involved: all typography, page numbers and structured content are set by the renderer.\n\nRun: bookfactory render golf-addicts-guide-to-family-reintegration --page p038 --submit",
   "page_id": "p038",
@@ -27,6 +27,6 @@
   "remediation": false,
   "retry_count": 0,
   "mode": "continue_automatically",
-  "created_at": "2026-09-24T10:55:51Z",
-  "closed_at": "2026-09-24T10:55:53Z"
+  "created_at": "2026-09-27T11:38:38Z",
+  "closed_at": "2026-09-27T11:38:39Z"
 }

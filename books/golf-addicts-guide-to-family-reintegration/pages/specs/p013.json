@@ -24,7 +24,7 @@
       "ref-character-support",
       "ref-page-editorial"
     ],
-    "placement": "inline"
+    "placement": "spot"
   },
   "chapter": 2,
   "schema_version": "1.0",
