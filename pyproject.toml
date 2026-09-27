@@ -32,6 +32,7 @@ include = ["bookfactory*"]
 [tool.setuptools.package-data]
 "bookfactory" = [
     "render/assets/*.css",
+    "render/assets/fonts/*",
     "render/templates/**/*",
     "kdp/profiles/*.json",
     "schemas/*.json",

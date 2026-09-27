@@ -30,6 +30,12 @@ DEFAULT_DESIGN = {
 MARGIN_IN = 0.5
 FONT_SUFFIXES = (".ttf", ".otf")
 
+#: Fonts Book Factory ships with, under their own OFL licences (see the
+#: accompanying OFL-*.txt files). A book's own `style/fonts/` copy of the
+#: same filename always wins; this is only a fallback for a book that names
+#: one of these fonts but hasn't copied it in itself.
+BUNDLED_FONTS_DIR = Path(__file__).resolve().parent / "assets" / "fonts"
+
 #: Mirrors the KDP barcode rectangle in bookfactory.core.cover.check_pdf - the
 #: back panel's content is kept entirely to its left, so it can never overlap
 #: the barcode regardless of how tall the back copy grows.
@@ -59,12 +65,15 @@ def _book_font(book, rel_path: str, *, field: str) -> Path:
             f"cover.json design.{field} is outside the book project: {rel_path}",
             remedy="Point it at a font file inside this book, e.g. style/fonts/Title.ttf",
         )
-    if not resolved.is_file():
-        raise ValidationError(
-            f"cover.json design.{field} file not found: {rel_path}",
-            remedy="Add the font file to the book, or remove the design override.",
-        )
-    return resolved
+    if resolved.is_file():
+        return resolved
+    bundled = BUNDLED_FONTS_DIR / Path(rel_path).name
+    if bundled.is_file():
+        return bundled
+    raise ValidationError(
+        f"cover.json design.{field} file not found: {rel_path}",
+        remedy="Add the font file to the book, or remove the design override.",
+    )
 
 
 def _paragraphs(text: str) -> list[str]:

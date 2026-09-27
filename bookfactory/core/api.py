@@ -433,6 +433,139 @@ def _apply_intake_answers(book, answers: dict, *, by: str) -> None:
         cover_module.set_artwork(
             book, cover_module.TEXT_ONLY, by=by,
             reason="cover style 'big_lettering' chosen at intake")
+        _default_big_lettering_design(book, by=by)
+
+
+#: A default palette for a big-lettering cover: a strong dark background with
+#: two contrasting title colours (cycled across the stacked lines) and a
+#: bright author colour. The operator can change any of it in cover/cover.json
+#: - this only gives a working starting point instead of a blank one.
+_BIG_LETTERING_PALETTE = {
+    "background": "#1f3a55",
+    "ink": "#fbf8f1",
+    "accent": "#fbf8f1",
+    "author_colour": "#f6dc45",
+    "title_colours": ["#f6dc45", "#f6dc45", "#fbf8f1", "#ed5a3a"],
+}
+
+#: Anton (condensed display) fits about this many points of width per
+#: character at size 1pt, at the fixed 6x9 front panel width Book Factory
+#: books default to - so `_BIG_LETTERING_WIDTH_CONSTANT / len(line)` gives a
+#: size, in points, that fills that width. Matches the sizes hand-picked for
+#: the Golf and Padel books' big-lettering covers (e.g. an 8-character line
+#: sized at ~108-110pt, a 20-character line at ~44pt).
+_BIG_LETTERING_WIDTH_CONSTANT = 860.0
+_BIG_LETTERING_MIN_SIZE_PT = 28.0
+_BIG_LETTERING_MAX_SIZE_PT = 120.0
+
+
+def _split_title_into_lines(title: str, *, max_lines: int = 4) -> list[str]:
+    """Split a title into up to `max_lines` stacked lines, in reading order.
+
+    Balances the (character) length of each line so no one line runs far
+    longer than the others, the way the Golf and Padel big-lettering covers
+    are split ("The Golf" / "Addict's" / "Guide to Family" / "Reintegration").
+    """
+    words = title.split()
+    if not words:
+        return []
+    n_lines = min(max_lines, len(words))
+    best = None
+    # Classic "minimise the longest line" split: try every way to place
+    # n_lines - 1 breaks between words, keep the one with the smallest
+    # longest-line length (ties broken by the earliest breaks, for stability).
+    from itertools import combinations
+
+    positions = range(1, len(words))
+    for breaks in combinations(positions, n_lines - 1):
+        bounds = (0,) + breaks + (len(words),)
+        candidate = [" ".join(words[bounds[i]:bounds[i + 1]])
+                     for i in range(len(bounds) - 1)]
+        worst = max(len(line) for line in candidate)
+        key = (worst, len(breaks))
+        if best is None or key < best[0]:
+            best = (key, candidate)
+    return best[1] if best else [title]
+
+
+#: Share of the front text box a title line may fill, leaving room for the
+#: renderer's own rounding (a line measured by letter count alone overran the
+#: spine safety margin on a long, wide title).
+_BIG_LETTERING_FILL = 0.9
+
+
+def _front_text_width_pt(book) -> float:
+    """Width of the cover's front text box: trim plus bleed, less its margins."""
+    from bookfactory.core import cover as cover_module
+    from bookfactory.render.cover import MARGIN_IN
+
+    try:
+        dim = cover_module.dimensions(book)
+        trim, bleed = dim["trim_width_in"], dim["bleed_in"]
+    except Exception:
+        trim, bleed = 6.0, 0.125
+    return (trim + bleed - 2 * MARGIN_IN) * 72
+
+
+def _title_line_measurer(book):
+    """A function giving a title line's printed width at 1pt, in the title font.
+
+    Measures the uppercase text (the cover sets title lines in capitals) with
+    the real font, so wide letters are accounted for. None if the font can't be
+    loaded, and the caller falls back to the letter-count estimate.
+    """
+    try:
+        from PIL import ImageFont
+
+        from bookfactory.render.cover import _book_font
+        path = _book_font(book, "style/fonts/Anton-Regular.ttf", field="title_font")
+        font = ImageFont.truetype(str(path), size=1000)
+    except Exception:
+        return None
+    return lambda text: font.getlength(text.upper()) / 1000.0
+
+
+def _default_big_lettering_design(book, *, by: str) -> None:
+    """Write a ready-to-build big-lettering design block, if there isn't one.
+
+    Never overwrites a design the operator or an earlier task already wrote.
+    """
+    from bookfactory.core import cover as cover_module
+
+    data = cover_module.load(book)
+    if data.get("design"):
+        return
+    title = book.state.title
+    lines = _split_title_into_lines(title)
+    if not lines:
+        return
+    palette = _BIG_LETTERING_PALETTE["title_colours"]
+    measure = _title_line_measurer(book)
+    title_lines = []
+    for i, line in enumerate(lines):
+        width_at_1pt = measure(line) if measure else None
+        if width_at_1pt:
+            size = _front_text_width_pt(book) * _BIG_LETTERING_FILL / width_at_1pt
+        else:
+            size = _BIG_LETTERING_WIDTH_CONSTANT / max(1, len(line))
+        size = round(min(_BIG_LETTERING_MAX_SIZE_PT,
+                         max(_BIG_LETTERING_MIN_SIZE_PT, size)), 1)
+        title_lines.append({"text": line, "size_pt": size,
+                            "colour": palette[i % len(palette)]})
+    data["design"] = {
+        "background": _BIG_LETTERING_PALETTE["background"],
+        "ink": _BIG_LETTERING_PALETTE["ink"],
+        "accent": _BIG_LETTERING_PALETTE["accent"],
+        "author_colour": _BIG_LETTERING_PALETTE["author_colour"],
+        "title_font": "style/fonts/Anton-Regular.ttf",
+        "body_font": "style/fonts/Archivo-Regular.ttf",
+        "title_lines": title_lines,
+        "stack_top_in": 1.45,
+        "author_size_pt": 22,
+        "subtitle_size_pt": 16,
+    }
+    cover_module.save(book, data)
+    book.log("cover_design_defaulted", by=by, title_lines=[l["text"] for l in title_lines])
 
 
 def _require_open_intake(book) -> None:
