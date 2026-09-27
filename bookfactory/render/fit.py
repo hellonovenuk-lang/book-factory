@@ -27,7 +27,12 @@ from bookfactory.core import checksums, clock
 from bookfactory.core.errors import RenderError
 from bookfactory.core.models import ApprovalRecord, AssetRecord
 from bookfactory.render import backends as render_backends
-from bookfactory.render.renderer import render_reference_page
+from bookfactory.render.renderer import geometry, render_reference_page
+
+POINTS_PER_INCH = 72.0
+#: A render engine's own rounding can put a word's baseline a fraction of a
+#: point past the exact margin line; that is not the defect this looks for.
+MARGIN_TOLERANCE_PT = 2.0
 
 #: A `chapter_opener` or `text_illustration` page is plain eyebrow/heading/
 #: body prose (`templates/pages/chapter_opener.html.j2`,
@@ -221,6 +226,11 @@ def _check_all_engines(book, spec: dict, engines: list[str], tmp_dir: Path,
                 render_reference_page(book, spec, destination=destination, backend=engine)
             except RenderError as exc:
                 return False, f"{engine}: {exc}"
+            overflow = bottom_margin_overflow_words(book, destination)
+            if overflow:
+                sample = ", ".join(repr(word) for word in overflow[:5])
+                return False, (f"{engine}: text runs into the bottom margin or over the "
+                               f"page number ({sample})")
     finally:
         if stub is not None:
             book.registry.assets.remove(stub)
@@ -264,6 +274,39 @@ def _stand_in_for_illustration(book, spec: dict, placeholder: Path) -> AssetReco
     )
     book.registry.assets.append(stub)
     return stub
+
+
+def bottom_margin_overflow_words(book, pdf_path: Path) -> list[str]:
+    """Words on `pdf_path`'s first page that print below the bottom margin.
+
+    A page whose body copy runs long enough can push its last line or two
+    below `style/design-tokens.json`'s `margins_in.bottom`, overlapping the
+    folio (the printed page number) - a page can still be exactly one PDF
+    page with every word of copy present (so `_assert_single_page` and
+    `_assert_copy_present` both pass it) and still print wrong. This is
+    shared with `bookfactory.qa.technical`, which runs the same check on
+    already-approved page PDFs.
+
+    Ignores the folio itself (a bottom-area word that is only digits) and
+    the running head, which this book's templates (`book.css`) always place
+    near the top margin, so it never falls in the bottom band being checked.
+    Allows `MARGIN_TOLERANCE_PT` of slack for a render engine's own rounding.
+    """
+    import pymupdf
+
+    geo = geometry(book, side="recto")  # top/bottom margins don't mirror by side
+    page_height_pt = geo["page_height_in"] * POINTS_PER_INCH
+    margin_bottom_pt = geo["margin_bottom_in"] * POINTS_PER_INCH
+    threshold = page_height_pt - margin_bottom_pt + MARGIN_TOLERANCE_PT
+
+    doc = pymupdf.open(str(pdf_path))
+    try:
+        words = doc[0].get_text("words")
+    finally:
+        doc.close()
+
+    return [word for (_x0, _y0, _x1, y1, word, *_rest) in words
+            if y1 > threshold and not word.strip().isdigit()]
 
 
 def _placeholder_image(tmp_dir: Path) -> Path:

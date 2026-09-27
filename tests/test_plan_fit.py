@@ -165,6 +165,32 @@ def test_fit_pages_reports_not_checked_when_no_backend_is_available(locked_book,
     assert result["pages"] == pages
 
 
+def test_an_opener_that_spills_past_the_bottom_margin_is_split(locked_book):
+    # A single ordinary-length paragraph under a picture: not long enough to
+    # overflow onto a second PDF page or get clipped (both already caught
+    # elsewhere), but long enough to print its last line below the bottom
+    # margin, over the folio - the defect five real chapter openers shipped
+    # with (task 20.4).
+    paragraph = ("Sentence number filler word count padding text here to occupy space on the "
+                "page and see how much room a single paragraph really needs when set at "
+                "normal body size and how")
+    pages = [{"title": "Stage Seven: Relapse", "type": "chapter_opener", "chapter": 7,
+              "spec": {"type": "chapter_opener", "chapter": 7, "title": "Stage Seven: Relapse",
+                       "copy": {"eyebrow": "Stage Seven", "heading": "Relapse",
+                                "subheading": "Keeping him home.", "body": [paragraph]},
+                       "illustration": {"asset_id": "art-stage-07-opener", "concept": "x",
+                                        "placement": "inline"}}}]
+
+    result = fit_pages(locked_book, pages, backends=AVAILABLE_ENGINES)
+
+    assert [e["status"] for e in result["report"]] == ["split"]
+    opener, continued = result["pages"]
+    assert opener["type"] == "chapter_opener"
+    assert opener["spec"]["copy"]["body"] == []
+    assert continued["type"] == "text_illustration"
+    assert continued["spec"]["copy"]["body"] == [paragraph]
+
+
 def test_an_opener_can_hand_its_only_paragraph_to_the_next_page(locked_book):
     # The Golf Addict's Guide's Stage Seven and Eight openers: one paragraph too
     # long to sit under the picture, so the opener keeps an empty body.

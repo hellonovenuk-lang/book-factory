@@ -6,6 +6,7 @@ from pathlib import Path
 
 from bookfactory.core import checksums
 from bookfactory.qa.findings import LayerResult
+from bookfactory.render.fit import bottom_margin_overflow_words
 
 POINTS_PER_INCH = 72.0
 #: PDF page boxes are floats; a thousandth of an inch of slop is not a defect.
@@ -124,6 +125,15 @@ def check(book) -> LayerResult:
                                  f"{page.page_id}: fonts are not embedded",
                                  page_id=page.page_id,
                                  remedy="KDP rejects interiors with unembedded fonts.")
+
+            overflow = bottom_margin_overflow_words(book, path)
+            if overflow:
+                sample = ", ".join(repr(word) for word in overflow[:5])
+                result.error("technical.bottom_margin",
+                             f"{page.page_id}: body text runs into the bottom margin or over "
+                             f"the page number ({sample})",
+                             page_id=page.page_id,
+                             remedy="Shorten the copy or split the page, then re-render.")
 
     _check_margins(book, result, profile_id)
     _check_page_numbers(book, result)
