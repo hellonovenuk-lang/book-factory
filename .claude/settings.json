@@ -29,7 +29,21 @@
       "Edit(**/assets/approved/**)",
       "Write(**/assets/approved/**)",
       "Edit(**/cover/drafts/*.pdf)",
-      "Write(**/cover/drafts/*.pdf)"
+      "Write(**/cover/drafts/*.pdf)",
+      "Edit(.claude/state/**)",
+      "Write(.claude/state/**)",
+      "Edit(**/.claude/state/**)",
+      "Write(**/.claude/state/**)",
+      "Edit(.claude/hooks/**)",
+      "Write(.claude/hooks/**)",
+      "Edit(**/.claude/hooks/**)",
+      "Write(**/.claude/hooks/**)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)",
+      "Edit(.claude/settings.local.json)",
+      "Write(.claude/settings.local.json)",
+      "Edit(~/.claude/projects/**)",
+      "Write(~/.claude/projects/**)"
     ]
   },
   "hooks": {

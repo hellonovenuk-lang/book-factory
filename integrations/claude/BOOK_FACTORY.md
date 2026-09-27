@@ -65,18 +65,23 @@ When the next task is copy to write, `produce` stops with the code
 `writing` instead of running it. The skill `/write-book <book>`
 (`.claude/skills/write-book/SKILL.md`) repeats: run `produce`; when it stops
 with `writing`, write that one task's copy yourself - brief, writing sample,
-voice bible, manuscript, page plan or page specs - on the operator's
-subscription, with no Claude API call, following the "Writing copy" rules
-below; save it where the task says; run `produce` again. When it stops with
-`picture` (a page illustration in `continue_automatically`; the cover never
-gives this code), and the Higgsfield connector is available, it draws that
-one picture following the "Images" routine below, checks it against the
-references itself, redrawing up to 3 times if it breaks the visual bible,
-then submits it; only if that picture's own approval task is next and its
-`mode` is `continue_automatically` does it also approve, with `bookfactory
-approve <book> <asset-id> --kind asset --draft <vN> --autonomous --by
-claude`, audited as granted under the recorded policy. It reports the
-credits used. This never applies to cover artwork or the full-wrap cover.
+voice bible, manuscript, page plan, page specs or cover copy - on the
+operator's subscription, with no Claude API call, following the "Writing
+copy" rules below; save it where the task says; run `produce` again. When it
+stops with `picture` (a page illustration, or a character reference or
+editorial scene from the visual reference set, all in
+`continue_automatically`; the cover never gives this code), and the
+Higgsfield connector is available, it draws that one picture following the
+"Images" routine below, checks it against the references itself, redrawing
+up to 3 times if it breaks the visual bible, then submits it; only if that
+picture's own approval task is next and its `mode` is
+`continue_automatically` does it also approve, with `bookfactory approve
+<book> <asset-id> --kind asset --draft <vN> --autonomous --by claude`,
+audited as granted under the recorded policy. It reports the credits used.
+The reference set's three typeset samples (`Typeset reference samples`,
+below) are `produce`'s ordinary `not_mechanical` stop, not `picture` - the
+skill still makes them itself, just by rendering rather than drawing. None
+of this ever applies to cover artwork or the full-wrap cover.
 When the next task is a lock whose `mode` is `continue_automatically`, it
 runs that lock itself with `--autonomous --by claude` (`AGENTS.md` quick
 reference): Book Factory refuses it unless the recorded production policy
@@ -86,15 +91,40 @@ the interior is otherwise finished, it likewise runs `bookfactory advance
 <book> --to release_ready`, `bookfactory cover finalize` and `bookfactory
 cover preflight` on their own, but only when the current task asks for
 exactly that command and its `mode` is `continue_automatically` - otherwise
-it stops and reports, same as any other command needing authority. It stops
-and reports at any other stop code. It never approves, rejects, revises,
-changes the picture budget, changes the production policy, touches cover
-artwork or the full-wrap cover's approval, or uses `--force`.
+it stops and reports, same as any other command needing authority. Anything
+left to the operator - the visual lock under `visual_checkpoint`, the
+full-wrap cover's approval, a revise, or re-assembling and re-preflighting
+after a revision - it asks for as a short statement and carries out only
+once the operator's next message plainly is that decision (no question mark,
+no "not"/"wait" and so on): the guard reads that message itself, from Claude
+Code's own record of the conversation, and lets through exactly the command
+it names, signed `--by kieran`, in whatever permission mode the session is
+already in (never a mode switch), only until the operator's next message.
+It stops and reports at any other stop code. It never
+approves, rejects, revises, changes the picture budget, changes the
+production policy, touches cover artwork or the full-wrap cover's approval,
+or uses `--force`, `--autonomous` or `--all-passing` on the operator's
+behalf.
 
 You have shell access, which means you *could* write straight into
 `pages/approved/`, `chmod` a read-only file, or hand-edit `manifest.json`.
 Do not. Every one of those bypasses a check that exists because of a real
 failure. Use the CLI.
+
+Write every book id, page id and asset id out in full in a command that
+needs the operator's authority (`approve`, `lock`, `revise` and the rest).
+The approval guard cannot read a shell variable or a loop, so it blocks
+both, correctly - it is not something to work around. When only the
+operator may make the decision at all, ask them for a short plain
+statement, not a question, and wait: the guard reads the operator's own
+next message straight from Claude Code's session record (never something an
+agent writes) and, only when that message plainly is the decision itself
+(short, no question mark, no "not"/"don't"/"wait" and so on), lets through
+exactly the command it names, signed `--by kieran` - without anyone
+switching the session's permission mode, and only for that one message; a
+helper (subagent) never gets this. It is a guard against mistakes, not a
+lock against a determined attacker. Never ask the operator to switch modes
+instead.
 
 The one legitimate exception is repairing state the system itself cannot
 repair - a hand-corrupted manifest, for instance. Say clearly that you are doing
@@ -151,6 +181,12 @@ spec detail, not a picture: write it as an `activity` page's `blocks`
 (`docs/RENDERING.md`), and it never touches the picture budget in
 `AGENTS.md` section 5a.
 
+The cover's own direction, author line, subtitle and back copy are copy too:
+write them into `cover/cover.json` in the book's voice, the same as any
+other task. Only the artwork and the full-wrap cover's approval stay outside
+what you write or decide (`AGENTS.md` section 9a) - never generate, submit
+or approve `cover-front-artwork`, and never run `cover approve` yourself.
+
 ## Images
 
 Every book has a recorded picture budget (`AGENTS.md` section 5a); read it
@@ -164,10 +200,11 @@ available, generate it yourself:
    references, its `constraints` (`min_pixels` etc.) and its
    `output.destination` / `output.submit_command`. Read
    `style/visual-bible.md` first.
-2. Upload each reference file to Higgsfield: `media_upload` (returns
-   presigned upload URLs), then `curl -X PUT -H "Content-Type: image/png"
-   --data-binary @<file> '<upload_url>'` from the session, then
-   `media_confirm`.
+2. Upload each reference file to Higgsfield from its approved drafts path
+   (`assets/drafts/<asset-id>/...`, never the `approved/` copy itself):
+   `media_upload` (returns presigned upload URLs), then `curl -X PUT -H
+   "Content-Type: image/png" --data-binary @<file> '<upload_url>'` from the
+   session, then `media_confirm`.
 3. `generate_image` with those media ids as `image_references`. On the basic
    plan, Nano Banana Pro works at `2k` (2 credits); `4k` needs the Plus plan.
    Pick an aspect ratio whose width at 2K meets the task's `min_pixels` (a
@@ -209,10 +246,18 @@ page spec as if it existed, and do not advance past it.
 
 ### Typeset reference samples
 
-The visual-lock reference set includes typeset examples - a chapter opener,
-a normal page, a diagnostic/checklist page, the palette sheet - that don't
-need a real page to exist first. Render one from an ordinary page spec and
-submit it as a new draft of the already-registered reference asset with:
+Three of the six reference-set pictures are typeset examples, not drawn
+artwork, and don't need a real page to exist first: `ref-layout-chapter-opener`
+(a chapter opener - illustrated with the already-approved `ref-page-editorial`
+scene), `ref-page-diagnostic` (a diagnostic/checklist activity page, built
+from the locked manuscript's "No. 01" page) and `ref-palette` (the palette
+and type sheet, built straight from `style/design-tokens.json`, no copy to
+write). `ref-page-editorial` itself - the normal page's editorial scene - is
+drawn artwork, made the same way as a page illustration (`produce` gives it
+the `picture` code, above), not a typeset sample.
+
+Render a typeset sample from an ordinary page spec and submit it as a new
+draft of the already-registered reference asset with:
 
 ```bash
 bookfactory reference render <book> <asset-id> --from-file <spec.json> [--dpi 300] [--json]
@@ -220,7 +265,8 @@ bookfactory reference render <book> <asset-id> --from-file <spec.json> [--dpi 30
 
 This is a render, not a generation - no Higgsfield credits, no image model.
 See `docs/RENDERING.md` for the full mechanics and `docs/OPERATOR.md` for
-when to use it.
+when to use it. `produce` has no distinct code for these three (they stop as
+its ordinary `not_mechanical`); `/write-book` still makes them itself.
 
 ## Reporting back
 

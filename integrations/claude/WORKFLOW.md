@@ -49,12 +49,21 @@ on in `.claude/settings.json`:
 
 | Hook | When | What it does |
 |---|---|---|
-| `.claude/hooks/guard-authority.py` | before every shell command | Stops `approve`, `lock`, `policy set`, `reject`, `revise`, `cover approve/finalize`, `advance --force` and similar. In the default permission mode it asks the operator; in auto mode (where a question would be settled without reaching the operator) it blocks the command and Claude asks in the chat instead. It lets through `approve`, `lock` and `cover approve` run with `--autonomous` (not signed with the operator's name), because Book Factory itself refuses those unless the book's recorded production policy authorizes them. It also lets through `bookfactory advance <book> --to release_ready`, `bookfactory cover finalize` and `bookfactory cover preflight` without asking when the book's next task asks for exactly that command and its `mode` is `continue_automatically` (which `/write-book` checks before running one); otherwise those three still ask, same as before. Blocks any write into approved pages, assets or the approved cover |
+| `.claude/hooks/guard-authority.py` | before every shell command | Stops `approve`, `lock`, `policy set`, `reject`, `revise`, `cover approve/finalize`, `advance --force` and similar. In the default permission mode it asks the operator; in auto mode (where a question would be settled without reaching the operator) it blocks the command and Claude asks in the chat instead. It lets through `approve`, `lock` and `cover approve` run with `--autonomous` (not signed with the operator's name), because Book Factory itself refuses those unless the book's recorded production policy authorizes them. It also lets through `bookfactory advance <book> --to release_ready`, `bookfactory cover finalize` and `bookfactory cover preflight` without asking when the book's next task asks for exactly that command and its `mode` is `continue_automatically` (which `/write-book` checks before running one); otherwise those three still ask, same as before. In any permission mode, it also lets through exactly the one command the operator's own last message authorises: it reads that message from Claude Code's own session record (not a file Claude writes), and it counts only when the message *is* the decision - starting with it (optionally after "ok"/"yes"/"please"/"go ahead and"), short, no question mark, and no "not/don't/no/wait/hold/later/after/until" ("Lock the look", "Approve cover v1", "Assemble, preflight and approve cover v1" all work; naming the cover always needs the word "cover"). It runs only the exact bookfactory command(s) that message names, signed `--by kieran`, never chained with anything else, and only until the operator's next message; a helper (subagent) never gets this. This is a guard against mistakes, not a lock against a determined attacker. Blocks any write into approved pages, assets or the approved cover |
 | `.claude/hooks/quick-check.py` | after a file is saved | Checks a `.py` or `.json` file still reads correctly, so a slip is caught at once |
 | `.claude/hooks/session-start.sh` | when a session starts | In web sessions installs what the tests need; if not on `main`, tells Claude to switch to `main` itself (no question to Kieran); shows "Start here" |
 
 The settings file also forbids editing approved pages, assets and the approved
 cover, and pre-approves safe read-only commands so helpers ask less.
+
+**No mode switching.** Because the guard reads the operator's own last
+message and lets its exact decision through in whatever permission mode the
+session is already in, Claude never needs to ask the operator to switch
+modes to get an operator-only command past the guard - and must not ask. If
+a decision needs the operator, ask them to type it as a short plain
+statement (not a question) and wait; only if the guard still refuses does
+the operator run the command themselves, or switch modes for that one
+command.
 
 ## Keeping usage down
 

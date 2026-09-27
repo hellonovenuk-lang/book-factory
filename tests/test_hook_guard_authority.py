@@ -657,3 +657,78 @@ def test_an_option_before_the_operation_cannot_hide_it(command):
 
 def test_a_read_only_cover_command_after_root_is_still_allowed():
     assert decide("bookfactory cover --root /tmp/x dimensions golf") == "allow"
+
+
+# -- false alarm A: a `for` loop over a literal list (Phase 20) ---------------
+#
+# `$a` from `for a in x y` is read once per listed value; the strictest answer
+# stands. Any other variable the guard can't read still asks.
+
+@pytest.mark.parametrize("command", [
+    "for a in ref-x ref-y; do bookfactory approve padel-addicts-guide $a --kind asset "
+    "--draft v1 --autonomous --by claude; done",
+    "for a in ref-x ref-y\ndo\n  bookfactory approve padel-addicts-guide \"${a}\" --kind asset "
+    "--draft v1 --autonomous --by claude\ndone",
+    "for p in p001 p002; do bookfactory render demo-book --page $p --submit; done",
+])
+def test_a_for_loop_over_literal_words_is_read(command):
+    assert decide(command, mode="auto") == "allow"
+
+
+@pytest.mark.parametrize("command", [
+    # one listed value makes it an operator step
+    "for a in ref-x ref-y; do bookfactory approve padel-addicts-guide $a --kind asset "
+    "--draft v1 --autonomous --by kieran; done",
+    "for s in concept voice; do bookfactory lock $s demo-book --by kieran; done",
+    "for a in approve status; do bookfactory $a demo-book p001; done",
+    # a list the guard can't read
+    "for a in $(ls); do bookfactory approve demo-book $a --autonomous --by claude "
+    "--draft $a; done",
+    "for a in *; do bookfactory approve demo-book p001 --autonomous --by claude --note $a; done",
+    # the variable is changed inside the loop
+    "for a in p001; do a=--by; bookfactory approve demo-book p001 --autonomous $a kieran; done",
+    # a variable that isn't the loop's
+    "for a in p001; do bookfactory approve demo-book $b --autonomous --by claude; done",
+    # after the loop has ended, $a is not read from it
+    "for a in p001; do echo $a; done; bookfactory approve demo-book $a --autonomous --by claude",
+])
+def test_other_variables_still_ask(command):
+    assert decide(command) == "ask"
+
+
+def test_a_for_loop_still_denies_writes_into_approved_work():
+    assert decide("for f in p001.pdf p002.pdf; do rm books/demo-book/pages/approved/$f; done") \
+        == "deny"
+    assert decide("for d in pages assets; do cp /tmp/x books/demo-book/$d/approved/; done") \
+        == "deny"
+
+
+# -- false alarm B: working folder inside approved work (Phase 20) ------------
+
+APPROVED_CWD = "/repo/books/demo-book/assets/approved"
+
+
+@pytest.mark.parametrize("command", [
+    "curl -sS -o /tmp/x.png https://example.com/x.png",
+    "python3 -c \"print(1)\"",
+    "cd /tmp && curl -sS -o x.png https://example.com/x.png",
+    "cd /tmp/scratch && echo hi > out.txt",
+    "curl -sS -o ../drafts/hero/hero-v2.png https://example.com/x.png",
+    "sha256sum hero/hero-v1.png > /tmp/sums.txt",
+    "cd && touch notes.txt",
+])
+def test_a_harmless_command_inside_an_approved_folder_is_allowed(command):
+    assert decide(command, cwd=APPROVED_CWD) == "allow"
+
+
+@pytest.mark.parametrize("command", [
+    "curl -sS -o hero/hero-v1.png https://example.com/x.png",
+    "echo x > hero/hero-v1.png",
+    "rm hero/hero-v1.png",
+    "cd /tmp && cd /repo/books/demo-book/pages/approved && rm p001.pdf",
+    "cd hero && rm hero-v1.png",
+    "cd $SOMEWHERE && rm hero-v1.png",
+    "cd ../../pages/approved && rm p001.pdf",
+])
+def test_writes_relative_to_an_approved_folder_are_still_denied(command):
+    assert decide(command, cwd=APPROVED_CWD) == "deny"
