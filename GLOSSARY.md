@@ -47,6 +47,12 @@ a saved routine, e.g. `/handover`. Behind each one is a skill.
 **Commit.** A saved snapshot of changes, with a short message saying what
 changed. Saved on this computer only until it is pushed.
 
+**CRM.** Short for customer relationship management: an app for keeping track of the people, deals and progress of a business. For Book Factory it means one place to see the books, their sales and the ideas board.
+
+**Dashboard.** One screen that shows the important numbers and statuses at a glance, usually as cards and charts.
+
+**Design tokens.** The small set of named choices a design is built from (colours, fonts, spacing, corner rounding), written down once so every screen uses the same ones. It is what makes an app look designed rather than assembled.
+
 **Docs keeper.** The helper that keeps the shared rule and guide files (`AGENTS.md`, `docs/OPERATOR.md`, `integrations/`) accurate. The only helper allowed to edit them.
 
 **Done when.** The checklist, written before work starts, that says in plain
@@ -87,6 +93,8 @@ to do one job. It gets its own instructions and reports back when done.
 
 **Intake.** The 16 starting questions for a new book (who it's for, humour, look, length, exact title, main character details, print colour, cover style...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
 
+**Kanban board.** A board of columns (e.g. Idea, Shortlisted, Writing, Published) with cards you drag from one column to the next as work moves along.
+
 **KDP folder.** The top-level `KDP/` folder: one subfolder per book holding the cover PDF, the interior PDF and `UPLOAD.md`, what to type into each box of Amazon's KDP form.
 
 **Loop.** A program repeating the same steps ("read the next task, do it") until something tells it to stop. `bookfactory produce` is one.
@@ -95,6 +103,8 @@ to do one job. It gets its own instructions and reports back when done.
 out work to helpers, checks their work and saves it.
 
 **MCP (Model Context Protocol).** A standard plug-in that lets an AI like Claude use another service's tools directly in the chat, e.g. Higgsfield for pictures.
+
+**Mockup.** A picture or clickable page showing what an app will look like, made before building it, so the look can be agreed cheaply.
 
 **Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
 
