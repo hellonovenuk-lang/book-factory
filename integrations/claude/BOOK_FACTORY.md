@@ -81,7 +81,9 @@ audited as granted under the recorded policy. It reports the credits used.
 The reference set's three typeset samples (`Typeset reference samples`,
 below) are `produce`'s ordinary `not_mechanical` stop, not `picture` - the
 skill still makes them itself, just by rendering rather than drawing. None
-of this ever applies to cover artwork or the full-wrap cover.
+of this loop applies to the cover: cover artwork is drawn by the separate
+"Cover artwork" routine below (Kieran allowed it 2026-09-27), and its
+approval, with the full-wrap cover's, stays the operator's.
 When the next task is a lock whose `mode` is `continue_automatically`, it
 runs that lock itself with `--autonomous --by claude` (`AGENTS.md` quick
 reference): Book Factory refuses it unless the recorded production policy
@@ -102,7 +104,7 @@ it names, signed `--by kieran`, in whatever permission mode the session is
 already in (never a mode switch), only until the operator's next message.
 It stops and reports at any other stop code. It never
 approves, rejects, revises, changes the picture budget, changes the
-production policy, touches cover artwork or the full-wrap cover's approval,
+production policy, approves cover artwork or the full-wrap cover,
 or uses `--force`, `--autonomous` or `--all-passing` on the operator's
 behalf.
 
@@ -183,9 +185,11 @@ spec detail, not a picture: write it as an `activity` page's `blocks`
 
 The cover's own direction, author line, subtitle and back copy are copy too:
 write them into `cover/cover.json` in the book's voice, the same as any
-other task. Only the artwork and the full-wrap cover's approval stay outside
-what you write or decide (`AGENTS.md` section 9a) - never generate, submit
-or approve `cover-front-artwork`, and never run `cover approve` yourself.
+other task. You may also draw and submit the cover artwork
+(`cover-front-artwork`) through Higgsfield, following "Cover artwork"
+below. Only the approval stays outside what you decide (`AGENTS.md` section
+9a): never approve `cover-front-artwork`, and never run `cover approve`
+yourself.
 
 ## Images
 
@@ -267,6 +271,32 @@ This is a render, not a generation - no Higgsfield credits, no image model.
 See `docs/RENDERING.md` for the full mechanics and `docs/OPERATOR.md` for
 when to use it. `produce` has no distinct code for these three (they stop as
 its ordinary `not_mechanical`); `/write-book` still makes them itself.
+
+### Cover artwork
+
+Kieran allowed Claude to draw cover artwork on 2026-09-27. Draw it with the
+same Higgsfield routine as a page picture (steps 1-7 of "Images", above),
+plus these cover rules:
+
+1. Only when the book's cover is `native` (`cover/cover.json` `artwork`
+   absent or `"native"`). A text-only cover is the operator's recorded
+   choice (`AGENTS.md` section 9a); never switch it yourself.
+2. Read `cover/cover.json`'s `direction` and the approved character
+   references. Run `bookfactory cover dimensions <book>` for the front
+   panel's printed size: the picture's width AND height must both reach
+   300 DPI there (the task's `min_pixels` and `min_height_pixels`). Pick
+   the aspect ratio and resolution to meet both; never upscale.
+3. When the title is set over the picture (`design.title_over_artwork`),
+   ask for a plain, empty band across the top for it. The picture itself
+   carries no text, letters, numbers, logos or signatures (rule 5), and no
+   title.
+4. Submit it with the task's `output.submit_command`, then `bookfactory
+   cover build <book>` and look at both previews against the direction.
+   Redraw if it breaks the visual bible or the title does not read at
+   thumbnail size.
+5. Stop there. Show the operator the previews and the credits used.
+   Approving the artwork and the full wrap (`cover approve`) stays the
+   operator's under every policy, never `--autonomous` from Claude.
 
 ## Reporting back
 

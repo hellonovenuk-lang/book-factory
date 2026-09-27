@@ -288,6 +288,15 @@ and its approval are:
    and the full-wrap cover itself stays the operator's decision (section
    3g); this step only ever writes the copy and typesets the draft.
 
+When the next task is drawing the cover artwork (`cover-front-artwork`, on
+a cover whose `artwork` is `native`), draw it yourself through Higgsfield,
+following "Cover artwork" in `integrations/claude/BOOK_FACTORY.md` (Kieran
+allowed it 2026-09-27): size it to 300 DPI in width and height at the front
+panel's printed size, leave an empty band for the title when the title sits
+over it, no text in the picture, submit it, then build and check the wrap as
+above. Never approve it: show the operator the previews and wait for their
+go-ahead (section 3g).
+
 ## 3f. Run a release step the recorded policy authorizes
 
 Exactly like a lock (section 3a): an agent may run `cover finalize`, `cover
@@ -365,8 +374,8 @@ This applies only to that one message from the operator, never to a helper
   `produce` makes the only page approvals; the skill makes the only picture
   approvals it is authorised for, both under the recorded policy or the
   operator's own typed word.
-- Never generate, submit or approve cover artwork
-  (`cover-front-artwork`), and never approve or finalize the full-wrap
+- Draw and submit cover artwork (`cover-front-artwork`) only as section 3e
+  says; never approve it, and never approve or finalize the full-wrap
   cover other than the `cover finalize` step in 3f - `cover approve` stays
   the operator's under every policy, run only via section 3g.
 - Never write into `approved/` folders or an approved cover, and keep the
