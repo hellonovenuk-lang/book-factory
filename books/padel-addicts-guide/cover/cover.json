@@ -2,7 +2,7 @@
   "required": true,
   "paper": "white",
   "finish": "matte",
-  "artwork": "none",
+  "artwork": "native",
   "direction": "Big lettering, decided at intake: a text-only full-colour gift paperback, white paper, matte, no artwork. Bold stacked title on a deep court-blue field, with padel-ball yellow and coral accents, in the same big-lettering family as the Golf Addict's Guide. The title must read at Amazon thumbnail size.",
   "author": "Kieran Smith",
   "subtitle": "A formal engagement for the man who has made padel his whole personality",
@@ -79,11 +79,5 @@
     "at": "2026-09-26T18:19:28Z",
     "by": "kieran"
   },
-  "preflight": {
-    "status": "pass",
-    "errors": [],
-    "cover_sha256": "cef0f47e0cb00a85eaf51afe3c442d4011872b611a276b73e7e7ae349e7db2d2",
-    "page_count": 80,
-    "run_at": "2026-09-26T18:19:34Z"
-  }
+  "preflight": null
 }

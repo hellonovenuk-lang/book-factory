@@ -237,3 +237,9 @@
 {"at": "2026-09-27T11:38:40Z", "event": "approved", "kind": "page", "id": "p045", "revision": "v2", "path": "pages/approved/p045-stage-six-holidays.pdf", "sha256": "86590b2e2eb7a5c63a5ca3b636f58b627863b13af671405d71669f2656da2889", "by": "produce", "authorization": "autonomous_production_policy:visual_checkpoint"}
 {"at": "2026-09-27T11:38:42Z", "event": "assembled", "label": "interior", "output": "output/interior.pdf", "page_count": 71, "sha256": "49e7897a6fb8728196eb597bf9ce6b331bc64315469614a95861a698c16ba931"}
 {"at": "2026-09-27T11:38:43Z", "event": "preflight_run", "status": "warn", "failures": 0, "warnings": 2, "profile": "kdp-default"}
+{"at": "2026-09-27T20:21:15Z", "event": "cover_artwork_mode_set", "mode": "native", "previous": "none", "by": "kieran", "reason": "Kieran 2026-09-27: Switch the golf and padel covers to artwork (big title plus one family scene)", "superseded": []}
+{"at": "2026-09-27T20:22:11Z", "event": "assembled", "label": "interior", "output": "output/interior.pdf", "page_count": 71, "sha256": "49e7897a6fb8728196eb597bf9ce6b331bc64315469614a95861a698c16ba931"}
+{"at": "2026-09-27T20:22:12Z", "event": "preflight_run", "status": "warn", "failures": 0, "warnings": 2, "profile": "kdp-default"}
+{"at": "2026-09-27T20:24:24Z", "event": "draft_submitted", "kind": "asset", "id": "cover-front-artwork", "revision": "v2", "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v2.png", "sha256": "7033c590357ab23121eeeef022aaabfcd53969a295595f1f4a7958ca6747c111"}
+{"at": "2026-09-27T20:24:24Z", "event": "constraints_failed", "kind": "asset", "id": "cover-front-artwork", "revision": "v2", "failed": ["min_height_pixels"]}
+{"at": "2026-09-27T20:25:58Z", "event": "cover_draft_submitted", "revision": "v4", "path": "cover/drafts/cover-v4.pdf"}

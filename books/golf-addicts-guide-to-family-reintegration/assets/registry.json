@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "book_id": "golf-addicts-guide-to-family-reintegration",
-  "updated_at": "2026-09-27T11:38:43Z",
+  "updated_at": "2026-09-27T20:25:58Z",
   "assets": [
     {
       "asset_id": "art-stage-01-opener",
@@ -461,6 +461,26 @@
           "constraint_failures": [],
           "width": 1696,
           "height": 2528
+        },
+        {
+          "revision": "v2",
+          "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v2.png",
+          "sha256": "7033c590357ab23121eeeef022aaabfcd53969a295595f1f4a7958ca6747c111",
+          "submitted_at": "2026-09-27T20:24:24Z",
+          "source": null,
+          "status": "draft",
+          "note": null,
+          "constraint_failures": [
+            {
+              "constraint": "min_height_pixels",
+              "expected": 2292,
+              "actual": 1908,
+              "message": "Native cover art is 1908px high, requires 2292px",
+              "remedy": "Regenerate natively at print resolution; do not upscale."
+            }
+          ],
+          "width": 1696,
+          "height": 1908
         }
       ],
       "approved": null,

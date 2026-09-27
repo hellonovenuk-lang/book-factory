@@ -2,12 +2,12 @@
   "required": true,
   "paper": "white",
   "finish": "matte",
-  "artwork": "none",
-  "direction": "Bold but muted full-colour gift paperback, white paper, matte. The front shows Dave at the family Sunday roast, mid-swing with a French stick, while Sue, Alfie and Poppy stare at him and Biscuit eyes the roast. Fine ink line with flat muted colour: fairway green, sand, cream, soft navy, small brick-red accents. Open space at the top for the typeset title. The title must read at Amazon thumbnail size.",
+  "artwork": "native",
+  "direction": "Big title plus one family scene (Kieran, 2026-09-27, after Amazon research). Cream page the same colour as the artwork's paper, so the picture sits on it without a box. Top: a brick-red gift strip. Then the title stacked in bold condensed capitals in fairway green and brick red, readable at Amazon thumbnail size. Below: Dave at the family Sunday roast, mid-swing with a French stick, while Sue, Alfie and Poppy stare and Biscuit eyes the roast. Fine ink line, flat muted colour. Author at the foot.",
   "author": "Kieran Smith",
   "back_copy": "Your family has applied for your return.\n\nFor years you have been on a long tour of duty at the golf club. You have missed birthdays, bath times and most of Sunday. You have described the putt on the 7th roughly four hundred times, including once during a minute's silence.\n\nThis is the official Family Reintegration Programme: eight stages, twenty-four activities, a relapse-prevention plan for the first sunny Saturday in April and a certificate at the end, if you earn it.\n\nFor every golfer who pops out for a quick nine and comes back in the dark, and for everyone waiting at home with his tea under cling film.",
-  "artwork_width_in": 5.125,
-  "artwork_height_in": 7.64,
+  "artwork_width_in": 4.0,
+  "artwork_height_in": 4.5,
   "drafts": [
     {
       "revision": "v1",
@@ -69,6 +69,25 @@
         "at": "2026-09-24T14:13:39Z",
         "by": "kieran"
       }
+    },
+    {
+      "revision": "v4",
+      "path": "cover/drafts/cover-v4.pdf",
+      "sha256": "c2311d8bf0a2bfaf042922d9692c9702b1e81989db05f4ba4b9228fb803e7c13",
+      "artwork": "native",
+      "artwork_sha256": "f397a491af8bc12de40faa1d6299fe5e64325bce7fdff6e634e1037b85693cac",
+      "status": "draft",
+      "submitted_at": "2026-09-27T20:25:58Z",
+      "dimensions": {
+        "page_count": 71,
+        "paper": "white",
+        "spine_in": 0.159892,
+        "width_in": 12.409892,
+        "height_in": 9.25,
+        "trim_width_in": 6.0,
+        "trim_height_in": 9.0,
+        "bleed_in": 0.125
+      }
     }
   ],
   "approved": {
@@ -78,50 +97,39 @@
     "at": "2026-09-24T14:13:39Z",
     "by": "kieran"
   },
-  "preflight": {
-    "status": "pass",
-    "errors": [],
-    "cover_sha256": "44d2af9d20eb5aed95c44f53fcb864d167b198ac3b98ac655a23a2a79e599490",
-    "page_count": 71,
-    "run_at": "2026-09-24T14:13:55Z"
-  },
+  "preflight": null,
   "design": {
-    "background": "#1d5c36",
-    "ink": "#fbf8f1",
-    "accent": "#fbf8f1",
-    "author_colour": "#f6dc45",
+    "background": "#f7f4e5",
+    "ink": "#1d5c36",
+    "accent": "#1d5c36",
+    "author_colour": "#1d5c36",
     "title_font": "style/fonts/Anton-Regular.ttf",
     "body_font": "style/fonts/Archivo-Regular.ttf",
     "banner": {
-      "text": "The Family Reintegration Programme",
-      "background": "#ed5a3a",
+      "text": "A gift for golfers, and the people who live with them",
+      "background": "#c4553a",
       "colour": "#fbf8f1"
     },
     "title_lines": [
       {
-        "text": "The Golf",
-        "size_pt": 108.2,
-        "colour": "#f6dc45"
-      },
-      {
-        "text": "Addict's",
-        "size_pt": 110.4,
-        "colour": "#f6dc45"
+        "text": "The Golf Addict's",
+        "size_pt": 48,
+        "colour": "#1d5c36"
       },
       {
         "text": "Guide to Family",
-        "size_pt": 58.6,
-        "colour": "#fbf8f1"
+        "size_pt": 48,
+        "colour": "#1d5c36"
       },
       {
         "text": "Reintegration",
-        "size_pt": 65.5,
-        "colour": "#ed5a3a"
+        "size_pt": 56,
+        "colour": "#c4553a"
       }
     ],
-    "stack_top_in": 1.45,
-    "author_size_pt": 22,
-    "subtitle_size_pt": 17
+    "stack_top_in": 0.95,
+    "author_size_pt": 18,
+    "subtitle_size_pt": 11.5
   },
   "subtitle": "An official programme for bringing him home from the golf club"
 }
