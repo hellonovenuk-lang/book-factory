@@ -9,7 +9,7 @@ moves listed below. Recorded in `../audit.jsonl` as `interior_decision`
 (sha256 `195e5e1e…a65a22a6`). The committed PDF is the approved file:
 rebuilding it gives a new checksum, so don't overwrite it. It replaces v3 for
 upload, paired with the approved 58-page cover
-`../cover/proposals/cover-v3-weekend.pdf` (see `../releases/KDP-UPLOAD.md`).
+`../cover/proposals/cover-v3-weekend.pdf` (see `KDP/runners-guide/UPLOAD.md` at the repository root).
 
 - `interior-v4-proposal.pdf`: the 58-page interior (6 × 9 in, no bleed, black
   and white).
