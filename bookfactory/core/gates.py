@@ -184,8 +184,11 @@ def autonomous_cover_approval_authorized(book) -> GateResult:
 
 def release_ready(book) -> GateResult:
     reasons = []
-    if not book.paths.interior_pdf.is_file():
-        reasons.append("output/interior.pdf has not been assembled")
+    if not book.interior_current():
+        reasons.append(
+            "output/interior.pdf has not been assembled, or is stale: a page was revised "
+            "and re-approved since it was last built"
+        )
     report = book.latest_preflight()
     if report is None:
         reasons.append("KDP preflight has not been run")

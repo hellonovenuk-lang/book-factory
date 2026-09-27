@@ -8,7 +8,7 @@ changes its requirements and this must stay a data edit.
 from __future__ import annotations
 
 from bookfactory import SCHEMA_VERSION
-from bookfactory.core import clock
+from bookfactory.core import checksums, clock
 from bookfactory.core.jsonio import write_json
 from bookfactory.kdp import profiles
 
@@ -202,6 +202,9 @@ def _finalise(book, profile, checks: list[dict], write_report: bool) -> dict:
         "profile": profile["profile_id"],
         "profile_captured_on": profile.get("captured_on"),
         "run_at": clock.timestamp(),
+        #: Which interior this checked, so a re-assembled interior needs a new run.
+        "interior_sha256": (checksums.sha256_file(book.paths.interior_pdf)
+                            if book.paths.interior_pdf.is_file() else None),
         "status": status,
         "failures": len(failures),
         "warnings": len(warnings),

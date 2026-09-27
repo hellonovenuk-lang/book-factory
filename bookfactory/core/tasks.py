@@ -653,7 +653,7 @@ def _latest_qa(book) -> dict | None:
 def _assembly_task(book) -> Task | None:
     if not gates.page_approval_complete(book).ok:
         return None
-    if book.paths.interior_pdf.is_file():
+    if book.interior_current():
         return None
     gate = gates.assembly(book)
     if not gate.ok:
@@ -663,20 +663,26 @@ def _assembly_task(book) -> Task | None:
             summary="Assembly is blocked",
             instructions="Assembly fails closed. Resolve:\n  - " + "\n  - ".join(gate.reasons),
         )
+    stale = book.paths.interior_pdf.is_file()
     return _task(
         book, "assemble",
         type="assembly",
         summary="Assemble the interior PDF",
         instructions=(
-            "Assembly is mechanical: approved pages, in manifest order, checksums verified. "
-            "It never regenerates, rewrites or reinterprets anything.\n\n"
-            f"Run: {_cmd(book, 'assemble', '<book>')}"
+            (
+                "output/interior.pdf is out of date: a page was revised and re-approved "
+                "since it was last assembled. Re-assemble it.\n\n"
+                if stale else
+                "Assembly is mechanical: approved pages, in manifest order, checksums verified. "
+                "It never regenerates, rewrites or reinterprets anything.\n\n"
+            )
+            + f"Run: {_cmd(book, 'assemble', '<book>')}"
         ),
     )
 
 
 def _preflight_task(book) -> Task | None:
-    if not book.paths.interior_pdf.is_file():
+    if not book.interior_current():
         return None
     report = book.latest_preflight()
     if report is not None and report.get("status") != "fail":
@@ -716,7 +722,7 @@ def _release_task(book) -> Task | None:
 
 def _cover_task(book) -> Task | None:
     from bookfactory.core import cover
-    if not book.paths.interior_pdf.is_file() or not cover.required(book):
+    if not book.interior_current() or not cover.required(book):
         return None
     data = cover.load(book)
     refs = book.reference_paths(book.required_reference_ids(), generative_only=True)

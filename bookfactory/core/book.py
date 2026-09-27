@@ -407,10 +407,10 @@ class Book:
             stages.CONTENT_QA: lambda: self.paths.qa_latest.is_file(),
             stages.VISUAL_QA: lambda: self.paths.qa_latest.is_file(),
             stages.TECHNICAL_QA: lambda: self.paths.qa_latest.is_file(),
-            stages.ASSEMBLY: lambda: self.paths.interior_pdf.is_file(),
+            stages.ASSEMBLY: lambda: self.interior_current(),
             stages.KDP_PREFLIGHT: lambda: (self.latest_preflight() or {}).get("status") in
                                           ("pass", "warn"),
-            stages.COVER_PRODUCTION: lambda: self.paths.interior_pdf.is_file(),
+            stages.COVER_PRODUCTION: lambda: self.interior_current(),
             stages.COVER_PREFLIGHT: lambda: cover.preflight_current(self)
                 if cover.required(self) else True,
         }
@@ -991,9 +991,56 @@ class Book:
         return count
 
     def latest_preflight(self) -> dict | None:
+        """The interior preflight report, if it checked the interior assembled now.
+
+        A report run before the latest assembly checked an older
+        `output/interior.pdf`, so it no longer counts (a revised page means
+        re-assembly, and then a fresh preflight).
+        """
         if not self.paths.preflight_report.is_file():
             return None
-        return read_json(self.paths.preflight_report)
+        report = read_json(self.paths.preflight_report)
+        manifest_path = self.paths.interior_pdf.with_suffix(".manifest.json")
+        try:
+            assembled = read_json(manifest_path)
+        except Exception:
+            assembled = {}
+        checked = report.get("interior_sha256")
+        if checked:
+            if assembled.get("output_sha256") and checked != assembled["output_sha256"]:
+                return None
+        elif assembled.get("assembled_at") and \
+                str(report.get("run_at") or "") < str(assembled["assembled_at"]):
+            # A report from before this field existed: fall back to the times.
+            return None
+        return report
+
+    def interior_current(self) -> bool:
+        """Is `output/interior.pdf` still built from exactly the pages approved now?
+
+        Assembly writes `output/interior.manifest.json` alongside the PDF,
+        recording the page ids and checksums it was built from (see
+        `bookfactory/assembly/assemble.py`). A revised-and-reapproved page
+        changes an approved checksum without touching the PDF, so the file
+        existing is not enough: it only counts as current if that recorded
+        list still matches the approved pages now, in the same order. A
+        missing or unreadable manifest (an older assembly, or a hand-edited
+        output directory) cannot be compared, so the interior keeps counting as
+        current the way it always did; only a record that disagrees with the
+        approved pages makes it stale.
+        """
+        if not self.paths.interior_pdf.is_file():
+            return False
+        manifest_path = self.paths.interior_pdf.with_suffix(".manifest.json")
+        if not manifest_path.is_file():
+            return True
+        try:
+            record = read_json(manifest_path)
+        except Exception:
+            return True
+        recorded = [(p.get("page_id"), p.get("sha256")) for p in record.get("pages", [])]
+        current = [(p.page_id, p.approved.sha256 if p.approved else None) for p in self.manifest]
+        return recorded == current
 
     # ------------------------------------------------------------------
     # Reporting

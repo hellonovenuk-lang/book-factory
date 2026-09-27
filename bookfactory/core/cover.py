@@ -319,9 +319,9 @@ def approve(book, revision: str, *, by: str, autonomous: bool = False) -> dict:
         candidate["review_approval"]["authorization"] = authorization
     save(book, data)
     book.log("cover_visual_approved", revision=revision, by=by,
-             provisional=not book.paths.interior_pdf.is_file(), authorization=authorization)
+             provisional=not book.interior_current(), authorization=authorization)
     book.save()
-    if not book.paths.interior_pdf.is_file():
+    if not book.interior_current():
         return {"revision": revision, "by": by, "status": "review_approved",
                 "awaiting": "final_interior_and_cover_finalization",
                 **({"authorization": authorization} if authorization else {})}
@@ -337,8 +337,11 @@ def finalize(book, revision: str) -> dict:
     (`approved.path`), made read-only like any approved artefact - never a
     second stored copy. `output/cover.pdf` is only a regenerable upload copy.
     """
-    if not book.paths.interior_pdf.is_file():
-        raise ValidationError("Assemble the final interior before finalizing the cover")
+    if not book.interior_current():
+        raise ValidationError(
+            "Assemble the final interior before finalizing the cover - it is either "
+            "missing or stale (a page was revised and re-approved since it was last built)"
+        )
     data = load(book)
     candidate = next((d for d in data["drafts"] if d["revision"] == revision), None)
     if not candidate or candidate["status"] != "review_approved" or not candidate.get("review_approval"):
@@ -496,13 +499,18 @@ def release_reasons(book) -> list[str]:
 
 
 def readiness(book) -> dict:
-    interior = (book.paths.interior_pdf.is_file() and
-                (book.latest_preflight() or {}).get("status") in ("pass", "warn"))
+    current = book.interior_current()
+    interior_ok = (current and (book.latest_preflight() or {}).get("status") in ("pass", "warn"))
+    #: "stale" (built once, but from pages no longer approved) is distinct from
+    #: "pending" (never assembled) - both mean not ready, but only "stale" means
+    #: a page was revised and re-approved since the last assembly.
+    stale = book.paths.interior_pdf.is_file() and not current
+    interior_state = "ready" if interior_ok else "stale" if stale else "pending"
     data = load(book)
     cover_state = ("legacy_not_required" if not required(book) else
                    "ready" if preflight_current(book) else
                    "awaiting_final_interior" if any(d["status"] == "review_approved" for d in data.get("drafts", [])) else
                    "awaiting_approval" if data.get("drafts") and not data.get("approved") else
                    "pending_preflight" if data.get("approved") else "in_production")
-    return {"interior": "ready" if interior else "pending", "cover": cover_state,
-            "book": "ready" if interior and not release_reasons(book) else "pending"}
+    return {"interior": interior_state, "cover": cover_state,
+            "book": "ready" if interior_ok and not release_reasons(book) else "pending"}
