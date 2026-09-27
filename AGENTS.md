@@ -455,6 +455,17 @@ be reviewed.
 `reject`, `revise`, `advance --force`, `policy set` and `pictures set` are for
 the operator only. Run them only when the operator asks.
 
+Claude Code also lets one of these commands through, without the operator
+changing how much the session may do on its own, when the operator's own
+last message plainly is that decision (a short statement, not a question,
+naming the command with no "not"/"don't"/"wait" and so on - e.g. "Lock the
+look" or "Approve cover v1"). The guard reads that message itself, from
+Claude Code's own record of the conversation, not from anything an agent
+writes; it runs only the exact command named, signed `--by kieran`, and only
+until the operator's next message. An agent never treats its own guess at
+what the operator meant as this decision - only their own words, read by the
+guard, count. See `integrations/claude/WORKFLOW.md` for the detail.
+
 `policy set <book> <mode> --by <operator>` is how autonomy is granted or
 withdrawn after a book is created. Never run it unless the operator
 explicitly asks for that change, in those terms - not to unblock yourself, not

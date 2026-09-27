@@ -24,6 +24,25 @@ Before Claude runs a Bash command, the hook reads the command and answers:
               release_ready`, `cover finalize`, `cover preflight`) when the
               book's own next task asks for exactly that step with mode
               `continue_automatically` (see `release_step_decision`).
+* **deny**  - it would write, move, copy over or delete what the go-ahead
+              trusts: the session transcripts under `~/.claude/projects/`
+              (or the payload's `transcript_path` folder), or remove the
+              `.claude` folder itself. The guard's own files and the settings
+              stay editable (Kieran, 2026-09-27: option A), so Book Factory can
+              keep improving them; a change to them goes through a safety
+              review before it reaches `main`.
+* **allow** (explicit, with a reason) - a command line made only of
+              `bookfactory` commands that Kieran's own latest typed message
+              clearly decides ("Lock the look", "approve cover v1"). The
+              guard reads that message from Claude Code's transcript, never
+              from a file in the project, and never for a helper (subagent).
+              See "the go-ahead" below for the exact, deliberately strict
+              rules. Writes into approved work stay denied.
+
+This is a guard against mistakes, not a sandbox against a deliberately
+adversarial agent: a determined agent with a shell has ways round any list of
+command patterns (a script run by name, for one). It stops the ordinary slips
+and makes the rules mechanical; it does not replace them.
 
 An **ask** only reaches the operator in the "default" permission mode. In
 auto mode (and bypass or don't-ask modes) Claude Code settles an ask without
@@ -50,6 +69,7 @@ import os
 import re
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 
 ALLOW, ASK, DENY = "allow", "ask", "deny"
@@ -195,7 +215,7 @@ _NEXT_TASK_CODE = (
 
 def _plain(word: str) -> bool:
     """A literal word: no substitution, variable or glob."""
-    return SUBST not in word and "$" not in word and not any(ch in word for ch in "*?[`")
+    return SUBST not in word and "$" not in word and not any(ch in word for ch in "*?[`{}")
 
 
 def _parse_options(words: list[str], value_opts: set[str], flag_opts: set[str]):
@@ -338,6 +358,537 @@ def release_step_decision(sub: str, global_words: list[str], rest: list[str],
         return task is not None and task_asks_for(task, what, book, draft)
     except Exception:
         return False
+
+
+# -- the go-ahead: what Kieran himself typed this turn --------------------------
+#
+# Rule (Phase 20, task 20.1). The guard cannot see the chat, but every
+# PreToolUse payload names Claude Code's own transcript (`transcript_path`, a
+# JSONL file under ~/.claude/projects/, outside the project). A command line
+# that would otherwise ask (and so be blocked outside the default mode) gets an
+# explicit ALLOW only when ALL of these hold:
+#
+#  1. The call is from the main session, never a helper: the payload has no
+#     `agent_id` and no `agent_type`.
+#  2. The newest user entry in the transcript that is not a tool result or a
+#     harness note is Kieran's own typed message: `"type": "user"`,
+#     `"origin": {"kind": "human"}`, not `isMeta`, not `isSidechain`, no
+#     `agentId`, the payload's `sessionId`, at most 60 minutes old. A task
+#     notification, a helper's hand-back or any other non-human user entry
+#     after it means nothing is authorised.
+#  3. The message IS a decision (`parse_decision`): at most 20 words, no "?",
+#     no negator anywhere (don't, not, never, no, wait, hold, stop, cancel,
+#     later, yet, after, until, unless, before, "only if", any "...n't"); after
+#     optional polite leads (ok, okay, yes, yep, great, good, please, "go ahead
+#     and", "go on and") it is a list of clauses joined by "," ";" "." "and"
+#     "then", each starting with a decision verb (lock, approve, revise,
+#     reject, assemble, preflight, finalise/finalize, release/advance, "set
+#     [the] policy", "set [the] picture budget"). A clause of bare ids
+#     ("approve p014 and p015") continues the one before; "thanks" is ignored.
+#     Anything else authorises nothing.
+#  4. Every simple command on the line is a plainly written `bookfactory`
+#     command (the program word itself, no VAR=value, wrapper, variable,
+#     substitution, glob, redirection, pipe or loop), and each is either
+#     read-only (status, next, task, validate, list, policy show, pictures
+#     show) or an authority command a clause covers (`clause_covers`). All the
+#     authority commands name the same book, and a bare "lock" covers one lock.
+#  5. Each authority command uses only the options it really has, spelled in
+#     full; never `--force`, `--all-passing` or `--autonomous`; signed `--by
+#     kieran` where it takes `--by` (advance may be unsigned).
+#
+# Otherwise the ordinary decision for the line stands; the go-ahead never turns
+# a DENY (writes into approved work or the guard's own files) into an allow.
+#
+# This is a guard against mistakes, not a sandbox against a deliberately
+# adversarial agent: a determined agent with a shell has ways round any list of
+# write patterns (a script run by name, say). The protection below (the
+# transcript folder is denied to Bash writes and to Edit/Write) stops the
+# ordinary slips.
+
+GO_AHEAD_MAX_AGE = 60 * 60  # seconds
+GO_AHEAD_CLOCK_SKEW = 60  # a message dated this far in the future still counts
+GO_AHEAD_MAX_WORDS = 20
+TRANSCRIPT_SCAN_LIMIT = 64 * 1024 * 1024  # bytes read backwards at most
+CONFIG_REASON = ("This would change Claude Code's session transcripts "
+                 "(`~/.claude/projects/`), which the go-ahead reads Kieran's messages from, "
+                 "or remove the `.claude` folder. Claude never does that.")
+PATCH_REASON = ("A patch can write any file, including approved work and the guard's own "
+                "files, and the guard can't see which. Make the change with the Edit tool "
+                "instead, or Kieran applies the patch himself.")
+
+# (positional names, options with a value, flags) - exact names only.
+_GO_SPECS = {
+    "approve": (("book", "id"), {"--kind", "--draft", "--by", "--note", "--root"},
+                {"--json", "--dry-run"}),
+    "reject": (("book", "id"), {"--kind", "--draft", "--reason", "--by", "--root"}, {"--json"}),
+    "revise": (("book", "id"), {"--kind", "--reason", "--by", "--root"}, {"--json"}),
+    "lock": (("what", "book"), {"--version", "--by", "--note", "--root"}, {"--json"}),
+    "advance": (("book",), {"--to", "--by", "--note", "--root"}, {"--json"}),
+    "assemble": (("book",), {"--root"}, {"--json"}),
+    "preflight": (("book",), {"--root"}, {"--json"}),
+    "cover approve": (("book",), {"--draft", "--by", "--root"}, {"--json"}),
+    "cover finalize": (("book",), {"--draft", "--root"}, {"--json"}),
+    "cover preflight": (("book",), {"--root"}, {"--json"}),
+    "policy set": (("book", "mode"), {"--by", "--reason", "--root"}, {"--json"}),
+    "pictures set": (("book", "budget"), {"--count", "--by", "--reason", "--root"}, {"--json"}),
+}
+_GO_SIGNED = {"approve", "reject", "revise", "lock", "cover approve", "policy set",
+              "pictures set"}
+_READ_ONLY = {"status", "next", "task", "validate", "list", "policy show", "pictures show"}
+
+# the clause verb each command needs
+_VERB_OF = {"approve": "approve", "reject": "reject", "revise": "revise", "lock": "lock",
+            "assemble": "assemble", "preflight": "preflight", "advance": "release",
+            "cover approve": "approve", "cover finalize": "finalize",
+            "cover preflight": "preflight", "policy set": "policy", "pictures set": "budget"}
+_VERB_WORDS = {"approve": "approve", "lock": "lock", "revise": "revise", "reject": "reject",
+               "assemble": "assemble", "preflight": "preflight", "pre-flight": "preflight",
+               "finalise": "finalize", "finalize": "finalize", "release": "release",
+               "advance": "release"}
+_LEADS = {"ok", "okay", "yes", "yep", "great", "good", "please", "also"}
+_LEAD_PHRASES = (("go", "ahead", "and"), ("go", "on", "and"))
+_COURTESY = {"thanks", "thank", "you", "cheers", "please", "ta"}
+_NEGATORS = {"don't", "dont", "not", "never", "no", "nope", "wait", "hold", "stop", "cancel",
+             "later", "yet", "after", "until", "unless", "before", "cannot", "without",
+             "instead", "except", "but", "if", "once", "when", "whenever", "provided",
+             "assuming", "maybe", "perhaps", "might", "should", "would", "could"}
+_SEPARATORS = {",", ";", ".", "and", "then", "&"}
+_COVER_WORDS = {"cover", "wrap"}
+_LOCK_OBJECTS = {"look": "visual", "visual": "visual", "visuals": "visual", "style": "visual",
+                 "concept": "concept", "brief": "concept", "voice": "voice",
+                 "manuscript": "manuscript"}
+# words that name nothing in particular: a clause of only these is "bare"
+_FILLER = {"all", "them", "it", "these", "those", "the", "this", "that", "they", "both",
+           "pages", "page", "pictures", "picture", "assets", "asset", "drafts", "draft",
+           "everything", "ones", "one", "of", "remaining", "rest", "now", "too", "as", "well",
+           "in", "for", "to", "a", "an", "please", "each", "every", "latest", "new",
+           "interior", "book", "its", "their"}
+# words a clause may carry after its verb, by verb (besides filler, ids, drafts and
+# book names); any other word means the message isn't a plain decision
+_CLAUSE_WORDS = {
+    "lock": set(_LOCK_OBJECTS),
+    "approve": _COVER_WORDS,
+    "preflight": _COVER_WORDS,
+    "finalize": _COVER_WORDS,
+    "release": {"ready"},
+    "policy": {"autonomous", "visual_checkpoint", "visual", "checkpoint", "checkpointed"},
+    "budget": {"limit", "unlimited", "chapter_openers", "chapter", "openers"},
+}
+_ID_WORD_RE = re.compile(r"^(p[0-9]+[a-z]?|[a-z0-9]+([-_][a-z0-9]+)+)$")
+_PAGE_ID_RE = re.compile(r"^p[0-9]+[a-z]?$")
+_WORD_RE = re.compile(r"[a-z0-9][a-z0-9_'-]*|[?,;.!&]")
+
+
+def project_dir() -> Path:
+    return Path(os.environ.get("CLAUDE_PROJECT_DIR") or _PROJECT_DIR)
+
+
+def transcript_roots() -> list[Path]:
+    """Where Claude Code keeps session transcripts."""
+    roots = [Path.home() / ".claude" / "projects"]
+    config = os.environ.get("CLAUDE_CONFIG_DIR")
+    if config:
+        roots.append(Path(config) / "projects")
+    return roots
+
+
+def known_books() -> set[str]:
+    try:
+        return {p.name for p in (project_dir() / "books").iterdir() if p.is_dir()}
+    except Exception:
+        return set()
+
+
+def _lines_backwards(path: Path):
+    """The file's lines, last first, reading at most TRANSCRIPT_SCAN_LIMIT bytes."""
+    with open(path, "rb") as fh:
+        fh.seek(0, os.SEEK_END)
+        pos = fh.tell()
+        buf = b""
+        read = 0
+        while pos > 0 and read < TRANSCRIPT_SCAN_LIMIT:
+            step = min(1 << 16, pos)
+            pos -= step
+            read += step
+            fh.seek(pos)
+            buf = fh.read(step) + buf
+            parts = buf.split(b"\n")
+            buf = parts[0]
+            for line in reversed(parts[1:]):
+                if line.strip():
+                    yield line
+        if pos == 0 and buf.strip():
+            yield buf
+
+
+def _is_tool_result(entry: dict) -> bool:
+    content = entry.get("message", {}).get("content") if isinstance(entry.get("message"),
+                                                                   dict) else None
+    if "toolUseResult" in entry:
+        return True
+    return isinstance(content, list) and any(
+        isinstance(b, dict) and b.get("type") == "tool_result" for b in content)
+
+
+def _typed_text(entry: dict) -> str | None:
+    message = entry.get("message")
+    if not isinstance(message, dict) or message.get("role", "user") != "user":
+        return None
+    content = message.get("content")
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        texts = []
+        for block in content:
+            if not isinstance(block, dict) or block.get("type") not in ("text", "image"):
+                return None
+            if block.get("type") == "text":
+                if not isinstance(block.get("text"), str):
+                    return None
+                texts.append(block["text"])
+        return "\n".join(texts) if texts else None
+    return None
+
+
+def operator_message(payload: dict, now=None) -> str | None:
+    """Kieran's latest typed message this turn, from the transcript, or None."""
+    try:
+        from datetime import datetime, timezone
+        if "agent_id" in payload or "agent_type" in payload:
+            return None  # a helper: never gets a go-ahead
+        session_id = payload.get("session_id")
+        path_text = payload.get("transcript_path")
+        if not isinstance(session_id, str) or not session_id \
+                or not isinstance(path_text, str) or not path_text.startswith("/"):
+            return None
+        path = Path(path_text)
+        real = Path(os.path.realpath(path))
+        if path.is_symlink() or not real.is_file() or real.suffix != ".jsonl":
+            return None
+        roots = [Path(os.path.realpath(r)) for r in transcript_roots()]
+        if not any(real.is_relative_to(r) for r in roots) or "subagents" in real.parts:
+            return None
+        for line in _lines_backwards(real):
+            try:
+                entry = json.loads(line)
+            except ValueError:
+                return None
+            if not isinstance(entry, dict) or entry.get("type") != "user":
+                continue
+            if _is_tool_result(entry):
+                continue
+            origin = entry.get("origin")
+            if entry.get("isSidechain") or entry.get("agentId") \
+                    or entry.get("isCompactSummary"):
+                return None
+            if origin is None and entry.get("isMeta"):
+                continue  # a harness note inside the turn (skill text, image note)
+            if not isinstance(origin, dict) or origin.get("kind") != "human" \
+                    or entry.get("isMeta") or entry.get("sessionId") != session_id:
+                return None  # the newest turn wasn't started by Kieran typing
+            stamp = entry.get("timestamp")
+            if not isinstance(stamp, str):
+                return None
+            recorded = datetime.fromisoformat(stamp.replace("Z", "+00:00"))
+            if recorded.tzinfo is None:
+                return None
+            age = ((now or datetime.now(timezone.utc)) - recorded).total_seconds()
+            if age < -GO_AHEAD_CLOCK_SKEW or age > GO_AHEAD_MAX_AGE:
+                return None
+            return _typed_text(entry)
+        return None
+    except Exception:
+        return None
+
+
+# -- reading the message as a decision ------------------------------------------
+
+class Clause:
+    def __init__(self, verb: str):
+        self.verb = verb
+        self.words: list[str] = []
+
+    @property
+    def cover(self) -> bool:
+        return bool(_COVER_WORDS & set(self.words))
+
+    def drafts(self) -> set[str]:
+        return {w for w in self.words if _DRAFT_RE.match(w)}
+
+
+def _message_tokens(text: str) -> list[str]:
+    text = text.lower().replace("’", "'").replace("‘", "'")
+    # a new line or a dash between words ends a clause ("Lock the look - actually leave it")
+    text = re.sub(r"\n+|\s[-–—]+\s|[–—]", " . ", text)
+    return _WORD_RE.findall(text)
+
+
+def book_hints() -> dict[str, str]:
+    """Short names Kieran uses for a book ("golf", "padel") -> its id, when unambiguous."""
+    hints: dict[str, list[str]] = {}
+    for book in known_books():
+        first = book.split("-")[0]
+        if first == "the" and "-" in book:
+            first = book.split("-")[1]
+        hints.setdefault(first, []).append(book)
+    return {word: ids[0] for word, ids in hints.items() if len(ids) == 1}
+
+
+def parse_decision(text: str) -> tuple[list[Clause], set[str]] | None:
+    """(clauses, book ids typed) when the whole message is a decision, else None."""
+    if not isinstance(text, str):
+        return None
+    text = unicodedata.normalize("NFKC", text).replace("’", "'").replace("‘", "'")
+    if "?" in text or any(ord(ch) > 127 for ch in text):
+        return None  # a question, or characters the rules below can't read reliably
+    tokens = _message_tokens(text.strip())
+    # "go ahead and lock ..." is a polite lead, not two clauses joined by "and"
+    k = 0
+    while k < len(tokens):
+        for phrase in _LEAD_PHRASES:
+            if tuple(tokens[k:k + len(phrase)]) == phrase:
+                tokens[k:k + len(phrase)] = ["please"]
+                break
+        k += 1
+    words = [t for t in tokens if t not in _SEPARATORS and t not in "?!"]
+    if not words or len(words) > GO_AHEAD_MAX_WORDS:
+        return None
+    joined = " " + " ".join(words) + " "
+    if _NEGATORS & set(words) or any(w.endswith("n't") for w in words) \
+            or " do not " in joined or " only if " in joined:
+        return None
+    books = set(words) & known_books()
+    hints = book_hints()
+    books |= {hints[w] for w in words if w in hints}
+
+    # split into segments at separators
+    segments: list[list[str]] = [[]]
+    for t in tokens:
+        if t in _SEPARATORS or t == "!":
+            segments.append([])
+        else:
+            segments[-1].append(t)
+    segments = [s for s in segments if s]
+
+    def strip_leads(seg: list[str]) -> list[str]:
+        changed = True
+        while seg and changed:
+            changed = False
+            if seg[0] in _LEADS:
+                seg, changed = seg[1:], True
+            for phrase in _LEAD_PHRASES:
+                if tuple(seg[:len(phrase)]) == phrase:
+                    seg, changed = seg[len(phrase):], True
+        return seg
+
+    def verb_of(seg: list[str]) -> tuple[str, list[str]] | None:
+        if not seg:
+            return None
+        if seg[0] in _VERB_WORDS:
+            return _VERB_WORDS[seg[0]], seg[1:]
+        if seg[0] == "set":
+            rest = seg[1:]
+            if rest[:1] == ["the"]:
+                rest = rest[1:]
+            if rest[:1] == ["policy"]:
+                return "policy", rest[1:]
+            if rest[:2] in (["picture", "budget"], ["pictures", "budget"]):
+                return "budget", rest[2:]
+        return None
+
+    clauses: list[Clause] = []
+    for n, seg in enumerate(segments):
+        # leads ("ok, please ...") only before the first clause and at a clause's start
+        seg = strip_leads(seg)
+        if not seg:
+            if n == 0 or clauses:
+                continue
+            return None
+        found = verb_of(seg)
+        if found is not None:
+            clause = Clause(found[0])
+            clause.words = found[1]
+            clauses.append(clause)
+            continue
+        if all(w in _COURTESY for w in seg):
+            continue
+        if clauses and all(_ID_WORD_RE.match(w) or _DRAFT_RE.match(w) or w in books
+                           for w in seg):
+            clauses[-1].words += seg  # "approve p014 and p015"
+            continue
+        return None  # a clause that isn't a decision: the whole message counts for nothing
+
+    # after its verb, a clause may name only what the decision is about
+    for clause in clauses:
+        allowed = _FILLER | _CLAUSE_WORDS.get(clause.verb, set())
+        for w in clause.words:
+            if w in allowed or w in books or w in hints or _DRAFT_RE.match(w) \
+                    or _ID_WORD_RE.match(w) or w.isdigit():
+                continue
+            return None  # "tomorrow", "or v2", "i guess", "a list of problems" ...
+    return (clauses, books) if clauses else None
+
+
+def parse_authority_command(args: list[str]):
+    """(what, positionals, options) for a plainly written authority command, or None."""
+    k, global_words = 0, []
+    while k < len(args) and args[k].startswith("-"):
+        if args[k] == "--root" and k + 1 < len(args):
+            global_words += args[k:k + 2]
+            k += 2
+            continue
+        global_words.append(args[k])
+        k += 1
+    if k >= len(args):
+        return None
+    parsed = _parse_options(global_words, {"--root"}, {"--json"})
+    if parsed is None or parsed[1]:
+        return None
+    roots = parsed[0].get("--root", [])
+    sub, rest = args[k], args[k + 1:]
+    what = sub
+    if sub in ("cover", "policy", "pictures"):
+        j = 0
+        while j < len(rest) and rest[j].startswith("-"):
+            if rest[j] == "--root" and j + 1 < len(rest):
+                roots.append(rest[j + 1])
+                j += 2
+            elif rest[j] == "--json" or rest[j].startswith("--root="):
+                if rest[j].startswith("--root="):
+                    roots.append(rest[j].split("=", 1)[1])
+                j += 1
+            else:
+                return None
+        if j >= len(rest):
+            return None
+        what, rest = f"{sub} {rest[j]}", rest[j + 1:]
+    if what in _READ_ONLY:
+        return what, {}, {}
+    if what not in _GO_SPECS:
+        return None
+    names, value_opts, flag_opts = _GO_SPECS[what]
+    parsed = _parse_options(rest, value_opts, flag_opts)
+    if parsed is None:
+        return None
+    opts, positional = parsed
+    if len(positional) != len(names):
+        return None
+    if any(len(v) > 1 for v in opts.values()):
+        return None
+    roots += opts.get("--root", [])
+    if len(set(roots)) > 1:
+        return None
+    pos = dict(zip(names, positional))
+    if not _BOOK_ID_RE.match(pos["book"]) or ".." in pos["book"]:
+        return None
+    return what, pos, {name: v[0] for name, v in opts.items()}
+
+
+def clause_covers(clause: Clause, what: str, pos: dict, opts: dict) -> str | None:
+    """None if `clause` doesn't authorise this command; else "named", "bare" or "ok"."""
+    if clause.verb != _VERB_OF[what]:
+        return None
+    words = clause.words
+    drafts = clause.drafts()
+    if what in ("approve", "reject", "revise"):
+        if clause.cover:
+            return None  # "approve cover v1" is the full-wrap cover, not a page
+        item = pos["id"].lower()
+        if drafts and opts.get("--draft") not in drafts:
+            return None
+        others = [w for w in words if not _DRAFT_RE.match(w) and w not in known_books()]
+        if item in others:
+            return "named"
+        if all(w in _FILLER for w in others):
+            # a bare "approve" / "revise": never cover artwork
+            return None if item.startswith("cover") else "bare"
+        return None
+    if what in ("cover approve", "cover finalize"):
+        if what == "cover approve" and not clause.cover:
+            return None
+        if drafts and opts.get("--draft") not in drafts:
+            return None
+        return "ok"
+    if what == "cover preflight":
+        return "ok" if clause.cover else None
+    if what == "preflight":
+        return None if clause.cover else "ok"
+    if what == "assemble":
+        return "ok"
+    if what == "advance":
+        return "ok" if opts.get("--to") == "release_ready" else None
+    if what == "lock":
+        objects = {_LOCK_OBJECTS[w] for w in words if w in _LOCK_OBJECTS}
+        if objects:
+            return "named" if pos["what"] in objects else None
+        others = [w for w in words if w not in known_books()]
+        return "bare" if all(w in _FILLER for w in others) else None
+    if what == "policy set":
+        text = " ".join(words).replace("visual checkpoint", "visual_checkpoint")
+        named = set(text.split()) & {"checkpointed", "visual_checkpoint", "autonomous"}
+        return "ok" if named == {pos["mode"]} else None
+    if what == "pictures set":
+        text = " ".join(words).replace("chapter openers", "chapter_openers")
+        named = set(text.split()) & {"chapter_openers", "limit", "unlimited"}
+        if named != {pos["budget"]}:
+            return None
+        if "--count" in opts and opts["--count"] not in words:
+            return None
+        return "ok"
+    return None
+
+
+def go_ahead_line(raw: str, message: str) -> bool:
+    """Whether Kieran's `message` authorises the whole command line `raw` (rule above)."""
+    try:
+        decision = parse_decision(message)
+        if decision is None:
+            return False
+        clauses, books = decision
+        nested: list[str] = []
+        heredocs: list[tuple[int, str]] = []
+        toks = tokenize(raw, nested, heredocs)
+        if nested or heredocs or any(t.kind == "redir" for t in toks):
+            return False
+        if any(t.kind == "op" and t.text not in (";", "&&") for t in toks):
+            return False  # pipes, ||, &, subshells: not a plain list of commands
+        authorised: list[tuple[str, dict, str]] = []
+        for cmd in split_simple(toks, heredocs):
+            if not cmd.words or cmd.words[0] != "bookfactory" \
+                    or not all(_plain(w) for w in cmd.words):
+                return False
+            parsed = parse_authority_command(cmd.words[1:])
+            if parsed is None:
+                return False
+            what, pos, opts = parsed
+            if what in _READ_ONLY:
+                continue
+            by = opts.get("--by")
+            if what in _GO_SIGNED or by is not None:
+                if by is None or by.strip().lower() not in OPERATOR_NAMES:
+                    return False
+            if books and pos["book"] not in books:
+                return False
+            kinds = [c for c in (clause_covers(cl, what, pos, opts) for cl in clauses) if c]
+            if not kinds:
+                return False
+            kind = "named" if "named" in kinds else kinds[0]
+            authorised.append((what, pos, kind))
+        if not authorised:
+            return False
+        if len({pos["book"] for _, pos, _ in authorised}) != 1:
+            return False  # one book per go-ahead
+        bare_locks = [a for a in authorised if a[0] == "lock" and a[2] == "bare"]
+        if bare_locks and sum(1 for a in authorised if a[0] == "lock") > 1:
+            return False  # a bare "lock" covers exactly one lock
+        return True
+    except Exception:
+        return False
+
+
+def _quote(prompt: str) -> str:
+    text = " ".join(prompt.split())
+    return text if len(text) <= 80 else text[:77] + "..."
 
 
 # -- tokenizer ---------------------------------------------------------------
@@ -657,6 +1208,58 @@ def is_protected(path: str, cwd_protected: bool = False) -> bool:
     return False
 
 
+# The guard's own files, Claude Code's settings and the session transcripts.
+_CONFIG_RE = re.compile(
+    r"(^|/)\.claude/+projects(/|$)"                  # the session transcripts
+    r"|(^|/)\.claude/*$"                             # the .claude folder itself
+)
+_CONFIG_TEXT_RE = re.compile(r"\.claude/+projects|\.jsonl\b")
+_CONFIG_NAMES = {".claude", "projects"}
+
+
+def _path_text(path: str) -> str:
+    p = path.replace(SUBST, "") if path else ""
+    if p.startswith("-") and "=" in p:
+        p = p.split("=", 1)[1]  # --option=path
+    if p.startswith("-"):
+        return ""
+    return os.path.expanduser(p) if p.startswith("~") else p
+
+
+def is_config_path(path: str, extra_dirs: tuple[str, ...] = ()) -> bool:
+    """Whether `path` is (in) the guard's own files, settings or the transcripts."""
+    p = _path_text(path)
+    if not p:
+        return False
+    norm = os.path.normpath(p)
+    if _CONFIG_RE.search(p) or _CONFIG_RE.search(norm):
+        return True
+    if norm.startswith("/"):
+        for root in [str(r) for r in transcript_roots()] + list(extra_dirs):
+            root = os.path.normpath(root)
+            if norm == root or norm.startswith(root + "/"):
+                return True
+    # a glob that could reach them: .claude/st*, .cl*/hooks ...
+    return any(ch in p for ch in "*?[") and any(
+        s in p for s in (".cl", "proj"))
+
+
+def is_config_parent(path: str) -> bool:
+    """Whether `path` is a folder that holds `.claude` or the transcripts (the project,
+    home, `~/.claude`), where a copied or moved folder could land as one of them."""
+    p = _path_text(path)
+    if not p:
+        return False
+    norm = os.path.normpath(p)
+    if norm in (".", "..") or basename(norm) == ".claude":
+        return True
+    if not norm.startswith("/"):
+        return False
+    home = os.path.normpath(str(Path.home()))
+    return norm in ("/", home, os.path.normpath(str(project_dir()))) \
+        or norm == os.path.join(home, ".claude")
+
+
 def _args(words: list[str]) -> list[str]:
     """Non-option words (after `--` everything counts)."""
     out, rest = [], False
@@ -676,11 +1279,21 @@ _PY_WRITE_RE = re.compile(
     r"|write_text|write_bytes|\.touch\s*\(|unlink|rmtree|os\.remove|os\.rename|os\.replace"
     r"|\.rename\s*\(|\.replace\s*\(|chmod|chown|shutil\.(copy|move)|copyfile|truncate"
     r"|\bunlink\b|\brename\b|File\.write|fs\.write|writeFile|rmSync|unlinkSync"
+    r"|open\s*\(?\s*[\w$]*\s*,\s*['\"]\s*[+>]"     # perl: open(F, ">path")
+    r"|print[^;\n]*>\s*['\"]"                        # awk: print "x" > "path"
 )
+# more ways code can change a file, used only for the guard's own files
+_CONFIG_WRITE_RE = re.compile(r"\bjson\.dump\b|makedirs|mkdir|syswrite|\bsystem\s*\(|subprocess"
+                              r"|os\.popen|copytree|\bexec\b|\beval\b|symlink|\blink\b")
 
 
 def code_writes_protected(code: str) -> bool:
     return bool(_PROTECTED_TEXT_RE.search(code) and _PY_WRITE_RE.search(code))
+
+
+def code_writes_config(code: str) -> bool:
+    return bool(_CONFIG_TEXT_RE.search(code)
+                and (_PY_WRITE_RE.search(code) or _CONFIG_WRITE_RE.search(code)))
 
 
 def code_calls_authority(code: str) -> bool:
@@ -856,13 +1469,45 @@ def analyze_bookfactory_args(args: list[str], shown: str = "bookfactory",
     return ALLOW, ""
 
 
+_NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+MAX_LOOP_RUNS = 64  # more combinations than this: leave the variable unread (asks)
+_LOOP_OPENERS = {"for", "while", "until", "select"}
+_KEYWORD_PREFIX = {"do", "then", "else", "elif", "{", "(", "!"}
+
+
+def _keyword(words: list[str]) -> tuple[str, int]:
+    """The first word after any `do`/`then`/`{` ..., and its index."""
+    k = 0
+    while k < len(words) and words[k] in _KEYWORD_PREFIX:
+        k += 1
+    return (words[k], k) if k < len(words) else ("", k)
+
+
+def _loop_var_reassigned(name: str, raw: str) -> bool:
+    """Whether the loop variable might be changed inside the command (then don't expand)."""
+    return bool(re.search(rf"(^|[^A-Za-z0-9_$]){name}(\[[^]]*\])?\+?=", raw)
+                or re.search(r"\b(read|declare|typeset|local|export|mapfile|readarray|getopts"
+                             r"|let|unset)\b|printf\s+-v", raw))
+
+
+def _substitute(word: str, name: str, value: str) -> str:
+    return re.sub(rf"\$\{{{name}\}}|\${name}(?![A-Za-z0-9_])", lambda _m: value, word)
+
+
 class Analyzer:
-    def __init__(self, raw: str, cwd: str | None):
+    def __init__(self, raw: str, cwd: str | None, config_dirs: tuple[str, ...] = ()):
         self.raw = raw
         self.decision = ALLOW
         self.reason = ""
-        self.cwd = cwd
+        self.session_cwd = cwd
+        self.config_dirs = config_dirs  # the transcript's folder, from the payload
+        # where the shell is now (changed by cd); None once the guard can't tell
+        self.cwd = os.path.normpath(cwd) if cwd and cwd.startswith("/") else None
         self.cwd_protected = bool(cwd and is_protected(cwd.rstrip("/") + "/"))
+        self.cwd_config = bool(cwd and self.is_config(cwd.rstrip("/") + "/"))
+
+    def is_config(self, path: str) -> bool:
+        return is_config_path(path, self.config_dirs)
 
     def release_context(self, cmd: Simple, words: list[str]) -> dict | None:
         """Where a plainly-run `bookfactory` would find its books, or None.
@@ -875,7 +1520,7 @@ class Analyzer:
         if cmd.run_by_other or _CWD_CHANGE_RE.search(self.raw):
             return None
         prefix = cmd.words[:len(cmd.words) - len(words)]
-        context: dict = {"cwd": self.cwd, "bookfactory_root": None}
+        context: dict = {"cwd": self.session_cwd, "bookfactory_root": None}
         for w in prefix:
             if not _ASSIGN_RE.match(w) or not _plain(w):
                 return None
@@ -900,12 +1545,127 @@ class Analyzer:
         toks = tokenize(text, nested, heredocs)
         for inner in nested:
             self.shell(inner, depth + 1)
+        # `for NAME in literal words; do ...; done`: a `$NAME` inside the loop
+        # is read once per listed value, and the strictest answer stands.
+        # Anything else the guard can't resolve stays unread (and so asks).
+        loops: list[tuple[str, list[str] | None] | None] = []
         for cmd in split_simple(toks, heredocs):
+            key, k = _keyword(cmd.words)
+            if key == "done" and loops:
+                loops.pop()
+            if key in _LOOP_OPENERS:
+                binding = None
+                w = cmd.words[k:]
+                if key == "for" and len(w) >= 4 and w[2] == "in" and _NAME_RE.match(w[1]):
+                    values = w[3:]
+                    ok = all(_plain(v) and v for v in values) \
+                        and not _loop_var_reassigned(w[1], self.raw)
+                    binding = (w[1], values if ok else None)
+                loops.append(binding)
+            self.simple_expanded(cmd, depth, [b for b in loops if b is not None])
+
+    def simple_expanded(self, cmd: Simple, depth: int, loops) -> None:
+        text = " ".join(cmd.words + [t for _, t in cmd.redirs])
+        used, seen = [], set()
+        for name, values in reversed(loops):  # the innermost loop's variable wins
+            if name in seen:
+                continue
+            seen.add(name)
+            if values is not None and re.search(rf"\$\{{{name}\}}|\${name}(?![A-Za-z0-9_])",
+                                                text):
+                used.append((name, values))
+        runs = 1
+        for _, values in used:
+            runs *= len(values)
+        if not used or runs > MAX_LOOP_RUNS:
             self.simple(cmd, depth)
+            return
+        combos: list[dict[str, str]] = [{}]
+        for name, values in used:
+            combos = [{**c, name: v} for c in combos for v in values]
+        for combo in combos:
+            copy = Simple()
+            copy.stdin_text, copy.piped_in = cmd.stdin_text, cmd.piped_in
+            copy.run_by_other = cmd.run_by_other
+
+            def sub(word: str) -> str:
+                for name, value in combo.items():
+                    word = _substitute(word, name, value)
+                return word
+            copy.words = [sub(w) for w in cmd.words]
+            copy.redirs = [(op, sub(t)) for op, t in cmd.redirs]
+            self.simple(copy, depth)
+
+    def _resolve(self, path: str) -> str | None:
+        """`path` as an absolute path from where the shell is now, or None."""
+        p = path.replace(SUBST, "")
+        if p.startswith("-") and "=" in p:
+            p = p.split("=", 1)[1]
+        if not p or p.startswith(("-", "~", "$")):
+            return None
+        if p.startswith("/"):
+            return os.path.normpath(p)
+        return os.path.normpath(os.path.join(self.cwd, p)) if self.cwd else None
 
     def deny_if(self, path: str) -> None:
-        if is_protected(path, self.cwd_protected):
+        if not path or path == SUBST:
+            return
+        resolved = self._resolve(path)
+        relative = not path.replace(SUBST, "").startswith(("/", "~"))
+        if is_protected(path, self.cwd_protected and self.cwd is None) \
+                or (resolved is not None and is_protected(resolved)):
             self.note(DENY, APPROVED_REASON)
+        if self.is_config(path) or (resolved is not None and self.is_config(resolved)) \
+                or (relative and self.cwd is None and self.cwd_config):
+            self.note(DENY, CONFIG_REASON)
+
+    def deny_if_destroyed(self, path: str) -> None:
+        """For rm/mv/chmod...: also the folders that hold the guard's files."""
+        self.deny_if(path)
+        resolved = self._resolve(path)
+        if is_config_parent(resolved if resolved is not None else path):
+            self.note(DENY, CONFIG_REASON)
+
+    def deny_config_landing(self, target: str, sources: list[str], recursive: bool) -> None:
+        """Copying or moving a folder into the project, home or `.claude` could land it
+        as `.claude/hooks`, `.claude/settings.json` ... : deny a recursive copy there,
+        or a source named like one of them."""
+        resolved = self._resolve(target)
+        if not is_config_parent(resolved if resolved is not None else target):
+            return
+
+        def suspicious(s: str) -> bool:
+            name = basename(s.replace(SUBST, "").rstrip("/"))
+            if name in _CONFIG_NAMES or name in (".", "..", "") or not _plain(s):
+                return True
+            return name.endswith(".jsonl")
+        if recursive or any(suspicious(s) for s in sources):
+            self.note(DENY, CONFIG_REASON)
+
+    def change_dir(self, target: str | None) -> None:
+        """Follow a `cd`, so relative paths after it are judged from the right folder."""
+        if target is None or target == "~" or target.startswith("~/"):
+            home = os.path.expanduser(target or "~")
+            target = home if home.startswith("/") else None
+        if target is None or target == "-" or not _plain(target):
+            self.cwd = None  # can't tell: keep the old flags
+            return
+        if target.startswith("/"):
+            self.cwd = os.path.normpath(target)
+        elif self.cwd is not None:
+            self.cwd = os.path.normpath(os.path.join(self.cwd, target))
+        else:
+            if is_protected(target.rstrip("/") + "/"):
+                self.cwd_protected = True
+            if self.is_config(target.rstrip("/") + "/"):
+                self.cwd_config = True
+            return
+        self.cwd_protected = is_protected(self.cwd + "/")
+        self.cwd_config = self.is_config(self.cwd + "/")
+
+    def in_config_parent(self) -> bool:
+        """The shell is in the project root, home, `.claude` - or the guard can't tell."""
+        return self.cwd is None or is_config_parent(self.cwd) or self.cwd_config
 
     def simple(self, cmd: Simple, depth: int) -> None:
         for op, target in cmd.redirs:
@@ -1017,6 +1777,8 @@ class Analyzer:
                             "(AGENTS.md section 3). Kieran must confirm."))
         if code_writes_protected(code):
             self.note(DENY, APPROVED_REASON)
+        if code_writes_config(code):
+            self.note(DENY, CONFIG_REASON)
 
     def shell_program(self, args: list[str], cmd: Simple, depth: int) -> None:
         k = 0
@@ -1042,13 +1804,27 @@ class Analyzer:
     def writes(self, head: str, args: list[str], words: list[str]) -> None:
         plain = _args(args)
         if head in ("cd", "pushd"):
-            if plain and is_protected(plain[0].rstrip("/") + "/"):
-                self.cwd_protected = True
+            self.change_dir(plain[0] if plain else None)
             return
-        if head in ("rm", "rmdir", "unlink", "chmod", "chown", "chgrp", "touch", "truncate",
-                    "shred", "chattr", "setfacl", "mv", "tee", "srm", "wipe"):
+        if head == "popd":
+            self.change_dir("-")
+            return
+        if head in ("rm", "rmdir", "unlink", "chmod", "chown", "chgrp", "shred", "chattr",
+                    "setfacl", "srm", "wipe"):
+            for a in plain:
+                self.deny_if_destroyed(a)
+            return
+        if head in ("touch", "truncate", "tee"):
             for a in plain:
                 self.deny_if(a)
+            return
+        if head == "mv":
+            for a in plain[:-1]:
+                self.deny_if_destroyed(a)
+            if plain:
+                self.deny_if(plain[-1])
+            if len(plain) > 1:
+                self.deny_config_landing(plain[-1], plain[:-1], recursive=False)
             return
         if head in ("cp", "rsync", "install", "ln", "scp", "link", "ditto", "gcp"):
             target = None
@@ -1057,10 +1833,16 @@ class Analyzer:
                     target = args[k + 1]
                 elif a.startswith("--target-directory="):
                     target = a.split("=", 1)[1]
+            recursive = head in ("rsync", "ditto") or any(
+                a in ("--recursive", "--archive") or (a.startswith("-") and not a.startswith("--")
+                                                      and any(f in a[1:] for f in "rRa"))
+                for a in args)
             if target is not None:
                 self.deny_if(target)
+                self.deny_config_landing(target, plain, recursive)
             elif plain:
                 self.deny_if(plain[-1])
+                self.deny_config_landing(plain[-1], plain[:-1], recursive)
             if head == "rsync" and any(a.startswith("--remove-source") for a in args):
                 for a in plain:
                     self.deny_if(a)
@@ -1072,6 +1854,43 @@ class Analyzer:
             if inplace:
                 for a in plain:
                     self.deny_if(a)
+            return
+        if head in ("awk", "gawk", "mawk", "nawk"):
+            inplace = any(a == "inplace" for a in args)
+            for k, a in enumerate(args):
+                if a in ("-f", "-v", "-F", "-i", "-l", "-e", "--file", "--source"):
+                    continue
+                if inplace:
+                    self.deny_if(a)
+            program = next((a for k, a in enumerate(args) if not a.startswith("-")
+                            and (k == 0 or args[k - 1] not in ("-f", "-v", "-F", "-i", "-l"))),
+                           "")
+            self.code(program)
+            return
+        if head in ("sort", "shuf", "uniq"):
+            for k, a in enumerate(args):
+                if a == "-o" and k + 1 < len(args):
+                    self.deny_if(args[k + 1])
+                elif a.startswith("--output="):
+                    self.deny_if(a.split("=", 1)[1])
+                elif a.startswith("-o") and len(a) > 2 and not a.startswith("--"):
+                    self.deny_if(a[2:])
+            if head == "uniq" and len(plain) > 1:
+                self.deny_if(plain[-1])
+            return
+        if head in ("split", "csplit"):
+            if len(plain) > 1:
+                self.deny_if(plain[-1])
+            return
+        if head in ("vi", "vim", "nvim", "ex", "ed", "view", "nano", "emacs", "pico", "joe",
+                    "micro", "kak", "hx"):
+            # an editor opening (or `-c 'w! path'` writing) a protected file
+            for a in args:
+                for piece in re.split(r"[\s|]+", a):
+                    self.deny_if(piece.lstrip("+"))
+            return
+        if head == "patch" and not any(a in ("--dry-run", "-C", "--check") for a in args):
+            self.note(DENY, PATCH_REASON)
             return
         if head == "dd":
             for a in args:
@@ -1086,22 +1905,57 @@ class Analyzer:
                                                      "reset", "switch", "apply", "stash"):
                 for a in _args(args[sub_k + 1:]):
                     self.deny_if(a)
+            if sub_k < len(args) and args[sub_k] in ("apply", "am") and not any(
+                    a in ("--check", "--stat", "--numstat", "--summary") for a in args):
+                self.note(DENY, PATCH_REASON)
             return
         if head == "find" and any(a == "-delete" or a in ("-exec", "-execdir", "-ok", "-okdir")
                                   and k + 1 < len(args) and basename(args[k + 1]) in FIND_WRITERS
                                   for k, a in enumerate(args)):
             if any("approved" in a or "cover/drafts" in a for a in args):
                 self.note(DENY, APPROVED_REASON)
+            if any(self.is_config(a) or is_config_parent(a) for a in _args(args)[:1]) \
+                    or any(_CONFIG_TEXT_RE.search(a) for a in args):
+                self.note(DENY, CONFIG_REASON)
             return
-        if head in ("unzip", "tar", "bsdtar", "7z", "patch", "wget", "curl"):
+        if head in ("unzip", "tar", "bsdtar", "7z", "7za", "gtar", "cpio", "wget", "curl"):
             # extracting / downloading into a protected directory
+            destination = None
+            # each tool's own destination option ("-o" means overwrite to unzip)
+            dest_opts = {"unzip": ("-d",), "curl": ("-o", "--output"),
+                         "wget": ("-O", "-P", "--output-document", "--directory-prefix")
+                         }.get(head, ("-C", "--directory"))
             for k, a in enumerate(args):
                 if a in ("-d", "-C", "--directory", "-o", "-O", "--output", "-P") \
                         and k + 1 < len(args):
                     self.deny_if(args[k + 1])
+                    if a in dest_opts:
+                        destination = args[k + 1]
                 elif a.startswith(("--directory=", "--output=", "-o")) and len(a) > 2 \
                         and "=" in a:
                     self.deny_if(a.split("=", 1)[1])
+                    if a.split("=", 1)[0] in dest_opts:
+                        destination = a.split("=", 1)[1]
+                elif head in ("7z", "7za") and a.startswith("-o") and len(a) > 2:
+                    destination = a[2:]
+                    self.deny_if(destination)
+            extracting = head in ("unzip", "cpio") or (head in ("7z", "7za") and args[:1] == ["x"]) \
+                or (head in ("tar", "bsdtar", "gtar") and args and (
+                    "--extract" in args or "--get" in args
+                    or any(a.startswith("-") and not a.startswith("--") and "x" in a[1:]
+                           for a in args)
+                    or (not args[0].startswith("-") and "x" in args[0])))
+            if extracting:
+                # an archive can hold `.claude/hooks/...`: not into the project root,
+                # home or `.claude` (nor anywhere the guard can't place)
+                if destination is None:
+                    if self.in_config_parent():
+                        self.note(DENY, CONFIG_REASON)
+                else:
+                    resolved = self._resolve(destination)
+                    if is_config_parent(resolved if resolved is not None else destination) \
+                            or self.is_config(destination):
+                        self.note(DENY, CONFIG_REASON)
 
 
 def decide(payload) -> tuple[str, str]:
@@ -1117,13 +1971,23 @@ def decide(payload) -> tuple[str, str]:
     if not isinstance(command, str):
         return ASK, UNREADABLE_REASON
     cwd = payload.get("cwd") if isinstance(payload.get("cwd"), str) else None
-    analyzer = Analyzer(command, cwd)
+    transcript = payload.get("transcript_path")
+    config_dirs = (os.path.dirname(transcript),) \
+        if isinstance(transcript, str) and transcript.startswith("/") else ()
+    analyzer = Analyzer(command, cwd, config_dirs)
     analyzer.shell(command)
+    if analyzer.decision == ASK:
+        # Only an ask can become a go-ahead; a deny never does.
+        message = operator_message(payload)
+        if message is not None and go_ahead_line(command, message):
+            return ALLOW, f"Kieran typed the go-ahead this turn: '{_quote(message)}'"
     return analyzer.decision, analyzer.reason
 
 
 def emit(decision: str, reason: str, mode=None) -> None:
     if decision == ALLOW:
+        if reason:  # let through on Kieran's go-ahead: say so, in every mode
+            _write_decision(ALLOW, reason)
         return
     if decision == ASK and mode not in ASK_MODES:
         decision, reason = DENY, reason + BLOCKED_SUFFIX
@@ -1133,6 +1997,10 @@ def emit(decision: str, reason: str, mode=None) -> None:
 def _write(decision: str, reason: str) -> None:
     if decision == ALLOW:
         return
+    _write_decision(decision, reason)
+
+
+def _write_decision(decision: str, reason: str) -> None:
     sys.stdout.write(json.dumps({
         "hookSpecificOutput": {
             "hookEventName": "PreToolUse",

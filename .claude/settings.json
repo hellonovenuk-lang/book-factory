@@ -29,7 +29,9 @@
       "Edit(**/assets/approved/**)",
       "Write(**/assets/approved/**)",
       "Edit(**/cover/drafts/*.pdf)",
-      "Write(**/cover/drafts/*.pdf)"
+      "Write(**/cover/drafts/*.pdf)",
+      "Edit(~/.claude/projects/**)",
+      "Write(~/.claude/projects/**)"
     ]
   },
   "hooks": {
