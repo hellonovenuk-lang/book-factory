@@ -637,6 +637,32 @@ submit, and approve the new version. The old one moves to
 This is the only way to change approved work, and that is the point: fixing a
 typo on page 58 must never cause page 58's artwork to be redrawn.
 
+Once a revised page is approved, the assembled interior is **stale**: it was
+built from the old page. `bookfactory status` shows the interior as "stale"
+and `bookfactory next` asks you to assemble again, then run a fresh KDP
+check; `produce` does both for you. An old KDP check no longer counts after
+re-assembly.
+
+QA also measures every approved page for text that runs into the bottom
+margin or over the page number (`technical.bottom_margin`), and the page plan's
+fit test uses the same check. A chapter opener with a long first paragraph is
+the usual culprit; the fix is a revision that splits the page or uses the
+smaller `spot` picture placement.
+
+### Deciding things by typing (Claude Code)
+
+When Claude needs a decision that only you can make - locking the look,
+approving the cover, revising a page, re-assembling after a revision - it
+asks you to type it. Type the decision itself, short, starting with the verb:
+"Lock the look", "Approve cover v1", "Revise p014 p033", "Assemble, preflight
+and approve cover v1". The approval guard reads your message from Claude
+Code's own record of the conversation and lets exactly those commands through,
+signed with your name, whatever permission mode the session is in - so you
+never need to switch modes. A question, or a message with "not", "don't",
+"wait", "later", "if" or "once" in it, decides nothing, and it only lasts until
+your next message. Helpers never get it. It is a guard against mistakes, not a
+lock against a determined attacker.
+
 ## When something looks wrong
 
 ```bash

@@ -16,7 +16,7 @@ Claude API call. Pictures use the operator's Higgsfield credits (say how many
 were spent, per `integrations/claude/BOOK_FACTORY.md` "Images").
 
 Never ask the operator to switch Claude Code's permission mode. The go-ahead
-slip (section 3g) is how his own typed decisions reach commands that need his
+(section 3g) is how his own typed decisions reach commands that need his
 authority, in whatever mode the session is already in.
 
 ## 0. Ask once
@@ -321,8 +321,12 @@ mode to get one of these through: Book Factory's own safety check reads the
 operator's own next message from the conversation itself, never from
 anything Claude writes, and, only when that message plainly is the decision
 itself, lets the exact command it names through in whatever mode the session
-is already in. A short statement, not a question, counts; one containing
-"not", "don't", "no", "wait", "hold", "later", "after" or "until" does not.
+is already in. The message must start with the decision (optionally after
+"ok", "yes", "please" or "go ahead and"), be short (20 words at most), and
+have no question mark; one containing "not", "don't", "no", "wait", "hold",
+"later", "after", "until", "if" or "once" decides nothing. It lasts only
+until his next message, and it is a guard against mistakes, not a lock
+against a determined attacker.
 This applies only to that one message from the operator, never to a helper
 (subagent), and naming the cover always needs the word "cover" in it.
 
@@ -341,10 +345,12 @@ This applies only to that one message from the operator, never to a helper
    interior is still current - a revised page marks it stale until it is
    reassembled. Before the release step, read the QA findings for
    `technical.bottom_margin` and fix any page it names.
-4. If the guard still refuses the command (for example because this session
-   started before the go-ahead hook existed, so it never loaded), say so
-   plainly and give the fallback: the operator runs it themselves, or
-   switches to the default permission mode for that one command.
+4. If the guard still refuses the command (for example because the
+   operator's message didn't read as a plain decision, or the session
+   record couldn't be read), say so plainly, quote the wording that works
+   ("Approve cover v1"), and ask him to type it again. Only if that still
+   fails, give the fallback: he runs it himself, or switches to the default
+   permission mode for that one command.
 5. Go back to the loop (step 1 of section 2).
 
 ## 4. Never
@@ -354,7 +360,7 @@ This applies only to that one message from the operator, never to a helper
   exactly `bookfactory approve ... --kind asset` for a picture the skill
   itself drew or typeset and checked (section 3d), exactly `cover finalize`
   or `cover preflight` when section 3f's conditions hold, and exactly the
-  one command a go-ahead slip authorises (section 3g). Never `--force`.
+  commands the operator's own go-ahead names (section 3g). Never `--force`.
   Never run `lock` or `advance` except as section 3a, 3f or 3g says.
   `produce` makes the only page approvals; the skill makes the only picture
   approvals it is authorised for, both under the recorded policy or the

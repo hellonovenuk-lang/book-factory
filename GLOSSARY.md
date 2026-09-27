@@ -16,6 +16,8 @@ ChatGPT, anything else). The most important file for behaviour.
 
 **Big lettering cover.** A cover style choice at intake (`cover_style: big_lettering`): a text-only cover, bold type and no picture, recorded the same way as `cover artwork --mode none`.
 
+**Bottom margin check.** A QA check (`technical.bottom_margin`), also used by the page plan's fit test, that flags any page whose text runs into the bottom margin or over the page number.
+
 **Block.** One item in an `activity` page's `blocks` list (e.g. a tick list, a score box, a gauge, a cut-out card) - the renderer sets every block as real type, never a picture.
 
 **Branch.** A separate line of changes in a repository. `main` is the real
@@ -61,6 +63,8 @@ own files yet.
 page it builds: rendering it in both backends to see whether the copy
 actually fits, splitting an overrun chapter opener or text page at a
 paragraph break and naming an overrun activity page instead of splitting it.
+
+**Go-ahead.** Kieran's own short typed decision ("Lock the look", "Approve cover v1"). The approval guard reads it from Claude Code's record of the conversation and lets exactly those commands through, signed with his name, without switching permission modes; it lasts until his next message and never applies to a helper.
 
 **GitHub.** The website that stores the repository online. Work isn't safe
 until it is pushed there.
@@ -118,6 +122,10 @@ can see them.
 
 **Repository (repo).** The project folder with its full history of changes.
 Book Factory's lives on GitHub.
+
+**Reference set.** The six pictures that fix a book's look before any page is drawn: the main character, the supporting characters, a scene, and three typeset samples (chapter opener, activity page, palette and type). Locking them is the "look lock".
+
+**Stale interior.** An assembled interior built from pages that have since been revised and re-approved. `status` shows it as "stale" and `next` asks for re-assembly and a fresh KDP check.
 
 **Sample page (reference render).** A one-page render of an ordinary page spec, made with `bookfactory reference render` to show a typeset reference (chapter opener, normal page, checklist page, palette sheet) before any real page exists. It is never added to the page plan.
 
