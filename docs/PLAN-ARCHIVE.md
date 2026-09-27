@@ -712,3 +712,128 @@ before its page plan. Planned 2026-09-24, agreed by Kieran.
 |---|---|---|---|
 | 2026-09-24 | 16 | Checker: full suite (junit), demo build in throwaway copy, both backends, docs vs code | 535 passed, 2 skipped, 0 failed; demo Release Ready; both backends ran; one doc wording fix applied |
 | 2026-09-24 | 16 | Test-drive: Golf references rendered with reference render; palette sheet overflow found by eye and fixed; new fit test fails on the old template, passes on the new | 4 samples approved under policy; visual checkpoint waits for Kieran |
+
+## Phase 17: Page plan straight from the manuscript (done)
+
+Goal: one command reads a locked manuscript and writes the whole page plan
+(openers, text pages, activity pages built from blocks), fit-tests every page
+in both engines and splits text pages that overflow. The Golf plan needed a
+one-off scratch script. The command writes a plan file only; loading it into a
+book stays `plan --from-file`. Planned and agreed with Kieran 2026-09-24.
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 17.1 ✓ | Parse the manuscript into plan pages: front matter, stage openers, text pages, `No. NN · Kind: Title` activities with their blocks (ticks, checklist, table, score, case note, cut-out, gauge) | builder, tricky (Opus: many block kinds must match the renderer's schema) | `bookfactory/core/manuscript_plan.py`, `tests/test_manuscript_plan.py` |
+| 17.2 ✓ | Fit test: render each planned page in both engines; split an overflowing text page at a paragraph break; name an activity page that won't fit | builder, routine (Sonnet) | `bookfactory/render/fit.py`, `tests/test_plan_fit.py` |
+| 17.3 ✓ | `bookfactory plan <book> --from-manuscript --out <plan.json>`: writes the plan file and a fit report, changes nothing in the book | main (small once 17.1 and 17.2 were in) | `bookfactory/core/api.py`, `bookfactory/cli/main.py`, `tests/test_cli_plan_from_manuscript.py` |
+| 17.4 ✓ | Document the manuscript layout the command reads; `/write-book` uses it for the page plan | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/claude/BOOK_FACTORY.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
+| 17.5 ✓ | Check: full suite, demo build in a throwaway copy | checker, routine (Sonnet) | none |
+| 17.6 ✓ | Test-drive on a copy of the Golf book: compare with its real 71-page plan | main | `PLAN.md` |
+
+**Test-drive:** 17.6 runs the command on a scratch clone of the Golf Addict's Guide and compares its output with the real plan, page for page.
+
+**Done when:**
+- [x] One command turns the Golf manuscript into a page plan that matches the real one page for page, with any differences listed and explained. (71 pages each; same types and order; split pages match word for word. Differences: the three split-off pages are titled "(continued)" not "(introduction)", and "About this programme" is back matter with no chapter, not chapter 8.)
+- [x] Every page in that plan fits on its page in both engines, or the command names the ones that don't. (Golf: 68 fit, 3 openers split, none too long. The test-drive found that a one-paragraph opener could not be split; fixed so an opener can hand its only paragraph on, as Golf's Stage Seven and Eight did; test added.)
+- [x] `pytest` passes, and `scripts/build_demo_book.py` passes in a throwaway copy.
+- [x] Everything is pushed to `main` and checked there.
+
+## Phase 18: Big decisions at intake (done)
+
+Goal: starting a book also asks the exact title, the main character's age,
+family and look, colour or black-and-white printing, and the cover style (big
+lettering, picture, or let Book Factory decide); confirming intake sets the
+book up from those answers, audited, and the writing tasks show them as fixed.
+From the Golf Addict's Guide retrospective (late changes to Dave's age, the
+cover style and black and white cost rework and credits). Planned and agreed
+with Kieran 2026-09-26; he asked for every task at once.
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 18.1 ✓ | Four new questions (`title`, `main_character_details`, `print_colour`, `cover_style`) with validation and drafting | builder, routine (Sonnet) | `bookfactory/core/intake.py`, `tests/test_intake_draft.py`, `tests/test_autonomous.py`, `tests/test_intake_questions.py` |
+| 18.2 ✓ | Confirming intake applies them: title, `format.colour`, text-only cover for `big_lettering`, each audited | builder, routine (Sonnet) | `bookfactory/core/api.py`, `tests/test_intake_apply.py` |
+| 18.3 ✓ | Writing tasks (brief, character and visual references, visual bible, cover) list the decisions as fixed at intake | builder, routine (Sonnet) | `bookfactory/core/tasks.py`, `tests/test_tasks_intake_decisions.py` |
+| 18.4 ✓ | Guides and `/write-book` | docs keeper, routine (Sonnet) | `AGENTS.md`, `docs/OPERATOR.md`, `integrations/chatgpt/AUTONOMOUS_PRODUCTION.md`, `.claude/skills/write-book/SKILL.md`, `GLOSSARY.md` |
+| 18.5 ✓ | Check: full suite, demo build in a throwaway copy, docs vs code | checker, routine (Sonnet) | none |
+| 18.6 ✓ | Test-drive: a test book in a scratch copy, intake drafted and confirmed; title, printing and cover set with no hand edits | main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** 18.6 starts a book from an idea in a scratch copy, drafts intake with the new questions marked unclear, confirms them, then reads `book.json`, `cover/cover.json`, the audit log and the brief task.
+
+**Done when:**
+- [x] Starting a new book asks the four new questions along with the others.
+- [x] After confirming, the book already has the right title, colour or black-and-white printing and cover type, all in the audit log, with no hand edits.
+- [x] The writing steps show those decisions, so the brief, character and cover follow them.
+- [x] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+
+## Phase 19: Pictures in the loop, and the last steps on their own (done)
+
+Goal: `/write-book` carries a book through its pictures and its final release
+steps without stopping, whenever the recorded production policy allows. Part A:
+`produce` stops with a new `picture` code at a page picture it can't draw;
+`/write-book` then draws it through Higgsfield (the routine in
+`integrations/claude/BOOK_FACTORY.md`), checks it against the references,
+submits it, and approves a page picture with `--autonomous` only when the task's
+mode is continue_automatically; cover artwork and the full-wrap cover stay
+Kieran's. Part B: the guard lets `advance --to release_ready`, `cover finalize`
+and `cover preflight` through when the book's next task asks for exactly that
+command and its mode is continue_automatically. Kieran asked for both
+2026-09-26 ("Start both").
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 19.1 ✓ | `produce` stops with `picture` at a page-picture task in continue_automatically (not cover artwork) | builder, routine (Sonnet) | `bookfactory/core/produce.py`, `tests/test_produce_picture.py` |
+| 19.2 ✓ | Guard: allow `advance --to release_ready`, `cover finalize`, `cover preflight` when the next task names that command in continue_automatically; ask otherwise | builder, tricky (Opus: a safety hook, must never widen past the policy) | `.claude/hooks/guard-authority.py`, `tests/test_hook_guard_authority.py` |
+| 19.3 ✓ | `/write-book`: the picture loop (budget, Higgsfield, own check, submit, `--autonomous` page-picture approval, credits report) and the release steps | docs keeper, routine (Sonnet) | `.claude/skills/write-book/SKILL.md` |
+| 19.4 ✓ | Rules and guides for both parts | docs keeper, routine (Sonnet) | `AGENTS.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`, `docs/OPERATOR.md`, `GLOSSARY.md` |
+| 19.5 ✓ | Check: full suite, demo build in a throwaway copy, docs vs code, guard decisions | checker, routine (Sonnet) | none |
+| 19.6 ✓ | Test-drive in a scratch copy: `produce` stops with `picture`; the guard allows the three end steps only when the task asks | main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** 19.6, in a scratch copy. The first live Higgsfield picture inside the loop is on the next real book (it spends Kieran's credits).
+
+**Done when:**
+- [x] `produce` says "picture" when the next job is a page picture, and `/write-book` knows how to draw, check, submit and (only when the policy allows) approve it, never the cover.
+- [x] In auto mode, a book whose policy allows it goes through `cover finalize`, `cover preflight` and release ready without stopping; anything else still asks.
+- [x] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+
+## Phase 20: A smoother `/write-book` (done)
+
+Goal: fix what made the first real `/write-book` run (the padel book) clunky.
+Kieran's own typed go-ahead lets his decisions run in auto mode, so he never
+switches modes; `/write-book` asks once how often to check in, handles the
+reference set and the cover itself, and Book Factory catches the two faults
+that slipped through (text running over the page number, an out-of-date
+interior after a revision). Kieran asked for all of it 2026-09-26 ("Make all
+changes, /fan-out responsibilities").
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 20.1 ✓ | Go-ahead slip: a UserPromptSubmit hook records Kieran's typed words; the guard allows exactly the matching operator command signed `--by kieran` in any mode, for that turn only; Claude can never write the slip. Also fix two false alarms (a shell loop variable, a working folder inside `approved/`) | builder, tricky (Opus: a safety hook, must never let Claude grant itself authority) | `.claude/hooks/record-go-ahead.py`, `.claude/hooks/guard-authority.py`, `.claude/settings.json`, `.gitignore`, `tests/test_hook_go_ahead.py`, `tests/test_hook_guard_authority.py` |
+| 20.2 ✓ | `produce` gives `picture` for drawn visual references too (not typeset samples, not the cover); book ids drop apostrophes and a leading "the" | builder, routine (Sonnet) | `bookfactory/core/produce.py`, `bookfactory/core/ids.py`, `tests/test_produce_picture.py`, `tests/test_ids_slug.py` |
+| 20.3 ✓ | A revised page makes the assembled interior and its preflight stale: `status` says so and `next` asks for assembly again | builder, routine (Sonnet) | `bookfactory/core/book.py`, `bookfactory/core/gates.py`, `bookfactory/core/tasks.py`, `bookfactory/core/cover.py`, `tests/test_stale_interior.py` |
+| 20.4 ✓ | The fit test and QA flag body text that runs into the bottom margin or over the page number | builder, routine (Sonnet) | `bookfactory/render/fit.py`, `bookfactory/qa/technical.py`, `tests/test_plan_fit.py`, `tests/test_qa_bottom_margin.py` |
+| 20.5 ✓ | Cover fonts ship with Book Factory (no copying from Golf) and a big-lettering cover starts with a ready design block | builder, routine (Sonnet) | `bookfactory/render/cover.py`, `bookfactory/render/assets/fonts/*`, `bookfactory/core/api.py`, `tests/test_cover_design_defaults.py` |
+| 20.6 ✓ | `/write-book` and the guides: one check-in choice at the start, the reference set end to end, the cover step, the go-ahead slip, no shell variables | docs keeper, routine (Sonnet), after 20.1 to 20.5 | `.claude/skills/write-book/SKILL.md`, `AGENTS.md`, `integrations/claude/BOOK_FACTORY.md`, `integrations/claude/WORKFLOW.md`, `docs/OPERATOR.md`, `GLOSSARY.md` |
+| 20.7 ✓ | Check: full suite, demo build in a throwaway copy, docs vs code, guard safety review; then test-drive in a scratch copy of the padel book | checker (Sonnet), then main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** 20.7, in a scratch copy of the padel book: the go-ahead slip lets a typed "lock the look" through and nothing else; reopening a page marks the interior stale; the old padel openers are flagged by the margin check.
+
+**Done when:**
+- [x] In auto mode, typing "approve cover v1" (or "lock the look", "revise p014") lets exactly that command through, signed with Kieran's name, without switching modes; nothing Claude writes can do the same.
+- [x] `/write-book` asks once how often to check in, then draws and shows the six reference pictures together, and writes the cover for Kieran to approve.
+- [x] Text running over a page number, and an out-of-date interior after a revision, are both caught automatically.
+- [x] `pytest` passes, `scripts/build_demo_book.py` passes in a throwaway copy, and everything is pushed to `main` and checked there.
+
+### Verification log (Phases 15, 17-20)
+
+| Date | Phase | Check | Result |
+|---|---|---|---|
+| 2026-09-24 | 15 | Full suite (junit) | 510 passed, 2 skipped, 0 failed |
+| 2026-09-24 | 17 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, placeholder can't leak | 579 passed, 2 skipped, 0 failed; demo Release Ready; no mismatches |
+| 2026-09-24 | 17 | Test-drive: `plan --from-manuscript` on a scratch copy of the Golf book, compared with its real plan | 71 = 71 pages, all fit (3 openers split), split bodies identical; opener one-paragraph fix and its test added after the checker ran, `tests/test_plan_fit.py` 8 passed |
+| 2026-09-26 | 18 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, old books unaffected | 603 tests: 600 passed, 2 skipped, 1 failed (a Phase 17 Golf test made stale by the p055/p061 fix, not Phase 18; fixed, rerun passes); demo Release Ready; question order in AUTONOMOUS_PRODUCTION.md was wrong, fixed; Golf status/validate/task clean |
+| 2026-09-26 | 18 | Test-drive: book from an idea in a scratch copy, intake drafted with the four new questions unclear, confirmed with --set | title set exactly, black and white, cover artwork none by kieran, three audit entries; the brief task lists all four as fixed at intake |
+| 2026-09-26 | 19 | Checker: scope, full suite (junit), demo build in throwaway copy, docs vs code, guard safety review | 671 passed, 2 skipped, 0 failed; demo Release Ready; no mismatches; no new way past the guard |
+| 2026-09-27 | 20 | Checkers on 20.2-20.5 (scope, named tests, real books read-only) and a full suite with all four in | 20.3 needed a fix (13 older cover tests assumed no assembly record; fixed so a missing record behaves as before) and a preflight-staleness addition; 20.5 needed measured title sizing (a long wide title overran); then full suite 788 passed, 2 skipped, 0 failed. Margin check found Golf p005, p013, p023, p031, p038, p045 print over the folio (fixed 2026-09-27: revised by Kieran to the smaller picture, re-approved, reassembled; Golf still Release Ready, 71 pages, no page over the margin) |
+| 2026-09-27 | 20 | Safety review of 20.1 (Opus) | Failed round 1 (loose wording, chained commands allowed, helpers shared it, slip file forgeable); reworked to read the transcript; 3 small fixes left because the new self-lock blocked the builder; saved on branch `phase-20-go-ahead` |
+| 2026-09-27 | 20 | Option A applied on `main` (guard's own files editable, transcripts protected), three pending fixes, second safety review (Opus) | Review found words after the decision unchecked, no clause break at a new line or dash, odd characters, short book names, brace expansion, `assemble --out`; all fixed with 28 new tests from its examples. Full suite 856 passed, 2 skipped, 0 failed; demo build Release Ready in a throwaway copy; live check against this session's real transcript: "Go" authorises nothing |
+| 2026-09-26 | 19 | Test-drive: guard decisions on a scratch copy of the finished Golf book; the picture stop via tests (reopening a Golf picture needs Kieran, correctly blocked) | cover preflight / advance / `cover --root X finalize` all ask (not the next task); `status` allowed; `produce` gives `picture` in tests |

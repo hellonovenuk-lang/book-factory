@@ -4,8 +4,6 @@ Plain-English meanings of the technical words that come up while working on
 Book Factory. It grows as we go: when Claude uses a new term, it adds a line
 here. Alphabetical.
 
-**API (and API key).** A way for one program to use another service directly, e.g. Book Factory asking an image service for a picture. The API key is its password; it is paid per use and kept as a secret setting, never in the repository.
-
 **Activity page.** A page type (`activity`) for numbered activity panels - questionnaires with tick boxes, score boxes, write-in lines, a gauge, a cut-out card and more - built from a list of `blocks`, every word set as real type, never a generated picture.
 
 **Agent team.** An experimental Claude Code mode where several Claude sessions
@@ -14,11 +12,15 @@ work as a team and message each other. We deliberately don't use it.
 **AGENTS.md.** The rulebook for every AI working in this repository (Claude,
 ChatGPT, anything else). The most important file for behaviour.
 
+**API (and API key).** A way for one program to use another service directly, e.g. Book Factory asking an image service for a picture. The API key is its password; it is paid per use and kept as a secret setting, never in the repository.
+
+**Auto mode.** A Claude Code setting where Claude works without asking before each step; a built-in safety check still blocks risky actions, such as Claude loosening its own rules or signing a decision with the operator's name.
+
 **Big lettering cover.** A cover style choice at intake (`cover_style: big_lettering`): a text-only cover, bold type and no picture, recorded the same way as `cover artwork --mode none`.
 
-**Bottom margin check.** A QA check (`technical.bottom_margin`), also used by the page plan's fit test, that flags any page whose text runs into the bottom margin or over the page number.
-
 **Block.** One item in an `activity` page's `blocks` list (e.g. a tick list, a score box, a gauge, a cut-out card) - the renderer sets every block as real type, never a picture.
+
+**Bottom margin check.** A QA check (`technical.bottom_margin`), also used by the page plan's fit test, that flags any page whose text runs into the bottom margin or over the page number.
 
 **Branch.** A separate line of changes in a repository. `main` is the real
 one. Web sessions sometimes start on a side branch with a name like
@@ -29,6 +31,8 @@ one. Web sessions sometimes start on a side branch with a name like
 **Builder.** The helper that makes a change (`implementer`). It edits only the files its brief lists.
 
 **Checker.** The helper that checks finished work (`verifier`). It can't edit anything; it runs the checks and reports what it found.
+
+**Checksum (SHA-256).** A long fingerprint worked out from a file's exact contents. If two files have the same checksum they are identical, which is how the `KDP/` copies are checked against the approved originals.
 
 **CLAUDE.md.** The file Claude Code reads automatically at the start of every
 session. Ours loads `AGENTS.md`, the Claude notes, the current plan and your
@@ -45,11 +49,11 @@ changed. Saved on this computer only until it is pushed.
 
 **Docs keeper.** The helper that keeps the shared rule and guide files (`AGENTS.md`, `docs/OPERATOR.md`, `integrations/`) accurate. The only helper allowed to edit them.
 
-**DPI (dots per inch).** How sharp a picture prints: how many pixels land in
-each printed inch. KDP needs at least 300 for interior images.
-
 **Done when.** The checklist, written before work starts, that says in plain
 words what "finished" means for a phase or task.
+
+**DPI (dots per inch).** How sharp a picture prints: how many pixels land in
+each printed inch. KDP needs at least 300 for interior images.
 
 **Dry run.** Running a command in "show me what you would do" mode: it lists the changes and makes none. `approve --all-passing --dry-run` is one.
 
@@ -64,10 +68,12 @@ page it builds: rendering it in both backends to see whether the copy
 actually fits, splitting an overrun chapter opener or text page at a
 paragraph break and naming an overrun activity page instead of splitting it.
 
-**Go-ahead.** Kieran's own short typed decision ("Lock the look", "Approve cover v1"). The approval guard reads it from Claude Code's record of the conversation and lets exactly those commands through, signed with his name, without switching permission modes; it lasts until his next message and never applies to a helper.
+**Full wrap.** The one-piece print cover KDP asks for: back, spine and front side by side in a single PDF, with a little extra (bleed) round the edges.
 
 **GitHub.** The website that stores the repository online. Work isn't safe
 until it is pushed there.
+
+**Go-ahead.** Kieran's own short typed decision ("Lock the look", "Approve cover v1"). The approval guard reads it from Claude Code's record of the conversation and lets exactly those commands through, signed with his name, without switching permission modes; it lasts until his next message and never applies to a helper.
 
 **Handover.** The note left at the end of a session so a fresh session can
 pick up exactly where we stopped. Lives at the top of `PLAN.md`.
@@ -81,20 +87,22 @@ to do one job. It gets its own instructions and reports back when done.
 
 **Intake.** The 16 starting questions for a new book (who it's for, humour, look, length, exact title, main character details, print colour, cover style...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
 
-**Loop.** A program repeating the same steps ("read the next task, do it") until something tells it to stop. `bookfactory produce` is one.
+**KDP folder.** The top-level `KDP/` folder: one subfolder per book holding the cover PDF, the interior PDF and `UPLOAD.md`, what to type into each box of Amazon's KDP form.
 
-**MCP (Model Context Protocol).** A standard plug-in that lets an AI like Claude use another service's tools directly in the chat, e.g. Higgsfield for pictures.
+**Loop.** A program repeating the same steps ("read the next task, do it") until something tells it to stop. `bookfactory produce` is one.
 
 **Main session.** The Claude conversation you are talking to. It plans, hands
 out work to helpers, checks their work and saves it.
 
-**Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
+**MCP (Model Context Protocol).** A standard plug-in that lets an AI like Claude use another service's tools directly in the chat, e.g. Higgsfield for pictures.
 
-**Palette sheet.** A page type (`palette_sheet`) that draws a book's colour swatches and type sizes straight from `design-tokens.json`, used for the `ref-palette` reference. Never written by hand.
+**Model.** Which version of Claude does the work. Opus is the strongest and uses the most allowance; Sonnet is cheaper and fine for routine jobs.
 
 **Page plan.** The list of every page in a book, in order, with its type and title (`pages/manifest.json`). It can carry each page's spec too, so the whole plan is written in one file.
 
 **Page spec.** One page's exact words, layout and illustration brief (`pages/specs/<page>.json`). The renderer sets the page from it. If it names an artwork (`illustration.asset_id`), that artwork is registered for the page automatically.
+
+**Palette sheet.** A page type (`palette_sheet`) that draws a book's colour swatches and type sizes straight from `design-tokens.json`, used for the `ref-palette` reference. Never written by hand.
 
 **Permission mode.** How much Claude Code may do without asking. In "default" mode it shows you a question before risky commands; in "auto" mode its own safety check answers most questions for you, so the approval guard blocks operator-only commands there instead of asking.
 
@@ -120,12 +128,12 @@ can see them.
 
 **QA (quality assurance).** Automatic checks across the whole book for wording, layout and technical problems. Some findings need a person to look.
 
-**Repository (repo).** The project folder with its full history of changes.
-Book Factory's lives on GitHub.
-
 **Reference set.** The six pictures that fix a book's look before any page is drawn: the main character, the supporting characters, a scene, and three typeset samples (chapter opener, activity page, palette and type). Locking them is the "look lock".
 
-**Stale interior.** An assembled interior built from pages that have since been revised and re-approved. `status` shows it as "stale" and `next` asks for re-assembly and a fresh KDP check.
+**Release Ready.** Book Factory's last stage: every page approved, interior and cover built and checked. The book can be uploaded to KDP.
+
+**Repository (repo).** The project folder with its full history of changes.
+Book Factory's lives on GitHub.
 
 **Sample page (reference render).** A one-page render of an ordinary page spec, made with `bookfactory reference render` to show a typeset reference (chapter opener, normal page, checklist page, palette sheet) before any real page exists. It is never added to the page plan.
 
@@ -136,16 +144,20 @@ nothing from the last one except what is written in the repository.
 
 **Settings file.** `.claude/settings.json`: the switchboard that turns hooks on and says which commands and edits Claude may do without asking, must ask about, or may never do.
 
+**Skill.** A saved set of instructions Claude follows for a particular job.
+Typing its name as a command runs it.
+
 **Spine width.** The thickness of the book's spine, set by the page count.
 Change the page count and the wrap-around cover must be rebuilt to match.
 
-**Skill.** A saved set of instructions Claude follows for a particular job.
-Typing its name as a command runs it.
+**Stale interior.** An assembled interior built from pages that have since been revised and re-approved. `status` shows it as "stale" and `next` asks for re-assembly and a fresh KDP check.
 
 **Stop code.** The short label `produce` gives for why it stopped, e.g. `writing` (the next job is copy), `wait_for_operator` (it needs you) or `complete` (nothing left).
 
 **Test suite (tests).** Automatic checks that make sure Book Factory still
 works after a change. Run with `pytest`.
+
+**Thumbnail.** The small cover picture Amazon shows in search results; a cover's title has to be readable at that size.
 
 **Token.** The unit Claude's usage is counted in, roughly three-quarters of a word. Everything Claude reads or writes uses tokens from your plan's allowance.
 
