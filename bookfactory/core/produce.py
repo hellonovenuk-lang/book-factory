@@ -50,6 +50,13 @@ a picture itself. The cover artwork step keeps the ordinary `not_mechanical`
 code, as does a picture's own approval task (still the operator's, or an
 autonomous policy's, decision - never produce's).
 
+The same `picture` code applies to a drawn visual reference (a main or
+supporting character reference, or the editorial scene example) that is
+still to be created. A typeset reference sample - the palette sheet, the
+chapter-opener example, the diagnostic-page example - is made with
+`bookfactory reference render`, not drawn, and keeps the ordinary
+`not_mechanical` code, as does the cover's own artwork.
+
 Two guards keep it from looping: a step limit, and a no-progress stop when a
 step leaves the same task next (for example a preflight that keeps failing).
 A dry run only reads: it reports the first step it would take, or why it
@@ -180,6 +187,34 @@ def _is_page_picture_task(book_id: str, task: dict) -> bool:
             and bool(task.get("asset_id")) and not _is_cover_task(book_id, task))
 
 
+#: A visual-reference task's `type` is the same whichever of layout_reference,
+#: page_reference or palette_reference it was registered as (`tasks.py`'s
+#: `_REFERENCE_TASK_TYPE`), and only the palette and chapter-opener/diagnostic
+#: examples are typeset samples made with `bookfactory reference render`, not
+#: drawn artwork - the task carries no field that says which. Rather than
+#: guess, only the reference known to be drawn is named here by asset id
+#: (`ref-page-editorial`, the editorial scene example); every other
+#: layout_reference-typed task stays `not_mechanical` until Book Factory can
+#: tell typeset samples and drawn scenes apart on the task itself.
+_DRAWN_LAYOUT_REFERENCE_IDS = frozenset({"ref-page-editorial"})
+
+
+def _is_reference_picture_task(book_id: str, task: dict) -> bool:
+    """Is this a drawn (not typeset) visual reference waiting to be created?
+
+    Character references are always drawn. `palette_reference` is always a
+    typeset sample, never drawn, so it is excluded outright.
+    """
+    if _is_cover_task(book_id, task) or not task.get("asset_id"):
+        return False
+    task_type = task.get("type")
+    if task_type == "character_reference":
+        return True
+    if task_type == "layout_reference":
+        return task.get("asset_id") in _DRAWN_LAYOUT_REFERENCE_IDS
+    return False
+
+
 def _is_asset_register_task(task: dict) -> bool:
     task_id = task.get("task_id") or ""
     return bool(task.get("asset_id")) and task_id.endswith("-register")
@@ -222,7 +257,7 @@ def _stop_for(book_id: str, task: dict | None, root=None) -> tuple[str, str] | N
                 and not _is_asset_register_task(task)):
             return WRITING, (f"Stopped: the next task, {_describe(task)}, needs copy written, "
                              "which produce does not do; Claude Code's /write-book can write it.")
-        if _is_page_picture_task(book_id, task):
+        if _is_page_picture_task(book_id, task) or _is_reference_picture_task(book_id, task):
             return PICTURE, (f"Stopped: the next task, {_describe(task)}, needs a picture "
                              "drawn, which produce does not do; Claude Code's /write-book can "
                              f"draw it through Higgsfield. Asset: {task.get('asset_id')}.")

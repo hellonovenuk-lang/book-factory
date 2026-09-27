@@ -64,6 +64,69 @@ def test_a_waiting_illustration_does_not_give_picture():
     assert code != "picture"
 
 
+def test_character_reference_gives_picture():
+    task = {"task_id": f"{BOOK}-ref-character-main-generate", "book_id": BOOK,
+            "type": "character_reference",
+            "summary": "Create visual reference: Main character reference", "page_id": None,
+            "asset_id": "ref-character-main", "gate": None, "mode": "continue_automatically"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "picture"
+    assert "ref-character-main" in message
+
+
+def test_editorial_scene_reference_gives_picture():
+    task = {"task_id": f"{BOOK}-ref-page-editorial-generate", "book_id": BOOK,
+            "type": "layout_reference",
+            "summary": "Create visual reference: Normal internal editorial page example",
+            "page_id": None, "asset_id": "ref-page-editorial", "gate": None,
+            "mode": "continue_automatically"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "picture"
+    assert "ref-page-editorial" in message
+
+
+def test_palette_reference_stays_not_mechanical():
+    task = {"task_id": f"{BOOK}-ref-palette-generate", "book_id": BOOK, "type": "layout_reference",
+            "summary": "Create visual reference: Palette, type and layout rules",
+            "page_id": None, "asset_id": "ref-palette", "gate": None,
+            "mode": "continue_automatically"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "not_mechanical"
+    assert code != "picture"
+
+
+def test_typeset_layout_sample_stays_not_mechanical():
+    task = {"task_id": f"{BOOK}-ref-layout-chapter-opener-generate", "book_id": BOOK,
+            "type": "layout_reference", "summary": "Create visual reference: Chapter opener example",
+            "page_id": None, "asset_id": "ref-layout-chapter-opener", "gate": None,
+            "mode": "continue_automatically"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "not_mechanical"
+    assert code != "picture"
+
+
+def test_diagnostic_page_sample_stays_not_mechanical():
+    task = {"task_id": f"{BOOK}-ref-page-diagnostic-generate", "book_id": BOOK,
+            "type": "layout_reference",
+            "summary": "Create visual reference: Diagram / checklist / test page example",
+            "page_id": None, "asset_id": "ref-page-diagnostic", "gate": None,
+            "mode": "continue_automatically"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "not_mechanical"
+    assert code != "picture"
+
+
+def test_cover_reference_style_task_never_gives_picture():
+    # The cover never gives `picture`, however it is typed - its task_id
+    # always starts with "<book>-cover-", the same check _is_cover_task uses.
+    task = {"task_id": f"{BOOK}-cover-artwork-generate", "book_id": BOOK,
+            "type": "character_reference", "summary": "Cover artwork", "page_id": None,
+            "asset_id": "cover-front-artwork", "gate": None, "mode": "continue_automatically"}
+    code, message = produce._stop_for(BOOK, task)
+    assert code == "not_mechanical"
+    assert code != "picture"
+
+
 def test_a_dry_run_reports_the_picture_stop_and_changes_nothing(produced_book, workspace):
     api.revise(BOOK, "fig-scope", kind=ASSET, reason="Composition too tight", root=workspace)
     folder = workspace / "books" / BOOK

@@ -25,8 +25,25 @@ def slugify(text: str) -> str:
     return slug or "untitled"
 
 
+#: A leading "the" (as its own word) is dropped before slugifying a title into
+#: a book id, so "The Padel Addict's Guide ..." becomes "padel-addicts-guide
+#: ...", not "the-padel-addict-s-guide-...". Apostrophes are dropped outright
+#: rather than turned into a hyphen, for the same reason: "Addict's" should
+#: read as "addicts", not "addict-s".
+_LEADING_THE_RE = re.compile(r"^(the)\b\s*", re.IGNORECASE)
+_APOSTROPHE_RE = re.compile(r"[’'`]")
+
+
 def make_book_id(title: str) -> str:
-    return slugify(title)
+    """A new book's id from its title.
+
+    Only used when starting a book (`create`/`create-from-idea`); it never
+    reslugs an existing book's id, so a book made before this change keeps
+    the id it already has.
+    """
+    text = _APOSTROPHE_RE.sub("", title or "")
+    text = _LEADING_THE_RE.sub("", text)
+    return slugify(text)
 
 
 def page_id(sequence: int) -> str:
