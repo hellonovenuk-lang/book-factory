@@ -1,0 +1,705 @@
+<title>Book Factory Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#F4F2EB; --sheet:#FCFBF7; --ink:#17150F; --ink-soft:#5E5A50; --rule:#DDD8CB;
+  --panel:#17150F; --panel-ink:#F1EEE5; --panel-soft:#9C978A; --panel-rule:#34322B;
+  --lime:#C8F03C; --accent:#E4572E; --accent-ink:#FFFFFF;
+  --good:#2F7D4F; --waiting:#B7800E; --problem:#C23B2A;
+  --golf:#1D5C36; --padel:#1F3A66; --runners:#FF5A1F;
+  --hover:rgba(23,21,15,.045); --shadow:0 18px 40px -12px rgba(23,21,15,.35);
+  --display:Anton,"Arial Narrow",Impact,sans-serif;
+  --body:Archivo,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1); --t:160ms;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#131311; --sheet:#1C1B18; --ink:#F1EEE5; --ink-soft:#A9A496; --rule:#2F2D28;
+    --panel:#0B0B0A; --panel-rule:#2A2924; --accent:#F2764F; --accent-ink:#17150F;
+    --good:#5DBB84; --waiting:#E0AE3E; --problem:#EE6B59;
+    --golf:#4FA873; --padel:#6F93D6; --runners:#FF7A45;
+    --hover:rgba(241,238,229,.05); --shadow:0 18px 40px -12px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131311; --sheet:#1C1B18; --ink:#F1EEE5; --ink-soft:#A9A496; --rule:#2F2D28;
+  --panel:#0B0B0A; --panel-rule:#2A2924; --accent:#F2764F; --accent-ink:#17150F;
+  --good:#5DBB84; --waiting:#E0AE3E; --problem:#EE6B59;
+  --golf:#4FA873; --padel:#6F93D6; --runners:#FF7A45;
+  --hover:rgba(241,238,229,.05); --shadow:0 18px 40px -12px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font:400 15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.label{font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;margin:0;text-wrap:balance;line-height:1.02}
+h1{font-size:clamp(34px,5vw,48px)}
+h2{font-size:26px}
+h3{font-size:19px}
+p{margin:0}
+
+/* ---------- shell ---------- */
+.app{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100%}
+.side{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;display:flex;flex-direction:column;gap:28px;padding:28px 18px;border-right:1px solid var(--rule)}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand b{font:400 26px/0.95 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.brand b span{color:var(--accent)}
+.brand small{font:500 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:6px;color:var(--ink-soft);text-decoration:none;font-weight:500;transition:background var(--t) var(--ease),color var(--t) var(--ease)}
+.nav a:hover{background:var(--hover);color:var(--ink)}
+.nav a[aria-current="page"]{color:var(--ink);background:var(--hover)}
+.nav a[aria-current="page"] .ic{color:var(--accent)}
+.nav .k{margin-left:auto;font:500 10px var(--mono);color:var(--ink-soft);opacity:.7}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.theme-btn{display:flex;align-items:center;gap:10px;background:none;border:1px solid var(--rule);border-radius:6px;padding:8px 10px;color:var(--ink-soft);font-size:13px}
+.theme-btn:hover{color:var(--ink)}
+.sample-note{font:400 11px/1.45 var(--mono);color:var(--ink-soft)}
+
+main{min-width:0;padding-inline:clamp(16px,4vw,48px);padding-block:32px 64px}
+.screen{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:28px;animation:rise 260ms var(--ease)}
+@keyframes rise{from{transform:translateY(6px);opacity:.4}to{transform:none;opacity:1}}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+.head .sub{color:var(--ink-soft);margin-top:8px}
+
+.tabbar{display:none}
+
+.pill{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;font:500 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;border:1px solid currentColor}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.waiting{color:var(--waiting)} .pill.good{color:var(--good)} .pill.problem{color:var(--problem)} .pill.plain{color:var(--ink-soft)}
+.pill.sample{color:var(--lime);border-color:rgba(200,240,60,.5)}
+.pill.sample::before{display:none}
+.tag-sample{color:var(--ink-soft)}
+.tag-sample::before{display:none}
+
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:6px}
+.btn{text-decoration:none;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:6px;border:1px solid var(--rule);background:var(--sheet);font-weight:600;font-size:14px;transition:background var(--t) var(--ease),transform var(--t) var(--ease)}
+.btn:hover{background:var(--hover)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.06)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:6px;padding:2px;background:var(--sheet)}
+.seg button{border:0;background:none;padding:5px 12px;border-radius:4px;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* ---------- stats panel (the Runner's cover) ---------- */
+.panel{background:var(--panel);color:var(--panel-ink);border-radius:10px;padding:clamp(20px,3vw,32px);display:grid;gap:26px;position:relative;overflow:hidden}
+.panel-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.panel-top .quote{font:600 17px/1.3 var(--body)}
+.panel-top .quote em{font-style:normal;color:var(--lime);font-family:var(--mono);font-weight:500}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.fig b{display:block;font:500 clamp(28px,3.6vw,40px)/1 var(--mono);color:var(--lime);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.fig span{display:block;margin-top:8px;font:500 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--panel-soft)}
+.panel-charts{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:end}
+.panel .lab{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--panel-soft);margin-bottom:12px}
+.spark{width:100%;height:110px;display:block}
+.bars-mini{display:flex;align-items:flex-end;gap:10px;height:110px}
+.bars-mini div{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.bars-mini i{display:block;width:100%;max-width:34px;border-radius:2px 2px 0 0}
+.bars-mini small{font:500 10px var(--mono);color:var(--panel-soft);letter-spacing:.06em}
+.panel-foot{font:500 13px/1.4 var(--body);color:var(--panel-soft);border-top:1px solid var(--panel-rule);padding-top:16px}
+
+/* ---------- home ---------- */
+.home-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;align-items:start}
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.sec-title a{font:500 12px var(--mono);color:var(--ink-soft);text-decoration:none;letter-spacing:.04em;text-transform:uppercase}
+.sec-title a:hover{color:var(--accent)}
+.next-list{display:flex;flex-direction:column}
+.next{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--rule);cursor:pointer;transition:background var(--t) var(--ease)}
+.next:first-child{border-top:0}
+.next:hover{background:var(--hover)}
+.next img{width:44px;height:66px;object-fit:cover;border-radius:2px;box-shadow:0 1px 0 var(--rule),2px 3px 0 -1px var(--rule)}
+.next .t{font-weight:600;line-height:1.25}
+.next .d{font-size:13px;color:var(--ink-soft);margin-top:3px}
+.pipeline{padding:18px}
+.stages{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.stage{display:flex;flex-direction:column;gap:6px}
+.stage .bar{height:8px;border-radius:2px;background:var(--rule)}
+.stage.on .bar{background:var(--ink)}
+.stage.hot .bar{background:var(--accent)}
+.stage b{font:400 22px/1 var(--display)}
+.stage small{font:500 10px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.ideas-mini{display:flex;flex-direction:column}
+.ideas-mini div{display:flex;gap:12px;padding:12px 16px;border-top:1px solid var(--rule);align-items:baseline}
+.ideas-mini div:first-child{border-top:0}
+.ideas-mini .n{font:500 12px var(--mono);color:var(--accent);min-width:22px}
+.ideas-mini .who{font-size:13px;color:var(--ink-soft)}
+.fact{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.fact b{font:400 30px/1 var(--display)}
+.fact p{font-size:13px;color:var(--ink-soft)}
+
+/* ---------- shelf ---------- */
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px 24px}
+.book{display:flex;flex-direction:column;gap:14px;background:none;border:0;padding:0;text-align:left}
+.book .cv{position:relative;aspect-ratio:2/3;border-radius:2px 4px 4px 2px;overflow:hidden;background:var(--sheet);box-shadow:0 1px 0 var(--rule),0 12px 24px -16px rgba(0,0,0,.45);transition:transform 220ms var(--ease),box-shadow 220ms var(--ease)}
+.book .cv::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(255,255,255,.12) 45%,rgba(0,0,0,0));z-index:1}
+.book .cv img{width:100%;height:100%;object-fit:cover;display:block}
+.book:hover .cv{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 1px 0 var(--rule),0 22px 30px -18px rgba(0,0,0,.55)}
+.book .spine{height:4px;border-radius:2px;width:44px}
+.book .meta{display:flex;flex-direction:column;gap:8px}
+.book .ttl{font-weight:600;font-size:16px;line-height:1.25}
+.book .row{display:flex;flex-wrap:wrap;gap:6px 14px;font:400 12px var(--mono);color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.book .pills{display:flex;flex-wrap:wrap;gap:6px}
+.add-book{aspect-ratio:2/3;border:1.5px dashed var(--rule);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-soft);text-align:center;padding:24px;background:none}
+.add-book:hover{border-color:var(--accent);color:var(--ink)}
+.add-book b{font:400 22px/1 var(--display);text-transform:uppercase}
+.add-book code{font:500 12px var(--mono);background:var(--hover);padding:3px 6px;border-radius:4px}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,10,8,.45);opacity:0;pointer-events:none;transition:opacity 200ms var(--ease);z-index:40}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--paper);border-left:1px solid var(--rule);z-index:41;transform:translateX(102%);transition:transform 260ms var(--ease);overflow-y:auto;padding:calc(24px + env(safe-area-inset-top,0px)) 24px calc(32px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:24px}
+.drawer.open{transform:none}
+.drawer .x{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--sheet);display:grid;place-items:center}
+.dr-head{display:grid;grid-template-columns:110px minmax(0,1fr);gap:18px;align-items:end;padding-right:40px}
+.dr-head img{width:110px;border-radius:2px;box-shadow:0 12px 24px -14px rgba(0,0,0,.5)}
+.dr-head h2{font-size:24px}
+.specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+.specs div{padding:12px 14px;border-left:1px solid var(--rule)}
+.specs div:first-child{border-left:0}
+.specs b{display:block;font:500 17px var(--mono);font-variant-numeric:tabular-nums;margin-top:4px}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:18px 88px minmax(0,1fr);gap:10px;align-items:start;position:relative;padding-bottom:14px}
+.timeline li::before{content:"";position:absolute;left:5px;top:14px;bottom:0;width:1.5px;background:var(--rule)}
+.timeline li:last-child::before{display:none}
+.timeline .dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);background:var(--paper);margin-top:4px;position:relative}
+.timeline li.done .dot{background:var(--ink)}
+.timeline li.now .dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.timeline li.todo .dot{border-style:dashed;border-color:var(--ink-soft)}
+.timeline .when{font:400 12px/1.8 var(--mono);color:var(--ink-soft)}
+.timeline .what{font-weight:500}
+.timeline li.todo .what{color:var(--ink-soft)}
+.kdp-box{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.kv{display:grid;grid-template-columns:130px minmax(0,1fr);gap:8px 14px;font-size:14px}
+.kv dt{color:var(--ink-soft)}
+.kv dd{margin:0;font-family:var(--mono);font-size:13px;overflow-wrap:anywhere}
+
+/* ---------- sales ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+.kpi{padding:18px 20px;border-left:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
+.kpi:first-child{border-left:0}
+.kpi b{font:400 34px/1 var(--display);letter-spacing:.01em}
+.kpi .delta{font:500 12px var(--mono);color:var(--good)}
+.chart-card{padding:20px}
+.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.chart-wrap{overflow-x:auto}
+svg.chart{display:block;width:100%;height:auto}
+svg.chart .grid{stroke:var(--rule);stroke-width:1}
+svg.chart .axis{fill:var(--ink-soft);font:500 11px var(--mono)}
+svg.chart rect.seg{transition:opacity var(--t) var(--ease)}
+svg.chart g.col:hover rect.seg{opacity:.85}
+.tip{position:fixed;pointer-events:none;z-index:60;background:var(--panel);color:var(--panel-ink);border-radius:6px;padding:10px 12px;font:400 12px/1.6 var(--mono);box-shadow:var(--shadow);opacity:0;transition:opacity 120ms}
+.tip b{color:var(--lime);font-weight:500}
+.sales-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule)}
+td{padding:12px 16px;border-bottom:1px solid var(--rule);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.bk{display:flex;align-items:center;gap:10px;font-weight:600}
+.bk i{width:4px;height:28px;border-radius:2px;flex:none}
+.mk{padding:8px 18px 16px;display:flex;flex-direction:column;gap:14px}
+.mk-row{display:grid;grid-template-columns:120px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:14px}
+.mk-row .track{height:8px;background:var(--hover);border-radius:2px;overflow:hidden}
+.mk-row .track i{display:block;height:100%;background:var(--ink);border-radius:2px}
+.mk-row .v{font:500 12px var(--mono);text-align:right;color:var(--ink-soft)}
+.drop{border:1.5px dashed var(--rule);border-radius:6px;padding:22px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px;background:none;width:100%;text-align:left;transition:border-color var(--t),background var(--t)}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--hover)}
+.drop .ico{width:44px;height:44px;border-radius:8px;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+.drop .txt{flex:1;min-width:200px}
+.drop .txt b{display:block;font-weight:600}
+.drop .txt span{font-size:13px;color:var(--ink-soft)}
+.table-wrap{overflow-x:auto}
+
+/* ---------- ideas board ---------- */
+.board{display:grid;grid-template-columns:repeat(4,minmax(240px,1fr));gap:16px;align-items:start;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.col{background:var(--hover);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:10px;min-height:200px;scroll-snap-align:start;border:1px solid transparent;transition:border-color var(--t),background var(--t)}
+.col.over{border-color:var(--accent)}
+.col-head{display:flex;align-items:center;gap:8px;padding:4px 6px 2px}
+.col-head h3{font-size:17px}
+.col-head .count{font:500 12px var(--mono);color:var(--ink-soft)}
+.col-head .hint{margin-left:auto;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.col-list{display:flex;flex-direction:column;gap:8px;min-height:40px;flex:1}
+.idea{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:12px 12px 12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 8px;cursor:grab;user-select:none;-webkit-user-select:none;transition:border-color var(--t),opacity var(--t)}
+.idea:hover{border-color:color-mix(in srgb,var(--ink) 30%,var(--rule))}
+.idea .t{font-weight:600;line-height:1.3;font-size:14px}
+.idea .who{grid-column:1/-1;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+.idea .foot{grid-column:1/-1;display:flex;align-items:center;gap:8px;margin-top:2px}
+.idea .chip{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--rule);border-radius:999px;padding:2px 7px}
+.idea .chip.pick{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.idea .grip{width:26px;height:26px;margin:-4px -4px 0 0;border:0;background:none;color:var(--ink-soft);display:grid;place-items:center;border-radius:4px;touch-action:none;cursor:grab}
+.idea .grip:hover{background:var(--hover);color:var(--ink)}
+.idea.pub{grid-template-columns:34px minmax(0,1fr) auto}
+.idea.pub img{width:34px;height:51px;object-fit:cover;border-radius:2px;grid-row:span 2}
+.idea.pub .who{grid-column:2/-1}
+.idea.placeholder{opacity:.35;border-style:dashed}
+.ghost{position:fixed;z-index:80;pointer-events:none;box-shadow:var(--shadow);transform:rotate(1.5deg);opacity:.96}
+.empty{border:1.5px dashed var(--rule);border-radius:6px;padding:18px 14px;text-align:center;font-size:13px;color:var(--ink-soft);line-height:1.5}
+.empty code{font:500 12px var(--mono);color:var(--ink)}
+.add-form{display:flex;flex-direction:column;gap:8px}
+.add-form input{width:100%;border:1px solid var(--rule);background:var(--sheet);border-radius:6px;padding:9px 10px;font-size:14px}
+.add-form input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.add-toggle{border:0;background:none;text-align:left;padding:8px 6px;color:var(--ink-soft);font-weight:500;font-size:14px;border-radius:4px}
+.add-toggle:hover{color:var(--ink);background:var(--hover)}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--panel);color:var(--panel-ink);padding:11px 16px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity 200ms,transform 200ms var(--ease);z-index:90;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- phone ---------- */
+@media (max-width:1020px){
+  .home-grid,.sales-grid{grid-template-columns:minmax(0,1fr)}
+  .panel-charts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{display:none}
+  main{padding-block:20px calc(96px + env(safe-area-inset-bottom,0px))}
+  .mobile-top{display:flex!important}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--rule);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--ink-soft);text-decoration:none;font:500 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase}
+  .tabbar a[aria-current="page"]{color:var(--ink)}
+  .tabbar a[aria-current="page"] .ic{color:var(--accent)}
+  .tabbar .ic{width:22px;height:22px}
+  .figs{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi:nth-child(3){border-left:0}
+  .kpi:nth-child(n+3){border-top:1px solid var(--rule)}
+  .stages{grid-template-columns:repeat(7,minmax(38px,1fr))}
+  .stage b{font-size:18px}
+  .stage small{font-size:9px}
+  .shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}
+  .book .ttl{font-size:14px}
+  .board{grid-template-columns:repeat(4,85%);gap:12px;margin-inline:-16px;padding-inline:16px;scroll-padding-inline:16px}
+  .specs b{font-size:15px}
+  .mk-row{grid-template-columns:96px minmax(0,1fr) 44px}
+  .hide-sm{display:none}
+}
+.mobile-top{display:none;align-items:center;justify-content:space-between;margin-bottom:18px}
+.mobile-top b{font:400 22px/1 var(--display);text-transform:uppercase}
+.mobile-top b span{color:var(--accent)}
+.icon-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--sheet);display:grid;place-items:center;color:var(--ink-soft)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h5v-6h4v6h5V9.5"/></symbol>
+  <symbol id="i-shelf" viewBox="0 0 24 24"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="8.5" y="4" width="4" height="16" rx="1"/><path d="m14.5 5.2 3.8-1 3.2 15.3-3.8 1z"/></symbol>
+  <symbol id="i-sales" viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></symbol>
+  <symbol id="i-ideas" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="10" rx="1"/><rect x="17" y="4" width="4" height="6" rx="1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand"><b>Book<br><span>Factory</span></b><small>Office · Kieran Smith</small></div>
+    <nav class="nav" aria-label="Main">
+      <a href="#home" data-nav="home"><svg class="ic"><use href="#i-home"/></svg>Home<span class="k">1</span></a>
+      <a href="#shelf" data-nav="shelf"><svg class="ic"><use href="#i-shelf"/></svg>Shelf<span class="k">2</span></a>
+      <a href="#sales" data-nav="sales"><svg class="ic"><use href="#i-sales"/></svg>Sales<span class="k">3</span></a>
+      <a href="#ideas" data-nav="ideas"><svg class="ic"><use href="#i-ideas"/></svg>Ideas<span class="k">4</span></a>
+    </nav>
+    <div class="side-foot">
+      <p class="sample-note">Mockup. Books, covers, stages and dates are real. Sales figures are samples until your KDP report is imported.</p>
+      <button class="theme-btn" data-theme-toggle type="button"><svg class="ic"><use href="#i-moon"/></svg><span>Dark mode</span></button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="mobile-top">
+      <b>Book <span>Factory</span></b>
+      <button class="icon-btn" data-theme-toggle type="button" aria-label="Switch light or dark"><svg class="ic"><use href="#i-moon"/></svg></button>
+    </div>
+    <div id="view"></div>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#home" data-nav="home"><svg class="ic"><use href="#i-home"/></svg>Home</a>
+  <a href="#shelf" data-nav="shelf"><svg class="ic"><use href="#i-shelf"/></svg>Shelf</a>
+  <a href="#sales" data-nav="sales"><svg class="ic"><use href="#i-sales"/></svg>Sales</a>
+  <a href="#ideas" data-nav="ideas"><svg class="ic"><use href="#i-ideas"/></svg>Ideas</a>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+<div class="tip" id="tip"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ===== Real data, read from the repository on 27 Sep 2026 ===== */
+var BOOKS=[
+  {id:"golf",bookId:"golf-addicts-guide-to-family-reintegration",short:"Golf",
+   title:"The Golf Addict's Guide to Family Reintegration",
+   sub:"An official programme for bringing him home from the golf club",
+   cover:"covers/golf.jpg",colour:"var(--golf)",pages:71,coverV:"v4",
+   stage:"Release Ready",kdp:"In review",
+   next:"Wait for KDP's review, then order a printed proof",
+   build:"19h 28m",buildNote:"brief to cover approved",
+   timeline:[["23 Sep","Brief written","done"],["23 Sep","Voice locked","done"],["23 Sep","Manuscript locked","done"],["24 Sep","Look locked","done"],["24 Sep","71 pages approved","done"],["27 Sep","Cover v4 approved","done"],["27 Sep","Release Ready","done"],["27 Sep","Uploaded to KDP","now"],["","Live on Amazon","todo"]]},
+  {id:"padel",bookId:"padel-addicts-guide",short:"Padel",
+   title:"The Padel Addict's Guide to Talking About Anything Else",
+   sub:"A formal engagement for the man who has made padel his whole personality",
+   cover:"covers/padel.jpg",colour:"var(--padel)",pages:80,coverV:"v2",
+   stage:"Release Ready",kdp:"In review",
+   next:"Wait for KDP's review, then order a printed proof",
+   build:"7h 25m",buildNote:"brief to Release Ready",
+   timeline:[["26 Sep","Brief written","done"],["26 Sep","Voice locked","done"],["26 Sep","Manuscript locked","done"],["26 Sep","Look locked","done"],["26 Sep","80 pages approved","done"],["26 Sep","Release Ready","done"],["27 Sep","Cover v2 approved","done"],["27 Sep","Uploaded to KDP","now"],["","Live on Amazon","todo"]]},
+  {id:"runners",bookId:"runners-guide-to-normal-conversation",short:"Runner's",
+   title:"The Runner's Guide to Normal Conversation",
+   sub:"A Rehabilitation Manual for Runners Who Can No Longer Answer a Simple Question",
+   cover:"covers/runners.jpg",colour:"var(--runners)",pages:58,coverV:"v3",
+   stage:"Made by hand",kdp:"In review",
+   next:"Wait for KDP's review, then order a printed proof",
+   build:"4 days",buildNote:"brief to interior chosen",
+   timeline:[["19 Sep","Brief written","done"],["20 Sep","Voice locked","done"],["20 Sep","Manuscript locked","done"],["20 Sep","Look locked","done"],["23 Sep","Cover v3 chosen","done"],["23 Sep","58-page interior chosen","done"],["","Uploaded to KDP","now"],["","Live on Amazon","todo"]]}
+];
+
+/* ===== SAMPLE sales: made up, labelled everywhere ===== */
+var WEEKS=["Wk 1","Wk 2","Wk 3","Wk 4","Wk 5","Wk 6","Wk 7","Wk 8"];
+var UNITS={golf:[3,5,4,8,6,9,12,15],padel:[0,2,3,5,4,6,9,11],runners:[4,6,5,7,9,8,11,14]};
+var PER_UNIT={golf:3.69,padel:3.72,runners:3.95};
+var MARKETS=[["Amazon.co.uk",118],["Amazon.com",30],["Amazon.de",8],["Amazon.ca",6],["Amazon.com.au",4]];
+
+var IDEAS_SEED={
+  cols:{
+    ideas:["fishing","fantasy","swim","gym","f1","season","beer","ski","cricket","warhammer","allotment","coffee"],
+    shortlist:["cyclist","hyrox","bbq"],
+    writing:[],
+    kdp:["pub-golf","pub-padel","pub-runners"]
+  },
+  cards:{
+    cyclist:{t:"The Cyclist's Guide to Leaving the House Without Lycra",w:"His wife, who was told the bike \"was about £800\"",pick:1},
+    hyrox:{t:"The Hyrox Addict's Guide to Talking About Anything Else",w:"A partner, a colleague, the group chat",pick:2},
+    bbq:{t:"The Barbecue Dad's Guide to Cooking Indoors",w:"His wife, whose kitchen now only makes side salads",pick:3},
+    fishing:{t:"The Fishing Addict's Guide to Coming Home Before Dark",w:"A 48-hour carp session, \"just the one night\""},
+    fantasy:{t:"The Fantasy Football Manager's Guide to Real Life",w:"Silent at Saturday dinner over a captaincy pick"},
+    swim:{t:"The Wild Swimmer's Guide to Warm Water",w:"Tells strangers the water temperature unasked"},
+    gym:{t:"The Gym Addict's Guide to Eating a Normal Dinner",w:"Brings a shaker to a wedding"},
+    f1:{t:"The F1 Fan's Guide to Sunday Lunch",w:"The roast is timed around lights out"},
+    season:{t:"The Season Ticket Holder's Guide to Free Weekends",w:"Away days to Plymouth on a Tuesday"},
+    beer:{t:"The Craft Beer Bore's Guide to Just Having a Pint",w:"Untappd before small talk"},
+    ski:{t:"The Ski Bore's Guide to the Other 51 Weeks",w:"Still talks about the powder day in 2019"},
+    cricket:{t:"The Cricket Addict's Guide to the Summer Holidays",w:"The family holiday is planned round the Ashes"},
+    warhammer:{t:"The Warhammer Addict's Guide to Unpainted Walls",w:"The spare room is an army"},
+    allotment:{t:"The Allotment Addict's Guide to Weekends Indoors",w:"40 courgettes and a feud with plot 12"},
+    coffee:{t:"The Coffee Snob's Guide to Instant",w:"Travels with a grinder"},
+    "pub-golf":{t:"The Golf Addict's Guide to Family Reintegration",w:"71 pages · cover v4",book:"golf"},
+    "pub-padel":{t:"The Padel Addict's Guide to Talking About Anything Else",w:"80 pages · cover v2",book:"padel"},
+    "pub-runners":{t:"The Runner's Guide to Normal Conversation",w:"58 pages · cover v3",book:"runners"}
+  }
+};
+var COLS=[["ideas","Ideas","Parked"],["shortlist","Shortlisted","Next up"],["writing","Writing","/write-book"],["kdp","On KDP","Published"]];
+
+/* ===== helpers ===== */
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
+function money(n){return "£"+n.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2})}
+function book(id){for(var i=0;i<BOOKS.length;i++)if(BOOKS[i].id===id)return BOOKS[i]}
+function greet(){var h=new Date().getHours();return h<12?"Morning":h<18?"Afternoon":"Evening"}
+function sum(a){return a.reduce(function(x,y){return x+y},0)}
+function store(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem(k))}localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+var toastT;
+function toast(msg){var t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show")},2600)}
+function kdpPill(s){var c=s==="Live"?"good":s==="In review"?"waiting":"plain";return '<span class="pill '+c+'">KDP · '+esc(s)+'</span>'}
+function stagePill(s){return '<span class="pill '+(s==="Release Ready"?"good":"plain")+'">'+esc(s)+'</span>'}
+
+var weekTotals=WEEKS.map(function(_,i){return BOOKS.reduce(function(a,b){return a+UNITS[b.id][i]},0)});
+var totalUnits=sum(weekTotals);
+var royaltyBy={};BOOKS.forEach(function(b){royaltyBy[b.id]=sum(UNITS[b.id])*PER_UNIT[b.id]});
+var totalRoyalty=sum(BOOKS.map(function(b){return royaltyBy[b.id]}));
+
+/* ===== sparkline (lime, like the Runner's elevation chart) ===== */
+function spark(vals){
+  var W=560,H=110,p=6,max=Math.max.apply(null,vals)*1.1;
+  var xs=vals.map(function(_,i){return p+i*(W-2*p)/(vals.length-1)});
+  var ys=vals.map(function(v){return H-p-(v/max)*(H-2*p)});
+  var line=xs.map(function(x,i){return (i?"L":"M")+x.toFixed(1)+" "+ys[i].toFixed(1)}).join(" ");
+  var area=line+" L"+xs[xs.length-1]+" "+(H-p)+" L"+xs[0]+" "+(H-p)+" Z";
+  var grid="";for(var g=1;g<4;g++){var y=p+g*(H-2*p)/4;grid+='<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="var(--panel-rule)" stroke-dasharray="2 4"/>'}
+  var dots=xs.map(function(x,i){return i===xs.length-1?"":'<circle cx="'+x+'" cy="'+ys[i]+'" r="2.5" fill="var(--panel-ink)"/>'}).join("");
+  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" role="img" aria-label="Units per week, sample">'+grid+
+    '<path d="'+area+'" fill="rgba(200,240,60,.16)"/><path d="'+line+'" fill="none" stroke="var(--lime)" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>'+dots+
+    '<circle cx="'+xs[xs.length-1]+'" cy="'+ys[ys.length-1]+'" r="5" fill="var(--lime)"/></svg>';
+}
+
+/* ===== screens ===== */
+var screens={};
+
+screens.home=function(){
+  var best=BOOKS.slice().sort(function(a,b){return royaltyBy[b.id]-royaltyBy[a.id]})[0];
+  var maxB=Math.max.apply(null,BOOKS.map(function(b){return sum(UNITS[b.id])}));
+  var d=new Date(2026,8,27);
+  var dateStr=d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"});
+  var h='<section class="screen">'+
+  '<div class="head"><div><div class="label">'+dateStr+'</div><h1 style="margin-top:8px">'+greet()+', Kieran</h1><p class="sub">Three books with KDP. Fifteen ideas waiting. Nothing needs you today.</p></div>'+
+  '<a class="btn primary" href="#ideas">Start the next book</a></div>'+
+
+  '<div class="panel" aria-label="Sales summary">'+
+    '<div class="panel-top"><p class="quote">How were sales? Well, since launch <em>'+totalUnits+'</em> copies, then&nbsp;—</p><span class="pill sample">Sample figures</span></div>'+
+    '<div class="figs">'+
+      '<div class="fig"><b>'+money(totalRoyalty)+'</b><span>Royalties · 8 wks</span></div>'+
+      '<div class="fig"><b>'+totalUnits+'</b><span>Paperbacks sold</span></div>'+
+      '<div class="fig"><b>'+money(totalRoyalty/totalUnits)+'</b><span>Per copy</span></div>'+
+      '<div class="fig"><b>'+weekTotals[weekTotals.length-1]+'</b><span>This week</span></div>'+
+    '</div>'+
+    '<div class="panel-charts"><div><div class="lab">Copies per week (the long way)</div>'+spark(weekTotals)+'</div>'+
+    '<div><div class="lab">By book</div><div class="bars-mini">'+BOOKS.map(function(b){var u=sum(UNITS[b.id]);return '<div><i style="height:'+(u/maxB*80+6)+'px;background:'+(b.id===best.id?"var(--lime)":"var(--panel-ink)")+'"></i><small>'+esc(b.short.toUpperCase())+'</small></div>'}).join("")+'</div></div></div>'+
+    '<p class="panel-foot">…and that\'s when '+esc(best.short)+' pulled ahead, mostly on Amazon.co.uk. Your real KDP report replaces these numbers.</p>'+
+  '</div>'+
+
+  '<div class="home-grid">'+
+    '<div style="display:flex;flex-direction:column;gap:24px">'+
+      '<div><div class="sec-title"><h2>Next up</h2><a href="#shelf">Shelf →</a></div>'+
+      '<div class="card next-list">'+BOOKS.map(function(b){return '<div class="next" data-book="'+b.id+'" tabindex="0" role="button"><img src="'+b.cover+'" alt=""><div><div class="t">'+esc(b.short)+'</div><div class="d">'+esc(b.next)+'</div></div>'+kdpPill(b.kdp)+'</div>'}).join("")+'</div></div>'+
+      '<div><div class="sec-title"><h2>Pipeline</h2><span class="label">idea → Amazon</span></div>'+
+      '<div class="card pipeline"><div class="stages">'+
+        [["15","Ideas","on"],["0","Writing",""],["0","Look",""],["0","Pages",""],["0","Cover",""],["0","Ready",""],["3","On KDP","hot"]].map(function(s){return '<div class="stage '+s[2]+'"><div class="bar"></div><b>'+s[0]+'</b><small>'+s[1]+'</small></div>'}).join("")+
+      '</div></div></div>'+
+    '</div>'+
+    '<div style="display:flex;flex-direction:column;gap:24px">'+
+      '<div><div class="sec-title"><h2>Shortlist</h2><a href="#ideas">Ideas →</a></div>'+
+      '<div class="card ideas-mini">'+["cyclist","hyrox","bbq"].map(function(k,i){var c=IDEAS_SEED.cards[k];return '<div><span class="n">0'+(i+1)+'</span><span><span style="font-weight:600">'+esc(c.t)+'</span><br><span class="who">'+esc(c.w)+'</span></span></div>'}).join("")+'</div></div>'+
+      '<div class="card fact"><span class="label">Fastest build</span><b>7h 25m</b><p>Padel went from brief to Release Ready on 26 September. Golf took 19h 28m.</p></div>'+
+    '</div>'+
+  '</div></section>';
+  return h;
+};
+
+screens.shelf=function(){
+  return '<section class="screen">'+
+  '<div class="head"><div><div class="label">3 books · 209 pages · all 6 × 9 in, black and white</div><h1 style="margin-top:8px">Shelf</h1></div></div>'+
+  '<div class="shelf">'+BOOKS.map(function(b){
+    return '<button class="book" type="button" data-book="'+b.id+'"><div class="cv"><img src="'+b.cover+'" alt="Cover of '+esc(b.title)+'"></div>'+
+    '<div class="meta"><div class="spine" style="background:'+b.colour+'"></div><div class="ttl">'+esc(b.title)+'</div>'+
+    '<div class="row"><span>'+b.pages+' pp</span><span>cover '+b.coverV+'</span><span>built in '+b.build+'</span></div>'+
+    '<div class="pills">'+stagePill(b.stage)+kdpPill(b.kdp)+'</div></div></button>';
+  }).join("")+
+  '<button class="add-book" type="button" data-go="ideas"><b>Next book</b><span>Pick one from the shortlist, then run</span><code>/write-book</code></button>'+
+  '</div></section>';
+};
+
+screens.sales=function(){
+  var mTotal=sum(MARKETS.map(function(m){return m[1]}));
+  return '<section class="screen">'+
+  '<div class="head"><div><div class="label">Paperback · all marketplaces</div><h1 style="margin-top:8px">Sales</h1></div>'+
+  '<div class="seg" role="group" aria-label="Period"><button type="button" aria-pressed="false">4 wks</button><button type="button" aria-pressed="true">8 wks</button><button type="button" aria-pressed="false">All</button></div></div>'+
+
+  '<button class="drop" type="button" id="drop"><span class="ico"><svg class="ic"><use href="#i-up"/></svg></span><span class="txt"><b>Drop your KDP royalties report here</b><span>The Excel file from KDP → Reports → Prior Months\' Royalties. Every figure below is a sample until you do.</span></span><span class="pill tag-sample plain">Sample data</span></button>'+
+
+  '<div class="kpis">'+
+    '<div class="kpi"><span class="label">Royalties</span><b>'+money(totalRoyalty)+'</b><span class="delta">▲ 25% on last week</span></div>'+
+    '<div class="kpi"><span class="label">Copies</span><b>'+totalUnits+'</b><span class="delta">▲ 8 on last week</span></div>'+
+    '<div class="kpi"><span class="label">Per copy</span><b>'+money(totalRoyalty/totalUnits)+'</b><span class="label" style="text-transform:none;letter-spacing:0">after printing cost</span></div>'+
+    '<div class="kpi"><span class="label">Top marketplace</span><b>UK</b><span class="label" style="text-transform:none;letter-spacing:0">'+Math.round(MARKETS[0][1]/mTotal*100)+'% of copies</span></div>'+
+  '</div>'+
+
+  '<div class="card chart-card"><div class="chart-head"><h2>Copies per week</h2><div class="legend">'+BOOKS.map(function(b){return '<span><i style="background:'+b.colour+'"></i>'+esc(b.short)+'</span>'}).join("")+'</div>'+
+  '<div class="seg" role="group" aria-label="Measure"><button type="button" data-measure="units" aria-pressed="true">Copies</button><button type="button" data-measure="gbp" aria-pressed="false">£</button></div></div>'+
+  '<div class="chart-wrap" id="chart"></div></div>'+
+
+  '<div class="sales-grid">'+
+    '<div class="card"><div class="table-wrap"><table><thead><tr><th>Book</th><th class="n">Copies</th><th class="n">Royalties</th><th class="n hide-sm">Per copy</th></tr></thead><tbody>'+
+    BOOKS.map(function(b){var u=sum(UNITS[b.id]);return '<tr><td><span class="bk"><i style="background:'+b.colour+'"></i>'+esc(b.short)+'</span></td><td class="n">'+u+'</td><td class="n">'+money(royaltyBy[b.id])+'</td><td class="n hide-sm">'+money(PER_UNIT[b.id])+'</td></tr>'}).join("")+
+    '</tbody></table></div></div>'+
+    '<div class="card"><div style="padding:16px 18px 4px" class="sec-title"><h3>Where they sell</h3><span class="label">copies</span></div><div class="mk">'+
+    MARKETS.map(function(m){return '<div class="mk-row"><span>'+m[0]+'</span><span class="track"><i style="width:'+(m[1]/MARKETS[0][1]*100)+'%"></i></span><span class="v">'+m[1]+'</span></div>'}).join("")+
+    '</div></div>'+
+  '</div></section>';
+};
+
+function drawChart(measure){
+  var host=$("#chart");if(!host)return;
+  var W=Math.max(300,Math.round(host.clientWidth||760)),H=W<500?230:280,L=44,R=8,T=14,B=30;
+  var data=WEEKS.map(function(_,i){return BOOKS.map(function(b){var u=UNITS[b.id][i];return measure==="gbp"?u*PER_UNIT[b.id]:u})});
+  var tot=data.map(sum),top=Math.max.apply(null,tot);
+  var step=measure==="gbp"?40:10,max=Math.ceil(top/step)*step;
+  var y=function(v){return T+(H-T-B)*(1-v/max)};
+  var bw=(W-L-R)/WEEKS.length,barW=Math.min(46,bw*.58);
+  var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Copies per week by book, sample">';
+  for(var v=0;v<=max;v+=step){s+='<line class="grid" x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="axis" x="'+(L-10)+'" y="'+(y(v)+4)+'" text-anchor="end">'+(measure==="gbp"?"£"+v:v)+'</text>'}
+  WEEKS.forEach(function(w,i){
+    var x=L+i*bw+(bw-barW)/2,acc=0;
+    s+='<g class="col" data-i="'+i+'">';
+    s+='<rect x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'" fill="transparent"/>';
+    BOOKS.forEach(function(b,j){var val=data[i][j];if(!val)return;var y0=y(acc),y1=y(acc+val);s+='<rect class="seg" x="'+x+'" y="'+y1+'" width="'+barW+'" height="'+Math.max(0,y0-y1-1.5)+'" rx="1.5" fill="'+b.colour+'"/>';acc+=val});
+    s+='<text class="axis" x="'+(x+barW/2)+'" y="'+(H-10)+'" text-anchor="middle">'+(W<500?w.replace("Wk ","W"):w)+'</text></g>';
+  });
+  s+='</svg>';host.innerHTML=s;
+  var tip=$("#tip");
+  $$("g.col",host).forEach(function(g){
+    g.addEventListener("pointermove",function(e){var i=+g.getAttribute("data-i");
+      tip.innerHTML=WEEKS[i]+' · <span class="tag">sample</span><br>'+BOOKS.map(function(b,j){return esc(b.short)+' <b>'+(measure==="gbp"?money(data[i][j]):data[i][j])+'</b>'}).join("<br>");
+      tip.style.opacity=1;var tx=Math.min(e.clientX+14,innerWidth-170);tip.style.left=tx+"px";tip.style.top=(e.clientY-10)+"px"});
+    g.addEventListener("pointerleave",function(){tip.style.opacity=0});
+  });
+}
+
+/* ===== ideas board ===== */
+var ideas=store("bf-crm-ideas-v1")||JSON.parse(JSON.stringify(IDEAS_SEED));
+function saveIdeas(){store("bf-crm-ideas-v1",ideas)}
+
+function ideaCard(k){
+  var c=ideas.cards[k];if(!c)return"";
+  var b=c.book&&book(c.book);
+  return '<article class="idea'+(b?" pub":"")+'" data-id="'+esc(k)+'">'+(b?'<img src="'+b.cover+'" alt="">':"")+
+    '<div class="t">'+esc(c.t)+'</div><button class="grip" type="button" aria-label="Drag to move"><svg class="ic"><use href="#i-grip"/></svg></button>'+
+    '<div class="who">'+esc(c.w||"")+'</div>'+
+    (b?'<div class="foot" style="grid-column:2/-1">'+kdpPill(b.kdp)+'</div>':(c.pick?'<div class="foot"><span class="chip pick">Top pick '+c.pick+'</span></div>':(c.mine?'<div class="foot"><span class="chip">Added by you</span></div>':"")))+
+  '</article>';
+}
+screens.ideas=function(){
+  return '<section class="screen">'+
+  '<div class="head"><div><div class="label">Drag a card to move it · on a phone, hold the ⋮⋮ handle</div><h1 style="margin-top:8px">Ideas board</h1></div>'+
+  '<button class="btn" type="button" id="reset-board">Reset board</button></div>'+
+  '<div class="board" id="board">'+COLS.map(function(c){
+    var list=ideas.cols[c[0]]||[];
+    return '<section class="col" data-col="'+c[0]+'"><div class="col-head"><h3>'+c[1]+'</h3><span class="count">'+list.length+'</span><span class="hint">'+c[2]+'</span></div>'+
+    '<div class="col-list">'+list.map(ideaCard).join("")+(c[0]==="writing"&&!list.length?'<div class="empty">Drag an idea here to start it.<br>Then run <code>/write-book</code> with its title.</div>':"")+'</div>'+
+    (c[0]==="ideas"?'<div class="add-wrap"><button class="add-toggle" type="button" id="add-toggle">+ Add an idea</button><form class="add-form" id="add-form" hidden><input id="new-title" placeholder="The ___ Addict\'s Guide to …" autocomplete="off"><input id="new-who" placeholder="Who buys it, or one \'that\'s literally him\'" autocomplete="off"><div style="display:flex;gap:8px"><button class="btn primary" type="submit">Add</button><button class="btn" type="button" id="add-cancel">Cancel</button></div></form></div>':"")+
+    '</section>';
+  }).join("")+'</div></section>';
+};
+
+function recount(){
+  $$(".col").forEach(function(col){
+    var k=col.getAttribute("data-col");
+    ideas.cols[k]=$$(".idea",col).map(function(e){return e.getAttribute("data-id")});
+    $(".count",col).textContent=ideas.cols[k].length;
+    var empty=$(".empty",col);
+    if(k==="writing"){if(ideas.cols[k].length&&empty)empty.remove();
+      if(!ideas.cols[k].length&&!empty){var d=document.createElement("div");d.className="empty";d.innerHTML='Drag an idea here to start it.<br>Then run <code>/write-book</code> with its title.';$(".col-list",col).appendChild(d)}}
+  });
+  saveIdeas();
+}
+
+function bindBoard(){
+  var board=$("#board");if(!board)return;
+  var drag=null;
+  function colAt(x,y){var el=document.elementFromPoint(x,y);return el&&el.closest?el.closest(".col"):null}
+  function start(card,e){
+    var r=card.getBoundingClientRect();
+    var g=card.cloneNode(true);g.classList.add("ghost");g.style.width=r.width+"px";g.style.left=r.left+"px";g.style.top=r.top+"px";
+    document.body.appendChild(g);card.classList.add("placeholder");
+    drag={card:card,ghost:g,dx:e.clientX-r.left,dy:e.clientY-r.top,from:card.closest(".col").getAttribute("data-col")};
+    document.body.style.cursor="grabbing";
+  }
+  function move(e){
+    if(!drag)return;
+    drag.ghost.style.left=(e.clientX-drag.dx)+"px";drag.ghost.style.top=(e.clientY-drag.dy)+"px";
+    var bR=board.getBoundingClientRect();
+    if(e.clientX<bR.left+40)board.scrollLeft-=12;else if(e.clientX>bR.right-40)board.scrollLeft+=12;
+    var col=colAt(e.clientX,e.clientY);
+    $$(".col").forEach(function(c){c.classList.toggle("over",c===col)});
+    if(!col)return;
+    var list=$(".col-list",col),after=null;
+    $$(".idea:not(.placeholder)",list).some(function(c){var r=c.getBoundingClientRect();if(e.clientY<r.top+r.height/2){after=c;return true}});
+    if(after)list.insertBefore(drag.card,after);else{var em=$(".empty",list);list.insertBefore(drag.card,em||null)}
+  }
+  function end(){
+    if(!drag)return;
+    drag.ghost.remove();drag.card.classList.remove("placeholder");
+    $$(".col").forEach(function(c){c.classList.remove("over")});
+    document.body.style.cursor="";
+    var to=drag.card.closest(".col").getAttribute("data-col");
+    var id=drag.card.getAttribute("data-id"),from=drag.from;drag=null;recount();
+    if(to!==from){var name=COLS.filter(function(c){return c[0]===to})[0][1];
+      toast(to==="writing"?"Moved to Writing. Next: run /write-book with this title.":"Moved to "+name+".");}
+  }
+  board.addEventListener("pointerdown",function(e){
+    var card=e.target.closest(".idea");if(!card||e.button>0)return;
+    var onGrip=!!e.target.closest(".grip");
+    if(e.pointerType!=="mouse"&&!onGrip)return;
+    e.preventDefault();
+    var sx=e.clientX,sy=e.clientY,started=false;
+    function mv(ev){if(!started&&Math.hypot(ev.clientX-sx,ev.clientY-sy)>5){started=true;start(card,ev)}if(started){ev.preventDefault();move(ev)}}
+    function up(){document.removeEventListener("pointermove",mv);document.removeEventListener("pointerup",up);document.removeEventListener("pointercancel",up);if(started)end()}
+    document.addEventListener("pointermove",mv,{passive:false});document.addEventListener("pointerup",up);document.addEventListener("pointercancel",up);
+  });
+  var tog=$("#add-toggle"),form=$("#add-form");
+  tog.addEventListener("click",function(){form.hidden=false;tog.hidden=true;$("#new-title").focus()});
+  $("#add-cancel").addEventListener("click",function(){form.hidden=true;tog.hidden=false});
+  form.addEventListener("submit",function(e){e.preventDefault();var t=$("#new-title").value.trim();if(!t){$("#new-title").focus();return}
+    var id="mine-"+Date.now();ideas.cards[id]={t:t,w:$("#new-who").value.trim(),mine:1};ideas.cols.ideas.unshift(id);saveIdeas();render("ideas");toast("Idea added to the board.")});
+  $("#reset-board").addEventListener("click",function(){ideas=JSON.parse(JSON.stringify(IDEAS_SEED));saveIdeas();render("ideas");toast("Board reset to the ideas in docs/BOOK-IDEAS.md.")});
+}
+
+/* ===== book drawer ===== */
+function openBook(id){
+  var b=book(id);if(!b)return;var dr=$("#drawer");
+  var u=sum(UNITS[b.id]);
+  dr.innerHTML='<button class="x" type="button" id="dr-close" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>'+
+  '<div class="dr-head"><img src="'+b.cover+'" alt=""><div style="display:flex;flex-direction:column;gap:10px"><div class="pills" style="display:flex;flex-wrap:wrap;gap:6px">'+stagePill(b.stage)+kdpPill(b.kdp)+'</div><h2>'+esc(b.title)+'</h2></div></div>'+
+  '<p style="color:var(--ink-soft)">'+esc(b.sub)+'</p>'+
+  '<div class="specs"><div><span class="label">Pages</span><b>'+b.pages+'</b></div><div><span class="label">Built in</span><b>'+b.build+'</b></div><div><span class="label">Copies</span><b>'+u+'<span style="font-size:10px;color:var(--ink-soft)"> sample</span></b></div></div>'+
+  '<div><div class="sec-title"><h3>From brief to Amazon</h3><span class="label">real dates</span></div><ol class="timeline">'+
+  b.timeline.map(function(t){return '<li class="'+t[2]+'"><span class="dot"></span><span class="when">'+(t[0]||"—")+'</span><span class="what">'+esc(t[1])+'</span></li>'}).join("")+'</ol></div>'+
+  '<div class="card kdp-box"><div class="sec-title" style="margin:0"><h3>KDP</h3>'+kdpPill(b.kdp)+'</div><dl class="kv">'+
+  '<dt>Book id</dt><dd>'+b.bookId+'</dd><dt>Format</dt><dd>Paperback · 6 × 9 in · B&amp;W</dd><dt>ASIN</dt><dd style="color:var(--ink-soft)">Given by KDP when it goes live</dd><dt>Upload sheet</dt><dd>KDP/'+(b.id==="golf"?"golf-addicts-guide":b.id==="padel"?"padel-addicts-guide":"runners-guide")+'/UPLOAD.md</dd></dl></div>';
+  dr.classList.add("open");dr.setAttribute("aria-hidden","false");$("#scrim").classList.add("open");
+  $("#dr-close").focus();
+  $("#dr-close").addEventListener("click",closeBook);
+}
+function closeBook(){$("#drawer").classList.remove("open");$("#drawer").setAttribute("aria-hidden","true");$("#scrim").classList.remove("open")}
+$("#scrim").addEventListener("click",closeBook);
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape")closeBook();
+  if(/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;
+  var m={"1":"home","2":"shelf","3":"sales","4":"ideas"}[e.key];if(m)location.hash=m;
+});
+
+/* ===== router ===== */
+function render(name){
+  if(!screens[name])name="home";
+  $("#view").innerHTML=screens[name]();
+  $$("[data-nav]").forEach(function(a){if(a.getAttribute("data-nav")===name)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  $$("[data-book]").forEach(function(el){el.addEventListener("click",function(){openBook(el.getAttribute("data-book"))});el.addEventListener("keydown",function(e){if(e.key==="Enter")openBook(el.getAttribute("data-book"))})});
+  $$("[data-go]").forEach(function(el){el.addEventListener("click",function(){location.hash=el.getAttribute("data-go")})});
+  if(name==="sales"){
+    drawChart("units");
+    $$("[data-measure]").forEach(function(b){b.addEventListener("click",function(){$$("[data-measure]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});drawChart(b.getAttribute("data-measure"))})});
+    $$(".head .seg button").forEach(function(b){b.addEventListener("click",function(){$$(".head .seg button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});toast("Periods switch once real data is imported.")})});
+    var drop=$("#drop");
+    drop.addEventListener("click",function(){toast("Importing your KDP report comes in a later phase.")});
+    ["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});
+    ["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over");if(t==="drop")toast("Importing your KDP report comes in a later phase.")})});
+  }
+  if(name==="ideas")bindBoard();
+  window.scrollTo(0,0);
+}
+function route(){render((location.hash||"#home").slice(1))}
+window.addEventListener("hashchange",route);
+
+/* ===== theme ===== */
+function currentDark(){var t=document.documentElement.getAttribute("data-theme");if(t)return t==="dark";return matchMedia("(prefers-color-scheme: dark)").matches}
+function labelTheme(){$$("[data-theme-toggle] span").forEach(function(s){s.textContent=currentDark()?"Light mode":"Dark mode"})}
+$$("[data-theme-toggle]").forEach(function(b){b.addEventListener("click",function(){document.documentElement.setAttribute("data-theme",currentDark()?"light":"dark");labelTheme()})});
+labelTheme();
+
+route();
+})();
+</script>

@@ -11,7 +11,7 @@ here.
 
 ## Start here
 
-> **Doing:** no phase open. Phases 17-20 are done and archived in `docs/PLAN-ARCHIVE.md`.
+> **Doing:** Phase 21, the look of the CRM (a mockup to agree before building). Phases 17-20 are done and archived in `docs/PLAN-ARCHIVE.md`.
 > **Finished (2026-09-27, covers and KDP):** Amazon cover research (categories: Humor > Sports, Humor > Parodies, the sport's own category; covers with a big title, one family scene and a gift line). Kieran let Claude draw and submit cover artwork through Higgsfield, with approval staying his (`integrations/claude/BOOK_FACTORY.md` "Cover artwork", `/write-book` section 3e). Golf and Padel switched to artwork covers (Kieran's words, audited): Golf cover v4 reuses the unused Sunday-roast picture (0 credits); Padel cover v2 has a new breakfast scene of Josh explaining the scoring (2 credits, 6 left). Both approved by Kieran, cover preflight passes, both Release Ready. New top-level `KDP/` folder: per book `cover.pdf`, `interior.pdf` (copies, checksums in the sheet) and `UPLOAD.md` (every KDP form field); the Runner's Guide sheet moved in.
 > **Next action:** Kieran uploads Golf and Padel to KDP from `KDP/<book>/UPLOAD.md` (order a printed proof first); otherwise start the next real book with `/write-book`, or plan Phase 21 from `IDEAS.md` (a `kdp pack` command is a good candidate).
 
@@ -101,6 +101,29 @@ Phase 18: Big decisions at intake (done, see `docs/PLAN-ARCHIVE.md`)
 Phase 19: Pictures in the loop, and the last steps on their own (done, see `docs/PLAN-ARCHIVE.md`)
 
 Phase 20: A smoother `/write-book` (done, see `docs/PLAN-ARCHIVE.md`)
+
+## Phase 21: The look of the CRM (in progress)
+
+Goal: agree exactly how the Book Factory CRM looks (books, KDP sales, ideas
+board), on phone and laptop, before any real building starts. Kieran asked for
+it 2026-09-27; it will be a hosted site he opens on his phone and his laptop.
+Later phases (data, the real app, putting it online) are planned once the look
+is agreed. Everything for the CRM lives in `crm/`.
+
+| # | Task | Who | Files |
+|---|---|---|---|
+| 21.1 ✓ | Design brief and design tokens: colours, two fonts, spacing, rounding, animation speed; starting from the books' own look (paper cream, ink black, one accent) | main | `crm/design/BRIEF.md`, `crm/design/tokens.json` |
+| 21.2 ✓ | Front-cover pictures of the three books for the mockup, taken from the approved cover PDFs (read only) | main | `crm/mockup/covers/*.jpg` |
+| 21.3 ✓ | Clickable mockup: Home, Shelf, Sales (sample figures, labelled), Ideas board; laptop and phone layouts, light and dark | main | `crm/mockup/index.html` |
+| 21.4 | Publish it as a private page; up to two rounds of changes from Kieran's comments | main | `crm/mockup/index.html` |
+| 21.5 | Update `PLAN.md`, save to `main` | main | `PLAN.md`, `IDEAS.md` |
+
+**Test-drive:** Kieran opens the mockup on his phone and laptop and clicks through all four screens.
+
+**Done when:**
+- [ ] Kieran can open the mockup on his phone and his laptop (published 2026-09-27: https://claude.ai/artifact/7cT2qafLBNQeUKLHJgGgbg, version 1).
+- [ ] All four screens are there, with the three real books and covers.
+- [ ] Kieran has said "that's the look".
 
 ---
 
