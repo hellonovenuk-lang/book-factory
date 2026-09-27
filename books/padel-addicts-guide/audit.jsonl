@@ -240,3 +240,6 @@
 {"at": "2026-09-27T20:21:16Z", "event": "cover_artwork_mode_set", "mode": "native", "previous": "none", "by": "kieran", "reason": "Kieran 2026-09-27: Switch the golf and padel covers to artwork (big title plus one family scene)", "superseded": []}
 {"at": "2026-09-27T20:22:15Z", "event": "assembled", "label": "interior", "output": "output/interior.pdf", "page_count": 80, "sha256": "48174bf35792afd130f814dc12ea850fad94727fa3dafd5676d566d2018e7fcf"}
 {"at": "2026-09-27T20:22:15Z", "event": "preflight_run", "status": "pass", "failures": 0, "warnings": 0, "profile": "kdp-default"}
+{"at": "2026-09-27T20:30:15Z", "event": "draft_submitted", "kind": "asset", "id": "cover-front-artwork", "revision": "v1", "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v1.png", "sha256": "abe0c57d9206af80f04f1620620825dd20208da6c7662552b97ca80b8d4cb0a2"}
+{"at": "2026-09-27T20:30:15Z", "event": "draft_submitted", "kind": "asset", "id": "cover-front-artwork", "revision": "v2", "path": "assets/drafts/cover-front-artwork/cover-front-artwork-v2.png", "sha256": "f1d1d583068cc54b009499c166edc561e26921277d6abd79ada083e3e74b0c2e"}
+{"at": "2026-09-27T20:31:06Z", "event": "cover_draft_submitted", "revision": "v2", "path": "cover/drafts/cover-v2.pdf"}

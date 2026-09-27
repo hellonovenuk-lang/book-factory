@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "task_id": "padel-addicts-guide-cover-artwork",
+  "book_id": "padel-addicts-guide",
+  "type": "illustration",
+  "stage": "release_ready",
+  "summary": "Produce native text-free cover artwork",
+  "instructions": "Match locked character and editorial references. No lettering, logos or recreated app interfaces. Never upscale native pixels.\n\nFixed at intake - do not change without the operator:\n- Title: exactly \"The Padel Addict's Guide to Talking About Anything Else\"\n- Main character: Josh, 31, a management consultant, married to Lauren, two children under five (Mia, 4, and Alfie, 1). Fixed look: short beard, a smartwatch he never takes off, and a padel brand cap or quarter-zip whether he is at the office or a toddler's birthday party.\n- Print colour: black and white\n- Cover style: big lettering (a text-only cover, bold type, no picture)",
+  "page_id": null,
+  "asset_id": "cover-front-artwork",
+  "scene": null,
+  "characters": [],
+  "references": [
+    "assets/approved/ref-character-main-main-character-reference.png",
+    "assets/approved/ref-character-support-supporting-character-reference.png",
+    "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+    "assets/approved/ref-page-editorial-editorial-illustration-example-phase-one-kitchen-table-scene.png",
+    "assets/approved/ref-page-diagnostic-activity-page-example-no-01-current-state-assessment.png",
+    "assets/approved/ref-palette-palette-and-type-sheet.png"
+  ],
+  "required_inputs": [],
+  "constraints": {
+    "embedded_text": false,
+    "maintain_character_identity": true,
+    "maintain_style": true,
+    "colour": true,
+    "readable_image": true,
+    "min_pixels": 1200,
+    "min_height_pixels": 1350
+  },
+  "output": {
+    "destination": "assets/drafts/cover-front-artwork/",
+    "submit_command": "bookfactory submit padel-addicts-guide cover-front-artwork --kind asset --file <path>"
+  },
+  "approval_required": false,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-09-27T20:27:09Z",
+  "closed_at": "2026-09-27T20:30:15Z"
+}
