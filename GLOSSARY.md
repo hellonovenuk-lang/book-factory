@@ -4,6 +4,10 @@ Plain-English meanings of the technical words that come up while working on
 Book Factory. It grows as we go: when Claude uses a new term, it adds a line
 here. Alphabetical.
 
+**A+ Content.** Free extra space on a book's Amazon page, set up in KDP once the book is live: pictures and short text panels below the description. Shows buyers the inside of the book.
+
+**ACOS (advertising cost of sale).** What an Amazon ad spent, as a share of the sales it brought in. If a book earns about £2.50 a copy on a £9.99 sale, an ACOS under about 25% means the ads are paying for themselves.
+
 **Activity page.** A page type (`activity`) for numbered activity panels - questionnaires with tick boxes, score boxes, write-in lines, a gauge, a cut-out card and more - built from a list of `blocks`, every word set as real type, never a generated picture.
 
 **Agent team.** An experimental Claude Code mode where several Claude sessions
@@ -159,6 +163,8 @@ Typing its name as a command runs it.
 
 **Spine width.** The thickness of the book's spine, set by the page count.
 Change the page count and the wrap-around cover must be rebuilt to match.
+
+**Sponsored Products ad.** Amazon's pay-per-click book ad: your book shows in search results or on other books' pages, and you pay only when someone clicks. Set up from the KDP bookshelf ("Promote and advertise").
 
 **Stale interior.** An assembled interior built from pages that have since been revised and re-approved. `status` shows it as "stale" and `next` asks for re-assembly and a fresh KDP check.
 
