@@ -20,6 +20,8 @@ ChatGPT, anything else). The most important file for behaviour.
 
 **Auto mode.** A Claude Code setting where Claude works without asking before each step; a built-in safety check still blocks risky actions, such as Claude loosening its own rules or signing a decision with the operator's name.
 
+**Bestseller list (Amazon).** Amazon's hourly-updated top 100 for each book category, e.g. "Word Search". A book's place there shows what is selling right now, not how many copies.
+
 **Big lettering cover.** A cover style choice at intake (`cover_style: big_lettering`): a text-only cover, bold type and no picture, recorded the same way as `cover artwork --mode none`.
 
 **Block.** One item in an `activity` page's `blocks` list (e.g. a tick list, a score box, a gauge, a cut-out card) - the renderer sets every block as real type, never a picture.
@@ -97,9 +99,13 @@ to do one job. It gets its own instructions and reports back when done.
 
 **Intake.** The 16 starting questions for a new book (who it's for, humour, look, length, exact title, main character details, print colour, cover style...). The agent can now draft the answers from your one-sentence idea; you check one summary and confirm, and nothing counts until you do.
 
+**Indie / small publisher.** A book not from a traditional publisher: self-published through KDP ("Independently published") or under a one-person imprint name.
+
 **Kanban board.** A board of columns (e.g. Idea, Shortlisted, Writing, Published) with cards you drag from one column to the next as work moves along.
 
 **KDP folder.** The top-level `KDP/` folder: one subfolder per book holding the cover PDF, the interior PDF and `UPLOAD.md`, what to type into each box of Amazon's KDP form.
+
+**Low-content book.** KDP's name for journals, planners and log books, mostly blank pages to fill in. They get no free ISBN, no series and no expanded distribution. Puzzle and colouring books do not count as low-content.
 
 **Loop.** A program repeating the same steps ("read the next task, do it") until something tells it to stop. `bookfactory produce` is one.
 
@@ -141,6 +147,8 @@ someone else. We don't install any; we write our own.
 can see them.
 
 **QA (quality assurance).** Automatic checks across the whole book for wording, layout and technical problems. Some findings need a person to look.
+
+**Royalty (KDP paperback).** What you earn per copy: list price × 60% (50% under £7.99 / $9.99) minus Amazon's printing cost.
 
 **Reference set.** The six pictures that fix a book's look before any page is drawn: the main character, the supporting characters, a scene, and three typeset samples (chapter opener, activity page, palette and type). Locking them is the "look lock".
 

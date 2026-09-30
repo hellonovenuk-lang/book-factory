@@ -40,3 +40,4 @@ Format: `- YYYY-MM-DD: the idea, in one line (where it came from)`
 - 2026-09-26: `create-from-idea` turns "Addict's" into the id `the-padel-addict-s-guide-...`; drop apostrophes and a leading "the" when making the id
 - 2026-09-27: A `bookfactory kdp pack <book>` command to copy a Release Ready book's approved cover and interior into `KDP/<book>/` and write its upload sheet, so the KDP folder never goes stale after a revision (the folder is filled by hand for now)
 - 2026-09-27: The cover build does not notice the author line printed on top of the cover picture (seen on Golf cover v4's first preview); add an overlap check
+- 2026-09-30: Puzzle books: a word-search/grid page with an answer key set as real type, then "The Golf Addict's Puzzle Book" as the pilot, live before Christmas; murder-mystery puzzle book and kids' joke books (separate pen name) after that (research run, `docs/research/2026-09-30-new-book-types.md`)
