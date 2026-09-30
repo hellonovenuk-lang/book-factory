@@ -148,8 +148,6 @@ can see them.
 
 **QA (quality assurance).** Automatic checks across the whole book for wording, layout and technical problems. Some findings need a person to look.
 
-**Royalty (KDP paperback).** What you earn per copy: list price × 60% (50% under £7.99 / $9.99) minus Amazon's printing cost.
-
 **Reference set.** The six pictures that fix a book's look before any page is drawn: the main character, the supporting characters, a scene, and three typeset samples (chapter opener, activity page, palette and type). Locking them is the "look lock".
 
 **Release Ready.** Book Factory's last stage: every page approved, interior and cover built and checked. The book can be uploaded to KDP.
@@ -157,7 +155,13 @@ can see them.
 **Repository (repo).** The project folder with its full history of changes.
 Book Factory's lives on GitHub.
 
+**Routine (scheduled task).** A job Claude runs on its own on a timetable, in a fresh session, e.g. the night-time book research three nights a week. You manage routines at claude.ai/code under Routines.
+
+**Royalty (KDP paperback).** What you earn per copy: list price × 60% (50% under £7.99 / $9.99) minus Amazon's printing cost.
+
 **Sample page (reference render).** A one-page render of an ordinary page spec, made with `bookfactory reference render` to show a typeset reference (chapter opener, normal page, checklist page, palette sheet) before any real page exists. It is never added to the page plan.
+
+**Scraper.** A small script that reads public web pages and saves the useful bits as a table; `scripts/research/amazon_bestsellers.py` does this for Amazon's bestseller lists.
 
 **Series preset.** Starting a new book from an earlier, locked book in the same series (`create --series-from`), so it reuses that book's voice, visual rules, design settings and reference art instead of making them again. The reused art arrives as drafts, still to be approved in the new book.
 
