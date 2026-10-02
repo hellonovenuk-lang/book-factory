@@ -1,0 +1,22 @@
+{
+  "answers": {
+    "idea": "A deadpan official handbook for a man who has just retired and is now home all day, and for the wife who now lives with him. The humour is at home: the kitchen he has started 'helping' in, the cupboards he has reorganised, the quick jobs that took a month. Affectionate; the household is the joke too.",
+    "title": "The Newly Retired Man's Guide to Being Home All Day",
+    "buyer": "His wife, grown-up children, or work colleagues clubbing together for a leaving gift; also bought for his birthday, Christmas or Father's Day.",
+    "recipient": "A man in his mid-sixties who has just retired after about 40 years in work and is now at home every day, with energy, opinions and no meetings.",
+    "recognition_trigger": "Reorganising the kitchen cupboards 'so they make sense'; re-loading the dishwasher after someone else has loaded it; announcing a 'project' (the shed, the loft, the garage) that is still open in March; following his wife round the supermarket with suggestions; asking 'what are we doing today?' at 7am; keeping a spreadsheet of the bin collection days; still waking at 6:15 for a commute that no longer exists; calling the grandchildren's nursery run 'the logistics'; telling former colleagues on the phone that he is 'busier than ever'; treating the weather forecast as a briefing.",
+    "humour_level": "medium",
+    "visual_feel": "classic_editorial_caricature",
+    "colour_direction": "muted",
+    "print_colour": "black_and_white",
+    "cover_style": "picture",
+    "main_character": "book_factory_invents",
+    "main_character_details": "Graham, 66, just retired after 41 years as a regional operations manager, married to Sue, 63, who has run the house the whole time. Two grown-up children and one grandchild, Ellie, 3. Fixed look: reading glasses pushed up on his forehead, a zip-up fleece gilet, and a tape measure clipped to his belt.",
+    "length": "80",
+    "must_include": "none",
+    "must_avoid": "Anything about money worries, health decline or death; keep it warm, not patronising."
+  },
+  "unclear": [],
+  "drafted_by": "claude",
+  "drafted_at": "2026-10-02T11:01:54Z"
+}

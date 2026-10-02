@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "book_id": "retired-mans-guide",
+  "title": "The Newly Retired Man's Guide to Being Home All Day",
+  "subtitle": "An Official Handbook for Him, and for the Person Who Now Lives With Him",
+  "series": null,
+  "stage": "book_brief",
+  "format": {
+    "trim": "6x9",
+    "colour": false,
+    "bleed": false,
+    "dpi": 300,
+    "kdp_profile": "kdp-default",
+    "target_page_count": 80
+  },
+  "concept": {
+    "locked": false,
+    "locked_at": null,
+    "sha256": null
+  },
+  "manuscript": {
+    "version": "v0",
+    "locked": false,
+    "locked_at": null,
+    "sha256": null,
+    "path": null
+  },
+  "style": {
+    "visual_version": "v0",
+    "visual_locked": false,
+    "visual_locked_at": null,
+    "visual_sha256": null,
+    "voice_version": "v0",
+    "voice_locked": false,
+    "voice_locked_at": null,
+    "voice_sha256": null
+  },
+  "page_plan": {
+    "planned": false,
+    "page_count": 0,
+    "planned_at": null
+  },
+  "intake": {
+    "required": true,
+    "completed": false,
+    "completed_at": null,
+    "answers": {},
+    "draft": {
+      "answers": {
+        "idea": "A deadpan official handbook for a man who has just retired and is now home all day, and for the wife who now lives with him. The humour is at home: the kitchen he has started 'helping' in, the cupboards he has reorganised, the quick jobs that took a month. Affectionate; the household is the joke too.",
+        "title": "The Newly Retired Man's Guide to Being Home All Day",
+        "buyer": "His wife, grown-up children, or work colleagues clubbing together for a leaving gift; also bought for his birthday, Christmas or Father's Day.",
+        "recipient": "A man in his mid-sixties who has just retired after about 40 years in work and is now at home every day, with energy, opinions and no meetings.",
+        "recognition_trigger": "Reorganising the kitchen cupboards 'so they make sense'; re-loading the dishwasher after someone else has loaded it; announcing a 'project' (the shed, the loft, the garage) that is still open in March; following his wife round the supermarket with suggestions; asking 'what are we doing today?' at 7am; keeping a spreadsheet of the bin collection days; still waking at 6:15 for a commute that no longer exists; calling the grandchildren's nursery run 'the logistics'; telling former colleagues on the phone that he is 'busier than ever'; treating the weather forecast as a briefing.",
+        "humour_level": "medium",
+        "visual_feel": "classic_editorial_caricature",
+        "colour_direction": "muted",
+        "print_colour": "black_and_white",
+        "cover_style": "picture",
+        "main_character": "book_factory_invents",
+        "main_character_details": "Graham, 66, just retired after 41 years as a regional operations manager, married to Sue, 63, who has run the house the whole time. Two grown-up children and one grandchild, Ellie, 3. Fixed look: reading glasses pushed up on his forehead, a zip-up fleece gilet, and a tape measure clipped to his belt.",
+        "length": "80",
+        "must_include": "none",
+        "must_avoid": "Anything about money worries, health decline or death; keep it warm, not patronising."
+      },
+      "unclear": [],
+      "drafted_by": "claude",
+      "drafted_at": "2026-10-02T11:01:54Z"
+    },
+    "drafted_by": null,
+    "confirmed_by": null,
+    "changed_on_confirm": []
+  },
+  "production_policy": {
+    "mode": "checkpointed",
+    "operator_authorized": false,
+    "visual_checkpoint": true,
+    "major_gate_checkpoints": true,
+    "stop_on_soft_qa_failure": true,
+    "stop_on_hard_failure": true,
+    "authorized_at": null,
+    "source": null
+  },
+  "pictures": {
+    "budget": "chapter_openers",
+    "count": null,
+    "set_by": null,
+    "set_at": "2026-10-02T11:01:37Z",
+    "source": "new_book_default"
+  },
+  "production_mode": "wait_for_operator",
+  "blocked": null,
+  "next_action": {
+    "task_id": "retired-mans-guide-intake",
+    "type": "intake",
+    "summary": "Show the operator the drafted intake answers and wait for their reply",
+    "page_id": null,
+    "asset_id": null,
+    "approval_required": true,
+    "mode": "wait_for_operator"
+  },
+  "last_transition": {
+    "from": "idea",
+    "to": "book_brief",
+    "at": "2026-10-02T11:01:38Z",
+    "by": "system",
+    "note": "stage derived from repository state"
+  },
+  "created_at": "2026-10-02T11:01:37Z",
+  "updated_at": "2026-10-02T11:01:54Z"
+}

@@ -1,0 +1,4 @@
+{"at": "2026-10-02T11:01:38Z", "event": "cover_required", "paper": "white", "finish": "matte", "artwork": "native"}
+{"at": "2026-10-02T11:01:38Z", "event": "stage_advanced", "from": "idea", "to": "book_brief", "by": "system", "note": "stage derived from repository state"}
+{"at": "2026-10-02T11:01:38Z", "event": "book_created", "book_id": "retired-mans-guide", "title": "The Newly Retired Man's Guide to Being Home All Day", "trim": "6x9", "colour": false}
+{"at": "2026-10-02T11:01:54Z", "event": "intake_drafted", "drafted_by": "claude"}

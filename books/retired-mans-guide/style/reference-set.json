@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "description": "Every entry here must be approved before `bookfactory lock visual` will pass. This is the set that later illustration tasks are generated against.",
+  "required": [
+    {
+      "asset_id": "ref-character-main",
+      "kind": "character_reference",
+      "title": "Main character reference",
+      "description": "Front and three-quarter view, neutral and one signature expression."
+    },
+    {
+      "asset_id": "ref-character-support",
+      "kind": "character_reference",
+      "title": "Supporting character reference",
+      "description": "The recurring partner/friend/pet. Delete this entry if the book has none."
+    },
+    {
+      "asset_id": "ref-layout-chapter-opener",
+      "kind": "layout_reference",
+      "title": "Chapter opener example",
+      "description": "Approved example of how every chapter opener looks."
+    },
+    {
+      "asset_id": "ref-page-editorial",
+      "kind": "page_reference",
+      "title": "Normal internal editorial page example",
+      "description": "The most common page in the book."
+    },
+    {
+      "asset_id": "ref-page-diagnostic",
+      "kind": "page_reference",
+      "title": "Diagram / checklist / test page example",
+      "description": "The structured-content page family."
+    },
+    {
+      "asset_id": "ref-palette",
+      "kind": "palette_reference",
+      "title": "Palette, type and layout rules",
+      "description": "One sheet showing the palette swatches and type hierarchy."
+    }
+  ]
+}
