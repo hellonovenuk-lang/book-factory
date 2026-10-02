@@ -14,9 +14,11 @@
     "main_character_details": "Graham, 66, just retired after 41 years as a regional operations manager, married to Sue, 63, who has run the house the whole time. Two grown-up children and one grandchild, Ellie, 3. Fixed look: reading glasses pushed up on his forehead, a zip-up fleece gilet, and a tape measure clipped to his belt.",
     "length": "80",
     "must_include": "none",
-    "must_avoid": "Anything about money worries, health decline or death; keep it warm, not patronising."
+    "must_avoid": "Anything about money worries, health decline or death; keep it warm, not patronising.",
+    "production_policy": "visual_checkpoint"
   },
-  "unclear": [],
+  "completed_at": "2026-10-02T11:05:44Z",
   "drafted_by": "claude",
-  "drafted_at": "2026-10-02T11:01:54Z"
+  "confirmed_by": "kieran",
+  "changed_on_confirm": []
 }

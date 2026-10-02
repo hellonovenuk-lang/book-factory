@@ -4,7 +4,7 @@
   "title": "The Newly Retired Man's Guide to Being Home All Day",
   "subtitle": "An Official Handbook for Him, and for the Person Who Now Lives With Him",
   "series": null,
-  "stage": "book_brief",
+  "stage": "visual_development",
   "format": {
     "trim": "6x9",
     "colour": false,
@@ -14,26 +14,26 @@
     "target_page_count": 80
   },
   "concept": {
-    "locked": false,
-    "locked_at": null,
-    "sha256": null
+    "locked": true,
+    "locked_at": "2026-10-02T11:07:00Z",
+    "sha256": "b762cbc3d9b207293e4cfc7ef22be0380e9ea18e07e0d2edf0438c2e7a03c367"
   },
   "manuscript": {
-    "version": "v0",
-    "locked": false,
-    "locked_at": null,
-    "sha256": null,
-    "path": null
+    "version": "v1",
+    "locked": true,
+    "locked_at": "2026-10-02T11:12:13Z",
+    "sha256": "6403887a80801633811803940ede831815eadc70dac17cad0868097632e2fb8e",
+    "path": "manuscript/versions/manuscript-v1.md"
   },
   "style": {
     "visual_version": "v0",
     "visual_locked": false,
     "visual_locked_at": null,
     "visual_sha256": null,
-    "voice_version": "v0",
-    "voice_locked": false,
-    "voice_locked_at": null,
-    "voice_sha256": null
+    "voice_version": "v1",
+    "voice_locked": true,
+    "voice_locked_at": "2026-10-02T11:07:58Z",
+    "voice_sha256": "a5cce5ae23568f725b2e0d6d6944c733e20cc6bf3ae803a2dbbba64fe32da542"
   },
   "page_plan": {
     "planned": false,
@@ -42,44 +42,40 @@
   },
   "intake": {
     "required": true,
-    "completed": false,
-    "completed_at": null,
-    "answers": {},
-    "draft": {
-      "answers": {
-        "idea": "A deadpan official handbook for a man who has just retired and is now home all day, and for the wife who now lives with him. The humour is at home: the kitchen he has started 'helping' in, the cupboards he has reorganised, the quick jobs that took a month. Affectionate; the household is the joke too.",
-        "title": "The Newly Retired Man's Guide to Being Home All Day",
-        "buyer": "His wife, grown-up children, or work colleagues clubbing together for a leaving gift; also bought for his birthday, Christmas or Father's Day.",
-        "recipient": "A man in his mid-sixties who has just retired after about 40 years in work and is now at home every day, with energy, opinions and no meetings.",
-        "recognition_trigger": "Reorganising the kitchen cupboards 'so they make sense'; re-loading the dishwasher after someone else has loaded it; announcing a 'project' (the shed, the loft, the garage) that is still open in March; following his wife round the supermarket with suggestions; asking 'what are we doing today?' at 7am; keeping a spreadsheet of the bin collection days; still waking at 6:15 for a commute that no longer exists; calling the grandchildren's nursery run 'the logistics'; telling former colleagues on the phone that he is 'busier than ever'; treating the weather forecast as a briefing.",
-        "humour_level": "medium",
-        "visual_feel": "classic_editorial_caricature",
-        "colour_direction": "muted",
-        "print_colour": "black_and_white",
-        "cover_style": "picture",
-        "main_character": "book_factory_invents",
-        "main_character_details": "Graham, 66, just retired after 41 years as a regional operations manager, married to Sue, 63, who has run the house the whole time. Two grown-up children and one grandchild, Ellie, 3. Fixed look: reading glasses pushed up on his forehead, a zip-up fleece gilet, and a tape measure clipped to his belt.",
-        "length": "80",
-        "must_include": "none",
-        "must_avoid": "Anything about money worries, health decline or death; keep it warm, not patronising."
-      },
-      "unclear": [],
-      "drafted_by": "claude",
-      "drafted_at": "2026-10-02T11:01:54Z"
+    "completed": true,
+    "completed_at": "2026-10-02T11:05:44Z",
+    "answers": {
+      "idea": "A deadpan official handbook for a man who has just retired and is now home all day, and for the wife who now lives with him. The humour is at home: the kitchen he has started 'helping' in, the cupboards he has reorganised, the quick jobs that took a month. Affectionate; the household is the joke too.",
+      "title": "The Newly Retired Man's Guide to Being Home All Day",
+      "buyer": "His wife, grown-up children, or work colleagues clubbing together for a leaving gift; also bought for his birthday, Christmas or Father's Day.",
+      "recipient": "A man in his mid-sixties who has just retired after about 40 years in work and is now at home every day, with energy, opinions and no meetings.",
+      "recognition_trigger": "Reorganising the kitchen cupboards 'so they make sense'; re-loading the dishwasher after someone else has loaded it; announcing a 'project' (the shed, the loft, the garage) that is still open in March; following his wife round the supermarket with suggestions; asking 'what are we doing today?' at 7am; keeping a spreadsheet of the bin collection days; still waking at 6:15 for a commute that no longer exists; calling the grandchildren's nursery run 'the logistics'; telling former colleagues on the phone that he is 'busier than ever'; treating the weather forecast as a briefing.",
+      "humour_level": "medium",
+      "visual_feel": "classic_editorial_caricature",
+      "colour_direction": "muted",
+      "print_colour": "black_and_white",
+      "cover_style": "picture",
+      "main_character": "book_factory_invents",
+      "main_character_details": "Graham, 66, just retired after 41 years as a regional operations manager, married to Sue, 63, who has run the house the whole time. Two grown-up children and one grandchild, Ellie, 3. Fixed look: reading glasses pushed up on his forehead, a zip-up fleece gilet, and a tape measure clipped to his belt.",
+      "length": "80",
+      "must_include": "none",
+      "must_avoid": "Anything about money worries, health decline or death; keep it warm, not patronising.",
+      "production_policy": "visual_checkpoint"
     },
-    "drafted_by": null,
-    "confirmed_by": null,
+    "draft": null,
+    "drafted_by": "claude",
+    "confirmed_by": "kieran",
     "changed_on_confirm": []
   },
   "production_policy": {
-    "mode": "checkpointed",
-    "operator_authorized": false,
+    "mode": "visual_checkpoint",
+    "operator_authorized": true,
     "visual_checkpoint": true,
-    "major_gate_checkpoints": true,
-    "stop_on_soft_qa_failure": true,
+    "major_gate_checkpoints": false,
+    "stop_on_soft_qa_failure": false,
     "stop_on_hard_failure": true,
-    "authorized_at": null,
-    "source": null
+    "authorized_at": "2026-10-02T11:05:44Z",
+    "source": "intake_questionnaire"
   },
   "pictures": {
     "budget": "chapter_openers",
@@ -91,21 +87,21 @@
   "production_mode": "wait_for_operator",
   "blocked": null,
   "next_action": {
-    "task_id": "retired-mans-guide-intake",
-    "type": "intake",
-    "summary": "Show the operator the drafted intake answers and wait for their reply",
+    "task_id": "retired-mans-guide-lock-visual",
+    "type": "operator_decision",
+    "summary": "Approve the reference set and lock the visual style",
     "page_id": null,
     "asset_id": null,
     "approval_required": true,
     "mode": "wait_for_operator"
   },
   "last_transition": {
-    "from": "idea",
-    "to": "book_brief",
-    "at": "2026-10-02T11:01:38Z",
+    "from": "manuscript_lock",
+    "to": "visual_development",
+    "at": "2026-10-02T11:13:04Z",
     "by": "system",
     "note": "stage derived from repository state"
   },
   "created_at": "2026-10-02T11:01:37Z",
-  "updated_at": "2026-10-02T11:01:54Z"
+  "updated_at": "2026-10-02T11:21:13Z"
 }

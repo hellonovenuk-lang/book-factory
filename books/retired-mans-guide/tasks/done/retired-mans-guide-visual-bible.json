@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "task_id": "retired-mans-guide-visual-bible",
+  "book_id": "retired-mans-guide",
+  "type": "authoring",
+  "stage": "manuscript_lock",
+  "summary": "Finish the visual bible",
+  "instructions": "Replace every TODO in style/visual-bible.md. Be concrete about character appearance, line style, medium, palette and edge treatment.\nA fresh agent with no chat history must be able to draw on-style from this file alone. Vague entries here are what caused the drift last time.\n\nFixed at intake - do not change without the operator:\n- Title: exactly \"The Newly Retired Man's Guide to Being Home All Day\"\n- Main character: Graham, 66, just retired after 41 years as a regional operations manager, married to Sue, 63, who has run the house the whole time. Two grown-up children and one grandchild, Ellie, 3. Fixed look: reading glasses pushed up on his forehead, a zip-up fleece gilet, and a tape measure clipped to his belt.\n- Print colour: black and white\n- Cover style: a picture cover\n- Must avoid: Anything about money worries, health decline or death; keep it warm, not patronising.",
+  "page_id": null,
+  "asset_id": null,
+  "scene": null,
+  "characters": [],
+  "references": [],
+  "required_inputs": [
+    "brief/brief.md",
+    "style/design-tokens.json"
+  ],
+  "constraints": {},
+  "output": {
+    "destination": "style/visual-bible.md",
+    "expected_format": "markdown"
+  },
+  "approval_required": true,
+  "status": "done",
+  "gate": null,
+  "remediation": false,
+  "retry_count": 0,
+  "mode": "continue_automatically",
+  "created_at": "2026-10-02T11:12:13Z",
+  "closed_at": "2026-10-02T11:13:04Z"
+}

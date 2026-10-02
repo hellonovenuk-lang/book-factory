@@ -1,6 +1,265 @@
 {
   "schema_version": "1.0",
   "book_id": "retired-mans-guide",
-  "updated_at": "2026-10-02T11:01:54Z",
-  "assets": []
+  "updated_at": "2026-10-02T11:21:13Z",
+  "assets": [
+    {
+      "asset_id": "ref-character-main",
+      "kind": "character_reference",
+      "title": "Main character reference",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-character-main/ref-character-main-v1.png",
+          "sha256": "52eb9cc9749b73e9b06230016ce39add4b6d2a183b3f0d4ea787101765fd3405",
+          "submitted_at": "2026-10-02T11:15:27Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-character-main-main-character-reference.png",
+        "sha256": "52eb9cc9749b73e9b06230016ce39add4b6d2a183b3f0d4ea787101765fd3405",
+        "approved_at": "2026-10-02T11:15:39Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-character-main/ref-character-main-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-character-support",
+      "kind": "character_reference",
+      "title": "Supporting character reference",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-character-support/ref-character-support-v1.png",
+          "sha256": "956ab90e22901e4c6fd342a68a9106153bbe15b1c454feb1f16d50b73b1bd754",
+          "submitted_at": "2026-10-02T11:17:23Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-character-support-supporting-character-reference.png",
+        "sha256": "956ab90e22901e4c6fd342a68a9106153bbe15b1c454feb1f16d50b73b1bd754",
+        "approved_at": "2026-10-02T11:17:26Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-character-support/ref-character-support-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-layout-chapter-opener",
+      "kind": "layout_reference",
+      "title": "Chapter opener example",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
+          "sha256": "9a20745b4acf29254684ec50db92e40d02dde11a3d61f35b478094703a497485",
+          "submitted_at": "2026-10-02T11:19:16Z",
+          "source": "reference-render:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-layout-chapter-opener-chapter-opener-example.png",
+        "sha256": "9a20745b4acf29254684ec50db92e40d02dde11a3d61f35b478094703a497485",
+        "approved_at": "2026-10-02T11:19:27Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-layout-chapter-opener/ref-layout-chapter-opener-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-page-diagnostic",
+      "kind": "page_reference",
+      "title": "Diagram / checklist / test page example",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
+          "sha256": "f3a55e699429084a1ddc3e0e46429ca7742ad48b1dfb7125a2cec99759082672",
+          "submitted_at": "2026-10-02T11:20:50Z",
+          "source": "reference-render:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-page-diagnostic-diagram-checklist-test-page-example.png",
+        "sha256": "f3a55e699429084a1ddc3e0e46429ca7742ad48b1dfb7125a2cec99759082672",
+        "approved_at": "2026-10-02T11:21:00Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-page-diagnostic/ref-page-diagnostic-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-page-editorial",
+      "kind": "page_reference",
+      "title": "Editorial illustration example: Stage One kitchen scene",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
+          "sha256": "5f3bb9a76cba638f5847b4c3382a90521a8ebda61cf449612cbc3dfe4dd88d72",
+          "submitted_at": "2026-10-02T11:18:53Z",
+          "source": null,
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 2528,
+          "height": 1696
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-page-editorial-editorial-illustration-example-stage-one-kitchen-scene.png",
+        "sha256": "5f3bb9a76cba638f5847b4c3382a90521a8ebda61cf449612cbc3dfe4dd88d72",
+        "approved_at": "2026-10-02T11:19:11Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-page-editorial/ref-page-editorial-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 2528,
+        "height": 1696
+      },
+      "approval_history": [],
+      "notes": null
+    },
+    {
+      "asset_id": "ref-palette",
+      "kind": "palette_reference",
+      "title": "Palette, type and layout rules",
+      "description": null,
+      "page_id": null,
+      "characters": [],
+      "references": [],
+      "status": "approved",
+      "revision_open": false,
+      "locked": false,
+      "reference_role": null,
+      "drafts": [
+        {
+          "revision": "v1",
+          "path": "assets/drafts/ref-palette/ref-palette-v1.png",
+          "sha256": "a1e9178cb3421f0ffdc27deab7ba940bca7048575a9f4417970f644ee283a610",
+          "submitted_at": "2026-10-02T11:21:07Z",
+          "source": "reference-render:default",
+          "status": "approved",
+          "note": null,
+          "constraint_failures": [],
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "approved": {
+        "revision": "v1",
+        "path": "assets/approved/ref-palette-palette-type-and-layout-rules.png",
+        "sha256": "a1e9178cb3421f0ffdc27deab7ba940bca7048575a9f4417970f644ee283a610",
+        "approved_at": "2026-10-02T11:21:13Z",
+        "approved_by": "claude",
+        "source_draft": "assets/drafts/ref-palette/ref-palette-v1.png",
+        "note": null,
+        "superseded_at": null,
+        "superseded_reason": null,
+        "authorization": "autonomous_production_policy:visual_checkpoint",
+        "width": 1800,
+        "height": 2700
+      },
+      "approval_history": [],
+      "notes": null
+    }
+  ]
 }
