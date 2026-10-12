@@ -16,7 +16,7 @@ Nightly research run, 12 October 2026. Angle 2 of the rotation (the last run was
 
 ## 3. Evidence
 
-How sure am I: **medium-low.** Tonight's Amazon refresh ran for over ten minutes with no output (the same problem as the 5 and 9 October runs), so the numbers below are the 30 September snapshot (`docs/research/2026-09-30-amazon-bestsellers.csv`), twelve days old. Web search could not reach Amazon pages and found no adult household "would you rather" bestseller. I found no sales figures, only ranks and review counts.
+How sure am I: **medium-low.** Tonight's Amazon refresh only finished after I wrote this, so the tables below use the 30 September snapshot (`docs/research/2026-09-30-amazon-bestsellers.csv`). I spot-checked the new pull for the would-you-rather and men's gift titles: the same books hold the same places (Would you rather? World UK Trivia 1 and Quiz 3; the kids' Would You Rather Game Book still at UK Trivia 6 with about 6,600 reviews; The Book For Men Who Have Everything at US Trivia 5). Prices in the new pull show in pounds for UK lists. Web search could not reach Amazon pages and found no adult household would-you-rather bestseller. I found no sales figures, only ranks and review counts.
 
 UK Trivia and Quiz questions lists (30 September snapshot; prices were shown in US dollars because the data was pulled from a US server):
 
