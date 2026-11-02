@@ -12,13 +12,14 @@ operator presses Publish.
 | KDP field | File | SHA-256 |
 | --- | --- | --- |
 | **Manuscript (interior)** | `interior.pdf` in this folder (58 pages; a copy of the book's `interior/interior-v4-proposal.pdf`) | `195e5e1e9bce3a3218b6484d9f19d3e5bcde8f9f3e33ee90e9d37cb4a65a22a6` |
-| **Cover** | `cover.pdf` in this folder ("How was your weekend?"; a copy of the book's `cover/proposals/cover-v3-weekend.pdf`) | `3fc886310ac18b97792fb026bb6b31c6842eeb53e3e3c1babff2248015006fa1` |
+| **Cover** | `cover.pdf` in this folder (v4 "The dinner party", full colour, chosen by Kieran 2026-11-02; a copy of the book's `cover/proposals/cover-v4-dinner.pdf`) | `228000abcfbb71debd67f940714ed6090058210018dce92d51beaea36a382d3b` |
+| Superseded cover (v3) | in the book folder: `cover/proposals/cover-v3-weekend.pdf` | `3fc886310ac18b97792fb026bb6b31c6842eeb53e3e3c1babff2248015006fa1` |
 | Superseded interior (80 pages) | `books/runners-guide-to-normal-conversation/releases/interior-v3-publication-draft.pdf` | `675ff470d239e292e0f7f6433f7ae24a9d94cab234bec5399c695e33ca942d63` |
 | Superseded covers (sized for 80 pages, do not use) | in the book folder: `cover/proposals/cover-v2-text-only.pdf`, `cover/drafts/cover-v1.pdf` | |
 
 The interior and cover belong together: the cover's spine is sized for exactly
 58 pages. If the interior ever changes page count, the cover must be rebuilt
-with `python books/runners-guide-to-normal-conversation/cover/build_cover_v3.py`.
+with `python books/runners-guide-to-normal-conversation/cover/build_cover_v4.py`.
 The committed PDFs are the approved files; rebuilding produces new checksums.
 
 Choose "Upload a cover you already have (print-ready PDF only)". Do not use
@@ -104,7 +105,7 @@ Cover (checked 2026-09-23):
 | Print options | Black & white interior, white paper. Trim 6 × 9 in. Bleed: No bleed. Cover finish: Matte |
 | Manuscript | Upload `interior.pdf` from this folder |
 | Cover | Upload `cover.pdf` from this folder |
-| AI-generated content | Answer honestly for how this book was made. If ChatGPT drafted the text, answer **Yes** for text. The illustrations were generated, so answer **Yes** for images. The cover has no generated images (it is typeset and drawn by code), but the interior does. Amazon does not show buyers this answer |
+| AI-generated content | Answer honestly for how this book was made. If ChatGPT drafted the text, answer **Yes** for text. The illustrations were generated, so answer **Yes** for images. The v4 cover picture was generated too (all lettering on it is real type). Amazon does not show buyers this answer |
 
 Then open the **Print Previewer** and check every page, the spine and the barcode area.
 

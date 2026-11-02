@@ -9,7 +9,17 @@ Kieran 2026-09-27. The operator presses Publish.
 | KDP field | File | SHA-256 |
 | --- | --- | --- |
 | **Manuscript (interior)** | `interior.pdf` (71 pages) | `49e7897a6fb8728196eb597bf9ce6b331bc64315469614a95861a698c16ba931` |
-| **Cover** | `cover.pdf` (full wrap, cover v4) | `c2311d8bf0a2bfaf042922d9692c9702b1e81989db05f4ba4b9228fb803e7c13` |
+| **Cover (new, use this one)** | `cover-full-colour.pdf` (full wrap, full-colour design, 2026-11-02) | `292b5250dbf58f6f29395ca9d11f59d84e59648fb87c161270d4b43a4fa969e0` |
+| Cover (old, replaced) | `cover.pdf` (full wrap, cover v4) | `c2311d8bf0a2bfaf042922d9692c9702b1e81989db05f4ba4b9228fb803e7c13` |
+
+**2026-11-02:** Kieran chose the new full-colour cover ("very happy with all
+three designs"). To replace the cover on a live book: KDP Bookshelf, the
+paperback's "..." menu, "Edit paperback content", upload
+`cover-full-colour.pdf` under Cover, save and publish; Amazon re-reviews it
+(up to 72 hours) and the old cover stays on sale until then. Book Factory's
+own record still lists cover v4 as approved until the artwork is revised and
+the new draft approved there (see `PLAN.md`); the new PDF was built by the
+same cover builder at the same 71-page size and passes the same checks.
 
 These are copies. The book's own approved files are the source:
 `books/golf-addicts-guide-to-family-reintegration/cover/drafts/cover-v4.pdf`
@@ -74,7 +84,7 @@ Cover Creator.
 | Imprint | Leave as "Independently published" |
 | Print options | Black & white interior, white paper. Trim 6 × 9 in. Bleed: No bleed. Cover finish: Matte |
 | Manuscript | Upload `interior.pdf` from this folder |
-| Cover | Upload `cover.pdf` from this folder |
+| Cover | Upload `cover-full-colour.pdf` from this folder |
 | AI-generated content | Text: **Yes** (drafted by Claude). Images: **Yes** (interior pictures and the cover picture were generated). Amazon does not show buyers this answer |
 
 Then open the **Print Previewer** and check every page, the spine and the

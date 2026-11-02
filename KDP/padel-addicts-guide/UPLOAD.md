@@ -9,7 +9,17 @@ operator presses Publish.
 | KDP field | File | SHA-256 |
 | --- | --- | --- |
 | **Manuscript (interior)** | `interior.pdf` (80 pages) | `48174bf35792afd130f814dc12ea850fad94727fa3dafd5676d566d2018e7fcf` |
-| **Cover** | `cover.pdf` (full wrap, cover v2) | `6722704ee3d8c8e6bb50b57b99f28a247130618439aa7d58a6b21a9154599de4` |
+| **Cover (new, use this one)** | `cover-full-colour.pdf` (full wrap, full-colour design, 2026-11-02) | `912b043d652fbaee6000c804e29ee8ffd196d4f53f224fbb056dc2924ebd54dd` |
+| Cover (old, replaced) | `cover.pdf` (full wrap, cover v2) | `6722704ee3d8c8e6bb50b57b99f28a247130618439aa7d58a6b21a9154599de4` |
+
+**2026-11-02:** Kieran chose the new full-colour cover ("very happy with all
+three designs"). To replace the cover on a live book: KDP Bookshelf, the
+paperback's "..." menu, "Edit paperback content", upload
+`cover-full-colour.pdf` under Cover, save and publish; Amazon re-reviews it
+(up to 72 hours) and the old cover stays on sale until then. Book Factory's
+own record still lists cover v2 as approved until the artwork is revised and
+the new draft approved there (see `PLAN.md`); the new PDF was built by the
+same cover builder at the same 80-page size and passes the same checks.
 
 These are copies. The book's own approved files are the source:
 `books/padel-addicts-guide/cover/drafts/cover-v2.pdf` and the assembled
@@ -75,7 +85,7 @@ A close competitor exists: *You Play Padel? Funny, You Never Mentioned It!*
 | Imprint | Leave as "Independently published" |
 | Print options | Black & white interior, white paper. Trim 6 × 9 in. Bleed: No bleed. Cover finish: Matte |
 | Manuscript | Upload `interior.pdf` from this folder |
-| Cover | Upload `cover.pdf` from this folder |
+| Cover | Upload `cover-full-colour.pdf` from this folder |
 | AI-generated content | Text: **Yes** (drafted by Claude). Images: **Yes** (interior pictures and the cover picture were generated). Amazon does not show buyers this answer |
 
 Then open the **Print Previewer** and check every page, the spine and the
