@@ -3,11 +3,11 @@
   "paper": "white",
   "finish": "matte",
   "artwork": "native",
-  "direction": "Big title plus one family scene (Kieran, 2026-09-27, after Amazon research). Cream page the same colour as the artwork's paper, so the picture sits on it without a box. Top: a brick-red gift strip. Then the title stacked in bold condensed capitals in fairway green and brick red, readable at Amazon thumbnail size. Below: Dave at the family Sunday roast, mid-swing with a French stick, while Sue, Alfie and Poppy stare and Biscuit eyes the roast. Fine ink line, flat muted colour. Author at the foot.",
+  "direction": "Full-colour bold cover (Kieran, 2026-11-02: stand out more, obvious who it is for, characters in full colour on the cover only; the interior stays black and white). Whole wrap in deep fairway green. Front: a brick-red gift strip, the title stacked in big condensed capitals (cream, with REINTEGRATION in golden yellow) over the empty green top of a full-bleed picture: Dave caught creeping out of the front door at dawn with his golf bag while Sue, Alfie, Poppy and Biscuit sit on the stairs in pyjamas, arms folded. Author on a black label at the foot. Subtitle left off the front (no room above Dave); it stays here for the listing.",
   "author": "Kieran Smith",
   "back_copy": "Your family has applied for your return.\n\nFor years you have been on a long tour of duty at the golf club. You have missed birthdays, bath times and most of Sunday. You have described the putt on the 7th roughly four hundred times, including once during a minute's silence.\n\nThis is the official Family Reintegration Programme: eight stages, twenty-four activities, a relapse-prevention plan for the first sunny Saturday in April and a certificate at the end, if you earn it.\n\nFor every golfer who pops out for a quick nine and comes back in the dark, and for everyone waiting at home with his tea under cling film.",
-  "artwork_width_in": 4.0,
-  "artwork_height_in": 4.5,
+  "artwork_width_in": 6.125,
+  "artwork_height_in": 7.6,
   "drafts": [
     {
       "revision": "v1",
@@ -109,37 +109,41 @@
     "run_at": "2026-09-27T20:33:58Z"
   },
   "design": {
-    "background": "#f7f4e5",
-    "ink": "#1d5c36",
-    "accent": "#1d5c36",
-    "author_colour": "#1d5c36",
     "title_font": "style/fonts/Anton-Regular.ttf",
     "body_font": "style/fonts/Archivo-Regular.ttf",
+    "stack_top_in": 1.0,
+    "author_size_pt": 18,
+    "subtitle_size_pt": 12,
+    "artwork_layout": "bleed_bottom",
+    "artwork_fade_in": 0.6,
+    "author_background": "#1c1a17",
+    "background": "#2d503c",
+    "ink": "#fbf8f1",
+    "accent": "#fbf8f1",
+    "author_colour": "#fbf8f1",
     "banner": {
-      "text": "A gift for golfers, and the people who live with them",
+      "text": "The perfect gift for the golfer who's never home",
       "background": "#c4553a",
       "colour": "#fbf8f1"
     },
     "title_lines": [
       {
         "text": "The Golf Addict's",
-        "size_pt": 48,
-        "colour": "#1d5c36"
+        "size_pt": 50,
+        "colour": "#fbf8f1"
       },
       {
         "text": "Guide to Family",
-        "size_pt": 48,
-        "colour": "#1d5c36"
+        "size_pt": 50,
+        "colour": "#fbf8f1"
       },
       {
         "text": "Reintegration",
-        "size_pt": 56,
-        "colour": "#c4553a"
+        "size_pt": 64,
+        "colour": "#f6c945"
       }
     ],
-    "stack_top_in": 0.95,
-    "author_size_pt": 18,
-    "subtitle_size_pt": 11.5
+    "front_subtitle": false
   },
   "subtitle": "An official programme for bringing him home from the golf club"
 }

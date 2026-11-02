@@ -3,44 +3,47 @@
   "paper": "white",
   "finish": "matte",
   "artwork": "native",
-  "direction": "Big title plus one family scene (Kieran, 2026-09-27, after Amazon research), in the same layout as the Golf Addict's Guide so the two read as a series. Warm cream page. Top: a coral gift strip. Then the title stacked in bold condensed capitals in court blue and coral, readable at Amazon thumbnail size. Below: Josh at the family kitchen table, padel racket in one hand, explaining the scoring with great enthusiasm, while Lauren (Alfie on her hip) and Mia have clearly stopped listening. The interior's fine pen-and-ink line with soft wash, plus muted flat colour for the cover only. Author at the foot.",
+  "direction": "Full-colour bold cover (Kieran, 2026-11-02: stand out more, obvious who it is for, characters in full colour on the cover only; the interior stays black and white). Whole wrap in court blue, in the same layout as the Golf Addict's Guide so the two read as a series. Front: a coral gift strip, the title stacked in big condensed capitals (cream, with ABOUT ANYTHING ELSE in warm amber) and the subtitle over the empty blue top of a full-bleed picture: Josh demonstrating a padel shot to his newborn son while Lauren stares flatly from the sofa, Mia lies face-down on a cushion and the racket bag sits where the buggy should be. Author on a black label at the foot.",
   "author": "Kieran Smith",
   "subtitle": "A formal engagement for the man who has made padel his whole personality",
   "back_copy": "Your stakeholders have commissioned an engagement.\n\nEighteen months ago you took up padel. Since then you have mentioned it in 94% of conversations lasting longer than four minutes. You have told a midwife it is the fastest-growing sport in the world. The racket bag is in the boot, and the buggy is not.\n\nThis is the programme pack: nine phases, twenty-six activities, stakeholder feedback from home and work, a daily padel budget, a relapse risk register and a certificate at the end, if you earn it.\n\nFor every padel convert who answers the 6am group chat before the baby, and for everyone who has to listen to him.",
-  "artwork_width_in": 4.4,
-  "artwork_height_in": 4.419,
+  "artwork_width_in": 6.125,
+  "artwork_height_in": 7.6,
   "design": {
-    "background": "#fef7ed",
-    "ink": "#1f3a66",
-    "accent": "#1f3a66",
-    "author_colour": "#1f3a66",
     "title_font": "style/fonts/Anton-Regular.ttf",
     "body_font": "style/fonts/Archivo-Regular.ttf",
+    "stack_top_in": 1.0,
+    "author_size_pt": 18,
+    "subtitle_size_pt": 12,
+    "artwork_layout": "bleed_bottom",
+    "artwork_fade_in": 0.6,
+    "author_background": "#1c1a17",
+    "background": "#2873ad",
+    "ink": "#fbf8f1",
+    "accent": "#fbf8f1",
+    "author_colour": "#fbf8f1",
     "banner": {
-      "text": "A gift for padel players, and the people who live with them",
+      "text": "The perfect gift for the man who won't stop talking about padel",
       "background": "#f0643c",
       "colour": "#fbf8f1"
     },
     "title_lines": [
       {
         "text": "The Padel Addict's",
-        "size_pt": 46,
-        "colour": "#1f3a66"
+        "size_pt": 50,
+        "colour": "#fbf8f1"
       },
       {
         "text": "Guide to Talking",
-        "size_pt": 46,
-        "colour": "#1f3a66"
+        "size_pt": 50,
+        "colour": "#fbf8f1"
       },
       {
         "text": "About Anything Else",
-        "size_pt": 44,
-        "colour": "#f0643c"
+        "size_pt": 48,
+        "colour": "#ffb547"
       }
-    ],
-    "stack_top_in": 0.95,
-    "author_size_pt": 18,
-    "subtitle_size_pt": 11.5
+    ]
   },
   "drafts": [
     {

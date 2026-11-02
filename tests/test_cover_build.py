@@ -203,3 +203,46 @@ def test_title_lines_must_spell_the_title_exactly(new_book, workspace):
     book = Book.load("test-book", workspace)
     with pytest.raises(ValidationError, match="spell out the book's title"):
         cover_render.build(book)
+
+
+def _bleed_artwork(workspace, height_px):
+    api.register_asset("test-book", cover.ART_ID, root=workspace, kind="cover_artwork")
+    art = workspace / "cover-art-bleed.png"
+    Image.new("RGB", (1856, height_px), "orange").save(art)
+    api.submit_asset("test-book", cover.ART_ID, art, kind="asset", root=workspace)
+
+
+def test_bleed_bottom_artwork_runs_edge_to_edge_under_the_title(new_book, workspace):
+    import fitz
+
+    _interior(new_book, 80)
+    title = Book.load("test-book", workspace).state.title
+    words = title.split()
+    _set_cover_fields(new_book, subtitle="A field guide", artwork_width_in=6.125,
+                      artwork_height_in=7.6, design={
+        "background": "#2873ad", "ink": "#fbf8f1",
+        "title_lines": [{"text": words[0], "size_pt": 50},
+                        {"text": " ".join(words[1:]), "size_pt": 40}],
+        "artwork_layout": "bleed_bottom", "artwork_fade_in": 0.6,
+        "author_background": "#1c1a17", "front_subtitle": False})
+    _bleed_artwork(workspace, 2304)
+    book = Book.load("test-book", workspace)
+    result = cover_render.build(book)
+    assert result["problems"] == []
+    dim = cover.dimensions(book)
+    with fitz.open(str(book.paths.resolve(result["pdf"]))) as doc:
+        page = doc[0]
+        box = fitz.Rect(page.get_image_info()[0]["bbox"])
+        front_fold = (dim["bleed_in"] + dim["trim_width_in"] + dim["spine_in"]) * 72
+        assert abs(box.x0 - front_fold) < 1, "the picture starts at the spine fold"
+        assert abs(box.x1 - page.rect.width) < 1, "and runs into the outer bleed"
+        assert abs(box.y1 - page.rect.height) < 1, "and sits on the bottom bleed edge"
+        text = page.get_text()
+        assert "A field guide" not in text, "front_subtitle false leaves it off the front"
+        assert "A WRITER" in text, "the author is still set, as real type"
+
+
+def test_unknown_artwork_layout_is_refused(new_book, workspace):
+    _interior(new_book, 80)
+    with pytest.raises(ValidationError, match="schema"):
+        _set_cover_fields(new_book, design={"artwork_layout": "sideways"})

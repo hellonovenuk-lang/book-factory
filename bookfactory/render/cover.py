@@ -104,6 +104,10 @@ def build(book, *, submit: bool = False) -> dict:
         raise ValidationError("cover.json has no back_copy",
                               remedy="Set cover/cover.json's 'back_copy' field.")
     subtitle = data.get("subtitle")
+    # A front with little room above the picture can leave the subtitle off;
+    # it stays in cover.json for the listing.
+    if (data.get("design") or {}).get("front_subtitle") is False:
+        subtitle = None
 
     notes: list[str] = []
     spine_text = None
@@ -157,6 +161,18 @@ def build(book, *, submit: bool = False) -> dict:
     author_size_pt = float(design.get("author_size_pt") or 12)
     subtitle_size_pt = float(design.get("subtitle_size_pt") or 14)
     stack_top_in = design.get("stack_top_in")
+    # "bleed_bottom": the artwork runs edge to edge across the front panel's
+    # trim and outer bleed, sitting on the bottom bleed edge, with the title
+    # stack set over the empty top of the picture.
+    artwork_layout = design.get("artwork_layout") or "boxed"
+    if artwork_layout not in ("boxed", "bleed_bottom"):
+        raise ValidationError(
+            f"cover.json design.artwork_layout must be 'boxed' or 'bleed_bottom', got {artwork_layout!r}",
+            remedy="Leave artwork_layout out for the boxed picture, or set it to 'bleed_bottom'.")
+    author_background = design.get("author_background")
+    # Blend the picture's top edge into the page colour over this depth, so
+    # the seam between the solid background and the artwork does not show.
+    artwork_fade_in = float(design.get("artwork_fade_in") or 0)
 
     title_font_family = "DejaVu Sans"
     body_font_family = "DejaVu Sans"
@@ -207,6 +223,8 @@ def build(book, *, submit: bool = False) -> dict:
         "title_top_in": title_top_in, "title_lines": title_lines, "banner": banner,
         "author_colour": author_colour, "author_size_pt": author_size_pt,
         "subtitle_size_pt": subtitle_size_pt, "stack_top_in": stack_top_in,
+        "artwork_layout": artwork_layout, "author_background": author_background,
+        "artwork_fade_in": artwork_fade_in,
         "artwork_width_in": data["artwork_width_in"], "artwork_height_in": data["artwork_height_in"],
     }
     html = _cover_template_env().get_template("wrap.html.j2").render(**context)

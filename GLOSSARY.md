@@ -82,6 +82,8 @@ paragraph break and naming an overrun activity page instead of splitting it.
 
 **Full wrap.** The one-piece print cover KDP asks for: back, spine and front side by side in a single PDF, with a little extra (bleed) round the edges.
 
+**Full-bleed picture.** A picture that runs right to the edges of the page, past the cut line, with no border. On a cover it is set with `design.artwork_layout: "bleed_bottom"` in `cover/cover.json`.
+
 **GitHub.** The website that stores the repository online. Work isn't safe
 until it is pushed there.
 

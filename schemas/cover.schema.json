@@ -123,7 +123,11 @@
         "author_colour": {"type": "string", "description": "Author name colour (default: ink)."},
         "author_size_pt": {"type": "number", "description": "Author name size in points (default 12)."},
         "subtitle_size_pt": {"type": "number", "description": "Subtitle size in points (default 14)."},
-        "stack_top_in": {"type": "number", "description": "With title_lines: distance from the top edge to the first title line, in inches."}
+        "stack_top_in": {"type": "number", "description": "With title_lines: distance from the top edge to the first title line, in inches."},
+        "artwork_layout": {"type": "string", "enum": ["boxed", "bleed_bottom"], "description": "With title_lines: 'boxed' (default) places the artwork under the title; 'bleed_bottom' runs it edge to edge across the front panel's trim and outer bleed, on the bottom edge, with the title set over its empty top. Set artwork_width_in to trim width plus bleed (6.125 for 6x9)."},
+        "artwork_fade_in": {"type": "number", "minimum": 0, "description": "With bleed_bottom: fade the artwork's top edge into the background colour over this depth, in inches."},
+        "front_subtitle": {"type": "boolean", "description": "false leaves the subtitle off the front cover (it stays in cover.json). Default true."},
+        "author_background": {"type": "string", "description": "A colour for a solid label behind the author name, so it reads over artwork."}
       }
     }
   },
